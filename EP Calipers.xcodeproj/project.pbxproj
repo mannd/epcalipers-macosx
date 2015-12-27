@@ -12,6 +12,8 @@
 		8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F41C2E264000AD9556 /* MainMenu.xib */; };
 		8E3DA8011C2E264000AD9556 /* EP_CalipersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA8001C2E264000AD9556 /* EP_CalipersTests.swift */; };
 		8E3DA80C1C2E264000AD9556 /* EP_CalipersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA80B1C2E264000AD9556 /* EP_CalipersUITests.swift */; };
+		8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA8191C306C1300AD9556 /* MainWindowController.swift */; };
+		8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		8E3DA8071C2E264000AD9556 /* EP CalipersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EP CalipersUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3DA80B1C2E264000AD9556 /* EP_CalipersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EP_CalipersUITests.swift; sourceTree = "<group>"; };
 		8E3DA80D1C2E264000AD9556 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E3DA8191C306C1300AD9556 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 				8E3DA7F21C2E264000AD9556 /* Assets.xcassets */,
 				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
 				8E3DA7F71C2E264000AD9556 /* Info.plist */,
+				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
+				8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -224,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
+				8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +479,7 @@
 				8E3DA8121C2E264000AD9556 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E3DA8131C2E264000AD9556 /* Build configuration list for PBXNativeTarget "EP CalipersTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +488,7 @@
 				8E3DA8151C2E264000AD9556 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E3DA8161C2E264000AD9556 /* Build configuration list for PBXNativeTarget "EP CalipersUITests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +497,7 @@
 				8E3DA8181C2E264000AD9556 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
