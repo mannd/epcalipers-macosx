@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Quartz
 
 class MainWindowController: NSWindowController {
     
