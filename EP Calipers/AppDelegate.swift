@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Quartz
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.imagekit.ibplugin" version="9531"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
@@ -20,6 +22,40 @@
             <view key="contentView" id="uHL-zZ-C20">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oyF-pH-BhC">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nw-Mz-NId">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <subviews>
+                                    <ikImageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-Qk-bwP">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                        <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
+                                    </ikImageView>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <visibilityPriorities>
+                            <integer value="1000"/>
+                        </visibilityPriorities>
+                        <customSpacing>
+                            <real value="3.4028234663852886e+38"/>
+                        </customSpacing>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="oyF-pH-BhC" secondAttribute="trailing" id="4ci-WM-ug1"/>
+                    <constraint firstItem="oyF-pH-BhC" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="9iV-Mx-kZp"/>
+                    <constraint firstItem="oyF-pH-BhC" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="cDo-WM-pQ2"/>
+                    <constraint firstAttribute="bottom" secondItem="oyF-pH-BhC" secondAttribute="bottom" id="suU-Rt-01Y"/>
+                </constraints>
             </view>
             <point key="canvasLocation" x="399" y="573"/>
         </window>
