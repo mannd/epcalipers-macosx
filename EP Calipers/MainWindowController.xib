@@ -9,6 +9,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
+                <outlet property="imageView" destination="2uX-Qk-bwP" id="Ykt-jV-hr9"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
         </customObject>

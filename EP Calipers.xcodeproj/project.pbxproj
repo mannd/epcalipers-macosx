@@ -16,6 +16,7 @@
 		8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */; };
 		8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81D1C30850200AD9556 /* Quartz.framework */; };
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
+		8E3DA8221C33668300AD9556 /* Normal 12_Lead ECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA8211C33668300AD9556 /* Normal 12_Lead ECG.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		8E3DA81D1C30850200AD9556 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8E3DA8211C33668300AD9556 /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Normal 12_Lead ECG.jpg"; path = "../../../epcalipers/EP Calipers/EP Calipers/Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		8E3DA7EF1C2E264000AD9556 /* EP Calipers */ = {
 			isa = PBXGroup;
 			children = (
+				8E3DA8211C33668300AD9556 /* Normal 12_Lead ECG.jpg */,
 				8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */,
 				8E3DA7F21C2E264000AD9556 /* Assets.xcassets */,
 				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
+				8E3DA8221C33668300AD9556 /* Normal 12_Lead ECG.jpg in Resources */,
 				8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
 			);
