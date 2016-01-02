@@ -27,21 +27,10 @@
                     <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oyF-pH-BhC">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nw-Mz-NId">
+                            <ikImageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-Qk-bwP">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <subviews>
-                                    <ikImageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-Qk-bwP">
-                                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                        <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
-                                    </ikImageView>
-                                </subviews>
-                                <visibilityPriorities>
-                                    <integer value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
+                                <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
+                            </ikImageView>
                         </subviews>
                         <visibilityPriorities>
                             <integer value="1000"/>
@@ -52,12 +41,15 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="oyF-pH-BhC" secondAttribute="trailing" id="4ci-WM-ug1"/>
-                    <constraint firstItem="oyF-pH-BhC" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="9iV-Mx-kZp"/>
-                    <constraint firstItem="oyF-pH-BhC" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="cDo-WM-pQ2"/>
-                    <constraint firstAttribute="bottom" secondItem="oyF-pH-BhC" secondAttribute="bottom" id="suU-Rt-01Y"/>
+                    <constraint firstItem="oyF-pH-BhC" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3gc-3C-z6h"/>
+                    <constraint firstItem="oyF-pH-BhC" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="Hxp-oT-m2M"/>
+                    <constraint firstAttribute="bottom" secondItem="oyF-pH-BhC" secondAttribute="bottom" id="IUU-kN-ujo"/>
+                    <constraint firstAttribute="trailing" secondItem="oyF-pH-BhC" secondAttribute="trailing" id="tK5-Br-f3I"/>
                 </constraints>
             </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
+            </connections>
             <point key="canvasLocation" x="399" y="573"/>
         </window>
     </objects>
