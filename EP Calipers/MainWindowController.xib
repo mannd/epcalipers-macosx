@@ -4,11 +4,11 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
         <plugIn identifier="com.apple.imagekit.ibplugin" version="9531"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
+                <outlet property="calipersView" destination="8xR-BA-8ef" id="szU-vr-vvf"/>
                 <outlet property="imageView" destination="2uX-Qk-bwP" id="Ykt-jV-hr9"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
@@ -20,37 +20,35 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="480" height="270"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <view key="contentView" id="uHL-zZ-C20">
+            <view key="contentView" wantsLayer="YES" id="uHL-zZ-C20">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oyF-pH-BhC">
+                    <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-Qk-bwP">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <subviews>
-                            <ikImageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-Qk-bwP">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
-                            </ikImageView>
-                        </subviews>
-                        <visibilityPriorities>
-                            <integer value="1000"/>
-                        </visibilityPriorities>
-                        <customSpacing>
-                            <real value="3.4028234663852886e+38"/>
-                        </customSpacing>
-                    </stackView>
+                        <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
+                    </ikImageView>
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xR-BA-8ef" userLabel="Calipers View" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="479" height="270"/>
+                    </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="oyF-pH-BhC" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3gc-3C-z6h"/>
-                    <constraint firstItem="oyF-pH-BhC" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="Hxp-oT-m2M"/>
-                    <constraint firstAttribute="bottom" secondItem="oyF-pH-BhC" secondAttribute="bottom" id="IUU-kN-ujo"/>
-                    <constraint firstAttribute="trailing" secondItem="oyF-pH-BhC" secondAttribute="trailing" id="tK5-Br-f3I"/>
+                    <constraint firstAttribute="trailing" secondItem="2uX-Qk-bwP" secondAttribute="trailing" id="2sx-UB-oAw"/>
+                    <constraint firstItem="8xR-BA-8ef" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="3Hz-ii-4jp"/>
+                    <constraint firstAttribute="bottom" secondItem="8xR-BA-8ef" secondAttribute="bottom" id="67j-je-AuK"/>
+                    <constraint firstItem="2uX-Qk-bwP" firstAttribute="centerY" secondItem="uHL-zZ-C20" secondAttribute="centerY" id="7Ap-Cm-rkA"/>
+                    <constraint firstItem="8xR-BA-8ef" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="ApN-PM-CzC"/>
+                    <constraint firstItem="2uX-Qk-bwP" firstAttribute="centerX" secondItem="uHL-zZ-C20" secondAttribute="centerX" id="ZH7-yN-QO1"/>
+                    <constraint firstItem="2uX-Qk-bwP" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="aNw-Ji-5mr"/>
+                    <constraint firstAttribute="trailing" secondItem="8xR-BA-8ef" secondAttribute="trailing" constant="1" id="ddf-U2-cnT"/>
+                    <constraint firstAttribute="bottom" secondItem="2uX-Qk-bwP" secondAttribute="bottom" id="hh1-W8-Kdc"/>
+                    <constraint firstItem="2uX-Qk-bwP" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="sAt-Pv-hpm"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
             </connections>
-            <point key="canvasLocation" x="399" y="573"/>
+            <point key="canvasLocation" x="561" y="520"/>
         </window>
     </objects>
 </document>
