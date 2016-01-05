@@ -11,7 +11,7 @@ import Cocoa
 class CalipersView: NSView {
     
     override func drawRect(dirtyRect: NSRect) {
-        let backgroundColor = NSColor.redColor()
+        let backgroundColor = NSColor.clearColor()
         backgroundColor.set()
         NSBezierPath.fillRect(bounds)
     }

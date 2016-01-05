@@ -24,26 +24,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-Qk-bwP">
+                    <ikImageView wantsLayer="YES" fixedFrame="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-Qk-bwP">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
                     </ikImageView>
-                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xR-BA-8ef" userLabel="Calipers View" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
+                    <customView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xR-BA-8ef" userLabel="Calipers View" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="479" height="270"/>
                     </customView>
                 </subviews>
-                <constraints>
-                    <constraint firstAttribute="trailing" secondItem="2uX-Qk-bwP" secondAttribute="trailing" id="2sx-UB-oAw"/>
-                    <constraint firstItem="8xR-BA-8ef" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="3Hz-ii-4jp"/>
-                    <constraint firstAttribute="bottom" secondItem="8xR-BA-8ef" secondAttribute="bottom" id="67j-je-AuK"/>
-                    <constraint firstItem="2uX-Qk-bwP" firstAttribute="centerY" secondItem="uHL-zZ-C20" secondAttribute="centerY" id="7Ap-Cm-rkA"/>
-                    <constraint firstItem="8xR-BA-8ef" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="ApN-PM-CzC"/>
-                    <constraint firstItem="2uX-Qk-bwP" firstAttribute="centerX" secondItem="uHL-zZ-C20" secondAttribute="centerX" id="ZH7-yN-QO1"/>
-                    <constraint firstItem="2uX-Qk-bwP" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="aNw-Ji-5mr"/>
-                    <constraint firstAttribute="trailing" secondItem="8xR-BA-8ef" secondAttribute="trailing" constant="1" id="ddf-U2-cnT"/>
-                    <constraint firstAttribute="bottom" secondItem="2uX-Qk-bwP" secondAttribute="bottom" id="hh1-W8-Kdc"/>
-                    <constraint firstItem="2uX-Qk-bwP" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="sAt-Pv-hpm"/>
-                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>

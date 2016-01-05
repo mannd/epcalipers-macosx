@@ -33,6 +33,9 @@ class MainWindowController: NSWindowController {
         imageView.doubleClickOpensImageEditPanel = true
         imageView.currentToolMode = IKToolModeMove
         imageView.zoomImageToFit(self)
+// FIXME: needs more than below to drag and drop
+        imageView.supportsDragAndDrop = true
+        imageView.addSubview(calipersView)
         calipersView.needsDisplay = true
         super.awakeFromNib()
     }
