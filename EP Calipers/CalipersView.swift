@@ -10,11 +10,27 @@ import Cocoa
 
 class CalipersView: NSView {
     
+//    override func mouseDown(theEvent: NSEvent) {
+//        superview!.mouseDown(theEvent)
+//    }
+//    
+//    override func mouseDragged(theEvent: NSEvent) {
+//        superview!.mouseDragged(theEvent)
+//    }
+//    
+//    override func mouseUp(theEvent: NSEvent) {
+//        superview!.mouseUp(theEvent)
+//    }
+//    
+//    override func hitTest(aPoint: NSPoint) -> NSView? {
+//        return superview
+//    }
+//    
     override func drawRect(dirtyRect: NSRect) {
         let backgroundColor = NSColor.clearColor()
         backgroundColor.set()
         NSBezierPath.fillRect(bounds)
     }
-    
+        
 }
 

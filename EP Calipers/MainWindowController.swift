@@ -36,9 +36,11 @@ class MainWindowController: NSWindowController {
 // FIXME: needs more than below to drag and drop
         imageView.supportsDragAndDrop = true
         imageView.addSubview(calipersView)
-        calipersView.needsDisplay = true
+// FIXME: need to selectively pass mouse events through
+        calipersView.hidden = true
         super.awakeFromNib()
     }
+    
     
     @IBAction func openImage(sender: AnyObject) {
         /* Present open panel. */
