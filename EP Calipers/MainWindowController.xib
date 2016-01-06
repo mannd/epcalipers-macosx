@@ -8,9 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
-                <outlet property="calipersView" destination="8xR-BA-8ef" id="szU-vr-vvf"/>
-                <outlet property="imageView" destination="2uX-Qk-bwP" id="Ykt-jV-hr9"/>
-                <outlet property="scrollView" destination="iMR-xf-CUB" id="iap-hn-SQ6"/>
+                <outlet property="imageView" destination="E6m-Gi-zsQ" id="JeH-JR-Kl3"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
         </customObject>
@@ -25,39 +23,39 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMR-xf-CUB">
-                        <rect key="frame" x="148" y="87" width="183" height="96"/>
-                        <clipView key="contentView" ambiguous="YES" id="0bd-mg-xzZ">
-                            <rect key="frame" x="1" y="1" width="181" height="94"/>
+                    <scrollView misplaced="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipJ-wm-xc0">
+                        <rect key="frame" x="-1" y="-1" width="482" height="222"/>
+                        <clipView key="contentView" id="NLP-g6-y16">
+                            <rect key="frame" x="1" y="1" width="480" height="220"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4GO-mP-CTD">
-                                    <rect key="frame" x="0.0" y="0.0" width="181" height="94"/>
-                                </view>
+                                <ikImageView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E6m-Gi-zsQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </ikImageView>
                             </subviews>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Vq9-Zn-Ms3">
-                            <rect key="frame" x="1" y="79" width="181" height="16"/>
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="K02-KB-2On">
+                            <rect key="frame" x="1" y="205" width="480" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="DHW-l7-t31">
-                            <rect key="frame" x="166" y="1" width="16" height="94"/>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="30i-l4-xHn">
+                            <rect key="frame" x="465" y="1" width="16" height="220"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <ikImageView wantsLayer="YES" fixedFrame="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-Qk-bwP">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
-                    </ikImageView>
-                    <customView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xR-BA-8ef" userLabel="Calipers View" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="479" height="270"/>
-                    </customView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ipJ-wm-xc0" secondAttribute="trailing" id="J6f-Yf-RUm"/>
+                    <constraint firstItem="ipJ-wm-xc0" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="fZV-Cp-fPN"/>
+                    <constraint firstAttribute="bottom" secondItem="ipJ-wm-xc0" secondAttribute="bottom" id="kQS-TU-CZf"/>
+                    <constraint firstItem="ipJ-wm-xc0" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="xqp-Ys-2OE"/>
+                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
             </connections>
-            <point key="canvasLocation" x="561" y="520"/>
+            <point key="canvasLocation" x="374" y="515"/>
         </window>
     </objects>
 </document>
