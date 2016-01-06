@@ -14,7 +14,7 @@ class MainWindowController: NSWindowController {
     
     @IBOutlet weak var imageView: IKImageView!
 //    @IBOutlet weak var scrollView: NSScrollView!
-  //  @IBOutlet weak var calipersView: CalipersView!
+    @IBOutlet weak var calipersView: CalipersView!
     
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
@@ -41,7 +41,7 @@ class MainWindowController: NSWindowController {
 // FIXME: needs more than below to drag and drop
 //scrollView.addSubview(calipersView)
 // FIXME: need to selectively pass mouse events through
-    //    calipersView.hidden = true
+        calipersView.hidden = true
       //  super.awakeFromNib()
     }
     
