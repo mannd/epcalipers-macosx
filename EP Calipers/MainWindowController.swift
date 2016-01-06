@@ -12,6 +12,7 @@ import AppKit
 
 class MainWindowController: NSWindowController {
     
+    @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     
