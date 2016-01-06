@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
                 <outlet property="imageView" destination="E6m-Gi-zsQ" id="JeH-JR-Kl3"/>
+                <outlet property="toggleModeButton" destination="198-bp-AJ0" id="Et8-YF-s69"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
         </customObject>
@@ -54,16 +55,32 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
                     </customView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="198-bp-AJ0">
+                        <rect key="frame" x="381" y="233" width="90" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="HO0-3D-nqY"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Calipers" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DWy-av-BTL">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="toggleMode:" target="-2" id="cg9-ND-IoW"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="198-bp-AJ0" secondAttribute="bottom" constant="20" id="3A5-SY-3SD"/>
                     <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="DBw-48-XtM"/>
                     <constraint firstAttribute="trailing" secondItem="ipJ-wm-xc0" secondAttribute="trailing" id="J6f-Yf-RUm"/>
+                    <constraint firstAttribute="trailing" secondItem="198-bp-AJ0" secondAttribute="trailing" constant="15" id="Nxj-UC-YBB"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="V0j-xs-2nn"/>
                     <constraint firstItem="ipJ-wm-xc0" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="fZV-Cp-fPN"/>
                     <constraint firstAttribute="bottom" secondItem="ipJ-wm-xc0" secondAttribute="bottom" id="kQS-TU-CZf"/>
                     <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="vGb-j5-eaI"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="xSq-Oj-hrS"/>
                     <constraint firstItem="ipJ-wm-xc0" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="xqp-Ys-2OE"/>
+                    <constraint firstItem="198-bp-AJ0" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="yde-8i-Crc"/>
                 </constraints>
             </view>
             <connections>

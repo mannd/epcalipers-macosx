@@ -12,6 +12,8 @@ import AppKit
 
 class MainWindowController: NSWindowController {
     
+   
+    @IBOutlet weak var toggleModeButton: NSButton!
     @IBOutlet weak var imageView: IKImageView!
 //    @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var calipersView: CalipersView!
@@ -20,6 +22,10 @@ class MainWindowController: NSWindowController {
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
     var imageURL: NSURL? = nil
+    var calipersMode: Bool = false
+    
+    let calipersModeTitle = "Calipers"
+    let imageModeTitle = "Image"
 
     
     override var windowNibName: String? {
@@ -27,22 +33,32 @@ class MainWindowController: NSWindowController {
     }
     
     override func awakeFromNib() {
-          let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
-          let url = NSURL.fileURLWithPath(path!)
-//        
-//        imageURL = url
-//        let image = NSImage(fURL: url)
+        let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
+        let url = NSURL.fileURLWithPath(path!)
+        //
+        //        imageURL = url
+        //        let image = NSImage(fURL: url)
         
         imageView.setImageWithURL(url)
         imageView.editable = true
-        
-        
-    
-// FIXME: needs more than below to drag and drop
-//scrollView.addSubview(calipersView)
-// FIXME: need to selectively pass mouse events through
+        // FIXME: needs more than below to drag and drop
+        //scrollView.addSubview(calipersView)
+        // FIXME: need to selectively pass mouse events through
         calipersView.hidden = true
-      //  super.awakeFromNib()
+        toggleModeButton.title = calipersModeTitle
+        //  super.awakeFromNib()
+    }
+    
+    @IBAction func toggleMode(sender: AnyObject) {
+        calipersMode = !calipersMode
+        if calipersMode {
+            toggleModeButton.title = imageModeTitle
+            calipersView.hidden = false
+        }
+        else {
+            toggleModeButton.title = calipersModeTitle
+            calipersView.hidden = true
+        }
     }
     
     
@@ -69,8 +85,8 @@ class MainWindowController: NSWindowController {
         let image = CGImageSourceCreateImageAtIndex(isr!, 0, options)
         if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
             imageProperties = CGImageSourceCopyProperties(isr!, imageProperties)!
-//            imageView.setImage(image, imageProperties: imageProperties as [NSObject : AnyObject])
-//            imageView.zoomImageToFit(self)
+            imageView.setImage(image, imageProperties: imageProperties as [NSObject : AnyObject])
+            imageView.zoomImageToFit(self)
             self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
             imageURL = url
         }
