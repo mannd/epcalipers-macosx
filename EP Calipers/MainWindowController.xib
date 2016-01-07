@@ -25,7 +25,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipJ-wm-xc0">
+                    <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipJ-wm-xc0">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
                         <clipView key="contentView" id="NLP-g6-y16">
                             <rect key="frame" x="1" y="1" width="478" height="218"/>
@@ -52,7 +52,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
                     </customView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="198-bp-AJ0">
@@ -70,17 +70,16 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="198-bp-AJ0" secondAttribute="bottom" constant="20" id="3A5-SY-3SD"/>
-                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="DBw-48-XtM"/>
-                    <constraint firstAttribute="trailing" secondItem="ipJ-wm-xc0" secondAttribute="trailing" id="J6f-Yf-RUm"/>
-                    <constraint firstAttribute="trailing" secondItem="198-bp-AJ0" secondAttribute="trailing" constant="15" id="Nxj-UC-YBB"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="V0j-xs-2nn"/>
-                    <constraint firstItem="ipJ-wm-xc0" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="fZV-Cp-fPN"/>
-                    <constraint firstAttribute="bottom" secondItem="ipJ-wm-xc0" secondAttribute="bottom" id="kQS-TU-CZf"/>
-                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="vGb-j5-eaI"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="xSq-Oj-hrS"/>
-                    <constraint firstItem="ipJ-wm-xc0" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="xqp-Ys-2OE"/>
-                    <constraint firstItem="198-bp-AJ0" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="yde-8i-Crc"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="ipJ-wm-xc0" secondAttribute="top" id="BZY-Lb-qtV"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="trailing" secondItem="ipJ-wm-xc0" secondAttribute="trailing" id="FHO-On-gZo"/>
+                    <constraint firstItem="198-bp-AJ0" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="H45-Bm-vy6"/>
+                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
+                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="TUz-x3-9lI"/>
+                    <constraint firstAttribute="trailing" secondItem="198-bp-AJ0" secondAttribute="trailing" constant="15" id="cGG-6u-DD2"/>
+                    <constraint firstItem="ipJ-wm-xc0" firstAttribute="top" secondItem="198-bp-AJ0" secondAttribute="bottom" constant="20" symbolic="YES" id="khs-vN-KYI"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="ipJ-wm-xc0" secondAttribute="leading" id="liS-rN-u95"/>
+                    <constraint firstItem="ipJ-wm-xc0" firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="tht-G8-EF6"/>
                 </constraints>
             </view>
             <connections>

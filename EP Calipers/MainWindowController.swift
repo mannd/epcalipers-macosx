@@ -15,7 +15,6 @@ class MainWindowController: NSWindowController {
    
     @IBOutlet weak var toggleModeButton: NSButton!
     @IBOutlet weak var imageView: IKImageView!
-//    @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var calipersView: CalipersView!
     
     var imageProperties: NSDictionary = Dictionary<String, String>()
@@ -41,12 +40,11 @@ class MainWindowController: NSWindowController {
         
         imageView.setImageWithURL(url)
         imageView.editable = true
-        // FIXME: needs more than below to drag and drop
-        //scrollView.addSubview(calipersView)
         // FIXME: need to selectively pass mouse events through
         calipersView.hidden = true
         toggleModeButton.title = calipersModeTitle
         //  super.awakeFromNib()
+    
     }
     
     @IBAction func toggleMode(sender: AnyObject) {
@@ -61,6 +59,7 @@ class MainWindowController: NSWindowController {
         }
     }
     
+        
     
     @IBAction func openImage(sender: AnyObject) {
         /* Present open panel. */
