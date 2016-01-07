@@ -7,8 +7,12 @@
 //
 
 import Cocoa
+import Quartz
 
 class CalipersView: NSView {
+    
+    var imageView: IKImageView? = nil
+    
 //    override init(frame frameRect: NSRect) {
 //        
 //        super.init(frame: frameRect)
@@ -35,6 +39,14 @@ class CalipersView: NSView {
 //        NSLog("MouseUp")
 //        superview!.mouseUp(theEvent)
 //    }
+//    
+    override func magnifyWithEvent(event: NSEvent) {
+        // NSLog("Zoom gesture")
+        if (imageView != nil) {
+            imageView!.magnifyWithEvent(event)
+        }
+    }
+
     
     override func drawRect(dirtyRect: NSRect) {
         let backgroundColor = NSColor.redColor().colorWithAlphaComponent(0.3)
@@ -43,10 +55,6 @@ class CalipersView: NSView {
     }
  
     
-    //    override func magnifyWithEvent(event: NSEvent) {
-//        NSLog("Zoom gesture")
-//        superview!.magnifyWithEvent(event)
-//    }
 
 }
 

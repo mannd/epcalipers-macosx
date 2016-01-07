@@ -13,6 +13,7 @@ import AppKit
 class MainWindowController: NSWindowController {
     
    
+    @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var toggleModeButton: NSButton!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
@@ -40,11 +41,17 @@ class MainWindowController: NSWindowController {
         
         imageView.setImageWithURL(url)
         imageView.editable = true
+        imageView.currentToolMode = IKToolModeMove
+        imageView.delegate = self
+        //imageView.setOverlay(calipersView.layer, forType: IKOverlayTypeImage)
+        //imageView.addSubview(calipersView)
         // FIXME: need to selectively pass mouse events through
+        calipersView.imageView = imageView
         calipersView.hidden = true
         toggleModeButton.title = calipersModeTitle
-        //  super.awakeFromNib()
-    
+        if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
+            super.awakeFromNib()
+        }
     }
     
     @IBAction func toggleMode(sender: AnyObject) {

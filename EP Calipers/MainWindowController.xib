@@ -9,7 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
-                <outlet property="imageView" destination="E6m-Gi-zsQ" id="JeH-JR-Kl3"/>
+                <outlet property="imageView" destination="L01-4C-stO" id="hsO-de-Dek"/>
                 <outlet property="toggleModeButton" destination="198-bp-AJ0" id="Et8-YF-s69"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
@@ -21,37 +21,14 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="480" height="270"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <view key="contentView" wantsLayer="YES" id="uHL-zZ-C20">
+            <view key="contentView" id="uHL-zZ-C20">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipJ-wm-xc0">
+                    <ikImageView translatesAutoresizingMaskIntoConstraints="NO" id="L01-4C-stO">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
-                        <clipView key="contentView" id="NLP-g6-y16">
-                            <rect key="frame" x="1" y="1" width="478" height="218"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <ikImageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E6m-Gi-zsQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="478" height="218"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </ikImageView>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="E6m-Gi-zsQ" secondAttribute="bottom" id="Fcg-Lf-h1d"/>
-                                <constraint firstAttribute="trailing" secondItem="E6m-Gi-zsQ" secondAttribute="trailing" id="VTX-GV-3Ky"/>
-                                <constraint firstItem="E6m-Gi-zsQ" firstAttribute="top" secondItem="NLP-g6-y16" secondAttribute="top" id="ZiK-fQ-3NK"/>
-                                <constraint firstItem="E6m-Gi-zsQ" firstAttribute="leading" secondItem="NLP-g6-y16" secondAttribute="leading" id="dho-jr-vbc"/>
-                            </constraints>
-                        </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="K02-KB-2On">
-                            <rect key="frame" x="1" y="203" width="478" height="16"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="30i-l4-xHn">
-                            <rect key="frame" x="463" y="1" width="16" height="218"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                    </scrollView>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </ikImageView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
                     </customView>
@@ -68,18 +45,22 @@
                             <action selector="toggleMode:" target="-2" id="cg9-ND-IoW"/>
                         </connections>
                     </button>
+                    <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APQ-DF-YEg">
+                        <rect key="frame" x="5" y="235" width="28" height="30"/>
+                        <sliderCell key="cell" alignment="left" maxValue="100" allowsTickMarkValuesOnly="YES" sliderType="circular" id="31C-LA-ycJ"/>
+                    </slider>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="L01-4C-stO" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3bZ-YJ-9DX"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="ipJ-wm-xc0" secondAttribute="top" id="BZY-Lb-qtV"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="trailing" secondItem="ipJ-wm-xc0" secondAttribute="trailing" id="FHO-On-gZo"/>
                     <constraint firstItem="198-bp-AJ0" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="H45-Bm-vy6"/>
                     <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="198-bp-AJ0" secondAttribute="bottom" constant="20" id="O7w-MK-t6E"/>
+                    <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="Sc4-rx-DOe"/>
                     <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="TUz-x3-9lI"/>
                     <constraint firstAttribute="trailing" secondItem="198-bp-AJ0" secondAttribute="trailing" constant="15" id="cGG-6u-DD2"/>
-                    <constraint firstItem="ipJ-wm-xc0" firstAttribute="top" secondItem="198-bp-AJ0" secondAttribute="bottom" constant="20" symbolic="YES" id="khs-vN-KYI"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="ipJ-wm-xc0" secondAttribute="leading" id="liS-rN-u95"/>
-                    <constraint firstItem="ipJ-wm-xc0" firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="tht-G8-EF6"/>
+                    <constraint firstAttribute="bottom" secondItem="L01-4C-stO" secondAttribute="bottom" id="t63-uN-q8y"/>
+                    <constraint firstAttribute="trailing" secondItem="L01-4C-stO" secondAttribute="trailing" id="y9W-gC-Tww"/>
                 </constraints>
             </view>
             <connections>
