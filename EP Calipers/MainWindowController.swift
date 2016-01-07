@@ -12,7 +12,9 @@ import AppKit
 
 class MainWindowController: NSWindowController {
     
+   
     @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet weak var toggleModeButton: NSButton!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     
@@ -20,6 +22,11 @@ class MainWindowController: NSWindowController {
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
     var imageURL: NSURL? = nil
+    var calipersMode: Bool = false
+    
+    let calipersModeTitle = "Calipers"
+    let imageModeTitle = "Image"
+
     
     override var windowNibName: String? {
         return "MainWindowController"
@@ -28,20 +35,38 @@ class MainWindowController: NSWindowController {
     override func awakeFromNib() {
         let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
         let url = NSURL.fileURLWithPath(path!)
+        //
+        //        imageURL = url
+        //        let image = NSImage(fURL: url)
         
-        imageURL = url
         imageView.setImageWithURL(url)
-        imageView.doubleClickOpensImageEditPanel = true
+        imageView.editable = true
         imageView.currentToolMode = IKToolModeMove
-        imageView.zoomImageToFit(self)
-// FIXME: needs more than below to drag and drop
-        imageView.supportsDragAndDrop = true
-        imageView.addSubview(calipersView)
-// FIXME: need to selectively pass mouse events through
+        imageView.delegate = self
+        //imageView.setOverlay(calipersView.layer, forType: IKOverlayTypeImage)
+        //imageView.addSubview(calipersView)
+        // FIXME: need to selectively pass mouse events through
+        calipersView.imageView = imageView
         calipersView.hidden = true
-        super.awakeFromNib()
+        toggleModeButton.title = calipersModeTitle
+        if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
+            super.awakeFromNib()
+        }
     }
     
+    @IBAction func toggleMode(sender: AnyObject) {
+        calipersMode = !calipersMode
+        if calipersMode {
+            toggleModeButton.title = imageModeTitle
+            calipersView.hidden = false
+        }
+        else {
+            toggleModeButton.title = calipersModeTitle
+            calipersView.hidden = true
+        }
+    }
+    
+        
     
     @IBAction func openImage(sender: AnyObject) {
         /* Present open panel. */
@@ -75,48 +100,48 @@ class MainWindowController: NSWindowController {
     
 // FIXME: saveImage doesn't save image effects added
     @IBAction func saveImage(sender: AnyObject) {
-        let savePanel = NSSavePanel()
-        saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
-
-// FIXME: Accessory view doesn't work
-//// Option 1: build view and add it as accessory view
-//        let view: NSView = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 200))
-//        savePanel.accessoryView = view
-//        saveOptions.addSaveOptionsToView(view)
-//        // this statement doesn't work:
-//        // view.autoresizingMask = CAAutoresizingMask.LayerWidthSizable | CAAutoresizingMask.LayerHeightSizable
-//        
-//// Option 2: add accessory view to save pane, doesn't work due to Apple bug?, even with "fix"
-//        //saveOptions.addSaveOptionsAccessoryViewToSavePanel(savePanel)
-//        // FIXME: http://stackoverflow.com/questions/27374355/nssavepanel-crashes-on-yosemite suggests
-//        // this to avoid crash of NSSavePanel, but it doesn't work
-//        //savePanel.accessoryView!.translatesAutoresizingMaskIntoConstraints = false
-
-// Option 3: forget about the accessory view:
-        savePanel.nameFieldStringValue = imageURL!.lastPathComponent!
-        savePanel.beginSheetModalForWindow(self.window!, completionHandler: {
-            (result: NSInteger) -> Void in
-            if result == NSFileHandlingPanelOKButton {
-                self.savePanelDidEnd(savePanel, returnCode: result)
-            }
-        })
+//        let savePanel = NSSavePanel()
+//        saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
+//
+//// FIXME: Accessory view doesn't work
+////// Option 1: build view and add it as accessory view
+////        let view: NSView = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 200))
+////        savePanel.accessoryView = view
+////        saveOptions.addSaveOptionsToView(view)
+////        // this statement doesn't work:
+////        // view.autoresizingMask = CAAutoresizingMask.LayerWidthSizable | CAAutoresizingMask.LayerHeightSizable
+////        
+////// Option 2: add accessory view to save pane, doesn't work due to Apple bug?, even with "fix"
+////        //saveOptions.addSaveOptionsAccessoryViewToSavePanel(savePanel)
+////        // FIXME: http://stackoverflow.com/questions/27374355/nssavepanel-crashes-on-yosemite suggests
+////        // this to avoid crash of NSSavePanel, but it doesn't work
+////        //savePanel.accessoryView!.translatesAutoresizingMaskIntoConstraints = false
+//
+//// Option 3: forget about the accessory view:
+//        savePanel.nameFieldStringValue = imageURL!.lastPathComponent!
+//        savePanel.beginSheetModalForWindow(self.window!, completionHandler: {
+//            (result: NSInteger) -> Void in
+//            if result == NSFileHandlingPanelOKButton {
+//                self.savePanelDidEnd(savePanel, returnCode: result)
+//            }
+//        })
     }
    
-    func savePanelDidEnd (sheet: NSSavePanel, returnCode: NSInteger) {
-        if returnCode == NSModalResponseOK {
-            let newUTType: String = saveOptions.imageUTType
-            let image: CGImage = imageView.image().takeUnretainedValue()
-            if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
-                let url = sheet.URL
-                let dest: CGImageDestination = CGImageDestinationCreateWithURL(url!, newUTType, 1, nil)!
-                CGImageDestinationAddImage(dest, image, saveOptions.imageProperties)
-                CGImageDestinationFinalize(dest)
-            }
-            else {
-                print("*** saveImageToPath - no image")
-            }
-        }
-    }
+//    func savePanelDidEnd (sheet: NSSavePanel, returnCode: NSInteger) {
+//        if returnCode == NSModalResponseOK {
+//            let newUTType: String = saveOptions.imageUTType
+//            let image: CGImage = imageView.image().takeUnretainedValue()
+//            if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
+//                let url = sheet.URL
+//                let dest: CGImageDestination = CGImageDestinationCreateWithURL(url!, newUTType, 1, nil)!
+//                CGImageDestinationAddImage(dest, image, saveOptions.imageProperties)
+//                CGImageDestinationFinalize(dest)
+//            }
+//            else {
+//                print("*** saveImageToPath - no image")
+//            }
+//        }
+//    }
    
 // not sure we want image to zoom with window resize
 //    func windowDidResize (notification: NSNotification?) {
