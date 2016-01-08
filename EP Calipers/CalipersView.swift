@@ -12,6 +12,7 @@ import Quartz
 class CalipersView: NSView {
     
     var imageView: IKImageView? = nil
+    var calipersMode: Bool = false
     
 //    override init(frame frameRect: NSRect) {
 //        
@@ -25,26 +26,30 @@ class CalipersView: NSView {
 //
 //    }
     
-//    override func mouseDown(theEvent: NSEvent) {
-//        NSLog("MouseDown")
-//        superview!.mouseDown(theEvent)
-//    }
-//    
-//    override func mouseDragged(theEvent: NSEvent) {
-//        NSLog("MouseDragged")
-//        superview!.mouseDragged(theEvent)
-//    }
-//    
-//    override func mouseUp(theEvent: NSEvent) {
-//        NSLog("MouseUp")
-//        superview!.mouseUp(theEvent)
-//    }
-//    
-    override func magnifyWithEvent(event: NSEvent) {
-        // NSLog("Zoom gesture")
-        if (imageView != nil) {
-            imageView!.magnifyWithEvent(event)
+    override func mouseDown(theEvent: NSEvent) {
+        NSLog("MouseDown")
+        if !calipersMode {
+            imageView!.mouseDown(theEvent)
         }
+    }
+    
+    override func mouseDragged(theEvent: NSEvent) {
+        NSLog("MouseDragged")
+        if !calipersMode {
+            imageView!.mouseDragged(theEvent)
+        }
+    }
+    
+    override func mouseUp(theEvent: NSEvent) {
+        NSLog("MouseUp")
+        if !calipersMode {
+            imageView!.mouseUp(theEvent)
+        }
+    }
+    
+    override func magnifyWithEvent(event: NSEvent) {
+        NSLog("Zoom gesture")
+        imageView!.magnifyWithEvent(event)
     }
 
     

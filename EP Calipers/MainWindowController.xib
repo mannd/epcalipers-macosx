@@ -25,7 +25,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <ikImageView translatesAutoresizingMaskIntoConstraints="NO" id="L01-4C-stO">
+                    <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="L01-4C-stO">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </ikImageView>

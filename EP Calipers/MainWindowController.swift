@@ -22,7 +22,6 @@ class MainWindowController: NSWindowController {
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
     var imageURL: NSURL? = nil
-    var calipersMode: Bool = false
     
     let calipersModeTitle = "Calipers"
     let imageModeTitle = "Image"
@@ -44,25 +43,23 @@ class MainWindowController: NSWindowController {
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
         //imageView.setOverlay(calipersView.layer, forType: IKOverlayTypeImage)
-        //imageView.addSubview(calipersView)
+//        imageView.addSubview(calipersView)
         // FIXME: need to selectively pass mouse events through
         calipersView.imageView = imageView
-        calipersView.hidden = true
         toggleModeButton.title = calipersModeTitle
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
         }
+
     }
     
     @IBAction func toggleMode(sender: AnyObject) {
-        calipersMode = !calipersMode
-        if calipersMode {
+        calipersView.calipersMode = !calipersView.calipersMode
+        if calipersView.calipersMode {
             toggleModeButton.title = imageModeTitle
-            calipersView.hidden = false
         }
         else {
             toggleModeButton.title = calipersModeTitle
-            calipersView.hidden = true
         }
     }
     
