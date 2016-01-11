@@ -127,5 +127,20 @@ class Caliper: NSObject {
         return (direction == .Horizontal ? p.x : p.y)
     }
     
+    func rect(containerRect: CGRect) -> CGRect {
+        if direction == .Horizontal {
+            return CGRectMake(bar1Position, containerRect.origin.y, self.bar2Position - bar1Position, containerRect.size.height)
+        }
+        else { // vertical caliper
+            return CGRectMake(0, bar1Position, containerRect.size.width, bar2Position - bar1Position)
+        }
+    }
+    
+    // FIXME: implement Calibration class before completing Caliper class
+    func measurement() -> String {
+        let s = "test"
+        return s
+    }
+    
 
 }
