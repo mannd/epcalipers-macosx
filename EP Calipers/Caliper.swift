@@ -28,6 +28,7 @@ class Caliper: NSObject {
     var selected: Bool
     var textFont: NSFont
     var paragraphStyle: NSMutableParagraphStyle
+    var calibration: Calibration = Calibration()
     
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
         crossBarPosition: CGFloat) {
@@ -103,9 +104,7 @@ class Caliper: NSObject {
             CGContextAddLineToPoint(context, crossBarPosition, bar1Position);
         }
         CGContextStrokePath(context)
- // FIXME: see below
-        // let text = measurement()
-        let text = "1xxx msec"
+        let text = measurement()
         paragraphStyle.lineBreakMode = .ByTruncatingTail
         paragraphStyle.alignment = (direction == .Horizontal ? .Center : .Left)
         let attributes = [
@@ -136,11 +135,74 @@ class Caliper: NSObject {
         }
     }
     
-    // FIXME: implement Calibration class before completing Caliper class
     func measurement() -> String {
-        let s = "test"
+        let s = String("%.4g %@", calibratedResult(), calibration.units)
         return s
     }
     
-
+    func calibratedResult() -> Double {
+        var result = intervalResult()
+        if result != 0 && calibration.displayRate && calibration.canDisplayRate {
+            result = rateResult(result)
+        }
+        return result
+    }
+    
+    func points() -> CGFloat {
+        return bar2Position - bar1Position
+    }
+    
+    func intervalResult() -> Double {
+        return Double(points()) * calibration.multiplier()
+    }
+    
+    func rateResult(interval: Double) -> Double {
+        if interval != 0 {
+            if calibration.unitsAreMsec {
+                return 60000.0 / interval
+            }
+            if calibration.unitsAreSeconds {
+                return 60.0 / interval
+            }
+        }
+        return interval
+    }
+    
+    func intervalInSecs(interval: Double) -> Double {
+        if calibration.unitsAreSeconds {
+            return interval
+        }
+        else {
+            return interval / 1000
+        }
+    }
+    
+    func intervalInMsec(interval: Double) -> Double {
+        if calibration.unitsAreMsec {
+            return interval
+        }
+        else {
+            return 1000 * interval
+        }
+    }
+    
+    func pointNearBar(p: CGPoint, forBarPosition barPosition: CGFloat) -> Bool {
+        return (Double(barCoord(p)) > (Double(barPosition) - delta)) && (Double(barCoord(p)) < (Double(barPosition) + delta))
+    }
+    
+    func pointNearCrossBar(p: CGPoint) -> Bool {
+        var nearBar = false
+        let adjustedDelta = delta + 5  // make crossbar delta a little larger
+        if direction == .Horizontal {
+            nearBar = (Double(p.x) > fmin(Double(bar1Position), Double(bar2Position)) + adjustedDelta &&
+            Double(p.x) < fmax(Double(bar2Position), Double(bar1Position)) - adjustedDelta &&
+            Double(p.x) > Double(crossBarPosition) - adjustedDelta && Double(p.x) < Double(crossBarPosition) + adjustedDelta)
+        }
+        return nearBar
+    }
+    
+    func pointNearCaliper(p: CGPoint) -> Bool {
+        return pointNearCrossBar(p) || pointNearBar(p, forBarPosition: bar1Position) || pointNearBar(p, forBarPosition: bar2Position)
+    }
+    
 }

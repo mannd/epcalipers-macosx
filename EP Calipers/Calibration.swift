@@ -12,9 +12,9 @@ class Calibration: NSObject {
     var direction: CaliperDirection
     var calibrationString: String = ""
     var displayRate: Bool = false
-    var originalZoom: CGFloat = 1.0
-    var currentZoom: CGFloat = 1.0
-    var originalCalFactor: CGFloat = 1.0
+    var originalZoom: Double = 1.0
+    var currentZoom: Double = 1.0
+    var originalCalFactor: Double = 1.0
     var calibrated: Bool = false
     var rawUnits: String = "points"
     
@@ -43,11 +43,11 @@ class Calibration: NSObject {
         }
     }
     
-    func currentCalFactor() -> CGFloat {
+    func currentCalFactor() -> Double {
         return (originalZoom * originalCalFactor) / currentZoom
     }
     
-    func multiplier() -> CGFloat {
+    func multiplier() -> Double {
         if calibrated {
             return currentCalFactor()
         }
