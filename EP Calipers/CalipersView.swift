@@ -9,6 +9,9 @@
 import Cocoa
 import Quartz
 
+// TODO: Locked mode - lock image so it can't be moved by the mouse, only allowing
+// calipers to be moved.  Might be useful to avoid inadvertent moving of ECG when
+// trying to move calipers.
 class CalipersView: NSView {
     
     var imageView: IKImageView? = nil
