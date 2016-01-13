@@ -22,6 +22,12 @@ class CalipersView: NSView {
     // not sure if still need this
     var locked: Bool = false
     var selectedCaliper: Caliper? = nil
+
+    // needed to handle key input
+    override var acceptsFirstResponder: Bool { return true }
+
+    
+    
     
     
 //    override init(frame frameRect: NSRect) {
@@ -34,7 +40,7 @@ class CalipersView: NSView {
 //        super.init(coder: coder)
 //        // have gesturerecognizers in iOS version
 //        // clearsContextBeforeDrawing = false ?? iOS/UIView only property?
-//        locked = false  // declared above as false
+//        acceptsFirstResponder = true
 //    }
   
 // See Tracking-Area Objects for possible equivalence of below in Mac OS X
@@ -98,21 +104,13 @@ class CalipersView: NSView {
         }
     }
     
+    // double click to toggle selected state
     override func mouseUp(theEvent: NSEvent) {
         NSLog("MouseUp")
-        if let c = selectedCaliper {
-            if theEvent.clickCount == 1 {
-                if c.selected {
-                    unselectCaliper(c)
-                }
-                else {
-                    selectCaliper(c)
-                }
+        if selectedCaliper != nil {
+            if theEvent.clickCount > 1 {
+                toggleCaliperState()
             }
-            else {
-                unselectCaliper(c)
-            }
-        selectedCaliper = nil
         }
         else {
             imageView!.mouseUp(theEvent)
@@ -135,10 +133,24 @@ class CalipersView: NSView {
             }
             selectedCaliper = nil
         }
-        
-
     }
- 
+    
+    override func keyDown(theEvent: NSEvent) {
+        NSLog("Key down")
+        interpretKeyEvents([theEvent])
+    }
+    
+    
+    override func deleteBackward(sender: AnyObject?) {
+        NSLog("Delete")
+        for c in calipers {
+            if c.selected {
+                calipers.removeAtIndex(calipers.indexOf(c)!)
+                needsDisplay = true
+            }
+        }
+    }
+    
     override func magnifyWithEvent(event: NSEvent) {
         NSLog("Zoom gesture")
         imageView!.magnifyWithEvent(event)
