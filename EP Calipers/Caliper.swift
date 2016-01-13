@@ -43,7 +43,6 @@ class Caliper: NSObject {
             self.lineWidth = 2
             self.selected = false
             self.textFont = NSFont(name: "Helvetica", size: 18.0)!
-            //self.paragraphStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
             self.paragraphStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
             super.init()
     }
@@ -136,7 +135,7 @@ class Caliper: NSObject {
     }
     
     func measurement() -> String {
-        let s = String("%.4g %@", calibratedResult(), calibration.units)
+        let s = String(format: "%.4g %@", calibratedResult(), calibration.units)
         return s
     }
     
@@ -196,6 +195,11 @@ class Caliper: NSObject {
         if direction == .Horizontal {
             nearBar = (Double(p.x) > fmin(Double(bar1Position), Double(bar2Position)) + adjustedDelta &&
             Double(p.x) < fmax(Double(bar2Position), Double(bar1Position)) - adjustedDelta &&
+            Double(p.y) > Double(crossBarPosition) - adjustedDelta && Double(p.y) < Double(crossBarPosition) + adjustedDelta)
+        }
+        else {
+            nearBar = (Double(p.y) > fmin(Double(bar1Position), Double(bar2Position)) + adjustedDelta &&
+            Double(p.y) < fmax(Double(bar2Position), Double(bar1Position)) - adjustedDelta &&
             Double(p.x) > Double(crossBarPosition) - adjustedDelta && Double(p.x) < Double(crossBarPosition) + adjustedDelta)
         }
         return nearBar

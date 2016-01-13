@@ -47,6 +47,13 @@ class MainWindowController: NSWindowController {
         // FIXME: need to selectively pass mouse events through
         calipersView.imageView = imageView
         toggleModeButton.title = calipersModeTitle
+        
+// FIXME: a little test to try to draw the first caliper
+        let caliper: Caliper = Caliper()
+        caliper.setInitialPositionInRect(calipersView.bounds)
+        calipersView.calipers.append(caliper)
+        
+        
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
         }
