@@ -24,12 +24,16 @@ class CalipersView: NSView {
     var selectedCaliper: Caliper? = nil
 
     // needed to handle key input
-    override var acceptsFirstResponder: Bool { return true }
+    override var acceptsFirstResponder: Bool {
+        return true }
 
-    
-    
-    
-    
+    // used to hold statics for mouse dragging
+    struct Holder {
+        static var bar1Selected = false
+        static var bar2Selected = false
+        static var crossBarSelected = false
+    }
+
 //    override init(frame frameRect: NSRect) {
 //        
 //        super.init(frame: frameRect)
@@ -91,6 +95,15 @@ class CalipersView: NSView {
         }
         if selectedCaliper != nil {
             NSLog("Near caliper")
+            if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
+                Holder.crossBarSelected = true
+            }
+            else if selectedCaliper!.pointNearBar(theEvent.locationInWindow, forBarPosition: selectedCaliper!.bar1Position) {
+                Holder.bar1Selected = true
+            }
+            else if selectedCaliper!.pointNearBar(theEvent.locationInWindow, forBarPosition: selectedCaliper!.bar2Position) {
+                Holder.bar2Selected = true
+            }
         }
         else {
             imageView!.mouseDown(theEvent)
@@ -99,7 +112,29 @@ class CalipersView: NSView {
     
     override func mouseDragged(theEvent: NSEvent) {
         NSLog("MouseDragged")
-        if selectedCaliper == nil {
+ 
+        if let c = selectedCaliper {
+            var delta = CGPoint(x: theEvent.deltaX, y: theEvent.deltaY)
+            if c.direction == .Vertical {
+                let tmp = delta.x
+                delta.x = delta.y
+                delta.y = tmp
+            }
+            if Holder.crossBarSelected {
+                c.bar1Position += delta.x
+                c.bar2Position += delta.x
+                // origin is lower left in Cocoa
+                c.crossBarPosition -= delta.y
+            }
+            else if Holder.bar1Selected {
+                c.bar1Position += delta.x
+            }
+            else if Holder.bar2Selected {
+                c.bar2Position += delta.x
+            }
+            needsDisplay = true
+        }
+        else {
             imageView!.mouseDragged(theEvent)
         }
     }
@@ -111,6 +146,10 @@ class CalipersView: NSView {
             if theEvent.clickCount > 1 {
                 toggleCaliperState()
             }
+            selectedCaliper = nil
+            Holder.bar1Selected = false
+            Holder.bar2Selected = false
+            Holder.crossBarSelected = false
         }
         else {
             imageView!.mouseUp(theEvent)
@@ -131,7 +170,6 @@ class CalipersView: NSView {
                     unselectCaliper(cal)
                 }
             }
-            selectedCaliper = nil
         }
     }
     
