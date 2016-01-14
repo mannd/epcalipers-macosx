@@ -12,9 +12,6 @@ import AppKit
 
 class MainWindowController: NSWindowController {
     
-   
-    @IBOutlet weak var scrollView: NSScrollView!
-    @IBOutlet weak var toggleModeButton: NSButton!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     
@@ -23,8 +20,9 @@ class MainWindowController: NSWindowController {
     var saveOptions: IKSaveOptions = IKSaveOptions()
     var imageURL: NSURL? = nil
     
-    let calipersModeTitle = "Calipers"
-    let imageModeTitle = "Image"
+    // These are taken from the Apple IKImageView demo
+    let zoomInFactor: CGFloat = 1.414214
+    let zoomOutFactor: CGFloat = 0.7071068
 
     
     override var windowNibName: String? {
@@ -45,7 +43,6 @@ class MainWindowController: NSWindowController {
         // calipersView unhandled events are passed to imageView
         calipersView.nextResponder = imageView
         calipersView.imageView = imageView
-        toggleModeButton.title = calipersModeTitle
         
 // FIXME: a little test to try to draw the first caliper
         let caliper: Caliper = Caliper()
@@ -59,13 +56,23 @@ class MainWindowController: NSWindowController {
 
     }
     
-    @IBAction func toggleMode(sender: AnyObject) {
-        calipersView.calipersMode = !calipersView.calipersMode
-        if calipersView.calipersMode {
-            toggleModeButton.title = imageModeTitle
-        }
-        else {
-            toggleModeButton.title = calipersModeTitle
+    @IBAction func doZoom(sender: AnyObject) {
+        if sender.isKindOfClass(NSSegmentedControl) {
+            var zoomFactor: CGFloat
+            let zoom = sender.selectedSegment
+            switch zoom {
+            case 0:
+                zoomFactor = imageView.zoomFactor
+                imageView.zoomFactor = zoomFactor * zoomInFactor
+            case 1:
+                zoomFactor = imageView.zoomFactor
+                imageView.zoomFactor = zoomFactor * zoomOutFactor
+            case 2:
+                imageView.zoomImageToActualSize(self)
+            case 3:
+                imageView.zoomImageToFit(self)
+            default: break
+            }
         }
     }
     

@@ -20,6 +20,11 @@
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
 		8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC11C4378A4002E0085 /* Calibration.swift */; };
+		8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC41C472973002E0085 /* TB_rotate.tiff */; };
+		8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC51C472973002E0085 /* TB_zoomActual.png */; };
+		8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC61C472973002E0085 /* TB_zoomIn.png */; };
+		8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC71C472973002E0085 /* TB_zoomOut.png */; };
+		8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +64,11 @@
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
 		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
+		8EA7EFC41C472973002E0085 /* TB_rotate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TB_rotate.tiff; sourceTree = "<group>"; };
+		8EA7EFC51C472973002E0085 /* TB_zoomActual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomActual.png; sourceTree = "<group>"; };
+		8EA7EFC61C472973002E0085 /* TB_zoomIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomIn.png; sourceTree = "<group>"; };
+		8EA7EFC71C472973002E0085 /* TB_zoomOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomOut.png; sourceTree = "<group>"; };
+		8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomToFit.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +103,7 @@
 			children = (
 				8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */,
 				8E3DA81D1C30850200AD9556 /* Quartz.framework */,
+				8EA7EFC31C472909002E0085 /* Resources */,
 				8E3DA7EF1C2E264000AD9556 /* EP Calipers */,
 				8E3DA7FF1C2E264000AD9556 /* EP CalipersTests */,
 				8E3DA80A1C2E264000AD9556 /* EP CalipersUITests */,
@@ -143,6 +154,18 @@
 				8E3DA80D1C2E264000AD9556 /* Info.plist */,
 			);
 			path = "EP CalipersUITests";
+			sourceTree = "<group>";
+		};
+		8EA7EFC31C472909002E0085 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8EA7EFC41C472973002E0085 /* TB_rotate.tiff */,
+				8EA7EFC51C472973002E0085 /* TB_zoomActual.png */,
+				8EA7EFC61C472973002E0085 /* TB_zoomIn.png */,
+				8EA7EFC71C472973002E0085 /* TB_zoomOut.png */,
+				8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,9 +272,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */,
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
+				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
+				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8E194EE91C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg in Resources */,
 				8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */,
+				8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */,
+				8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
