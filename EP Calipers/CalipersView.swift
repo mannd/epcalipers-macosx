@@ -87,7 +87,9 @@ class CalipersView: NSView {
 
     override func magnifyWithEvent(theEvent: NSEvent) {
         NSLog("Magnify event")
-        imageView!.magnifyWithEvent(theEvent)
+        if !lockedMode {
+            imageView!.magnifyWithEvent(theEvent)
+        }
         NSLog("Zoom factor = %f", imageView!.zoomFactor)
     }
     

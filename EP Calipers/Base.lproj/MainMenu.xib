@@ -609,6 +609,54 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="HyV-fh-RgO">
                         <items>
+                            <menuItem title="Zoom In" keyEquivalent="=" id="oLP-ek-a3b">
+                                <connections>
+                                    <action selector="doZoom:" target="-1" id="fC4-CD-NsL"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom Out" tag="1" keyEquivalent="-" id="PfA-hX-1iQ">
+                                <connections>
+                                    <action selector="doZoom:" target="-1" id="1p4-hB-kVC"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom To Actual Size" tag="2" id="e1s-vQ-Cdy">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doZoom:" target="-1" id="Nze-eD-TOf"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom To Fit" tag="3" id="tHQ-eg-jvF">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doZoom:" target="-1" id="ISO-xX-yUV"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Jjx-Jt-oPU"/>
+                            <menuItem title="Cursor" id="fPv-by-kue">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Cursor" id="W17-tB-LLr">
+                                    <items>
+                                        <menuItem title="Grab All" id="P6q-PG-2Hd">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="switchToolMode:" target="-1" id="MlC-b5-ZGb"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Rotate Image" tag="1" id="Nu6-fl-pzH">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="switchToolMode:" target="-1" id="PbN-ca-mjM"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Lock Image" tag="2" id="54R-by-BUe">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="switchToolMode:" target="-1" id="FIY-NI-9cn"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>

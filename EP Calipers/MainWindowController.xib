@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
                 <outlet property="imageView" destination="L01-4C-stO" id="hsO-de-Dek"/>
+                <outlet property="toolSegmentedControl" destination="xw2-IA-d6A" id="Xrv-aA-NNd"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
         </customObject>
@@ -76,7 +77,7 @@
                             <segments>
                                 <segment toolTip="Grab image or caliper" image="TB_move" width="32" selected="YES"/>
                                 <segment toolTip="Rotate image or move calipers" image="TB_rotate" width="32" tag="1"/>
-                                <segment toolTip="Lock image and move calipers" image="TB_move">
+                                <segment toolTip="Lock image and move calipers" image="lock-16">
                                     <nil key="label"/>
                                 </segment>
                             </segments>
@@ -118,5 +119,6 @@
         <image name="TB_zoomIn" width="20" height="20"/>
         <image name="TB_zoomOut" width="20" height="20"/>
         <image name="TB_zoomToFit" width="20" height="20"/>
+        <image name="lock-16" width="16" height="16"/>
     </resources>
 </document>

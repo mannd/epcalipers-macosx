@@ -14,6 +14,7 @@ class MainWindowController: NSWindowController {
     
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
+    @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
     
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
@@ -56,42 +57,57 @@ class MainWindowController: NSWindowController {
     }
     
     @IBAction func switchToolMode(sender: AnyObject) {
+        var newTool: Int
         if sender.isKindOfClass(NSSegmentedControl) {
-            let newTool = sender.selectedSegment
-            switch newTool {
-            case 0:
-                imageView.currentToolMode = IKToolModeMove
-            case 1:
-                imageView.currentToolMode = IKToolModeRotate
-            case 2:
-                imageView.currentToolMode = IKToolModeNone
-            default:
-                break
-            }
+            newTool = sender.selectedSegment
+        }
+        else {
+            // menu items tagged
+            newTool = sender.tag()
+            // also make segmented control match selected tool
+            toolSegmentedControl.selectedSegment = newTool
+        }
+        switch newTool {
+        case 0:
+            imageView.currentToolMode = IKToolModeMove
+            calipersView.lockedMode = false
+        case 1:
+            imageView.currentToolMode = IKToolModeRotate
+            calipersView.lockedMode = false
+        case 2:
+            imageView.currentToolMode = IKToolModeNone
+            calipersView.lockedMode = true
+        default:
+            break
         }
     }
     
     @IBAction func doZoom(sender: AnyObject) {
+        var zoom: Int
+        var zoomFactor: CGFloat
         if sender.isKindOfClass(NSSegmentedControl) {
-            var zoomFactor: CGFloat
-            let zoom = sender.selectedSegment
-            switch zoom {
-            case 0:
-                zoomFactor = imageView.zoomFactor
-                imageView.zoomFactor = zoomFactor * zoomInFactor
-            case 1:
-                zoomFactor = imageView.zoomFactor
-                imageView.zoomFactor = zoomFactor * zoomOutFactor
-            case 2:
-                imageView.zoomImageToActualSize(self)
-            case 3:
-                imageView.zoomImageToFit(self)
-            default: break
-            }
+            zoom = sender.selectedSegment
+        }
+        else {
+            zoom = sender.tag()
+        }
+        switch zoom {
+        case 0:
+            zoomFactor = imageView.zoomFactor
+            imageView.zoomFactor = zoomFactor * zoomInFactor
+        case 1:
+            zoomFactor = imageView.zoomFactor
+            imageView.zoomFactor = zoomFactor * zoomOutFactor
+        case 2:
+            imageView.zoomImageToActualSize(self)
+        case 3:
+            imageView.zoomImageToFit(self)
+        default:
+            break
         }
     }
     
-        
+    
     
     @IBAction func openImage(sender: AnyObject) {
         /* Present open panel. */
