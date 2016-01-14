@@ -28,6 +28,8 @@
 		8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFCE1C473049002E0085 /* TB_move.tiff */; };
 		8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD01C4740C0002E0085 /* lock-20.png */; };
 		8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD21C4742E4002E0085 /* lock-16.png */; };
+		8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */; };
+		8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		8EA7EFCE1C473049002E0085 /* TB_move.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TB_move.tiff; sourceTree = "<group>"; };
 		8EA7EFD01C4740C0002E0085 /* lock-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-20.png"; sourceTree = "<group>"; };
 		8EA7EFD21C4742E4002E0085 /* lock-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-16.png"; sourceTree = "<group>"; };
+		8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-icon-bw-20x20.png"; sourceTree = "<group>"; };
+		8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-amplitude-icon-bw-20x20.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,8 @@
 		8EA7EFC31C472909002E0085 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */,
+				8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */,
 				8EA7EFD21C4742E4002E0085 /* lock-16.png */,
 				8EA7EFD01C4740C0002E0085 /* lock-20.png */,
 				8EA7EFCE1C473049002E0085 /* TB_move.tiff */,
@@ -284,11 +290,13 @@
 				8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */,
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
 				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
+				8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */,
 				8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */,
 				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8E194EE91C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg in Resources */,
 				8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */,
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
+				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
 				8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */,
 				8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */,
 				8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */,

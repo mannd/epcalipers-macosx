@@ -76,8 +76,8 @@
                             <font key="font" metaFont="system"/>
                             <segments>
                                 <segment toolTip="Grab image or caliper" image="TB_move" width="32" selected="YES"/>
-                                <segment toolTip="Rotate image or move calipers" image="TB_rotate" width="32" tag="1"/>
-                                <segment toolTip="Lock image and move calipers" image="lock-16">
+                                <segment toolTip="Rotate image" image="TB_rotate" width="32" tag="1"/>
+                                <segment toolTip="Lock image" image="lock-16">
                                     <nil key="label"/>
                                 </segment>
                             </segments>
@@ -86,13 +86,34 @@
                             <action selector="switchToolMode:" target="-2" id="hbC-b3-4pR"/>
                         </connections>
                     </segmentedControl>
+                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
+                        <rect key="frame" x="312" y="238" width="104" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="71b-LD-amQ"/>
+                            <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
+                        </constraints>
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="F0P-3a-q84">
+                            <font key="font" metaFont="system"/>
+                            <segments>
+                                <segment toolTip="Add time caliper" image="calipers-icon-bw-20x20" width="32">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment toolTip="Add amplitude caliper" image="calipers-amplitude-icon-bw-20x20" width="32" tag="1">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment label="Cal" width="32"/>
+                            </segments>
+                        </segmentedCell>
+                    </segmentedControl>
                 </subviews>
                 <constraints>
                     <constraint firstItem="L01-4C-stO" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3bZ-YJ-9DX"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="IkW-Sz-7Vn" secondAttribute="bottom" constant="20" id="9Ab-0t-DAN"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
+                    <constraint firstItem="80d-Qz-dhr" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="DXa-Xh-bOf"/>
                     <constraint firstItem="xw2-IA-d6A" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="ElB-4V-NMq"/>
                     <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
+                    <constraint firstItem="80d-Qz-dhr" firstAttribute="leading" secondItem="xw2-IA-d6A" secondAttribute="trailing" constant="8" id="NQM-mM-vZz"/>
                     <constraint firstItem="APQ-DF-YEg" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="5" id="NSu-IM-DVv"/>
                     <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="Sc4-rx-DOe"/>
                     <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="TUz-x3-9lI"/>
@@ -101,6 +122,7 @@
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="APQ-DF-YEg" secondAttribute="bottom" constant="13" id="hhU-Ga-2Qw"/>
                     <constraint firstItem="APQ-DF-YEg" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="5" id="pmX-cK-yAd"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="xw2-IA-d6A" secondAttribute="bottom" constant="20" id="s8D-BT-QR0"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="80d-Qz-dhr" secondAttribute="bottom" constant="20" id="szt-Ba-awQ"/>
                     <constraint firstAttribute="bottom" secondItem="L01-4C-stO" secondAttribute="bottom" id="t63-uN-q8y"/>
                     <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="APQ-DF-YEg" secondAttribute="trailing" constant="170" id="w9o-kK-yse"/>
                     <constraint firstAttribute="trailing" secondItem="L01-4C-stO" secondAttribute="trailing" id="y9W-gC-Tww"/>
@@ -119,6 +141,8 @@
         <image name="TB_zoomIn" width="20" height="20"/>
         <image name="TB_zoomOut" width="20" height="20"/>
         <image name="TB_zoomToFit" width="20" height="20"/>
+        <image name="calipers-amplitude-icon-bw-20x20" width="20" height="20"/>
+        <image name="calipers-icon-bw-20x20" width="20" height="20"/>
         <image name="lock-16" width="16" height="16"/>
     </resources>
 </document>
