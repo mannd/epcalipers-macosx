@@ -42,9 +42,8 @@ class MainWindowController: NSWindowController {
         imageView.editable = true
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
-        //imageView.setOverlay(calipersView.layer, forType: IKOverlayTypeImage)
-//        imageView.addSubview(calipersView)
-        // FIXME: need to selectively pass mouse events through
+        // calipersView unhandled events are passed to imageView
+        calipersView.nextResponder = imageView
         calipersView.imageView = imageView
         toggleModeButton.title = calipersModeTitle
         

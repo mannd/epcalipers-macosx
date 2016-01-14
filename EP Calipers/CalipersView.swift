@@ -26,6 +26,7 @@ class CalipersView: NSView {
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
         return true }
+    
 
     // used to hold statics for mouse dragging
     struct Holder {
@@ -64,7 +65,14 @@ class CalipersView: NSView {
 //    for (Caliper *caliper in self.calipers) {
 //    [caliper drawWithContext:con inRect:rect];
 //    }
-
+    
+    
+    
+//    @IBAction func setRotation(sender: AnyObject) {
+//        NSLog("SetRotation")
+////        imageView!.setRotation(sender)
+//    }
+//
     func selectCaliper(c: Caliper) {
         c.color = c.selectedColor
         c.selected = true

@@ -46,8 +46,11 @@
                         </connections>
                     </button>
                     <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APQ-DF-YEg">
-                        <rect key="frame" x="5" y="235" width="28" height="30"/>
-                        <sliderCell key="cell" alignment="left" maxValue="100" allowsTickMarkValuesOnly="YES" sliderType="circular" id="31C-LA-ycJ"/>
+                        <rect key="frame" x="5" y="233" width="32" height="32"/>
+                        <sliderCell key="cell" alignment="left" maxValue="360" numberOfTickMarks="4" allowsTickMarkValuesOnly="YES" sliderType="circular" id="31C-LA-ycJ"/>
+                        <connections>
+                            <action selector="setRotation:" target="-1" id="0dU-KE-B2W"/>
+                        </connections>
                     </slider>
                 </subviews>
                 <constraints>
