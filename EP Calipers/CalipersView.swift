@@ -85,8 +85,12 @@ class CalipersView: NSView {
         needsDisplay = true
     }
 
-// TDOD: Movement functions to be implemented
-
+    override func magnifyWithEvent(theEvent: NSEvent) {
+        NSLog("Magnify event")
+        imageView!.magnifyWithEvent(theEvent)
+        NSLog("Zoom factor = %f", imageView!.zoomFactor)
+    }
+    
     override func mouseDown(theEvent: NSEvent) {
         NSLog("MouseDown")
         if theEvent.clickCount == 2 {
@@ -196,12 +200,6 @@ class CalipersView: NSView {
             }
         }
     }
-    
-    override func magnifyWithEvent(event: NSEvent) {
-        NSLog("Zoom gesture")
-        imageView!.magnifyWithEvent(event)
-    }
-
     
     override func drawRect(dirtyRect: NSRect) {
         let context: CGContext! = NSGraphicsContext.currentContext()?.CGContext
