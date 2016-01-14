@@ -53,7 +53,22 @@ class MainWindowController: NSWindowController {
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
         }
-
+    }
+    
+    @IBAction func switchToolMode(sender: AnyObject) {
+        if sender.isKindOfClass(NSSegmentedControl) {
+            let newTool = sender.selectedSegment
+            switch newTool {
+            case 0:
+                imageView.currentToolMode = IKToolModeMove
+            case 1:
+                imageView.currentToolMode = IKToolModeRotate
+            case 2:
+                imageView.currentToolMode = IKToolModeNone
+            default:
+                break
+            }
+        }
     }
     
     @IBAction func doZoom(sender: AnyObject) {

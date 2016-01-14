@@ -25,6 +25,7 @@
 		8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC61C472973002E0085 /* TB_zoomIn.png */; };
 		8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC71C472973002E0085 /* TB_zoomOut.png */; };
 		8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */; };
+		8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFCE1C473049002E0085 /* TB_move.tiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		8EA7EFC61C472973002E0085 /* TB_zoomIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomIn.png; sourceTree = "<group>"; };
 		8EA7EFC71C472973002E0085 /* TB_zoomOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomOut.png; sourceTree = "<group>"; };
 		8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomToFit.png; sourceTree = "<group>"; };
+		8EA7EFCE1C473049002E0085 /* TB_move.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TB_move.tiff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 		8EA7EFC31C472909002E0085 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8EA7EFCE1C473049002E0085 /* TB_move.tiff */,
 				8EA7EFC41C472973002E0085 /* TB_rotate.tiff */,
 				8EA7EFC51C472973002E0085 /* TB_zoomActual.png */,
 				8EA7EFC61C472973002E0085 /* TB_zoomIn.png */,
@@ -275,6 +278,7 @@
 				8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */,
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
 				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
+				8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */,
 				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8E194EE91C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg in Resources */,
 				8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */,

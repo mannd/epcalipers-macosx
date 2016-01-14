@@ -51,12 +51,12 @@
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="lRw-HE-u64">
                             <font key="font" metaFont="system"/>
                             <segments>
-                                <segment toolTip="Zoom in" image="TB_zoomIn" imageScaling="none"/>
+                                <segment toolTip="Zoom in" image="TB_zoomIn"/>
                                 <segment toolTip="Zoom out" image="TB_zoomOut" tag="1"/>
                                 <segment toolTip="Zoom to actual size" image="TB_zoomActual">
                                     <nil key="label"/>
                                 </segment>
-                                <segment toolTip="Zoom to fit window" image="TB_zoomToFit" imageScaling="none">
+                                <segment toolTip="Zoom to fit window" image="TB_zoomToFit">
                                     <nil key="label"/>
                                 </segment>
                             </segments>
@@ -65,11 +65,32 @@
                             <action selector="doZoom:" target="-2" id="opd-CW-vQJ"/>
                         </connections>
                     </segmentedControl>
+                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xw2-IA-d6A">
+                        <rect key="frame" x="205" y="238" width="103" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="EZO-Ew-XTK"/>
+                            <constraint firstAttribute="width" constant="99" id="qgq-we-qCZ"/>
+                        </constraints>
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="GJ2-vD-tvz">
+                            <font key="font" metaFont="system"/>
+                            <segments>
+                                <segment toolTip="Grab image or caliper" image="TB_move" width="32" selected="YES"/>
+                                <segment toolTip="Rotate image or move calipers" image="TB_rotate" width="32" tag="1"/>
+                                <segment toolTip="Lock image and move calipers" image="TB_move">
+                                    <nil key="label"/>
+                                </segment>
+                            </segments>
+                        </segmentedCell>
+                        <connections>
+                            <action selector="switchToolMode:" target="-2" id="hbC-b3-4pR"/>
+                        </connections>
+                    </segmentedControl>
                 </subviews>
                 <constraints>
                     <constraint firstItem="L01-4C-stO" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3bZ-YJ-9DX"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="IkW-Sz-7Vn" secondAttribute="bottom" constant="20" id="9Ab-0t-DAN"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
+                    <constraint firstItem="xw2-IA-d6A" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="ElB-4V-NMq"/>
                     <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
                     <constraint firstItem="APQ-DF-YEg" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="5" id="NSu-IM-DVv"/>
                     <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="Sc4-rx-DOe"/>
@@ -78,7 +99,9 @@
                     <constraint firstItem="IkW-Sz-7Vn" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="bpC-FE-Jq7"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="APQ-DF-YEg" secondAttribute="bottom" constant="13" id="hhU-Ga-2Qw"/>
                     <constraint firstItem="APQ-DF-YEg" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="5" id="pmX-cK-yAd"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="xw2-IA-d6A" secondAttribute="bottom" constant="20" id="s8D-BT-QR0"/>
                     <constraint firstAttribute="bottom" secondItem="L01-4C-stO" secondAttribute="bottom" id="t63-uN-q8y"/>
+                    <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="APQ-DF-YEg" secondAttribute="trailing" constant="170" id="w9o-kK-yse"/>
                     <constraint firstAttribute="trailing" secondItem="L01-4C-stO" secondAttribute="trailing" id="y9W-gC-Tww"/>
                 </constraints>
             </view>
@@ -89,6 +112,8 @@
         </window>
     </objects>
     <resources>
+        <image name="TB_move" width="14" height="14"/>
+        <image name="TB_rotate" width="14" height="14"/>
         <image name="TB_zoomActual" width="20" height="20"/>
         <image name="TB_zoomIn" width="20" height="20"/>
         <image name="TB_zoomOut" width="20" height="20"/>
