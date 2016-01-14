@@ -20,10 +20,14 @@ class MainWindowController: NSWindowController {
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
     var imageURL: NSURL? = nil
+    var firstWindowResize = true
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
+    
+    let horizontalCalibration = Calibration()
+    let verticalCalibration = Calibration()
 
     
     override var windowNibName: String? {
@@ -33,28 +37,38 @@ class MainWindowController: NSWindowController {
     override func awakeFromNib() {
         let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
         let url = NSURL.fileURLWithPath(path!)
-        //
-        //        imageURL = url
-        //        let image = NSImage(fURL: url)
-        
         imageView.setImageWithURL(url)
         imageView.editable = true
+        // FIXME: need to retest combinations of these next 2 factors to see what works best
+        imageView.zoomImageToFit(self)
+        //imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
         // calipersView unhandled events are passed to imageView
         calipersView.nextResponder = imageView
         calipersView.imageView = imageView
-        
-// FIXME: a little test to try to draw the first caliper
-        let caliper: Caliper = Caliper()
-        caliper.setInitialPositionInRect(calipersView.bounds)
-        calipersView.calipers.append(caliper)
-        
-        
+        horizontalCalibration.direction = .Horizontal
+        verticalCalibration.direction = .Vertical
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
         }
     }
+  
+    func windowDidResize(notification: NSNotification) {
+        // Window resizes after load, changing bounds.
+        // This is the only place where first caliper can be placed with
+        // accurate window bounds.
+        NSLog("Window did resize")
+        //imageView.autoresizes = false
+        // FIXME: probably best to avoid the resizing hassle and just
+        // allow user to add initial caliper manually.
+//        if firstWindowResize {
+//            addHorizontalCaliper()
+//        }
+//        firstWindowResize = false
+    }
+    
+// MARK: Image functions
     
     @IBAction func switchToolMode(sender: AnyObject) {
         var newTool: Int
@@ -188,6 +202,51 @@ class MainWindowController: NSWindowController {
 //    func windowDidResize (notification: NSNotification?) {
 //        imageView.zoomImageToFit(self)
 //    }
+
+// MARK: Caliper functions
+    
+    func addCaliperWithDirection(direction: CaliperDirection) {
+        let caliper = Caliper()
+        // initiallize with Preferences here
+        caliper.direction = direction
+        if direction == .Horizontal {
+            caliper.calibration = horizontalCalibration
+        }
+        else {
+            caliper.calibration = verticalCalibration
+        }
+        caliper.setInitialPositionInRect(calipersView.bounds)
+        calipersView.calipers.append(caliper)
+        calipersView.needsDisplay = true
+    }
+    
+    func addHorizontalCaliper() {
+        addCaliperWithDirection(.Horizontal)
+    }
+    
+    func addVerticalCaliper() {
+        addCaliperWithDirection(.Vertical)
+    }
+    
+    @IBAction func addCaliper(sender: AnyObject) {
+        var caliperType: Int
+        if sender.isKindOfClass(NSSegmentedControl) {
+            caliperType = sender.selectedSegment
+        }
+        else {
+            caliperType = sender.tag()
+        }
+        switch caliperType {
+        case 0:
+            addHorizontalCaliper()
+        case 1:
+            addVerticalCaliper()
+        default:
+            break
+        }
+    }
+    
+    
     
     
 }

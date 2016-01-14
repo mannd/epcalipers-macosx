@@ -160,7 +160,7 @@
                                     <action selector="pasteAsPlainText:" target="-1" id="cEh-KX-wJQ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Delete" id="pa3-QI-u2k">
+                            <menuItem title="Delete " id="pa3-QI-u2k">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="delete:" target="-1" id="0Mk-Ml-PaM"/>
@@ -668,6 +668,41 @@
                                 <connections>
                                     <action selector="runToolbarCustomizationPalette:" target="-1" id="pQI-g3-MTW"/>
                                 </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Caliper" id="D0w-6S-BDp">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Caliper" id="MrP-RE-zcc">
+                        <items>
+                            <menuItem title="Add Time Caliper" id="VXG-nN-9pi">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="addCaliper:" target="-1" id="fZs-ap-VyT"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Add Amplitude Caliper" tag="1" id="fyJ-Gr-6Q4">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="addCaliper:" target="-1" id="1vr-6D-jcL"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete Caliper" id="MGL-eL-tFp">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Calibrate" id="bCr-le-ZI5">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="xvL-Ml-etX"/>
+                            <menuItem title="Toggle Rate/Interval" id="aNU-cw-RNz">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Mean Rate/Interval" id="2hW-zW-ivA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="QTc Measurement" id="5VV-jo-nu6">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
                     </menu>
