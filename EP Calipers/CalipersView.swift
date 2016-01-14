@@ -9,19 +9,23 @@
 import Cocoa
 import Quartz
 
-// TODO: Locked mode - lock image so it can't be moved by the mouse, only allowing
-// calipers to be moved.  Might be useful to avoid inadvertent moving of ECG when
-// trying to move calipers.
+
+
 class CalipersView: NSView {
+
+    // temporary preferences
+    struct EPCPreferences {
+        static var singleClickMode: Bool = true
+    }
     
     var imageView: IKImageView? = nil
-    var calipersMode: Bool = false
+    var calipersMode = false
     var calipers: [Caliper] = []
-    // new lockedMode variable?
-    var lockedMode: Bool = false
+    var lockedMode = false
     // not sure if still need this
-    var locked: Bool = false
+    var locked = false
     var selectedCaliper: Caliper? = nil
+    var mouseWasDragged = false
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -126,7 +130,6 @@ class CalipersView: NSView {
     
     override func mouseDragged(theEvent: NSEvent) {
         NSLog("MouseDragged")
- 
         if let c = selectedCaliper {
             var delta = CGPoint(x: theEvent.deltaX, y: theEvent.deltaY)
             if c.direction == .Vertical {
@@ -146,6 +149,7 @@ class CalipersView: NSView {
             else if Holder.bar2Selected {
                 c.bar2Position += delta.x
             }
+            mouseWasDragged = true
             needsDisplay = true
         }
         else {
@@ -157,10 +161,24 @@ class CalipersView: NSView {
     override func mouseUp(theEvent: NSEvent) {
         NSLog("MouseUp")
         if selectedCaliper != nil {
-            if theEvent.clickCount > 1 {
+            if EPCPreferences.singleClickMode {
+                if theEvent.clickCount == 1 && !mouseWasDragged {
+                    toggleCaliperState()
+                }
+                else {
+                    for c in calipers {
+                        if c.selected {
+                            calipers.removeAtIndex(calipers.indexOf(c)!)
+                            needsDisplay = true
+                        }
+                    }
+                }
+            }
+            else if theEvent.clickCount > 1 {
                 toggleCaliperState()
             }
             selectedCaliper = nil
+            mouseWasDragged = false
             Holder.bar1Selected = false
             Holder.bar2Selected = false
             Holder.crossBarSelected = false
