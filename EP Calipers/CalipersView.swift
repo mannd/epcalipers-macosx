@@ -118,13 +118,15 @@ class CalipersView: NSView {
     override func mouseUp(theEvent: NSEvent) {
         NSLog("MouseUp")
         if selectedCaliper != nil {
-            if theEvent.clickCount == 1 && !mouseWasDragged {
-                toggleCaliperState()
-            }
-            else {  // at least double click
-                for c in calipers {
-                    if c.selected {
-                        calipers.removeAtIndex(calipers.indexOf(c)!)
+            if !mouseWasDragged {
+                if theEvent.clickCount == 1 {
+                    toggleCaliperState()
+                }
+                else {  // at least double click
+                    for c in calipers {
+                        if c == selectedCaliper {
+                            calipers.removeAtIndex(calipers.indexOf(c)!)
+                        }
                         needsDisplay = true
                     }
                 }
@@ -134,6 +136,7 @@ class CalipersView: NSView {
             bar1Selected = false
             bar2Selected = false
             crossBarSelected = false
+            
         }
         else {
             imageView!.mouseUp(theEvent)
