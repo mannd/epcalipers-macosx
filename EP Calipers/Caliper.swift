@@ -24,7 +24,6 @@ class Caliper: NSObject {
     var unselectedColor: NSColor
     var selectedColor: NSColor
     var lineWidth: CGFloat
-    var valueInPoints: Float = 0// readonly
     var selected: Bool
     var textFont: NSFont
     var paragraphStyle: NSMutableParagraphStyle

@@ -328,7 +328,7 @@ class MainWindowController: NSWindowController {
             NSLog("Units = %@", trimmedUnits)
             if value > 0 {
                 let c = calipersView.activeCaliper()
-                if (c == nil || c!.valueInPoints <= 0) {
+                if (c == nil || c!.points() <= 0) {
                     return
                 }
                 var calibration: Calibration
@@ -344,7 +344,7 @@ class MainWindowController: NSWindowController {
                     calibration.displayRate = false
                 }
                 calibration.originalZoom = Double(imageView.zoomFactor)
-                calibration.originalCalFactor = value / Double(c!.valueInPoints)
+                calibration.originalCalFactor = value / Double(c!.points())
                 calibration.currentZoom = calibration.originalZoom
                 calibration.calibrated = true
             }
