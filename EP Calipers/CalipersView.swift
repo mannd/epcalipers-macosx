@@ -160,6 +160,29 @@ class CalipersView: NSView {
         }
     }
     
+    func noCaliperIsSelected() -> Bool {
+        var noneSelected = true
+        for c in calipers {
+            if c.selected {
+                noneSelected = false
+            }
+        }
+        return noneSelected
+    }
+    
+    func activeCaliper() -> Caliper? {
+        if calipers.count <= 0 {
+            return nil
+        }
+        var caliper: Caliper? = nil
+        for c in calipers {
+            if c.selected {
+                caliper = c
+            }
+        }
+        return caliper
+    }
+    
     // TODO: may not need this is menu option available instead
     override func keyDown(theEvent: NSEvent) {
         NSLog("Key down")

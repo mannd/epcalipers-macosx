@@ -27,7 +27,7 @@
                 <subviews>
                     <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="L01-4C-stO">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
-                        <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" red="0.92500000000000004" green="0.92500000000000004" blue="0.92500000000000004" alpha="1" colorSpace="deviceRGB"/>
                     </ikImageView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
@@ -133,6 +133,39 @@
             </connections>
             <point key="canvasLocation" x="374" y="515"/>
         </window>
+        <customView id="1nv-Ch-vgn">
+            <rect key="frame" x="0.0" y="0.0" width="249" height="133"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nas-NK-EXN">
+                    <rect key="frame" x="20" y="55" width="209" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="cEz-Fq-rD9"/>
+                        <constraint firstAttribute="width" constant="209" id="eKV-7u-m9D"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="I1j-RQ-6Ut">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="nas-NK-EXN" firstAttribute="centerY" secondItem="1nv-Ch-vgn" secondAttribute="centerY" id="7o1-9d-1eT"/>
+                <constraint firstItem="nas-NK-EXN" firstAttribute="centerX" secondItem="1nv-Ch-vgn" secondAttribute="centerX" id="Wsf-hl-6gJ"/>
+            </constraints>
+            <point key="canvasLocation" x="464.5" y="221.5"/>
+        </customView>
+        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Hsh-8H-9Ny">
+            <rect key="frame" x="0.0" y="0.0" width="38" height="17"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Oux-CQ-MYK">
+                <font key="font" metaFont="system"/>
+                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+            </textFieldCell>
+            <point key="canvasLocation" x="723" y="466.5"/>
+        </textField>
     </objects>
     <resources>
         <image name="TB_move" width="14" height="14"/>

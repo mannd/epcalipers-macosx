@@ -241,9 +241,65 @@ class MainWindowController: NSWindowController {
             addHorizontalCaliper()
         case 1:
             addVerticalCaliper()
+        case 2:
+            calibrate()
         default:
             break
         }
+    }
+    
+    func calibrate() {
+        if calipersView.calipers.count < 1 {
+            showNoCalipersAlert()
+            return
+        }
+        if calipersView.noCaliperIsSelected() {
+            if calipersView.calipers.count == 1 {
+                // assume user wants to calibrate sole caliper, so select it
+                calipersView.selectCaliper(calipersView.calipers[0])
+            }
+            else {
+                showNoCaliperSelectedAlert()
+                return
+            }
+        }
+        if let c = calipersView.activeCaliper() {
+            var example: String
+            if c.direction == .Vertical {
+                example = "1 mV"
+            }
+            else {
+                example = "1000 msec"
+            }
+            let message = String(format: "Enter calibration measurement (e.g. %@)", example)
+            let alert = NSAlert()
+            alert.messageText = "Calibrate caliper"
+            alert.informativeText = message
+            alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+            alert.addButtonWithTitle("Calibrate")
+            alert.addButtonWithTitle("Cancel")
+            let result = alert.runModal()
+        }
+        
+        
+    }
+    
+    func showNoCalipersAlert() {
+        let alert = NSAlert()
+        alert.messageText = "No calipers available for calibration"
+        alert.informativeText = "In order to calibrate, you must first add a caliper and then set it to a known interval, e.g. 1000 msec."
+        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.addButtonWithTitle("OK")
+        alert.runModal()
+    }
+    
+    func showNoCaliperSelectedAlert() {
+        let alert = NSAlert()
+        alert.messageText = "No caliper selected (highlighted)"
+        alert.informativeText = "Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV"
+        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.addButtonWithTitle("OK")
+        alert.runModal()
     }
     
     
