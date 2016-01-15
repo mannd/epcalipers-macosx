@@ -15,6 +15,9 @@ class MainWindowController: NSWindowController {
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
+    // Note textInputView must be a strong reference to prevent deallocation
+    @IBOutlet var textInputView: NSView!
+    @IBOutlet weak var textField: NSTextField!
     
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
@@ -41,7 +44,7 @@ class MainWindowController: NSWindowController {
         imageView.editable = true
         // FIXME: need to retest combinations of these next 2 factors to see what works best
         imageView.zoomImageToFit(self)
-        //imageView.autoresizes = false
+        imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
         // calipersView unhandled events are passed to imageView
@@ -52,6 +55,13 @@ class MainWindowController: NSWindowController {
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
         }
+    }
+    
+    override func windowDidLoad() {
+        // Necessary to load view here or window gets resized if loaded when
+        // NSAlert used.
+        NSBundle.mainBundle().loadNibNamed("View", owner: self, topLevelObjects: nil)
+
     }
   
     func windowDidResize(notification: NSNotification) {
@@ -158,7 +168,7 @@ class MainWindowController: NSWindowController {
 //        let savePanel = NSSavePanel()
 //        saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
 //
-//// FIXME: Accessory view doesn't work
+//// FIXME: Accessory view doesn't work: NOTE: try nib for this
 ////// Option 1: build view and add it as accessory view
 ////        let view: NSView = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 200))
 ////        savePanel.accessoryView = view
@@ -249,6 +259,7 @@ class MainWindowController: NSWindowController {
     }
     
     func calibrate() {
+
         if calipersView.calipers.count < 1 {
             showNoCalipersAlert()
             return
@@ -278,10 +289,67 @@ class MainWindowController: NSWindowController {
             alert.alertStyle = NSAlertStyle.InformationalAlertStyle
             alert.addButtonWithTitle("Calibrate")
             alert.addButtonWithTitle("Cancel")
+            alert.accessoryView = textInputView
+            if horizontalCalibration.calibrationString.characters.count < 1 {
+                horizontalCalibration.calibrationString = "1000 msec" // TODO: use default here
+            }
+            if verticalCalibration.calibrationString.characters.count < 1 {
+                verticalCalibration.calibrationString = "1 mV" // TODO: use default here
+            }
+            let direction = c.direction
+            var calibrationString: String
+            if direction == .Horizontal {
+                calibrationString = horizontalCalibration.calibrationString
+            }
+            else {
+                calibrationString = verticalCalibration.calibrationString
+            }
+            textField.stringValue = calibrationString
             let result = alert.runModal()
+            if result == NSAlertFirstButtonReturn {
+                let inputText = textField.stringValue
+                if inputText.characters.count > 0 {
+                    calibrateWithText(inputText)
+                }
+            }
         }
-        
-        
+    }
+    
+    func calibrateWithText(inputText: String) {
+        // caller must guarantee this
+        assert(inputText.characters.count > 0)
+        var value: Double = 0.0
+        var trimmedUnits: String = ""
+        let scanner = NSScanner.localizedScannerWithString(inputText)
+        if scanner.scanDouble(&value) {
+            trimmedUnits = scanner.string!!.substringFromIndex(scanner.scanLocation).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            value = fabs(value)
+            NSLog("Value = %f", value)
+            NSLog("Units = %@", trimmedUnits)
+            if value > 0 {
+                let c = calipersView.activeCaliper()
+                if (c == nil || c!.valueInPoints <= 0) {
+                    return
+                }
+                var calibration: Calibration
+                if c!.direction == .Horizontal {
+                    calibration = horizontalCalibration
+                }
+                else {
+                    calibration = verticalCalibration
+                }
+                calibration.calibrationString = inputText
+                calibration.rawUnits = trimmedUnits
+                if !calibration.canDisplayRate {
+                    calibration.displayRate = false
+                }
+                calibration.originalZoom = Double(imageView.zoomFactor)
+                calibration.originalCalFactor = value / Double(c!.valueInPoints)
+                calibration.currentZoom = calibration.originalZoom
+                calibration.calibrated = true
+            }
+            calipersView.needsDisplay = true
+        }
     }
     
     func showNoCalipersAlert() {
