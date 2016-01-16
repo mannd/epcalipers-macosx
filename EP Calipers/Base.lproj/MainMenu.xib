@@ -690,9 +690,21 @@
                             </menuItem>
                             <menuItem title="Delete Caliper" id="MGL-eL-tFp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="deleteBackward:" target="-1" id="stP-pk-BSH"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Calibrate" id="bCr-le-ZI5">
+                            <menuItem title="Calibrate" tag="2" id="bCr-le-ZI5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="addCaliper:" target="-1" id="bt5-up-YeT"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Clear Calibration" id="CWG-n0-m2k">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="clearCalibration:" target="-1" id="lhz-H6-0y0"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xvL-Ml-etX"/>
                             <menuItem title="Toggle Rate/Interval" id="aNU-cw-RNz">

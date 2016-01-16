@@ -370,6 +370,21 @@ class MainWindowController: NSWindowController {
         alert.runModal()
     }
     
+    @IBAction func clearCalibration(sender: AnyObject) {
+        resetCalibration()
+        calipersView.needsDisplay = true
+    }
+    
+    func resetCalibration() {
+        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
+            // No easy animation equivalent in Cocoa
+            // flashCalipers()
+            horizontalCalibration.reset()
+            verticalCalibration.reset()
+        }
+    }
+    
+    
     
     
     
