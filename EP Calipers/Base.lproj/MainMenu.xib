@@ -631,6 +631,43 @@
                                     <action selector="doZoom:" target="-1" id="ISO-xX-yUV"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Rotation" id="QLS-TN-252">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Rotation" id="d5K-g9-32O">
+                                    <items>
+                                        <menuItem title="Rotate 90° Right" id="hX3-m3-BnY">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="doRotation:" target="-1" id="TNI-gB-gMk"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Rotate 90° Left" tag="1" id="1UF-a2-1md">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="doRotation:" target="-1" id="6Ac-wE-oX1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Rotate 1° Right" tag="2" id="Osb-se-4Ge">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="doRotation:" target="-1" id="EPS-ol-aGv"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Rotate 1° Left" tag="3" id="UTb-hN-uvE">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="doRotation:" target="-1" id="KSF-r9-F4Q"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Reset Rotation" tag="4" id="mRi-px-TI8">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="doRotation:" target="-1" id="EB4-Os-kNX"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="Jjx-Jt-oPU"/>
                             <menuItem title="Cursor" id="fPv-by-kue">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -758,5 +795,8 @@
                 </menuItem>
             </items>
         </menu>
+        <menuItem title="Item" id="qW0-tk-Hk7">
+            <modifierMask key="keyEquivalentModifierMask"/>
+        </menuItem>
     </objects>
 </document>

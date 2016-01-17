@@ -16,7 +16,6 @@ class MainWindowController: NSWindowController {
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
-    @IBOutlet weak var circularControl: NSSlider!
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
@@ -31,8 +30,7 @@ class MainWindowController: NSWindowController {
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
-    
-    
+
     
     override var windowNibName: String? {
         return "MainWindowController"
@@ -241,6 +239,51 @@ class MainWindowController: NSWindowController {
 //    func windowDidResize (notification: NSNotification?) {
 //        imageView.zoomImageToFit(self)
 //    }
+    
+    @IBAction func doRotation(sender: AnyObject) {
+        var rotationType: Int
+        if sender.isKindOfClass(NSSegmentedControl) {
+            rotationType = sender.selectedSegment
+        }
+        else {
+            rotationType = sender.tag()
+        }
+        switch rotationType {
+        case 0:
+            rotateImageView(-90)
+        case 1:
+            rotateImageView(90)
+        case 2:
+            rotateImageView(-1)
+        case 3:
+            rotateImageView(1)
+        case 4:
+            resetImageViewRotation()
+        default:
+            break
+        }
+        
+    }
+    
+    let radionsPerDegree: Double = 2 * 3.14159265359 / 360.0
+
+    func radians(degrees: Double) -> Double {
+        return degrees * 3.14159265359 / 180.0
+    }
+    
+    func rotateImageView(degrees: Double) {
+        imageView.rotationAngle += CGFloat(radians(degrees))
+        adjustImageAfterRotation()
+    }
+    
+    func resetImageViewRotation() {
+        imageView.rotationAngle = 0
+        adjustImageAfterRotation()
+    }
+    
+    func adjustImageAfterRotation() {
+        imageView.zoomImageToActualSize(self)
+    }
 
 // MARK: Caliper functions
     
@@ -343,9 +386,9 @@ class MainWindowController: NSWindowController {
                 let inputText = textField.stringValue
                 if inputText.characters.count > 0 {
                     calibrateWithText(inputText)
+
                 }
             }
-            circularControl.enabled = false
             if calipersView.horizontalCalibration.calibrated {
                 measurementSegmentedControl.enabled = true
             }
@@ -394,8 +437,10 @@ class MainWindowController: NSWindowController {
                 calipersView.lockedMode = false
             }
             toolSegmentedControl.setEnabled(false, forSegment: 1)
+            circularSlider.enabled = false
+
             
-                
+            
         }
     }
     
@@ -429,10 +474,10 @@ class MainWindowController: NSWindowController {
             // flashCalipers()
             calipersView.horizontalCalibration.reset()
             calipersView.verticalCalibration.reset()
-            circularControl.enabled = true
             // allow rotation tool
             toolSegmentedControl.setEnabled(true, forSegment: 1)
             measurementSegmentedControl.enabled = false
+            circularSlider.enabled = true
         }
     }
     

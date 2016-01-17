@@ -9,7 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
-                <outlet property="circularControl" destination="APQ-DF-YEg" id="u9t-OL-Fez"/>
                 <outlet property="circularSlider" destination="APQ-DF-YEg" id="jAR-2H-due"/>
                 <outlet property="imageView" destination="L01-4C-stO" id="hsO-de-Dek"/>
                 <outlet property="measurementSegmentedControl" destination="7Ej-cN-zsf" id="Hhd-nv-Ud9"/>
