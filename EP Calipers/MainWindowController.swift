@@ -15,6 +15,7 @@ class MainWindowController: NSWindowController {
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
+    @IBOutlet weak var circularControl: NSSlider!
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
     @IBOutlet weak var textField: NSTextField!
@@ -29,9 +30,7 @@ class MainWindowController: NSWindowController {
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
     
-    let horizontalCalibration = Calibration()
-    let verticalCalibration = Calibration()
-
+    
     
     override var windowNibName: String? {
         return "MainWindowController"
@@ -50,8 +49,8 @@ class MainWindowController: NSWindowController {
         // calipersView unhandled events are passed to imageView
         calipersView.nextResponder = imageView
         calipersView.imageView = imageView
-        horizontalCalibration.direction = .Horizontal
-        verticalCalibration.direction = .Vertical
+        calipersView.horizontalCalibration.direction = .Horizontal
+        calipersView.verticalCalibration.direction = .Vertical
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
         }
@@ -119,13 +118,17 @@ class MainWindowController: NSWindowController {
         case 0:
             zoomFactor = imageView.zoomFactor
             imageView.zoomFactor = zoomFactor * zoomInFactor
+            calipersView.updateCalibration()
         case 1:
             zoomFactor = imageView.zoomFactor
             imageView.zoomFactor = zoomFactor * zoomOutFactor
+            calipersView.updateCalibration()
         case 2:
             imageView.zoomImageToActualSize(self)
+            calipersView.updateCalibration()
         case 3:
             imageView.zoomImageToFit(self)
+            calipersView.updateCalibration()
         default:
             break
         }
@@ -220,10 +223,10 @@ class MainWindowController: NSWindowController {
         // initiallize with Preferences here
         caliper.direction = direction
         if direction == .Horizontal {
-            caliper.calibration = horizontalCalibration
+            caliper.calibration = calipersView.horizontalCalibration
         }
         else {
-            caliper.calibration = verticalCalibration
+            caliper.calibration = calipersView.verticalCalibration
         }
         caliper.setInitialPositionInRect(calipersView.bounds)
         calipersView.calipers.append(caliper)
@@ -290,19 +293,19 @@ class MainWindowController: NSWindowController {
             alert.addButtonWithTitle("Calibrate")
             alert.addButtonWithTitle("Cancel")
             alert.accessoryView = textInputView
-            if horizontalCalibration.calibrationString.characters.count < 1 {
-                horizontalCalibration.calibrationString = "1000 msec" // TODO: use default here
+            if calipersView.horizontalCalibration.calibrationString.characters.count < 1 {
+                calipersView.horizontalCalibration.calibrationString = "1000 msec" // TODO: use default here
             }
-            if verticalCalibration.calibrationString.characters.count < 1 {
-                verticalCalibration.calibrationString = "1 mV" // TODO: use default here
+            if calipersView.verticalCalibration.calibrationString.characters.count < 1 {
+                calipersView.verticalCalibration.calibrationString = "1 mV" // TODO: use default here
             }
             let direction = c.direction
             var calibrationString: String
             if direction == .Horizontal {
-                calibrationString = horizontalCalibration.calibrationString
+                calibrationString = calipersView.horizontalCalibration.calibrationString
             }
             else {
-                calibrationString = verticalCalibration.calibrationString
+                calibrationString = calipersView.verticalCalibration.calibrationString
             }
             textField.stringValue = calibrationString
             let result = alert.runModal()
@@ -333,10 +336,10 @@ class MainWindowController: NSWindowController {
                 }
                 var calibration: Calibration
                 if c!.direction == .Horizontal {
-                    calibration = horizontalCalibration
+                    calibration = calipersView.horizontalCalibration
                 }
                 else {
-                    calibration = verticalCalibration
+                    calibration = calipersView.verticalCalibration
                 }
                 calibration.calibrationString = inputText
                 calibration.rawUnits = trimmedUnits
@@ -376,16 +379,13 @@ class MainWindowController: NSWindowController {
     }
     
     func resetCalibration() {
-        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
+        if calipersView.horizontalCalibration.calibrated ||
+            calipersView.verticalCalibration.calibrated {
             // No easy animation equivalent in Cocoa
             // flashCalipers()
-            horizontalCalibration.reset()
-            verticalCalibration.reset()
+            calipersView.horizontalCalibration.reset()
+            calipersView.verticalCalibration.reset()
         }
     }
-    
-    
-    
-    
-    
+
 }

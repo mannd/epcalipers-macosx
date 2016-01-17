@@ -29,11 +29,15 @@ class CalipersView: NSView {
     var bar1Selected = false
     var bar2Selected = false
     var crossBarSelected = false
+    // references to MainWindowController calibrations
+    let horizontalCalibration = Calibration()
+    let verticalCalibration = Calibration()
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
         return true }
     
+
     func selectCaliper(c: Caliper) {
         c.color = c.selectedColor
         c.selected = true
@@ -46,13 +50,6 @@ class CalipersView: NSView {
         needsDisplay = true
     }
 
-    override func magnifyWithEvent(theEvent: NSEvent) {
-        NSLog("Magnify event")
-        if !lockedMode {
-            imageView!.magnifyWithEvent(theEvent)
-        }
-        NSLog("Zoom factor = %f", imageView!.zoomFactor)
-    }
     
     override func mouseDown(theEvent: NSEvent) {
         NSLog("MouseDown")
@@ -72,6 +69,25 @@ class CalipersView: NSView {
             imageView!.mouseDown(theEvent)
         }
     }
+    
+    override func magnifyWithEvent(theEvent: NSEvent) {
+        if !lockedMode {
+            imageView!.magnifyWithEvent(theEvent)
+        }
+        updateCalibration()
+    }
+    
+    func updateCalibration() {
+        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
+            horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
+            verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
+        }
+        if calipers.count > 0 {
+            needsDisplay = true
+        }
+    }
+    
+
     
     func getSelectedCaliper(point: CGPoint) -> Caliper?{
         var caliper: Caliper? = nil
