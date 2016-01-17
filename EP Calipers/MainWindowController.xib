@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
                 <outlet property="circularControl" destination="APQ-DF-YEg" id="u9t-OL-Fez"/>
+                <outlet property="circularSlider" destination="APQ-DF-YEg" id="jAR-2H-due"/>
                 <outlet property="imageView" destination="L01-4C-stO" id="hsO-de-Dek"/>
                 <outlet property="toolSegmentedControl" destination="xw2-IA-d6A" id="Xrv-aA-NNd"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>

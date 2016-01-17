@@ -12,6 +12,7 @@ import AppKit
 
 class MainWindowController: NSWindowController {
     
+    @IBOutlet weak var circularSlider: NSSlider!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
@@ -42,7 +43,7 @@ class MainWindowController: NSWindowController {
         imageView.setImageWithURL(url)
         imageView.editable = true
         // FIXME: need to retest combinations of these next 2 factors to see what works best
-        imageView.zoomImageToFit(self)
+        imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
@@ -133,7 +134,6 @@ class MainWindowController: NSWindowController {
             break
         }
     }
-    
     
     
     @IBAction func openImage(sender: AnyObject) {
@@ -315,6 +315,8 @@ class MainWindowController: NSWindowController {
                     calibrateWithText(inputText)
                 }
             }
+            circularControl.enabled = false
+            
         }
     }
     
@@ -352,6 +354,15 @@ class MainWindowController: NSWindowController {
                 calibration.calibrated = true
             }
             calipersView.needsDisplay = true
+            // Don't allow rotation toll after calibration
+            if toolSegmentedControl.selectedSegment == 1 {
+                toolSegmentedControl.selectedSegment = 0
+                imageView.currentToolMode = IKToolModeMove
+                calipersView.lockedMode = false
+            }
+            toolSegmentedControl.setEnabled(false, forSegment: 1)
+            
+                
         }
     }
     
@@ -385,6 +396,9 @@ class MainWindowController: NSWindowController {
             // flashCalipers()
             calipersView.horizontalCalibration.reset()
             calipersView.verticalCalibration.reset()
+            circularControl.enabled = true
+            // allow rotation tool
+            toolSegmentedControl.setEnabled(true, forSegment: 1)
         }
     }
 
