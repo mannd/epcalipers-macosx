@@ -12,6 +12,7 @@
                 <outlet property="circularControl" destination="APQ-DF-YEg" id="u9t-OL-Fez"/>
                 <outlet property="circularSlider" destination="APQ-DF-YEg" id="jAR-2H-due"/>
                 <outlet property="imageView" destination="L01-4C-stO" id="hsO-de-Dek"/>
+                <outlet property="measurementSegmentedControl" destination="7Ej-cN-zsf" id="Hhd-nv-Ud9"/>
                 <outlet property="toolSegmentedControl" destination="xw2-IA-d6A" id="Xrv-aA-NNd"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
@@ -21,21 +22,21 @@
         <window title="EP Calipers" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="faX-Do-WYj">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="131" y="158" width="480" height="270"/>
+            <rect key="contentRect" x="131" y="158" width="651" height="345"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="uHL-zZ-C20">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <rect key="frame" x="0.0" y="0.0" width="651" height="345"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="L01-4C-stO">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
+                        <rect key="frame" x="0.0" y="0.0" width="651" height="295"/>
                         <color key="backgroundColor" red="0.92500000000000004" green="0.92500000000000004" blue="0.92500000000000004" alpha="1" colorSpace="deviceRGB"/>
                     </ikImageView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
+                        <rect key="frame" x="0.0" y="0.0" width="651" height="295"/>
                     </customView>
                     <slider toolTip="Rotate image by 90 degree steps" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="APQ-DF-YEg">
-                        <rect key="frame" x="5" y="233" width="32" height="32"/>
+                        <rect key="frame" x="8" y="308" width="32" height="32"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="32" id="5xn-Mo-3FS"/>
                             <constraint firstAttribute="height" constant="32" id="Ype-BQ-nMp"/>
@@ -46,9 +47,9 @@
                         </connections>
                     </slider>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IkW-Sz-7Vn">
-                        <rect key="frame" x="41" y="238" width="204" height="24"/>
+                        <rect key="frame" x="46" y="313" width="150" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="200" id="mmW-sf-Oxb"/>
+                            <constraint firstAttribute="width" constant="146" id="mmW-sf-Oxb"/>
                             <constraint firstAttribute="height" constant="21" id="slr-Ed-CWF"/>
                         </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="lRw-HE-u64">
@@ -69,7 +70,7 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xw2-IA-d6A">
-                        <rect key="frame" x="205" y="238" width="103" height="24"/>
+                        <rect key="frame" x="200" y="313" width="103" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="EZO-Ew-XTK"/>
                             <constraint firstAttribute="width" constant="99" id="qgq-we-qCZ"/>
@@ -89,7 +90,7 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
-                        <rect key="frame" x="312" y="238" width="104" height="24"/>
+                        <rect key="frame" x="307" y="313" width="104" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="71b-LD-amQ"/>
                             <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
@@ -110,30 +111,51 @@
                             <action selector="addCaliper:" target="-2" id="TkU-CH-Yg0"/>
                         </connections>
                     </segmentedControl>
+                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
+                        <rect key="frame" x="415" y="313" width="104" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="wV2-P7-0mE"/>
+                            <constraint firstAttribute="height" constant="21" id="wj5-y7-FoH"/>
+                        </constraints>
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="5zE-4y-ufs">
+                            <font key="font" metaFont="system"/>
+                            <segments>
+                                <segment label="R/I" width="32"/>
+                                <segment label="M" width="32" tag="1"/>
+                                <segment label="QTc" width="32"/>
+                            </segments>
+                        </segmentedCell>
+                        <connections>
+                            <action selector="doMeasurement:" target="-2" id="xbg-xN-OK6"/>
+                        </connections>
+                    </segmentedControl>
                 </subviews>
                 <constraints>
                     <constraint firstItem="L01-4C-stO" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3bZ-YJ-9DX"/>
+                    <constraint firstItem="7Ej-cN-zsf" firstAttribute="leading" secondItem="80d-Qz-dhr" secondAttribute="trailing" constant="8" id="5hr-ls-3re"/>
+                    <constraint firstItem="7Ej-cN-zsf" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="7nX-BO-Ij5"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
                     <constraint firstItem="80d-Qz-dhr" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="DXa-Xh-bOf"/>
                     <constraint firstItem="xw2-IA-d6A" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="ElB-4V-NMq"/>
+                    <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="IkW-Sz-7Vn" secondAttribute="trailing" constant="8" id="GOS-he-SIh"/>
                     <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="7Ej-cN-zsf" secondAttribute="bottom" constant="20" id="MMa-tO-MYv"/>
                     <constraint firstItem="80d-Qz-dhr" firstAttribute="leading" secondItem="xw2-IA-d6A" secondAttribute="trailing" constant="8" id="NQM-mM-vZz"/>
-                    <constraint firstItem="APQ-DF-YEg" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="5" id="NSu-IM-DVv"/>
+                    <constraint firstItem="APQ-DF-YEg" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="8" id="NSu-IM-DVv"/>
                     <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="Sc4-rx-DOe"/>
                     <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="TUz-x3-9lI"/>
-                    <constraint firstItem="IkW-Sz-7Vn" firstAttribute="leading" secondItem="APQ-DF-YEg" secondAttribute="trailing" constant="6" id="WaU-pB-XoM"/>
+                    <constraint firstItem="IkW-Sz-7Vn" firstAttribute="leading" secondItem="APQ-DF-YEg" secondAttribute="trailing" constant="8" id="WaU-pB-XoM"/>
                     <constraint firstItem="IkW-Sz-7Vn" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="bpC-FE-Jq7"/>
                     <constraint firstItem="APQ-DF-YEg" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="5" id="pmX-cK-yAd"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="APQ-DF-YEg" secondAttribute="bottom" constant="13" id="rsW-rO-kwi"/>
                     <constraint firstAttribute="bottom" secondItem="L01-4C-stO" secondAttribute="bottom" id="t63-uN-q8y"/>
-                    <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="APQ-DF-YEg" secondAttribute="trailing" constant="170" id="w9o-kK-yse"/>
                     <constraint firstAttribute="trailing" secondItem="L01-4C-stO" secondAttribute="trailing" id="y9W-gC-Tww"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
             </connections>
-            <point key="canvasLocation" x="374" y="515"/>
+            <point key="canvasLocation" x="375.5" y="491.5"/>
         </window>
         <customView id="1nv-Ch-vgn">
             <rect key="frame" x="0.0" y="0.0" width="249" height="133"/>

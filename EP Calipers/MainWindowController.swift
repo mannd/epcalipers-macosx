@@ -17,6 +17,7 @@ class MainWindowController: NSWindowController {
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var circularControl: NSSlider!
+    @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
     @IBOutlet weak var textField: NSTextField!
@@ -52,6 +53,7 @@ class MainWindowController: NSWindowController {
         calipersView.imageView = imageView
         calipersView.horizontalCalibration.direction = .Horizontal
         calipersView.verticalCalibration.direction = .Vertical
+        measurementSegmentedControl.enabled = false
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
         }
@@ -130,6 +132,22 @@ class MainWindowController: NSWindowController {
         case 3:
             imageView.zoomImageToFit(self)
             calipersView.updateCalibration()
+        default:
+            break
+        }
+    }
+    
+    @IBAction func doMeasurement(sender: AnyObject) {
+        var measurement: Int
+        if sender.isKindOfClass(NSSegmentedControl) {
+            measurement = sender.selectedSegment
+        }
+        else {
+            measurement = sender.tag()
+        }
+        switch measurement {
+        case 0:
+            toggleIntervalRate()
         default:
             break
         }
@@ -316,6 +334,9 @@ class MainWindowController: NSWindowController {
                 }
             }
             circularControl.enabled = false
+            if calipersView.horizontalCalibration.calibrated {
+                measurementSegmentedControl.enabled = true
+            }
             
         }
     }
@@ -399,7 +420,13 @@ class MainWindowController: NSWindowController {
             circularControl.enabled = true
             // allow rotation tool
             toolSegmentedControl.setEnabled(true, forSegment: 1)
+            measurementSegmentedControl.enabled = false
         }
+    }
+    
+    func toggleIntervalRate() {
+        calipersView.horizontalCalibration.displayRate = !calipersView.horizontalCalibration.displayRate
+        calipersView.needsDisplay = true
     }
 
 }
