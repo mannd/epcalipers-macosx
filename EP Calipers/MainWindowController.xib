@@ -69,8 +69,8 @@
                             <action selector="doZoom:" target="-2" id="opd-CW-vQJ"/>
                         </connections>
                     </segmentedControl>
-                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xw2-IA-d6A">
-                        <rect key="frame" x="200" y="313" width="103" height="24"/>
+                    <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xw2-IA-d6A">
+                        <rect key="frame" x="201" y="313" width="102" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="EZO-Ew-XTK"/>
                             <constraint firstAttribute="width" constant="99" id="qgq-we-qCZ"/>
@@ -78,7 +78,7 @@
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="GJ2-vD-tvz">
                             <font key="font" metaFont="system"/>
                             <segments>
-                                <segment toolTip="Grab image or caliper" image="TB_move" width="32" selected="YES"/>
+                                <segment toolTip="Grab image or caliper" image="TB_move" selected="YES"/>
                                 <segment toolTip="Rotate image" image="TB_rotate" width="32" tag="1"/>
                                 <segment toolTip="Lock image" image="lock-16">
                                     <nil key="label"/>
@@ -90,9 +90,9 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
-                        <rect key="frame" x="307" y="313" width="104" height="24"/>
+                        <rect key="frame" x="307" y="313" width="139" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="71b-LD-amQ"/>
+                            <constraint firstAttribute="width" constant="135" id="71b-LD-amQ"/>
                             <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
                         </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="F0P-3a-q84">
@@ -105,14 +105,15 @@
                                     <nil key="label"/>
                                 </segment>
                                 <segment label="Cal" width="32"/>
+                                <segment label="Clr"/>
                             </segments>
                         </segmentedCell>
                         <connections>
                             <action selector="addCaliper:" target="-2" id="TkU-CH-Yg0"/>
                         </connections>
                     </segmentedControl>
-                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
-                        <rect key="frame" x="415" y="313" width="104" height="24"/>
+                    <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
+                        <rect key="frame" x="448" y="313" width="109" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="wV2-P7-0mE"/>
                             <constraint firstAttribute="height" constant="21" id="wj5-y7-FoH"/>
@@ -120,7 +121,7 @@
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="5zE-4y-ufs">
                             <font key="font" metaFont="system"/>
                             <segments>
-                                <segment label="R/I" width="32"/>
+                                <segment label="R/I"/>
                                 <segment label="M" width="32" tag="1"/>
                                 <segment label="QTc" width="32"/>
                             </segments>

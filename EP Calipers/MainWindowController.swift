@@ -127,10 +127,18 @@ class MainWindowController: NSWindowController {
             imageView.zoomFactor = zoomFactor * zoomOutFactor
             calipersView.updateCalibration()
         case 2:
+            NSLog("Old zoomFactor = %f", imageView.zoomFactor)
+            NSLog("Old imagesize w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
             imageView.zoomImageToActualSize(self)
+            NSLog("New zoomfactor = %f", imageView.zoomFactor)
+            NSLog("New imagesize w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
             calipersView.updateCalibration()
         case 3:
+            NSLog("Old zoomFactor = %f", imageView.zoomFactor)
+            NSLog("Old imagesize w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
             imageView.zoomImageToFit(self)
+            NSLog("New zoomfactor = %f", imageView.zoomFactor)
+            NSLog("New imagesize w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
             calipersView.updateCalibration()
         default:
             break
@@ -274,6 +282,8 @@ class MainWindowController: NSWindowController {
             addVerticalCaliper()
         case 2:
             calibrate()
+        case 3:
+            clearCalibration(self)
         default:
             break
         }
@@ -296,6 +306,8 @@ class MainWindowController: NSWindowController {
             }
         }
         if let c = calipersView.activeCaliper() {
+            NSLog("Zoom factor = %f", imageView.zoomFactor)
+            NSLog("Image size w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
             var example: String
             if c.direction == .Vertical {
                 example = "1 mV"
