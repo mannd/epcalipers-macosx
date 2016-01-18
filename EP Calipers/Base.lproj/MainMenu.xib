@@ -625,12 +625,6 @@
                                     <action selector="doZoom:" target="-1" id="Nze-eD-TOf"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Zoom To Fit" tag="3" id="tHQ-eg-jvF">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="doZoom:" target="-1" id="ISO-xX-yUV"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Rotation" id="QLS-TN-252">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Rotation" id="d5K-g9-32O">
@@ -679,13 +673,7 @@
                                                 <action selector="switchToolMode:" target="-1" id="MlC-b5-ZGb"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Rotate Image" tag="1" id="Nu6-fl-pzH">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="switchToolMode:" target="-1" id="PbN-ca-mjM"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Lock Image" tag="2" id="54R-by-BUe">
+                                        <menuItem title="Lock Image" tag="1" id="54R-by-BUe">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="switchToolMode:" target="-1" id="FIY-NI-9cn"/>

@@ -12,7 +12,6 @@ import AppKit
 
 class MainWindowController: NSWindowController {
     
-    @IBOutlet weak var circularSlider: NSSlider!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
@@ -63,19 +62,12 @@ class MainWindowController: NSWindowController {
         NSBundle.mainBundle().loadNibNamed("View", owner: self, topLevelObjects: nil)
 
     }
-  
-    func windowDidResize(notification: NSNotification) {
-        // Window resizes after load, changing bounds.
-        // This is the only place where first caliper can be placed with
-        // accurate window bounds.
-        NSLog("Window did resize")
-        //imageView.autoresizes = false
-        // FIXME: probably best to avoid the resizing hassle and just
-        // allow user to add initial caliper manually.
-//        if firstWindowResize {
-//            addHorizontalCaliper()
-//        }
-//        firstWindowResize = false
+
+    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == Selector("doRotation:") {
+            return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
+        }
+        return true
     }
     
 // MARK: Image functions
@@ -96,11 +88,8 @@ class MainWindowController: NSWindowController {
             imageView.currentToolMode = IKToolModeMove
             calipersView.lockedMode = false
         case 1:
-            imageView.currentToolMode = IKToolModeRotate
-            calipersView.lockedMode = false
-        case 2:
             imageView.currentToolMode = IKToolModeNone
-            calipersView.lockedMode = true
+            calipersView.lockedMode = false
         default:
             break
         }
@@ -125,18 +114,7 @@ class MainWindowController: NSWindowController {
             imageView.zoomFactor = zoomFactor * zoomOutFactor
             calipersView.updateCalibration()
         case 2:
-            NSLog("Old zoomFactor = %f", imageView.zoomFactor)
-            NSLog("Old imagesize w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
             imageView.zoomImageToActualSize(self)
-            NSLog("New zoomfactor = %f", imageView.zoomFactor)
-            NSLog("New imagesize w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
-            calipersView.updateCalibration()
-        case 3:
-            NSLog("Old zoomFactor = %f", imageView.zoomFactor)
-            NSLog("Old imagesize w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
-            imageView.zoomImageToFit(self)
-            NSLog("New zoomfactor = %f", imageView.zoomFactor)
-            NSLog("New imagesize w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
             calipersView.updateCalibration()
         default:
             break
@@ -349,8 +327,6 @@ class MainWindowController: NSWindowController {
             }
         }
         if let c = calipersView.activeCaliper() {
-            NSLog("Zoom factor = %f", imageView.zoomFactor)
-            NSLog("Image size w = %f, h = %f", imageView.imageSize().width, imageView.imageSize().height)
             var example: String
             if c.direction == .Vertical {
                 example = "1 mV"
@@ -405,8 +381,6 @@ class MainWindowController: NSWindowController {
         if scanner.scanDouble(&value) {
             trimmedUnits = scanner.string!!.substringFromIndex(scanner.scanLocation).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             value = fabs(value)
-            NSLog("Value = %f", value)
-            NSLog("Units = %@", trimmedUnits)
             if value > 0 {
                 let c = calipersView.activeCaliper()
                 if (c == nil || c!.points() <= 0) {
@@ -430,16 +404,6 @@ class MainWindowController: NSWindowController {
                 calibration.calibrated = true
             }
             calipersView.needsDisplay = true
-            // Don't allow rotation toll after calibration
-            if toolSegmentedControl.selectedSegment == 1 {
-                toolSegmentedControl.selectedSegment = 0
-                imageView.currentToolMode = IKToolModeMove
-                calipersView.lockedMode = false
-            }
-            toolSegmentedControl.setEnabled(false, forSegment: 1)
-            circularSlider.enabled = false
-
-            
             
         }
     }
@@ -473,11 +437,8 @@ class MainWindowController: NSWindowController {
             // No easy animation equivalent in Cocoa
             // flashCalipers()
             calipersView.horizontalCalibration.reset()
-            calipersView.verticalCalibration.reset()
-            // allow rotation tool
-            toolSegmentedControl.setEnabled(true, forSegment: 1)
+            calipersView.verticalCalibration.reset()            
             measurementSegmentedControl.enabled = false
-            circularSlider.enabled = true
         }
     }
     

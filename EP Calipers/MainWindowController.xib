@@ -9,7 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
-                <outlet property="circularSlider" destination="APQ-DF-YEg" id="jAR-2H-due"/>
                 <outlet property="imageView" destination="L01-4C-stO" id="hsO-de-Dek"/>
                 <outlet property="measurementSegmentedControl" destination="7Ej-cN-zsf" id="Hhd-nv-Ud9"/>
                 <outlet property="toolSegmentedControl" destination="xw2-IA-d6A" id="Xrv-aA-NNd"/>
@@ -28,27 +27,15 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="L01-4C-stO">
-                        <rect key="frame" x="0.0" y="0.0" width="651" height="295"/>
+                        <rect key="frame" x="0.0" y="0.0" width="651" height="305"/>
                         <color key="backgroundColor" red="0.92500000000000004" green="0.92500000000000004" blue="0.92500000000000004" alpha="1" colorSpace="deviceRGB"/>
                     </ikImageView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="651" height="295"/>
+                        <rect key="frame" x="0.0" y="0.0" width="651" height="305"/>
                     </customView>
-                    <slider toolTip="Rotate image by 90 degree steps" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="APQ-DF-YEg">
-                        <rect key="frame" x="8" y="308" width="32" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="32" id="5xn-Mo-3FS"/>
-                            <constraint firstAttribute="height" constant="32" id="Ype-BQ-nMp"/>
-                        </constraints>
-                        <sliderCell key="cell" alignment="left" maxValue="360" numberOfTickMarks="4" allowsTickMarkValuesOnly="YES" sliderType="circular" id="31C-LA-ycJ"/>
-                        <connections>
-                            <action selector="setRotation:" target="-1" id="0dU-KE-B2W"/>
-                        </connections>
-                    </slider>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IkW-Sz-7Vn">
-                        <rect key="frame" x="46" y="313" width="150" height="24"/>
+                        <rect key="frame" x="18" y="313" width="116" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="146" id="mmW-sf-Oxb"/>
                             <constraint firstAttribute="height" constant="21" id="slr-Ed-CWF"/>
                         </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="lRw-HE-u64">
@@ -59,27 +46,24 @@
                                 <segment toolTip="Zoom to actual size" image="TB_zoomActual">
                                     <nil key="label"/>
                                 </segment>
-                                <segment toolTip="Zoom to fit window" image="TB_zoomToFit">
-                                    <nil key="label"/>
-                                </segment>
                             </segments>
                         </segmentedCell>
                         <connections>
                             <action selector="doZoom:" target="-2" id="opd-CW-vQJ"/>
                         </connections>
                     </segmentedControl>
-                    <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xw2-IA-d6A">
-                        <rect key="frame" x="201" y="313" width="102" height="24"/>
+                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xw2-IA-d6A">
+                        <rect key="frame" x="138" y="313" width="69" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="EZO-Ew-XTK"/>
-                            <constraint firstAttribute="width" constant="99" id="qgq-we-qCZ"/>
                         </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="GJ2-vD-tvz">
                             <font key="font" metaFont="system"/>
                             <segments>
-                                <segment toolTip="Grab image or caliper" image="TB_move" selected="YES"/>
-                                <segment toolTip="Rotate image" image="TB_rotate" width="32" tag="1"/>
-                                <segment toolTip="Lock image" image="lock-16">
+                                <segment toolTip="Grab image or caliper" image="TB_move" selected="YES">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment toolTip="Rotate image" image="lock-16" width="32" tag="1">
                                     <nil key="label"/>
                                 </segment>
                             </segments>
@@ -89,9 +73,8 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
-                        <rect key="frame" x="307" y="313" width="139" height="24"/>
+                        <rect key="frame" x="211" y="313" width="143" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="135" id="71b-LD-amQ"/>
                             <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
                         </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="F0P-3a-q84">
@@ -111,10 +94,9 @@
                             <action selector="addCaliper:" target="-2" id="TkU-CH-Yg0"/>
                         </connections>
                     </segmentedControl>
-                    <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
-                        <rect key="frame" x="448" y="313" width="109" height="24"/>
+                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
+                        <rect key="frame" x="358" y="313" width="109" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="wV2-P7-0mE"/>
                             <constraint firstAttribute="height" constant="21" id="wj5-y7-FoH"/>
                         </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="5zE-4y-ufs">
@@ -132,22 +114,19 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="L01-4C-stO" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3bZ-YJ-9DX"/>
-                    <constraint firstItem="7Ej-cN-zsf" firstAttribute="leading" secondItem="80d-Qz-dhr" secondAttribute="trailing" constant="8" id="5hr-ls-3re"/>
+                    <constraint firstItem="IkW-Sz-7Vn" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="20" symbolic="YES" id="3hY-Rg-vt6"/>
+                    <constraint firstItem="7Ej-cN-zsf" firstAttribute="leading" secondItem="80d-Qz-dhr" secondAttribute="trailing" constant="8" symbolic="YES" id="5hr-ls-3re"/>
                     <constraint firstItem="7Ej-cN-zsf" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="7nX-BO-Ij5"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
                     <constraint firstItem="80d-Qz-dhr" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="DXa-Xh-bOf"/>
                     <constraint firstItem="xw2-IA-d6A" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="ElB-4V-NMq"/>
-                    <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="IkW-Sz-7Vn" secondAttribute="trailing" constant="8" id="GOS-he-SIh"/>
+                    <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="IkW-Sz-7Vn" secondAttribute="trailing" constant="8" symbolic="YES" id="GOS-he-SIh"/>
                     <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="7Ej-cN-zsf" secondAttribute="bottom" constant="20" id="MMa-tO-MYv"/>
-                    <constraint firstItem="80d-Qz-dhr" firstAttribute="leading" secondItem="xw2-IA-d6A" secondAttribute="trailing" constant="8" id="NQM-mM-vZz"/>
-                    <constraint firstItem="APQ-DF-YEg" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="8" id="NSu-IM-DVv"/>
-                    <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="50" id="Sc4-rx-DOe"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="7Ej-cN-zsf" secondAttribute="bottom" constant="10" id="MMa-tO-MYv"/>
+                    <constraint firstItem="80d-Qz-dhr" firstAttribute="leading" secondItem="xw2-IA-d6A" secondAttribute="trailing" constant="8" symbolic="YES" id="NQM-mM-vZz"/>
+                    <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="40" id="Sc4-rx-DOe"/>
                     <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="TUz-x3-9lI"/>
-                    <constraint firstItem="IkW-Sz-7Vn" firstAttribute="leading" secondItem="APQ-DF-YEg" secondAttribute="trailing" constant="8" id="WaU-pB-XoM"/>
                     <constraint firstItem="IkW-Sz-7Vn" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="bpC-FE-Jq7"/>
-                    <constraint firstItem="APQ-DF-YEg" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="5" id="pmX-cK-yAd"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="APQ-DF-YEg" secondAttribute="bottom" constant="13" id="rsW-rO-kwi"/>
                     <constraint firstAttribute="bottom" secondItem="L01-4C-stO" secondAttribute="bottom" id="t63-uN-q8y"/>
                     <constraint firstAttribute="trailing" secondItem="L01-4C-stO" secondAttribute="trailing" id="y9W-gC-Tww"/>
                 </constraints>
@@ -193,11 +172,9 @@
     </objects>
     <resources>
         <image name="TB_move" width="14" height="14"/>
-        <image name="TB_rotate" width="14" height="14"/>
         <image name="TB_zoomActual" width="20" height="20"/>
         <image name="TB_zoomIn" width="20" height="20"/>
         <image name="TB_zoomOut" width="20" height="20"/>
-        <image name="TB_zoomToFit" width="20" height="20"/>
         <image name="calipers-amplitude-icon-bw-20x20" width="20" height="20"/>
         <image name="calipers-icon-bw-20x20" width="20" height="20"/>
         <image name="lock-16" width="16" height="16"/>

@@ -52,7 +52,6 @@ class CalipersView: NSView {
 
     
     override func mouseDown(theEvent: NSEvent) {
-        NSLog("MouseDown")
         selectedCaliper = getSelectedCaliper(theEvent.locationInWindow)
         if selectedCaliper != nil {
             if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
@@ -100,7 +99,6 @@ class CalipersView: NSView {
     }
     
     override func mouseDragged(theEvent: NSEvent) {
-        // NSLog("MouseDragged")
         if let c = selectedCaliper {
             var delta = CGPoint(x: theEvent.deltaX, y: theEvent.deltaY)
             if c.direction == .Vertical {
@@ -132,7 +130,6 @@ class CalipersView: NSView {
     // TODO: consider context menu or options for other action with double click, 
     // e.g. calibrate
     override func mouseUp(theEvent: NSEvent) {
-        NSLog("MouseUp")
         if selectedCaliper != nil {
             if !mouseWasDragged {
                 if theEvent.clickCount == 1 {
@@ -201,13 +198,11 @@ class CalipersView: NSView {
     
     // TODO: may not need this is menu option available instead
     override func keyDown(theEvent: NSEvent) {
-        NSLog("Key down")
         interpretKeyEvents([theEvent])
     }
     
     
     override func deleteBackward(sender: AnyObject?) {
-        NSLog("Delete")
         for c in calipers {
             if c.selected {
                 calipers.removeAtIndex(calipers.indexOf(c)!)
