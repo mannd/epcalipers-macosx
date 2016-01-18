@@ -740,9 +740,15 @@
                             </menuItem>
                             <menuItem title="Mean Rate/Interval" id="2hW-zW-ivA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doMeasurement:" target="-1" id="PGx-Qp-YTC"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="QTc Measurement" id="5VV-jo-nu6">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doMeasurement:" target="-1" id="lGh-oH-PQp"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>

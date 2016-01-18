@@ -135,6 +135,8 @@ class MainWindowController: NSWindowController {
         switch measurement {
         case 0:
             toggleIntervalRate()
+        case 1:
+            meanRR()
         default:
             break
         }
@@ -246,8 +248,6 @@ class MainWindowController: NSWindowController {
         
     }
     
-    let radionsPerDegree: Double = 2 * 3.14159265359 / 360.0
-
     func radians(degrees: Double) -> Double {
         return degrees * 3.14159265359 / 180.0
     }
@@ -413,8 +413,8 @@ class MainWindowController: NSWindowController {
     
     func showNoCalipersAlert() {
         let alert = NSAlert()
-        alert.messageText = "No calipers available for calibration"
-        alert.informativeText = "In order to calibrate, you must first add a caliper and then set it to a known interval, e.g. 1000 msec."
+        alert.messageText = "No calipers available"
+        alert.informativeText = "In order to proceed, you must first add a caliper."
         alert.alertStyle = NSAlertStyle.InformationalAlertStyle
         alert.addButtonWithTitle("OK")
         alert.runModal()
@@ -448,6 +448,13 @@ class MainWindowController: NSWindowController {
     func toggleIntervalRate() {
         calipersView.horizontalCalibration.displayRate = !calipersView.horizontalCalibration.displayRate
         calipersView.needsDisplay = true
+    }
+    
+    func meanRR() {
+        if calipersView.calipers.count < 1 {
+            showNoCalipersAlert()
+            return
+        }
     }
 
 }

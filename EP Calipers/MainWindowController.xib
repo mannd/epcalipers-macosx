@@ -103,7 +103,7 @@
                             <font key="font" metaFont="system"/>
                             <segments>
                                 <segment label="R/I"/>
-                                <segment label="M" width="32" tag="1"/>
+                                <segment label="mRR" width="32" tag="1"/>
                                 <segment label="QTc" width="32"/>
                             </segments>
                         </segmentedCell>
