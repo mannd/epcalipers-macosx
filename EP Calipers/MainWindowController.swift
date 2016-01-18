@@ -67,6 +67,9 @@ class MainWindowController: NSWindowController {
         if menuItem.action == Selector("doRotation:") {
             return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
+        if menuItem.action == Selector("doMeasurement:") {
+            return calipersView.horizontalCalibration.calibrated
+        }
         return true
     }
     
