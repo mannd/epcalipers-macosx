@@ -131,7 +131,7 @@ class CalipersView: NSView {
     // e.g. calibrate
     override func mouseUp(theEvent: NSEvent) {
         if selectedCaliper != nil {
-            if !mouseWasDragged {
+            if !mouseWasDragged && !locked {
                 if theEvent.clickCount == 1 {
                     toggleCaliperState()
                 }

@@ -738,13 +738,13 @@
                                     <action selector="doMeasurement:" target="-1" id="MTn-l6-ORC"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Mean Rate/Interval" id="2hW-zW-ivA">
+                            <menuItem title="Mean Rate/Interval" tag="1" id="2hW-zW-ivA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="doMeasurement:" target="-1" id="PGx-Qp-YTC"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="QTc Measurement" id="5VV-jo-nu6">
+                            <menuItem title="QTc Measurement" tag="2" id="5VV-jo-nu6">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="doMeasurement:" target="-1" id="lGh-oH-PQp"/>

@@ -11,6 +11,7 @@
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
                 <outlet property="imageView" destination="L01-4C-stO" id="hsO-de-Dek"/>
                 <outlet property="measurementSegmentedControl" destination="7Ej-cN-zsf" id="Hhd-nv-Ud9"/>
+                <outlet property="messageLabel" destination="7Kx-dG-EsR" id="cbR-jv-99t"/>
                 <outlet property="toolSegmentedControl" destination="xw2-IA-d6A" id="Xrv-aA-NNd"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
@@ -27,11 +28,11 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="L01-4C-stO">
-                        <rect key="frame" x="0.0" y="0.0" width="651" height="305"/>
+                        <rect key="frame" x="0.0" y="0.0" width="651" height="285"/>
                         <color key="backgroundColor" red="0.92500000000000004" green="0.92500000000000004" blue="0.92500000000000004" alpha="1" colorSpace="deviceRGB"/>
                     </ikImageView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="651" height="305"/>
+                        <rect key="frame" x="0.0" y="0.0" width="651" height="285"/>
                     </customView>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IkW-Sz-7Vn">
                         <rect key="frame" x="18" y="313" width="116" height="24"/>
@@ -73,7 +74,7 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
-                        <rect key="frame" x="211" y="313" width="143" height="24"/>
+                        <rect key="frame" x="211" y="313" width="158" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
                         </constraints>
@@ -86,8 +87,8 @@
                                 <segment toolTip="Add amplitude caliper" image="calipers-amplitude-icon-bw-20x20" width="32" tag="1">
                                     <nil key="label"/>
                                 </segment>
-                                <segment label="Cal" width="32"/>
-                                <segment label="Clr"/>
+                                <segment label="Cal" toolTip="Calibrate"/>
+                                <segment label="CLR" toolTip="Clear calibration"/>
                             </segments>
                         </segmentedCell>
                         <connections>
@@ -95,22 +96,34 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
-                        <rect key="frame" x="358" y="313" width="109" height="24"/>
+                        <rect key="frame" x="373" y="313" width="109" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="wj5-y7-FoH"/>
                         </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="5zE-4y-ufs">
                             <font key="font" metaFont="system"/>
                             <segments>
-                                <segment label="R/I"/>
-                                <segment label="mRR" width="32" tag="1"/>
-                                <segment label="QTc" width="32"/>
+                                <segment label="R/I" toolTip="Toggle rate/interval"/>
+                                <segment label="mRR" toolTip="Calculate mean interval and rate" width="32" tag="1"/>
+                                <segment label="QTc" toolTip="Calculate corrected QT" width="32"/>
                             </segments>
                         </segmentedCell>
                         <connections>
                             <action selector="doMeasurement:" target="-2" id="xbg-xN-OK6"/>
                         </connections>
                     </segmentedControl>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Kx-dG-EsR">
+                        <rect key="frame" x="18" y="293" width="464" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="NzN-KS-kJs"/>
+                            <constraint firstAttribute="width" constant="460" id="VSh-Go-O3x"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="O5P-K2-4g1">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="L01-4C-stO" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3bZ-YJ-9DX"/>
@@ -122,11 +135,13 @@
                     <constraint firstItem="xw2-IA-d6A" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="ElB-4V-NMq"/>
                     <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="IkW-Sz-7Vn" secondAttribute="trailing" constant="8" symbolic="YES" id="GOS-he-SIh"/>
                     <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="7Ej-cN-zsf" secondAttribute="bottom" constant="10" id="MMa-tO-MYv"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="7Ej-cN-zsf" secondAttribute="bottom" constant="30" id="MMa-tO-MYv"/>
                     <constraint firstItem="80d-Qz-dhr" firstAttribute="leading" secondItem="xw2-IA-d6A" secondAttribute="trailing" constant="8" symbolic="YES" id="NQM-mM-vZz"/>
-                    <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="40" id="Sc4-rx-DOe"/>
+                    <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="60" id="Sc4-rx-DOe"/>
                     <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="TUz-x3-9lI"/>
                     <constraint firstItem="IkW-Sz-7Vn" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="bpC-FE-Jq7"/>
+                    <constraint firstItem="7Kx-dG-EsR" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="20" symbolic="YES" id="cJf-7b-M4Z"/>
+                    <constraint firstItem="7Kx-dG-EsR" firstAttribute="top" secondItem="7Ej-cN-zsf" secondAttribute="bottom" constant="5" id="q6L-ZI-UVq"/>
                     <constraint firstAttribute="bottom" secondItem="L01-4C-stO" secondAttribute="bottom" id="t63-uN-q8y"/>
                     <constraint firstAttribute="trailing" secondItem="L01-4C-stO" secondAttribute="trailing" id="y9W-gC-Tww"/>
                 </constraints>

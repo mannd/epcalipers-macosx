@@ -16,6 +16,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
+    @IBOutlet weak var messageLabel: NSTextField!
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
     @IBOutlet weak var textField: NSTextField!
@@ -54,6 +55,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         calipersView.horizontalCalibration.direction = .Horizontal
         calipersView.verticalCalibration.direction = .Vertical
         measurementSegmentedControl.enabled = false
+        clearMessage()
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
         }
@@ -76,6 +78,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         return true
     }
+    
     
 // MARK: Image functions
     
@@ -141,6 +144,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             toggleIntervalRate()
         case 1:
             meanRR()
+        case 2:
+            calculateQTc()
         default:
             break
         }
@@ -415,6 +420,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
+    func showMessage(message: String) {
+        messageLabel.stringValue = message
+    }
+    
+    func clearMessage() {
+        showMessage("")
+    }
+    
     func showNoCalipersAlert(noTimeCaliper: Bool) {
         let alert = NSAlert()
         if noTimeCaliper {
@@ -489,7 +502,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func meanRR() {
-        if calipersView.calipers.count < 1 {
+        if noTimeCaliperExists() {
             showNoCalipersAlert(true)
             return
         }
@@ -536,6 +549,65 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
+    func calculateQTc() {
+        if noTimeCaliperExists() {
+            showNoCalipersAlert(true)
+            return
+        }
+        calipersView.horizontalCalibration.displayRate = false
+        let singleHorizontalCaliper = getLoneTimeCaliper()
+        if let caliper = singleHorizontalCaliper {
+            calipersView.selectCaliper(caliper)
+            calipersView.unselectCalipersExcept(caliper)
+        }
+        if calipersView.noCaliperIsSelected() {
+            showNoTimeCaliperSelectedAlert()
+            return
+        }
+        if let c = calipersView.activeCaliper() {
+            if c.direction == .Vertical {
+                showNoTimeCaliperSelectedAlert()
+                return
+            }
+            // Don't allow unselecting or deleting caliper now that we are into
+            // the 2 step QTc measurement process.
+            // IMPORTANT: all returns from this func must unlock the calipers like below!
+            calipersView.locked = true
+            let alert = NSAlert()
+            alert.alertStyle = .InformationalAlertStyle
+            alert.messageText = "QTc step 1: RR interval: Enter number of intervals"
+            alert.informativeText = "How many RR intervals is this caliper measuring?"
+            alert.addButtonWithTitle("Calculate")
+            alert.addButtonWithTitle("Cancel")
+            alert.accessoryView = numberInputView
+            // TODO: replace with Preference value
+            numberTextField.stringValue = "1"
+            numberStepper.integerValue = 1
+            let result = alert.runModal()
+            if result == NSAlertFirstButtonReturn {
+                NSLog("Finish QTc step 1")
+                if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
+                    showDivisorErrorAlert()
+                    calipersView.locked = false
+                    return
+                }
+                // get integer from the stepper
+                let divisor = numberStepper.integerValue
+                assert (divisor != 0)
+                let intervalResult = fabs(c.intervalResult())
+                let meanInterval = intervalResult / Double(divisor)
+                let rrIntervalForQTc = c.intervalInSecs(meanInterval)
+                // now measure QT...
+            }
+            else {
+                calipersView.locked = false
+            }
+            
+            
+        }
+        calipersView.locked = false
+    }
+    
     
     func getLoneTimeCaliper() -> Caliper? {
         var c: Caliper? = nil
@@ -552,6 +624,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
              c = nil
         }
         return c
+    }
+    
+    func noTimeCaliperExists() -> Bool {
+        var noTimeCaliperFound = true
+        for c in calipersView.calipers {
+            if c.direction == .Horizontal {
+                noTimeCaliperFound = false
+            }
+        }
+        return noTimeCaliperFound
     }
     
     @IBAction func stepperAction(sender: AnyObject) {
