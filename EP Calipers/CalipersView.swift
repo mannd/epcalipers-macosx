@@ -165,10 +165,14 @@ class CalipersView: NSView {
                 selectCaliper(c)
             }
             // unselect all the other calipers
-            for cal in calipers {
-                if cal != c {
-                    unselectCaliper(cal)
-                }
+            unselectCalipersExcept(c)
+        }
+    }
+    
+    func unselectCalipersExcept(c: Caliper) {
+        for cal in calipers {
+            if cal != c {
+                unselectCaliper(cal)
             }
         }
     }

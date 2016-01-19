@@ -10,7 +10,7 @@ import Cocoa
 import Quartz
 import AppKit
 
-class MainWindowController: NSWindowController {
+class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
@@ -19,6 +19,9 @@ class MainWindowController: NSWindowController {
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
     @IBOutlet weak var textField: NSTextField!
+    @IBOutlet var numberInputView: NSView!
+    @IBOutlet weak var numberStepper: NSStepper!
+    @IBOutlet weak var numberTextField: NSTextField!
     
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
@@ -60,6 +63,7 @@ class MainWindowController: NSWindowController {
         // Necessary to load view here or window gets resized if loaded when
         // NSAlert used.
         NSBundle.mainBundle().loadNibNamed("View", owner: self, topLevelObjects: nil)
+        numberTextField.delegate = self
 
     }
 
@@ -316,7 +320,7 @@ class MainWindowController: NSWindowController {
     func calibrate() {
 
         if calipersView.calipers.count < 1 {
-            showNoCalipersAlert()
+            showNoCalipersAlert(false)
             return
         }
         if calipersView.noCaliperIsSelected() {
@@ -411,10 +415,16 @@ class MainWindowController: NSWindowController {
         }
     }
     
-    func showNoCalipersAlert() {
+    func showNoCalipersAlert(noTimeCaliper: Bool) {
         let alert = NSAlert()
-        alert.messageText = "No calipers available"
-        alert.informativeText = "In order to proceed, you must first add a caliper."
+        if noTimeCaliper {
+            alert.messageText = "No time caliper available"
+            alert.informativeText = "In order to proceed, you must first add a time caliper."
+        }
+        else {
+            alert.messageText = "No calipers available"
+            alert.informativeText = "In order to proceed, you must first add a caliper."
+        }
         alert.alertStyle = NSAlertStyle.InformationalAlertStyle
         alert.addButtonWithTitle("OK")
         alert.runModal()
@@ -428,6 +438,34 @@ class MainWindowController: NSWindowController {
         alert.addButtonWithTitle("OK")
         alert.runModal()
     }
+    
+    func showNoTimeCaliperSelectedAlert() {
+        let alert = NSAlert()
+        alert.messageText = "No time caliper selected"
+        alert.informativeText = "Select a time caliper.  Stretch the caliper over several intervals to get an average interval and rate."
+        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.addButtonWithTitle("OK")
+        alert.runModal()
+    }
+    
+    func showDivisorErrorAlert() {
+        let alert = NSAlert()
+        alert.alertStyle = NSAlertStyle.WarningAlertStyle
+        alert.messageText = "Bad number of intervals"
+        alert.informativeText = "Please enter a number between 1 and 10"
+        alert.addButtonWithTitle("OK")
+        alert.runModal()
+    }
+    
+    func showMeanRRResultAlert(meanInterval: Double, meanRate: Double, intervalUnits: String) {
+        let alert = NSAlert()
+        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.messageText = "Mean interval and rate"
+        alert.informativeText = String(format: "Mean interval = %.4g %@\nMean rate = %.4g bpm", meanInterval, intervalUnits, meanRate)
+        alert.addButtonWithTitle("OK")
+        alert.runModal()
+    }
+
     
     @IBAction func clearCalibration(sender: AnyObject) {
         resetCalibration()
@@ -452,9 +490,79 @@ class MainWindowController: NSWindowController {
     
     func meanRR() {
         if calipersView.calipers.count < 1 {
-            showNoCalipersAlert()
+            showNoCalipersAlert(true)
             return
         }
+        let singleHorizontalCaliper = getLoneTimeCaliper()
+        if let caliper = singleHorizontalCaliper {
+            calipersView.selectCaliper(caliper)
+            calipersView.unselectCalipersExcept(caliper)
+        }
+        if calipersView.noCaliperIsSelected() {
+            showNoTimeCaliperSelectedAlert()
+            return
+        }
+        if let c = calipersView.activeCaliper() {
+            if c.direction == .Vertical {
+                showNoTimeCaliperSelectedAlert()
+                return
+            }
+            
+            let alert = NSAlert()
+            alert.messageText = "Enter number of intervals"
+            alert.informativeText = "How many intervals is this caliper measuring?  "
+            alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+            alert.addButtonWithTitle("Calculate")
+            alert.addButtonWithTitle("Cancel")
+            alert.accessoryView = numberInputView
+            // TODO: get numberTextField and stepper value from Preferences
+            numberTextField.stringValue = "3"
+            numberStepper.integerValue = 3
+            let result = alert.runModal()
+            if result == NSAlertFirstButtonReturn {
+                if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
+                    showDivisorErrorAlert()
+                    return
+                }
+                // get integer from the stepper
+                let divisor = numberStepper.integerValue
+                assert (divisor != 0)
+                let intervalResult = fabs(c.intervalResult())
+                let meanInterval = intervalResult / Double(divisor)
+                let meanRate = c.rateResult(meanInterval)
+                let intervalUnits = c.calibration.rawUnits
+                showMeanRRResultAlert(meanInterval, meanRate: meanRate, intervalUnits: intervalUnits)
+            }
+        }
     }
-
+    
+    
+    func getLoneTimeCaliper() -> Caliper? {
+        var c: Caliper? = nil
+        var n: Int = 0
+        if calipersView.calipers.count > 0 {
+            for caliper in calipersView.calipers {
+                if caliper.direction == .Horizontal {
+                    c = caliper
+                    n++
+                }
+            }
+        }
+        if n != 1 {
+             c = nil
+        }
+        return c
+    }
+    
+    @IBAction func stepperAction(sender: AnyObject) {
+        numberTextField.integerValue = numberStepper.integerValue
+    }
+    
+    override func controlTextDidChange(obj: NSNotification) {
+        if obj.name == "NSControlTextDidChangeNotification" {
+            if obj.object === numberTextField {
+                numberStepper.integerValue = numberTextField.integerValue
+            }
+        }
+    }
 }
