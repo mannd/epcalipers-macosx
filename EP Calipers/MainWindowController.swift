@@ -15,8 +15,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
+    @IBOutlet weak var calipersSegementedControl: NSSegmentedControl!
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var messageLabel: NSTextField!
+    @IBOutlet weak var navigationSegmentedControl: NSSegmentedControl!
+    
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
     @IBOutlet weak var textField: NSTextField!
@@ -29,6 +32,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var saveOptions: IKSaveOptions = IKSaveOptions()
     var imageURL: NSURL? = nil
     var firstWindowResize = true
+    
+    var inQTcStep1 = false
+    var inQTcStep2 = false
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
@@ -55,6 +61,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         calipersView.horizontalCalibration.direction = .Horizontal
         calipersView.verticalCalibration.direction = .Vertical
         measurementSegmentedControl.enabled = false
+        navigationSegmentedControl.enabled = false
         clearMessage()
         if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
             super.awakeFromNib()
@@ -146,6 +153,26 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             meanRR()
         case 2:
             calculateQTc()
+        default:
+            break
+        }
+    }
+    
+    @IBAction func doNavigation(sender: AnyObject) {
+        var navigation: Int
+        if sender.isKindOfClass(NSSegmentedControl) {
+            navigation = sender.selectedSegment
+        }
+        else {
+            navigation = sender.tag()
+        }
+        switch navigation {
+        case 0:
+            doNextStep()
+        case 1:
+            doPreviousStep()
+        case 2:
+            cancelSteps()
         default:
             break
         }
@@ -316,14 +343,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         case 2:
             calibrate()
         case 3:
-            clearCalibration(self)
+            clearCalibration()
         default:
             break
         }
     }
     
     func calibrate() {
-
         if calipersView.calipers.count < 1 {
             showNoCalipersAlert(false)
             return
@@ -480,7 +506,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
     
-    @IBAction func clearCalibration(sender: AnyObject) {
+    func clearCalibration() {
         resetCalibration()
         calipersView.needsDisplay = true
     }
@@ -569,10 +595,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 showNoTimeCaliperSelectedAlert()
                 return
             }
-            // Don't allow unselecting or deleting caliper now that we are into
-            // the 2 step QTc measurement process.
-            // IMPORTANT: all returns from this func must unlock the calipers like below!
-            calipersView.locked = true
+            // TODO: wrap up entry and exit steps in funcs for QT
+            enterQTc()
+            showMessage("Measure 1 or more RR intervals. Select Next to continue")
+            inQTcStep1 = true
+        }
+        
+    }
+    
+    func doQTcStep1() {
+        if let c = calipersView.activeCaliper() {
             let alert = NSAlert()
             alert.alertStyle = .InformationalAlertStyle
             alert.messageText = "QTc step 1: RR interval: Enter number of intervals"
@@ -588,7 +620,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 NSLog("Finish QTc step 1")
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
-                    calipersView.locked = false
+                    exitQTc()
                     return
                 }
                 // get integer from the stepper
@@ -598,17 +630,47 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let meanInterval = intervalResult / Double(divisor)
                 let rrIntervalForQTc = c.intervalInSecs(meanInterval)
                 // now measure QT...
+                inQTcStep1 = false
+                inQTcStep2 = true
             }
-            else {
-                calipersView.locked = false
-            }
-            
-            
         }
-        calipersView.locked = false
+        else {
+            exitQTc()
+        }
     }
-    
-    
+
+    func enterQTc() {
+        navigationSegmentedControl.enabled = true
+        calipersView.locked = true
+    }
+
+    func exitQTc() {
+        navigationSegmentedControl.enabled = false
+        calipersView.locked = false
+        clearMessage()
+        inQTcStep1 = false
+        inQTcStep2 = false
+    }
+
+    func doNextStep() {
+        if inQTcStep1 {
+            doQTcStep1()
+        }
+    }
+
+    func doPreviousStep() {
+        if inQTcStep1 {
+            NSLog("Back from QTc step 2")
+            exitQTc()
+        }
+        
+    }
+
+    func cancelSteps() {
+        NSLog("Cancel QTc")
+        exitQTc()
+    }
+
     func getLoneTimeCaliper() -> Caliper? {
         var c: Caliper? = nil
         var n: Int = 0
