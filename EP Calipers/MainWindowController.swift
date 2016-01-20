@@ -35,10 +35,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     var inQTcStep1 = false
     var inQTcStep2 = false
+    var inCalibration = false
+    var inMeanRR = false
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
+    
+    // Temporary preferences, to be replaced by real ones
+    let tmpPrefDefaultNumberOfMeanRRIntervals = 3
+    let tmpPrefDefaultNumberOfQTcMeanRRIntervals = 1
+    let tmpPrefShowPrompts = true
 
     
     override var windowNibName: String? {
@@ -150,7 +157,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         case 0:
             toggleIntervalRate()
         case 1:
-            meanRR()
+            meanRRWithPossiblePrompts()
         case 2:
             calculateQTc()
         default:
@@ -166,15 +173,38 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         else {
             navigation = sender.tag()
         }
-        switch navigation {
-        case 0:
-            doNextStep()
-        case 1:
-            doPreviousStep()
-        case 2:
-            cancelSteps()
-        default:
-            break
+        if inCalibration {
+            switch navigation {
+            case 0:
+                calibrate()
+            case 1, 2:
+                exitCalibration()
+            default:
+                break
+            }
+            
+        }
+        else if inMeanRR {
+            switch navigation {
+            case 0:
+                meanRR()
+            case 1,2:
+                exitMeanRR()
+            default:
+                break
+            }
+        }
+        else {
+            switch navigation {
+            case 0:
+                doNextStep()
+            case 1:
+                doPreviousStep()
+            case 2:
+                cancelSteps()
+            default:
+                break
+            }
         }
     }
     
@@ -341,11 +371,27 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         case 1:
             addVerticalCaliper()
         case 2:
-            calibrate()
+            calibrateWithPossiblePrompts()
         case 3:
             clearCalibration()
         default:
             break
+        }
+    }
+    
+    func calibrateWithPossiblePrompts() {
+        if tmpPrefShowPrompts {
+            if inCalibration {
+                // user pressed Calibrate again instead of Next, it's OK, do what s/he wants
+                calibrate()
+                return
+            }
+            showMessage("Use a caliper to measure a known interval, then select Next to calibrate, or Cancel.")
+            navigationSegmentedControl.enabled = true
+            inCalibration = true
+        }
+        else {
+            calibrate()
         }
     }
     
@@ -400,12 +446,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let inputText = textField.stringValue
                 if inputText.characters.count > 0 {
                     calibrateWithText(inputText)
-
+                    exitCalibration()
                 }
             }
             if calipersView.horizontalCalibration.calibrated {
                 measurementSegmentedControl.enabled = true
             }
+            
             
         }
     }
@@ -446,6 +493,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
+    func exitCalibration() {
+        clearMessage()
+        inCalibration = false
+        navigationSegmentedControl.enabled = false
+    }
+    
     func showMessage(message: String) {
         messageLabel.stringValue = message
     }
@@ -471,7 +524,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     func showNoCaliperSelectedAlert() {
         let alert = NSAlert()
-        alert.messageText = "No caliper selected (highlighted)"
+        alert.messageText = "No caliper selected"
         alert.informativeText = "Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV"
         alert.alertStyle = NSAlertStyle.InformationalAlertStyle
         alert.addButtonWithTitle("OK")
@@ -512,6 +565,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func resetCalibration() {
+        // if nothing else, clear messages
+        exitCalibration()
         if calipersView.horizontalCalibration.calibrated ||
             calipersView.verticalCalibration.calibrated {
             // No easy animation equivalent in Cocoa
@@ -525,6 +580,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func toggleIntervalRate() {
         calipersView.horizontalCalibration.displayRate = !calipersView.horizontalCalibration.displayRate
         calipersView.needsDisplay = true
+    }
+    
+    func meanRRWithPossiblePrompts() {
+        if tmpPrefShowPrompts {
+            if inMeanRR {
+                // user pressed mRR again instead of Next, it's OK, do what s/he wants
+                meanRR()
+                return
+            }
+            showMessage("Use a caliper to measure 2 or more intervals, then select Next to continue, or Cancel.")
+            navigationSegmentedControl.enabled = true
+            inMeanRR = true
+        }
+        else {
+            meanRR()
+        }
+        
     }
     
     func meanRR() {
@@ -555,8 +627,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.addButtonWithTitle("Cancel")
             alert.accessoryView = numberInputView
             // TODO: get numberTextField and stepper value from Preferences
-            numberTextField.stringValue = "3"
-            numberStepper.integerValue = 3
+            numberTextField.stringValue = String(tmpPrefDefaultNumberOfMeanRRIntervals)
+            numberStepper.integerValue = tmpPrefDefaultNumberOfMeanRRIntervals
             let result = alert.runModal()
             if result == NSAlertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
@@ -571,8 +643,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let meanRate = c.rateResult(meanInterval)
                 let intervalUnits = c.calibration.rawUnits
                 showMeanRRResultAlert(meanInterval, meanRate: meanRate, intervalUnits: intervalUnits)
+                exitMeanRR()
             }
         }
+    }
+    
+    func exitMeanRR() {
+        clearMessage()
+        inMeanRR = false
+        navigationSegmentedControl.enabled = false
     }
     
     func calculateQTc() {
@@ -597,7 +676,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             }
             // TODO: wrap up entry and exit steps in funcs for QT
             enterQTc()
-            showMessage("Measure 1 or more RR intervals. Select Next to continue")
+            showMessage("Measure 1 or more RR intervals.  Select Next to continue.")
             inQTcStep1 = true
         }
         
@@ -613,8 +692,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.addButtonWithTitle("Cancel")
             alert.accessoryView = numberInputView
             // TODO: replace with Preference value
-            numberTextField.stringValue = "1"
-            numberStepper.integerValue = 1
+            numberTextField.stringValue = String(tmpPrefDefaultNumberOfQTcMeanRRIntervals)
+            numberStepper.integerValue = tmpPrefDefaultNumberOfQTcMeanRRIntervals
             let result = alert.runModal()
             if result == NSAlertFirstButtonReturn {
                 NSLog("Finish QTc step 1")
