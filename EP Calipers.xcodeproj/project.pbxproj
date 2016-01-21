@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E194EE91C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */; };
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
+		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
 		8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */; };
 		8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F21C2E264000AD9556 /* Assets.xcassets */; };
 		8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F41C2E264000AD9556 /* MainMenu.xib */; };
@@ -53,6 +54,7 @@
 /* Begin PBXFileReference section */
 		8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
+		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EP Calipers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E3DA7F21C2E264000AD9556 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
 				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
 				8ECC76C61C48B1830091F87A /* View.xib */,
+				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			files = (
 				8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */,
 				8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */,
+				8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */,
 				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,

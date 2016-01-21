@@ -99,8 +99,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         return true
     }
     
+    @IBAction func showPreferences(sender: AnyObject) {
+        NSLog("Show preferences")
+    }
     
-// MARK: Image functions
     
     @IBAction func switchToolMode(sender: AnyObject) {
         var newTool: Int

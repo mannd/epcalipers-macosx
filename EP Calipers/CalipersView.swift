@@ -13,11 +13,6 @@ import Quartz
 
 class CalipersView: NSView {
 
-    // temporary preferences
-    struct EPCPreferences {
-        static var singleClickMode: Bool = true
-    }
-    
     var imageView: IKImageView? = nil
     var calipersMode = false
     var calipers: [Caliper] = []
