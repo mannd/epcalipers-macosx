@@ -49,6 +49,13 @@ class CalipersView: NSView {
         c.selected = false
         needsDisplay = true
     }
+    
+    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == Selector("deleteBackward:") {
+            return !locked
+        }
+        return true
+    }
 
     
     override func mouseDown(theEvent: NSEvent) {

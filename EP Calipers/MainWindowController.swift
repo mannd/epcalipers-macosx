@@ -39,6 +39,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var inMeanRR = false
     var rrIntervalForQTc: Double = 0.0
     
+    let calipersMenuTag = 999
+    
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
@@ -89,7 +91,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
         if menuItem.action == Selector("doMeasurement:") {
-            return calipersView.horizontalCalibration.calibrated
+            return calipersView.horizontalCalibration.calibrated && !calipersView.locked && !inMeanRR && !inCalibration
+        }
+        if menuItem.action == Selector("addCaliper:") {
+            return !calipersView.locked
         }
         return true
     }
@@ -381,6 +386,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func calibrateWithPossiblePrompts() {
+        // not allowed to calibrate in middle of a measurement
+        if calipersView.locked || inMeanRR {
+            NSBeep()
+            return
+        }
         if tmpPrefShowPrompts {
             if inCalibration {
                 // user pressed Calibrate again instead of Next, it's OK, do what s/he wants
@@ -389,6 +399,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             }
             showMessage("Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel.")
             navigationSegmentedControl.enabled = true
+            measurementSegmentedControl.enabled = false
             inCalibration = true
         }
         else {
@@ -566,6 +577,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func resetCalibration() {
+        // not allowed to do cal stuff in middle of measurement
+        if calipersView.locked || inMeanRR {
+            NSBeep()
+            return
+        }
         // if nothing else, clear messages
         exitCalibration()
         if calipersView.horizontalCalibration.calibrated ||
@@ -592,6 +608,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             }
             showMessage("Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel.")
             navigationSegmentedControl.enabled = true
+            // don't allow pressing QTc button in middle of meanRR
+            measurementSegmentedControl.setEnabled(false, forSegment: 2)
             inMeanRR = true
         }
         else {
@@ -653,6 +671,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         clearMessage()
         inMeanRR = false
         navigationSegmentedControl.enabled = false
+        measurementSegmentedControl.setEnabled(true, forSegment: 2)
     }
     
     func calculateQTc() {

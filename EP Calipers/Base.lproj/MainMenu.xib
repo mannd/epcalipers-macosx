@@ -697,7 +697,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Caliper" id="D0w-6S-BDp">
+                <menuItem title="Caliper" tag="999" id="D0w-6S-BDp">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Caliper" id="MrP-RE-zcc">
                         <items>
