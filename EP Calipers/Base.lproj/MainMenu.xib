@@ -725,10 +725,10 @@
                                     <action selector="addCaliper:" target="-1" id="bt5-up-YeT"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Clear Calibration" id="CWG-n0-m2k">
+                            <menuItem title="Clear Calibration" tag="3" id="CWG-n0-m2k">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="clearCalibration:" target="-1" id="lhz-H6-0y0"/>
+                                    <action selector="addCaliper:" target="-1" id="wmy-f3-oAv"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xvL-Ml-etX"/>

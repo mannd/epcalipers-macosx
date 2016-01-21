@@ -37,6 +37,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var inQTcStep2 = false
     var inCalibration = false
     var inMeanRR = false
+    var rrIntervalForQTc: Double = 0.0
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
@@ -194,14 +195,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 break
             }
         }
-        else {
+        else {  // inQTn
             switch navigation {
             case 0:
-                doNextStep()
+                doNextQTcStep()
             case 1:
-                doPreviousStep()
+                doPreviousQTcStep()
             case 2:
-                cancelSteps()
+                cancelQTcSteps()
             default:
                 break
             }
@@ -386,7 +387,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 calibrate()
                 return
             }
-            showMessage("Use a caliper to measure a known interval, then select Next to calibrate, or Cancel.")
+            showMessage("Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel.")
             navigationSegmentedControl.enabled = true
             inCalibration = true
         }
@@ -418,7 +419,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             else {
                 example = "1000 msec"
             }
-            let message = String(format: "Enter calibration measurement (e.g. %@)", example)
+            let message = String("Enter calibration measurement (e.g. \(example))")
             let alert = NSAlert()
             alert.messageText = "Calibrate caliper"
             alert.informativeText = message
@@ -589,7 +590,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 meanRR()
                 return
             }
-            showMessage("Use a caliper to measure 2 or more intervals, then select Next to continue, or Cancel.")
+            showMessage("Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel.")
             navigationSegmentedControl.enabled = true
             inMeanRR = true
         }
@@ -655,6 +656,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func calculateQTc() {
+        if inQTcStep1 {
+            // user pressed QTc button instead of Next.  That's OK
+            doQTcStep1()
+            return
+        }
+        if inQTcStep2 {
+            doQTcResult()
+            return
+        }
         if noTimeCaliperExists() {
             showNoCalipersAlert(true)
             return
@@ -674,7 +684,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 showNoTimeCaliperSelectedAlert()
                 return
             }
-            // TODO: wrap up entry and exit steps in funcs for QT
             enterQTc()
             showMessage("Measure 1 or more RR intervals.  Select Next to continue.")
             inQTcStep1 = true
@@ -686,17 +695,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if let c = calipersView.activeCaliper() {
             let alert = NSAlert()
             alert.alertStyle = .InformationalAlertStyle
-            alert.messageText = "QTc step 1: RR interval: Enter number of intervals"
+            alert.messageText = "QTc step 1: Enter number of RR intervals"
             alert.informativeText = "How many RR intervals is this caliper measuring?"
-            alert.addButtonWithTitle("Calculate")
-            alert.addButtonWithTitle("Cancel")
+            alert.addButtonWithTitle("Continue")
+            alert.addButtonWithTitle("Back")
             alert.accessoryView = numberInputView
             // TODO: replace with Preference value
             numberTextField.stringValue = String(tmpPrefDefaultNumberOfQTcMeanRRIntervals)
             numberStepper.integerValue = tmpPrefDefaultNumberOfQTcMeanRRIntervals
             let result = alert.runModal()
             if result == NSAlertFirstButtonReturn {
-                NSLog("Finish QTc step 1")
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
                     exitQTc()
@@ -707,46 +715,97 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 assert (divisor != 0)
                 let intervalResult = fabs(c.intervalResult())
                 let meanInterval = intervalResult / Double(divisor)
-                let rrIntervalForQTc = c.intervalInSecs(meanInterval)
+                rrIntervalForQTc = c.intervalInSecs(meanInterval)
                 // now measure QT...
                 inQTcStep1 = false
                 inQTcStep2 = true
+                doQTcStep2()
             }
         }
-        else {
+        else {  // on error (c = nil) exit QTc
             exitQTc()
         }
+    }
+    
+    func doQTcStep2() {
+        NSLog("In QTc step 2")
+        showMessage("Now measure QT interval and select Next, or Cancel")
+    }
+    
+    func doQTcResult() {
+        if let c = calipersView.activeCaliper() {
+            var qt = fabs(c.intervalInSecs(c.intervalResult()))
+            var meanRR = fabs(rrIntervalForQTc)
+            var result = "Invalid Result"
+            if meanRR > 0 {
+                let sqrtRR = sqrt(meanRR)
+                var qtc = qt / sqrtRR
+                // switch to units that calibration uses
+                if c.calibration.unitsAreMsec {
+                    meanRR *= 1000
+                    qt *= 1000
+                    qtc *= 1000
+                }
+                result = String(format: "Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formulat)", meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units)
+                let alert = NSAlert()
+                alert.alertStyle = .InformationalAlertStyle
+                alert.messageText = "Calculated QTc"
+                alert.informativeText = result
+                alert.addButtonWithTitle("OK")
+                alert.runModal()
+                exitQTc()
+            }
+        }
+        else { // c shouldn't = nil, but if it does
+            exitQTc()
+        }
+        
     }
 
     func enterQTc() {
         navigationSegmentedControl.enabled = true
+        // don't mess with calibration during QTc measurment
+        calipersSegementedControl.enabled = false
+        // don't allow pushing R/I or meanRR buttons either
+        measurementSegmentedControl.setEnabled(false, forSegment: 0)
+        measurementSegmentedControl.setEnabled(false, forSegment: 1)
         calipersView.locked = true
     }
 
     func exitQTc() {
         navigationSegmentedControl.enabled = false
+        calipersSegementedControl.enabled = true
+        measurementSegmentedControl.setEnabled(true, forSegment: 0)
+        measurementSegmentedControl.setEnabled(true, forSegment: 1)
         calipersView.locked = false
         clearMessage()
         inQTcStep1 = false
         inQTcStep2 = false
     }
 
-    func doNextStep() {
+    func doNextQTcStep() {
         if inQTcStep1 {
             doQTcStep1()
         }
+        else if inQTcStep2 {
+            doQTcResult()
+        }
     }
 
-    func doPreviousStep() {
+    func doPreviousQTcStep() {
         if inQTcStep1 {
-            NSLog("Back from QTc step 2")
             exitQTc()
+        }
+        if inQTcStep2 {
+            // back to beginning of QTc process
+            inQTcStep2 = false
+            inQTcStep1 = false
+            calculateQTc()
         }
         
     }
 
-    func cancelSteps() {
-        NSLog("Cancel QTc")
+    func cancelQTcSteps() {
         exitQTc()
     }
 
