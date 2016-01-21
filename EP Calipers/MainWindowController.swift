@@ -48,7 +48,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // Temporary preferences, to be replaced by real ones
     let tmpPrefDefaultNumberOfMeanRRIntervals = 3
     let tmpPrefDefaultNumberOfQTcMeanRRIntervals = 1
-    let tmpPrefShowPrompts = true
+    let tmpPrefShowPrompts = false
 
     
     override var windowNibName: String? {

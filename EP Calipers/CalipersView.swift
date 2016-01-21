@@ -214,6 +214,9 @@ class CalipersView: NSView {
     
     
     override func deleteBackward(sender: AnyObject?) {
+        if locked {
+            return
+        }
         for c in calipers {
             if c.selected {
                 calipers.removeAtIndex(calipers.indexOf(c)!)
