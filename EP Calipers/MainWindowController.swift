@@ -40,17 +40,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var rrIntervalForQTc: Double = 0.0
     
     let calipersMenuTag = 999
+    let appPreferences = Preferences()
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
-    
-    // Temporary preferences, to be replaced by real ones
-    let tmpPrefDefaultNumberOfMeanRRIntervals = 3
-    let tmpPrefDefaultNumberOfQTcMeanRRIntervals = 1
-    let tmpPrefShowPrompts = false
-
-    
+        
     override var windowNibName: String? {
         return "MainWindowController"
     }
@@ -79,8 +74,24 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     override func windowDidLoad() {
-        // Necessary to load view here or window gets resized if loaded when
-        // NSAlert used.
+        // register preference defaults
+        let defaults = [
+            "lineWidthKey": 2,
+            "defaultCalibrationKey": "1000 msec",
+            "defaultVerticalCalibrationKey": "10 mm",
+            "defaultNumberOfMeanRRIntervalsKey": 3,
+            "defaultNumberOfQTcMeanRRIntervalsKey": 1,
+            "showPromptsKey": true
+        ]
+        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+        appPreferences.loadPreferences()
+        // need to manually register colors, using extension to NSUserDefaults
+        if (appPreferences.caliperColor == nil) {
+            NSUserDefaults.standardUserDefaults().setColor(NSColor.blueColor(), forKey:"caliperColorKey")
+        }
+        if (appPreferences.highlightColor == nil) {
+            NSUserDefaults.standardUserDefaults().setColor(NSColor.redColor(), forKey: "highlightColorKey")
+        }
         NSBundle.mainBundle().loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
 
@@ -345,6 +356,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func addCaliperWithDirection(direction: CaliperDirection) {
         let caliper = Caliper()
         // initiallize with Preferences here
+        caliper.lineWidth = CGFloat(appPreferences.lineWidth)
+        if let color = appPreferences.caliperColor {
+            caliper.unselectedColor = color
+        }
+        if let color = appPreferences.highlightColor {
+            caliper.selectedColor = color
+        }
+        caliper.color = caliper.unselectedColor
         caliper.direction = direction
         if direction == .Horizontal {
             caliper.calibration = calipersView.horizontalCalibration
@@ -393,7 +412,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             NSBeep()
             return
         }
-        if tmpPrefShowPrompts {
+        if appPreferences.showPrompts {
             if inCalibration {
                 // user pressed Calibrate again instead of Next, it's OK, do what s/he wants
                 calibrate()
@@ -441,10 +460,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.addButtonWithTitle("Cancel")
             alert.accessoryView = textInputView
             if calipersView.horizontalCalibration.calibrationString.characters.count < 1 {
-                calipersView.horizontalCalibration.calibrationString = "1000 msec" // TODO: use default here
+                calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration!
             }
             if calipersView.verticalCalibration.calibrationString.characters.count < 1 {
-                calipersView.verticalCalibration.calibrationString = "1 mV" // TODO: use default here
+                calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration!
             }
             let direction = c.direction
             var calibrationString: String
@@ -602,7 +621,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func meanRRWithPossiblePrompts() {
-        if tmpPrefShowPrompts {
+        if appPreferences.showPrompts {
             if inMeanRR {
                 // user pressed mRR again instead of Next, it's OK, do what s/he wants
                 meanRR()
@@ -648,8 +667,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.addButtonWithTitle("Cancel")
             alert.accessoryView = numberInputView
             // TODO: get numberTextField and stepper value from Preferences
-            numberTextField.stringValue = String(tmpPrefDefaultNumberOfMeanRRIntervals)
-            numberStepper.integerValue = tmpPrefDefaultNumberOfMeanRRIntervals
+            numberTextField.stringValue = String(appPreferences.defaultNumberOfMeanRRIntervals)
+            numberStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
             let result = alert.runModal()
             if result == NSAlertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
@@ -722,8 +741,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.addButtonWithTitle("Back")
             alert.accessoryView = numberInputView
             // TODO: replace with Preference value
-            numberTextField.stringValue = String(tmpPrefDefaultNumberOfQTcMeanRRIntervals)
-            numberStepper.integerValue = tmpPrefDefaultNumberOfQTcMeanRRIntervals
+            numberTextField.stringValue = String(appPreferences.defaultNumberOfQTcMeanRRIntervals)
+            numberStepper.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
             let result = alert.runModal()
             if result == NSAlertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
