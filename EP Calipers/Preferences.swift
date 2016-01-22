@@ -40,6 +40,7 @@ class Preferences: NSObject {
     var defaultNumberOfQTcMeanRRIntervals: Int = 1
     var showPrompts: Bool = true
     // any others?
+    
 
     
     func loadPreferences() {
