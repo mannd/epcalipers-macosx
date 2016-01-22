@@ -65,7 +65,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     override func awakeFromNib() {
         let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
         let url = NSURL.fileURLWithPath(path!)
-        openImageUrl(url)
+        openImageUrl(url, addToRecentDocuments: false)
         imageView.editable = true
         // FIXME: need to retest combinations of these next 2 factors to see what works best
         imageView.zoomImageToActualSize(self)
@@ -299,13 +299,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             completionHandler: {
                 (result: NSInteger) -> Void in
                 if result == NSFileHandlingPanelOKButton { // User did select an image.
-                    self.openImageUrl(openPanel.URL!)
+                    self.openImageUrl(openPanel.URL!, addToRecentDocuments: true)
                 }
             }
         )
     }
     
-    func openImageUrl(url: NSURL) {
+    func openImageUrl(url: NSURL, addToRecentDocuments: Bool) -> Bool {
         let isr = CGImageSourceCreateWithURL(url, nil)
         let options = NSDictionary(object: kCFBooleanTrue, forKey: kCGImageSourceShouldCache as String)
         let image = CGImageSourceCreateImageAtIndex(isr!, 0, options)
@@ -315,13 +315,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             imageView.zoomImageToActualSize(self)
             self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
             imageURL = url
+            if addToRecentDocuments {
+                NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
+            }
+            return true
         }
+        return false
     }
 
     // secret IKImageView delegate method
     // see http://www.theregister.co.uk/2008/10/14/mac_secrets_imagekit_internals/
     func imagePathChanged(path: String) {
         let url = NSURL.fileURLWithPath(path)
+        NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
         if let title = url.lastPathComponent {
             self.window!.setTitleWithRepresentedFilename("EP Calipers: " + title)
         }
