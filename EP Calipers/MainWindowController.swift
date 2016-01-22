@@ -65,7 +65,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     override func awakeFromNib() {
         let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
         let url = NSURL.fileURLWithPath(path!)
-        imageView.setImageWithURL(url)
+        openImageUrl(url)
         imageView.editable = true
         // FIXME: need to retest combinations of these next 2 factors to see what works best
         imageView.zoomImageToActualSize(self)
@@ -149,6 +149,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = appPreferences.showPrompts ? 1 : 0
         let result = alert.runModal()
+        if result == NSAlertFirstButtonReturn {
+            // assign new preferences
+            // update views
+        }
     }
     
     @IBAction func numberOfMeanRRStepperAction(sender: AnyObject) {
@@ -298,10 +302,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
             imageProperties = CGImageSourceCopyProperties(isr!, imageProperties)!
             imageView.setImage(image, imageProperties: imageProperties as [NSObject : AnyObject])
-            imageView.zoomImageToFit(self)
+            imageView.zoomImageToActualSize(self)
             self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
             imageURL = url
         }
+    }
+
+    // secret IKImageView delegate method
+    // see http://www.theregister.co.uk/2008/10/14/mac_secrets_imagekit_internals/
+    func imagePathChanged(path: String) {
+        let url = NSURL.fileURLWithPath(path)
+        if let title = url.lastPathComponent {
+            self.window!.setTitleWithRepresentedFilename("EP Calipers: " + title)
+        }
+        else {
+            self.window!.setTitleWithRepresentedFilename("EP Calipers")
+        }
+        imageView.zoomImageToActualSize(self)
     }
     
 // FIXME: saveImage doesn't save image effects added
