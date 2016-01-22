@@ -123,7 +123,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func showPreferences(sender: AnyObject) {
-        NSLog("Show preferences")
         let alert = NSAlert()
         alert.alertStyle = .InformationalAlertStyle
         alert.messageText = "EP Calipers Preferences"
@@ -151,7 +150,18 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         let result = alert.runModal()
         if result == NSAlertFirstButtonReturn {
             // assign new preferences
-            // update views
+            appPreferences.caliperColor = caliperColorWell.color
+            appPreferences.highlightColor = highlightedCaliperColorWell.color
+            appPreferences.lineWidth = lineWidthSlider.integerValue
+            // TODO: check what happens if these fields are empty
+            appPreferences.defaultCalibration = defaultCalibrationTextField.stringValue
+            appPreferences.defaultVerticalCalibration = defaultVerticalCalibrationTextField.stringValue
+            appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
+            appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
+            appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
+            appPreferences.savePreferences()
+            // update calipersView
+            calipersView.updateCaliperColors(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth)
         }
     }
     

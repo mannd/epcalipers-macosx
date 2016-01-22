@@ -52,5 +52,17 @@ class Preferences: NSObject {
         defaultNumberOfQTcMeanRRIntervals = preferences.integerForKey("defaultNumberOfQTcMeanRRIntervalsKey")
         showPrompts = preferences.boolForKey("showPromptsKey")
     }
+    
+    func savePreferences() {
+        let preferences = NSUserDefaults.standardUserDefaults()
+        preferences.setColor(caliperColor, forKey: "caliperColorKey")
+        preferences.setColor(highlightColor, forKey: "highlightColorKey")
+        preferences.setInteger(lineWidth, forKey: "lineWidthKey")
+        preferences.setObject(defaultCalibration, forKey: "defaultCalibrationKey")
+        preferences.setObject(defaultVerticalCalibration, forKey: "defaultVerticalCalibrationKey")
+        preferences.setInteger(defaultNumberOfMeanRRIntervals, forKey: "defaultNumberOfMeanRRIntervalsKey")
+        preferences.setInteger(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
+        preferences.setBool(showPrompts, forKey: "showPromptsKey")
+    }
 
 }

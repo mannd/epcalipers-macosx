@@ -51,6 +51,7 @@ class CalipersView: NSView {
         }
         return true
     }
+    
 
     
     override func mouseDown(theEvent: NSEvent) {
@@ -218,6 +219,25 @@ class CalipersView: NSView {
                 needsDisplay = true
             }
         }
+    }
+    
+    func updateCaliperColors(unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int) {
+         for c in calipers {
+            if let color = unselectedColor {
+                c.unselectedColor = color
+            }
+            if let color = selectedColor {
+                c.selectedColor = color
+            }
+            if c.selected {
+                c.color = c.selectedColor
+            }
+            else {
+                c.color = c.unselectedColor
+            }
+            c.lineWidth = CGFloat(lineWidth)
+        }
+        needsDisplay = true
     }
     
     override func drawRect(dirtyRect: NSRect) {
