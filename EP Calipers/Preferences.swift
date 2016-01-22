@@ -38,9 +38,7 @@ class Preferences: NSObject {
     var defaultVerticalCalibration: String? = "10 mm"
     var defaultNumberOfMeanRRIntervals: Int = 3
     var defaultNumberOfQTcMeanRRIntervals: Int = 1
-    var showPrompts: Bool = true
-    // any others?
-    
+    var showPrompts: Bool = true    
 
     
     func loadPreferences() {

@@ -130,8 +130,35 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         alert.accessoryView = preferencesAccessoryView
         alert.addButtonWithTitle("OK")
         alert.addButtonWithTitle("Cancel")
+        if let color = appPreferences.caliperColor {
+            caliperColorWell.color = color
+        }
+        if let color = appPreferences.highlightColor {
+            highlightedCaliperColorWell.color = color
+        }
+        lineWidthSlider.integerValue = appPreferences.lineWidth
+        if let calibration = appPreferences.defaultCalibration {
+            defaultCalibrationTextField.stringValue = calibration
+        }
+        if let calibration = appPreferences.defaultVerticalCalibration {
+            defaultVerticalCalibrationTextField.stringValue = calibration
+        }
+        numberOfMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
+        numberOfMeanRRIntervalsStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
+        numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
+        numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
+        showPromptsCheckBox.state = appPreferences.showPrompts ? 1 : 0
         let result = alert.runModal()
     }
+    
+    @IBAction func numberOfMeanRRStepperAction(sender: AnyObject) {
+        numberOfMeanRRIntervalsTextField.integerValue = numberOfMeanRRIntervalsStepper.integerValue
+    }
+    
+    @IBAction func numberOfQTcMeanRRStepperAction(sender: AnyObject) {
+        numberOfQTcMeanRRIntervalsTextField.integerValue = numberOfQTcMeanRRIntervalsStepper.integerValue
+    }
+    
     
     
     @IBAction func switchToolMode(sender: AnyObject) {
@@ -903,6 +930,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if obj.name == "NSControlTextDidChangeNotification" {
             if obj.object === numberTextField {
                 numberStepper.integerValue = numberTextField.integerValue
+            }
+            if obj.object === numberOfMeanRRIntervalsTextField {
+                numberOfMeanRRIntervalsStepper.integerValue = numberOfMeanRRIntervalsTextField.integerValue
+            }
+            if obj.object === numberOfQTcMeanRRIntervalsTextField {
+                numberOfQTcMeanRRIntervalsStepper.integerValue = numberOfQTcMeanRRIntervalsTextField.integerValue
             }
         }
     }

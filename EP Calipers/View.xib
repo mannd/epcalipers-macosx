@@ -112,7 +112,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Whf-69-jWT">
-                    <rect key="frame" x="176" y="90" width="88" height="22"/>
+                    <rect key="frame" x="176" y="90" width="84" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="88P-Ej-I4M">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="ez4-fv-Wlj"/>
                         <font key="font" metaFont="system"/>
@@ -121,7 +121,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yA2-g0-kdT">
-                    <rect key="frame" x="176" y="53" width="88" height="22"/>
+                    <rect key="frame" x="176" y="53" width="84" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="czX-h3-tJg">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Ct9-Iu-wVN"/>
                         <font key="font" metaFont="system"/>
@@ -131,11 +131,17 @@
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eGw-e7-hy2">
                     <rect key="frame" x="260" y="87" width="19" height="27"/>
-                    <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="Riz-xo-CH7"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="10" doubleValue="3" id="Riz-xo-CH7"/>
+                    <connections>
+                        <action selector="numberOfMeanRRStepperAction:" target="-2" id="HFW-ix-aEA"/>
+                    </connections>
                 </stepper>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H94-tw-Juy">
                     <rect key="frame" x="260" y="50" width="19" height="27"/>
-                    <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="Yqs-a2-Ds8"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="10" doubleValue="1" id="Yqs-a2-Ds8"/>
+                    <connections>
+                        <action selector="numberOfQTcMeanRRStepperAction:" target="-2" id="7j5-4I-8z3"/>
+                    </connections>
                 </stepper>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="9Nk-jL-6iI">
                     <rect key="frame" x="256" y="18" width="22" height="18"/>
@@ -233,7 +239,7 @@
                 <constraint firstItem="Ihd-Wb-ZtZ" firstAttribute="centerY" secondItem="QjZ-5I-b6C" secondAttribute="centerY" id="OA0-gX-TVH"/>
                 <constraint firstItem="Whf-69-jWT" firstAttribute="trailing" secondItem="yA2-g0-kdT" secondAttribute="trailing" id="PTK-LQ-Ouo"/>
                 <constraint firstItem="Zou-Nx-XEc" firstAttribute="leading" secondItem="Qfe-0Y-e7q" secondAttribute="leading" id="S9x-fc-Y8J"/>
-                <constraint firstAttribute="trailing" secondItem="Whf-69-jWT" secondAttribute="trailing" constant="32" id="T2S-2x-Eu2"/>
+                <constraint firstAttribute="trailing" secondItem="Whf-69-jWT" secondAttribute="trailing" constant="36" id="T2S-2x-Eu2"/>
                 <constraint firstAttribute="bottom" secondItem="fEW-vJ-IeB" secondAttribute="bottom" constant="20" symbolic="YES" id="Uis-Be-vzr"/>
                 <constraint firstItem="eGw-e7-hy2" firstAttribute="top" secondItem="Whf-69-jWT" secondAttribute="top" id="V8B-09-GqS"/>
                 <constraint firstItem="r4a-ZC-EWw" firstAttribute="leading" secondItem="QjZ-5I-b6C" secondAttribute="leading" id="X0l-Ku-LiP"/>
