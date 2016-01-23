@@ -338,47 +338,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         imageView.zoomImageToActualSize(self)
     }
     
-    // see http://stackoverflow.com/questions/18583465/merging-stacking-two-images-with-cocoa-osx
-    func mergedImage() -> CGImage? {
-        let overlay: NSImage = NSImage(data: calipersView.dataWithPDFInsideRect(calipersView.bounds))!
-        let background: NSImage = NSImage(CGImage: imageView.image().takeUnretainedValue(), size: imageView.bounds.size)
-        
-        let newImage: NSImage = NSImage(size: background.size)
-        newImage.lockFocus()
-        
-        var newImageRect = CGRectZero
-        newImageRect.size = newImage.size
-        
-        background.drawInRect(newImageRect)
-        overlay .drawInRect(newImageRect)
-        
-        newImage.unlockFocus()
-        
-        let newImageRef = newImage.CGImageForProposedRect(nil , context: nil, hints: nil)
-        return newImageRef
-    }
+
     
 // FIXME: saveImage doesn't save image effects added
     // -- Well, sometimes it does, not sure why
     @IBAction func saveImage(sender: AnyObject) {
         let savePanel = NSSavePanel()
         saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
-//
-//// FIXME: Accessory view doesn't work: NOTE: try nib for this
-////// Option 1: build view and add it as accessory view
-////        let view: NSView = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 200))
-////        savePanel.accessoryView = view
-////        saveOptions.addSaveOptionsToView(view)
-////        // this statement doesn't work:
-////        // view.autoresizingMask = CAAutoresizingMask.LayerWidthSizable | CAAutoresizingMask.LayerHeightSizable
-////        
-////// Option 2: add accessory view to save pane, doesn't work due to Apple bug?, even with "fix"
-////        //saveOptions.addSaveOptionsAccessoryViewToSavePanel(savePanel)
-////        // FIXME: http://stackoverflow.com/questions/27374355/nssavepanel-crashes-on-yosemite suggests
-////        // this to avoid crash of NSSavePanel, but it doesn't work
-////        //savePanel.accessoryView!.translatesAutoresizingMaskIntoConstraints = false
-//
-//// Option 3: forget about the accessory view:
         savePanel.nameFieldStringValue = imageURL!.lastPathComponent!
         savePanel.beginSheetModalForWindow(self.window!, completionHandler: {
             (result: NSInteger) -> Void in
@@ -391,7 +357,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func savePanelDidEnd (sheet: NSSavePanel, returnCode: NSInteger) {
         if returnCode == NSModalResponseOK {
             let newUTType: String = saveOptions.imageUTType
-            if let image = mergedImage() {
+            if let image = calipersView.mergedImage() {
             //let image: CGImage = imageView.image().takeUnretainedValue()
                 if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
                     let url = sheet.URL
@@ -403,6 +369,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
+   
     @IBAction func doRotation(sender: AnyObject) {
         var rotationType: Int
         if sender.isKindOfClass(NSSegmentedControl) {

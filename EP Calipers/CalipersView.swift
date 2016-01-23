@@ -246,6 +246,45 @@ class CalipersView: NSView {
             c.drawWithContext(context, inRect: dirtyRect)
         }
     }
+    
+    @IBAction override func print(sender: AnyObject?) {
+        NSLog("printing it")
+        printMergedImage()
+    }
+    
+    // see http://findnerd.com/list/view/How-to-print-an-NSImage/755/
+    func printMergedImage() {
+        NSLog("Print")
+        let image: NSImage = NSImage(CGImage: mergedImage()!, size: imageView!.bounds.size)
+        let printImageView = NSImageView()
+        printImageView.frame = NSMakeRect(0, 0, image.size.width, image.size.height)
+        printImageView.image = image
+        let printInfo: NSPrintInfo = NSPrintInfo.sharedPrintInfo()
+        printInfo.horizontalPagination = .FitPagination
+        printInfo.verticalPagination = .FitPagination
+        NSPrintOperation(view: printImageView, printInfo: printInfo).runOperation()
+    }
+    
+    // see http://stackoverflow.com/questions/18583465/merging-stacking-two-images-with-cocoa-osx
+    func mergedImage() -> CGImage? {
+        let overlay: NSImage = NSImage(data: dataWithPDFInsideRect(bounds))!
+        let background: NSImage = NSImage(CGImage: imageView!.image().takeUnretainedValue(), size: imageView!.bounds.size)
+        
+        let newImage: NSImage = NSImage(size: background.size)
+        newImage.lockFocus()
+        
+        var newImageRect = CGRectZero
+        newImageRect.size = newImage.size
+        
+        background.drawInRect(newImageRect)
+        overlay .drawInRect(newImageRect)
+        
+        newImage.unlockFocus()
+        
+        let newImageRef = newImage.CGImageForProposedRect(nil , context: nil, hints: nil)
+        return newImageRef
+    }
+    
 
 }
 
