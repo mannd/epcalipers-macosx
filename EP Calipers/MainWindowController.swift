@@ -63,9 +63,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     override func awakeFromNib() {
-        let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
-        let url = NSURL.fileURLWithPath(path!)
-        openImageUrl(url, addToRecentDocuments: false)
+
         imageView.editable = true
         // FIXME: need to retest combinations of these next 2 factors to see what works best
         imageView.zoomImageToActualSize(self)
@@ -106,6 +104,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         NSBundle.mainBundle().loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
+        let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
+        let url = NSURL.fileURLWithPath(path!)
+        openImageUrl(url, addToRecentDocuments: false)
 
     }
 
@@ -287,7 +288,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    
     @IBAction func openImage(sender: AnyObject) {
         /* Present open panel. */
         let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF"
@@ -334,13 +334,35 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         else {
             self.window!.setTitleWithRepresentedFilename("EP Calipers")
         }
+        imageURL = url
         imageView.zoomImageToActualSize(self)
     }
     
+    // see http://stackoverflow.com/questions/18583465/merging-stacking-two-images-with-cocoa-osx
+    func mergedImage() -> CGImage? {
+        let overlay: NSImage = NSImage(data: calipersView.dataWithPDFInsideRect(calipersView.bounds))!
+        let background: NSImage = NSImage(CGImage: imageView.image().takeUnretainedValue(), size: imageView.bounds.size)
+        
+        let newImage: NSImage = NSImage(size: background.size)
+        newImage.lockFocus()
+        
+        var newImageRect = CGRectZero
+        newImageRect.size = newImage.size
+        
+        background.drawInRect(newImageRect)
+        overlay .drawInRect(newImageRect)
+        
+        newImage.unlockFocus()
+        
+        let newImageRef = newImage.CGImageForProposedRect(nil , context: nil, hints: nil)
+        return newImageRef
+    }
+    
 // FIXME: saveImage doesn't save image effects added
+    // -- Well, sometimes it does, not sure why
     @IBAction func saveImage(sender: AnyObject) {
-//        let savePanel = NSSavePanel()
-//        saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
+        let savePanel = NSSavePanel()
+        saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
 //
 //// FIXME: Accessory view doesn't work: NOTE: try nib for this
 ////// Option 1: build view and add it as accessory view
@@ -357,35 +379,29 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
 ////        //savePanel.accessoryView!.translatesAutoresizingMaskIntoConstraints = false
 //
 //// Option 3: forget about the accessory view:
-//        savePanel.nameFieldStringValue = imageURL!.lastPathComponent!
-//        savePanel.beginSheetModalForWindow(self.window!, completionHandler: {
-//            (result: NSInteger) -> Void in
-//            if result == NSFileHandlingPanelOKButton {
-//                self.savePanelDidEnd(savePanel, returnCode: result)
-//            }
-//        })
+        savePanel.nameFieldStringValue = imageURL!.lastPathComponent!
+        savePanel.beginSheetModalForWindow(self.window!, completionHandler: {
+            (result: NSInteger) -> Void in
+            if result == NSFileHandlingPanelOKButton {
+                self.savePanelDidEnd(savePanel, returnCode: result)
+            }
+        })
     }
    
-//    func savePanelDidEnd (sheet: NSSavePanel, returnCode: NSInteger) {
-//        if returnCode == NSModalResponseOK {
-//            let newUTType: String = saveOptions.imageUTType
-//            let image: CGImage = imageView.image().takeUnretainedValue()
-//            if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
-//                let url = sheet.URL
-//                let dest: CGImageDestination = CGImageDestinationCreateWithURL(url!, newUTType, 1, nil)!
-//                CGImageDestinationAddImage(dest, image, saveOptions.imageProperties)
-//                CGImageDestinationFinalize(dest)
-//            }
-//            else {
-//                print("*** saveImageToPath - no image")
-//            }
-//        }
-//    }
-   
-// not sure we want image to zoom with window resize
-//    func windowDidResize (notification: NSNotification?) {
-//        imageView.zoomImageToFit(self)
-//    }
+    func savePanelDidEnd (sheet: NSSavePanel, returnCode: NSInteger) {
+        if returnCode == NSModalResponseOK {
+            let newUTType: String = saveOptions.imageUTType
+            if let image = mergedImage() {
+            //let image: CGImage = imageView.image().takeUnretainedValue()
+                if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
+                    let url = sheet.URL
+                    let dest: CGImageDestination = CGImageDestinationCreateWithURL(url!, newUTType, 1, nil)!
+                    CGImageDestinationAddImage(dest, image, saveOptions.imageProperties)
+                    CGImageDestinationFinalize(dest)
+                }
+            }
+        }
+    }
     
     @IBAction func doRotation(sender: AnyObject) {
         var rotationType: Int
