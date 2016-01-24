@@ -128,7 +128,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func showPreferences(sender: AnyObject) {
-        NSLog("Preferences")
+        // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
+        // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
         if preferencesAlert == nil {
             let alert = NSAlert()
             alert.alertStyle = .InformationalAlertStyle
