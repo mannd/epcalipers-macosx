@@ -27,17 +27,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var numberStepper: NSStepper!
     @IBOutlet weak var numberTextField: NSTextField!
     // Preferences accessory view
-    @IBOutlet var preferencesAccessoryView: NSView!
-    @IBOutlet weak var caliperColorWell: NSColorWell!
-    @IBOutlet weak var highlightedCaliperColorWell: NSColorWell!
-    @IBOutlet weak var lineWidthSlider: NSSlider!
-    @IBOutlet weak var defaultCalibrationTextField: NSTextField!
-    @IBOutlet weak var defaultVerticalCalibrationTextField: NSTextField!
-    @IBOutlet weak var numberOfMeanRRIntervalsTextField: NSTextField!
-    @IBOutlet weak var numberOfMeanRRIntervalsStepper: NSStepper!
-    @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
-    @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
-    @IBOutlet weak var showPromptsCheckBox: NSButton!
+    @IBOutlet var preferencesAccessoryView: NSView?
+    @IBOutlet var caliperColorWell: NSColorWell!
+    @IBOutlet var highlightedCaliperColorWell: NSColorWell!
+    @IBOutlet   var lineWidthSlider: NSSlider!
+    @IBOutlet var defaultCalibrationTextField: NSTextField!
+    @IBOutlet var defaultVerticalCalibrationTextField: NSTextField!
+    @IBOutlet var numberOfMeanRRIntervalsTextField: NSTextField!
+    @IBOutlet var numberOfMeanRRIntervalsStepper: NSStepper!
+    @IBOutlet var numberOfQTcMeanRRIntervalsTextField: NSTextField!
+    @IBOutlet var numberOfQTcMeanRRIntervalsStepper: NSStepper!
+    @IBOutlet var showPromptsCheckBox: NSButton!
     
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
@@ -53,6 +53,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     let calipersMenuTag = 999
     let appPreferences = Preferences()
+    var preferencesChanged = false
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
@@ -104,6 +105,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         NSBundle.mainBundle().loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
+        numberOfMeanRRIntervalsTextField.delegate = self
+        numberOfQTcMeanRRIntervalsTextField.delegate = self
         let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
         let url = NSURL.fileURLWithPath(path!)
         openImageUrl(url, addToRecentDocuments: false)
@@ -124,6 +127,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func showPreferences(sender: AnyObject) {
+        NSLog("Preferences")
         let alert = NSAlert()
         alert.alertStyle = .InformationalAlertStyle
         alert.messageText = "EP Calipers Preferences"
@@ -163,6 +167,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperColors(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth)
+            preferencesChanged = true
         }
     }
     
@@ -521,11 +526,18 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.addButtonWithTitle("Calibrate")
             alert.addButtonWithTitle("Cancel")
             alert.accessoryView = textInputView
-            if calipersView.horizontalCalibration.calibrationString.characters.count < 1 {
+            if preferencesChanged {
                 calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration!
-            }
-            if calipersView.verticalCalibration.calibrationString.characters.count < 1 {
                 calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration!
+                preferencesChanged = false
+            }
+            else {  // don't bother doing this again if preferencesChanged
+                if calipersView.horizontalCalibration.calibrationString.characters.count < 1 {
+                    calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration!
+                }
+                if calipersView.verticalCalibration.calibrationString.characters.count < 1 {
+                    calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration!
+                }
             }
             let direction = c.direction
             var calibrationString: String
