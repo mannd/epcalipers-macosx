@@ -27,17 +27,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var numberStepper: NSStepper!
     @IBOutlet weak var numberTextField: NSTextField!
     // Preferences accessory view
-    @IBOutlet var preferencesAccessoryView: NSView?
-    @IBOutlet var caliperColorWell: NSColorWell!
-    @IBOutlet var highlightedCaliperColorWell: NSColorWell!
-    @IBOutlet   var lineWidthSlider: NSSlider!
-    @IBOutlet var defaultCalibrationTextField: NSTextField!
-    @IBOutlet var defaultVerticalCalibrationTextField: NSTextField!
-    @IBOutlet var numberOfMeanRRIntervalsTextField: NSTextField!
-    @IBOutlet var numberOfMeanRRIntervalsStepper: NSStepper!
-    @IBOutlet var numberOfQTcMeanRRIntervalsTextField: NSTextField!
-    @IBOutlet var numberOfQTcMeanRRIntervalsStepper: NSStepper!
-    @IBOutlet var showPromptsCheckBox: NSButton!
+    @IBOutlet var preferencesAccessoryView: NSView!
+    @IBOutlet weak var caliperColorWell: NSColorWell!
+    @IBOutlet weak var highlightedCaliperColorWell: NSColorWell!
+    @IBOutlet weak var lineWidthSlider: NSSlider!
+    @IBOutlet weak var defaultCalibrationTextField: NSTextField!
+    @IBOutlet weak var defaultVerticalCalibrationTextField: NSTextField!
+    @IBOutlet weak var numberOfMeanRRIntervalsTextField: NSTextField!
+    @IBOutlet weak var numberOfMeanRRIntervalsStepper: NSStepper!
+    @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
+    @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
+    @IBOutlet weak var showPromptsCheckBox: NSButton!
     
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
@@ -54,6 +54,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     let calipersMenuTag = 999
     let appPreferences = Preferences()
     var preferencesChanged = false
+    var preferencesAlert: NSAlert? = nil
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
@@ -128,12 +129,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     @IBAction func showPreferences(sender: AnyObject) {
         NSLog("Preferences")
-        let alert = NSAlert()
-        alert.alertStyle = .InformationalAlertStyle
-        alert.messageText = "EP Calipers Preferences"
-        alert.accessoryView = preferencesAccessoryView
-        alert.addButtonWithTitle("OK")
-        alert.addButtonWithTitle("Cancel")
+        if preferencesAlert == nil {
+            let alert = NSAlert()
+            alert.alertStyle = .InformationalAlertStyle
+            alert.messageText = "EP Calipers Preferences"
+            alert.accessoryView = preferencesAccessoryView
+            alert.addButtonWithTitle("OK")
+            alert.addButtonWithTitle("Cancel")
+            preferencesAlert = alert
+        }
         if let color = appPreferences.caliperColor {
             caliperColorWell.color = color
         }
@@ -152,7 +156,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = appPreferences.showPrompts ? 1 : 0
-        let result = alert.runModal()
+        let result = preferencesAlert!.runModal()
         if result == NSAlertFirstButtonReturn {
             // assign new preferences
             appPreferences.caliperColor = caliperColorWell.color
