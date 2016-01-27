@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E194EE91C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */; };
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
+		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
 		8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */; };
 		8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F21C2E264000AD9556 /* Assets.xcassets */; };
 		8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F41C2E264000AD9556 /* MainMenu.xib */; };
@@ -17,7 +19,20 @@
 		8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */; };
 		8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81D1C30850200AD9556 /* Quartz.framework */; };
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
-		8E3DA8221C33668300AD9556 /* Normal 12_Lead ECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA8211C33668300AD9556 /* Normal 12_Lead ECG.jpg */; };
+		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
+		8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC11C4378A4002E0085 /* Calibration.swift */; };
+		8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC41C472973002E0085 /* TB_rotate.tiff */; };
+		8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC51C472973002E0085 /* TB_zoomActual.png */; };
+		8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC61C472973002E0085 /* TB_zoomIn.png */; };
+		8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC71C472973002E0085 /* TB_zoomOut.png */; };
+		8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */; };
+		8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFCE1C473049002E0085 /* TB_move.tiff */; };
+		8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD01C4740C0002E0085 /* lock-20.png */; };
+		8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD21C4742E4002E0085 /* lock-16.png */; };
+		8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */; };
+		8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */; };
+		8ECC76C71C48B1830091F87A /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ECC76C61C48B1830091F87A /* View.xib */; };
+		8EF1AD5A1C58659200337895 /* EPCalipers-help in Resources */ = {isa = PBXBuildFile; fileRef = 8EF1AD591C58659200337895 /* EPCalipers-help */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
+		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EP Calipers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E3DA7F21C2E264000AD9556 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,7 +71,21 @@
 		8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		8E3DA81D1C30850200AD9556 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		8E3DA8211C33668300AD9556 /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Normal 12_Lead ECG.jpg"; path = "../../../epcalipers/EP Calipers/EP Calipers/Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
+		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
+		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
+		8EA7EFC41C472973002E0085 /* TB_rotate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TB_rotate.tiff; sourceTree = "<group>"; };
+		8EA7EFC51C472973002E0085 /* TB_zoomActual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomActual.png; sourceTree = "<group>"; };
+		8EA7EFC61C472973002E0085 /* TB_zoomIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomIn.png; sourceTree = "<group>"; };
+		8EA7EFC71C472973002E0085 /* TB_zoomOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomOut.png; sourceTree = "<group>"; };
+		8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TB_zoomToFit.png; sourceTree = "<group>"; };
+		8EA7EFCE1C473049002E0085 /* TB_move.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TB_move.tiff; sourceTree = "<group>"; };
+		8EA7EFD01C4740C0002E0085 /* lock-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-20.png"; sourceTree = "<group>"; };
+		8EA7EFD21C4742E4002E0085 /* lock-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-16.png"; sourceTree = "<group>"; };
+		8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-icon-bw-20x20.png"; sourceTree = "<group>"; };
+		8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-amplitude-icon-bw-20x20.png"; sourceTree = "<group>"; };
+		8ECC76C61C48B1830091F87A /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EP Calipers.entitlements"; sourceTree = "<group>"; };
+		8EF1AD591C58659200337895 /* EPCalipers-help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "EPCalipers-help"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +120,7 @@
 			children = (
 				8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */,
 				8E3DA81D1C30850200AD9556 /* Quartz.framework */,
+				8EA7EFC31C472909002E0085 /* Resources */,
 				8E3DA7EF1C2E264000AD9556 /* EP Calipers */,
 				8E3DA7FF1C2E264000AD9556 /* EP CalipersTests */,
 				8E3DA80A1C2E264000AD9556 /* EP CalipersUITests */,
@@ -109,7 +141,8 @@
 		8E3DA7EF1C2E264000AD9556 /* EP Calipers */ = {
 			isa = PBXGroup;
 			children = (
-				8E3DA8211C33668300AD9556 /* Normal 12_Lead ECG.jpg */,
+				8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */,
+				8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */,
 				8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */,
 				8E3DA7F21C2E264000AD9556 /* Assets.xcassets */,
 				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
@@ -117,6 +150,10 @@
 				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
 				8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */,
 				8E2282471C398B1300337695 /* CalipersView.swift */,
+				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
+				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
+				8ECC76C61C48B1830091F87A /* View.xib */,
+				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -137,6 +174,24 @@
 				8E3DA80D1C2E264000AD9556 /* Info.plist */,
 			);
 			path = "EP CalipersUITests";
+			sourceTree = "<group>";
+		};
+		8EA7EFC31C472909002E0085 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8EF1AD591C58659200337895 /* EPCalipers-help */,
+				8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */,
+				8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */,
+				8EA7EFD21C4742E4002E0085 /* lock-16.png */,
+				8EA7EFD01C4740C0002E0085 /* lock-20.png */,
+				8EA7EFCE1C473049002E0085 /* TB_move.tiff */,
+				8EA7EFC41C472973002E0085 /* TB_rotate.tiff */,
+				8EA7EFC51C472973002E0085 /* TB_zoomActual.png */,
+				8EA7EFC61C472973002E0085 /* TB_zoomIn.png */,
+				8EA7EFC71C472973002E0085 /* TB_zoomOut.png */,
+				8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +262,12 @@
 				TargetAttributes = {
 					8E3DA7EC1C2E264000AD9556 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = SZLBQWQUR2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					8E3DA7FB1C2E264000AD9556 = {
 						CreatedOnToolsVersion = 7.2;
@@ -243,9 +304,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */,
+				8ECC76C71C48B1830091F87A /* View.xib in Resources */,
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
-				8E3DA8221C33668300AD9556 /* Normal 12_Lead ECG.jpg in Resources */,
+				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
+				8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */,
+				8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */,
+				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
+				8E194EE91C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg in Resources */,
+				8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */,
+				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
+				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
 				8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */,
+				8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */,
+				8EF1AD5A1C58659200337895 /* EPCalipers-help in Resources */,
+				8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,7 +344,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */,
 				8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */,
+				8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */,
+				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,
 			);
@@ -404,11 +480,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "EP Calipers/EP Calipers.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "EP Calipers/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -416,11 +496,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "EP Calipers/EP Calipers.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "EP Calipers/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

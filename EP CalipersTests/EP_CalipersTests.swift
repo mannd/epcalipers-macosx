@@ -33,4 +33,49 @@ class EP_CalipersTests: XCTestCase {
         }
     }
     
+    func testBarCoord() {
+        let c = Caliper()
+        XCTAssert(c.bar1Position == 0)
+        XCTAssert(c.bar2Position == 0);
+        XCTAssert(c.crossBarPosition == 100.0);
+        let p = CGPointMake(100, 50);
+        XCTAssert(c.barCoord(p) == 100);
+        c.direction = .Vertical;
+        XCTAssert(c.barCoord(p) == 50);
+    }
+    
+    func testCanDisplayRate() {
+        let cal = Calibration()
+        cal.calibrated = true
+        cal.rawUnits = "msec"
+        XCTAssert(cal.canDisplayRate)
+        cal.rawUnits = "milliseconds";
+        XCTAssert(cal.canDisplayRate)
+        cal.rawUnits = "sec";
+        XCTAssert(cal.canDisplayRate)
+        cal.rawUnits = "secs";
+        XCTAssert(cal.canDisplayRate)
+        cal.rawUnits = "Msec";
+        XCTAssert(cal.canDisplayRate)
+        cal.rawUnits = "ms";
+        XCTAssert(cal.canDisplayRate)
+        cal.rawUnits = "mm";
+        XCTAssert(!cal.canDisplayRate)
+        cal.rawUnits = "mSecs";
+        XCTAssert(cal.canDisplayRate)
+        cal.direction = .Vertical;
+        XCTAssert(!cal.canDisplayRate)
+    }
+    
+    func testCurrentHorizontalCalFactor() {
+        let cal = Calibration()
+        cal.originalZoom = 1.0;
+        cal.originalCalFactor = 0.5;
+        cal.currentZoom = 1.0;
+        XCTAssert(cal.currentCalFactor() == 0.5);
+        cal.currentZoom = 2.0;
+        XCTAssert(cal.currentCalFactor() == 0.25);
+    }
+
+
 }
