@@ -305,14 +305,13 @@ class CalipersView: NSView {
 ////        newImageRect.size = newImage.size
 ////        
 ////        background.drawInRect(newImageRect)
-////        overlay .drawInRect(newImageRect)
+////        overlay.drawInRect(newImageRect)
 ////        
 ////        newImage.unlockFocus()
 ////        
 ////        let newImageRef = newImage.CGImageForProposedRect(nil , context: nil, hints: nil)
 ////        return newImageRef
 //    }
-    
     
     
 
