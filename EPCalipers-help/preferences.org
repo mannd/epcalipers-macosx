@@ -10,7 +10,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="description" content="Changing default settings" />
-* Preferences
-Preferences can be selected using the *EP Calipers | Preferences* menu item.  You can change caliper colors, line width of the calipers, as well as default calibration intervals and number of intervals used to calculate mean intervals.  For example, if you usually use just 1 RR interval to calculate the QTc, set the number of mean RR intervals for the QTc measurement at 1 interval.  Remember though you can override any of these values when you actually do the measurements.
+* [[./shrd/icon_32x32@2x.png]] Preferences
+Preferences can be selected using the *EP Calipers | Preferences* menu item.  You can change caliper colors, line width of the calipers, as well as default calibration intervals and number of intervals used to calculate mean intervals.  For example, if you usually use just 1 RR interval to calculate the QTc, set the number of mean RR intervals for the QTc measurement to 1 interval.  Remember though you can override any of these values when you actually do the measurements.
 #+CAPTION: Preferences
 [[./shrd/preferences.png]]

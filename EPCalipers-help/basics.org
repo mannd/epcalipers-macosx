@@ -10,9 +10,15 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="description" content="Crash course for EP Calipers" />
-* EP Calipers 101
-** Rationale
-*EP Calipers* provides electronic calipers for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In this age of electronic health records, ECG recordings are created electronically and transmitted digitally.  Even in cases where hardcopies are created (e.g. telemetry strips), it is common for doctors, nurses and medical technicians to take pictures of these recordings and send them to each other using smart phones and tablets.  In the past ECG measurements were made with a pair of calipers, an often inaccurate tool, especially given the typical slow recording speeds of standard ECGs (25 mm/sec).  Automated ECG interval measurements are helpful, though they too are often inaccurate.  I believe that the human eye is better at estimating the end of the T wave than a computer!  In the electrophysiology lab electronic calipers are included as part of the recording system.  *EP Calipers* is intended to provide similar electronic calipers for use on your Mac.  ECG zooming allows more accurate measurements than can be obtained with mechanical calipers.   And accurate measurements are important, as the risk of drug-related complications like Torsade de Pointes can be avoided by carefully following the QTc interval, for example.  *EP Calipers* makes such measurements very easy!
+* [[./shrd/icon_32x32@2x.png]] Introduction - EP Calipers 101
+** You're on call, again
+It's 2 AM and the phone rings.  It's a nurse on the cardiac unit.  Mr. Smith is due to get his antiarrhythmic drug (who comes up with these crazy drug schedules?) and the ECG she got has a borderline prolonged QTc interval, at least according to the computer.  She's not sure if she should give the drug.  She wants to email you the ECG.
+
+You drag yourself out of bed and open up your laptop.  There's the ECG in question.  You look at the QT interval.  Eyeballing it it looks OK.  Mentally you start counting little boxes.  You pull out the trusty old pair of mechanical calipers some drug rep gave you many years ago, when such largesse was still legal.  You think to yourself: I live in a digital age.  Am I really making measurements on a computer screen with a physical pair of calipers?
+** Electronic calipers
+*EP Calipers* provides *electronic calipers* for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In this age of electronic health records, ECG recordings are created electronically and transmitted digitally.  Even in cases where hardcopies are created (e.g. telemetry strips), it is common for doctors, nurses and medical technicians to take pictures of these recordings and send them to each other using smart phones and tablets.  In the past ECG measurements were made with a pair of calipers, an often inaccurate tool, especially given the typical slow recording speeds of standard ECGs (25 mm/sec).  Automated ECG interval measurements are helpful, though they too are often inaccurate.  I believe that the human eye is better at estimating the end of the T wave than a computer!  In the electrophysiology lab electronic calipers are included as part of the recording system.  *EP Calipers* is intended to provide similar electronic calipers for use on your Mac.  ECG zooming allows more accurate measurements than can be obtained with mechanical calipers.   Accurate measurements are important, as the risk of drug-related complications like Torsade de Pointes can be avoided by carefully following the QTc interval, for example.  *EP Calipers* makes such measurements very easy!
+** Who's it for?
+*EP Calipers* is especially useful for electrophysiologists, cardiologists, and associated professions who routinely analyze ECGs.  Many other medical personnel need to analyze ECG recordings and rhythm strips and will find this app useful.  The app allows one to make measurements on figures from textbooks and academic papers, and thus useful to anyone who reads the medical literature, from medical students to experienced researchers.
 ** It's intuitive
 When *EP Calipers* starts, a sample ECG is loaded.  Click a caliper
 icon on the toolbar to add a caliper to the screen.  Move the caliper
@@ -41,8 +47,8 @@ Here are the toolbars.  Note that not all toolbars will be available all the tim
 ** Calipers toolbar
 - [[./shrd/calipers-icon-bw-20x20.png]] Add time (horizontal) caliper
 - [[./shrd/calipers-amplitude-icon-bw-20x20.png]] Add amplitude (vertical) caliper
-- *Calibrate* selected caliper
-- *Clear* all calibration
+- *Calibrate* Calibrate caliper
+- *Clear* Clear all calibration
 ** Measurement toolbar
 - *R/I* Toggle heart rate and time interval
 - *mRR* Calculate mean interval from several intervals

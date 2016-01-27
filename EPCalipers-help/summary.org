@@ -1,4 +1,4 @@
-#+TITLE:     EP Calipers Help
+#+TITLE:     
 #+AUTHOR:    David Mann
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
@@ -11,17 +11,16 @@
 #+HTML_HEAD: <meta name="AppleIcon" content="EPCalipers-help/icon_16x16.png" />
 #+HTML_HEAD: <meta name="description" content="Help documentation for EP Calipers" />
 #+HTML_HEAD: <meta name="AppleTitle" content="EP Calipers Help" />
-* Welcome to EP Calipers Help!
-* [[file:./basics.html][Basic operations]]
+* [[./shrd/icon_32x32@2x.png]] EP Calipers Help
+* [[file:./basics.html][Introduction - EP Calipers 101]]
 Rationale and basic use of *EP Calipers*.
 * [[./images.org][Image operations]]
 Open, rotate, move, and save ECG images.
 * [[./calipers.html][Caliper operations]]
-Add, move, delete calipers
+Add, move, and delete calipers.
 * [[./measurements.html][Making measurements]]
 Calibrate calipers, measure, and do ECG calculations.
 * [[./preferences.html][Preferences]]
 Change app preferences, such as caliper color, default calibration, etc.
 * [[./misc.html][Fine print]]
 Miscellaneous stuff.
-* Index

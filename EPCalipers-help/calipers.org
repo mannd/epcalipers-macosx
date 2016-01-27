@@ -10,6 +10,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="description" content="How to use the electronic calipers" />
+* [[./shrd/icon_32x32@2x.png]] Calipers
 * Adding and deleting calipers
 Calipers come in two flavors.  Calipers with a horizontal crossbar and vertical sidebars are used to make time measurements and are called "time calipers."  Calipers with a vertical crossbar and horizontal sidebars are used to make amplitude measurements and are called, you guessed it, "amplitude calipers."
 ** Add Calipers
