@@ -350,34 +350,45 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
 
     
-// FIXME: saveImage doesn't save image effects added
-    // -- Well, sometimes it does, not sure why
+    // Save image for now is just uses the system screenshot utility
     @IBAction func saveImage(sender: AnyObject) {
-        let savePanel = NSSavePanel()
-        saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
-        savePanel.nameFieldStringValue = imageURL!.lastPathComponent!
-        savePanel.beginSheetModalForWindow(self.window!, completionHandler: {
-            (result: NSInteger) -> Void in
-            if result == NSFileHandlingPanelOKButton {
-                self.savePanelDidEnd(savePanel, returnCode: result)
-            }
-        })
-    }
-   
-    func savePanelDidEnd (sheet: NSSavePanel, returnCode: NSInteger) {
-        if returnCode == NSModalResponseOK {
-            let newUTType: String = saveOptions.imageUTType
-            if let image = calipersView.mergedImage() {
-            //let image: CGImage = imageView.image().takeUnretainedValue()
-                if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
-                    let url = sheet.URL
-                    let dest: CGImageDestination = CGImageDestinationCreateWithURL(url!, newUTType, 1, nil)!
-                    CGImageDestinationAddImage(dest, image, saveOptions.imageProperties)
-                    CGImageDestinationFinalize(dest)
-                }
-            }
+        if !calipersView.takeScreenshot() {
+            NSLog("Screenshot error")
+            // NSAlert here
+            let alert = NSAlert()
+            alert.alertStyle = .CriticalAlertStyle
+            alert.messageText = "Screencapture not available or not working on this machine"
+            alert.informativeText = "For some reason screencapture is not working on your machine.  Sorry.  If this is unexpected, please report as a bug."
+            alert.runModal()
         }
+//        if let image = calipersView.mergedImage() {
+//            let savePanel = NSSavePanel()
+//            saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
+//            savePanel.nameFieldStringValue = imageURL!.lastPathComponent!
+//            savePanel.beginSheetModalForWindow(self.window!, completionHandler: {
+//                (result: NSInteger) -> Void in
+//                if result == NSFileHandlingPanelOKButton {
+//                    self.savePanelDidEnd(savePanel, returnCode: result, image: image)
+//                }
+//            })
+//        }
     }
+    
+//    
+//    func savePanelDidEnd(sheet: NSSavePanel, returnCode: NSInteger, image: CGImage) {
+//        if returnCode == NSModalResponseOK {
+//            let newUTType: String = saveOptions.imageUTType
+//            //if let image = calipersView.mergedImage() {
+//            //let image: CGImage = imageView.image().takeUnretainedValue()
+//            if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
+//                let url = sheet.URL
+//                let dest: CGImageDestination = CGImageDestinationCreateWithURL(url!, newUTType, 1, nil)!
+//                CGImageDestinationAddImage(dest, image, saveOptions.imageProperties)
+//                CGImageDestinationFinalize(dest)
+//            }
+//        }
+//    }
+    
     
    
     @IBAction func doRotation(sender: AnyObject) {
@@ -972,4 +983,5 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             }
         }
     }
+    
 }
