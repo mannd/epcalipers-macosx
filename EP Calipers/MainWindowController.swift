@@ -119,7 +119,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
         if menuItem.action == Selector("doMeasurement:") {
-            return calipersView.horizontalCalibration.calibrated && !calipersView.locked && !inMeanRR && !inCalibration
+            return calipersView.horizontalCalibration.calibrated && !calipersView.locked && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate
         }
         if menuItem.action == Selector("addCaliper:") {
             return !calipersView.locked
