@@ -572,7 +572,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                     exitCalibration()
                 }
             }
-            if calipersView.horizontalCalibration.calibrated {
+            if calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate {
                 measurementSegmentedControl.enabled = true
             }
             
@@ -825,7 +825,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if let c = calipersView.activeCaliper() {
             let alert = NSAlert()
             alert.alertStyle = .InformationalAlertStyle
-            alert.messageText = "QTc step 1: Enter number of RR intervals"
+            alert.messageText = "QTc: Enter number of RR intervals"
             alert.informativeText = "How many RR intervals is this caliper measuring?"
             alert.addButtonWithTitle("Continue")
             alert.addButtonWithTitle("Back")
