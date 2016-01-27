@@ -1,0 +1,27 @@
+#+TITLE:     
+#+AUTHOR:    David Mann
+#+EMAIL:     mannd@epstudiossoftware.com
+#+DATE:      
+#+DESCRIPTION: EP Calipers Help
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+HTML_HEAD: <meta name="description" content="Using calipers to make measurements" />
+* Making measurements
+** Caliper interval
+The interval measured by each caliper is displayed on top of or next to the crossbar of the caliper.  Until the calipers are calibrated, measurements are displayed in arbitrary units (points, roughly equivalent to screen pixels).
+** Measurement prompts
+If the Show Prompts preference is selected (see Preferences link) (it is by default) the program will guide you with detailed instructions on how to make each measurement.  When you become familiar with how to make measurements you may consider turning off the Show Prompts preference.  This minimizes the prompting the program gives.  Prompts appear at the top of the window, right under the toolbars.  For example, when measuring the mean RR interval, if Show Prompts is enabled, the program will first prompt you to select a time caliper, stretch it over a number of intervals, and then click Next on the Navigation Toolbar.  A dialog will then appear asking how many intervals you are measuring.  After entering the number and clicking the calculate button, the result will appear in a dialog.  If Show Prompts is disabled, you can select a caliper and stretch it over a number of intervals without prompting, and then press the mean RR (mRR) button or the *Caliper | Mean Rate and Interval* menu item.  The rest of the process is the same.
+** Calibration
+Calibration is necessary before any measurements can be made!  If the Show Prompts preference is enabled, select the Calibrate button or the *Caliper | Calibrate* menu item.  Follow the prompts to select a caliper and stretch it over a known interval (such as 1000 msec for time, or 10 mm for amplitude calipers).  Select the Next button.  In the dialog box that appears, make sure the interval matches what you are measuring.  Enter both the calibration interval and units (e.g. 1000 msec, or 1 sec, or 1 mV).  Select *Set* in the dialog box to set the calibration.  Note that time and amplitude calipers need to be calibrated separately.  Once calibrated, calipers will show intervals in the units used to calibrate.  Newly created calipers will use the same calibration.
+** Changing calibration
+You can recalibrate at any time.  You can clear all calibration by selecting *Clear* in the calibration toolbar.  Note that calibration is maintained if the device is rotated or the image is zoomed.  Selecting a new image will reset calibration.
+** Interval/Rate
+Once a time (horizontal) caliper is calibrated, provided you use time units (such as msec or sec) for the calibration, it is possible to toggle between interval measurements (e.g. 600 msec) and heart rate measurements (e.g. 100 bpm) by selecting *Interval/Rate* on iPads (or *I/R* on iPhones).
+** Mean rate and interval calculation
+Select a calibrated caliper and stretch it over a number of intervals.  Select *Mean Rate* or *MRate* and enter the number of intervals measured.  A dialog box will show the calculated mean heart rate and interval.  This is useful for calculating rates and intervals in irregular rhythms, such as atrial fibrillation.
+** QTc calculation
+Select *QTc*.  Stretch the selected caliper over one or more RR intervals and select *Measure*.  Enter the number of intervals the caliper is stretched over and select *Calculate*.  Then use the same caliper to measure the QT interval.  Select *Measure*.  A dialog box will give the calculated QTc using Bazett's formula.

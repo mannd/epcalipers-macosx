@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-01-26 Tue 20:38 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="generator" content="Org-mode" />
+<meta name="author" content="David Mann" />
+<meta name="description" content="EP Calipers Help"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<meta name="description" content="Crash course for EP Calipers" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">EP Calipers 101</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1">Rationale</h3>
+<div class="outline-text-3" id="text-orgheadline1">
+<p>
+<b>EP Calipers</b> provides electronic calipers for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In this age of electronic health records, ECG recordings are created electronically and transmitted digitally.  Even in cases where hardcopies are created (e.g. telemetry strips), it is common for doctors, nurses and medical technicians to take pictures of these recordings and send them to each other using smart phones and tablets.  In the past ECG measurements were made with a pair of calipers, an often inaccurate tool, especially given the typical slow recording speeds of standard ECGs (25 mm/sec).  Automated ECG interval measurements are helpful, though they too are often inaccurate.  I believe that the human eye is better at estimating the end of the T wave than a computer!  In the electrophysiology lab electronic calipers are included as part of the recording system.  <b>EP Calipers</b> is intended to provide similar electronic calipers for use on your Mac.  ECG zooming allows more accurate measurements than can be obtained with mechanical calipers.   And accurate measurements are important, as the risk of drug-related complications like Torsade de Pointes can be avoided by carefully following the QTc interval, for example.  <b>EP Calipers</b> makes such measurements very easy!
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">It's intuitive</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+When <b>EP Calipers</b> starts, a sample ECG is loaded.  Click a caliper
+icon on the toolbar to add a caliper to the screen.  Move the caliper
+around by clicking on the caliper's cross-bar and dragging it with the
+mouse or your finger on the track pad.  Expand and contract the
+caliper by dragging the bars on either end of the caliper.  Pinch and
+zoom the underlying ECG or use the zoom toolbar to enlarge or shrink
+the image as needed.  If the ECG is bigger than your screen, you can
+drag the image around with your mouse or finger.  The rest of these
+help pages will go over how to load ECG images, add and delete
+calipers, calibrate the calipers and make advanced measurements like
+the corrected QT interval.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Toolbars</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The toolbar looks like this:
+</p>
+
+<div class="figure">
+<p><img src="./shrd/EPCtoolbar.png" alt="EPCtoolbar.png" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Toolbars</p>
+</div>
+
+<p>
+Here are the toolbars.  Note that not all toolbars will be available all the time, depending on whether calibration has been performed.  Disabled toolbars are "grayed" out.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Zoom toolbar</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<ul class="org-ul">
+<li><img src="./shrd/TB_zoomIn.png" alt="TB_zoomIn.png" /> Zoom in</li>
+<li><img src="./shrd/TB_zoomOut.png" alt="TB_zoomOut.png" /> Zoom out</li>
+<li><img src="./shrd/TB_zoomActual.png" alt="TB_zoomActual.png" /> Zoom to actual size</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Cursors toolbar</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<ul class="org-ul">
+<li><img src="./shrd/grab.png" alt="grab.png" /> Grab and move image or calipers</li>
+<li><img src="./shrd/lock-16.png" alt="lock-16.png" /> Lock image (can only move calipers)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Calipers toolbar</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<ul class="org-ul">
+<li><img src="./shrd/calipers-icon-bw-20x20.png" alt="calipers-icon-bw-20x20.png" /> Add time (horizontal) caliper</li>
+<li><img src="./shrd/calipers-amplitude-icon-bw-20x20.png" alt="calipers-amplitude-icon-bw-20x20.png" /> Add amplitude (vertical) caliper</li>
+<li><b>Calibrate</b> selected caliper</li>
+<li><b>Clear</b> all calibration</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Measurement toolbar</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<ul class="org-ul">
+<li><b>R/I</b> Toggle heart rate and time interval</li>
+<li><b>mRR</b> Calculate mean interval from several intervals</li>
+<li><b>QTc</b> Measure corrected QT (QTc)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Navigation toolbar</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<ul class="org-ul">
+<li><b>Next</b> Go to next measurement step</li>
+<li><b>Back</b> Go back a step</li>
+<li><b>Cancel</b> Cancel measurement</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
