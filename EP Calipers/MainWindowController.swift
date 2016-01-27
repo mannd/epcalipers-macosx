@@ -325,6 +325,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             imageView.zoomImageToActualSize(self)
             self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
             imageURL = url
+            clearCalibration()
             if addToRecentDocuments {
                 NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
             }
@@ -346,6 +347,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         imageURL = url
         imageView.zoomImageToActualSize(self)
+        clearCalibration()
     }
     
 
