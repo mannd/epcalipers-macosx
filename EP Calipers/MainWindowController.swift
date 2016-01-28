@@ -356,8 +356,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // Save image for now is just uses the system screenshot utility
     @IBAction func saveImage(sender: AnyObject) {
         if !calipersView.takeScreenshot() {
-            NSLog("Screenshot error")
-            // NSAlert here
             let alert = NSAlert()
             alert.alertStyle = .CriticalAlertStyle
             alert.messageText = "Screencapture not available or not working on this machine"
@@ -859,7 +857,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func doQTcStep2() {
-        NSLog("In QTc step 2")
         showMessage("Now measure QT interval and select Next, or Cancel")
     }
     

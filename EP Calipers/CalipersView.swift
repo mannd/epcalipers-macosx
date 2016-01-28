@@ -252,10 +252,8 @@ class CalipersView: NSView {
         let guid = NSProcessInfo.processInfo().globallyUniqueString
         let fileName = "\(prefix)_\(guid)"
         let path = "\(NSHomeDirectory())/\(fileName).png"
-        NSLog("path = \(path)")
         let result = system("screencapture -P -w \(path)")
         if result != 0 {
-            NSLog("System error = \(result)")
             return false
         }
         return true
