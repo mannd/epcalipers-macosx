@@ -27,9 +27,6 @@ extension NSUserDefaults {
     }
 }
 
-/* TODO: Preferences
-Prefences will appear as a modal dialog, invoked by showPreferences action in MainWindowController.  Default preferences will be registered in AppDelegate.swift in windowDidLoad.  An accessory view for the dialog will hold the specific preference controls.
-*/
 class Preferences: NSObject {
     var caliperColor: NSColor? = NSColor.blueColor()
     var highlightColor: NSColor? = NSColor.redColor()
