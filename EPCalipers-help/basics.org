@@ -37,23 +37,41 @@ The program is controlled either by the toolbar buttons at the top of the window
 [[./shrd/EPCtoolbar.png]]
 
 Here are the toolbars.  Note that not all toolbars will be available all the time, depending on whether calibration has been performed.  Disabled toolbars are "grayed" out.
-** Zoom toolbar
+*** Zoom toolbar
 - [[./shrd/TB_zoomIn.png]] Zoom in
 - [[./shrd/TB_zoomOut.png]] Zoom out
 - [[./shrd/TB_zoomActual.png]] Zoom to actual size
-** Cursors toolbar
+*** Cursors toolbar
 - [[./shrd/grab.png]] Grab and move image or calipers
 - [[./shrd/lock-16.png]] Lock image (can only move calipers)
-** Calipers toolbar
+*** Calipers toolbar
 - [[./shrd/calipers-icon-bw-20x20.png]] Add time (horizontal) caliper
 - [[./shrd/calipers-amplitude-icon-bw-20x20.png]] Add amplitude (vertical) caliper
 - *Calibrate* Calibrate caliper
 - *Clear* Clear all calibration
-** Measurement toolbar
+*** Measurement toolbar
 - *R/I* Toggle heart rate and time interval
 - *mRR* Calculate mean interval from several intervals
 - *QTc* Measure corrected QT (QTc)
-** Navigation toolbar
+*** Navigation toolbar
 - *Next* Go to next measurement step
 - *Back* Go back a step
 - *Cancel* Cancel measurement
+** Menus
+Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the app's functions.
+** Keyboard shortcuts
+| Key | Function                |
+|-----+-------------------------|
+| ⌃R  | Rotate image 1° right   |
+| ⌃L  | Rotate image 1° left    |
+| ⇧⌃R | Rotate image 90° right  |
+| ⇧⌃L | Rotate image 90° left   |
+| ⌃0  | Reset image rotation    |
+| ⇧⌘= | Zoom in                 |
+| ⌘-  | Zoom out                |
+| ⌘=  | Zoom to actual size     |
+| ⌃T  | Add time caliper        |
+| ⌃A  | Add amplitude caliper   |
+| ⌃C  | Calibrate               |
+| Del | Delete selected caliper |
+| ⇧⌘S | Take screenshot         |

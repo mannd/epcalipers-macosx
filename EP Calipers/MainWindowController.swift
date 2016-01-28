@@ -187,6 +187,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     
     @IBAction func switchToolMode(sender: AnyObject) {
+        // consider updating menuitmes with checks when switching tools
         var newTool: Int
         if sender.isKindOfClass(NSSegmentedControl) {
             newTool = sender.selectedSegment
