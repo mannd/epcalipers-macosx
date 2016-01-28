@@ -130,8 +130,6 @@ class CalipersView: NSView {
         }
     }
     
-    // TODO: consider context menu or options for other action with double click, 
-    // e.g. calibrate
     override func mouseUp(theEvent: NSEvent) {
         if selectedCaliper != nil {
             if !mouseWasDragged && !locked {
@@ -203,7 +201,6 @@ class CalipersView: NSView {
         return caliper
     }
     
-    // TODO: may not need this is menu option available instead
     override func keyDown(theEvent: NSEvent) {
         interpretKeyEvents([theEvent])
     }
@@ -263,82 +260,6 @@ class CalipersView: NSView {
         }
         return true
     }
-
-// MARK: functions below were attempt at saving and printing without using screencapture -- abandoned for now
-    
-//    @IBAction override func print(sender: AnyObject?) {
-//        NSLog("printing it")
-//        let rect = convertRect(bounds, toView: nil)
-//        NSLog("Frame relative to window = \(rect)")
-//        if let screenRect = window?.convertRectToScreen(rect) {
-//            NSLog("Frame relative to screen = \(screenRect)")
-//        }
-//        // TODO: change back
-//        return
-////        printMergedImage()
-//    }
-//    
-// Print has problem because of multiple NSViews, first responder changes
-//    // see http://findnerd.com/list/view/How-to-print-an-NSImage/755/
-//    func printMergedImage() {
-//        NSLog("Print")
-//        let image: NSImage = NSImage(CGImage: mergedImage()!, size: imageView!.bounds.size)
-//        let printImageView = NSImageView()
-//        printImageView.frame = NSMakeRect(0, 0, image.size.width, image.size.height)
-//        printImageView.image = image
-//        let printInfo: NSPrintInfo = NSPrintInfo.sharedPrintInfo()
-//        printInfo.horizontalPagination = .FitPagination
-//        printInfo.verticalPagination = .FitPagination
-//        NSPrintOperation(view: printImageView, printInfo: printInfo).runOperation()
-//    }
-    
-//    // see http://stackoverflow.com/questions/18583465/merging-stacking-two-images-with-cocoa-osx
-//    func mergedImage() -> CGImage? {
-//        return imageFromScreen()
-////        let overlay: NSImage = NSImage(data: dataWithPDFInsideRect(bounds))!
-////        let background: NSImage = NSImage(CGImage: imageView!.image().takeUnretainedValue(), size: imageView!.bounds.size)
-////        
-////        let newImage: NSImage = NSImage(size: background.size)
-////        newImage.lockFocus()
-////        
-////        var newImageRect = CGRectZero
-////        newImageRect.size = newImage.size
-////        
-////        background.drawInRect(newImageRect)
-////        overlay.drawInRect(newImageRect)
-////        
-////        newImage.unlockFocus()
-////        
-////        let newImageRef = newImage.CGImageForProposedRect(nil , context: nil, hints: nil)
-////        return newImageRef
-//    }
-    
-    
-
-//    func imageFromScreen() -> CGImage? {
-//        // capture to clipboard, no sound
-//        let result = system("screencapture -c -x")
-//        if result != 0 {
-//            NSLog("System error = \(result)")
-//            return nil
-//        }
-//        if let imageFromClipBoard = NSImage(pasteboard: NSPasteboard.generalPasteboard()) {
-//            if let screenshotImage: CGImageRef = (imageFromClipBoard.CGImageForProposedRect(nil, context: nil, hints: nil)) {
-//                let rect = convertRect(bounds, toView: nil)
-//                let screenRect = window!.convertRectToScreen(rect)
-//                let screenshotCropped = CGImageCreateWithImageInRect(screenshotImage, screenRect)
-//
-//                return screenshotCropped
-//            }
-//            else {
-//                return nil
-//            }
-//        }
-//        else {
-//            return nil
-//        }
-//        
-//    }
 
 }
 

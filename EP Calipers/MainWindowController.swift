@@ -67,7 +67,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     override func awakeFromNib() {
 
         imageView.editable = true
-        // FIXME: need to retest combinations of these next 2 factors to see what works best
         imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
@@ -165,7 +164,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             appPreferences.caliperColor = caliperColorWell.color
             appPreferences.highlightColor = highlightedCaliperColorWell.color
             appPreferences.lineWidth = lineWidthSlider.integerValue
-            // TODO: check what happens if these fields are empty
             appPreferences.defaultCalibration = defaultCalibrationTextField.stringValue
             appPreferences.defaultVerticalCalibration = defaultVerticalCalibrationTextField.stringValue
             appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
@@ -760,7 +758,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.addButtonWithTitle("Calculate")
             alert.addButtonWithTitle("Cancel")
             alert.accessoryView = numberInputView
-            // TODO: get numberTextField and stepper value from Preferences
             numberTextField.stringValue = String(appPreferences.defaultNumberOfMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
             let result = alert.runModal()
@@ -834,7 +831,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.addButtonWithTitle("Continue")
             alert.addButtonWithTitle("Back")
             alert.accessoryView = numberInputView
-            // TODO: replace with Preference value
             numberTextField.stringValue = String(appPreferences.defaultNumberOfQTcMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
             let result = alert.runModal()
