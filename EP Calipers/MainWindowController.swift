@@ -100,9 +100,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         // need to manually register colors, using extension to NSUserDefaults
         if (appPreferences.caliperColor == nil) {
             NSUserDefaults.standardUserDefaults().setColor(NSColor.blueColor(), forKey:"caliperColorKey")
+            appPreferences.caliperColor = NSColor.blueColor()
         }
         if (appPreferences.highlightColor == nil) {
             NSUserDefaults.standardUserDefaults().setColor(NSColor.redColor(), forKey: "highlightColorKey")
+            appPreferences.highlightColor = NSColor.redColor()
         }
         NSBundle.mainBundle().loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self

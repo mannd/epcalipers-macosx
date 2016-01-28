@@ -15,10 +15,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var mainWindowController: MainWindowController?
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        // uncomment below to clear default prefs for testing
+//        let appDomain = NSBundle.mainBundle().bundleIdentifier
+//        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+
         // Insert code here to initialize your application
         let mainWindowController = MainWindowController()
         mainWindowController.showWindow(self)
         self.mainWindowController = mainWindowController
+        
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
