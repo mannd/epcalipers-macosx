@@ -40,6 +40,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let url = NSURL.fileURLWithPath(filename)
         return mainWindowController!.openImageUrl(url, addToRecentDocuments: false)
      }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
+        return true
+    }
 
 }
 
