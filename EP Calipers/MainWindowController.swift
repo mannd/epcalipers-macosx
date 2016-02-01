@@ -301,7 +301,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     @IBAction func openImage(sender: AnyObject) {
         /* Present open panel. */
-        let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF"
+        let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/pdf/PDF"
         let types = extensions.componentsSeparatedByString("/")
         let openPanel = NSOpenPanel()
         openPanel.allowedFileTypes = types
@@ -310,29 +310,34 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             completionHandler: {
                 (result: NSInteger) -> Void in
                 if result == NSFileHandlingPanelOKButton { // User did select an image.
+                    // self is needed here in closure
                     self.openImageUrl(openPanel.URL!, addToRecentDocuments: true)
                 }
             }
         )
     }
     
-    func openImageUrl(url: NSURL, addToRecentDocuments: Bool) -> Bool {
-        let isr = CGImageSourceCreateWithURL(url, nil)
-        let options = NSDictionary(object: kCFBooleanTrue, forKey: kCGImageSourceShouldCache as String)
-        let image = CGImageSourceCreateImageAtIndex(isr!, 0, options)
-        if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
-            imageProperties = CGImageSourceCopyProperties(isr!, imageProperties)!
-            imageView.setImage(image, imageProperties: imageProperties as [NSObject : AnyObject])
-            imageView.zoomImageToActualSize(self)
-            self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
-            imageURL = url
-            clearCalibration()
-            if addToRecentDocuments {
-                NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
-            }
-            return true
+    func openImageUrl(url: NSURL, addToRecentDocuments: Bool) {
+        // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
+        // Default value of kCGImageSourceShouldCache depends on platform.
+        // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
+        let error = NSErrorPointer()
+        if url.checkResourceIsReachableAndReturnError(error) == false {
+            let alert = NSAlert()
+            alert.messageText = "File not found"
+            alert.informativeText = "Can't locate \(url)"
+            alert.alertStyle = .CriticalAlertStyle
+            alert.runModal()
+            return
         }
-        return false
+        imageView.setImageWithURL(url)
+        imageView.zoomImageToActualSize(self)
+        self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
+        imageURL = url
+        clearCalibration()
+        if addToRecentDocuments {
+            NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
+        }
     }
 
     // secret IKImageView delegate method
@@ -351,10 +356,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         clearCalibration()
     }
     
-
-    
-    // Save image for now is just uses the system screenshot utility
     @IBAction func saveImage(sender: AnyObject) {
+        // Save image for now is just uses the system screenshot utility
         if !calipersView.takeScreenshot() {
             let alert = NSAlert()
             alert.alertStyle = .CriticalAlertStyle
@@ -362,36 +365,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.informativeText = "For some reason screencapture is not working on your machine.  Sorry.  If this is unexpected, please report as a bug."
             alert.runModal()
         }
-//        if let image = calipersView.mergedImage() {
-//            let savePanel = NSSavePanel()
-//            saveOptions = IKSaveOptions(imageProperties: imageProperties as [NSObject : AnyObject], imageUTType: imageUTType)
-//            savePanel.nameFieldStringValue = imageURL!.lastPathComponent!
-//            savePanel.beginSheetModalForWindow(self.window!, completionHandler: {
-//                (result: NSInteger) -> Void in
-//                if result == NSFileHandlingPanelOKButton {
-//                    self.savePanelDidEnd(savePanel, returnCode: result, image: image)
-//                }
-//            })
-//        }
     }
     
-//    
-//    func savePanelDidEnd(sheet: NSSavePanel, returnCode: NSInteger, image: CGImage) {
-//        if returnCode == NSModalResponseOK {
-//            let newUTType: String = saveOptions.imageUTType
-//            //if let image = calipersView.mergedImage() {
-//            //let image: CGImage = imageView.image().takeUnretainedValue()
-//            if CGImageGetWidth(image) > 0 && CGImageGetHeight(image) > 0 {
-//                let url = sheet.URL
-//                let dest: CGImageDestination = CGImageDestinationCreateWithURL(url!, newUTType, 1, nil)!
-//                CGImageDestinationAddImage(dest, image, saveOptions.imageProperties)
-//                CGImageDestinationFinalize(dest)
-//            }
-//        }
-//    }
-    
-    
-   
     @IBAction func doRotation(sender: AnyObject) {
         var rotationType: Int
         if sender.isKindOfClass(NSSegmentedControl) {
@@ -414,7 +389,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         default:
             break
         }
-        
     }
     
     func radians(degrees: Double) -> Double {
