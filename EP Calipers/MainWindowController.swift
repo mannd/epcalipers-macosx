@@ -134,7 +134,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if preferencesAlert == nil {
             let alert = NSAlert()
             alert.alertStyle = .InformationalAlertStyle
-            alert.messageText = "EP Calipers Preferences"
+            alert.messageText = "EP Calipers preferences"
             alert.accessoryView = preferencesAccessoryView
             alert.addButtonWithTitle("OK")
             alert.addButtonWithTitle("Cancel")
@@ -360,9 +360,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         // Save image for now is just uses the system screenshot utility
         if !calipersView.takeScreenshot() {
             let alert = NSAlert()
-            alert.alertStyle = .CriticalAlertStyle
-            alert.messageText = "Screencapture not available or not working on this machine"
-            alert.informativeText = "For some reason screencapture is not working on your machine.  Sorry.  If this is unexpected, please report as a bug."
+            alert.alertStyle = .InformationalAlertStyle
+            alert.messageText = "Screenshot cancelled"
+            alert.informativeText = "Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine."
             alert.runModal()
         }
     }
