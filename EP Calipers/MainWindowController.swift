@@ -848,7 +848,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                     qt *= 1000
                     qtc *= 1000
                 }
-                result = String(format: "Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formulat)", meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units)
+                result = String(format: "Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)", meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units)
                 let alert = NSAlert()
                 alert.alertStyle = .InformationalAlertStyle
                 alert.messageText = "Calculated QTc"
