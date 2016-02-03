@@ -37,8 +37,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func application(sender: NSApplication, openFile filename: String) -> Bool {
+        // needed to implement Open Recent... menu item
         let url = NSURL.fileURLWithPath(filename)
-        return mainWindowController!.openImageUrl(url, addToRecentDocuments: false)
+        mainWindowController!.openImageUrl(url, addToRecentDocuments: false)
+        return true
      }
     
     func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {

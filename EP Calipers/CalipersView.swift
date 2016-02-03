@@ -246,7 +246,8 @@ class CalipersView: NSView {
     
     func takeScreenshot() -> Bool {
         // Takes screenshot and stores in sandbox data directory (or home directory if
-        // no sandbox.  Returns false if screencapture doesn't work for some reason.
+        // no sandbox.  Returns false if screencapture doesn't work for some reason or
+        // if escape used to cancel screencapture.
         // Screencapture in preview mode and window mode with sound.
         let prefix = "EPCalipers"
         let guid = NSProcessInfo.processInfo().globallyUniqueString
