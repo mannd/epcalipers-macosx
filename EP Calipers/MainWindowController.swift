@@ -317,7 +317,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         )
     }
     
-    func openImageUrl(url: NSURL, addToRecentDocuments: Bool) {
+    func openImageUrl(url: NSURL, addToRecentDocuments: Bool) -> Bool {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
         // Default value of kCGImageSourceShouldCache depends on platform.
         // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
@@ -328,7 +328,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.informativeText = "Can't locate \(url)"
             alert.alertStyle = .CriticalAlertStyle
             alert.runModal()
-            return
+            return false
         }
         imageView.setImageWithURL(url)
         imageView.zoomImageToActualSize(self)
@@ -338,6 +338,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if addToRecentDocuments {
             NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
         }
+        return true
     }
 
     // secret IKImageView delegate method
