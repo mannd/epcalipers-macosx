@@ -125,6 +125,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if menuItem.action == Selector("addCaliper:") {
             return !calipersView.locked
         }
+        if menuItem.action == Selector("previousPage:") {
+            return false
+        }
+        if menuItem.action == Selector("nextPage:") {
+            return false
+        }
         return true
     }
     
@@ -366,6 +372,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.informativeText = "Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine."
             alert.runModal()
         }
+    }
+    
+    @IBAction func previousPage(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func nextPage(sender: AnyObject) {
+        
     }
     
     @IBAction func doRotation(sender: AnyObject) {
