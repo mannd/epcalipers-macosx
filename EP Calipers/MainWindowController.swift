@@ -59,6 +59,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
+    
+    // PDF variables
+    var pdfPageNumber = 0
+    var numberOfPDFPages = 0
+    var imageIsPDF = false
         
     override var windowNibName: String? {
         return "MainWindowController"
@@ -126,10 +131,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return !calipersView.locked
         }
         if menuItem.action == Selector("previousPage:") {
-            return false
+            return imageIsPDF && pdfPageNumber > 0
         }
         if menuItem.action == Selector("nextPage:") {
-            return false
+            return imageIsPDF && pdfPageNumber < numberOfPDFPages
         }
         return true
     }
@@ -316,11 +321,34 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             completionHandler: {
                 (result: NSInteger) -> Void in
                 if result == NSFileHandlingPanelOKButton { // User did select an image.
+                    if self.isPDFFile(openPanel.URL!.filePathURL) {
+                        NSLog("is PDF")
+                        self.imageIsPDF = true
+                        // process image before adding, get number of pages, etc.
+                    }
+                    else {
+                        self.clearPDF()
+                    }
                     // self is needed here in closure
                     self.openImageUrl(openPanel.URL!, addToRecentDocuments: true)
                 }
             }
         )
+    }
+    
+    func clearPDF() {
+        imageIsPDF = false
+        pdfPageNumber = 0
+        numberOfPDFPages = 0
+    }
+    
+    func isPDFFile(filePath: NSURL?) -> Bool {
+        if let path = filePath {
+            if let ext = path.pathExtension {
+                return ext.uppercaseString == "PDF"
+            }
+        }
+        return false
     }
     
     func openImageUrl(url: NSURL, addToRecentDocuments: Bool) -> Bool {
@@ -351,6 +379,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // see http://www.theregister.co.uk/2008/10/14/mac_secrets_imagekit_internals/
     func imagePathChanged(path: String) {
         let url = NSURL.fileURLWithPath(path)
+        if isPDFFile(url) {
+            imageIsPDF = true
+            // process PDF to improve quality, get number of pages etc.
+        }
+        else {
+            clearPDF()
+        }
         NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
         if let title = url.lastPathComponent {
             self.window!.setTitleWithRepresentedFilename("EP Calipers: " + title)
