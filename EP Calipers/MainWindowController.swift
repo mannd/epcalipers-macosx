@@ -382,6 +382,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if isPDFFile(url) {
             imageIsPDF = true
             // process PDF to improve quality, get number of pages etc.
+            // let tmpPDFRef: CGPDFDocumentRef = getPDFDocumentRef(url.path.UTF8String);
+
         }
         else {
             clearPDF()
@@ -408,6 +410,65 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.runModal()
         }
     }
+
+    // FIXME: PDF handling
+    
+//    - (void)openPDFPage:(CGPDFDocumentRef) documentRef atPage:(int) pageNum {
+//    if (documentRef == NULL) {
+//    return;
+//    }
+//    CGPDFPageRef page = getPDFPage(documentRef, pageNum);
+//    if (page == NULL) {
+//    return;
+//    }
+//    CGPDFPageRetain(page);
+//    CGRect sourceRect = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+//    // higher scale factor below makes for clearer image
+//    CGFloat scaleFactor = 5.0;
+//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(sourceRect.size.width, sourceRect.size.height), false, scaleFactor);
+//    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+//    CGContextTranslateCTM(currentContext, 0.0, sourceRect.size.height);
+//    CGContextScaleCTM(currentContext, 1.0, -1.0);
+//    CGContextDrawPDFPage(currentContext, page);
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    // first scale as usual, but image still too large since scaled up when created for better quality
+//    image = [self scaleImageForImageView:image];
+//    // now correct for scale factor when creating image
+//    image = [UIImage imageWithCGImage:(CGImageRef)image.CGImage scale:scaleFactor * image.scale orientation:UIImageOrientationUp];
+//    
+//    self.imageView.image = image;
+//    UIGraphicsEndImageContext();
+//    CGPDFPageRelease(page);
+//    }
+    
+//    func processPDFPage(document: CGPDFDocument?, atPage pageNum: Int) -> NSImage? {
+//        if document == nil {
+//            return nil
+//        }
+//        let page = getPDFPage(document!, pageNumber: pageNum)
+//        if page == nil {
+//            return nil
+//        }
+//        let sourceRect = CGPDFPageGetBoxRect(page, CGPDFBox.MediaBox)
+//        let scaleFactor: CGFloat = 5.0
+//        // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion/34361216#34361216
+//
+//        
+//        
+//    }
+
+    
+    func getPDFDocument(filename: String) -> CGPDFDocument? {
+        let path = CFStringCreateWithCString(kCFAllocatorDefault, filename, 0)
+        let url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, path, CFURLPathStyle.CFURLPOSIXPathStyle, false)
+        let document = CGPDFDocumentCreateWithURL(url)
+        return document
+    }
+  
+    func getPDFPage(document: CGPDFDocument, pageNumber: size_t) -> CGPDFPage? {
+        return CGPDFDocumentGetPage(document, pageNumber);
+    }
+
     
     @IBAction func previousPage(sender: AnyObject) {
         
