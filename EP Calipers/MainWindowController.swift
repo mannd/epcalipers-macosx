@@ -61,7 +61,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     let zoomOutFactor: CGFloat = 0.7071068
     
     // PDF variables
-    var pdfPageNumber = 0
+    // PDF page numbering starts at 1
+    var pdfPageNumber = 1
     var numberOfPDFPages = 0
     var imageIsPDF = false
         
@@ -131,7 +132,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return !calipersView.locked
         }
         if menuItem.action == Selector("previousPage:") {
-            return imageIsPDF && pdfPageNumber > 0
+            return imageIsPDF && pdfPageNumber > 1
         }
         if menuItem.action == Selector("nextPage:") {
             return imageIsPDF && pdfPageNumber < numberOfPDFPages
@@ -325,6 +326,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                         NSLog("is PDF")
                         self.imageIsPDF = true
                         // process image before adding, get number of pages, etc.
+                        // call common procedure for this
                     }
                     else {
                         self.clearPDF()
@@ -441,21 +443,32 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
 //    CGPDFPageRelease(page);
 //    }
     
-//    func processPDFPage(document: CGPDFDocument?, atPage pageNum: Int) -> NSImage? {
-//        if document == nil {
-//            return nil
-//        }
-//        let page = getPDFPage(document!, pageNumber: pageNum)
-//        if page == nil {
-//            return nil
-//        }
-//        let sourceRect = CGPDFPageGetBoxRect(page, CGPDFBox.MediaBox)
-//        let scaleFactor: CGFloat = 5.0
-//        // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion/34361216#34361216
-//
-//        
-//        
-//    }
+    func processPDFPage(document: CGPDFDocument?, atPage pageNum: Int) -> NSImage? {
+        if document == nil {
+            return nil
+        }
+        // NOTE: Use class below???
+        // let x = NSPDFImageRep
+        
+        let page = getPDFPage(document!, pageNumber: pageNum)
+        if page == nil {
+            return nil
+        }
+        let sourceRect = CGPDFPageGetBoxRect(page, CGPDFBox.MediaBox)
+        let scaleFactor: CGFloat = 5.0
+        // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion/34361216#34361216
+        let image: NSImage = NSImage()
+        image.size = sourceRect.size
+        image.lockFocus()
+        let currentContext = NSGraphicsContext.currentContext()?.CGContext
+        CGContextTranslateCTM(currentContext, 0.0, sourceRect.size.height)
+        CGContextScaleCTM(currentContext, 1.0, -1.0)
+        CGContextDrawPDFPage(currentContext, page)
+        
+        image.unlockFocus()
+        // remove
+        return image
+    }
 
     
     func getPDFDocument(filename: String) -> CGPDFDocument? {
@@ -468,7 +481,33 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func getPDFPage(document: CGPDFDocument, pageNumber: size_t) -> CGPDFPage? {
         return CGPDFDocumentGetPage(document, pageNumber);
     }
+    
+//    CGImageRef nsImageToCGImage(NSImage* image)
+//    {
+//    NSData * imgData = [image TIFFRepresentation];
+//    CGImageRef imgRef = 0;
+//    if(imgData)
+//    {
+//    CGImageSourceRef imageSource =
+//    CGImageSourceCreateWithData((CFDataRef)imgData,  NULL);
+//    
+//    imgRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
+//    }
+//    
+//    return imgRef;
+//    }
 
+    // convert NSImage to CGImage
+    // from http://lists.apple.com/archives/cocoa-dev/2010/May/msg01171.html
+    func nsImageToCGImage(image: NSImage) -> CGImageRef? {
+        let imageData = image.TIFFRepresentation
+        var imageRef: CGImageRef? = nil
+        if let imgData = imageData {
+            let imageSource = CGImageSourceCreateWithData(imgData as CFDataRef, nil)
+            imageRef = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
+        }
+        return imageRef
+    }
     
     @IBAction func previousPage(sender: AnyObject) {
         
