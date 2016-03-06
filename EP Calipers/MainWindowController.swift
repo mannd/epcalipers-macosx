@@ -324,15 +324,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 if result == NSFileHandlingPanelOKButton { // User did select an image.
                     if self.isPDFFile(openPanel.URL!.filePathURL) {
                         NSLog("is PDF")
-                        self.imageIsPDF = true
+                        self.openPDF(openPanel.URL!)
+                        //self.imageIsPDF = true
                         // process image before adding, get number of pages, etc.
                         // call common procedure for this
                     }
                     else {
                         self.clearPDF()
+                        self.openImageUrl(openPanel.URL!, addToRecentDocuments: true)
                     }
-                    // self is needed here in closure
-                    self.openImageUrl(openPanel.URL!, addToRecentDocuments: true)
                 }
             }
         )
@@ -414,6 +414,44 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
     // FIXME: PDF handling
+    
+    func openPDF(url: NSURL) {
+        NSLog("openPDF")
+        let pdfData = NSData(contentsOfURL: url)
+        if (pdfData == nil) {
+            return
+            // ? return nil, error?
+        }
+        let pdf = NSPDFImageRep(data: pdfData!)
+        let pageCount = pdf?.pageCount
+        pdf?.currentPage = 0
+        var tempImage = NSImage()
+        tempImage.addRepresentation(pdf!)
+        tempImage = scaleImage(tempImage, byFactor: 4.0)
+        let image = nsImageToCGImage(tempImage)
+        imageView.setImage(image, imageProperties: nil)
+        imageView.zoomImageToActualSize(self)
+        self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
+        imageURL = url
+        clearCalibration()
+        //if addToRecentDocuments {
+            NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
+        //}
+    }
+    
+    func scaleImage(image: NSImage, byFactor factor: CGFloat) -> NSImage {
+        let newSize = NSMakeSize(image.size.width * factor, image.size.height * factor)
+        let scaledImage = NSImage(size: newSize)
+        scaledImage.lockFocus()
+        NSColor.whiteColor().set()
+        NSBezierPath.fillRect(NSMakeRect(0, 0, newSize.width, newSize.height))
+        let transform = NSAffineTransform()
+        transform.scaleBy(factor)
+        transform.concat()
+        image.drawAtPoint(NSZeroPoint, fromRect: NSZeroRect, operation: NSCompositingOperation.CompositeSourceOver, fraction: 1.0)
+        scaledImage.unlockFocus()
+        return scaledImage
+    }
     
 //    - (void)openPDFPage:(CGPDFDocumentRef) documentRef atPage:(int) pageNum {
 //    if (documentRef == NULL) {
