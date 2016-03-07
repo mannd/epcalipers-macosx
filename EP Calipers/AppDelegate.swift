@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainWindowController.showWindow(self)
         self.mainWindowController = mainWindowController
         if let url = externalURL {
-            mainWindowController.openImageUrl(url, addToRecentDocuments: false)
+            mainWindowController.openURL(url, addToRecentDocuments: false)
         }
         
         NSLog("applicationDidFinishLaunching")
@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // needed to implement Open Recent... menu item
         let url = NSURL.fileURLWithPath(filename)
         if let controller = mainWindowController {
-            return controller.openImageUrl(url, addToRecentDocuments: false)
+            controller.openURL(url, addToRecentDocuments: false)
         }
         externalURL = url
         return true

@@ -65,6 +65,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var pdfPageNumber = 1
     var numberOfPDFPages = 0
     var imageIsPDF = false
+    var pdfRef: NSPDFImageRep? = nil
         
     override var windowNibName: String? {
         return "MainWindowController"
@@ -132,10 +133,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return !calipersView.locked
         }
         if menuItem.action == Selector("previousPage:") {
-            return imageIsPDF && pdfPageNumber > 1
+            return imageIsPDF && pdfPageNumber > 0
         }
         if menuItem.action == Selector("nextPage:") {
-            return imageIsPDF && pdfPageNumber < numberOfPDFPages
+            return imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
         return true
     }
@@ -222,6 +223,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
+    
+    // Give up on Recenter after zoom
+    // see IKImageView specs and
+    // - (void)setImageZoomFactor:(CGFloat)zoomFactor centerPoint:(NSPoint)centerPoint
+    // also could use method to get center of view's image point and use
+    // - (NSPoint)convertViewPointToImagePoint:(NSPoint)viewPoint
+    // to recenter image after zoom.
+    // but see this too: https://lists.apple.com/archives/cocoa-dev/2008/Mar/msg00774.html
+    // in Summary, setImageZoomFactor:centerPoint: doesn't work.  centerPoint doesn't affect
+    // zooming, which is always recentered to the origin (lower left).
     @IBAction func doZoom(sender: AnyObject) {
         var zoom: Int
         var zoomFactor: CGFloat
@@ -321,21 +332,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         openPanel.beginSheetModalForWindow(self.window!,
             completionHandler: {
                 (result: NSInteger) -> Void in
-                if result == NSFileHandlingPanelOKButton { // User did select an image.
-                    if self.isPDFFile(openPanel.URL!.filePathURL) {
-                        NSLog("is PDF")
-                        self.openPDF(openPanel.URL!)
-                        //self.imageIsPDF = true
-                        // process image before adding, get number of pages, etc.
-                        // call common procedure for this
-                    }
-                    else {
-                        self.clearPDF()
-                        self.openImageUrl(openPanel.URL!, addToRecentDocuments: true)
-                    }
-                }
+                if result == NSFileHandlingPanelOKButton {
+                    self.openURL(openPanel.URL, addToRecentDocuments: true)
+               }
             }
         )
+    }
+    
+    func openURL(url: NSURL?, addToRecentDocuments: Bool) {
+        if let goodURL = url {
+            clearPDF()
+            if isPDFFile(goodURL.filePathURL) {
+                openPDF(goodURL, addToRecentDocuments: addToRecentDocuments)
+            }
+            else {
+                openImageUrl(goodURL, addToRecentDocuments: addToRecentDocuments)
+            }
+        }
     }
     
     func clearPDF() {
@@ -353,7 +366,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         return false
     }
     
-    func openImageUrl(url: NSURL, addToRecentDocuments: Bool) -> Bool {
+    func openImageUrl(url: NSURL, addToRecentDocuments: Bool) {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
         // Default value of kCGImageSourceShouldCache depends on platform.
         // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
@@ -364,42 +377,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.informativeText = "Can't locate \(url)"
             alert.alertStyle = .CriticalAlertStyle
             alert.runModal()
-            return false
         }
         imageView.setImageWithURL(url)
         imageView.zoomImageToActualSize(self)
-        self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
+        self.window!.setTitleWithRepresentedFilename(url.path!)
         imageURL = url
         clearCalibration()
         if addToRecentDocuments {
             NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
         }
-        return true
     }
 
     // secret IKImageView delegate method
     // see http://www.theregister.co.uk/2008/10/14/mac_secrets_imagekit_internals/
     func imagePathChanged(path: String) {
+        NSLog("imagePathChanged called")
         let url = NSURL.fileURLWithPath(path)
-        if isPDFFile(url) {
-            imageIsPDF = true
-            // process PDF to improve quality, get number of pages etc.
-            // let tmpPDFRef: CGPDFDocumentRef = getPDFDocumentRef(url.path.UTF8String);
-
-        }
-        else {
-            clearPDF()
-        }
-        NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
-        if let title = url.lastPathComponent {
-            self.window!.setTitleWithRepresentedFilename("EP Calipers: " + title)
-        }
-        else {
-            self.window!.setTitleWithRepresentedFilename("EP Calipers")
-        }
-        imageURL = url
-        imageView.zoomImageToActualSize(self)
-        clearCalibration()
+        openURL(url, addToRecentDocuments: true)
     }
     
     @IBAction func saveImage(sender: AnyObject) {
@@ -414,31 +408,39 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
     // FIXME: PDF handling
-    
-    func openPDF(url: NSURL) {
-        NSLog("openPDF")
+    // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
+    func openPDF(url: NSURL, addToRecentDocuments: Bool) {
         let pdfData = NSData(contentsOfURL: url)
-        if (pdfData == nil) {
-            return
-            // ? return nil, error?
+        if let pdf = NSPDFImageRep(data: pdfData!) {
+            pdfRef = pdf
+            numberOfPDFPages = pdf.pageCount
+            imageIsPDF = true
+            showPDFPage(pdf, page: 0)
+            self.window!.setTitleWithRepresentedFilename(url.path!)
+            imageURL = url
+            clearCalibration()
+            if addToRecentDocuments {
+                NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
+            }
         }
-        let pdf = NSPDFImageRep(data: pdfData!)
-        let pageCount = pdf?.pageCount
-        pdf?.currentPage = 0
+    }
+    
+    func showPDFPage(pdf: NSPDFImageRep, page: Int) {
+        // consider add preference for low res, hi res (2.0, 4.0 scale?)
+        let scale: CGFloat = 4.0
+        pdf.currentPage = page
         var tempImage = NSImage()
-        tempImage.addRepresentation(pdf!)
-        tempImage = scaleImage(tempImage, byFactor: 4.0)
+        tempImage.addRepresentation(pdf)
+        tempImage = scaleImage(tempImage, byFactor: scale)
         let image = nsImageToCGImage(tempImage)
         imageView.setImage(image, imageProperties: nil)
         imageView.zoomImageToActualSize(self)
-        self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
-        imageURL = url
-        clearCalibration()
-        //if addToRecentDocuments {
-            NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
-        //}
+        // keep size of image manageable by scaling down
+        imageView.zoomFactor = imageView.zoomFactor / scale
+        calipersView.updateCalibration()
     }
     
+    // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion
     func scaleImage(image: NSImage, byFactor factor: CGFloat) -> NSImage {
         let newSize = NSMakeSize(image.size.width * factor, image.size.height * factor)
         let scaledImage = NSImage(size: newSize)
@@ -453,88 +455,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         return scaledImage
     }
     
-//    - (void)openPDFPage:(CGPDFDocumentRef) documentRef atPage:(int) pageNum {
-//    if (documentRef == NULL) {
-//    return;
-//    }
-//    CGPDFPageRef page = getPDFPage(documentRef, pageNum);
-//    if (page == NULL) {
-//    return;
-//    }
-//    CGPDFPageRetain(page);
-//    CGRect sourceRect = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
-//    // higher scale factor below makes for clearer image
-//    CGFloat scaleFactor = 5.0;
-//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(sourceRect.size.width, sourceRect.size.height), false, scaleFactor);
-//    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-//    CGContextTranslateCTM(currentContext, 0.0, sourceRect.size.height);
-//    CGContextScaleCTM(currentContext, 1.0, -1.0);
-//    CGContextDrawPDFPage(currentContext, page);
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    // first scale as usual, but image still too large since scaled up when created for better quality
-//    image = [self scaleImageForImageView:image];
-//    // now correct for scale factor when creating image
-//    image = [UIImage imageWithCGImage:(CGImageRef)image.CGImage scale:scaleFactor * image.scale orientation:UIImageOrientationUp];
-//    
-//    self.imageView.image = image;
-//    UIGraphicsEndImageContext();
-//    CGPDFPageRelease(page);
-//    }
-    
-    func processPDFPage(document: CGPDFDocument?, atPage pageNum: Int) -> NSImage? {
-        if document == nil {
-            return nil
-        }
-        // NOTE: Use class below???
-        // let x = NSPDFImageRep
-        
-        let page = getPDFPage(document!, pageNumber: pageNum)
-        if page == nil {
-            return nil
-        }
-        let sourceRect = CGPDFPageGetBoxRect(page, CGPDFBox.MediaBox)
-        let scaleFactor: CGFloat = 5.0
-        // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion/34361216#34361216
-        let image: NSImage = NSImage()
-        image.size = sourceRect.size
-        image.lockFocus()
-        let currentContext = NSGraphicsContext.currentContext()?.CGContext
-        CGContextTranslateCTM(currentContext, 0.0, sourceRect.size.height)
-        CGContextScaleCTM(currentContext, 1.0, -1.0)
-        CGContextDrawPDFPage(currentContext, page)
-        
-        image.unlockFocus()
-        // remove
-        return image
-    }
-
-    
-    func getPDFDocument(filename: String) -> CGPDFDocument? {
-        let path = CFStringCreateWithCString(kCFAllocatorDefault, filename, 0)
-        let url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, path, CFURLPathStyle.CFURLPOSIXPathStyle, false)
-        let document = CGPDFDocumentCreateWithURL(url)
-        return document
-    }
-  
-    func getPDFPage(document: CGPDFDocument, pageNumber: size_t) -> CGPDFPage? {
-        return CGPDFDocumentGetPage(document, pageNumber);
-    }
-    
-//    CGImageRef nsImageToCGImage(NSImage* image)
-//    {
-//    NSData * imgData = [image TIFFRepresentation];
-//    CGImageRef imgRef = 0;
-//    if(imgData)
-//    {
-//    CGImageSourceRef imageSource =
-//    CGImageSourceCreateWithData((CFDataRef)imgData,  NULL);
-//    
-//    imgRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
-//    }
-//    
-//    return imgRef;
-//    }
-
     // convert NSImage to CGImage
     // from http://lists.apple.com/archives/cocoa-dev/2010/May/msg01171.html
     func nsImageToCGImage(image: NSImage) -> CGImageRef? {
@@ -548,11 +468,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func previousPage(sender: AnyObject) {
-        
+        pdfPageNumber--
+        pdfPageNumber = pdfPageNumber < 0 ? 0 : pdfPageNumber
+        if let pdf = pdfRef {
+            showPDFPage(pdf, page: pdfPageNumber)
+        }
     }
     
     @IBAction func nextPage(sender: AnyObject) {
-        
+        pdfPageNumber++
+        pdfPageNumber = pdfPageNumber >= numberOfPDFPages ? numberOfPDFPages - 1 : pdfPageNumber
+        if let pdf = pdfRef {
+            showPDFPage(pdf, page: pdfPageNumber)
+        }
     }
     
     @IBAction func doRotation(sender: AnyObject) {
