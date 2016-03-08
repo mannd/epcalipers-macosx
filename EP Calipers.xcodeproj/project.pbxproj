@@ -10,6 +10,7 @@
 		8E194EE91C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */; };
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
 		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
+		8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */; };
 		8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */; };
 		8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F21C2E264000AD9556 /* Assets.xcassets */; };
 		8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F41C2E264000AD9556 /* MainMenu.xib */; };
@@ -56,6 +57,9 @@
 		8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EP Calipers-Bridging-Header.h"; sourceTree = "<group>"; };
+		8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedIKImageView.h; sourceTree = "<group>"; };
+		8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedIKImageView.m; sourceTree = "<group>"; };
 		8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EP Calipers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E3DA7F21C2E264000AD9556 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -154,6 +158,9 @@
 				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
 				8ECC76C61C48B1830091F87A /* View.xib */,
 				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
+				8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */,
+				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
+				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -349,6 +356,7 @@
 				8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */,
 				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
+				8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "EP Calipers/EP Calipers.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
@@ -490,6 +499,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "EP Calipers/EP Calipers-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -497,6 +508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "EP Calipers/EP Calipers.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
@@ -507,6 +519,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "EP Calipers/EP Calipers-Bridging-Header.h";
 			};
 			name = Release;
 		};
