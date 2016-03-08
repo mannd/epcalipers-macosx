@@ -12,7 +12,8 @@ import AppKit
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
-    @IBOutlet weak var imageView: IKImageView!
+    @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet weak var imageView: FixedIKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var calipersSegementedControl: NSSegmentedControl!
@@ -74,12 +75,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     override func awakeFromNib() {
 
         imageView.editable = true
+        imageView.doubleClickOpensImageEditPanel = true
         imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
         // calipersView unhandled events are passed to imageView
-        calipersView.nextResponder = imageView
+        calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
         calipersView.horizontalCalibration.direction = .Horizontal
         calipersView.verticalCalibration.direction = .Vertical

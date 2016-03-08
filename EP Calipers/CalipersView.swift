@@ -13,7 +13,7 @@ import Quartz
 
 class CalipersView: NSView {
 
-    var imageView: IKImageView? = nil
+    var imageView: FixedIKImageView? = nil
     var calipersMode = false
     var calipers: [Caliper] = []
     var lockedMode = false
