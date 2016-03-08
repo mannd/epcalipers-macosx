@@ -409,7 +409,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
 
-    // FIXME: PDF handling
     // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
     func openPDF(url: NSURL, addToRecentDocuments: Bool) {
         let pdfData = NSData(contentsOfURL: url)

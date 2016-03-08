@@ -192,13 +192,13 @@ class Caliper: NSObject {
         var nearBar = false
         let adjustedDelta = delta + 5  // make crossbar delta a little larger
         if direction == .Horizontal {
-            nearBar = (Double(p.x) > fmin(Double(bar1Position), Double(bar2Position)) + adjustedDelta &&
-            Double(p.x) < fmax(Double(bar2Position), Double(bar1Position)) - adjustedDelta &&
+            nearBar = (Double(p.x) > fmin(Double(bar1Position), Double(bar2Position)) &&
+            Double(p.x) < fmax(Double(bar2Position), Double(bar1Position)) &&
             Double(p.y) > Double(crossBarPosition) - adjustedDelta && Double(p.y) < Double(crossBarPosition) + adjustedDelta)
         }
         else {
-            nearBar = (Double(p.y) > fmin(Double(bar1Position), Double(bar2Position)) + adjustedDelta &&
-            Double(p.y) < fmax(Double(bar2Position), Double(bar1Position)) - adjustedDelta &&
+            nearBar = (Double(p.y) > fmin(Double(bar1Position), Double(bar2Position)) &&
+            Double(p.y) < fmax(Double(bar2Position), Double(bar1Position)) &&
             Double(p.x) > Double(crossBarPosition) - adjustedDelta && Double(p.x) < Double(crossBarPosition) + adjustedDelta)
         }
         return nearBar
