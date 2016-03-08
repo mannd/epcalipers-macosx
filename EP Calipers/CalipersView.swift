@@ -238,7 +238,7 @@ class CalipersView: NSView {
     }
     
     override func drawRect(dirtyRect: NSRect) {
-        let context: CGContext! = NSGraphicsContext.currentContext()?.CGContext
+        let context = (NSGraphicsContext.currentContext()?.CGContext)!
         for c in calipers {
             c.drawWithContext(context, inRect: dirtyRect)
         }

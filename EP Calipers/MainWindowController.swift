@@ -118,9 +118,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
-        let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
-        let url = NSURL.fileURLWithPath(path!)
-        openImageUrl(url, addToRecentDocuments: false)
+        if let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg") {
+            let url = NSURL.fileURLWithPath(path)
+            openImageUrl(url, addToRecentDocuments: false)
+        }
 
     }
 
@@ -382,7 +383,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         imageView.setImageWithURL(url)
         imageView.zoomImageToActualSize(self)
-        self.window!.setTitleWithRepresentedFilename(url.path!)
+        if let urlPath = url.path {
+            self.window!.setTitleWithRepresentedFilename(urlPath)
+        }
+        else {
+            self.window!.title = "EP Calipers"
+        }
         imageURL = url
         clearCalibration()
         if addToRecentDocuments {
@@ -393,7 +399,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // secret IKImageView delegate method
     // see http://www.theregister.co.uk/2008/10/14/mac_secrets_imagekit_internals/
     func imagePathChanged(path: String) {
-        NSLog("imagePathChanged called")
         let url = NSURL.fileURLWithPath(path)
         openURL(url, addToRecentDocuments: true)
     }
@@ -417,7 +422,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             numberOfPDFPages = pdf.pageCount
             imageIsPDF = true
             showPDFPage(pdf, page: 0)
-            self.window!.setTitleWithRepresentedFilename(url.path!)
+            if let urlPath = url.path {
+                self.window!.setTitleWithRepresentedFilename(urlPath)
+            }
+            else {
+                self.window!.title = "EP Calipers"
+            }
             imageURL = url
             clearCalibration()
             if addToRecentDocuments {
@@ -462,8 +472,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         let imageData = image.TIFFRepresentation
         var imageRef: CGImageRef? = nil
         if let imgData = imageData {
-            let imageSource = CGImageSourceCreateWithData(imgData as CFDataRef, nil)
-            imageRef = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
+            if let imageSource = CGImageSourceCreateWithData(imgData as CFDataRef, nil) {
+                imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
+            }
         }
         return imageRef
     }
