@@ -61,6 +61,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
     
+    var fileTypeIsOk = false
+    
     // PDF variables
     // PDF page numbering starts at 1
     var pdfPageNumber = 1
@@ -75,7 +77,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     override func awakeFromNib() {
         
 //        [self.window registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
-        let types = [NSFilenamesPboardType]
+        let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF]
         self.window!.registerForDraggedTypes(types)
         
         imageView.editable = true
@@ -85,8 +87,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
         
-        // this next line doesn't appear to make a difference
-        // calipersView.nextResponder = scrollView
+        calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
         calipersView.horizontalCalibration.direction = .Horizontal
         calipersView.verticalCalibration.direction = .Vertical
@@ -131,8 +132,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func draggingEntered(sender: NSDraggingInfo!) -> NSDragOperation  {
-        NSLog("dragging entered")
-        return NSDragOperation.Copy
+        if checkExtension(sender) == true {
+            self.fileTypeIsOk = true
+            return .Copy
+        } else {
+            self.fileTypeIsOk = false
+            return .None
+        }
+    }
+    
+    func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
+        if self.fileTypeIsOk {
+            return .Copy
+        } else {
+            return .None
+        }
     }
     
     func performDragOperation(sender: NSDraggingInfo!) -> Bool {
@@ -147,6 +161,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             }
         }
         return false    }
+    
+    func checkExtension(drag: NSDraggingInfo) -> Bool {
+        if let board = drag.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray,
+            let path = board[0] as? String {
+                let url = NSURL(fileURLWithPath: path)
+                if let suffix = url.pathExtension {
+                    for ext in validFileExtensions() {
+                        if ext.lowercaseString == suffix {
+                            return true
+                        }
+                    }
+                }
+        }
+        return false
+    }
 
 
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
@@ -351,10 +380,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     @IBAction func openImage(sender: AnyObject) {
         /* Present open panel. */
-        let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/pdf/PDF"
-        let types = extensions.componentsSeparatedByString("/")
         let openPanel = NSOpenPanel()
-        openPanel.allowedFileTypes = types
+        openPanel.allowedFileTypes = validFileExtensions()
         openPanel.canSelectHiddenExtension = true
         openPanel.beginSheetModalForWindow(self.window!,
             completionHandler: {
@@ -364,6 +391,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                }
             }
         )
+    }
+    
+    func validFileExtensions() -> [String] {
+        let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/pdf/PDF"
+        return extensions.componentsSeparatedByString("/")
     }
     
     func openURL(url: NSURL?, addToRecentDocuments: Bool) {
