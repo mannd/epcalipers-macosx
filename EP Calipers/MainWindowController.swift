@@ -73,14 +73,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     override func awakeFromNib() {
-
+        
         imageView.editable = true
         imageView.doubleClickOpensImageEditPanel = true
         imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
-        // calipersView unhandled events are passed to imageView
         calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
         calipersView.horizontalCalibration.direction = .Horizontal
