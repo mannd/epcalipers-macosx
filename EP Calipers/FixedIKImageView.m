@@ -14,7 +14,7 @@
 
 - (void)awakeFromNib
 {
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO]; // compatibility with Auto Layout; without this, there could be Auto Layout error messages when we are resized (delete this line if your app does not use Auto Layout)
+    [self setTranslatesAutoresizingMaskIntoConstraints:NO]; // compatibility with Auto Layout; without this, there could be Auto Layout error messages when we are resized (delete this line if your app does not use Auto Layout)    
 }
 
 // FixedIKImageView must *only* be used embedded within an NSScrollView. This means that setFrame: should never be called explicitly from outside the scroll view. Instead, this method is overwritten here to provide the correct behavior within a scroll view. The new implementation ignores the frameRect parameter.

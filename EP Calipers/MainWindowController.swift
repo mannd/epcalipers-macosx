@@ -74,13 +74,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     override func awakeFromNib() {
         
+//        [self.window registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+        let types = [NSFilenamesPboardType]
+        self.window!.registerForDraggedTypes(types)
+        
         imageView.editable = true
         imageView.doubleClickOpensImageEditPanel = true
         imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
-        calipersView.nextResponder = scrollView
+        
+        // this next line doesn't appear to make a difference
+        // calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
         calipersView.horizontalCalibration.direction = .Horizontal
         calipersView.verticalCalibration.direction = .Vertical
@@ -123,6 +129,25 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
 
     }
+    
+    func draggingEntered(sender: NSDraggingInfo!) -> NSDragOperation  {
+        NSLog("dragging entered")
+        return NSDragOperation.Copy
+    }
+    
+    func performDragOperation(sender: NSDraggingInfo!) -> Bool {
+        NSLog("perform drag operation")
+        if let board = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
+            if let imagePath = board[0] as? String {
+                // THIS IS WERE YOU GET THE PATH FOR THE DROPPED FILE
+                NSLog("image path = \(imagePath)")
+                let url = NSURL.fileURLWithPath(imagePath)
+                openURL(url, addToRecentDocuments: true)
+                return true
+            }
+        }
+        return false    }
+
 
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         if menuItem.action == Selector("doRotation:") {
