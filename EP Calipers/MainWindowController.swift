@@ -150,11 +150,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func performDragOperation(sender: NSDraggingInfo!) -> Bool {
-        NSLog("perform drag operation")
         if let board = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
             if let imagePath = board[0] as? String {
-                // THIS IS WERE YOU GET THE PATH FOR THE DROPPED FILE
-                NSLog("image path = \(imagePath)")
                 let url = NSURL.fileURLWithPath(imagePath)
                 openURL(url, addToRecentDocuments: true)
                 return true
