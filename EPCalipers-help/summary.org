@@ -12,7 +12,7 @@
 #+HTML_HEAD: <meta name="description" content="Help documentation for EP Calipers" />
 #+HTML_HEAD: <meta name="AppleTitle" content="EP Calipers Help" />
 * [[./shrd/icon_32x32@2x.png]] EP Calipers Help
-* [[file:./basics.html][Introduction - EP Calipers 101]]
+* [[file:./basics.html][Introduction -- EP Calipers 101]]
 Rationale and basic use of *EP Calipers*.
 * [[./images.org][Image operations]]
 Open, rotate, move, and save ECG images.
