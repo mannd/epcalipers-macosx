@@ -10,7 +10,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="description" content="Using calipers to make measurements" />
-* [[./shrd/icon_32x32@2x.png]] Making measurements
+* [[../../shrd/icon_32x32@2x.png]] Making measurements
 ** Caliper interval
 The interval measured by each caliper is displayed on top of or next to the crossbar of the caliper.  Until the calipers are calibrated, measurements are displayed in arbitrary units (points, roughly equivalent to screen pixels).
 ** Measurement prompts
@@ -30,5 +30,5 @@ Select a calibrated caliper and stretch it over a number of intervals.  Select t
 ** QTc calculation
 QTc measurement is a multiple step process, and prompts are always shown.  Select the QTc button on the toolbar or the *Caliper | QTc Measurement* menu command.  Follow the prompt to stretch the selected caliper over one or more RR intervals and select the Next button.  Enter the number of intervals the caliper is stretched over and select Continue.  Then use the same caliper to measure the QT interval.  Select Next.  A dialog box will give the calculated QTc using Bazett's formula.
 #+CAPTION: QTc measurement
-[[./shrd/qtc-measurement.png]]
+[[../../shrd/qtc-measurement.png]]
 

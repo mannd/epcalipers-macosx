@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-10 Thu 21:20 -->
+<!-- 2016-03-11 Fri 19:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title></title>
@@ -96,7 +96,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<meta name="description" content="How to manipulate the ECG image" />
+<meta name="description" content="How to use the electronic calipers" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -147,89 +147,74 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><img src="./shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Images</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<h2 id="orgheadline1"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Calipers</h2>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Adding and deleting calipers</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
-Images include files in typical image formats such as JPG and PNG, as well as PDF files.  When you start <b>EP Calipers</b> a sample normal ECG is loaded.  To load your own ECG images use one of the following methods.
+Calipers come in two flavors.  Calipers with a horizontal crossbar and vertical sidebars are used to make time measurements and are called "time calipers."  Calipers with a vertical crossbar and horizontal sidebars are used to make amplitude measurements and are called, you guessed it, "amplitude calipers."
 </p>
-</div>
-</div>
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">Loading an image</h2>
-<div class="outline-text-2" id="text-orgheadline5">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">Open command</h3>
-<div class="outline-text-3" id="text-orgheadline2">
-<p>
-Use the <b>File | Open</b> or <b>File | Open Recent</b> menu commands to select an image stored on your computer.
-</p>
-</div>
 </div>
 <div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">Drag and drop</h3>
+<h3 id="orgheadline3">Add Calipers</h3>
 <div class="outline-text-3" id="text-orgheadline3">
 <p>
-You can drag and drop an image file onto the app window and it will load.
+Add calipers by clicking on either of the two caliper icons on the Calipers Toolbar, or use the <b>Caliper</b> menu to do this.
 </p>
+
+<div class="figure">
+<p><img src="../../shrd/EPCCaliperIcons.png" alt="EPCCaliperIcons.png" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Add Calipers</p>
+</div>
 </div>
 </div>
 <div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">Right click menu</h3>
+<h3 id="orgheadline4">Selecting Calipers</h3>
 <div class="outline-text-3" id="text-orgheadline4">
 <p>
-Even when <b>EP Calipers</b> is not open, you can use the right click menu to open an image file.  The right click menu is opened either by right clicking on a file if you have a mouse, or using the left mouse button with the Control key held down, or, if you have a track pad, two-finger tapping on the trackpad.  After selecting <b>Open With</b> a list of apps will appear.  <b>EP Calipers</b> will be on the list of apps that can open the image.  Click it and the app will start with the loaded image.  This method is especially useful for opening email attachments.
+In order to make measurements or calibrate, it is necessary to "select" a single caliper when there are multiple calipers on the screen.  A single mouse click or single tap on any part of a caliper selects it.  A selected calipers is evident because it is a different color (by default red, but you can change this) than unselected calipers (by default blue).  Single-tapping or single-clicking a selected caliper will unselect it.  Only one caliper at a time can be selected.
+</p>
+
+<div class="figure">
+<p><img src="../../shrd/EPCSelectedCaliper.png" alt="EPCSelectedCaliper.png" />
+</p>
+<p><span class="figure-number">Figure 2:</span> The red caliper is selected</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Deleting Calipers</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+Double-tap on the trackpad or double-click with a mouse on a caliper to delete it.  Note that after calibration, even if you delete all calibrated calipers, new calipers that are added will retain calibration.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10">Adjusting the image</h2>
-<div class="outline-text-2" id="text-orgheadline10">
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Moving calipers</h2>
+<div class="outline-text-2" id="text-orgheadline8">
 </div><div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">Moving the image</h3>
+<h3 id="orgheadline6">Moving</h3>
 <div class="outline-text-3" id="text-orgheadline6">
 <p>
-If you have a track pad, you can move the image around using two finger scrolling.  You can also move the image using the Grab cursor.  <img src="./shrd/TB_move.png" alt="TB_move.png" />  Click the Cursor Toolbar to select the Grab cursor (the hand) if it is not already selected.  Hold down the left mouse button or click the trackpad to grab the ECG image.  Holding down the button or your finger on the trackpad, move the mouse or finger to move the image.  Note that if you grab over a caliper, the caliper will move instead of the ECG image.  If you change the cursor to the Lock cursor <img src="./shrd/lock-16.png" alt="lock-16.png" /> then clicking and holding down the button or your finger will not move the image, but will move the calipers.  This is useful if you want to move the calipers without inadvertently moving the underlying image.  Note that even when using the Lock cursor, it is still possible to use trackpad gestures to move and zoom the underlying image.  
+Calipers can be moved regardless of the cursor state.  Use the left mouse button or press and hold the trackpad with your finger over the crossbar area of a caliper.  Drag the mouse or your finger to move the caliper as a unit.  
 </p>
 </div>
 </div>
 <div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">Rotation</h3>
+<h3 id="orgheadline7">Stretching (opening and closing)</h3>
 <div class="outline-text-3" id="text-orgheadline7">
 <p>
-If your ECG image is rotated or tilted, use the <b>View | Rotation</b> menu commands to correct this.  You can rotate by 90° or 1° increments in either direction.  The keyboard shortcuts for rotation are useful.  <b>Important</b> You should rotate your image before calibrating your calipers or making measurements.  Once an image has been calibrated, rotation will affect the accuracy of the calibration.  For this reason, you can only rotate an image before you calibrate.  If you need to rotate the image after calibration, you will need to clear calibration (using <b>Clear</b> on the Calibration Toolbar or the <b>Calipers | Clear</b> menu command) before you can rotate.
-</p>
-</div>
-</div>
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">Zooming</h3>
-<div class="outline-text-3" id="text-orgheadline8">
-<p>
-If you have a track pad, pinch to zoom works.  You can also use the Zoom Toolbar to zoom in and out, or to set the image to its actual size.  Zooming is also available in the <b>View</b> menu.  Note that Caliper calibration <b>does</b> adjust with zooming.  There is no need to recalibrate the calipers after zooming.
-</p>
-</div>
-</div>
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">Image Edit</h3>
-<div class="outline-text-3" id="text-orgheadline9">
-<p>
-Double clicking on the ECG image will open the Image Edit menu.  The menu has many options that can be used to alter the appearance of the ECG, such as changing its color or contrast.
+If the cursor is positioned over either of the left or right bars (or top or bottom bars for an amplitude caliper) clicking with the left mouse button or hold your finger down on the track pad and then dragging will just move the caliper bar you are over.  In this way you can widen or narrow the caliper interval.  Note that you cannot move both bars at the same time (say with a pinch movement).  When you move one caliper bar, the other one always stays fixed.
 </p>
 
-<div class="figure">
-<p><img src="./shrd/EPCImageEdit.png" alt="EPCImageEdit.png" />
-</p>
-<p><span class="figure-number">Figure 1:</span> Image Edit Menu</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11">Saving an edited image</h2>
-<div class="outline-text-2" id="text-orgheadline11">
 <p>
-Use the <b>File | Screenshot</b> menu item to activate the Apple screen capture utility.  Click the camera icon on the EP Calipers window, or type ESC to cancel the screenshot.  The screenshot will pop up in a preview window, where it can be printed or moved to another directory for further editing.  Note that the screenshot function is also a good way to get ECGs from eBooks and PDF files into the program.  Grab a screenshot of the window, move it to your desktop using the Preview app, and then drag it into <b>EP Calipers</b>!
+By combining movements of the crossbar and sidebars of a caliper, you can place it anywhere on the ECG image to make measurements.
 </p>
+</div>
 </div>
 </div>
 </div>

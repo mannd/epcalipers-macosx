@@ -10,7 +10,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="description" content="Crash course for EP Calipers" />
-* [[./shrd/icon_32x32@2x.png]] Introduction -- EP Calipers 101
+* [[../../shrd/icon_32x32@2x.png]] Introduction -- EP Calipers 101
 ** You're on call, again...
 It's 2 AM and the phone rings.  It's a nurse on the cardiac unit.  Mr. Smith is due to get his antiarrhythmic drug (who comes up with these crazy drug schedules?) and the ECG shows a borderline prolonged QTc interval, at least according to the computer.  She's not sure if it is safe to give the drug.  She wants to send you the ECG.
 
@@ -35,19 +35,19 @@ interval.
 ** Toolbars
 The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The toolbars look like this:
 #+CAPTION: Toolbars
-[[./shrd/EPCtoolbar.png]]
+[[../../shrd/EPCtoolbar.png]]
 
 Here are the toolbars.  Note that not all toolbars will be available all the time, depending on whether calibration has been performed.  Disabled toolbars are "grayed" out.
 *** Zoom toolbar
-- [[./shrd/TB_zoomIn.png]] Zoom in
-- [[./shrd/TB_zoomOut.png]] Zoom out
-- [[./shrd/TB_zoomActual.png]] Zoom to actual size
+- [[../../shrd/TB_zoomIn.png]] Zoom in
+- [[../../shrd/TB_zoomOut.png]] Zoom out
+- [[../../shrd/TB_zoomActual.png]] Zoom to actual size
 *** Cursors toolbar
-- [[./shrd/grab.png]] Grab and move image or calipers
-- [[./shrd/lock-16.png]] Lock image (can only move calipers)
+- [[../../shrd/grab.png]] Grab and move image or calipers
+- [[../../shrd/lock-16.png]] Lock image (can only move calipers)
 *** Calipers toolbar
-- [[./shrd/calipers-icon-bw-20x20.png]] Add time (horizontal) caliper
-- [[./shrd/calipers-amplitude-icon-bw-20x20.png]] Add amplitude (vertical) caliper
+- [[../../shrd/calipers-icon-bw-20x20.png]] Add time (horizontal) caliper
+- [[../../shrd/calipers-amplitude-icon-bw-20x20.png]] Add amplitude (vertical) caliper
 - *Calibrate* Calibrate caliper
 - *Clear* Clear all calibration
 *** Measurement toolbar
