@@ -10,6 +10,12 @@ import Cocoa
 import Quartz
 import AppKit
 
+// To get control over IKImageEditPanel location when opened
+// When image is zoomed, double click makes panel disappear, it is somewhere off screen.
+extension IKImageView: IKImageEditPanelDataSource {
+    
+}
+
 class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     @IBOutlet weak var scrollView: NSScrollView!
@@ -81,7 +87,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         self.window!.registerForDraggedTypes(types)
         
         imageView.editable = true
-        imageView.doubleClickOpensImageEditPanel = true
+        // below is no longer true, open IKImageEditPanel only from menu
+        imageView.doubleClickOpensImageEditPanel = false
         imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
@@ -274,6 +281,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         default:
             break
         }
+    }
+    
+    @IBAction func openIKImageEditPanel(sender: AnyObject) {
+        let editor = IKImageEditPanel.sharedImageEditPanel()
+        editor.setFrameOrigin(NSMakePoint(400,200))
+        editor.dataSource = imageView
+        editor.makeKeyAndOrderFront(nil)
     }
     
     

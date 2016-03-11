@@ -319,9 +319,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="View" id="H8h-7b-M4v">
+                <menuItem title="Image" id="H8h-7b-M4v">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="View" id="HyV-fh-RgO">
+                    <menu key="submenu" title="Image" id="HyV-fh-RgO">
                         <items>
                             <menuItem title="Zoom In" keyEquivalent="=" id="oLP-ek-a3b">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
@@ -407,6 +407,13 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="nextPage:" target="-1" id="Cqt-dO-4kB"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Ujb-7A-52k"/>
+                            <menuItem title="Image Editor" id="Eqb-7y-vN9">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openIKImageEditPanel:" target="-1" id="HOL-5M-QdF"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -507,8 +514,5 @@
                 </menuItem>
             </items>
         </menu>
-        <menuItem title="Item" id="qW0-tk-Hk7">
-            <modifierMask key="keyEquivalentModifierMask"/>
-        </menuItem>
     </objects>
 </document>
