@@ -12,6 +12,7 @@ import AppKit
 
 // To get control over IKImageEditPanel location when opened
 // When image is zoomed, double click makes panel disappear, it is somewhere off screen.
+// see http://stackoverflow.com/questions/30110720/how-to-get-ikimageeditpanel-to-work-in-swift
 extension IKImageView: IKImageEditPanelDataSource {
     
 }
