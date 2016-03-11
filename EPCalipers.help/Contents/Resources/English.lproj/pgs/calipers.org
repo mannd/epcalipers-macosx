@@ -27,6 +27,6 @@ Double-tap on the trackpad or double-click with a mouse on a caliper to delete i
 ** Moving
 Calipers can be moved regardless of the cursor state.  Use the left mouse button or press and hold the trackpad with your finger over the crossbar area of a caliper.  Drag the mouse or your finger to move the caliper as a unit.  
 ** Stretching (opening and closing)
-If the cursor is positioned over either of the left or right bars (or top or bottom bars for an amplitude caliper) clicking with the left mouse button or hold your finger down on the track pad and then dragging will just move the caliper bar you are over.  In this way you can widen or narrow the caliper interval.  Note that you cannot move both bars at the same time (say with a pinch movement).  When you move one caliper bar, the other one always stays fixed.
+If the cursor is positioned over either the left or right sidebars of a time caliper (or top or bottom bars for an amplitude caliper) clicking with the left mouse button or holding your finger down on the track pad and then dragging will move that caliper bar by itself.  In this way you can widen or narrow the caliper interval.  Note that you cannot move both bars at the same time.  When you move one caliper bar, the other one always stays fixed.
 
 By combining movements of the crossbar and sidebars of a caliper, you can place it anywhere on the ECG image to make measurements.
