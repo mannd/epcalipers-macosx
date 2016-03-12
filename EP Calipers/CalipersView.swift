@@ -13,7 +13,7 @@ import Quartz
 
 class CalipersView: NSView {
 
-    var imageView: IKImageView? = nil
+    var imageView: FixedIKImageView? = nil
     var calipersMode = false
     var calipers: [Caliper] = []
     var lockedMode = false
@@ -238,7 +238,7 @@ class CalipersView: NSView {
     }
     
     override func drawRect(dirtyRect: NSRect) {
-        let context: CGContext! = NSGraphicsContext.currentContext()?.CGContext
+        let context = (NSGraphicsContext.currentContext()?.CGContext)!
         for c in calipers {
             c.drawWithContext(context, inRect: dirtyRect)
         }

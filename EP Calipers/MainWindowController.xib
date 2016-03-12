@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
-        <plugIn identifier="com.apple.imagekit.ibplugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
                 <outlet property="calipersSegementedControl" destination="80d-Qz-dhr" id="SBu-di-cRc"/>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
-                <outlet property="imageView" destination="L01-4C-stO" id="hsO-de-Dek"/>
+                <outlet property="imageView" destination="oIK-MS-rQb" id="tvd-y9-ClO"/>
                 <outlet property="measurementSegmentedControl" destination="7Ej-cN-zsf" id="Hhd-nv-Ud9"/>
                 <outlet property="messageLabel" destination="7Kx-dG-EsR" id="cbR-jv-99t"/>
                 <outlet property="navigationSegmentedControl" destination="8Qk-Lr-dNR" id="exd-vp-4Cn"/>
+                <outlet property="scrollView" destination="AxA-IY-0Zx" id="E2e-dv-DLM"/>
                 <outlet property="toolSegmentedControl" destination="xw2-IA-d6A" id="Xrv-aA-NNd"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
             </connections>
@@ -30,10 +29,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="727" height="456"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="L01-4C-stO">
+                    <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
                         <rect key="frame" x="0.0" y="0.0" width="727" height="396"/>
-                        <color key="backgroundColor" red="0.92500000000000004" green="0.92500000000000004" blue="0.92500000000000004" alpha="1" colorSpace="deviceRGB"/>
-                    </ikImageView>
+                        <clipView key="contentView" id="TeI-oG-eGn">
+                            <rect key="frame" x="1" y="1" width="725" height="394"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
+                                    <rect key="frame" x="88" y="-190" width="69" height="8"/>
+                                </view>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
+                            <rect key="frame" x="1" y="379" width="725" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrJ-fG-BcI">
+                            <rect key="frame" x="710" y="1" width="16" height="394"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="727" height="396"/>
                     </customView>
@@ -143,26 +158,26 @@
                     </segmentedControl>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="L01-4C-stO" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="3bZ-YJ-9DX"/>
                     <constraint firstItem="IkW-Sz-7Vn" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="20" symbolic="YES" id="3hY-Rg-vt6"/>
                     <constraint firstItem="7Ej-cN-zsf" firstAttribute="leading" secondItem="80d-Qz-dhr" secondAttribute="trailing" constant="8" symbolic="YES" id="5hr-ls-3re"/>
                     <constraint firstItem="7Ej-cN-zsf" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="7nX-BO-Ij5"/>
                     <constraint firstItem="8Qk-Lr-dNR" firstAttribute="leading" secondItem="7Ej-cN-zsf" secondAttribute="trailing" constant="8" symbolic="YES" id="9Wk-HV-JLy"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
                     <constraint firstItem="80d-Qz-dhr" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="DXa-Xh-bOf"/>
+                    <constraint firstItem="AxA-IY-0Zx" firstAttribute="top" secondItem="7Kx-dG-EsR" secondAttribute="bottom" constant="8" id="Dbm-Pe-iet"/>
                     <constraint firstItem="xw2-IA-d6A" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="ElB-4V-NMq"/>
                     <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="IkW-Sz-7Vn" secondAttribute="trailing" constant="8" symbolic="YES" id="GOS-he-SIh"/>
                     <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="7Ej-cN-zsf" secondAttribute="bottom" constant="30" id="MMa-tO-MYv"/>
                     <constraint firstItem="80d-Qz-dhr" firstAttribute="leading" secondItem="xw2-IA-d6A" secondAttribute="trailing" constant="8" symbolic="YES" id="NQM-mM-vZz"/>
-                    <constraint firstItem="L01-4C-stO" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="60" id="Sc4-rx-DOe"/>
                     <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="TUz-x3-9lI"/>
+                    <constraint firstAttribute="bottom" secondItem="AxA-IY-0Zx" secondAttribute="bottom" id="V2e-go-KHO"/>
                     <constraint firstItem="IkW-Sz-7Vn" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="bpC-FE-Jq7"/>
                     <constraint firstItem="7Kx-dG-EsR" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" constant="20" symbolic="YES" id="cJf-7b-M4Z"/>
+                    <constraint firstAttribute="trailing" secondItem="AxA-IY-0Zx" secondAttribute="trailing" id="iaZ-99-NTX"/>
                     <constraint firstItem="8Qk-Lr-dNR" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="9" id="jrX-o9-zbw"/>
                     <constraint firstItem="7Kx-dG-EsR" firstAttribute="top" secondItem="7Ej-cN-zsf" secondAttribute="bottom" constant="5" id="q6L-ZI-UVq"/>
-                    <constraint firstAttribute="bottom" secondItem="L01-4C-stO" secondAttribute="bottom" id="t63-uN-q8y"/>
-                    <constraint firstAttribute="trailing" secondItem="L01-4C-stO" secondAttribute="trailing" id="y9W-gC-Tww"/>
+                    <constraint firstItem="AxA-IY-0Zx" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="yj3-hc-ldc"/>
                 </constraints>
             </view>
             <connections>

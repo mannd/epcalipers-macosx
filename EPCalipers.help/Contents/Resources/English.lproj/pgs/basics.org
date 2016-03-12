@@ -1,0 +1,81 @@
+#+TITLE:     
+#+AUTHOR:    David Mann
+#+EMAIL:     mannd@epstudiossoftware.com
+#+DATE:      
+#+DESCRIPTION: EP Calipers Help
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+HTML_HEAD: <meta name="description" content="Crash course for EP Calipers" />
+* [[../../shrd/icon_32x32@2x.png]] Introduction -- EP Calipers 101
+** You're on call, again...
+It's 2 AM and the phone rings.  It's a nurse on the cardiac unit.  Mr. Smith is due to get his antiarrhythmic drug (who comes up with these crazy drug schedules?) and the ECG shows a borderline prolonged QTc interval, at least according to the computer.  She's not sure if it is safe to give the drug.  She wants to send you the ECG.
+
+You drag yourself out of bed and open up your laptop.  There's the ECG in question.  You look at the QT interval.  Eyeballing it, the QT looks OK.  Mentally you start counting little boxes.  You pull out the (t)rusty old pair of mechanical calipers some drug rep gave you many years ago, when such largesse was still legal.  You think to yourself: I live in a digital age.  Am I really making measurements on a computer screen with a pair of mechanical calipers?
+** Electronic calipers
+*EP Calipers* provides *electronic calipers* for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  *EP Calipers* is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of *EP Calipers* are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
+** What's new?
+This new version of *EP Calipers* includes full PDF file support, showing PDF files at high resolution and supporting multi-page PDFs.  Thus the app can be used to analyze /AliveCor™/ files as well as academic papers in PDF format.
+** Quick start
+When *EP Calipers* starts, a sample ECG is loaded.  Click a caliper
+icon on the toolbar to add a caliper to the screen.  Move the caliper
+around by clicking on the caliper's crossbar and dragging it with the
+mouse or your finger on the track pad.  Expand and contract the
+caliper by dragging the bars on either end of the caliper.  Pinch and
+zoom the underlying ECG or use the zoom toolbar to enlarge or shrink
+the image as needed.  If the ECG is bigger than your screen, you can
+drag the image around with your mouse or finger, or use two finger
+scrolling if you have a trackpad.  The rest of these help pages will go
+over how to load ECG images, add and delete calipers, calibrate the
+calipers and make advanced measurements like the corrected QT
+interval.
+** Toolbars
+The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The toolbars look like this:
+#+CAPTION: Toolbars
+[[../../shrd/EPCtoolbar.png]]
+
+Note that not all toolbars will be available all the time, depending on whether calibration has been performed.  Disabled toolbars are "grayed" out.
+*** Zoom toolbar
+- [[../../shrd/TB_zoomIn.png]] Zoom in
+- [[../../shrd/TB_zoomOut.png]] Zoom out
+- [[../../shrd/TB_zoomActual.png]] Zoom to actual size
+*** Cursors toolbar
+- [[../../shrd/grab.png]] Grab (click and drag) to move image or calipers
+- [[../../shrd/lock-16.png]] Lock image (click and drag only moves calipers)
+*** Calipers toolbar
+- [[../../shrd/calipers-icon-bw-20x20.png]] Add time (horizontal) caliper
+- [[../../shrd/calipers-amplitude-icon-bw-20x20.png]] Add amplitude (vertical) caliper
+- *Calibrate* Calibrate caliper
+- *Clear* Clear all calibration
+*** Measurement toolbar
+- *R/I* Toggle heart rate and time interval
+- *mRR* Calculate mean interval from several intervals
+- *QTc* Measure corrected QT (QTc)
+*** Navigation toolbar
+- *Next* Go to next measurement step
+- *Back* Go back a step
+- *Cancel* Cancel measurement
+** Menus
+Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the app's functions.
+** Keyboard shortcuts
+| Key | Function                   |
+|-----+----------------------------|
+| ⌃R  | Rotate image 1° right      |
+| ⌃L  | Rotate image 1° left       |
+| ⇧⌃R | Rotate image 90° right     |
+| ⇧⌃L | Rotate image 90° left      |
+| ⌃0  | Reset image rotation       |
+| ⇧⌘= | Zoom in                    |
+| ⌘-  | Zoom out                   |
+| ⌘=  | Zoom to actual size        |
+| ⌃E  | Image editor               |
+| ⌃T  | Add time caliper           |
+| ⌃A  | Add amplitude caliper      |
+| ⌃C  | Calibrate                  |
+| Del | Delete selected caliper    |
+| ⇧⌘S | Take screenshot            |
+| ←   | Prev page of multipage PDF |
+| →   | Next page of multipage PDF |

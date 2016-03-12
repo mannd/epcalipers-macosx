@@ -10,9 +10,17 @@ import Cocoa
 import Quartz
 import AppKit
 
+// To get control over IKImageEditPanel location when opened
+// When image is zoomed, double click makes panel disappear, it is somewhere off screen.
+// see http://stackoverflow.com/questions/30110720/how-to-get-ikimageeditpanel-to-work-in-swift
+extension IKImageView: IKImageEditPanelDataSource {
+    
+}
+
 class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
-    @IBOutlet weak var imageView: IKImageView!
+    @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet weak var imageView: FixedIKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var calipersSegementedControl: NSSegmentedControl!
@@ -59,20 +67,35 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
     let zoomOutFactor: CGFloat = 0.7071068
+    
+    var fileTypeIsOk = false
+    
+    // PDF variables
+    // PDF page numbering starts at 1
+    var pdfPageNumber = 1
+    var numberOfPDFPages = 0
+    var imageIsPDF = false
+    var pdfRef: NSPDFImageRep? = nil
         
     override var windowNibName: String? {
         return "MainWindowController"
     }
     
     override func awakeFromNib() {
-
+        
+//        [self.window registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+        let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF]
+        self.window!.registerForDraggedTypes(types)
+        
         imageView.editable = true
+        // below is no longer true, open IKImageEditPanel only from menu
+        imageView.doubleClickOpensImageEditPanel = false
         imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
-        // calipersView unhandled events are passed to imageView
-        calipersView.nextResponder = imageView
+        
+        calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
         calipersView.horizontalCalibration.direction = .Horizontal
         calipersView.verticalCalibration.direction = .Vertical
@@ -109,11 +132,56 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
-        let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg")
-        let url = NSURL.fileURLWithPath(path!)
-        openImageUrl(url, addToRecentDocuments: false)
+        if let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg") {
+            let url = NSURL.fileURLWithPath(path)
+            openImageUrl(url, addToRecentDocuments: false)
+        }
 
     }
+    
+    func draggingEntered(sender: NSDraggingInfo!) -> NSDragOperation  {
+        if checkExtension(sender) == true {
+            self.fileTypeIsOk = true
+            return .Copy
+        } else {
+            self.fileTypeIsOk = false
+            return .None
+        }
+    }
+    
+    func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
+        if self.fileTypeIsOk {
+            return .Copy
+        } else {
+            return .None
+        }
+    }
+    
+    func performDragOperation(sender: NSDraggingInfo!) -> Bool {
+        if let board = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
+            if let imagePath = board[0] as? String {
+                let url = NSURL.fileURLWithPath(imagePath)
+                openURL(url, addToRecentDocuments: true)
+                return true
+            }
+        }
+        return false    }
+    
+    func checkExtension(drag: NSDraggingInfo) -> Bool {
+        if let board = drag.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray,
+            let path = board[0] as? String {
+                let url = NSURL(fileURLWithPath: path)
+                if let suffix = url.pathExtension {
+                    for ext in validFileExtensions() {
+                        if ext.lowercaseString == suffix {
+                            return true
+                        }
+                    }
+                }
+        }
+        return false
+    }
+
 
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         if menuItem.action == Selector("doRotation:") {
@@ -124,6 +192,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         if menuItem.action == Selector("addCaliper:") {
             return !calipersView.locked
+        }
+        if menuItem.action == Selector("previousPage:") {
+            return imageIsPDF && pdfPageNumber > 0
+        }
+        if menuItem.action == Selector("nextPage:") {
+            return imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
         return true
     }
@@ -210,6 +284,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
+    @IBAction func openIKImageEditPanel(sender: AnyObject) {
+        let editor = IKImageEditPanel.sharedImageEditPanel()
+        editor.setFrameOrigin(NSMakePoint(400,200))
+        editor.dataSource = imageView
+        editor.makeKeyAndOrderFront(nil)
+    }
+    
+    
+    // Give up on Recenter after zoom
+    // see IKImageView specs and
+    // - (void)setImageZoomFactor:(CGFloat)zoomFactor centerPoint:(NSPoint)centerPoint
+    // also could use method to get center of view's image point and use
+    // - (NSPoint)convertViewPointToImagePoint:(NSPoint)viewPoint
+    // to recenter image after zoom.
+    // but see this too: https://lists.apple.com/archives/cocoa-dev/2008/Mar/msg00774.html
+    // in Summary, setImageZoomFactor:centerPoint: doesn't work.  centerPoint doesn't affect
+    // zooming, which is always recentered to the origin (lower left).
     @IBAction func doZoom(sender: AnyObject) {
         var zoom: Int
         var zoomFactor: CGFloat
@@ -301,20 +392,49 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     @IBAction func openImage(sender: AnyObject) {
         /* Present open panel. */
-        let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/pdf/PDF"
-        let types = extensions.componentsSeparatedByString("/")
         let openPanel = NSOpenPanel()
-        openPanel.allowedFileTypes = types
+        openPanel.allowedFileTypes = validFileExtensions()
         openPanel.canSelectHiddenExtension = true
         openPanel.beginSheetModalForWindow(self.window!,
             completionHandler: {
                 (result: NSInteger) -> Void in
-                if result == NSFileHandlingPanelOKButton { // User did select an image.
-                    // self is needed here in closure
-                    self.openImageUrl(openPanel.URL!, addToRecentDocuments: true)
-                }
+                if result == NSFileHandlingPanelOKButton {
+                    self.openURL(openPanel.URL, addToRecentDocuments: true)
+               }
             }
         )
+    }
+    
+    func validFileExtensions() -> [String] {
+        let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/pdf/PDF"
+        return extensions.componentsSeparatedByString("/")
+    }
+    
+    func openURL(url: NSURL?, addToRecentDocuments: Bool) {
+        if let goodURL = url {
+            clearPDF()
+            if isPDFFile(goodURL.filePathURL) {
+                openPDF(goodURL, addToRecentDocuments: addToRecentDocuments)
+            }
+            else {
+                openImageUrl(goodURL, addToRecentDocuments: addToRecentDocuments)
+            }
+        }
+    }
+    
+    func clearPDF() {
+        imageIsPDF = false
+        pdfPageNumber = 0
+        numberOfPDFPages = 0
+    }
+    
+    func isPDFFile(filePath: NSURL?) -> Bool {
+        if let path = filePath {
+            if let ext = path.pathExtension {
+                return ext.uppercaseString == "PDF"
+            }
+        }
+        return false
     }
     
     func openImageUrl(url: NSURL, addToRecentDocuments: Bool) {
@@ -328,11 +448,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.informativeText = "Can't locate \(url)"
             alert.alertStyle = .CriticalAlertStyle
             alert.runModal()
-            return
         }
         imageView.setImageWithURL(url)
         imageView.zoomImageToActualSize(self)
-        self.window!.setTitleWithRepresentedFilename("EP Calipers: " + url.lastPathComponent!)
+        if let urlPath = url.path {
+            self.window!.setTitleWithRepresentedFilename(urlPath)
+        }
+        else {
+            self.window!.title = "EP Calipers"
+        }
         imageURL = url
         clearCalibration()
         if addToRecentDocuments {
@@ -344,16 +468,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // see http://www.theregister.co.uk/2008/10/14/mac_secrets_imagekit_internals/
     func imagePathChanged(path: String) {
         let url = NSURL.fileURLWithPath(path)
-        NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
-        if let title = url.lastPathComponent {
-            self.window!.setTitleWithRepresentedFilename("EP Calipers: " + title)
-        }
-        else {
-            self.window!.setTitleWithRepresentedFilename("EP Calipers")
-        }
-        imageURL = url
-        imageView.zoomImageToActualSize(self)
-        clearCalibration()
+        openURL(url, addToRecentDocuments: true)
     }
     
     @IBAction func saveImage(sender: AnyObject) {
@@ -364,6 +479,87 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.messageText = "Screenshot cancelled"
             alert.informativeText = "Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine."
             alert.runModal()
+        }
+    }
+
+    // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
+    func openPDF(url: NSURL, addToRecentDocuments: Bool) {
+        let pdfData = NSData(contentsOfURL: url)
+        if let pdf = NSPDFImageRep(data: pdfData!) {
+            pdfRef = pdf
+            numberOfPDFPages = pdf.pageCount
+            imageIsPDF = true
+            showPDFPage(pdf, page: 0)
+            if let urlPath = url.path {
+                self.window!.setTitleWithRepresentedFilename(urlPath)
+            }
+            else {
+                self.window!.title = "EP Calipers"
+            }
+            imageURL = url
+            clearCalibration()
+            if addToRecentDocuments {
+                NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
+            }
+        }
+    }
+    
+    func showPDFPage(pdf: NSPDFImageRep, page: Int) {
+        // consider add preference for low res, hi res (2.0, 4.0 scale?)
+        let scale: CGFloat = 4.0
+        pdf.currentPage = page
+        var tempImage = NSImage()
+        tempImage.addRepresentation(pdf)
+        tempImage = scaleImage(tempImage, byFactor: scale)
+        let image = nsImageToCGImage(tempImage)
+        imageView.setImage(image, imageProperties: nil)
+        imageView.zoomImageToActualSize(self)
+        // keep size of image manageable by scaling down
+        imageView.zoomFactor = imageView.zoomFactor / scale
+        calipersView.updateCalibration()
+    }
+    
+    // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion
+    func scaleImage(image: NSImage, byFactor factor: CGFloat) -> NSImage {
+        let newSize = NSMakeSize(image.size.width * factor, image.size.height * factor)
+        let scaledImage = NSImage(size: newSize)
+        scaledImage.lockFocus()
+        NSColor.whiteColor().set()
+        NSBezierPath.fillRect(NSMakeRect(0, 0, newSize.width, newSize.height))
+        let transform = NSAffineTransform()
+        transform.scaleBy(factor)
+        transform.concat()
+        image.drawAtPoint(NSZeroPoint, fromRect: NSZeroRect, operation: NSCompositingOperation.CompositeSourceOver, fraction: 1.0)
+        scaledImage.unlockFocus()
+        return scaledImage
+    }
+    
+    // convert NSImage to CGImage
+    // from http://lists.apple.com/archives/cocoa-dev/2010/May/msg01171.html
+    func nsImageToCGImage(image: NSImage) -> CGImageRef? {
+        let imageData = image.TIFFRepresentation
+        var imageRef: CGImageRef? = nil
+        if let imgData = imageData {
+            if let imageSource = CGImageSourceCreateWithData(imgData as CFDataRef, nil) {
+                imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
+            }
+        }
+        return imageRef
+    }
+    
+    @IBAction func previousPage(sender: AnyObject) {
+        pdfPageNumber--
+        pdfPageNumber = pdfPageNumber < 0 ? 0 : pdfPageNumber
+        if let pdf = pdfRef {
+            showPDFPage(pdf, page: pdfPageNumber)
+        }
+    }
+    
+    @IBAction func nextPage(sender: AnyObject) {
+        pdfPageNumber++
+        pdfPageNumber = pdfPageNumber >= numberOfPDFPages ? numberOfPDFPages - 1 : pdfPageNumber
+        if let pdf = pdfRef {
+            showPDFPage(pdf, page: pdfPageNumber)
         }
     }
     

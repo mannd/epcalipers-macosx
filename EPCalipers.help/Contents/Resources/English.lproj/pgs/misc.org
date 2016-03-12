@@ -10,7 +10,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="description" content="Other information" />
-* [[./shrd/icon_32x32@2x.png]] Acknowledgments
+* [[../../shrd/icon_32x32@2x.png]] Acknowledgments
 - Thanks to Dr. Michael Katz for the concept.
 - The source code for *EP Calipers* is available on [[https://github.com/mannd/epcalipers-macosx][GitHub]].
 - *EP Calipers* is also available for iOS and Android devices.  Look for it on the Apple App Store and Google Play.

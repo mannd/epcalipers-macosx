@@ -13,6 +13,7 @@ import Quartz
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var mainWindowController: MainWindowController?
+    var externalURL: NSURL? = nil
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // uncomment below to clear default prefs for testing
@@ -23,9 +24,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let mainWindowController = MainWindowController()
         mainWindowController.showWindow(self)
         self.mainWindowController = mainWindowController
+        if let url = externalURL {
+            mainWindowController.openURL(url, addToRecentDocuments: false)
+        }
         
+        NSLog("applicationDidFinishLaunching")
     }
-
+    
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
@@ -39,13 +44,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func application(sender: NSApplication, openFile filename: String) -> Bool {
         // needed to implement Open Recent... menu item
         let url = NSURL.fileURLWithPath(filename)
-        mainWindowController!.openImageUrl(url, addToRecentDocuments: false)
+        if let controller = mainWindowController {
+            controller.openURL(url, addToRecentDocuments: false)
+        }
+        externalURL = url
         return true
      }
     
     func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
         return true
     }
-
+    
+    
 }
 
