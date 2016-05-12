@@ -46,7 +46,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
     @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
     @IBOutlet weak var showPromptsCheckBox: NSButton!
-    
+    @IBOutlet weak var roundMsecRateCheckBox: NSButton!
+
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
@@ -102,7 +103,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         measurementSegmentedControl.enabled = false
         navigationSegmentedControl.enabled = false
         clearMessage()
-        if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
+        if NSWindowController.instancesRespondToSelector(#selector(NSObject.awakeFromNib)) {
             super.awakeFromNib()
         }
     }
@@ -115,7 +116,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             "defaultVerticalCalibrationKey": "10 mm",
             "defaultNumberOfMeanRRIntervalsKey": 3,
             "defaultNumberOfQTcMeanRRIntervalsKey": 1,
-            "showPromptsKey": true
+            "showPromptsKey": true,
+            "roundMsecRateKey": true
         ]
         NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
         appPreferences.loadPreferences()
@@ -184,19 +186,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
 
 
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == Selector("doRotation:") {
+        if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
-        if menuItem.action == Selector("doMeasurement:") {
+        if menuItem.action == #selector(MainWindowController.doMeasurement(_:)) {
             return calipersView.horizontalCalibration.calibrated && !calipersView.locked && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate
         }
-        if menuItem.action == Selector("addCaliper:") {
+        if menuItem.action == #selector(MainWindowController.addCaliper(_:)) {
             return !calipersView.locked
         }
-        if menuItem.action == Selector("previousPage:") {
+        if menuItem.action == #selector(MainWindowController.previousPage(_:)) {
             return imageIsPDF && pdfPageNumber > 0
         }
-        if menuItem.action == Selector("nextPage:") {
+        if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
             return imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
         return true
@@ -232,6 +234,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = appPreferences.showPrompts ? 1 : 0
+        roundMsecRateCheckBox.state = appPreferences.roundMsecRate ? 1 : 0
         let result = preferencesAlert!.runModal()
         if result == NSAlertFirstButtonReturn {
             // assign new preferences
@@ -243,9 +246,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
+            appPreferences.roundMsecRate = roundMsecRateCheckBox.integerValue == 1 ? true : false
             appPreferences.savePreferences()
             // update calipersView
-            calipersView.updateCaliperColors(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth)
+            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate)
             preferencesChanged = true
         }
     }
@@ -441,7 +445,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
         // Default value of kCGImageSourceShouldCache depends on platform.
         // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
-        let error = NSErrorPointer()
+        let error: NSErrorPointer = nil
         if url.checkResourceIsReachableAndReturnError(error) == false {
             let alert = NSAlert()
             alert.messageText = "File not found"
@@ -548,7 +552,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func previousPage(sender: AnyObject) {
-        pdfPageNumber--
+        pdfPageNumber -= 1
         pdfPageNumber = pdfPageNumber < 0 ? 0 : pdfPageNumber
         if let pdf = pdfRef {
             showPDFPage(pdf, page: pdfPageNumber)
@@ -556,7 +560,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func nextPage(sender: AnyObject) {
-        pdfPageNumber++
+        pdfPageNumber += 1
         pdfPageNumber = pdfPageNumber >= numberOfPDFPages ? numberOfPDFPages - 1 : pdfPageNumber
         if let pdf = pdfRef {
             showPDFPage(pdf, page: pdfPageNumber)
@@ -611,6 +615,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         let caliper = Caliper()
         // initiallize with Preferences here
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
+        caliper.roundMsecRate = appPreferences.roundMsecRate
         if let color = appPreferences.caliperColor {
             caliper.unselectedColor = color
         }
@@ -743,11 +748,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                     exitCalibration()
                 }
             }
-            if calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate {
-                measurementSegmentedControl.enabled = true
-            }
-            
-            
+            measurementSegmentedControl.enabled = calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate
         }
     }
     
@@ -1114,7 +1115,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             for caliper in calipersView.calipers {
                 if caliper.direction == .Horizontal {
                     c = caliper
-                    n++
+                    n += 1
                 }
             }
         }

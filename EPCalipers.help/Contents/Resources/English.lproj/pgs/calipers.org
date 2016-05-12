@@ -1,8 +1,6 @@
-#+TITLE:     
 #+AUTHOR:    David Mann
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
-#+DESCRIPTION: EP Calipers Help
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t

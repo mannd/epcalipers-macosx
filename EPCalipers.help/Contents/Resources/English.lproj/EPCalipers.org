@@ -1,4 +1,3 @@
-#+TITLE:     
 #+AUTHOR:    David Mann
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
