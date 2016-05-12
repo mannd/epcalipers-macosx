@@ -615,6 +615,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         let caliper = Caliper()
         // initiallize with Preferences here
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
+        caliper.roundMsecRate = appPreferences.roundMsecRate
         if let color = appPreferences.caliperColor {
             caliper.unselectedColor = color
         }
