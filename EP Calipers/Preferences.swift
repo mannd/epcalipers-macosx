@@ -35,7 +35,8 @@ class Preferences: NSObject {
     var defaultVerticalCalibration: String? = "10 mm"
     var defaultNumberOfMeanRRIntervals: Int = 3
     var defaultNumberOfQTcMeanRRIntervals: Int = 1
-    var showPrompts: Bool = true    
+    var showPrompts: Bool = true
+    var roundMsecRate: Bool = true
 
     
     func loadPreferences() {
@@ -48,6 +49,7 @@ class Preferences: NSObject {
         defaultNumberOfMeanRRIntervals = preferences.integerForKey("defaultNumberOfMeanRRIntervalsKey")
         defaultNumberOfQTcMeanRRIntervals = preferences.integerForKey("defaultNumberOfQTcMeanRRIntervalsKey")
         showPrompts = preferences.boolForKey("showPromptsKey")
+        roundMsecRate = preferences.boolForKey("roundMsecRateKey")
     }
     
     func savePreferences() {
@@ -60,6 +62,7 @@ class Preferences: NSObject {
         preferences.setInteger(defaultNumberOfMeanRRIntervals, forKey: "defaultNumberOfMeanRRIntervalsKey")
         preferences.setInteger(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         preferences.setBool(showPrompts, forKey: "showPromptsKey")
+        preferences.setBool(roundMsecRate, forKey: "roundMsecRateKey")
     }
 
 }

@@ -28,6 +28,7 @@ class Caliper: NSObject {
     var textFont: NSFont
     var paragraphStyle: NSMutableParagraphStyle
     var calibration: Calibration = Calibration()
+    var roundMsecRate: Bool
     
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
         crossBarPosition: CGFloat) {
@@ -43,6 +44,7 @@ class Caliper: NSObject {
             self.selected = false
             self.textFont = NSFont(name: "Helvetica", size: 18.0)!
             self.paragraphStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+            self.roundMsecRate = true
             super.init()
     }
     
@@ -134,7 +136,13 @@ class Caliper: NSObject {
     }
     
     func measurement() -> String {
-        let s = String(format: "%.4g %@", calibratedResult(), calibration.units)
+        var s: String
+        if roundMsecRate && (calibration.displayRate || calibration.unitsAreMsec) {
+            s = String(format: "%d %@", Int(round(calibratedResult())), calibration.units)
+        }
+        else {
+            s = String(format: "%.4g %@", calibratedResult(), calibration.units)
+        }
         return s
     }
     
