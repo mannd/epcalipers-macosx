@@ -102,7 +102,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         measurementSegmentedControl.enabled = false
         navigationSegmentedControl.enabled = false
         clearMessage()
-        if NSWindowController.instancesRespondToSelector(Selector("awakeFromNib")) {
+        if NSWindowController.instancesRespondToSelector(#selector(NSObject.awakeFromNib)) {
             super.awakeFromNib()
         }
     }
@@ -184,19 +184,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
 
 
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == Selector("doRotation:") {
+        if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
-        if menuItem.action == Selector("doMeasurement:") {
+        if menuItem.action == #selector(MainWindowController.doMeasurement(_:)) {
             return calipersView.horizontalCalibration.calibrated && !calipersView.locked && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate
         }
-        if menuItem.action == Selector("addCaliper:") {
+        if menuItem.action == #selector(MainWindowController.addCaliper(_:)) {
             return !calipersView.locked
         }
-        if menuItem.action == Selector("previousPage:") {
+        if menuItem.action == #selector(MainWindowController.previousPage(_:)) {
             return imageIsPDF && pdfPageNumber > 0
         }
-        if menuItem.action == Selector("nextPage:") {
+        if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
             return imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
         return true
@@ -441,7 +441,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
         // Default value of kCGImageSourceShouldCache depends on platform.
         // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
-        let error = NSErrorPointer()
+        let error: NSErrorPointer = nil
         if url.checkResourceIsReachableAndReturnError(error) == false {
             let alert = NSAlert()
             alert.messageText = "File not found"
@@ -548,7 +548,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func previousPage(sender: AnyObject) {
-        pdfPageNumber--
+        pdfPageNumber -= 1
         pdfPageNumber = pdfPageNumber < 0 ? 0 : pdfPageNumber
         if let pdf = pdfRef {
             showPDFPage(pdf, page: pdfPageNumber)
@@ -556,7 +556,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func nextPage(sender: AnyObject) {
-        pdfPageNumber++
+        pdfPageNumber += 1
         pdfPageNumber = pdfPageNumber >= numberOfPDFPages ? numberOfPDFPages - 1 : pdfPageNumber
         if let pdf = pdfRef {
             showPDFPage(pdf, page: pdfPageNumber)
@@ -1114,7 +1114,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             for caliper in calipersView.calipers {
                 if caliper.direction == .Horizontal {
                     c = caliper
-                    n++
+                    n += 1
                 }
             }
         }

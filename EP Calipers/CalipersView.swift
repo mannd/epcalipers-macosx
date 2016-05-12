@@ -46,7 +46,7 @@ class CalipersView: NSView {
     }
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == Selector("deleteBackward:") {
+        if menuItem.action == #selector(NSResponder.deleteBackward(_:)) {
             return !locked
         }
         return true
