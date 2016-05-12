@@ -748,11 +748,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                     exitCalibration()
                 }
             }
-            if calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate {
-                measurementSegmentedControl.enabled = true
-            }
-            
-            
+            measurementSegmentedControl.enabled = calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate
         }
     }
     
@@ -782,7 +778,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 if !calibration.canDisplayRate {
                     calibration.displayRate = false
                 }
-                measurementSegmentedControl.enabled = calibration.canDisplayRate;
                 calibration.originalZoom = Double(imageView.zoomFactor)
                 calibration.originalCalFactor = value / Double(c!.points())
                 calibration.currentZoom = calibration.originalZoom
