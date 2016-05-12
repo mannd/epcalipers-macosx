@@ -46,7 +46,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
     @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
     @IBOutlet weak var showPromptsCheckBox: NSButton!
-    
+    @IBOutlet weak var roundMsecRateCheckBox: NSButton!
+
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
@@ -115,7 +116,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             "defaultVerticalCalibrationKey": "10 mm",
             "defaultNumberOfMeanRRIntervalsKey": 3,
             "defaultNumberOfQTcMeanRRIntervalsKey": 1,
-            "showPromptsKey": true
+            "showPromptsKey": true,
+            "roundMsecRateKey": true
         ]
         NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
         appPreferences.loadPreferences()
@@ -232,6 +234,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = appPreferences.showPrompts ? 1 : 0
+        roundMsecRateCheckBox.state = appPreferences.roundMsecRate ? 1 : 0
         let result = preferencesAlert!.runModal()
         if result == NSAlertFirstButtonReturn {
             // assign new preferences
@@ -243,9 +246,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
+            appPreferences.roundMsecRate = roundMsecRateCheckBox.integerValue == 1 ? true : false
             appPreferences.savePreferences()
             // update calipersView
-            calipersView.updateCaliperColors(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth)
+            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate)
             preferencesChanged = true
         }
     }

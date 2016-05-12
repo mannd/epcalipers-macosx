@@ -19,6 +19,7 @@
                 <outlet property="numberStepper" destination="wW7-cL-Gjc" id="pqR-gf-OEb"/>
                 <outlet property="numberTextField" destination="lNA-AR-KId" id="lqF-rT-b4b"/>
                 <outlet property="preferencesAccessoryView" destination="jm6-Ye-gwX" id="VtZ-nt-0Z5"/>
+                <outlet property="roundMsecRateCheckBox" destination="sTd-Y0-frE" id="3XN-tu-FiX"/>
                 <outlet property="showPromptsCheckBox" destination="9Nk-jL-6iI" id="O2Z-Wx-xgx"/>
                 <outlet property="textField" destination="SUZ-aQ-EoT" id="3N6-c4-TpH"/>
                 <outlet property="textInputView" destination="c22-O7-iKe" id="0ag-Kh-bm7"/>

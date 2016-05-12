@@ -218,7 +218,7 @@ class CalipersView: NSView {
         }
     }
     
-    func updateCaliperColors(unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int) {
+    func updateCaliperPreferences(unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool) {
          for c in calipers {
             if let color = unselectedColor {
                 c.unselectedColor = color
@@ -233,6 +233,7 @@ class CalipersView: NSView {
                 c.color = c.unselectedColor
             }
             c.lineWidth = CGFloat(lineWidth)
+            c.roundMsecRate = roundMsecRate
         }
         needsDisplay = true
     }
