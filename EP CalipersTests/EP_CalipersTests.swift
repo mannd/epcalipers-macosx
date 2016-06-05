@@ -76,6 +76,19 @@ class EP_CalipersTests: XCTestCase {
         cal.currentZoom = 2.0;
         XCTAssert(cal.currentCalFactor() == 0.25);
     }
+    
+    func testUnits() {
+        let c = Caliper()
+        XCTAssert(c.calibration.units == "points")
+        c.calibration.calibrated = true
+        c.calibration.rawUnits = "msec"
+        XCTAssert(c.calibration.units == "msec")
+        c.calibration.displayRate = true
+        XCTAssert(c.calibration.units == "bpm")
+        c.calibration.displayRate = false
+        XCTAssert(c.calibration.units == "msec")
+
+    }
 
 
 }
