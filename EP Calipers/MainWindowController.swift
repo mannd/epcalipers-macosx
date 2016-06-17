@@ -542,9 +542,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         scaledImage.lockFocus()
         NSColor.white().set()
         NSBezierPath.fill(NSMakeRect(0, 0, newSize.width, newSize.height))
-        var transform = AffineTransform()
-        transform.scale(factor)
-        (transform as NSAffineTransform).concat()
+        let transform = NSAffineTransform()
+        transform.scale(by: factor)
+        transform.concat()
         image.draw(at: NSZeroPoint, from: NSZeroRect, operation: NSCompositingOperation.sourceOver, fraction: 1.0)
         scaledImage.unlockFocus()
         return scaledImage
