@@ -9,27 +9,27 @@
 import Cocoa
 
 // from http://stackoverflow.com/questions/1275662/saving-uicolor-to-and-loading-from-nsuserdefaults
-extension NSUserDefaults {
-    func colorForKey(key: String) -> NSColor? {
+extension UserDefaults {
+    func colorForKey(_ key: String) -> NSColor? {
         var color: NSColor?
-        if let colorData = dataForKey(key) {
-            color = NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? NSColor
+        if let colorData = data(forKey: key) {
+            color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? NSColor
         }
         return color
     }
     
-    func setColor(color: NSColor?, forKey key: String) {
-        var colorData: NSData?
+    func setColor(_ color: NSColor?, forKey key: String) {
+        var colorData: Data?
         if let color = color {
-            colorData = NSKeyedArchiver.archivedDataWithRootObject(color)
+            colorData = NSKeyedArchiver.archivedData(withRootObject: color)
         }
-        setObject(colorData, forKey: key)
+        set(colorData, forKey: key)
     }
 }
 
 class Preferences: NSObject {
-    var caliperColor: NSColor? = NSColor.blueColor()
-    var highlightColor: NSColor? = NSColor.redColor()
+    var caliperColor: NSColor? = NSColor.blue()
+    var highlightColor: NSColor? = NSColor.red()
     var lineWidth: Int = 2
     var defaultCalibration: String? = "1000 msec"
     var defaultVerticalCalibration: String? = "10 mm"
@@ -40,29 +40,29 @@ class Preferences: NSObject {
 
     
     func loadPreferences() {
-        let preferences = NSUserDefaults.standardUserDefaults()
+        let preferences = UserDefaults.standard()
         caliperColor = preferences.colorForKey("caliperColorKey")
         highlightColor = preferences.colorForKey("highlightColorKey")
-        lineWidth = preferences.integerForKey("lineWidthKey")
-        defaultCalibration = preferences.stringForKey("defaultCalibrationKey")
-        defaultVerticalCalibration = preferences.stringForKey("defaultVerticalCalibrationKey")
-        defaultNumberOfMeanRRIntervals = preferences.integerForKey("defaultNumberOfMeanRRIntervalsKey")
-        defaultNumberOfQTcMeanRRIntervals = preferences.integerForKey("defaultNumberOfQTcMeanRRIntervalsKey")
-        showPrompts = preferences.boolForKey("showPromptsKey")
-        roundMsecRate = preferences.boolForKey("roundMsecRateKey")
+        lineWidth = preferences.integer(forKey: "lineWidthKey")
+        defaultCalibration = preferences.string(forKey: "defaultCalibrationKey")
+        defaultVerticalCalibration = preferences.string(forKey: "defaultVerticalCalibrationKey")
+        defaultNumberOfMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfMeanRRIntervalsKey")
+        defaultNumberOfQTcMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
+        showPrompts = preferences.bool(forKey: "showPromptsKey")
+        roundMsecRate = preferences.bool(forKey: "roundMsecRateKey")
     }
     
     func savePreferences() {
-        let preferences = NSUserDefaults.standardUserDefaults()
+        let preferences = UserDefaults.standard()
         preferences.setColor(caliperColor, forKey: "caliperColorKey")
         preferences.setColor(highlightColor, forKey: "highlightColorKey")
-        preferences.setInteger(lineWidth, forKey: "lineWidthKey")
-        preferences.setObject(defaultCalibration, forKey: "defaultCalibrationKey")
-        preferences.setObject(defaultVerticalCalibration, forKey: "defaultVerticalCalibrationKey")
-        preferences.setInteger(defaultNumberOfMeanRRIntervals, forKey: "defaultNumberOfMeanRRIntervalsKey")
-        preferences.setInteger(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
-        preferences.setBool(showPrompts, forKey: "showPromptsKey")
-        preferences.setBool(roundMsecRate, forKey: "roundMsecRateKey")
+        preferences.set(lineWidth, forKey: "lineWidthKey")
+        preferences.set(defaultCalibration, forKey: "defaultCalibrationKey")
+        preferences.set(defaultVerticalCalibration, forKey: "defaultVerticalCalibrationKey")
+        preferences.set(defaultNumberOfMeanRRIntervals, forKey: "defaultNumberOfMeanRRIntervalsKey")
+        preferences.set(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
+        preferences.set(showPrompts, forKey: "showPromptsKey")
+        preferences.set(roundMsecRate, forKey: "roundMsecRateKey")
     }
 
 }

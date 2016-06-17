@@ -51,7 +51,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var imageProperties: NSDictionary = Dictionary<String, String>()
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
-    var imageURL: NSURL? = nil
+    var imageURL: URL? = nil
     var firstWindowResize = true
     
     var inQTcStep1 = false
@@ -98,12 +98,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         
         calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
-        calipersView.horizontalCalibration.direction = .Horizontal
-        calipersView.verticalCalibration.direction = .Vertical
-        measurementSegmentedControl.enabled = false
-        navigationSegmentedControl.enabled = false
+        calipersView.horizontalCalibration.direction = .horizontal
+        calipersView.verticalCalibration.direction = .vertical
+        measurementSegmentedControl.isEnabled = false
+        navigationSegmentedControl.isEnabled = false
         clearMessage()
-        if NSWindowController.instancesRespondToSelector(#selector(NSObject.awakeFromNib)) {
+        if NSWindowController.instancesRespond(to: #selector(NSObject.awakeFromNib)) {
             super.awakeFromNib()
         }
     }
@@ -119,63 +119,63 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             "showPromptsKey": true,
             "roundMsecRateKey": true
         ]
-        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+        UserDefaults.standard().register(defaults)
         appPreferences.loadPreferences()
         // need to manually register colors, using extension to NSUserDefaults
         if (appPreferences.caliperColor == nil) {
-            NSUserDefaults.standardUserDefaults().setColor(NSColor.blueColor(), forKey:"caliperColorKey")
-            appPreferences.caliperColor = NSColor.blueColor()
+            UserDefaults.standard().setColor(NSColor.blue(), forKey:"caliperColorKey")
+            appPreferences.caliperColor = NSColor.blue()
         }
         if (appPreferences.highlightColor == nil) {
-            NSUserDefaults.standardUserDefaults().setColor(NSColor.redColor(), forKey: "highlightColorKey")
-            appPreferences.highlightColor = NSColor.redColor()
+            UserDefaults.standard().setColor(NSColor.red(), forKey: "highlightColorKey")
+            appPreferences.highlightColor = NSColor.red()
         }
-        NSBundle.mainBundle().loadNibNamed("View", owner: self, topLevelObjects: nil)
+        Bundle.main().loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
-        if let path = NSBundle.mainBundle().pathForResource("Normal 12_Lead ECG", ofType: "jpg") {
-            let url = NSURL.fileURLWithPath(path)
+        if let path = Bundle.main().pathForResource("Normal 12_Lead ECG", ofType: "jpg") {
+            let url = URL(fileURLWithPath: path)
             openImageUrl(url, addToRecentDocuments: false)
         }
 
     }
     
-    func draggingEntered(sender: NSDraggingInfo!) -> NSDragOperation  {
+    func draggingEntered(_ sender: NSDraggingInfo!) -> NSDragOperation  {
         if checkExtension(sender) == true {
             self.fileTypeIsOk = true
-            return .Copy
+            return .copy
         } else {
             self.fileTypeIsOk = false
-            return .None
+            return NSDragOperation()
         }
     }
     
-    func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
+    func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
         if self.fileTypeIsOk {
-            return .Copy
+            return .copy
         } else {
-            return .None
+            return NSDragOperation()
         }
     }
     
-    func performDragOperation(sender: NSDraggingInfo!) -> Bool {
-        if let board = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
+    func performDragOperation(_ sender: NSDraggingInfo!) -> Bool {
+        if let board = sender.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray {
             if let imagePath = board[0] as? String {
-                let url = NSURL.fileURLWithPath(imagePath)
+                let url = URL(fileURLWithPath: imagePath)
                 openURL(url, addToRecentDocuments: true)
                 return true
             }
         }
         return false    }
     
-    func checkExtension(drag: NSDraggingInfo) -> Bool {
-        if let board = drag.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray,
+    func checkExtension(_ drag: NSDraggingInfo) -> Bool {
+        if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
             let path = board[0] as? String {
-                let url = NSURL(fileURLWithPath: path)
+                let url = URL(fileURLWithPath: path)
                 if let suffix = url.pathExtension {
                     for ext in validFileExtensions() {
-                        if ext.lowercaseString == suffix {
+                        if ext.lowercased() == suffix {
                             return true
                         }
                     }
@@ -185,7 +185,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
 
-    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+    func validate(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
@@ -204,16 +204,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         return true
     }
     
-    @IBAction func showPreferences(sender: AnyObject) {
+    @IBAction func showPreferences(_ sender: AnyObject) {
         // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
         // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
         if preferencesAlert == nil {
             let alert = NSAlert()
-            alert.alertStyle = .InformationalAlertStyle
+            alert.alertStyle = .informational
             alert.messageText = "EP Calipers preferences"
             alert.accessoryView = preferencesAccessoryView
-            alert.addButtonWithTitle("OK")
-            alert.addButtonWithTitle("Cancel")
+            alert.addButton(withTitle: "OK")
+            alert.addButton(withTitle: "Cancel")
             preferencesAlert = alert
         }
         if let color = appPreferences.caliperColor {
@@ -254,25 +254,25 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func numberOfMeanRRStepperAction(sender: AnyObject) {
+    @IBAction func numberOfMeanRRStepperAction(_ sender: AnyObject) {
         numberOfMeanRRIntervalsTextField.integerValue = numberOfMeanRRIntervalsStepper.integerValue
     }
     
-    @IBAction func numberOfQTcMeanRRStepperAction(sender: AnyObject) {
+    @IBAction func numberOfQTcMeanRRStepperAction(_ sender: AnyObject) {
         numberOfQTcMeanRRIntervalsTextField.integerValue = numberOfQTcMeanRRIntervalsStepper.integerValue
     }
     
     
     
-    @IBAction func switchToolMode(sender: AnyObject) {
+    @IBAction func switchToolMode(_ sender: AnyObject) {
         // consider updating menuitmes with checks when switching tools
         var newTool: Int
-        if sender.isKindOfClass(NSSegmentedControl) {
+        if sender is NSSegmentedControl {
             newTool = sender.selectedSegment
         }
         else {
             // menu items tagged
-            newTool = sender.tag()
+            newTool = sender.tag
             // also make segmented control match selected tool
             toolSegmentedControl.selectedSegment = newTool
         }
@@ -288,11 +288,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func openIKImageEditPanel(sender: AnyObject) {
-        let editor = IKImageEditPanel.sharedImageEditPanel()
-        editor.setFrameOrigin(NSMakePoint(400,200))
-        editor.dataSource = imageView
-        editor.makeKeyAndOrderFront(nil)
+    @IBAction func openIKImageEditPanel(_ sender: AnyObject) {
+        let editor = IKImageEditPanel.shared()
+        editor?.setFrameOrigin(NSMakePoint(400,200))
+        editor?.dataSource = imageView
+        editor?.makeKeyAndOrderFront(nil)
     }
     
     
@@ -305,14 +305,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // but see this too: https://lists.apple.com/archives/cocoa-dev/2008/Mar/msg00774.html
     // in Summary, setImageZoomFactor:centerPoint: doesn't work.  centerPoint doesn't affect
     // zooming, which is always recentered to the origin (lower left).
-    @IBAction func doZoom(sender: AnyObject) {
+    @IBAction func doZoom(_ sender: AnyObject) {
         var zoom: Int
         var zoomFactor: CGFloat
-        if sender.isKindOfClass(NSSegmentedControl) {
+        if sender is NSSegmentedControl {
             zoom = sender.selectedSegment
         }
         else {
-            zoom = sender.tag()
+            zoom = sender.tag
         }
         switch zoom {
         case 0:
@@ -331,13 +331,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func doMeasurement(sender: AnyObject) {
+    @IBAction func doMeasurement(_ sender: AnyObject) {
         var measurement: Int
-        if sender.isKindOfClass(NSSegmentedControl) {
+        if sender is NSSegmentedControl {
             measurement = sender.selectedSegment
         }
         else {
-            measurement = sender.tag()
+            measurement = sender.tag
         }
         switch measurement {
         case 0:
@@ -351,13 +351,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func doNavigation(sender: AnyObject) {
+    @IBAction func doNavigation(_ sender: AnyObject) {
         var navigation: Int
-        if sender.isKindOfClass(NSSegmentedControl) {
+        if sender is NSSegmentedControl {
             navigation = sender.selectedSegment
         }
         else {
-            navigation = sender.tag()
+            navigation = sender.tag
         }
         if inCalibration {
             switch navigation {
@@ -394,16 +394,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func openImage(sender: AnyObject) {
+    @IBAction func openImage(_ sender: AnyObject) {
         /* Present open panel. */
         let openPanel = NSOpenPanel()
         openPanel.allowedFileTypes = validFileExtensions()
         openPanel.canSelectHiddenExtension = true
-        openPanel.beginSheetModalForWindow(self.window!,
+        openPanel.beginSheetModal(for: self.window!,
             completionHandler: {
                 (result: NSInteger) -> Void in
                 if result == NSFileHandlingPanelOKButton {
-                    self.openURL(openPanel.URL, addToRecentDocuments: true)
+                    self.openURL(openPanel.url, addToRecentDocuments: true)
                }
             }
         )
@@ -411,13 +411,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     func validFileExtensions() -> [String] {
         let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/pdf/PDF"
-        return extensions.componentsSeparatedByString("/")
+        return extensions.components(separatedBy: "/")
     }
     
-    func openURL(url: NSURL?, addToRecentDocuments: Bool) {
+    func openURL(_ url: URL?, addToRecentDocuments: Bool) {
         if let goodURL = url {
             clearPDF()
-            if isPDFFile(goodURL.filePathURL) {
+            if isPDFFile(try! goodURL.filePathURL()) {
                 openPDF(goodURL, addToRecentDocuments: addToRecentDocuments)
             }
             else {
@@ -432,54 +432,66 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfPDFPages = 0
     }
     
-    func isPDFFile(filePath: NSURL?) -> Bool {
+    func isPDFFile(_ filePath: URL?) -> Bool {
         if let path = filePath {
             if let ext = path.pathExtension {
-                return ext.uppercaseString == "PDF"
+                return ext.uppercased() == "PDF"
             }
         }
         return false
     }
     
-    func openImageUrl(url: NSURL, addToRecentDocuments: Bool) {
+    enum OpenError : ErrorProtocol {
+        case Nonspecific
+    }
+    
+    func openImageUrl(_ url: URL, addToRecentDocuments: Bool) {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
         // Default value of kCGImageSourceShouldCache depends on platform.
         // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
-        let error: NSErrorPointer = nil
-        if url.checkResourceIsReachableAndReturnError(error) == false {
+//        let error: NSErrorPointer? = nil
+        do {
+            let reachable = try (url as URL).checkResourceIsReachable()
+            if reachable {
+                imageView.setImageWith(url)
+                imageView.zoomImageToActualSize(self)
+                if let urlPath = url.path {
+                    self.window!.setTitleWithRepresentedFilename(urlPath)
+                }
+                else {
+                    self.window!.title = "EP Calipers"
+                }
+                imageURL = url
+                clearCalibration()
+                if addToRecentDocuments {
+                    NSDocumentController.shared().noteNewRecentDocumentURL(url)
+                }
+            }
+            else {
+               throw OpenError.Nonspecific
+            }
+        }
+        catch _ {
             let alert = NSAlert()
-            alert.messageText = "File not found"
-            alert.informativeText = "Can't locate \(url)"
-            alert.alertStyle = .CriticalAlertStyle
+            alert.messageText = "File not opened"
+            alert.informativeText = "Can't open \(url)"
+            alert.alertStyle = .critical
             alert.runModal()
-        }
-        imageView.setImageWithURL(url)
-        imageView.zoomImageToActualSize(self)
-        if let urlPath = url.path {
-            self.window!.setTitleWithRepresentedFilename(urlPath)
-        }
-        else {
-            self.window!.title = "EP Calipers"
-        }
-        imageURL = url
-        clearCalibration()
-        if addToRecentDocuments {
-            NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
         }
     }
 
     // secret IKImageView delegate method
     // see http://www.theregister.co.uk/2008/10/14/mac_secrets_imagekit_internals/
-    func imagePathChanged(path: String) {
-        let url = NSURL.fileURLWithPath(path)
+    func imagePathChanged(_ path: String) {
+        let url = URL(fileURLWithPath: path)
         openURL(url, addToRecentDocuments: true)
     }
     
-    @IBAction func saveImage(sender: AnyObject) {
+    @IBAction func saveImage(_ sender: AnyObject) {
         // Save image for now is just uses the system screenshot utility
         if !calipersView.takeScreenshot() {
             let alert = NSAlert()
-            alert.alertStyle = .InformationalAlertStyle
+            alert.alertStyle = .informational
             alert.messageText = "Screenshot cancelled"
             alert.informativeText = "Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine."
             alert.runModal()
@@ -487,8 +499,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
     // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
-    func openPDF(url: NSURL, addToRecentDocuments: Bool) {
-        let pdfData = NSData(contentsOfURL: url)
+    func openPDF(_ url: URL, addToRecentDocuments: Bool) {
+        let pdfData = try? Data(contentsOf: url)
         if let pdf = NSPDFImageRep(data: pdfData!) {
             pdfRef = pdf
             numberOfPDFPages = pdf.pageCount
@@ -503,12 +515,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             imageURL = url
             clearCalibration()
             if addToRecentDocuments {
-                NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(url)
+                NSDocumentController.shared().noteNewRecentDocumentURL(url)
             }
         }
     }
     
-    func showPDFPage(pdf: NSPDFImageRep, page: Int) {
+    func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
         // consider add preference for low res, hi res (2.0, 4.0 scale?)
         let scale: CGFloat = 4.0
         pdf.currentPage = page
@@ -524,34 +536,34 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion
-    func scaleImage(image: NSImage, byFactor factor: CGFloat) -> NSImage {
+    func scaleImage(_ image: NSImage, byFactor factor: CGFloat) -> NSImage {
         let newSize = NSMakeSize(image.size.width * factor, image.size.height * factor)
         let scaledImage = NSImage(size: newSize)
         scaledImage.lockFocus()
-        NSColor.whiteColor().set()
-        NSBezierPath.fillRect(NSMakeRect(0, 0, newSize.width, newSize.height))
-        let transform = NSAffineTransform()
-        transform.scaleBy(factor)
-        transform.concat()
-        image.drawAtPoint(NSZeroPoint, fromRect: NSZeroRect, operation: NSCompositingOperation.CompositeSourceOver, fraction: 1.0)
+        NSColor.white().set()
+        NSBezierPath.fill(NSMakeRect(0, 0, newSize.width, newSize.height))
+        var transform = AffineTransform()
+        transform.scale(factor)
+        (transform as NSAffineTransform).concat()
+        image.draw(at: NSZeroPoint, from: NSZeroRect, operation: NSCompositingOperation.sourceOver, fraction: 1.0)
         scaledImage.unlockFocus()
         return scaledImage
     }
     
     // convert NSImage to CGImage
     // from http://lists.apple.com/archives/cocoa-dev/2010/May/msg01171.html
-    func nsImageToCGImage(image: NSImage) -> CGImageRef? {
-        let imageData = image.TIFFRepresentation
-        var imageRef: CGImageRef? = nil
+    func nsImageToCGImage(_ image: NSImage) -> CGImage? {
+        let imageData = image.tiffRepresentation
+        var imageRef: CGImage? = nil
         if let imgData = imageData {
-            if let imageSource = CGImageSourceCreateWithData(imgData as CFDataRef, nil) {
+            if let imageSource = CGImageSourceCreateWithData(imgData as CFData, nil) {
                 imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
             }
         }
         return imageRef
     }
     
-    @IBAction func previousPage(sender: AnyObject) {
+    @IBAction func previousPage(_ sender: AnyObject) {
         pdfPageNumber -= 1
         pdfPageNumber = pdfPageNumber < 0 ? 0 : pdfPageNumber
         if let pdf = pdfRef {
@@ -559,7 +571,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func nextPage(sender: AnyObject) {
+    @IBAction func nextPage(_ sender: AnyObject) {
         pdfPageNumber += 1
         pdfPageNumber = pdfPageNumber >= numberOfPDFPages ? numberOfPDFPages - 1 : pdfPageNumber
         if let pdf = pdfRef {
@@ -567,13 +579,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func doRotation(sender: AnyObject) {
+    @IBAction func doRotation(_ sender: AnyObject) {
         var rotationType: Int
-        if sender.isKindOfClass(NSSegmentedControl) {
+        if sender is NSSegmentedControl {
             rotationType = sender.selectedSegment
         }
         else {
-            rotationType = sender.tag()
+            rotationType = sender.tag
         }
         switch rotationType {
         case 0:
@@ -591,11 +603,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    func radians(degrees: Double) -> Double {
+    func radians(_ degrees: Double) -> Double {
         return degrees * 3.14159265359 / 180.0
     }
     
-    func rotateImageView(degrees: Double) {
+    func rotateImageView(_ degrees: Double) {
         imageView.rotationAngle += CGFloat(radians(degrees))
         adjustImageAfterRotation()
     }
@@ -611,7 +623,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
 
 // MARK: Caliper functions
     
-    func addCaliperWithDirection(direction: CaliperDirection) {
+    func addCaliperWithDirection(_ direction: CaliperDirection) {
         let caliper = Caliper()
         // initiallize with Preferences here
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
@@ -624,7 +636,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         caliper.color = caliper.unselectedColor
         caliper.direction = direction
-        if direction == .Horizontal {
+        if direction == .horizontal {
             caliper.calibration = calipersView.horizontalCalibration
         }
         else {
@@ -636,20 +648,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func addHorizontalCaliper() {
-        addCaliperWithDirection(.Horizontal)
+        addCaliperWithDirection(.horizontal)
     }
     
     func addVerticalCaliper() {
-        addCaliperWithDirection(.Vertical)
+        addCaliperWithDirection(.vertical)
     }
     
-    @IBAction func addCaliper(sender: AnyObject) {
+    @IBAction func addCaliper(_ sender: AnyObject) {
         var caliperType: Int
-        if sender.isKindOfClass(NSSegmentedControl) {
+        if sender is NSSegmentedControl {
             caliperType = sender.selectedSegment
         }
         else {
-            caliperType = sender.tag()
+            caliperType = sender.tag
         }
         switch caliperType {
         case 0:
@@ -678,8 +690,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 return
             }
             showMessage("Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel.")
-            navigationSegmentedControl.enabled = true
-            measurementSegmentedControl.enabled = false
+            navigationSegmentedControl.isEnabled = true
+            measurementSegmentedControl.isEnabled = false
             inCalibration = true
         }
         else {
@@ -704,7 +716,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         if let c = calipersView.activeCaliper() {
             var example: String
-            if c.direction == .Vertical {
+            if c.direction == .vertical {
                 example = "1 mV"
             }
             else {
@@ -714,9 +726,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             let alert = NSAlert()
             alert.messageText = "Calibrate caliper"
             alert.informativeText = message
-            alert.alertStyle = NSAlertStyle.InformationalAlertStyle
-            alert.addButtonWithTitle("Calibrate")
-            alert.addButtonWithTitle("Cancel")
+            alert.alertStyle = NSAlertStyle.informational
+            alert.addButton(withTitle: "Calibrate")
+            alert.addButton(withTitle: "Cancel")
             alert.accessoryView = textInputView
             if preferencesChanged {
                 calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration!
@@ -733,7 +745,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             }
             let direction = c.direction
             var calibrationString: String
-            if direction == .Horizontal {
+            if direction == .horizontal {
                 calibrationString = calipersView.horizontalCalibration.calibrationString
             }
             else {
@@ -748,18 +760,18 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                     exitCalibration()
                 }
             }
-            measurementSegmentedControl.enabled = calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate
+            measurementSegmentedControl.isEnabled = calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate
         }
     }
     
-    func calibrateWithText(inputText: String) {
+    func calibrateWithText(_ inputText: String) {
         // caller must guarantee this
         assert(inputText.characters.count > 0)
         var value: Double = 0.0
         var trimmedUnits: String = ""
-        let scanner = NSScanner.localizedScannerWithString(inputText)
+        let scanner = Scanner.localizedScanner(with: inputText)
         if scanner.scanDouble(&value) {
-            trimmedUnits = scanner.string!!.substringFromIndex(scanner.scanLocation).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            trimmedUnits = scanner.string!!.substring(from: scanner.scanLocation).trimmingCharacters(in: CharacterSet.whitespaces)
             value = fabs(value)
             if value > 0 {
                 let c = calipersView.activeCaliper()
@@ -767,7 +779,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                     return
                 }
                 var calibration: Calibration
-                if c!.direction == .Horizontal {
+                if c!.direction == .horizontal {
                     calibration = calipersView.horizontalCalibration
                 }
                 else {
@@ -791,10 +803,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func exitCalibration() {
         clearMessage()
         inCalibration = false
-        navigationSegmentedControl.enabled = false
+        navigationSegmentedControl.isEnabled = false
     }
     
-    func showMessage(message: String) {
+    func showMessage(_ message: String) {
         messageLabel.stringValue = message
     }
     
@@ -802,7 +814,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         showMessage("")
     }
     
-    func showNoCalipersAlert(noTimeCaliper: Bool) {
+    func showNoCalipersAlert(_ noTimeCaliper: Bool) {
         let alert = NSAlert()
         if noTimeCaliper {
             alert.messageText = "No time caliper available"
@@ -812,8 +824,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             alert.messageText = "No calipers available"
             alert.informativeText = "In order to proceed, you must first add a caliper."
         }
-        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
-        alert.addButtonWithTitle("OK")
+        alert.alertStyle = NSAlertStyle.informational
+        alert.addButton(withTitle: "OK")
         alert.runModal()
     }
     
@@ -821,8 +833,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         let alert = NSAlert()
         alert.messageText = "No caliper selected"
         alert.informativeText = "Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV"
-        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
-        alert.addButtonWithTitle("OK")
+        alert.alertStyle = NSAlertStyle.informational
+        alert.addButton(withTitle: "OK")
         alert.runModal()
     }
     
@@ -830,26 +842,26 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         let alert = NSAlert()
         alert.messageText = "No time caliper selected"
         alert.informativeText = "Select a time caliper.  Stretch the caliper over several intervals to get an average interval and rate."
-        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
-        alert.addButtonWithTitle("OK")
+        alert.alertStyle = NSAlertStyle.informational
+        alert.addButton(withTitle: "OK")
         alert.runModal()
     }
     
     func showDivisorErrorAlert() {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.WarningAlertStyle
+        alert.alertStyle = NSAlertStyle.warning
         alert.messageText = "Bad number of intervals"
         alert.informativeText = "Please enter a number between 1 and 10"
-        alert.addButtonWithTitle("OK")
+        alert.addButton(withTitle: "OK")
         alert.runModal()
     }
     
-    func showMeanRRResultAlert(meanInterval: Double, meanRate: Double, intervalUnits: String) {
+    func showMeanRRResultAlert(_ meanInterval: Double, meanRate: Double, intervalUnits: String) {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.alertStyle = NSAlertStyle.informational
         alert.messageText = "Mean interval and rate"
         alert.informativeText = String(format: "Mean interval = %.4g %@\nMean rate = %.4g bpm", meanInterval, intervalUnits, meanRate)
-        alert.addButtonWithTitle("OK")
+        alert.addButton(withTitle: "OK")
         alert.runModal()
     }
 
@@ -873,7 +885,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             // flashCalipers()
             calipersView.horizontalCalibration.reset()
             calipersView.verticalCalibration.reset()            
-            measurementSegmentedControl.enabled = false
+            measurementSegmentedControl.isEnabled = false
         }
     }
     
@@ -890,7 +902,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 return
             }
             showMessage("Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel.")
-            navigationSegmentedControl.enabled = true
+            navigationSegmentedControl.isEnabled = true
             // don't allow pressing QTc button in middle of meanRR
             measurementSegmentedControl.setEnabled(false, forSegment: 2)
             inMeanRR = true
@@ -916,7 +928,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return
         }
         if let c = calipersView.activeCaliper() {
-            if c.direction == .Vertical {
+            if c.direction == .vertical {
                 showNoTimeCaliperSelectedAlert()
                 return
             }
@@ -924,9 +936,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             let alert = NSAlert()
             alert.messageText = "Enter number of intervals"
             alert.informativeText = "How many intervals is this caliper measuring?  "
-            alert.alertStyle = NSAlertStyle.InformationalAlertStyle
-            alert.addButtonWithTitle("Calculate")
-            alert.addButtonWithTitle("Cancel")
+            alert.alertStyle = NSAlertStyle.informational
+            alert.addButton(withTitle: "Calculate")
+            alert.addButton(withTitle: "Cancel")
             alert.accessoryView = numberInputView
             numberTextField.stringValue = String(appPreferences.defaultNumberOfMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
@@ -952,7 +964,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func exitMeanRR() {
         clearMessage()
         inMeanRR = false
-        navigationSegmentedControl.enabled = false
+        navigationSegmentedControl.isEnabled = false
         measurementSegmentedControl.setEnabled(true, forSegment: 2)
     }
     
@@ -981,7 +993,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return
         }
         if let c = calipersView.activeCaliper() {
-            if c.direction == .Vertical {
+            if c.direction == .vertical {
                 showNoTimeCaliperSelectedAlert()
                 return
             }
@@ -995,11 +1007,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func doQTcStep1() {
         if let c = calipersView.activeCaliper() {
             let alert = NSAlert()
-            alert.alertStyle = .InformationalAlertStyle
+            alert.alertStyle = .informational
             alert.messageText = "QTc: Enter number of RR intervals"
             alert.informativeText = "How many RR intervals is this caliper measuring?"
-            alert.addButtonWithTitle("Continue")
-            alert.addButtonWithTitle("Back")
+            alert.addButton(withTitle: "Continue")
+            alert.addButton(withTitle: "Back")
             alert.accessoryView = numberInputView
             numberTextField.stringValue = String(appPreferences.defaultNumberOfQTcMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
@@ -1047,10 +1059,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 }
                 result = String(format: "Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)", meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units)
                 let alert = NSAlert()
-                alert.alertStyle = .InformationalAlertStyle
+                alert.alertStyle = .informational
                 alert.messageText = "Calculated QTc"
                 alert.informativeText = result
-                alert.addButtonWithTitle("OK")
+                alert.addButton(withTitle: "OK")
                 alert.runModal()
                 exitQTc()
             }
@@ -1062,9 +1074,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
     func enterQTc() {
-        navigationSegmentedControl.enabled = true
+        navigationSegmentedControl.isEnabled = true
         // don't mess with calibration during QTc measurment
-        calipersSegementedControl.enabled = false
+        calipersSegementedControl.isEnabled = false
         // don't allow pushing R/I or meanRR buttons either
         measurementSegmentedControl.setEnabled(false, forSegment: 0)
         measurementSegmentedControl.setEnabled(false, forSegment: 1)
@@ -1072,8 +1084,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
     func exitQTc() {
-        navigationSegmentedControl.enabled = false
-        calipersSegementedControl.enabled = true
+        navigationSegmentedControl.isEnabled = false
+        calipersSegementedControl.isEnabled = true
         measurementSegmentedControl.setEnabled(true, forSegment: 0)
         measurementSegmentedControl.setEnabled(true, forSegment: 1)
         calipersView.locked = false
@@ -1113,7 +1125,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         var n: Int = 0
         if calipersView.calipers.count > 0 {
             for caliper in calipersView.calipers {
-                if caliper.direction == .Horizontal {
+                if caliper.direction == .horizontal {
                     c = caliper
                     n += 1
                 }
@@ -1128,19 +1140,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func noTimeCaliperExists() -> Bool {
         var noTimeCaliperFound = true
         for c in calipersView.calipers {
-            if c.direction == .Horizontal {
+            if c.direction == .horizontal {
                 noTimeCaliperFound = false
             }
         }
         return noTimeCaliperFound
     }
     
-    @IBAction func stepperAction(sender: AnyObject) {
+    @IBAction func stepperAction(_ sender: AnyObject) {
         numberTextField.integerValue = numberStepper.integerValue
     }
     
-    override func controlTextDidChange(obj: NSNotification) {
-        if obj.name == "NSControlTextDidChangeNotification" {
+    override func controlTextDidChange(_ obj: Notification) {
+        if obj.name == "NSControlTextDidChangeNotification" as NSNotification.Name {
             if obj.object === numberTextField {
                 numberStepper.integerValue = numberTextField.integerValue
             }
