@@ -48,7 +48,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var showPromptsCheckBox: NSButton!
     @IBOutlet weak var roundMsecRateCheckBox: NSButton!
 
-    var imageProperties: NSDictionary = Dictionary<String, String>()
+    var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
     var imageURL: URL? = nil
@@ -118,23 +118,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             "defaultNumberOfQTcMeanRRIntervalsKey": 1,
             "showPromptsKey": true,
             "roundMsecRateKey": true
-        ]
-        UserDefaults.standard().register(defaults)
+        ] as [String : Any]
+        UserDefaults.standard.register(defaults: defaults)
         appPreferences.loadPreferences()
         // need to manually register colors, using extension to NSUserDefaults
         if (appPreferences.caliperColor == nil) {
-            UserDefaults.standard().setColor(NSColor.blue(), forKey:"caliperColorKey")
-            appPreferences.caliperColor = NSColor.blue()
+            UserDefaults.standard.setColor(NSColor.blue, forKey:"caliperColorKey")
+            appPreferences.caliperColor = NSColor.blue
         }
         if (appPreferences.highlightColor == nil) {
-            UserDefaults.standard().setColor(NSColor.red(), forKey: "highlightColorKey")
-            appPreferences.highlightColor = NSColor.red()
+            UserDefaults.standard.setColor(NSColor.red, forKey: "highlightColorKey")
+            appPreferences.highlightColor = NSColor.red
         }
-        Bundle.main().loadNibNamed("View", owner: self, topLevelObjects: nil)
+        Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
-        if let path = Bundle.main().pathForResource("Normal 12_Lead ECG", ofType: "jpg") {
+        if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
             let url = URL(fileURLWithPath: path)
             openImageUrl(url, addToRecentDocuments: false)
         }
@@ -172,14 +172,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func checkExtension(_ drag: NSDraggingInfo) -> Bool {
         if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
             let path = board[0] as? String {
-                let url = URL(fileURLWithPath: path)
-                if let suffix = url.pathExtension {
-                    for ext in validFileExtensions() {
-                        if ext.lowercased() == suffix {
-                            return true
-                        }
-                    }
+            let url = URL(fileURLWithPath: path)
+            let suffix = url.pathExtension
+            for ext in validFileExtensions() {
+                if ext.lowercased() == suffix {
+                    return true
                 }
+            }
+            
         }
         return false
     }
@@ -417,7 +417,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func openURL(_ url: URL?, addToRecentDocuments: Bool) {
         if let goodURL = url {
             clearPDF()
-            if isPDFFile(try! goodURL.filePathURL()) {
+            // TODO: FIXME:
+            if isPDFFile((goodURL as NSURL).filePathURL) {
                 openPDF(goodURL, addToRecentDocuments: addToRecentDocuments)
             }
             else {
@@ -434,14 +435,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     func isPDFFile(_ filePath: URL?) -> Bool {
         if let path = filePath {
-            if let ext = path.pathExtension {
-                return ext.uppercased() == "PDF"
-            }
+            let ext = path.pathExtension
+            return ext.uppercased() == "PDF"
         }
         return false
     }
     
-    enum OpenError : ErrorProtocol {
+    enum OpenError : Error {
         case Nonspecific
     }
     
@@ -455,12 +455,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             if reachable {
                 imageView.setImageWith(url)
                 imageView.zoomImageToActualSize(self)
-                if let urlPath = url.path {
-                    self.window!.setTitleWithRepresentedFilename(urlPath)
-                }
-                else {
-                    self.window!.title = "EP Calipers"
-                }
+                let urlPath = url.path
+                self.window!.setTitleWithRepresentedFilename(urlPath)
+                
+//                else {
+//                    self.window!.title = "EP Calipers"
+//                }
                 imageURL = url
                 clearCalibration()
                 if addToRecentDocuments {
@@ -506,12 +506,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             numberOfPDFPages = pdf.pageCount
             imageIsPDF = true
             showPDFPage(pdf, page: 0)
-            if let urlPath = url.path {
-                self.window!.setTitleWithRepresentedFilename(urlPath)
-            }
-            else {
-                self.window!.title = "EP Calipers"
-            }
+            let urlPath = url.path
+            self.window!.setTitleWithRepresentedFilename(urlPath)
+//            }
+//            else {
+//                self.window!.title = "EP Calipers"
+//            }
             imageURL = url
             clearCalibration()
             if addToRecentDocuments {
@@ -540,7 +540,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         let newSize = NSMakeSize(image.size.width * factor, image.size.height * factor)
         let scaledImage = NSImage(size: newSize)
         scaledImage.lockFocus()
-        NSColor.white().set()
+        NSColor.white.set()
         NSBezierPath.fill(NSMakeRect(0, 0, newSize.width, newSize.height))
         let transform = NSAffineTransform()
         transform.scale(by: factor)
@@ -722,7 +722,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             else {
                 example = "1000 msec"
             }
-            let message = String("Enter calibration measurement (e.g. \(example))")
+            let message = String("Enter calibration measurement (e.g. \(example))")!
             let alert = NSAlert()
             alert.messageText = "Calibrate caliper"
             alert.informativeText = message
@@ -769,9 +769,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         assert(inputText.characters.count > 0)
         var value: Double = 0.0
         var trimmedUnits: String = ""
-        let scanner = Scanner.localizedScanner(with: inputText)
+        let scanner: Scanner = Scanner.localizedScanner(with: inputText) as! Scanner
         if scanner.scanDouble(&value) {
-            trimmedUnits = scanner.string!!.substring(from: scanner.scanLocation).trimmingCharacters(in: CharacterSet.whitespaces)
+            let scannerString = scanner.string
+            var scannerIndex = scannerString.startIndex
+            scannerIndex = scannerString.index(scannerString.startIndex, offsetBy: scanner.scanLocation)
+            trimmedUnits = scanner.string.substring(from: scannerIndex).trimmingCharacters(in: CharacterSet.whitespaces)
             value = fabs(value)
             if value > 0 {
                 let c = calipersView.activeCaliper()
@@ -1152,14 +1155,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     override func controlTextDidChange(_ obj: Notification) {
-        if obj.name == "NSControlTextDidChangeNotification" as NSNotification.Name {
-            if obj.object === numberTextField {
+        if obj.name.rawValue == "NSControlTextDidChangeNotification" {
+            if obj.object as AnyObject? === numberTextField {
                 numberStepper.integerValue = numberTextField.integerValue
             }
-            if obj.object === numberOfMeanRRIntervalsTextField {
+            if obj.object as AnyObject? === numberOfMeanRRIntervalsTextField {
                 numberOfMeanRRIntervalsStepper.integerValue = numberOfMeanRRIntervalsTextField.integerValue
             }
-            if obj.object === numberOfQTcMeanRRIntervalsTextField {
+            if obj.object as AnyObject? === numberOfQTcMeanRRIntervalsTextField {
                 numberOfQTcMeanRRIntervalsStepper.integerValue = numberOfQTcMeanRRIntervalsTextField.integerValue
             }
         }

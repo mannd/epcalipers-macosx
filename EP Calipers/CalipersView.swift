@@ -52,9 +52,7 @@ class CalipersView: NSView {
         return true
     }
     
-
-    
-    override func mouseDown(_ theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
         selectedCaliper = getSelectedCaliper(theEvent.locationInWindow)
         if selectedCaliper != nil {
             if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
@@ -68,7 +66,7 @@ class CalipersView: NSView {
             }
         }
         else {
-            imageView!.mouseDown(theEvent)
+            imageView!.mouseDown(with: theEvent)
         }
     }
     
@@ -101,7 +99,7 @@ class CalipersView: NSView {
         return caliper
     }
     
-    override func mouseDragged(_ theEvent: NSEvent) {
+    override func mouseDragged(with theEvent: NSEvent) {
         if let c = selectedCaliper {
             var delta = CGPoint(x: theEvent.deltaX, y: theEvent.deltaY)
             if c.direction == .vertical {
@@ -126,11 +124,11 @@ class CalipersView: NSView {
             needsDisplay = true
         }
         else {
-            imageView!.mouseDragged(theEvent)
+            imageView!.mouseDragged(with: theEvent)
         }
     }
     
-    override func mouseUp(_ theEvent: NSEvent) {
+    override func mouseUp(with theEvent: NSEvent) {
         if selectedCaliper != nil {
             if !mouseWasDragged && !locked {
                 if theEvent.clickCount == 1 {
@@ -153,7 +151,7 @@ class CalipersView: NSView {
             
         }
         else {
-            imageView!.mouseUp(theEvent)
+            imageView!.mouseUp(with: theEvent)
         }
     }
     
@@ -201,12 +199,12 @@ class CalipersView: NSView {
         return caliper
     }
     
-    override func keyDown(_ theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         interpretKeyEvents([theEvent])
     }
     
     
-    override func deleteBackward(_ sender: AnyObject?) {
+    override func deleteBackward(_ sender: Any?) {
         if locked {
             return
         }
@@ -251,10 +249,10 @@ class CalipersView: NSView {
         // if escape used to cancel screencapture.
         // Screencapture in preview mode and window mode with sound.
         let prefix = "EPCalipers"
-        let guid = ProcessInfo.processInfo().globallyUniqueString
+        let guid = ProcessInfo.processInfo.globallyUniqueString
         let fileName = "\(prefix)_\(guid)"
         let path = "\(NSHomeDirectory())/\(fileName).png"
-        let task = Task()
+        let task = Process()
         task.launchPath = "/bin/bash"
         task.arguments = ["screencapture -P -w \(path)"]
         task.launch()

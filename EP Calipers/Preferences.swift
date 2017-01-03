@@ -28,8 +28,8 @@ extension UserDefaults {
 }
 
 class Preferences: NSObject {
-    var caliperColor: NSColor? = NSColor.blue()
-    var highlightColor: NSColor? = NSColor.red()
+    var caliperColor: NSColor? = NSColor.blue
+    var highlightColor: NSColor? = NSColor.red
     var lineWidth: Int = 2
     var defaultCalibration: String? = "1000 msec"
     var defaultVerticalCalibration: String? = "10 mm"
@@ -40,7 +40,7 @@ class Preferences: NSObject {
 
     
     func loadPreferences() {
-        let preferences = UserDefaults.standard()
+        let preferences = UserDefaults.standard
         caliperColor = preferences.colorForKey("caliperColorKey")
         highlightColor = preferences.colorForKey("highlightColorKey")
         lineWidth = preferences.integer(forKey: "lineWidthKey")
@@ -53,7 +53,7 @@ class Preferences: NSObject {
     }
     
     func savePreferences() {
-        let preferences = UserDefaults.standard()
+        let preferences = UserDefaults.standard
         preferences.setColor(caliperColor, forKey: "caliperColorKey")
         preferences.setColor(highlightColor, forKey: "highlightColorKey")
         preferences.set(lineWidth, forKey: "lineWidthKey")

@@ -37,9 +37,9 @@ class Caliper: NSObject {
             self.bar1Position = bar1Position
             self.bar2Position = bar2Position
             self.crossBarPosition = crossBarPosition
-            self.color = NSColor.blue()
-            self.unselectedColor = NSColor.blue()
-            self.selectedColor = NSColor.red()
+            self.color = NSColor.blue
+            self.unselectedColor = NSColor.blue
+            self.selectedColor = NSColor.red
             self.lineWidth = 2
             self.selected = false
             self.textFont = NSFont(name: "Helvetica", size: 18.0)!
@@ -80,28 +80,28 @@ class Caliper: NSObject {
         context.setLineWidth(lineWidth)
         
         if self.direction == .horizontal {
-            crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta));
-            crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta));
-            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta));
+            crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
+            crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
+            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
             bar2Position = CGFloat(fmax(Double(bar2Position), delta));
-            context.moveTo(x: bar1Position, y: 0);
-            context.addLineTo(x: bar1Position, y: rect.size.height);
-            context.moveTo(x: bar2Position, y: 0);
-            context.addLineTo(x: bar2Position, y: rect.size.height);
-            context.moveTo(x: bar2Position, y: crossBarPosition);
-            context.addLineTo(x: bar1Position, y: crossBarPosition);
+            context.move(to: CGPoint(x: bar1Position, y: 0));
+            context.addLine(to: CGPoint(x: bar1Position, y: rect.size.height))
+            context.move(to: CGPoint(x: bar2Position, y: 0))
+            context.addLine(to: CGPoint(x: bar2Position, y: rect.size.height))
+            context.move(to: CGPoint(x: bar2Position, y: crossBarPosition))
+            context.addLine(to: CGPoint(x: bar1Position, y: crossBarPosition))
             
         } else {    // vertical caliper
-            crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.width) - delta));
-            crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta));
-            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.height) - delta));
-            bar2Position = CGFloat(fmax(Double(bar2Position), delta));
-            context.moveTo(x: 0, y: bar1Position);
-            context.addLineTo(x: rect.size.width, y: bar1Position);
-            context.moveTo(x: 0, y: bar2Position);
-            context.addLineTo(x: rect.size.width, y: bar2Position);
-            context.moveTo(x: crossBarPosition, y: bar2Position);
-            context.addLineTo(x: crossBarPosition, y: bar1Position);
+            crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.width) - delta))
+            crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
+            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.height) - delta))
+            bar2Position = CGFloat(fmax(Double(bar2Position), delta))
+            context.move(to: CGPoint(x: 0, y: bar1Position))
+            context.addLine(to: CGPoint(x: rect.size.width, y: bar1Position))
+            context.move(to: CGPoint(x: 0, y: bar2Position))
+            context.addLine(to: CGPoint(x: rect.size.width, y: bar2Position))
+            context.move(to: CGPoint(x: crossBarPosition, y: bar2Position))
+            context.addLine(to: CGPoint(x: crossBarPosition, y: bar1Position))
         }
         context.strokePath()
         let text = measurement()
@@ -111,7 +111,7 @@ class Caliper: NSObject {
             NSFontAttributeName: textFont,
             NSParagraphStyleAttributeName: paragraphStyle,
             NSForegroundColorAttributeName: color
-        ]
+        ] as [String : Any]
         if direction == .horizontal {
             // the math here insures that the label doesn't get so small that it can't be read
             text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition - 20,  width: fmax(50.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);
