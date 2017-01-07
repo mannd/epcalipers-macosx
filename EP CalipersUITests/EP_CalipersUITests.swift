@@ -36,7 +36,7 @@ class EP_CalipersUITests: XCTestCase {
         
         let app = XCUIApplication()
         let normal12LeadEcgJpgWindow = app.windows["Normal 12_Lead ECG.jpg"]
-        normal12LeadEcgJpgWindow.groups.containingType(.Button, identifier:"Calibrate").childrenMatchingType(.Button).elementBoundByIndex(0).click()
+        normal12LeadEcgJpgWindow.groups.containing(.button, identifier:"Calibrate").children(matching: .button).elementBound(by: 0).click()
         normal12LeadEcgJpgWindow.buttons["Calibrate"].click()
         app.dialogs["alert"].buttons["Calibrate"].click()
         normal12LeadEcgJpgWindow.buttons["R/I"].click()

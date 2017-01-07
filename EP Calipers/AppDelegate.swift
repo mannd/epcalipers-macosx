@@ -13,9 +13,9 @@ import Quartz
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var mainWindowController: MainWindowController?
-    var externalURL: NSURL? = nil
+    var externalURL: URL? = nil
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // uncomment below to clear default prefs for testing
 //        let appDomain = NSBundle.mainBundle().bundleIdentifier
 //        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
@@ -31,19 +31,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSLog("applicationDidFinishLaunching")
     }
     
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     
     // ensures closed window reopened by clicking on dock
-    func applicationShouldHandleReopen(sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         mainWindowController!.showWindow(self)
         return true
     }
     
-    func application(sender: NSApplication, openFile filename: String) -> Bool {
+    func application(_ sender: NSApplication, openFile filename: String) -> Bool {
         // needed to implement Open Recent... menu item
-        let url = NSURL.fileURLWithPath(filename)
+        let url = URL(fileURLWithPath: filename)
         if let controller = mainWindowController {
             controller.openURL(url, addToRecentDocuments: false)
         }
@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
      }
     
-    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
     

@@ -28,7 +28,7 @@ class EP_CalipersTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
@@ -38,9 +38,9 @@ class EP_CalipersTests: XCTestCase {
         XCTAssert(c.bar1Position == 0)
         XCTAssert(c.bar2Position == 0);
         XCTAssert(c.crossBarPosition == 100.0);
-        let p = CGPointMake(100, 50);
+        let p = CGPoint(x: 100, y: 50);
         XCTAssert(c.barCoord(p) == 100);
-        c.direction = .Vertical;
+        c.direction = .vertical;
         XCTAssert(c.barCoord(p) == 50);
     }
     
@@ -63,7 +63,7 @@ class EP_CalipersTests: XCTestCase {
         XCTAssert(!cal.canDisplayRate)
         cal.rawUnits = "mSecs";
         XCTAssert(cal.canDisplayRate)
-        cal.direction = .Vertical;
+        cal.direction = .vertical;
         XCTAssert(!cal.canDisplayRate)
     }
     
