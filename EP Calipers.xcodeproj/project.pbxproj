@@ -32,6 +32,7 @@
 		8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD21C4742E4002E0085 /* lock-16.png */; };
 		8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */; };
 		8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */; };
+		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EBF23641C93516A009FB6DF /* EPCalipers.help in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF23631C93516A009FB6DF /* EPCalipers.help */; };
 		8ECC76C71C48B1830091F87A /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ECC76C61C48B1830091F87A /* View.xib */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,7 @@
 		8EA7EFD21C4742E4002E0085 /* lock-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-16.png"; sourceTree = "<group>"; };
 		8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-icon-bw-20x20.png"; sourceTree = "<group>"; };
 		8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-amplitude-icon-bw-20x20.png"; sourceTree = "<group>"; };
+		8EB72C991E2154340083DE96 /* AngleCaliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleCaliper.swift; sourceTree = "<group>"; };
 		8EBF23631C93516A009FB6DF /* EPCalipers.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipers.help; sourceTree = "<group>"; };
 		8ECC76C61C48B1830091F87A /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EP Calipers.entitlements"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */,
 				8E2282471C398B1300337695 /* CalipersView.swift */,
 				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
+				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
 				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
 				8ECC76C61C48B1830091F87A /* View.xib */,
 				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
@@ -358,6 +361,7 @@
 				8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */,
 				8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */,
 				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,
+				8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,

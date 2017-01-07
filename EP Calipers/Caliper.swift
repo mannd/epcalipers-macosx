@@ -29,6 +29,8 @@ class Caliper: NSObject {
     var paragraphStyle: NSMutableParagraphStyle
     var calibration: Calibration = Calibration()
     var roundMsecRate: Bool
+    var requiresCalibration: Bool = true
+    var isAngleCaliper:Bool = false
     
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
         crossBarPosition: CGFloat) {
@@ -104,6 +106,10 @@ class Caliper: NSObject {
             context.addLine(to: CGPoint(x: crossBarPosition, y: bar1Position))
         }
         context.strokePath()
+        caliperText()
+    }
+    
+    func caliperText() {
         let text = measurement()
         paragraphStyle.lineBreakMode = .byTruncatingTail
         paragraphStyle.alignment = (direction == .horizontal ? .center : .left)
@@ -111,15 +117,14 @@ class Caliper: NSObject {
             NSFontAttributeName: textFont,
             NSParagraphStyleAttributeName: paragraphStyle,
             NSForegroundColorAttributeName: color
-        ] as [String : Any]
+            ] as [String : Any]
         if direction == .horizontal {
             // the math here insures that the label doesn't get so small that it can't be read
-            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition - 20,  width: fmax(50.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);
+            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition - 20,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);
         }
         else {
             text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position + (bar2Position - bar1Position) / 2, width: 140, height: 20), withAttributes:attributes);
         }
- 
     }
     
     func barCoord(_ p: CGPoint) -> CGFloat {
@@ -196,6 +201,14 @@ class Caliper: NSObject {
         return (Double(barCoord(p)) > (Double(barPosition) - delta)) && (Double(barCoord(p)) < (Double(barPosition) + delta))
     }
     
+    func pointNearBar1(p: CGPoint) -> Bool {
+        return pointNearBar(p, forBarPosition: bar1Position)
+    }
+    
+    func pointNearBar2(p: CGPoint) -> Bool {
+        return pointNearBar(p, forBarPosition: bar2Position)
+    }
+    
     func pointNearCrossBar(_ p: CGPoint) -> Bool {
         var nearBar = false
         let adjustedDelta = delta + 5  // make crossbar delta a little larger
@@ -214,6 +227,21 @@ class Caliper: NSObject {
     
     func pointNearCaliper(_ p: CGPoint) -> Bool {
         return pointNearCrossBar(p) || pointNearBar(p, forBarPosition: bar1Position) || pointNearBar(p, forBarPosition: bar2Position)
+    }
+    
+    func moveCrossBar(delta: CGPoint) {
+        bar1Position += delta.x
+        bar2Position += delta.x
+        crossBarPosition += delta.y
+    }
+    
+    func moveBar1(delta: CGPoint, forLocation location: CGPoint) {
+        // location parameter unused here, but is in subclass
+        bar1Position += delta.x
+    }
+    
+    func moveBar2(delta: CGPoint, forLocation location: CGPoint) {
+        bar2Position += delta.x
     }
     
 }
