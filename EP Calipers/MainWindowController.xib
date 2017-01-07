@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
@@ -23,7 +24,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="727" height="456"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="727" height="456"/>
             <view key="contentView" id="uHL-zZ-C20">
                 <rect key="frame" x="0.0" y="0.0" width="727" height="456"/>
@@ -37,6 +38,7 @@
                             <subviews>
                                 <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
                                     <rect key="frame" x="88" y="-190" width="69" height="8"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </view>
                             </subviews>
                         </clipView>
@@ -92,7 +94,7 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
-                        <rect key="frame" x="211" y="424" width="200" height="24"/>
+                        <rect key="frame" x="211" y="424" width="237" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
                         </constraints>
@@ -105,7 +107,10 @@
                                 <segment toolTip="Add amplitude caliper" image="calipers-amplitude-icon-bw-20x20" width="32" tag="1">
                                     <nil key="label"/>
                                 </segment>
-                                <segment label="Calibrate" toolTip="Calibrate"/>
+                                <segment toolTip="Calibrate" image="angle_icon_2_20x20">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment label="Calibrate" toolTip="Clear calibration"/>
                                 <segment label="Clear" toolTip="Clear calibration"/>
                             </segments>
                         </segmentedCell>
@@ -114,7 +119,7 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
-                        <rect key="frame" x="415" y="424" width="109" height="24"/>
+                        <rect key="frame" x="452" y="424" width="109" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="wj5-y7-FoH"/>
                         </constraints>
@@ -143,7 +148,7 @@
                         </textFieldCell>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Qk-Lr-dNR">
-                        <rect key="frame" x="528" y="424" width="169" height="24"/>
+                        <rect key="frame" x="565" y="424" width="169" height="24"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="lxO-ww-kvY">
                             <font key="font" metaFont="system"/>
                             <segments>
@@ -224,6 +229,7 @@
         <image name="TB_zoomActual" width="20" height="20"/>
         <image name="TB_zoomIn" width="20" height="20"/>
         <image name="TB_zoomOut" width="20" height="20"/>
+        <image name="angle_icon_2_20x20" width="20" height="20"/>
         <image name="calipers-amplitude-icon-bw-20x20" width="20" height="20"/>
         <image name="calipers-icon-bw-20x20" width="20" height="20"/>
         <image name="lock-16" width="16" height="16"/>

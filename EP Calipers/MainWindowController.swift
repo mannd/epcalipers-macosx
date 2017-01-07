@@ -655,6 +655,24 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         addCaliperWithDirection(.vertical)
     }
     
+    func addAngleCaliper() {
+        let caliper = AngleCaliper()
+        caliper.lineWidth = CGFloat(appPreferences.lineWidth)
+        caliper.direction = .horizontal
+        caliper.calibration = calipersView.horizontalCalibration
+        caliper.verticalCalibration = calipersView.verticalCalibration
+        if let color = appPreferences.caliperColor {
+            caliper.unselectedColor = color
+        }
+        if let color = appPreferences.highlightColor {
+            caliper.selectedColor = color
+        }
+        caliper.color = caliper.unselectedColor
+        caliper.setInitialPositionInRect(calipersView.bounds)
+        calipersView.calipers.append(caliper)
+        calipersView.needsDisplay = true
+    }
+    
     @IBAction func addCaliper(_ sender: AnyObject) {
         var caliperType: Int
         if sender is NSSegmentedControl {
@@ -669,8 +687,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         case 1:
             addVerticalCaliper()
         case 2:
-            calibrateWithPossiblePrompts()
+            addAngleCaliper()
         case 3:
+            calibrateWithPossiblePrompts()
+        case 4:
             clearCalibration()
         default:
             break

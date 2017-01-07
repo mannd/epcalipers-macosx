@@ -23,9 +23,9 @@ class AngleCaliper: Caliper {
         struct Holder {
             static var differential: CGFloat = 0
         }
-        bar1Position = (rect.size.width / 3) * Holder.differential
+        bar1Position = (rect.size.width / 3) + Holder.differential
         bar2Position = bar1Position
-        crossBarPosition = (rect.size.height / 3) * Holder.differential * 1.5
+        crossBarPosition = (rect.size.height / 3) + Holder.differential * 1.5
         Holder.differential += 20
         if Holder.differential > 100 {
             Holder.differential = 0
@@ -74,7 +74,7 @@ class AngleCaliper: Caliper {
     func endPointForPosition(p: CGPoint, angle: CGFloat, length: CGFloat) -> CGPoint {
         let endX = cos(angle) * length + p.x
         let endY = sin(angle) * length + p.y
-        let endPoint = CGPoint(x: endX, y: endY)
+        let endPoint = CGPoint(x: endX, y: -endY)
         return endPoint
     }
 

@@ -97,5 +97,12 @@ class Calibration: NSObject {
         || units.contains("MILLIS")
     }
     
+    var unitsAreMM: Bool {
+        if units.isEmpty || direction != .vertical {
+            return false
+        }
+        let upcasedUnits = units.uppercased()
+        return upcasedUnits == "MM" || upcasedUnits.contains("MILLIM")
+    }
     
 }

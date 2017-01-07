@@ -58,10 +58,10 @@ class CalipersView: NSView {
             if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
                 crossBarSelected = true
             }
-            else if selectedCaliper!.pointNearBar(theEvent.locationInWindow, forBarPosition: selectedCaliper!.bar1Position) {
+            else if selectedCaliper!.pointNearBar1(p: theEvent.locationInWindow) {
                 bar1Selected = true
             }
-            else if selectedCaliper!.pointNearBar(theEvent.locationInWindow, forBarPosition: selectedCaliper!.bar2Position) {
+            else if selectedCaliper!.pointNearBar2(p: theEvent.locationInWindow) {
                 bar2Selected = true
             }
         }
@@ -102,6 +102,7 @@ class CalipersView: NSView {
     override func mouseDragged(with theEvent: NSEvent) {
         if let c = selectedCaliper {
             var delta = CGPoint(x: theEvent.deltaX, y: theEvent.deltaY)
+            let location = theEvent.locationInWindow
             if c.direction == .vertical {
                 // different from iOS because origin at lower left
                 let tmp = delta.x
@@ -109,16 +110,13 @@ class CalipersView: NSView {
                 delta.y = -tmp
             }
             if crossBarSelected {
-                c.bar1Position += delta.x
-                c.bar2Position += delta.x
-                // origin is lower left in Cocoa
-                c.crossBarPosition -= delta.y
+                c.moveCrossBar(delta: delta)
             }
             else if bar1Selected {
-                c.bar1Position += delta.x
+                c.moveBar1(delta: delta, forLocation: location)
             }
             else if bar2Selected {
-                c.bar2Position += delta.x
+                c.moveBar2(delta: delta, forLocation: location)
             }
             mouseWasDragged = true
             needsDisplay = true
