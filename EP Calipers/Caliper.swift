@@ -120,7 +120,7 @@ class Caliper: NSObject {
             ] as [String : Any]
         if direction == .horizontal {
             // the math here insures that the label doesn't get so small that it can't be read
-            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 10,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);
+            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);
         }
         else {
             text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position + (bar2Position - bar1Position) / 2, width: 140, height: 20), withAttributes:attributes);
@@ -226,7 +226,7 @@ class Caliper: NSObject {
     }
     
     func pointNearCaliper(_ p: CGPoint) -> Bool {
-        return pointNearCrossBar(p) || pointNearBar(p, forBarPosition: bar1Position) || pointNearBar(p, forBarPosition: bar2Position)
+        return pointNearCrossBar(p) || pointNearBar1(p: p) || pointNearBar2(p: p)
     }
     
     func moveCrossBar(delta: CGPoint) {

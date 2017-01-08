@@ -12,6 +12,7 @@ class AngleCaliper: Caliper {
     var angleBar1 = CGFloat(0.5 * M_PI)
     var angleBar2 = CGFloat(0.25 * M_PI)
     var verticalCalibration: Calibration? = nil
+    let angleDelta = 0.15
     
     init() {
         super.init(direction: .horizontal, bar1Position: 100.0, bar2Position: 100.0, crossBarPosition: 100.0)
@@ -53,31 +54,69 @@ class AngleCaliper: Caliper {
         context.addLine(to: CGPoint(x: endPointBar2.x, y: endPointBar2.y))
         
         context.strokePath()
-        let text = measurement()
-        paragraphStyle.lineBreakMode = .byTruncatingTail
-        paragraphStyle.alignment = (direction == .horizontal ? .center : .left)
-        let attributes = [
-            NSFontAttributeName: textFont,
-            NSParagraphStyleAttributeName: paragraphStyle,
-            NSForegroundColorAttributeName: color
-            ] as [String : Any]
-        if direction == .horizontal {
-            // the math here insures that the label doesn't get so small that it can't be read
-            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition - 20,  width: fmax(50.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);
-        }
-        else {
-            text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position + (bar2Position - bar1Position) / 2, width: 140, height: 20), withAttributes:attributes);
-        }
-        
+        caliperText()
     }
     
     func endPointForPosition(p: CGPoint, angle: CGFloat, length: CGFloat) -> CGPoint {
         let endX = cos(angle) * length + p.x
-        let endY = sin(angle) * length + p.y
-        let endPoint = CGPoint(x: endX, y: -endY)
+        let endY = p.y - sin(angle) * length
+        let endPoint = CGPoint(x: endX, y: endY)
         return endPoint
     }
+    
+    func pointNearBar(point p: CGPoint, forBarAngle barAngle: CGFloat) -> Bool {
+        let theta = relativeTheta(point: p)
+        return theta < Double(barAngle) + angleDelta && theta > Double(barAngle) - angleDelta
+    }
+    
+    func relativeTheta(point p: CGPoint) -> Double {
+        let x = p.x - bar1Position
+        let y = crossBarPosition - p.y
+        return atan2(Double(y), Double(x))
+    }
+    
+    override func pointNearBar1(p: CGPoint) -> Bool {
+        return pointNearBar(point: p, forBarAngle: angleBar1)
+    }
+    
+    override func pointNearBar2(p: CGPoint) -> Bool {
+        return pointNearBar(point: p, forBarAngle: angleBar2)
+    }
+    
+    override func pointNearCrossBar(_ p: CGPoint) -> Bool {
+        let delta: CGFloat = 40.0
+        return (p.x > bar1Position - delta && p.x < bar1Position + delta
+        && p.y > crossBarPosition - delta && p.y < crossBarPosition + delta)
+    }
+    
+    override func measurement() -> String {
+        let angle = angleBar1 - angleBar2
+        let degrees = radiansToDegrees(radians: Double(angle))
+        let text = String(format: "%1.f°", degrees)
+        return text
+    }
+    
+    func radiansToDegrees(radians: Double) -> Double {
+        return radians * 180.0 / M_PI
+    }
 
-   
+    override func intervalResult() -> Double {
+        return Double(angleBar1 - angleBar2)
+    }
+    
+    override func moveBar1(delta: CGPoint, forLocation location: CGPoint) {
+        angleBar1 = CGFloat(moveBarAngle(delta: delta, forLocation: location))
+    }
+    
+    override func moveBar2(delta: CGPoint, forLocation location: CGPoint) {
+        angleBar2 = CGFloat(moveBarAngle(delta: delta, forLocation: location))
+    }
+    
+    func moveBarAngle(delta: CGPoint, forLocation location: CGPoint) -> Double {
+        let newPosition = CGPoint(x: location.x + delta.x, y: location.y + delta.y)
+        return relativeTheta(point: newPosition)
+    }
+    
+  
     
 }
