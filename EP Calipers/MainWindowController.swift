@@ -735,6 +735,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             }
         }
         if let c = calipersView.activeCaliper() {
+            if !c.requiresCalibration {
+                showAngleCaliperNoCalibrationAlert()
+                return
+            }
             var example: String
             if c.direction == .vertical {
                 example = "1 mV"
@@ -835,6 +839,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     func clearMessage() {
         showMessage("")
+    }
+    
+    func showAngleCaliperNoCalibrationAlert() {
+        let alert = NSAlert()
+        alert.messageText = "Angle caliper"
+        alert.informativeText = "Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers."
+        alert.alertStyle = NSAlertStyle.informational
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
     
     func showNoCalipersAlert(_ noTimeCaliper: Bool) {
@@ -1163,7 +1176,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func noTimeCaliperExists() -> Bool {
         var noTimeCaliperFound = true
         for c in calipersView.calipers {
-            if c.direction == .horizontal {
+            if c.direction == .horizontal && !c.isAngleCaliper {
                 noTimeCaliperFound = false
             }
         }

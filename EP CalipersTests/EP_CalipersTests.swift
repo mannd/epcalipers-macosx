@@ -89,6 +89,37 @@ class EP_CalipersTests: XCTestCase {
         XCTAssert(c.calibration.units == "msec")
 
     }
+    
+    func textUnitsAreMM() {
+        let cal = Calibration()
+        cal.calibrated = true
+        cal.direction = .vertical
+        cal.rawUnits = "mm"
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "millimeters";
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "Millimeter";
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "MM";
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "milliM";
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "milliVolts";
+        XCTAssert(!cal.unitsAreMM);
+        cal.rawUnits = "mV";
+        XCTAssert(!cal.unitsAreMM);
+        cal.rawUnits = "msec";
+        XCTAssert(!cal.unitsAreMM);
+    }
+    
+    func testIsAngleCaliper() {
+        let caliper = Caliper()
+        XCTAssert(caliper.requiresCalibration);
+        XCTAssert(!caliper.isAngleCaliper);
+        let angleCaliper = AngleCaliper()
+        XCTAssert(!angleCaliper.requiresCalibration);
+        XCTAssert(angleCaliper.isAngleCaliper);
+    }
 
 
 }
