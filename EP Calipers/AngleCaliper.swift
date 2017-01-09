@@ -55,6 +55,14 @@ class AngleCaliper: Caliper {
         
         context.strokePath()
         caliperText()
+        
+        if (verticalCalibration?.calibrated)! && (verticalCalibration?.unitsAreMM)! {
+            if angleInSouthernHemisphere(angleBar1) && angleInSouthernHemisphere(angleBar2) {
+                // TODO: add here
+                let pointsPerMM = 1.0 / (verticalCalibration?.multiplier())!
+                drawTriangleBase(context, forHeight: 5 * pointsPerMM)
+            }
+        }
     }
     
     func endPointForPosition(p: CGPoint, angle: CGFloat, length: CGFloat) -> CGPoint {
@@ -117,6 +125,56 @@ class AngleCaliper: Caliper {
         return relativeTheta(point: newPosition)
     }
     
+    func drawTriangleBase(_ context: CGContext, forHeight height:Double) {
+        let point1 = getBasePoint1ForHeight(height)
+        let point2 = getBasePoint2ForHeight(height)
+        let lengthInPoints = Double(point2.x - point1.x)
+        context.move(to: point1)
+        context.addLine(to: point2)
+        context.strokePath()
+        
+        let text = baseMeasurement(lengthInPoints)
+        paragraphStyle.lineBreakMode = .byTruncatingTail
+        paragraphStyle.alignment = (direction == .horizontal ? .center : .left)
+        let attributes = [
+            NSFontAttributeName: textFont,
+            NSParagraphStyleAttributeName: paragraphStyle,
+            NSForegroundColorAttributeName: color
+            ] as [String : Any]
+        text.draw(in: CGRect(x: point2.x > point1.x ? point1.x - 25 : point2.x - 25, y: point1.y - 20, width: fmax(100.0, fabs(point2.x - point1.x) + 50), height: 20.0),  withAttributes:attributes)
+        
+    }
+    
+    func baseMeasurement(_ lengthInPoints: Double) -> String {
+        let s = String(format: "%.4g %@", calibratedBaseResult(lengthInPoints), calibration.units)
+        return s
+    }
+    
+    func calibratedBaseResult(_ lengthInPoints: Double) -> Double {
+        var length = lengthInPoints * calibration.multiplier()
+        if roundMsecRate && calibration.unitsAreMsec {
+           length = round(length)
+        }
+        return length
+    }
+    
+    func getBasePoint1ForHeight(_ height: Double) -> CGPoint {
+        let pointY = Double(crossBarPosition) - height
+        var pointX = height * (sin(Double(angleBar1) - M_PI_2) / sin(M_PI - Double(angleBar1)))
+        pointX = Double(bar1Position) - pointX
+        return CGPoint(x: pointX, y: pointY)
+    }
+    
+    func getBasePoint2ForHeight(_ height: Double) -> CGPoint {
+        let pointY = Double(crossBarPosition) - height
+        var pointX = height * (sin(M_PI_2 - Double(angleBar2)) / sin(Double(angleBar2)))
+        pointX += Double(bar1Position)
+        return CGPoint(x: pointX, y: pointY)
+    }
+    
+    func angleInSouthernHemisphere(_ angle:CGFloat) -> Bool {
+        return (0 <= Double(angle) && Double(angle) <= M_PI)
+    }
   
     
 }
