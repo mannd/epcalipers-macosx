@@ -64,6 +64,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     let appPreferences = Preferences()
     var preferencesChanged = false
     var preferencesAlert: NSAlert? = nil
+    var calibrationAlert: NSAlert? = nil
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
@@ -747,13 +748,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 example = "1000 msec"
             }
             let message = String("Enter calibration measurement (e.g. \(example))")!
+            if calibrationAlert == nil {
             let alert = NSAlert()
-            alert.messageText = "Calibrate caliper"
-            alert.informativeText = message
-            alert.alertStyle = NSAlertStyle.informational
-            alert.addButton(withTitle: "Calibrate")
-            alert.addButton(withTitle: "Cancel")
-            alert.accessoryView = textInputView
+                alert.messageText = "Calibrate caliper"
+                //alert.informativeText = message
+                alert.alertStyle = NSAlertStyle.informational
+                alert.addButton(withTitle: "Calibrate")
+                alert.addButton(withTitle: "Cancel")
+                alert.accessoryView = textInputView
+                calibrationAlert = alert
+            }
+            calibrationAlert!.informativeText = message
             if preferencesChanged {
                 calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration!
                 calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration!
@@ -776,7 +781,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 calibrationString = calipersView.verticalCalibration.calibrationString
             }
             textField.stringValue = calibrationString
-            let result = alert.runModal()
+            let result = calibrationAlert!.runModal()
             if result == NSAlertFirstButtonReturn {
                 let inputText = textField.stringValue
                 if inputText.characters.count > 0 {
