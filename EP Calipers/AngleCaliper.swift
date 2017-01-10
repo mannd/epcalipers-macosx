@@ -58,7 +58,6 @@ class AngleCaliper: Caliper {
         
         if (verticalCalibration?.calibrated)! && (verticalCalibration?.unitsAreMM)! {
             if angleInSouthernHemisphere(angleBar1) && angleInSouthernHemisphere(angleBar2) {
-                // TODO: add here
                 let pointsPerMM = 1.0 / (verticalCalibration?.multiplier())!
                 drawTriangleBase(context, forHeight: 5 * pointsPerMM)
             }

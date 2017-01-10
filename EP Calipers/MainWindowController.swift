@@ -137,8 +137,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
             let url = URL(fileURLWithPath: path)
             openImageUrl(url, addToRecentDocuments: false)
+            // attempt to fix image not opening consistently on start bug
+            imageView.needsDisplay = true
         }
-
     }
     
     func draggingEntered(_ sender: NSDraggingInfo!) -> NSDragOperation  {
@@ -417,7 +418,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func openURL(_ url: URL?, addToRecentDocuments: Bool) {
         if let goodURL = url {
             clearPDF()
-            // TODO: FIXME:
             if isPDFFile((goodURL as NSURL).filePathURL) {
                 openPDF(goodURL, addToRecentDocuments: addToRecentDocuments)
             }
@@ -501,21 +501,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
     func openPDF(_ url: URL, addToRecentDocuments: Bool) {
         let pdfData = try? Data(contentsOf: url)
-        if let pdf = NSPDFImageRep(data: pdfData!) {
-            pdfRef = pdf
-            numberOfPDFPages = pdf.pageCount
-            imageIsPDF = true
-            showPDFPage(pdf, page: 0)
-            let urlPath = url.path
-            self.window!.setTitleWithRepresentedFilename(urlPath)
-//            }
-//            else {
-//                self.window!.title = "EP Calipers"
-//            }
-            imageURL = url
-            clearCalibration()
-            if addToRecentDocuments {
-                NSDocumentController.shared().noteNewRecentDocumentURL(url)
+        if pdfData != nil {
+            if let pdf = NSPDFImageRep(data: pdfData!) {
+                pdfRef = pdf
+                numberOfPDFPages = pdf.pageCount
+                imageIsPDF = true
+                showPDFPage(pdf, page: 0)
+                let urlPath = url.path
+                self.window!.setTitleWithRepresentedFilename(urlPath)
+                imageURL = url
+                clearCalibration()
+                if addToRecentDocuments {
+                    NSDocumentController.shared().noteNewRecentDocumentURL(url)
+                }
             }
         }
     }
@@ -760,10 +758,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 preferencesChanged = false
             }
             else {  // don't bother doing this again if preferencesChanged
-                if calipersView.horizontalCalibration.calibrationString.characters.count < 1 {
+                if calipersView.horizontalCalibration.calibrationString.isEmpty {
                     calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration!
                 }
-                if calipersView.verticalCalibration.calibrationString.characters.count < 1 {
+                if calipersView.verticalCalibration.calibrationString.isEmpty {
                     calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration!
                 }
             }

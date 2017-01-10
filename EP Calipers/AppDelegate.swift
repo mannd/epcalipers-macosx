@@ -27,8 +27,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let url = externalURL {
             mainWindowController.openURL(url, addToRecentDocuments: false)
         }
-        
-        NSLog("applicationDidFinishLaunching")
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
