@@ -120,6 +120,5 @@ class EP_CalipersTests: XCTestCase {
         XCTAssert(!angleCaliper.requiresCalibration);
         XCTAssert(angleCaliper.isAngleCaliper);
     }
-
-
+    
 }

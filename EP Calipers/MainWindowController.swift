@@ -208,11 +208,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBAction func showPreferences(_ sender: AnyObject) {
         // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
         // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
+        // Note there is an autolayout bug here, probable introduced in macOS 10.12
+        // see http://openradar.appspot.com/28700495
         if preferencesAlert == nil {
             let alert = NSAlert()
             alert.alertStyle = .informational
             alert.messageText = "EP Calipers preferences"
-            alert.accessoryView = preferencesAccessoryView
+            	alert.accessoryView = preferencesAccessoryView
             alert.addButton(withTitle: "OK")
             alert.addButton(withTitle: "Cancel")
             preferencesAlert = alert
