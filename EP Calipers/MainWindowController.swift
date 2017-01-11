@@ -138,8 +138,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
             let url = URL(fileURLWithPath: path)
             openImageUrl(url, addToRecentDocuments: false)
-            // attempt to fix image not opening consistently on start bug
-            imageView.needsDisplay = true
+            // attempt to fix image not opening consistently on start bug -- doesn't work
+            //imageView.needsDisplay = true
         }
     }
     

@@ -22,8 +22,6 @@
 	<string>EPCalipers.html</string>
 	<key>HPDBookIconPath</key>
 	<string>shrd/icon_16x16.png</string>
-	<key>HPDBookIndexPath</key>
-	<string>EPCalipers.helpindex</string>
 	<key>HPDBookKBProduct</key>
 	<string>epcalipers1</string>
 	<key>HPDBookKBURL</key>
@@ -34,5 +32,7 @@
 	<string>EP Calipers Help</string>
 	<key>HPDBookType</key>
 	<string>3</string>
+	<key>HPDBookIndexPath</key>
+	<string>EPCalipers.helpindex</string>
 </dict>
 </plist>
