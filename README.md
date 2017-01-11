@@ -12,7 +12,11 @@ EP Calipers for Mac OS X is open source, and licensed under the
 Lock icon from [iconshow](http://iconshow.me/lock-2).  By: designmodo.  License: CC ([Attribution 3.0 Unported](http://creativecommons.org/licenses/by/3.0/)).  Other icons from Apple [IKImageViewDemo](https://developer.apple.com/library/mac/samplecode/IKImageViewDemo/Introduction/Intro.html).  Unlimited rights to reproduce and modify portions of this demo are granted by Apple in the disclaimer attached to the source code [here](https://developer.apple.com/library/mac/samplecode/IKImageViewDemo/Listings/Controller_h.html#//apple_ref/doc/uid/DTS10004049-Controller_h-DontLinkElementID_3).
 
 ## Copyright
-Copyright © 2015, 2016 [EP Studios, Inc.](http://www.epstudiossoftware.com)
+Copyright © 2015, 2016, 2017 [EP Studios, Inc.](http://www.epstudiossoftware.com)
+
+##Acknowledgments
+
+The Brugadometer is based on the work of Dr. Adrian Baranchuk and his colleagues at Queen's University Kingston, Ontario, Canada. It is used with Dr. Baranchuk's permission and encouragement. Please see [this article][http://europace.oxfordjournals.org/content/16/11/1639] for more information.
 
 ## Author
 David Mann
