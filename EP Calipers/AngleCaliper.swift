@@ -99,7 +99,7 @@ class AngleCaliper: Caliper {
     override func measurement() -> String {
         let angle = angleBar1 - angleBar2
         let degrees = radiansToDegrees(radians: Double(angle))
-        let text = String(format: "%1.f°", degrees)
+        let text = String(format: "%.1f°", degrees)
         return text
     }
     
