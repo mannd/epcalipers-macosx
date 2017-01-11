@@ -111,6 +111,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     override func windowDidLoad() {
         // register preference defaults
+        super.windowDidLoad()
         let defaults = [
             "lineWidthKey": 2,
             "defaultCalibrationKey": "1000 msec",
@@ -135,11 +136,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
+        
         if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
-            let url = URL(fileURLWithPath: path)
-            openImageUrl(url, addToRecentDocuments: false)
-            // attempt to fix image not opening consistently on start bug -- doesn't work
-            //imageView.needsDisplay = true
+                let url = URL(fileURLWithPath: path)
+                self.openImageUrl(url, addToRecentDocuments: false)
         }
     }
     
