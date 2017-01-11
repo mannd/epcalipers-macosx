@@ -32,7 +32,5 @@
 	<string>EP Calipers Help</string>
 	<key>HPDBookType</key>
 	<string>3</string>
-	<key>HPDBookIndexPath</key>
-	<string>EPCalipers.helpindex</string>
 </dict>
 </plist>
