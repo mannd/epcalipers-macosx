@@ -3,11 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-05-12 Thu 14:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title></title>
-<meta name="generator" content="Org-mode" />
+<meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -53,13 +52,97 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,9 +175,10 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<meta name="description" content="How to manipulate the ECG image" />
+<style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -144,88 +228,88 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Images</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-orgcd0c99a" class="outline-2">
+<h2 id="orgcd0c99a"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Images</h2>
+<div class="outline-text-2" id="text-orgcd0c99a">
 <p>
 Images include files in typical image formats such as JPG and PNG, as well as PDF files.  When you start <b>EP Calipers</b> a sample normal ECG is loaded.  To load your own ECG images use one of the following methods.
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">Loading an image</h2>
-<div class="outline-text-2" id="text-orgheadline7">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">Open command</h3>
-<div class="outline-text-3" id="text-orgheadline2">
+<div id="outline-container-orgc87d196" class="outline-2">
+<h2 id="orgc87d196">Loading an image</h2>
+<div class="outline-text-2" id="text-orgc87d196">
+</div><div id="outline-container-org09f342e" class="outline-3">
+<h3 id="org09f342e">Open command</h3>
+<div class="outline-text-3" id="text-org09f342e">
 <p>
 Use the <b>File | Open</b> or <b>File | Open Recent</b> menu commands to select an image stored on your computer.
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">Drag and drop</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-org3ee1288" class="outline-3">
+<h3 id="org3ee1288">Drag and drop</h3>
+<div class="outline-text-3" id="text-org3ee1288">
 <p>
 You can drag and drop an image file onto the app window and it will load.
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">Right click menu</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-org5b7e579" class="outline-3">
+<h3 id="org5b7e579">Right click menu</h3>
+<div class="outline-text-3" id="text-org5b7e579">
 <p>
 Even when <b>EP Calipers</b> is not open, you can use the right click menu to open an image file.  The right click menu is opened either by right clicking on a file if you have a mouse, or using the left mouse button with the Control key held down, or, if you have a track pad, two-finger tapping on the trackpad.  After selecting <b>Open With</b> a list of apps will appear.  <b>EP Calipers</b> will be on the list of apps that can open the image.  Click it and the app will start with the loaded image.  This method is especially useful for opening email attachments.
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">Multi-page PDFs</h3>
-<div class="outline-text-3" id="text-orgheadline5">
+<div id="outline-container-orgca55e7d" class="outline-3">
+<h3 id="orgca55e7d">Multi-page PDFs</h3>
+<div class="outline-text-3" id="text-orgca55e7d">
 <p>
 If you load a PDF file with multiple pages, the first page will be shown initially.  You can use the <b>Image | Previous Page</b> and <b>Next Page</b> menu items to change pages, or the left and right arrow keys on your keyboard.
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">Opening <i>AliveCor™</i> ECGs</h3>
-<div class="outline-text-3" id="text-orgheadline6">
+<div id="outline-container-org4bc2c87" class="outline-3">
+<h3 id="org4bc2c87">Opening <i>AliveCor™</i> ECGs</h3>
+<div class="outline-text-3" id="text-org4bc2c87">
 <p>
 <i>AliveCor</i> ECGs can be saved as PDF files.  Load them with any of the above methods.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12">Adjusting the image</h2>
-<div class="outline-text-2" id="text-orgheadline12">
-</div><div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">Moving the image</h3>
-<div class="outline-text-3" id="text-orgheadline8">
+<div id="outline-container-orgd7a5f0f" class="outline-2">
+<h2 id="orgd7a5f0f">Adjusting the image</h2>
+<div class="outline-text-2" id="text-orgd7a5f0f">
+</div><div id="outline-container-org0a6d705" class="outline-3">
+<h3 id="org0a6d705">Moving the image</h3>
+<div class="outline-text-3" id="text-org0a6d705">
 <p>
 If you have a track pad, you can move the image around using two finger scrolling.  You can also move the image using the Grab cursor.  <img src="../../shrd/TB_move.png" alt="TB_move.png" />  Click the Cursor Toolbar to select the Grab cursor (the hand) if it is not already selected.  Hold down the left mouse button or click the trackpad to grab the ECG image.  Holding down the button or your finger on the trackpad, move the mouse or finger to move the image.  Note that if you grab over a caliper, the caliper will move instead of the ECG image.  If you change the cursor to the Lock cursor <img src="../../shrd/lock-16.png" alt="lock-16.png" /> then clicking and holding down the button or your finger will not move the image, but will move the calipers.  This is useful if you want to move the calipers without inadvertently moving the underlying image.  Note that even when using the Lock cursor, it is still possible to use trackpad gestures to move and zoom the underlying image.  
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">Rotation</h3>
-<div class="outline-text-3" id="text-orgheadline9">
+<div id="outline-container-org29317f0" class="outline-3">
+<h3 id="org29317f0">Rotation</h3>
+<div class="outline-text-3" id="text-org29317f0">
 <p>
 If your ECG image is rotated or tilted, use the <b>Image | Rotation</b> menu commands to correct this.  You can rotate by 90° or 1° increments in either direction.  The keyboard shortcuts for rotation are useful.  <b>Important:</b> You should rotate your image before calibrating your calipers or making measurements.  Once an image has been calibrated, rotation will affect the accuracy of the calibration.  For this reason, you can only rotate an image before you calibrate.  If you need to rotate the image after calibration, you will need to clear calibration (using <b>Clear</b> on the Calibration Toolbar or the <b>Calipers | Clear</b> menu command) before you can rotate.
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10">Zooming</h3>
-<div class="outline-text-3" id="text-orgheadline10">
+<div id="outline-container-orgb11dadf" class="outline-3">
+<h3 id="orgb11dadf">Zooming</h3>
+<div class="outline-text-3" id="text-orgb11dadf">
 <p>
 If you have a track pad, pinch to zoom works.  You can also use the Zoom Toolbar to zoom in and out, or to set the image to its actual size.  Zooming is also available in the <b>Image</b> menu.  Note that Caliper calibration <b>does</b> adjust with zooming.  There is no need to recalibrate the calipers after zooming.
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11">Image Editor</h3>
-<div class="outline-text-3" id="text-orgheadline11">
+<div id="outline-container-org6322243" class="outline-3">
+<h3 id="org6322243">Image Editor</h3>
+<div class="outline-text-3" id="text-org6322243">
 <p>
 Use the <b>Image | Image Editor</b> menu command to open the Image Editor.  The editor has many options that can be used to alter the appearance of the ECG, such as changing its color or contrast.
 </p>
@@ -233,14 +317,14 @@ Use the <b>Image | Image Editor</b> menu command to open the Image Editor.  The 
 <div class="figure">
 <p><img src="../../shrd/EPCImageEdit.png" alt="EPCImageEdit.png" />
 </p>
-<p><span class="figure-number">Figure 1:</span> Image Editor</p>
+<p><span class="figure-number">Figure 1: </span>Image Editor</p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13">Saving an edited image</h2>
-<div class="outline-text-2" id="text-orgheadline13">
+<div id="outline-container-orga476f22" class="outline-2">
+<h2 id="orga476f22">Saving an edited image</h2>
+<div class="outline-text-2" id="text-orga476f22">
 <p>
 Use the <b>File | Screenshot</b> menu item to activate the Apple screen capture utility.  Click the camera icon on the EP Calipers window, or type ESC to cancel the screenshot.  The screenshot will pop up in a preview window, where it can be printed or moved to another directory for further editing.  Note that the screenshot function is also a good way to get ECGs from eBooks into the program.  Grab a screenshot of the window, move it to your desktop using the Preview app, and then drag it into <b>EP Calipers</b>.
 </p>

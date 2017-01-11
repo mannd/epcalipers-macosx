@@ -4,27 +4,27 @@
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+HTML_HEAD: <meta name="description" content="How to use the electronic calipers" />
+#+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 * [[../../shrd/icon_32x32@2x.png]] Calipers
 * Adding and deleting calipers
-Calipers come in two flavors.  Calipers with a horizontal crossbar and vertical sidebars are used to make time measurements and are called "time calipers."  Calipers with a vertical crossbar and horizontal sidebars are used to make amplitude measurements and are called, you guessed it, "amplitude calipers."
+Calipers come in three flavors.  Calipers with a horizontal crossbar and vertical sidebars are used to make time measurements and are called "time calipers."  Calipers with a vertical crossbar and horizontal sidebars are used to make amplitude measurements and are called, you guessed it, "amplitude calipers."  Finally "angle calipers" are used to measure angles, such as the 𝞫 angle in Brugada syndrome.
 ** Add Calipers
-Add calipers by clicking on either of the two caliper icons on the Calipers Toolbar, or use the *Caliper* menu to do this.
+Add calipers by clicking on one of the caliper icons on the Calipers Toolbar, or use the *Caliper* menu to do this.
 #+CAPTION: Add Calipers
 [[../../shrd/EPCCaliperIcons.png]]
 ** Selecting Calipers
 In order to make measurements or calibrate, it is necessary to "select" a single caliper when there are multiple calipers on the screen.  A single mouse click or single tap on any part of a caliper selects it.  A selected calipers is evident because it is a different color (by default red, but you can change this) than unselected calipers (by default blue).  Single-tapping or single-clicking a selected caliper will unselect it.  Only one caliper at a time can be selected.
-#+CAPTION: The red caliper is selected
+#+CAPTION: Three different types of calipers (time, amplitude, and angle).  The red time caliper is selected.
 [[../../shrd/EPCSelectedCaliper.png]]
 ** Deleting Calipers
 Double-tap on the trackpad or double-click with a mouse on a caliper to delete it.  Note that after calibration, even if you delete all calibrated calipers, new calipers that are added will retain calibration.
 * Moving calipers
 ** Moving
-Calipers can be moved regardless of the cursor state.  Use the left mouse button or press and hold the trackpad with your finger over the crossbar area of a caliper.  Drag the mouse or your finger to move the caliper as a unit.  
+Calipers can be moved regardless of the cursor state.  Use the left mouse button or press and hold the trackpad with your finger over the crossbar area of a time or amplitude caliper. To move angle calipers, select the top (apex) of the angle where the two lines join together.  Drag the mouse or your finger to move the caliper as a unit.  
 ** Stretching (opening and closing)
-If the cursor is positioned over either the left or right sidebars of a time caliper (or top or bottom bars for an amplitude caliper) clicking with the left mouse button or holding your finger down on the track pad and then dragging will move that caliper bar by itself.  In this way you can widen or narrow the caliper interval.  Note that you cannot move both bars at the same time.  When you move one caliper bar, the other one always stays fixed.
+If the cursor is positioned over either the left or right sidebars of a time caliper (or top or bottom bars for an amplitude caliper) clicking with the left mouse button or holding your finger down on the track pad and then dragging will move that caliper bar by itself.  In this way you can widen or narrow the caliper interval.  Note that you cannot move both bars at the same time.  When you move one caliper bar, the other one always stays fixed.  With angle calipers, select either of the two bars of the angle a little distance away from the apex and drag to open and close the angle.
 
-By combining movements of the crossbar and sidebars of a caliper, you can place it anywhere on the ECG image to make measurements.
+By combining movements, you can place it anywhere on the ECG image to make measurements.

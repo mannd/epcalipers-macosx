@@ -4,10 +4,10 @@
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+HTML_HEAD: <meta name="description" content="Crash course for EP Calipers" />
+#+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 * [[../../shrd/icon_32x32@2x.png]] Introduction -- EP Calipers 101
 ** You're on call, again...
 It's 2 AM and the phone rings.  It's a nurse on the cardiac unit.  Mr. Smith is due to get his antiarrhythmic drug (who comes up with these crazy drug schedules?) and the ECG shows a borderline prolonged QTc interval, at least according to the computer.  She's not sure if it is safe to give the drug.  She wants to send you the ECG.
@@ -16,7 +16,7 @@ You drag yourself out of bed and open up your laptop.  There's the ECG in questi
 ** Electronic calipers
 *EP Calipers* provides *electronic calipers* for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  *EP Calipers* is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of *EP Calipers* are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
 ** What's new?
-This new version of *EP Calipers* includes full PDF file support, showing PDF files at high resolution and supporting multi-page PDFs.  Thus the app can be used to analyze /AliveCor™/ files as well as academic papers in PDF format.
+This new version of *EP Calipers* includes new *angle calipers* and the ability to assess Brugada ECGs with a *Brugadometer*.
 ** Quick start
 When *EP Calipers* starts, a sample ECG is loaded.  Click a caliper
 icon on the toolbar to add a caliper to the screen.  Move the caliper
@@ -46,6 +46,7 @@ Note that not all toolbars will be available all the time, depending on whether 
 *** Calipers toolbar
 - [[../../shrd/calipers-icon-bw-20x20.png]] Add time (horizontal) caliper
 - [[../../shrd/calipers-amplitude-icon-bw-20x20.png]] Add amplitude (vertical) caliper
+- [[../../shrd/angle_icon_2_20x20.png]] Add angle caliper
 - *Calibrate* Calibrate caliper
 - *Clear* Clear all calibration
 *** Measurement toolbar
@@ -72,6 +73,7 @@ Nearly all the functions of the app are contained in the main menu commands at t
 | ⌃E  | Image editor               |
 | ⌃T  | Add time caliper           |
 | ⌃A  | Add amplitude caliper      |
+| ⌃G  | Add angle caliper          |
 | ⌃C  | Calibrate                  |
 | Del | Delete selected caliper    |
 | ⇧⌘S | Take screenshot            |

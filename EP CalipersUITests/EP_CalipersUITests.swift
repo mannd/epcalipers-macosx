@@ -1,3 +1,5 @@
+
+
 //
 //  EP_CalipersUITests.swift
 //  EP CalipersUITests
@@ -28,9 +30,20 @@ class EP_CalipersUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testUI() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+//        let app = XCUIApplication()
+//        let normal12LeadEcgJpgWindow = app.windows["Normal 12_Lead ECG.jpg"]
+//        normal12LeadEcgJpgWindow.groups.containing(.button, identifier:"Calibrate").children(matching: .button).elementBound(by: 0).click()
+//        normal12LeadEcgJpgWindow.buttons["Calibrate"].click()
+//        app.dialogs["alert"].buttons["Calibrate"].click()
+//        normal12LeadEcgJpgWindow.buttons["R/I"].click()
+//        normal12LeadEcgJpgWindow.buttons["Clear"].click()
+//        
+//    
+    
     }
     
 }

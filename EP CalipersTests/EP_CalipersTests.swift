@@ -28,7 +28,7 @@ class EP_CalipersTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
@@ -38,9 +38,9 @@ class EP_CalipersTests: XCTestCase {
         XCTAssert(c.bar1Position == 0)
         XCTAssert(c.bar2Position == 0);
         XCTAssert(c.crossBarPosition == 100.0);
-        let p = CGPointMake(100, 50);
+        let p = CGPoint(x: 100, y: 50);
         XCTAssert(c.barCoord(p) == 100);
-        c.direction = .Vertical;
+        c.direction = .vertical;
         XCTAssert(c.barCoord(p) == 50);
     }
     
@@ -63,7 +63,7 @@ class EP_CalipersTests: XCTestCase {
         XCTAssert(!cal.canDisplayRate)
         cal.rawUnits = "mSecs";
         XCTAssert(cal.canDisplayRate)
-        cal.direction = .Vertical;
+        cal.direction = .vertical;
         XCTAssert(!cal.canDisplayRate)
     }
     
@@ -76,6 +76,49 @@ class EP_CalipersTests: XCTestCase {
         cal.currentZoom = 2.0;
         XCTAssert(cal.currentCalFactor() == 0.25);
     }
+    
+    func testUnits() {
+        let c = Caliper()
+        XCTAssert(c.calibration.units == "points")
+        c.calibration.calibrated = true
+        c.calibration.rawUnits = "msec"
+        XCTAssert(c.calibration.units == "msec")
+        c.calibration.displayRate = true
+        XCTAssert(c.calibration.units == "bpm")
+        c.calibration.displayRate = false
+        XCTAssert(c.calibration.units == "msec")
 
-
+    }
+    
+    func textUnitsAreMM() {
+        let cal = Calibration()
+        cal.calibrated = true
+        cal.direction = .vertical
+        cal.rawUnits = "mm"
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "millimeters";
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "Millimeter";
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "MM";
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "milliM";
+        XCTAssert(cal.unitsAreMM);
+        cal.rawUnits = "milliVolts";
+        XCTAssert(!cal.unitsAreMM);
+        cal.rawUnits = "mV";
+        XCTAssert(!cal.unitsAreMM);
+        cal.rawUnits = "msec";
+        XCTAssert(!cal.unitsAreMM);
+    }
+    
+    func testIsAngleCaliper() {
+        let caliper = Caliper()
+        XCTAssert(caliper.requiresCalibration);
+        XCTAssert(!caliper.isAngleCaliper);
+        let angleCaliper = AngleCaliper()
+        XCTAssert(!angleCaliper.requiresCalibration);
+        XCTAssert(angleCaliper.isAngleCaliper);
+    }
+    
 }

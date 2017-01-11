@@ -24,7 +24,7 @@ class Calibration: NSObject {
     }
     
     override convenience init() {
-        self.init(direction: .Horizontal)
+        self.init(direction: .horizontal)
     }
     
     var units: String {
@@ -66,7 +66,7 @@ class Calibration: NSObject {
     
     var canDisplayRate: Bool {
         get {
-            if direction == .Vertical {
+            if direction == .vertical {
                 return false
             }
             else if !calibrated  {
@@ -81,7 +81,7 @@ class Calibration: NSObject {
             if rawUnits.characters.count < 1 {
                 return false
             }
-            let units = rawUnits.uppercaseString
+            let units = rawUnits.uppercased()
             return units == "S" || units == "SEC"
             || units == "SECOND" || units == "SECS"
             || units == "SECONDS"
@@ -92,10 +92,17 @@ class Calibration: NSObject {
         if rawUnits.characters.count < 1 {
             return false
         }
-        let units = rawUnits.uppercaseString
-        return units.containsString("MSEC") || units == "MS"
-        || units.containsString("MILLIS")
+        let units = rawUnits.uppercased()
+        return units.contains("MSEC") || units == "MS"
+        || units.contains("MILLIS")
     }
     
+    var unitsAreMM: Bool {
+        if units.isEmpty || direction != .vertical {
+            return false
+        }
+        let upcasedUnits = units.uppercased()
+        return upcasedUnits == "MM" || upcasedUnits.contains("MILLIM")
+    }
     
 }

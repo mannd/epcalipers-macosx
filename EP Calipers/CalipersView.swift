@@ -33,48 +33,46 @@ class CalipersView: NSView {
         return true }
     
 
-    func selectCaliper(c: Caliper) {
+    func selectCaliper(_ c: Caliper) {
         c.color = c.selectedColor
         c.selected = true
         needsDisplay = true
     }
     
-    func unselectCaliper(c: Caliper) {
+    func unselectCaliper(_ c: Caliper) {
         c.color = c.unselectedColor
         c.selected = false
         needsDisplay = true
     }
     
-    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+    func validate(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(NSResponder.deleteBackward(_:)) {
             return !locked
         }
         return true
     }
     
-
-    
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
         selectedCaliper = getSelectedCaliper(theEvent.locationInWindow)
         if selectedCaliper != nil {
             if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
                 crossBarSelected = true
             }
-            else if selectedCaliper!.pointNearBar(theEvent.locationInWindow, forBarPosition: selectedCaliper!.bar1Position) {
+            else if selectedCaliper!.pointNearBar1(p: theEvent.locationInWindow) {
                 bar1Selected = true
             }
-            else if selectedCaliper!.pointNearBar(theEvent.locationInWindow, forBarPosition: selectedCaliper!.bar2Position) {
+            else if selectedCaliper!.pointNearBar2(p: theEvent.locationInWindow) {
                 bar2Selected = true
             }
         }
         else {
-            imageView!.mouseDown(theEvent)
+            imageView!.mouseDown(with: theEvent)
         }
     }
     
-    override func magnifyWithEvent(theEvent: NSEvent) {
+    override func magnify(with theEvent: NSEvent) {
         if !lockedMode {
-            imageView!.magnifyWithEvent(theEvent)
+            imageView!.magnify(with: theEvent)
         }
         updateCalibration()
     }
@@ -91,7 +89,7 @@ class CalipersView: NSView {
     
 
     
-    func getSelectedCaliper(point: CGPoint) -> Caliper?{
+    func getSelectedCaliper(_ point: CGPoint) -> Caliper?{
         var caliper: Caliper? = nil
         for c in calipers {
             if c.pointNearCaliper(point) && caliper == nil {
@@ -101,36 +99,34 @@ class CalipersView: NSView {
         return caliper
     }
     
-    override func mouseDragged(theEvent: NSEvent) {
+    override func mouseDragged(with theEvent: NSEvent) {
         if let c = selectedCaliper {
             var delta = CGPoint(x: theEvent.deltaX, y: theEvent.deltaY)
-            if c.direction == .Vertical {
+            let location = theEvent.locationInWindow
+            if c.direction == .vertical {
                 // different from iOS because origin at lower left
                 let tmp = delta.x
                 delta.x = -delta.y
                 delta.y = -tmp
             }
             if crossBarSelected {
-                c.bar1Position += delta.x
-                c.bar2Position += delta.x
-                // origin is lower left in Cocoa
-                c.crossBarPosition -= delta.y
+                c.moveCrossBar(delta: delta)
             }
             else if bar1Selected {
-                c.bar1Position += delta.x
+                c.moveBar1(delta: delta, forLocation: location)
             }
             else if bar2Selected {
-                c.bar2Position += delta.x
+                c.moveBar2(delta: delta, forLocation: location)
             }
             mouseWasDragged = true
             needsDisplay = true
         }
         else {
-            imageView!.mouseDragged(theEvent)
+            imageView!.mouseDragged(with: theEvent)
         }
     }
     
-    override func mouseUp(theEvent: NSEvent) {
+    override func mouseUp(with theEvent: NSEvent) {
         if selectedCaliper != nil {
             if !mouseWasDragged && !locked {
                 if theEvent.clickCount == 1 {
@@ -139,7 +135,7 @@ class CalipersView: NSView {
                 else {  // at least double click
                     for c in calipers {
                         if c == selectedCaliper {
-                            calipers.removeAtIndex(calipers.indexOf(c)!)
+                            calipers.remove(at: calipers.index(of: c)!)
                         }
                         needsDisplay = true
                     }
@@ -153,7 +149,7 @@ class CalipersView: NSView {
             
         }
         else {
-            imageView!.mouseUp(theEvent)
+            imageView!.mouseUp(with: theEvent)
         }
     }
     
@@ -170,7 +166,7 @@ class CalipersView: NSView {
         }
     }
     
-    func unselectCalipersExcept(c: Caliper) {
+    func unselectCalipersExcept(_ c: Caliper) {
         for cal in calipers {
             if cal != c {
                 unselectCaliper(cal)
@@ -201,24 +197,24 @@ class CalipersView: NSView {
         return caliper
     }
     
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         interpretKeyEvents([theEvent])
     }
     
     
-    override func deleteBackward(sender: AnyObject?) {
+    override func deleteBackward(_ sender: Any?) {
         if locked {
             return
         }
         for c in calipers {
             if c.selected {
-                calipers.removeAtIndex(calipers.indexOf(c)!)
+                calipers.remove(at: calipers.index(of: c)!)
                 needsDisplay = true
             }
         }
     }
     
-    func updateCaliperPreferences(unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool) {
+    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool) {
          for c in calipers {
             if let color = unselectedColor {
                 c.unselectedColor = color
@@ -238,8 +234,8 @@ class CalipersView: NSView {
         needsDisplay = true
     }
     
-    override func drawRect(dirtyRect: NSRect) {
-        let context = (NSGraphicsContext.currentContext()?.CGContext)!
+    override func draw(_ dirtyRect: NSRect) {
+        let context = (NSGraphicsContext.current()?.cgContext)!
         for c in calipers {
             c.drawWithContext(context, inRect: dirtyRect)
         }
@@ -251,13 +247,18 @@ class CalipersView: NSView {
         // if escape used to cancel screencapture.
         // Screencapture in preview mode and window mode with sound.
         let prefix = "EPCalipers"
-        let guid = NSProcessInfo.processInfo().globallyUniqueString
+        let guid = ProcessInfo.processInfo.globallyUniqueString
         let fileName = "\(prefix)_\(guid)"
         let path = "\(NSHomeDirectory())/\(fileName).png"
-        let result = system("screencapture -P -w \(path)")
-        if result != 0 {
-            return false
-        }
+        let task = Process()
+        task.launchPath = "/bin/bash"
+        task.arguments = ["screencapture -P -w \(path)"]
+        task.launch()
+        
+//        let result = system("screencapture -P -w \(path)")
+//        if result != 0 {
+//            return false
+//        }
         return true
     }
 
