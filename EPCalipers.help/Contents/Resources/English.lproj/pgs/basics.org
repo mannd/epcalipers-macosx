@@ -16,7 +16,7 @@ You drag yourself out of bed and open up your laptop.  There's the ECG in questi
 ** Electronic calipers
 *EP Calipers* provides *electronic calipers* for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  *EP Calipers* is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of *EP Calipers* are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
 ** What's new?
-This new version of *EP Calipers* includes new *angle calipers* and the ability to assess Brugada ECGs with a *Brugadometer*.
+Fine tune image rotation to a tenth of a degree.
 ** Quick start
 When *EP Calipers* starts, a sample ECG is loaded.  Click a caliper
 icon on the toolbar to add a caliper to the screen.  Move the caliper
@@ -62,10 +62,12 @@ Nearly all the functions of the app are contained in the main menu commands at t
 ** Keyboard shortcuts
 | Key | Function                   |
 |-----+----------------------------|
-| ⌃R  | Rotate image 1° right      |
-| ⌃L  | Rotate image 1° left       |
 | ⇧⌃R | Rotate image 90° right     |
 | ⇧⌃L | Rotate image 90° left      |
+| ⌃R  | Rotate image 1° right      |
+| ⌃L  | Rotate image 1° left       |
+| ⌘R  | Rotate image 0.1 right     |
+| ⌘L  | Rotate image 0.1 left      |
 | ⌃0  | Reset image rotation       |
 | ⇧⌘= | Zoom in                    |
 | ⌘-  | Zoom out                   |
