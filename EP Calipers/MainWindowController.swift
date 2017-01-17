@@ -146,7 +146,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         imageView.isHidden = true
         scrollView.drawsBackground = false
         self.window?.title = "EP Calipers"
-        self.window?.styleMask
         
         
 
