@@ -187,7 +187,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
 
-    func validate(_ menuItem: NSMenuItem) -> Bool {
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
