@@ -187,7 +187,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
 
 
-    func validate(_ menuItem: NSMenuItem) -> Bool {
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
@@ -581,6 +581,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func doRotation(_ sender: AnyObject) {
+        NSLog("Rotate")
         var rotationType: Int
         if sender is NSSegmentedControl {
             rotationType = sender.selectedSegment
@@ -598,6 +599,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         case 3:
             rotateImageView(1)
         case 4:
+            rotateImageView(-0.1)
+        case 5:
+            rotateImageView(0.1)
+        case 6:
             resetImageViewRotation()
         default:
             break
@@ -611,6 +616,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     func rotateImageView(_ degrees: Double) {
         imageView.rotationAngle += CGFloat(radians(degrees))
         adjustImageAfterRotation()
+        
     }
     
     func resetImageViewRotation() {
@@ -620,6 +626,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     func adjustImageAfterRotation() {
         imageView.zoomImageToActualSize(self)
+        // since rotation can adjust zoom factor, must clear calibration
+        clearCalibration()
     }
 
 // MARK: Caliper functions

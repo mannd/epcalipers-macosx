@@ -367,7 +367,17 @@
                                                 <action selector="doRotation:" target="-1" id="KSF-r9-F4Q"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Reset Rotation" tag="4" keyEquivalent="=" id="mRi-px-TI8">
+                                        <menuItem title="Rotate 0.1° Right" tag="4" keyEquivalent="r" id="6aq-d3-Qez">
+                                            <connections>
+                                                <action selector="doRotation:" target="-1" id="0Fy-o3-ipl"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Rotate 0.1° Left" tag="5" keyEquivalent="l" id="GfO-UW-Lf3">
+                                            <connections>
+                                                <action selector="doRotation:" target="-1" id="xA7-P6-C6k"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Reset Rotation" tag="6" keyEquivalent="=" id="mRi-px-TI8">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                             <connections>
                                                 <action selector="doRotation:" target="-1" id="EB4-Os-kNX"/>
