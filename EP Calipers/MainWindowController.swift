@@ -581,7 +581,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     @IBAction func doRotation(_ sender: AnyObject) {
-        NSLog("Rotate")
         var rotationType: Int
         if sender is NSSegmentedControl {
             rotationType = sender.selectedSegment
