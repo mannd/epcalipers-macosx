@@ -141,6 +141,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+        // TODO: testing transparent window
+        self.window?.isOpaque = false
+        imageView.isHidden = true
+        scrollView.drawsBackground = false
+        self.window?.title = "EP Calipers"
+        self.window?.styleMask
+        
+        
+
+
     }
     
     func draggingEntered(_ sender: NSDraggingInfo!) -> NSDragOperation  {
