@@ -37,6 +37,7 @@ class Preferences: NSObject {
     var defaultNumberOfQTcMeanRRIntervals: Int = 1
     var showPrompts: Bool = true
     var roundMsecRate: Bool = true
+    var transparency = false
 
     
     func loadPreferences() {
@@ -50,6 +51,7 @@ class Preferences: NSObject {
         defaultNumberOfQTcMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         showPrompts = preferences.bool(forKey: "showPromptsKey")
         roundMsecRate = preferences.bool(forKey: "roundMsecRateKey")
+        transparency = preferences.bool(forKey: "transparency")
     }
     
     func savePreferences() {
@@ -63,6 +65,7 @@ class Preferences: NSObject {
         preferences.set(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         preferences.set(showPrompts, forKey: "showPromptsKey")
         preferences.set(roundMsecRate, forKey: "roundMsecRateKey")
+        preferences.set(transparency, forKey: "transparency")
     }
 
 }
