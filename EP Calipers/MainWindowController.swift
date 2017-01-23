@@ -47,6 +47,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
     @IBOutlet weak var showPromptsCheckBox: NSButton!
     @IBOutlet weak var roundMsecRateCheckBox: NSButton!
+    @IBOutlet weak var transparencyCheckBox: NSButton!
+ 
 
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
@@ -78,6 +80,26 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var numberOfPDFPages = 0
     var imageIsPDF = false
     var pdfRef: NSPDFImageRep? = nil
+    
+    private var isTransparent: Bool = false
+    var transparent : Bool {
+        get {
+            return isTransparent
+        }
+        set (newValue) {
+            isTransparent = newValue
+            if isTransparent {
+                imageView.isHidden = true
+                scrollView.drawsBackground = false
+                self.window?.title = "EP Calipers"
+            }
+            else {
+                imageView.isHidden = false
+                scrollView.drawsBackground = true
+                self.window?.title = "EP Calipers"
+            }
+        }
+    }
         
     override var windowNibName: String? {
         return "MainWindowController"
@@ -85,7 +107,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     override func awakeFromNib() {
         
-//        [self.window registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF]
         self.window!.registerForDraggedTypes(types)
         
@@ -119,7 +140,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             "defaultNumberOfMeanRRIntervalsKey": 3,
             "defaultNumberOfQTcMeanRRIntervalsKey": 1,
             "showPromptsKey": true,
-            "roundMsecRateKey": true
+            "roundMsecRateKey": true,
+            "transparency": false
         ] as [String : Any]
         UserDefaults.standard.register(defaults: defaults)
         appPreferences.loadPreferences()
@@ -141,6 +163,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+        self.window?.isOpaque = false
+        transparent = appPreferences.transparency
+        // TODO: testing transparent window
+//        self.window?.isOpaque = false
+//        imageView.isHidden = true
+//        scrollView.drawsBackground = false
+//        self.window?.title = "EP Calipers"
+//        
+        
+
+
     }
     
     func draggingEntered(_ sender: NSDraggingInfo!) -> NSDragOperation  {
@@ -239,6 +272,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = appPreferences.showPrompts ? 1 : 0
         roundMsecRateCheckBox.state = appPreferences.roundMsecRate ? 1 : 0
+        transparencyCheckBox.state = appPreferences.transparency ? 1 : 0
         let result = preferencesAlert!.runModal()
         if result == NSAlertFirstButtonReturn {
             // assign new preferences
@@ -251,9 +285,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
             appPreferences.roundMsecRate = roundMsecRateCheckBox.integerValue == 1 ? true : false
+            appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate)
+            // update transparency
+            transparent = appPreferences.transparency
             preferencesChanged = true
         }
     }
