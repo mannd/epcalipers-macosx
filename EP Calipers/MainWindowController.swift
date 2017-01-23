@@ -18,6 +18,7 @@ extension IKImageView: IKImageEditPanelDataSource {
 }
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate {
+    let appName = "EP Calipers"
     
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: FixedIKImageView!
@@ -27,7 +28,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var messageLabel: NSTextField!
     @IBOutlet weak var navigationSegmentedControl: NSSegmentedControl!
-    
+    @IBOutlet weak var zoomSegmentedControl: NSSegmentedControl!
+
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
     @IBOutlet weak var textField: NSTextField!
@@ -90,20 +92,22 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         set (newValue) {
             isTransparent = newValue
+            zoomSegmentedControl.isEnabled = !isTransparent
             if isTransparent {
                 imageView.isHidden = true
                 // TODO:
                 // inhibit menu items for image when transparent (in validate()?)
                 // deal with title
                 oldWindowTitle = self.window?.title
-                self.window?.title = "EP Calipers"
-                // bug, sometimes transparent window is black
-                //self.window?.viewsNeedDisplay = true
+                self.window?.title = appName
             }
             else {
                 imageView.isHidden = false
                 if let title = oldWindowTitle {
                     self.window?.title = title
+                }
+                else {
+                    self.window?.title = appName
                 }
             }
         }
@@ -238,7 +242,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
             return imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
-        return true
+        // TODO: add items for transparency
+        if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
+            return !transparent
+        }
+        return super.validateMenuItem(menuItem)
     }
     
     @IBAction func showPreferences(_ sender: AnyObject) {
