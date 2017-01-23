@@ -81,6 +81,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var imageIsPDF = false
     var pdfRef: NSPDFImageRep? = nil
     
+    
+    var oldWindowTitle : String? = nil
     private var isTransparent: Bool = false
     var transparent : Bool {
         get {
@@ -90,13 +92,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             isTransparent = newValue
             if isTransparent {
                 imageView.isHidden = true
-                scrollView.drawsBackground = false
+                // TODO:
+                // inhibit menu items for image when transparent (in validate()?)
+                // deal with title
+                oldWindowTitle = self.window?.title
                 self.window?.title = "EP Calipers"
+                // bug, sometimes transparent window is black
+                //self.window?.viewsNeedDisplay = true
             }
             else {
                 imageView.isHidden = false
-                scrollView.drawsBackground = true
-                self.window?.title = "EP Calipers"
+                if let title = oldWindowTitle {
+                    self.window?.title = title
+                }
             }
         }
     }
@@ -163,17 +171,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+        // window must be non opaque for transparency to work
         self.window?.isOpaque = false
+        scrollView.drawsBackground = false
         transparent = appPreferences.transparency
-        // TODO: testing transparent window
-//        self.window?.isOpaque = false
-//        imageView.isHidden = true
-//        scrollView.drawsBackground = false
-//        self.window?.title = "EP Calipers"
-//        
-        
-
-
     }
     
     func draggingEntered(_ sender: NSDraggingInfo!) -> NSDragOperation  {
@@ -202,7 +203,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 return true
             }
         }
-        return false    }
+        return false
+    }
     
     func checkExtension(_ drag: NSDraggingInfo) -> Bool {
         if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
