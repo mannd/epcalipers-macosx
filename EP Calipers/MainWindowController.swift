@@ -80,6 +80,26 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var numberOfPDFPages = 0
     var imageIsPDF = false
     var pdfRef: NSPDFImageRep? = nil
+    
+    private var isTransparent: Bool = false
+    var transparent : Bool {
+        get {
+            return isTransparent
+        }
+        set (newValue) {
+            isTransparent = newValue
+            if isTransparent {
+                imageView.isHidden = true
+                scrollView.drawsBackground = false
+                self.window?.title = "EP Calipers"
+            }
+            else {
+                imageView.isHidden = false
+                scrollView.drawsBackground = true
+                self.window?.title = "EP Calipers"
+            }
+        }
+    }
         
     override var windowNibName: String? {
         return "MainWindowController"
@@ -87,7 +107,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     override func awakeFromNib() {
         
-//        [self.window registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF]
         self.window!.registerForDraggedTypes(types)
         
@@ -144,12 +163,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
-        // TODO: testing transparent window
         self.window?.isOpaque = false
-        imageView.isHidden = true
-        scrollView.drawsBackground = false
-        self.window?.title = "EP Calipers"
-        
+        transparent = appPreferences.transparency
+        // TODO: testing transparent window
+//        self.window?.isOpaque = false
+//        imageView.isHidden = true
+//        scrollView.drawsBackground = false
+//        self.window?.title = "EP Calipers"
+//        
         
 
 
@@ -268,6 +289,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate)
+            // update transparency
+            transparent = appPreferences.transparency
             preferencesChanged = true
         }
     }
