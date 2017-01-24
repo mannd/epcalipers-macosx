@@ -57,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E02593E1E37B49700820703 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
 				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
 				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
+				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";

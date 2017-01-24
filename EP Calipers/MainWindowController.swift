@@ -243,10 +243,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
         // TODO: add items for transparency
-        if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
+        if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !transparent
         }
-        return super.validateMenuItem(menuItem)
+        //return super.validateMenuItem(menuItem)
+        return true
     }
     
     @IBAction func showPreferences(_ sender: AnyObject) {
@@ -503,22 +504,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         do {
             let reachable = try (url as URL).checkResourceIsReachable()
             if reachable {
-                imageView.setImageWith(url)
-                imageView.zoomImageToActualSize(self)
+                // note below can fail with bad image file and crash program
+                self.imageView.setImageWith(url)
+                self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
                 self.window!.setTitleWithRepresentedFilename(urlPath)
-                
-//                else {
-//                    self.window!.title = "EP Calipers"
-//                }
-                imageURL = url
-                clearCalibration()
+                self.imageURL = url
+                self.clearCalibration()
                 if addToRecentDocuments {
                     NSDocumentController.shared().noteNewRecentDocumentURL(url)
                 }
             }
+                
             else {
-               throw OpenError.Nonspecific
+                throw OpenError.Nonspecific
             }
         }
         catch _ {
