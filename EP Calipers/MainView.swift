@@ -13,12 +13,10 @@ class MainView: NSView {
     let headerHeight: CGFloat = 60.0  // based on xib file constraints
 
     override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
+       super.draw(dirtyRect)
         let rect = NSRect(x: dirtyRect.minX, y: dirtyRect.minY, width:dirtyRect.maxX - dirtyRect.minX, height: dirtyRect.maxY - dirtyRect.minY - headerHeight)
         NSRectFillUsingOperation(rect, NSCompositingOperation.clear)
 
-
-        // Drawing code here.
     }
     
 }
