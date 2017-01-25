@@ -16,7 +16,7 @@
                 <outlet property="scrollView" destination="AxA-IY-0Zx" id="E2e-dv-DLM"/>
                 <outlet property="toolSegmentedControl" destination="xw2-IA-d6A" id="Xrv-aA-NNd"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
-                <outlet property="zoomSegmentedControl" destination="IkW-Sz-7Vn" id="JQa-Iv-vic"/>
+                <outlet property="zoomSegmentedControl" destination="IkW-Sz-7Vn" id="Rwl-87-hgS"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -27,17 +27,17 @@
             <rect key="contentRect" x="131" y="158" width="727" height="456"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="727" height="456"/>
-            <view key="contentView" id="uHL-zZ-C20" customClass="MainView" customModule="EP_Calipers" customModuleProvider="target">
+            <view key="contentView" id="uHL-zZ-C20">
                 <rect key="frame" x="0.0" y="0.0" width="727" height="456"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
                         <rect key="frame" x="0.0" y="0.0" width="727" height="396"/>
-                        <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
+                        <clipView key="contentView" id="TeI-oG-eGn">
                             <rect key="frame" x="1" y="1" width="725" height="394"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView" customModule="EP_Calipers" customModuleProvider="target">
+                                <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
                                     <rect key="frame" x="88" y="-190" width="69" height="8"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </view>
