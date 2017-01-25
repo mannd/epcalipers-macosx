@@ -576,6 +576,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         openURL(url, addToRecentDocuments: true)
     }
     
+    // This action has been removed
     @IBAction func saveImage(_ sender: AnyObject) {
         // Save image for now is just uses the system screenshot utility
         if !calipersView.takeScreenshot() {

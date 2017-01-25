@@ -80,7 +80,6 @@ Nearly all the functions of the app are contained in the main menu commands at t
 | ⌃G  | Add angle caliper          |
 | ⌃C  | Calibrate                  |
 | Del | Delete selected caliper    |
-| ⇧⌘S | Take screenshot            |
 | ←   | Prev page of multipage PDF |
 | →   | Next page of multipage PDF |
 | ⌘,  | Open preferences           |

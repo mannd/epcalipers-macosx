@@ -247,6 +247,7 @@ class CalipersView: NSView {
         }
     }
     
+    // This doesn't work as of OS 10.12.  Less need for screenshots now that transparent windows are possible.
     func takeScreenshot() -> Bool {
         // Takes screenshot and stores in sandbox data directory (or home directory if
         // no sandbox.  Returns false if screencapture doesn't work for some reason or
