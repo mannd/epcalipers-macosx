@@ -94,12 +94,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             isTransparent = newValue
             zoomSegmentedControl.isEnabled = !isTransparent
             toolSegmentedControl.isEnabled = !isTransparent
+            calipersView.lockedMode = isTransparent
+            clearCalibration()
             if isTransparent {
                 scrollView.drawsBackground = false
                 imageView.isHidden = true
                 toolSegmentedControl.selectedSegment = 1
                 imageView.currentToolMode = IKToolModeNone
-                calipersView.lockedMode = false
                 // TODO:
                 // deal with title
                 oldWindowTitle = self.window?.title
@@ -110,7 +111,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 imageView.isHidden = false
                 toolSegmentedControl.selectedSegment = 0
                 imageView.currentToolMode = IKToolModeMove
-                calipersView.lockedMode = false
                 if let title = oldWindowTitle {
                     self.window?.title = title
                 }
@@ -351,6 +351,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             calipersView.lockedMode = false
         case 1:
             imageView.currentToolMode = IKToolModeNone
+            // If we make this true, 2 finger scrolling and zooming is disabled, and
+            // the main purpose is to prevent scrolling with grabbing, so we'll leave it false
             calipersView.lockedMode = false
         default:
             break

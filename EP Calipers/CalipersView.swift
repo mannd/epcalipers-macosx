@@ -73,17 +73,23 @@ class CalipersView: NSView {
     override func magnify(with theEvent: NSEvent) {
         if !lockedMode {
             imageView!.magnify(with: theEvent)
+            updateCalibration()
         }
-        updateCalibration()
+    }
+    
+    override func scrollWheel(with event: NSEvent) {
+        if !lockedMode {
+            super.scrollWheel(with: event)
+        }
     }
     
     func updateCalibration() {
         if horizontalCalibration.calibrated || verticalCalibration.calibrated {
             horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
             verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
-        }
-        if calipers.count > 0 {
-            needsDisplay = true
+            if calipers.count > 0 {
+                needsDisplay = true
+            }
         }
     }
     
