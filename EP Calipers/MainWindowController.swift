@@ -231,7 +231,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
 
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
-            return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
+            return !transparent && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
         if menuItem.action == #selector(MainWindowController.doMeasurement(_:)) {
             return calipersView.horizontalCalibration.calibrated && !calipersView.locked && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate
@@ -240,16 +240,22 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return !calipersView.locked
         }
         if menuItem.action == #selector(MainWindowController.previousPage(_:)) {
-            return imageIsPDF && pdfPageNumber > 0
+            return !transparent && imageIsPDF && pdfPageNumber > 0
         }
         if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
-            return imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
+            return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
         // TODO: add items for transparency
-        if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
+        if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
             return !transparent
         }
-        return super.validateMenuItem(menuItem)
+        if menuItem.action == #selector(openIKImageEditPanel(_:)) {
+            return !transparent
+        }
+//        if menuItem.action == #selector(openImage(_:)) {
+//            return !transparent
+//        }
+        return true
     }
     
     @IBAction func showPreferences(_ sender: AnyObject) {
@@ -469,6 +475,25 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func openURL(_ url: URL?, addToRecentDocuments: Bool) {
+        // ensure no opening of anything if transparent mode
+        if transparent {
+            let alert = NSAlert()
+            alert.messageText = "Transparent window mode on"
+            alert.informativeText = "Do you want to turn off transparent window mode and load image?"
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "Turn off transparency and load image")
+            alert.addButton(withTitle: "Keep transparency and don't load image")
+            alert.addButton(withTitle: "Cancel")
+            let result = alert.runModal()
+            if result == NSAlertFirstButtonReturn {
+                transparent = false
+                appPreferences.transparency = transparent
+                appPreferences.savePreferences()
+            }
+            else {
+                return
+            }
+        }
         if let goodURL = url {
             clearPDF()
             if isPDFFile((goodURL as NSURL).filePathURL) {
