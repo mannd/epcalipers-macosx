@@ -93,11 +93,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         set (newValue) {
             isTransparent = newValue
             zoomSegmentedControl.isEnabled = !isTransparent
+            toolSegmentedControl.isEnabled = !isTransparent
             if isTransparent {
                 scrollView.drawsBackground = false
                 imageView.isHidden = true
+                toolSegmentedControl.selectedSegment = 1
+                imageView.currentToolMode = IKToolModeNone
+                calipersView.lockedMode = false
                 // TODO:
-                // inhibit menu items for image when transparent (in validate()?)
                 // deal with title
                 oldWindowTitle = self.window?.title
                 self.window?.title = appName
@@ -105,6 +108,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             else {
                 scrollView.drawsBackground = true
                 imageView.isHidden = false
+                toolSegmentedControl.selectedSegment = 0
+                imageView.currentToolMode = IKToolModeMove
+                calipersView.lockedMode = false
                 if let title = oldWindowTitle {
                     self.window?.title = title
                 }
@@ -252,9 +258,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if menuItem.action == #selector(openIKImageEditPanel(_:)) {
             return !transparent
         }
-//        if menuItem.action == #selector(openImage(_:)) {
-//            return !transparent
-//        }
+        if menuItem.action == #selector(openImage(_:)) {
+            return !transparent
+        }
+        if menuItem.action == #selector(switchToolMode(_:)) {
+            return !transparent
+        }
         return true
     }
     
