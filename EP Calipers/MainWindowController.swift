@@ -94,6 +94,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             isTransparent = newValue
             zoomSegmentedControl.isEnabled = !isTransparent
             if isTransparent {
+                scrollView.drawsBackground = false
                 imageView.isHidden = true
                 // TODO:
                 // inhibit menu items for image when transparent (in validate()?)
@@ -102,6 +103,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 self.window?.title = appName
             }
             else {
+                scrollView.drawsBackground = true
                 imageView.isHidden = false
                 if let title = oldWindowTitle {
                     self.window?.title = title
@@ -110,6 +112,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                     self.window?.title = appName
                 }
             }
+            // Need to force window display, otherwise black background sometimes drawn
+            self.window?.display()
         }
     }
         
@@ -177,7 +181,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         }
         // window must be non opaque for transparency to work
         self.window?.isOpaque = false
-        scrollView.drawsBackground = false
         transparent = appPreferences.transparency
     }
     
@@ -246,8 +249,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !transparent
         }
-        //return super.validateMenuItem(menuItem)
-        return true
+        return super.validateMenuItem(menuItem)
     }
     
     @IBAction func showPreferences(_ sender: AnyObject) {

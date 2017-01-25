@@ -33,7 +33,7 @@
                 <subviews>
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
                         <rect key="frame" x="0.0" y="0.0" width="727" height="396"/>
-                        <clipView key="contentView" id="TeI-oG-eGn">
+                        <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
                             <rect key="frame" x="1" y="1" width="725" height="394"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
