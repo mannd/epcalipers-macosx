@@ -103,7 +103,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 imageView.currentToolMode = IKToolModeNone
                 // TODO:
                 // deal with title
-                oldWindowTitle = self.window?.title
                 self.window?.title = appName
             }
             else {
@@ -112,7 +111,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 toolSegmentedControl.selectedSegment = 0
                 imageView.currentToolMode = IKToolModeMove
                 if let title = oldWindowTitle {
-                    self.window?.title = title
+                    self.window?.setTitleWithRepresentedFilename(title)
                 }
                 else {
                     self.window?.title = appName
@@ -181,13 +180,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
         
+        // window must be non opaque for transparency to work
+        self.window?.isOpaque = false
+        transparent = appPreferences.transparency
+        
         if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
-        // window must be non opaque for transparency to work
-        self.window?.isOpaque = false
-        transparent = appPreferences.transparency
+
     }
     
     func draggingEntered(_ sender: NSDraggingInfo!) -> NSDragOperation  {
@@ -546,7 +547,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 self.imageView.setImageWith(url)
                 self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
-                self.window!.setTitleWithRepresentedFilename(urlPath)
+                oldWindowTitle = urlPath
+                self.window?.setTitleWithRepresentedFilename(urlPath)
                 self.imageURL = url
                 self.clearCalibration()
                 if addToRecentDocuments {
