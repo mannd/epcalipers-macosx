@@ -27,7 +27,7 @@
             <rect key="contentRect" x="131" y="158" width="727" height="456"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="727" height="456"/>
-            <view key="contentView" id="uHL-zZ-C20">
+            <view key="contentView" id="uHL-zZ-C20" customClass="MainView" customModule="EP_Calipers" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="727" height="456"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
