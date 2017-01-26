@@ -2,8 +2,7 @@
 EP Calipers is an Apple Mac OS X application that
 provides electronic calipers for making measurements on images of ECGs
 or other recordings.  Simple calculations such as mean heart rate and
-corrected QT intervals can be performed directly in the app. This is
-a port of the iOS version of EP Calipers.
+corrected QT intervals can be performed directly in the app.
 
 EP Calipers for Mac OS X is open source, and licensed under the 
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
