@@ -20,7 +20,7 @@ If you are not using prompts, then simply select and stretch a caliper over the 
 
 It is important to use time units such as /msec/ or /sec/ when providing a time calibration if you want to do calculated measurements such as the corrected QT interval.  In other words, type in your calibration measurement as /1000 msec/ and not just /1000/.  Negative calibration intervals are treated as positive numbers (i.e. the negative sign is ignored).
 ** Changing calibration
-You can recalibrate at any time just by repeating the calibration process..  You can clear all calibration by selecting *Clear* in the calibration toolbar.  Note that calibration is maintained if the image is zoomed.  Selecting a new image will reset calibration.  If you need to rotate the image, you must first clear calibration.
+You can recalibrate at any time just by repeating the calibration process.  You can clear all calibration by selecting *Clear* in the calibration toolbar.  Note that calibration is maintained if the image is zoomed.  However, if you are using transparent window mode, you must manually recalibrate if you zoom the image on the Desktop (for example an image loaded in the Preview app).  Selecting a new image will reset calibration.  If you need to rotate the image, you must first clear calibration.
 ** Interval/Rate
 Once a time caliper is calibrated, provided you use time units (such as msec or sec) for the calibration, it is possible to toggle between interval measurements (e.g. 600 msec) and heart rate measurements (e.g. 100 bpm) by selecting the R/I button or *Caliper | Toggle Rate/Interval* menu command.
 ** Mean rate and interval calculation

@@ -32,5 +32,14 @@ If you have a track pad, pinch to zoom works.  You can also use the Zoom Toolbar
 Use the *Image | Image Editor* menu command to open the Image Editor.  The editor has many options that can be used to alter the appearance of the ECG, such as changing its color or contrast.
 #+CAPTION: Image Editor
 [[../../shrd/EPCImageEdit.png]]
-* Saving an edited image
-Use the *File | Screenshot* menu item to activate the Apple screen capture utility.  Click the camera icon on the EP Calipers window, or type ESC to cancel the screenshot.  The screenshot will pop up in a preview window, where it can be printed or moved to another directory for further editing.  Note that the screenshot function is also a good way to get ECGs from eBooks into the program.  Grab a screenshot of the window, move it to your desktop using the Preview app, and then drag it into *EP Calipers*.
+* Transparent windows
+** What is transparent window mode?
+Sometimes it is easier to open an image or PDF file on your Desktop using the Preview app, and then make measurements directly on this image.  *EP Calipers* allows you do this using /transparent window mode/.  In this mode, the main window is transparent, allowing you to measure whatever is underneath the window using calipers.  Transparent window mode looks like this:
+#+CAPTION: Transparent window mode
+[[../../shrd/transparentwindow.png]]
+** Activating transparent window mode
+Use the *EP Calipers | Show Preferences* menu item to display the Preferences dialog.  Check the Transparent window checkbox to change to transparent window mode.  Uncheck the check box to return to normal image mode.
+** Things to watch out for with transparent windows
+When you load an image into *EP Calipers* the normal way and calibrate your calipers, the program will automatically adjust the calibration factor when you zoom the image.  In transparent window mode, the program has no clue if you zoom the underlying image that the calibration is now incorrect.  Take care to recalibrate your calipers if you zoom your image in a program external to *EP Calipers*.  Also note that if run *EP Calipers* in full screen mode, transparent window mode won't work, since there is no Desktop under the window in full screen mode.  Finally, if you open a file while in transparent window mode, a dialog will appear asking if you wish to leave transparent window mode in order to load the image file.
+* Saving an image from *EP Calipers*
+Use the Mac system screenshot functions if you wish to save an image from *EP Calipers*.  *Command-Shift 3* takes a screenshot of your entire desktop.  Press *Command-Shift 4* and then *Space* to set up taking a screenshot of a window on the desktop.  Click the camera icon on the *EP Calipers* window.  Press the Escape (esc) key to cancel a screenshot.  

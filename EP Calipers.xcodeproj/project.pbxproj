@@ -20,6 +20,7 @@
 		8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */; };
 		8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81D1C30850200AD9556 /* Quartz.framework */; };
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
+		8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */; };
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
 		8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC11C4378A4002E0085 /* Calibration.swift */; };
 		8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC41C472973002E0085 /* TB_rotate.tiff */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E02593E1E37B49700820703 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		8E194EE81C3ED4A1007C05AD /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		8E3DA81D1C30850200AD9556 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
 		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
 		8EA7EFC41C472973002E0085 /* TB_rotate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TB_rotate.tiff; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */,
 				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
 				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
+				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
+				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */,
+				8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */,
 				8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */,
 				8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */,
 				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,

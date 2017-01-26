@@ -18,6 +18,7 @@ extension IKImageView: IKImageEditPanelDataSource {
 }
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate {
+    let appName = "EP Calipers"
     
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: FixedIKImageView!
@@ -27,7 +28,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var messageLabel: NSTextField!
     @IBOutlet weak var navigationSegmentedControl: NSSegmentedControl!
-    
+    @IBOutlet weak var zoomSegmentedControl: NSSegmentedControl!
+
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
     @IBOutlet weak var textField: NSTextField!
@@ -47,6 +49,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
     @IBOutlet weak var showPromptsCheckBox: NSButton!
     @IBOutlet weak var roundMsecRateCheckBox: NSButton!
+    @IBOutlet weak var transparencyCheckBox: NSButton!
+ 
 
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
@@ -78,6 +82,45 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     var numberOfPDFPages = 0
     var imageIsPDF = false
     var pdfRef: NSPDFImageRep? = nil
+    
+    
+    var oldWindowTitle : String? = nil
+    private var isTransparent: Bool = false
+    var transparent : Bool {
+        get {
+            return isTransparent
+        }
+        set (newValue) {
+            isTransparent = newValue
+            zoomSegmentedControl.isEnabled = !isTransparent
+            toolSegmentedControl.isEnabled = !isTransparent
+            calipersView.lockedMode = isTransparent
+            clearCalibration()
+            if isTransparent {
+                scrollView.drawsBackground = false
+                imageView.isHidden = true
+                toolSegmentedControl.selectedSegment = 1
+                imageView.currentToolMode = IKToolModeNone
+                // TODO:
+                // deal with title
+                self.window?.title = appName
+            }
+            else {
+                scrollView.drawsBackground = true
+                imageView.isHidden = false
+                toolSegmentedControl.selectedSegment = 0
+                imageView.currentToolMode = IKToolModeMove
+                if let title = oldWindowTitle {
+                    self.window?.setTitleWithRepresentedFilename(title)
+                }
+                else {
+                    self.window?.title = appName
+                }
+            }
+            // Need to force window display, otherwise black background sometimes drawn
+            self.window?.display()
+        }
+    }
         
     override var windowNibName: String? {
         return "MainWindowController"
@@ -85,7 +128,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     override func awakeFromNib() {
         
-//        [self.window registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF]
         self.window!.registerForDraggedTypes(types)
         
@@ -119,7 +161,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             "defaultNumberOfMeanRRIntervalsKey": 3,
             "defaultNumberOfQTcMeanRRIntervalsKey": 1,
             "showPromptsKey": true,
-            "roundMsecRateKey": true
+            "roundMsecRateKey": true,
+            "transparency": false
         ] as [String : Any]
         UserDefaults.standard.register(defaults: defaults)
         appPreferences.loadPreferences()
@@ -137,10 +180,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
         
+        // window must be non opaque for transparency to work
+        self.window?.isOpaque = false
+        transparent = appPreferences.transparency
+        
         if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+
     }
     
     func draggingEntered(_ sender: NSDraggingInfo!) -> NSDragOperation  {
@@ -169,7 +217,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 return true
             }
         }
-        return false    }
+        return false
+    }
     
     func checkExtension(_ drag: NSDraggingInfo) -> Bool {
         if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
@@ -189,7 +238,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
 
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
-            return !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
+            return !transparent && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
         if menuItem.action == #selector(MainWindowController.doMeasurement(_:)) {
             return calipersView.horizontalCalibration.calibrated && !calipersView.locked && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate
@@ -198,10 +247,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             return !calipersView.locked
         }
         if menuItem.action == #selector(MainWindowController.previousPage(_:)) {
-            return imageIsPDF && pdfPageNumber > 0
+            return !transparent && imageIsPDF && pdfPageNumber > 0
         }
         if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
-            return imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
+            return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
+        }
+        // TODO: add items for transparency
+        if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
+            return !transparent
+        }
+        if menuItem.action == #selector(openIKImageEditPanel(_:)) {
+            return !transparent
+        }
+        if menuItem.action == #selector(openImage(_:)) {
+            return !transparent
+        }
+        if menuItem.action == #selector(switchToolMode(_:)) {
+            return !transparent
         }
         return true
     }
@@ -239,6 +301,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = appPreferences.showPrompts ? 1 : 0
         roundMsecRateCheckBox.state = appPreferences.roundMsecRate ? 1 : 0
+        transparencyCheckBox.state = appPreferences.transparency ? 1 : 0
         let result = preferencesAlert!.runModal()
         if result == NSAlertFirstButtonReturn {
             // assign new preferences
@@ -251,9 +314,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
             appPreferences.roundMsecRate = roundMsecRateCheckBox.integerValue == 1 ? true : false
+            appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate)
+            // update transparency
+            transparent = appPreferences.transparency
             preferencesChanged = true
         }
     }
@@ -286,6 +352,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
             calipersView.lockedMode = false
         case 1:
             imageView.currentToolMode = IKToolModeNone
+            // If we make this true, 2 finger scrolling and zooming is disabled, and
+            // the main purpose is to prevent scrolling with grabbing, so we'll leave it false
             calipersView.lockedMode = false
         default:
             break
@@ -419,6 +487,25 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func openURL(_ url: URL?, addToRecentDocuments: Bool) {
+        // ensure no opening of anything if transparent mode
+        if transparent {
+            let alert = NSAlert()
+            alert.messageText = "Transparent window mode on"
+            alert.informativeText = "Do you want to turn off transparent window mode and load image?"
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "Turn off transparency and load image")
+            alert.addButton(withTitle: "Keep transparency and don't load image")
+            alert.addButton(withTitle: "Cancel")
+            let result = alert.runModal()
+            if result == NSAlertFirstButtonReturn {
+                transparent = false
+                appPreferences.transparency = transparent
+                appPreferences.savePreferences()
+            }
+            else {
+                return
+            }
+        }
         if let goodURL = url {
             clearPDF()
             if isPDFFile((goodURL as NSURL).filePathURL) {
@@ -456,22 +543,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         do {
             let reachable = try (url as URL).checkResourceIsReachable()
             if reachable {
-                imageView.setImageWith(url)
-                imageView.zoomImageToActualSize(self)
+                // note below can fail with bad image file and crash program
+                self.imageView.setImageWith(url)
+                self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
-                self.window!.setTitleWithRepresentedFilename(urlPath)
-                
-//                else {
-//                    self.window!.title = "EP Calipers"
-//                }
-                imageURL = url
-                clearCalibration()
+                oldWindowTitle = urlPath
+                self.window?.setTitleWithRepresentedFilename(urlPath)
+                self.imageURL = url
+                self.clearCalibration()
                 if addToRecentDocuments {
                     NSDocumentController.shared().noteNewRecentDocumentURL(url)
                 }
             }
+                
             else {
-               throw OpenError.Nonspecific
+                throw OpenError.Nonspecific
             }
         }
         catch _ {
@@ -490,6 +576,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         openURL(url, addToRecentDocuments: true)
     }
     
+    // This action has been removed
     @IBAction func saveImage(_ sender: AnyObject) {
         // Save image for now is just uses the system screenshot utility
         if !calipersView.takeScreenshot() {

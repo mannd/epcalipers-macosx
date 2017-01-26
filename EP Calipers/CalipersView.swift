@@ -73,17 +73,23 @@ class CalipersView: NSView {
     override func magnify(with theEvent: NSEvent) {
         if !lockedMode {
             imageView!.magnify(with: theEvent)
+            updateCalibration()
         }
-        updateCalibration()
+    }
+    
+    override func scrollWheel(with event: NSEvent) {
+        if !lockedMode {
+            super.scrollWheel(with: event)
+        }
     }
     
     func updateCalibration() {
         if horizontalCalibration.calibrated || verticalCalibration.calibrated {
             horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
             verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
-        }
-        if calipers.count > 0 {
-            needsDisplay = true
+            if calipers.count > 0 {
+                needsDisplay = true
+            }
         }
     }
     
@@ -241,6 +247,7 @@ class CalipersView: NSView {
         }
     }
     
+    // This doesn't work as of OS 10.12.  Less need for screenshots now that transparent windows are possible.
     func takeScreenshot() -> Bool {
         // Takes screenshot and stores in sandbox data directory (or home directory if
         // no sandbox.  Returns false if screencapture doesn't work for some reason or
