@@ -13,6 +13,13 @@ enum CaliperDirection {
     case vertical
 }
 
+enum CaliperComponent {
+    case leftBar
+    case rightBar
+    case crossBar
+    case noComponent
+}
+
 class Caliper: NSObject {
 
     let delta: Double = 20.0

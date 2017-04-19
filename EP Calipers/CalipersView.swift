@@ -27,6 +27,10 @@ class CalipersView: NSView {
     // references to MainWindowController calibrations
     let horizontalCalibration = Calibration()
     let verticalCalibration = Calibration()
+    
+    // for color and tweak menu
+    var chosenCaliper: Caliper? = nil
+    var chosenComponent: CaliperComponent? = nil
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -70,6 +74,18 @@ class CalipersView: NSView {
         }
     }
     
+    override func rightMouseDown(with event: NSEvent) {
+        NSLog("right mouse down")
+        chosenCaliper = getSelectedCaliper(event.locationInWindow)
+        chosenComponent = getSelectedCaliperComponent(forCaliper: chosenCaliper, atPoint: event.locationInWindow)
+        let theMenu = NSMenu()
+        let colorMenuItem = NSMenuItem(title: "Color Caliper", action: #selector(colorCaliper(_:)), keyEquivalent: "")
+        let tweakMenuItem = NSMenuItem(title: "Tweak Caliper Position", action: #selector(tweakCaliper(_:)), keyEquivalent: "")
+        theMenu.addItem(colorMenuItem)
+        theMenu.addItem(tweakMenuItem)
+        NSMenu.popUpContextMenu(theMenu, with: event, for: self)
+    }
+    
     override func magnify(with theEvent: NSEvent) {
         if !lockedMode {
             imageView!.magnify(with: theEvent)
@@ -91,6 +107,52 @@ class CalipersView: NSView {
                 needsDisplay = true
             }
         }
+    }
+    
+    func colorCaliper(_ sender: AnyObject) {
+        guard let chosenCaliper = chosenCaliper else {
+            return;
+        }
+        let colorChooser: NSColorPanel = NSColorPanel.shared()
+        colorChooser.setTarget(self)
+        colorChooser.setAction(#selector(setChoosenCaliperColor(_:)))
+        colorChooser.makeKeyAndOrderFront(self)
+        colorChooser.isContinuous = true
+        chosenCaliper.selected = false
+        self.needsDisplay = true
+        colorChooser.color = chosenCaliper.color
+    }
+
+    func setChoosenCaliperColor(_ sender: AnyObject) {
+        NSLog("Color changed")
+        let colorChooser: NSColorPanel = NSColorPanel.shared()
+        chosenCaliper?.color = colorChooser.color
+        chosenCaliper?.unselectedColor = colorChooser.color
+        self.needsDisplay = true
+    }
+    
+    func tweakCaliper(_ sender: AnyObject) {
+        
+    }
+    
+    
+    func getSelectedCaliperComponent(forCaliper c: Caliper?, atPoint p: NSPoint) -> CaliperComponent {
+        guard let c = c else {
+            return .noComponent
+        }
+        if c.pointNearBar1(p: p) {
+            return .leftBar
+        }
+        else if c.pointNearBar2(p: p) {
+            return .rightBar
+        }
+        else if c.pointNearCrossBar(p) {
+            return .crossBar
+        }
+        else {
+            return .noComponent
+        }
+        
     }
     
 
@@ -220,6 +282,7 @@ class CalipersView: NSView {
         }
     }
     
+    // TODO: do we change all caliper colors, or just new ones?  What happens in the apps?
     func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool) {
          for c in calipers {
             if let color = unselectedColor {

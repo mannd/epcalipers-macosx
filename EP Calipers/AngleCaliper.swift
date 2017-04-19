@@ -9,8 +9,8 @@
 import Cocoa
 
 class AngleCaliper: Caliper {
-    var angleBar1 = CGFloat(0.5 * M_PI)
-    var angleBar2 = CGFloat(0.25 * M_PI)
+    var angleBar1 = CGFloat(0.5 * Double.pi)
+    var angleBar2 = CGFloat(0.25 * Double.pi)
     var verticalCalibration: Calibration? = nil
     let angleDelta = 0.15
     
@@ -104,7 +104,7 @@ class AngleCaliper: Caliper {
     }
     
     func radiansToDegrees(radians: Double) -> Double {
-        return radians * 180.0 / M_PI
+        return radians * 180.0 / Double.pi
     }
 
     override func intervalResult() -> Double {
@@ -159,20 +159,20 @@ class AngleCaliper: Caliper {
     
     func getBasePoint1ForHeight(_ height: Double) -> CGPoint {
         let pointY = Double(crossBarPosition) - height
-        var pointX = height * (sin(Double(angleBar1) - M_PI_2) / sin(M_PI - Double(angleBar1)))
+        var pointX = height * (sin(Double(angleBar1) - (Double.pi / 2)) / sin(Double.pi - Double(angleBar1)))
         pointX = Double(bar1Position) - pointX
         return CGPoint(x: pointX, y: pointY)
     }
     
     func getBasePoint2ForHeight(_ height: Double) -> CGPoint {
         let pointY = Double(crossBarPosition) - height
-        var pointX = height * (sin(M_PI_2 - Double(angleBar2)) / sin(Double(angleBar2)))
+        var pointX = height * (sin((Double.pi / 2) - Double(angleBar2)) / sin(Double(angleBar2)))
         pointX += Double(bar1Position)
         return CGPoint(x: pointX, y: pointY)
     }
     
     func angleInSouthernHemisphere(_ angle:CGFloat) -> Bool {
-        return (0 <= Double(angle) && Double(angle) <= M_PI)
+        return (0 <= Double(angle) && Double(angle) <= Double.pi)
     }
   
     
