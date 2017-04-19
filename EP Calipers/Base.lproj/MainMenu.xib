@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -318,8 +318,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Image" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Zoom In" keyEquivalent="=" id="oLP-ek-a3b">
-                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                            <menuItem title="Zoom In" keyEquivalent="+" id="oLP-ek-a3b">
                                 <connections>
                                     <action selector="doZoom:" target="-1" id="fC4-CD-NsL"/>
                                 </connections>
@@ -402,14 +401,14 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Kug-Hn-eRZ"/>
-                            <menuItem title="Previous Page" keyEquivalent="" id="UD8-Ng-2y2">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Previous Page" keyEquivalent="p" id="UD8-Ng-2y2">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
                                     <action selector="previousPage:" target="-1" id="8dz-mV-YYJ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Next Page" keyEquivalent="" id="ihw-lr-h7M">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Next Page" keyEquivalent="n" id="ihw-lr-h7M">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
                                     <action selector="nextPage:" target="-1" id="Cqt-dO-4kB"/>
                                 </connections>

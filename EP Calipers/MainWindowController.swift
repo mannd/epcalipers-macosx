@@ -17,7 +17,7 @@ extension IKImageView: IKImageEditPanelDataSource {
     
 }
 
-class MainWindowController: NSWindowController, NSTextFieldDelegate {
+class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate {
     let appName = "EP Calipers"
     
     @IBOutlet weak var scrollView: NSScrollView!
@@ -188,6 +188,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+        
+        calipersView.delegate = self
 
     }
     
@@ -252,7 +254,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
             return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
-        // TODO: add items for transparency
         if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
             return !transparent
         }

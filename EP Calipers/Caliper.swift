@@ -17,6 +17,9 @@ enum CaliperComponent {
     case leftBar
     case rightBar
     case crossBar
+    case lowerBar
+    case upperBar
+    case apex
     case noComponent
 }
 
