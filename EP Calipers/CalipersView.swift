@@ -12,6 +12,7 @@ import Quartz
 protocol CalipersViewDelegate {
     func showMessage(_ message: String)
     func clearMessage()
+    func restoreLastMessage()
 }
 
 
@@ -36,7 +37,7 @@ class CalipersView: NSView {
     
     // for color and tweak menu
     var chosenCaliper: Caliper? = nil
-    var chosenComponent: CaliperComponent? = nil
+    var chosenComponent: CaliperComponent = .noComponent
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -89,12 +90,17 @@ class CalipersView: NSView {
         NSLog("right mouse down")
         chosenCaliper = getSelectedCaliper(event.locationInWindow)
         chosenComponent = getSelectedCaliperComponent(forCaliper: chosenCaliper, atPoint: event.locationInWindow)
+        if chosenCaliper == nil {
+            chosenComponent = .noComponent
+            delegate?.restoreLastMessage()
+        }
         let theMenu = NSMenu()
         let colorMenuItem = NSMenuItem(title: "Color Caliper", action: #selector(colorCaliper(_:)), keyEquivalent: "")
         let tweakMenuItem = NSMenuItem(title: "Tweak Caliper Position", action: #selector(tweakCaliper(_:)), keyEquivalent: "")
         theMenu.addItem(colorMenuItem)
         theMenu.addItem(tweakMenuItem)
         NSMenu.popUpContextMenu(theMenu, with: event, for: self)
+        
     }
     
     override func magnify(with theEvent: NSEvent) {
@@ -143,28 +149,7 @@ class CalipersView: NSView {
     }
     
     func tweakCaliper(_ sender: AnyObject) {
-        guard let chosenComponent = chosenComponent else {
-            delegate?.clearMessage()
-            return
-        }
-        let s: String?
-        switch (chosenComponent) {
-        case .leftBar:
-            s = "left bar"
-        case .rightBar:
-            s = "right bar"
-        case .crossBar:
-            s = "crossbar"
-        case .upperBar:
-            s = "upper bar"
-        case .lowerBar:
-            s = "lower bar"
-        case .apex:
-            s = "apex"
-        default:
-            s = nil
-        }
-        if let componentName = s {
+        if let componentName = Caliper.componentName(chosenComponent) {
             delegate?.showMessage("Tweak " + componentName + " with arrow keys or alt-arrow keys.  Press Escape to exit.")
         }
         else {
@@ -309,13 +294,36 @@ class CalipersView: NSView {
         NSLog("Up arrow.")
     }
     
-    override func moveWordLeft(_ sender: Any?) {
-        NSLog("Word left")
+    override func moveDown(_ sender: Any?) {
+        NSLog("Down arrow")
+    }
+    
+    override func moveLeft(_ sender: Any?) {
+        if (chosenCaliper == nil) {
+            return
+        }
+        NSLog("Left arrow")
+        chosenCaliper?.moveBarInDirection(direction: .left, distance: 0.1, forComponent: chosenComponent)
+        needsDisplay = true
+    }
+    
+    override func moveRight(_ sender: Any?) {
+        if (chosenCaliper == nil) {
+            return
+        }
+        NSLog("Right arrow")
+        chosenCaliper?.moveBarInDirection(direction: .right, distance: 0.1, forComponent: chosenComponent)
+        needsDisplay = true
     }
     
     override func cancelOperation(_ sender: Any?) {
+        if (chosenCaliper == nil) {
+            return
+        }
         NSLog("Escape")
-        delegate?.clearMessage()
+        chosenCaliper = nil
+        chosenComponent = .noComponent
+        delegate?.restoreLastMessage()
     }
     
     override func deleteBackward(_ sender: Any?) {

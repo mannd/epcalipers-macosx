@@ -23,6 +23,15 @@ enum CaliperComponent {
     case noComponent
 }
 
+enum MovementDirection {
+    case up
+    case down
+    case left
+    case right
+    case stationary
+}
+
+
 class Caliper: NSObject {
 
     let delta: Double = 20.0
@@ -254,5 +263,69 @@ class Caliper: NSObject {
     func moveBar2(delta: CGPoint, forLocation location: CGPoint) {
         bar2Position += delta.x
     }
+    
+    class func componentName(_ component: CaliperComponent) -> String? {
+        let s: String?
+        switch (component) {
+        case .leftBar:
+            s = "left bar"
+        case .rightBar:
+            s = "right bar"
+        case .crossBar:
+            s = "crossbar"
+        case .upperBar:
+            s = "upper bar"
+        case .lowerBar:
+            s = "lower bar"
+        case .apex:
+            s = "apex"
+        default:
+            s = nil
+        }
+        return s
+    }
+    
+    func moveBarInDirection(direction: MovementDirection, distance: CGFloat, forComponent component: CaliperComponent) {
+        if component == .noComponent {
+            return
+        }
+        if component == .crossBar {
+            // move crossbar
+            return
+        }
+        var delta = distance
+        if direction == .down || direction == .left {
+            delta = -delta
+        }
+        switch (component) {
+        case .leftBar:
+            bar1Position += delta
+        case .rightBar:
+            bar2Position += delta
+        default:
+            return
+        }
+    }
+    
+    // - (void)moveBarInDirection:(MovementDirection)direction distance:(CGFloat)delta forComponent:(CaliperComponent)component {
+    //     if (component == Crossbar) {
+    //         [self moveCrossbarInDirection:direction distance:delta];
+    //         return;
+    //     }
+    //     if (direction == Up || direction == Left) {
+    //         delta = -delta;
+    //     }
+    //     switch (component) {
+    //         case Bar1:
+    //             self.bar1Position += delta;
+    //             break;
+    //         case Bar2:
+    //             self.bar2Position += delta;
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
+
     
 }

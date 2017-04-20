@@ -85,6 +85,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     
     var oldWindowTitle : String? = nil
+    var lastMessage: String? = ""
+    
     private var isTransparent: Bool = false
     var transparent : Bool {
         get {
@@ -934,11 +936,18 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func showMessage(_ message: String) {
+        lastMessage = messageLabel.stringValue
         messageLabel.stringValue = message
     }
     
     func clearMessage() {
         showMessage("")
+    }
+    
+    func restoreLastMessage() {
+        if let message = lastMessage {
+            showMessage(message)
+        }
     }
     
     func showAngleCaliperNoCalibrationAlert() {
