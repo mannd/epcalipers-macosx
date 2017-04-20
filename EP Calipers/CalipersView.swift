@@ -38,6 +38,7 @@ class CalipersView: NSView {
     // for color and tweak menu
     var chosenCaliper: Caliper? = nil
     var chosenComponent: CaliperComponent = .noComponent
+    var tweakingComponent = false
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -90,16 +91,23 @@ class CalipersView: NSView {
         NSLog("right mouse down")
         chosenCaliper = getSelectedCaliper(event.locationInWindow)
         chosenComponent = getSelectedCaliperComponent(forCaliper: chosenCaliper, atPoint: event.locationInWindow)
-        if chosenCaliper == nil {
+        if chosenCaliper == nil && tweakingComponent {
             chosenComponent = .noComponent
+            tweakingComponent = false
             delegate?.restoreLastMessage()
         }
-        let theMenu = NSMenu()
-        let colorMenuItem = NSMenuItem(title: "Color Caliper", action: #selector(colorCaliper(_:)), keyEquivalent: "")
-        let tweakMenuItem = NSMenuItem(title: "Tweak Caliper Position", action: #selector(tweakCaliper(_:)), keyEquivalent: "")
-        theMenu.addItem(colorMenuItem)
-        theMenu.addItem(tweakMenuItem)
-        NSMenu.popUpContextMenu(theMenu, with: event, for: self)
+        // only show menu if not in middle of tweaking
+        if !tweakingComponent {
+            let theMenu = NSMenu()
+            let colorMenuItem = NSMenuItem(title: "Color Caliper", action: #selector(colorCaliper(_:)), keyEquivalent: "")
+            let tweakMenuItem = NSMenuItem(title: "Tweak Caliper Position", action: #selector(tweakCaliper(_:)), keyEquivalent: "")
+            theMenu.addItem(colorMenuItem)
+            theMenu.addItem(tweakMenuItem)
+            NSMenu.popUpContextMenu(theMenu, with: event, for: self)
+        }
+        else {
+            tweakCaliper(self)
+        }
         
     }
     
@@ -151,6 +159,7 @@ class CalipersView: NSView {
     func tweakCaliper(_ sender: AnyObject) {
         if let componentName = Caliper.componentName(chosenComponent) {
             delegate?.showMessage("Tweak " + componentName + " with arrow keys or alt-arrow keys.  Press Escape to exit.")
+            tweakingComponent = true
         }
         else {
             delegate?.clearMessage()
@@ -323,6 +332,7 @@ class CalipersView: NSView {
         NSLog("Escape")
         chosenCaliper = nil
         chosenComponent = .noComponent
+        tweakingComponent = false
         delegate?.restoreLastMessage()
     }
     

@@ -948,6 +948,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if let message = lastMessage {
             showMessage(message)
         }
+        else {
+            clearMessage()
+        }
     }
     
     func showAngleCaliperNoCalibrationAlert() {
