@@ -106,6 +106,10 @@ class AngleCaliper: Caliper {
     func radiansToDegrees(radians: Double) -> Double {
         return radians * 180.0 / Double.pi
     }
+    
+    func degreesToRadians(degrees: Double) -> Double {
+        return (degrees * Double.pi) / 180.0
+    }
 
     override func intervalResult() -> Double {
         return Double(angleBar1 - angleBar2)
@@ -123,6 +127,28 @@ class AngleCaliper: Caliper {
         let newPosition = CGPoint(x: location.x + delta.x, y: location.y + delta.y)
         return relativeTheta(point: newPosition)
     }
+    
+    
+    override func moveBarInDirection(movementDirection: MovementDirection, distance: CGFloat, forComponent component: CaliperComponent) {
+        if component == .apex {
+            super.moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: .crossBar)
+            return
+        }
+        var delta = distance
+        if movementDirection == .left {
+            delta = -delta
+        }
+        switch (component) {
+        case .leftBar:
+            angleBar1 -= CGFloat(degreesToRadians(degrees: Double(delta)))
+        case .rightBar:
+            angleBar2 -= CGFloat(degreesToRadians(degrees: Double(delta)))
+        default:
+            break
+        }
+    }
+    
+    
     
     func drawTriangleBase(_ context: CGContext, forHeight height:Double) {
         let point1 = getBasePoint1ForHeight(height)

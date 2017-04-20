@@ -41,7 +41,7 @@ class CalipersView: NSView {
     var chosenComponent: CaliperComponent = .noComponent
     var tweakingComponent = false
     // FIXME: big disance for debugging, change to 0.1
-    let tweakDistance: CGFloat = 1
+    let tweakDistance: CGFloat = 0.5
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -363,19 +363,21 @@ class CalipersView: NSView {
     // TODO: do we change all caliper colors, or just new ones?  What happens in the apps?
     func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool) {
          for c in calipers {
-            if let color = unselectedColor {
-                c.unselectedColor = color
-            }
+            // we no longer set c.unselected color to the default.  Calipers keep their colors, only
+            // new calipers get the default color
+//            if let color = unselectedColor {
+//                c.unselectedColor = color
+//            }
             if let color = selectedColor {
                 c.selectedColor = color
             }
             if c.selected {
                 c.color = c.selectedColor
             }
-            else {
-                c.color = c.unselectedColor
-            }
-            c.lineWidth = CGFloat(lineWidth)
+//            else {
+//                c.color = c.unselectedColor
+//            }
+//            c.lineWidth = CGFloat(lineWidth)
             c.roundMsecRate = roundMsecRate
         }
         needsDisplay = true
