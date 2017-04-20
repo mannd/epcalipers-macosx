@@ -11,6 +11,7 @@ import Quartz
 
 protocol CalipersViewDelegate {
     func showMessage(_ message: String)
+    func showTweakMessage(_ message: String)
     func clearMessage()
     func restoreLastMessage()
 }
@@ -39,6 +40,8 @@ class CalipersView: NSView {
     var chosenCaliper: Caliper? = nil
     var chosenComponent: CaliperComponent = .noComponent
     var tweakingComponent = false
+    // FIXME: big disance for debugging, change to 0.1
+    let tweakDistance: CGFloat = 1
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -158,8 +161,15 @@ class CalipersView: NSView {
     
     func tweakCaliper(_ sender: AnyObject) {
         if let componentName = Caliper.componentName(chosenComponent) {
-            delegate?.showMessage("Tweak " + componentName + " with arrow keys or alt-arrow keys.  Press Escape to exit.")
-            tweakingComponent = true
+            let message = "Tweak " + componentName + " with arrow keys.  Press Escape to exit."
+            if !tweakingComponent {
+                delegate?.showMessage(message)
+                tweakingComponent = true
+            }
+            else {
+                // showTweakMessage doesn't overwrite last message
+                delegate?.showTweakMessage(message)
+            }
         }
         else {
             delegate?.clearMessage()
@@ -301,28 +311,22 @@ class CalipersView: NSView {
     
     override func moveUp(_ sender: Any?) {
         NSLog("Up arrow.")
+        moveChosenComponent(movementDirection: .up)
     }
     
     override func moveDown(_ sender: Any?) {
         NSLog("Down arrow")
+        moveChosenComponent(movementDirection: .down)
     }
     
     override func moveLeft(_ sender: Any?) {
-        if (chosenCaliper == nil) {
-            return
-        }
         NSLog("Left arrow")
-        chosenCaliper?.moveBarInDirection(direction: .left, distance: 0.1, forComponent: chosenComponent)
-        needsDisplay = true
+        moveChosenComponent(movementDirection: .left)
     }
     
     override func moveRight(_ sender: Any?) {
-        if (chosenCaliper == nil) {
-            return
-        }
         NSLog("Right arrow")
-        chosenCaliper?.moveBarInDirection(direction: .right, distance: 0.1, forComponent: chosenComponent)
-        needsDisplay = true
+        moveChosenComponent(movementDirection: .right)
     }
     
     override func cancelOperation(_ sender: Any?) {
@@ -333,6 +337,7 @@ class CalipersView: NSView {
         chosenCaliper = nil
         chosenComponent = .noComponent
         tweakingComponent = false
+        // FIXME: doesn't work if you have changed components, goes back to last component message oops!
         delegate?.restoreLastMessage()
     }
     
@@ -345,6 +350,13 @@ class CalipersView: NSView {
                 calipers.remove(at: calipers.index(of: c)!)
                 needsDisplay = true
             }
+        }
+    }
+    
+    func moveChosenComponent(movementDirection: MovementDirection) {
+        if let c = chosenCaliper {
+            c.moveBarInDirection(movementDirection: movementDirection, distance: tweakDistance, forComponent: chosenComponent)
+            needsDisplay = true
         }
     }
     

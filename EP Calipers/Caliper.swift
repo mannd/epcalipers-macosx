@@ -285,47 +285,63 @@ class Caliper: NSObject {
         return s
     }
     
-    func moveBarInDirection(direction: MovementDirection, distance: CGFloat, forComponent component: CaliperComponent) {
+    func moveBarInDirection(movementDirection: MovementDirection, distance: CGFloat, forComponent component: CaliperComponent) {
         if component == .noComponent {
             return
         }
         if component == .crossBar {
-            // move crossbar
+            moveCrosbarInDirection(movementDirection: movementDirection, distance: distance)
             return
         }
         var delta = distance
-        if direction == .down || direction == .left {
+        if movementDirection == .down || movementDirection == .left {
             delta = -delta
         }
         switch (component) {
-        case .leftBar:
+        case .leftBar, .lowerBar:
             bar1Position += delta
-        case .rightBar:
+        case .rightBar, .upperBar:
             bar2Position += delta
         default:
-            return
+            break
         }
     }
     
-    // - (void)moveBarInDirection:(MovementDirection)direction distance:(CGFloat)delta forComponent:(CaliperComponent)component {
-    //     if (component == Crossbar) {
-    //         [self moveCrossbarInDirection:direction distance:delta];
-    //         return;
-    //     }
-    //     if (direction == Up || direction == Left) {
-    //         delta = -delta;
-    //     }
-    //     switch (component) {
-    //         case Bar1:
-    //             self.bar1Position += delta;
-    //             break;
-    //         case Bar2:
-    //             self.bar2Position += delta;
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
+    func moveCrosbarInDirection(movementDirection: MovementDirection, distance: CGFloat) {
+        var movementDirection = movementDirection
+        if direction == .vertical {
+            movementDirection = swapDirection(movementDirection)
+        }
+        switch (movementDirection) {
+        case .up:
+            crossBarPosition += distance
+        case .down:
+            crossBarPosition -= distance
+        case .left:
+            self.bar1Position -= distance
+            self.bar2Position -= distance
+        case .right:
+            self.bar1Position += distance
+            self.bar2Position += distance
+        default:
+            break
+        }
 
+    }
+    
+    func swapDirection(_ movementDirection: MovementDirection) -> MovementDirection {
+        switch (movementDirection) {
+        case .left:
+            return .down
+        case .right:
+            return .up
+        case .up:
+            return .right
+        case .down:
+            return .left
+        default:
+            return .stationary;
+        }
+    }
     
 }

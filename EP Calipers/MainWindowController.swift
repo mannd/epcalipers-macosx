@@ -940,6 +940,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         messageLabel.stringValue = message
     }
     
+    // This doesn't overwrite lastMessage, thus allowing multiple tweak messages that
+    // will return to last pre-Tweak message when restoreLastMessage called.
+    func showTweakMessage(_ message: String) {
+        messageLabel.stringValue = message
+    }
+    
     func clearMessage() {
         showMessage("")
     }
