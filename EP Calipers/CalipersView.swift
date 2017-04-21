@@ -9,6 +9,13 @@
 import Cocoa
 import Quartz
 
+protocol CalipersViewDelegate {
+    func showMessage(_ message: String)
+    func showMessageWithoutSaving(_ message: String)
+    func showMessageAndSaveLast(_ message: String)
+    func clearMessage()
+    func restoreLastMessage()
+}
 
 
 class CalipersView: NSView {
@@ -27,6 +34,15 @@ class CalipersView: NSView {
     // references to MainWindowController calibrations
     let horizontalCalibration = Calibration()
     let verticalCalibration = Calibration()
+    
+    var delegate: CalipersViewDelegate? = nil;
+    
+    // for color and tweak menu
+    var chosenCaliper: Caliper? = nil
+    var chosenComponent: CaliperComponent = .noComponent
+    var tweakingComponent = false
+    // FIXME: big disance for debugging, change to 0.1
+    let tweakDistance: CGFloat = 0.5
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -45,13 +61,16 @@ class CalipersView: NSView {
         needsDisplay = true
     }
     
-    func validate(_ menuItem: NSMenuItem) -> Bool {
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(NSResponder.deleteBackward(_:)) {
             return !locked
         }
-        return true
+        if menuItem.action == #selector(colorCaliper(_:)) || menuItem.action == #selector(tweakCaliper(_:)) {
+            return chosenCaliper != nil
+        }
+        return true;
     }
-    
+        
     override func mouseDown(with theEvent: NSEvent) {
         selectedCaliper = getSelectedCaliper(theEvent.locationInWindow)
         if selectedCaliper != nil {
@@ -68,6 +87,29 @@ class CalipersView: NSView {
         else {
             imageView!.mouseDown(with: theEvent)
         }
+    }
+    
+    override func rightMouseDown(with event: NSEvent) {
+        chosenCaliper = getSelectedCaliper(event.locationInWindow)
+        chosenComponent = getSelectedCaliperComponent(forCaliper: chosenCaliper, atPoint: event.locationInWindow)
+        if chosenCaliper == nil && tweakingComponent {
+            chosenComponent = .noComponent
+            tweakingComponent = false
+            delegate?.restoreLastMessage()
+        }
+        // only show menu if not in middle of tweaking
+        if !tweakingComponent {
+            let theMenu = NSMenu()
+            let colorMenuItem = NSMenuItem(title: "Caliper Color", action: #selector(colorCaliper(_:)), keyEquivalent: "")
+            let tweakMenuItem = NSMenuItem(title: "Tweak Caliper Position", action: #selector(tweakCaliper(_:)), keyEquivalent: "")
+            theMenu.addItem(colorMenuItem)
+            theMenu.addItem(tweakMenuItem)
+            NSMenu.popUpContextMenu(theMenu, with: event, for: self)
+        }
+        else {
+            tweakCaliper(self)
+        }
+        
     }
     
     override func magnify(with theEvent: NSEvent) {
@@ -91,6 +133,65 @@ class CalipersView: NSView {
                 needsDisplay = true
             }
         }
+    }
+    
+    func colorCaliper(_ sender: AnyObject) {
+        guard let chosenCaliper = chosenCaliper else {
+            return;
+        }
+        let colorChooser: NSColorPanel = NSColorPanel.shared()
+        colorChooser.setTarget(self)
+        colorChooser.setAction(#selector(setChoosenCaliperColor(_:)))
+        colorChooser.makeKeyAndOrderFront(self)
+        colorChooser.isContinuous = true
+        chosenCaliper.selected = false
+        self.needsDisplay = true
+        colorChooser.color = chosenCaliper.color
+    }
+
+    func setChoosenCaliperColor(_ sender: AnyObject) {
+        let colorChooser: NSColorPanel = NSColorPanel.shared()
+        chosenCaliper?.color = colorChooser.color
+        chosenCaliper?.unselectedColor = colorChooser.color
+        self.needsDisplay = true
+    }
+    
+    func tweakCaliper(_ sender: AnyObject) {
+        if let componentName = Caliper.componentName(chosenComponent) {
+            let message = "Tweak " + componentName + " with arrow keys.  Press Escape (esc) to stop tweaking."
+            if !tweakingComponent {
+                delegate?.showMessageAndSaveLast(message)
+                tweakingComponent = true
+            }
+            else {
+                // showTweakMessage doesn't overwrite last message
+                delegate?.showMessageWithoutSaving(message)
+            }
+        }
+        else {
+            delegate?.clearMessage()
+        }
+        // calipersView must be first responder, or keys down't work
+        window?.makeFirstResponder(self)
+    }
+    
+    func getSelectedCaliperComponent(forCaliper c: Caliper?, atPoint p: NSPoint) -> CaliperComponent {
+        guard let c = c else {
+            return .noComponent
+        }
+        if c.pointNearBar1(p: p) {
+            return c.direction == .horizontal ? .leftBar : .lowerBar
+        }
+        else if c.pointNearBar2(p: p) {
+            return c.direction == .horizontal ? .rightBar : .upperBar
+        }
+        else if c.pointNearCrossBar(p) {
+            return c.isAngleCaliper ? .apex : .crossBar
+        }
+        else {
+            return .noComponent
+        }
+        
     }
     
 
@@ -207,6 +308,35 @@ class CalipersView: NSView {
         interpretKeyEvents([theEvent])
     }
     
+    override func moveUp(_ sender: Any?) {
+        moveChosenComponent(movementDirection: .up)
+    }
+    
+    override func moveDown(_ sender: Any?) {
+        moveChosenComponent(movementDirection: .down)
+    }
+    
+    override func moveLeft(_ sender: Any?) {
+        moveChosenComponent(movementDirection: .left)
+    }
+    
+    override func moveRight(_ sender: Any?) {
+        moveChosenComponent(movementDirection: .right)
+    }
+    
+    override func cancelOperation(_ sender: Any?) {
+        stopTweaking()
+    }
+    
+    func stopTweaking() {
+        if (chosenCaliper == nil) {
+            return
+        }
+        chosenCaliper = nil
+        chosenComponent = .noComponent
+        tweakingComponent = false
+        delegate?.restoreLastMessage()
+    }
     
     override func deleteBackward(_ sender: Any?) {
         if locked {
@@ -220,21 +350,30 @@ class CalipersView: NSView {
         }
     }
     
+    func moveChosenComponent(movementDirection: MovementDirection) {
+        if let c = chosenCaliper {
+            c.moveBarInDirection(movementDirection: movementDirection, distance: tweakDistance, forComponent: chosenComponent)
+            needsDisplay = true
+        }
+    }
+    
     func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool) {
          for c in calipers {
-            if let color = unselectedColor {
-                c.unselectedColor = color
-            }
+            // we no longer set c.unselected color to the default.  Calipers keep their colors, only
+            // new calipers get the default color
+//            if let color = unselectedColor {
+//                c.unselectedColor = color
+//            }
             if let color = selectedColor {
                 c.selectedColor = color
             }
             if c.selected {
                 c.color = c.selectedColor
             }
-            else {
-                c.color = c.unselectedColor
-            }
-            c.lineWidth = CGFloat(lineWidth)
+//            else {
+//                c.color = c.unselectedColor
+//            }
+//            c.lineWidth = CGFloat(lineWidth)
             c.roundMsecRate = roundMsecRate
         }
         needsDisplay = true

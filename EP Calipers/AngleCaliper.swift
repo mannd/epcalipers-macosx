@@ -9,8 +9,8 @@
 import Cocoa
 
 class AngleCaliper: Caliper {
-    var angleBar1 = CGFloat(0.5 * M_PI)
-    var angleBar2 = CGFloat(0.25 * M_PI)
+    var angleBar1 = CGFloat(0.5 * Double.pi)
+    var angleBar2 = CGFloat(0.25 * Double.pi)
     var verticalCalibration: Calibration? = nil
     let angleDelta = 0.15
     
@@ -104,7 +104,11 @@ class AngleCaliper: Caliper {
     }
     
     func radiansToDegrees(radians: Double) -> Double {
-        return radians * 180.0 / M_PI
+        return radians * 180.0 / Double.pi
+    }
+    
+    func degreesToRadians(degrees: Double) -> Double {
+        return (degrees * Double.pi) / 180.0
     }
 
     override func intervalResult() -> Double {
@@ -123,6 +127,30 @@ class AngleCaliper: Caliper {
         let newPosition = CGPoint(x: location.x + delta.x, y: location.y + delta.y)
         return relativeTheta(point: newPosition)
     }
+    
+    
+    override func moveBarInDirection(movementDirection: MovementDirection, distance: CGFloat, forComponent component: CaliperComponent) {
+        let adjustedComponent = moveCrossbarInsteadOfSideBar(movementDirection: movementDirection, component: component) ? .apex : component
+        if adjustedComponent == .apex {
+            super.moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: .crossBar)
+            return
+        }
+        // we use smaller increments for angle calipers, otherwise the movement is too large
+        var delta = distance / 2.0
+        if movementDirection == .left {
+            delta = -delta
+        }
+        switch (adjustedComponent) {
+        case .leftBar:
+            angleBar1 -= CGFloat(degreesToRadians(degrees: Double(delta)))
+        case .rightBar:
+            angleBar2 -= CGFloat(degreesToRadians(degrees: Double(delta)))
+        default:
+            break
+        }
+    }
+    
+    
     
     func drawTriangleBase(_ context: CGContext, forHeight height:Double) {
         let point1 = getBasePoint1ForHeight(height)
@@ -159,20 +187,20 @@ class AngleCaliper: Caliper {
     
     func getBasePoint1ForHeight(_ height: Double) -> CGPoint {
         let pointY = Double(crossBarPosition) - height
-        var pointX = height * (sin(Double(angleBar1) - M_PI_2) / sin(M_PI - Double(angleBar1)))
+        var pointX = height * (sin(Double(angleBar1) - (Double.pi / 2)) / sin(Double.pi - Double(angleBar1)))
         pointX = Double(bar1Position) - pointX
         return CGPoint(x: pointX, y: pointY)
     }
     
     func getBasePoint2ForHeight(_ height: Double) -> CGPoint {
         let pointY = Double(crossBarPosition) - height
-        var pointX = height * (sin(M_PI_2 - Double(angleBar2)) / sin(Double(angleBar2)))
+        var pointX = height * (sin((Double.pi / 2) - Double(angleBar2)) / sin(Double(angleBar2)))
         pointX += Double(bar1Position)
         return CGPoint(x: pointX, y: pointY)
     }
     
     func angleInSouthernHemisphere(_ angle:CGFloat) -> Bool {
-        return (0 <= Double(angle) && Double(angle) <= M_PI)
+        return (0 <= Double(angle) && Double(angle) <= Double.pi)
     }
   
     

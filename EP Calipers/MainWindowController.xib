@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -136,7 +136,7 @@
                             <action selector="doMeasurement:" target="-2" id="xbg-xN-OK6"/>
                         </connections>
                     </segmentedControl>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Kx-dG-EsR">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Kx-dG-EsR">
                         <rect key="frame" x="18" y="404" width="604" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="NzN-KS-kJs"/>
@@ -195,7 +195,7 @@
             <rect key="frame" x="0.0" y="0.0" width="249" height="133"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nas-NK-EXN">
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nas-NK-EXN">
                     <rect key="frame" x="20" y="55" width="209" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="cEz-Fq-rD9"/>
@@ -214,7 +214,7 @@
             </constraints>
             <point key="canvasLocation" x="464.5" y="221.5"/>
         </customView>
-        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Hsh-8H-9Ny">
+        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="Hsh-8H-9Ny">
             <rect key="frame" x="0.0" y="0.0" width="38" height="17"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Oux-CQ-MYK">

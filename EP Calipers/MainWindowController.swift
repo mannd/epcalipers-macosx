@@ -17,7 +17,7 @@ extension IKImageView: IKImageEditPanelDataSource {
     
 }
 
-class MainWindowController: NSWindowController, NSTextFieldDelegate {
+class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate {
     let appName = "EP Calipers"
     
     @IBOutlet weak var scrollView: NSScrollView!
@@ -85,6 +85,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     
     
     var oldWindowTitle : String? = nil
+    var lastMessage: String? = ""
+    
     private var isTransparent: Bool = false
     var transparent : Bool {
         get {
@@ -101,7 +103,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 imageView.isHidden = true
                 toolSegmentedControl.selectedSegment = 1
                 imageView.currentToolMode = IKToolModeNone
-                // TODO:
                 // deal with title
                 self.window?.title = appName
             }
@@ -188,6 +189,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+        
+        calipersView.delegate = self
 
     }
     
@@ -252,7 +255,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
         if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
             return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
-        // TODO: add items for transparency
         if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
             return !transparent
         }
@@ -933,11 +935,32 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     func showMessage(_ message: String) {
+        calipersView.stopTweaking()
+        showMessageWithoutSaving(message)
+    }
+    
+    // This doesn't overwrite lastMessage, thus allowing multiple tweak messages that
+    // will return to last pre-Tweak message when restoreLastMessage called.
+    func showMessageWithoutSaving(_ message: String) {
+        messageLabel.stringValue = message
+    }
+    
+    func showMessageAndSaveLast(_ message: String) {
+        lastMessage = messageLabel.stringValue
         messageLabel.stringValue = message
     }
     
     func clearMessage() {
         showMessage("")
+    }
+    
+    func restoreLastMessage() {
+        if let message = lastMessage {
+            showMessageWithoutSaving(message)
+        }
+        else {
+            clearMessage()
+        }
     }
     
     func showAngleCaliperNoCalibrationAlert() {

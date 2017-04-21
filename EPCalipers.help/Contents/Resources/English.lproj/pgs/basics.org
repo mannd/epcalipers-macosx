@@ -16,7 +16,7 @@ You drag yourself out of bed and open up your laptop.  There's the ECG in questi
 ** Electronic calipers
 *EP Calipers* provides *electronic calipers* for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  *EP Calipers* is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of *EP Calipers* are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
 ** What's new?
-You can make the main window transparent and use *EP Calipers* to measure anything open on your Desktop.
+This new version of *EP Calipers* allows for individual calipers to be colored differently, and calipers can now be "micromoved" using keyboard arrow keys.
 ** Quick start
 When *EP Calipers* starts, a sample ECG is loaded.  Click a caliper
 icon on the toolbar to add a caliper to the screen.  Move the caliper
@@ -60,26 +60,30 @@ Note that not all toolbars will be available all the time, depending on whether 
 - *Back* Go back a step
 - *Cancel* Cancel measurement
 ** Menus
-Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the app's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
+Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
 ** Keyboard shortcuts
-| Key | Function                   |
-|-----+----------------------------|
-| ⇧⌃R | Rotate image 90° right     |
-| ⇧⌃L | Rotate image 90° left      |
-| ⌃R  | Rotate image 1° right      |
-| ⌃L  | Rotate image 1° left       |
-| ⌘R  | Rotate image 0.1 right     |
-| ⌘L  | Rotate image 0.1 left      |
-| ⌃0  | Reset image rotation       |
-| ⇧⌘= | Zoom in                    |
-| ⌘-  | Zoom out                   |
-| ⌘=  | Zoom to actual size        |
-| ⌃E  | Image editor               |
-| ⌃T  | Add time caliper           |
-| ⌃A  | Add amplitude caliper      |
-| ⌃G  | Add angle caliper          |
-| ⌃C  | Calibrate                  |
-| Del | Delete selected caliper    |
-| ←   | Prev page of multipage PDF |
-| →   | Next page of multipage PDF |
-| ⌘,  | Open preferences           |
+| Key | Function                      |
+|-----+-------------------------------|
+| ⇧⌃R | Rotate image 90° right        |
+| ⇧⌃L | Rotate image 90° left         |
+| ⌃R  | Rotate image 1° right         |
+| ⌃L  | Rotate image 1° left          |
+| ⌘R  | Rotate image 0.1 right        |
+| ⌘L  | Rotate image 0.1 left         |
+| ⌃0  | Reset image rotation          |
+| ⌘+  | Zoom in                       |
+| ⌘-  | Zoom out                      |
+| ⌘=  | Zoom to actual size           |
+| ⌃E  | Image editor                  |
+| ⌃T  | Add time caliper              |
+| ⌃A  | Add amplitude caliper         |
+| ⌃G  | Add angle caliper             |
+| ⌃C  | Calibrate                     |
+| Del | Delete selected caliper       |
+| <   | Prev page of multipage PDF    |
+| >   | Next page of multipage PDF    |
+| ←   | Tweak caliper component left  |
+| →   | Tweak caliper component right |
+| ↑   | Tweak caliper component up    |
+| ↓   | Tweak caliper component down  |
+| ⌘,  | Open preferences              |

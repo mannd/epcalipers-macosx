@@ -13,7 +13,7 @@ Preferences can be selected using the *EP Calipers | Preferences* menu item.  Yo
 #+CAPTION: Preferences
 [[../../shrd/preferences.png]]
 ** Preferences explained
-- Caliper color: This is the color of unselected calipers.
+- Caliper color: This is the color of unselected newly added calipers.  Note that this color can be overwritten by right-clicking on a caliper and selecting *Caliper Color*.
 - Selected caliper color: This is the color of the selected caliper.
 - Caliper line width: Increase or decrease this slider to make the caliper lines thicker or thinner.
 - Time calibration: This is the default value that appears in the text box when calibrating time calipers.  If you usually calibrate to a certain value (say 200 msec) then it is useful to change this default value.
