@@ -103,7 +103,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 imageView.isHidden = true
                 toolSegmentedControl.selectedSegment = 1
                 imageView.currentToolMode = IKToolModeNone
-                // TODO:
                 // deal with title
                 self.window?.title = appName
             }

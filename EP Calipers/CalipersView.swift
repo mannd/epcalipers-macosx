@@ -88,10 +88,7 @@ class CalipersView: NSView {
         }
     }
     
-
-    
     override func rightMouseDown(with event: NSEvent) {
-        NSLog("right mouse down")
         chosenCaliper = getSelectedCaliper(event.locationInWindow)
         chosenComponent = getSelectedCaliperComponent(forCaliper: chosenCaliper, atPoint: event.locationInWindow)
         if chosenCaliper == nil && tweakingComponent {
@@ -152,7 +149,6 @@ class CalipersView: NSView {
     }
 
     func setChoosenCaliperColor(_ sender: AnyObject) {
-        NSLog("Color changed")
         let colorChooser: NSColorPanel = NSColorPanel.shared()
         chosenCaliper?.color = colorChooser.color
         chosenCaliper?.unselectedColor = colorChooser.color
@@ -174,6 +170,7 @@ class CalipersView: NSView {
         else {
             delegate?.clearMessage()
         }
+        window?.makeFirstResponder(self)
     }
     
     func getSelectedCaliperComponent(forCaliper c: Caliper?, atPoint p: NSPoint) -> CaliperComponent {
@@ -310,22 +307,18 @@ class CalipersView: NSView {
     }
     
     override func moveUp(_ sender: Any?) {
-        NSLog("Up arrow.")
         moveChosenComponent(movementDirection: .up)
     }
     
     override func moveDown(_ sender: Any?) {
-        NSLog("Down arrow")
         moveChosenComponent(movementDirection: .down)
     }
     
     override func moveLeft(_ sender: Any?) {
-        NSLog("Left arrow")
         moveChosenComponent(movementDirection: .left)
     }
     
     override func moveRight(_ sender: Any?) {
-        NSLog("Right arrow")
         moveChosenComponent(movementDirection: .right)
     }
     
@@ -333,11 +326,9 @@ class CalipersView: NSView {
         if (chosenCaliper == nil) {
             return
         }
-        NSLog("Escape")
         chosenCaliper = nil
         chosenComponent = .noComponent
         tweakingComponent = false
-        // FIXME: doesn't work if you have changed components, goes back to last component message oops!
         delegate?.restoreLastMessage()
     }
     
@@ -360,7 +351,6 @@ class CalipersView: NSView {
         }
     }
     
-    // TODO: do we change all caliper colors, or just new ones?  What happens in the apps?
     func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool) {
          for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only

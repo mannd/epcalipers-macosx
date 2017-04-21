@@ -130,15 +130,17 @@ class AngleCaliper: Caliper {
     
     
     override func moveBarInDirection(movementDirection: MovementDirection, distance: CGFloat, forComponent component: CaliperComponent) {
-        if component == .apex {
+        let adjustedComponent = moveCrossbarInsteadOfSideBar(movementDirection: movementDirection, component: component) ? .apex : component
+        if adjustedComponent == .apex {
             super.moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: .crossBar)
             return
         }
-        var delta = distance
+        // we use smaller increments for angle calipers, otherwise the movement is too large
+        var delta = distance / 2.0
         if movementDirection == .left {
             delta = -delta
         }
-        switch (component) {
+        switch (adjustedComponent) {
         case .leftBar:
             angleBar1 -= CGFloat(degreesToRadians(degrees: Double(delta)))
         case .rightBar:

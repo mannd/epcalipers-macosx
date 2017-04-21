@@ -289,7 +289,8 @@ class Caliper: NSObject {
         if component == .noComponent {
             return
         }
-        if component == .crossBar {
+        let adjustedComponent = moveCrossbarInsteadOfSideBar(movementDirection: movementDirection, component: component) ? .crossBar : component
+        if adjustedComponent == .crossBar {
             moveCrosbarInDirection(movementDirection: movementDirection, distance: distance)
             return
         }
@@ -297,7 +298,7 @@ class Caliper: NSObject {
         if movementDirection == .down || movementDirection == .left {
             delta = -delta
         }
-        switch (component) {
+        switch (adjustedComponent) {
         case .leftBar, .lowerBar:
             bar1Position += delta
         case .rightBar, .upperBar:
@@ -305,6 +306,15 @@ class Caliper: NSObject {
         default:
             break
         }
+    }
+    
+    // E.g. see if you are doing up and down instead of left and right for a horizontal caliper sidebar
+    func moveCrossbarInsteadOfSideBar(movementDirection: MovementDirection, component: CaliperComponent) -> Bool {
+        if component == .crossBar || component == .apex {
+            return false
+        }
+        return (direction == .horizontal && (movementDirection == .up || movementDirection == .down)) ||
+            (direction == .vertical && (movementDirection == .left || movementDirection == .right))
     }
     
     func moveCrosbarInDirection(movementDirection: MovementDirection, distance: CGFloat) {

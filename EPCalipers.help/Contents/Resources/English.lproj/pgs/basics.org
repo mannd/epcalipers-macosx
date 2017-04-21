@@ -16,7 +16,7 @@ You drag yourself out of bed and open up your laptop.  There's the ECG in questi
 ** Electronic calipers
 *EP Calipers* provides *electronic calipers* for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  *EP Calipers* is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of *EP Calipers* are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
 ** What's new?
-You can make the main window transparent and use *EP Calipers* to measure anything open on your Desktop.
+This new version of *EP Calipers* allows for individual calipers to be colored differently, and calipers can now be "micromoved" using keyboard arrow keys.
 ** Quick start
 When *EP Calipers* starts, a sample ECG is loaded.  Click a caliper
 icon on the toolbar to add a caliper to the screen.  Move the caliper
