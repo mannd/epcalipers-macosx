@@ -935,13 +935,18 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func showMessage(_ message: String) {
-        lastMessage = messageLabel.stringValue
-        messageLabel.stringValue = message
+        calipersView.stopTweaking()
+        showMessageWithoutSaving(message)
     }
     
     // This doesn't overwrite lastMessage, thus allowing multiple tweak messages that
     // will return to last pre-Tweak message when restoreLastMessage called.
-    func showTweakMessage(_ message: String) {
+    func showMessageWithoutSaving(_ message: String) {
+        messageLabel.stringValue = message
+    }
+    
+    func showMessageAndSaveLast(_ message: String) {
+        lastMessage = messageLabel.stringValue
         messageLabel.stringValue = message
     }
     
@@ -951,7 +956,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func restoreLastMessage() {
         if let message = lastMessage {
-            showMessage(message)
+            showMessageWithoutSaving(message)
         }
         else {
             clearMessage()

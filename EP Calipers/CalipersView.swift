@@ -11,7 +11,8 @@ import Quartz
 
 protocol CalipersViewDelegate {
     func showMessage(_ message: String)
-    func showTweakMessage(_ message: String)
+    func showMessageWithoutSaving(_ message: String)
+    func showMessageAndSaveLast(_ message: String)
     func clearMessage()
     func restoreLastMessage()
 }
@@ -157,19 +158,20 @@ class CalipersView: NSView {
     
     func tweakCaliper(_ sender: AnyObject) {
         if let componentName = Caliper.componentName(chosenComponent) {
-            let message = "Tweak " + componentName + " with arrow keys.  Press Escape to exit."
+            let message = "Tweak " + componentName + " with arrow keys.  Press Escape (esc) to stop tweaking."
             if !tweakingComponent {
-                delegate?.showMessage(message)
+                delegate?.showMessageAndSaveLast(message)
                 tweakingComponent = true
             }
             else {
                 // showTweakMessage doesn't overwrite last message
-                delegate?.showTweakMessage(message)
+                delegate?.showMessageWithoutSaving(message)
             }
         }
         else {
             delegate?.clearMessage()
         }
+        // calipersView must be first responder, or keys down't work
         window?.makeFirstResponder(self)
     }
     
@@ -323,6 +325,10 @@ class CalipersView: NSView {
     }
     
     override func cancelOperation(_ sender: Any?) {
+        stopTweaking()
+    }
+    
+    func stopTweaking() {
         if (chosenCaliper == nil) {
             return
         }
