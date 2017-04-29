@@ -361,19 +361,13 @@ class CalipersView: NSView {
          for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
             // new calipers get the default color
-//            if let color = unselectedColor {
-//                c.unselectedColor = color
-//            }
             if let color = selectedColor {
                 c.selectedColor = color
             }
             if c.selected {
                 c.color = c.selectedColor
             }
-//            else {
-//                c.color = c.unselectedColor
-//            }
-//            c.lineWidth = CGFloat(lineWidth)
+            c.lineWidth = CGFloat(lineWidth)
             c.roundMsecRate = roundMsecRate
         }
         needsDisplay = true
