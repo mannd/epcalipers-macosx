@@ -93,6 +93,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return isTransparent
         }
         set (newValue) {
+            // do nothing if value unchanged
+            if (newValue == isTransparent) {
+                return;
+            }
             isTransparent = newValue
             zoomSegmentedControl.isEnabled = !isTransparent
             toolSegmentedControl.isEnabled = !isTransparent
