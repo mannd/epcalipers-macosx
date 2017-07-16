@@ -798,6 +798,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
     
+    @IBAction func deleteAllCalipers(_ sender: AnyObject) {
+        calipersView.deleteAllCalipers()
+    }
+    
     func calibrateWithPossiblePrompts() {
         // not allowed to calibrate in middle of a measurement
         if calipersView.locked || inMeanRR {
