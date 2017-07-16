@@ -17,7 +17,6 @@
 		8E3DA8011C2E264000AD9556 /* EP_CalipersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA8001C2E264000AD9556 /* EP_CalipersTests.swift */; };
 		8E3DA80C1C2E264000AD9556 /* EP_CalipersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA80B1C2E264000AD9556 /* EP_CalipersUITests.swift */; };
 		8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA8191C306C1300AD9556 /* MainWindowController.swift */; };
-		8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */; };
 		8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81D1C30850200AD9556 /* Quartz.framework */; };
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
 		8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */; };
@@ -37,6 +36,7 @@
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */; };
 		8ECC76C71C48B1830091F87A /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ECC76C61C48B1830091F87A /* View.xib */; };
+		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +76,6 @@
 		8E3DA80B1C2E264000AD9556 /* EP_CalipersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EP_CalipersUITests.swift; sourceTree = "<group>"; };
 		8E3DA80D1C2E264000AD9556 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E3DA8191C306C1300AD9556 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
-		8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		8E3DA81D1C30850200AD9556 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -97,6 +96,9 @@
 		8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angle_icon_2_20x20.png; sourceTree = "<group>"; };
 		8ECC76C61C48B1830091F87A /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EP Calipers.entitlements"; sourceTree = "<group>"; };
+		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		8ED1677F1F1C1D0200F44DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
+		8ED167821F1C1D1100F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +161,7 @@
 				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
 				8E3DA7F71C2E264000AD9556 /* Info.plist */,
 				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
-				8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */,
+				8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */,
 				8E2282471C398B1300337695 /* CalipersView.swift */,
 				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
 				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
@@ -307,6 +309,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 8E3DA7E41C2E264000AD9556;
 			productRefGroup = 8E3DA7EE1C2E264000AD9556 /* Products */;
@@ -338,7 +341,7 @@
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
 				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
 				8EAE6EC61E25BEBD009C01F7 /* EPCalipers.help in Resources */,
-				8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */,
+				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
 				8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */,
 				8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
@@ -414,8 +417,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				8E3DA7F51C2E264000AD9556 /* Base */,
+				8ED1677D1F1C19B200F44DF3 /* fr */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8ED1677F1F1C1D0200F44DF3 /* Base */,
+				8ED167821F1C1D1100F44DF3 /* fr */,
+			);
+			name = MainWindowController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -425,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -471,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
