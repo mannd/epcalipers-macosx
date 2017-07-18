@@ -45,16 +45,16 @@
 "GJ2-vD-tvz.ibShadowedToolTips[1]" = "Rotate image";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Oux-CQ-MYK"; */
-"Oux-CQ-MYK.title" = "Label";
+"Oux-CQ-MYK.title" = "Étiquette";
 
 /* Class = "NSWindow"; title = "EP Calipers"; ObjectID = "faX-Do-WYj"; */
 "faX-Do-WYj.title" = "Étriers EP";
 
 /* Class = "NSSegmentedCell"; lRw-HE-u64.ibShadowedToolTips[0] = "Zoom in"; ObjectID = "lRw-HE-u64"; */
-"lRw-HE-u64.ibShadowedToolTips[0]" = "Zoom in";
+"lRw-HE-u64.ibShadowedToolTips[0]" = "Zoom avant";
 
 /* Class = "NSSegmentedCell"; lRw-HE-u64.ibShadowedToolTips[1] = "Zoom out"; ObjectID = "lRw-HE-u64"; */
-"lRw-HE-u64.ibShadowedToolTips[1]" = "Zoom out";
+"lRw-HE-u64.ibShadowedToolTips[1]" = "Zoom arrière";
 
 /* Class = "NSSegmentedCell"; lRw-HE-u64.ibShadowedToolTips[2] = "Zoom to actual size"; ObjectID = "lRw-HE-u64"; */
 "lRw-HE-u64.ibShadowedToolTips[2]" = "Zoom to actual size";

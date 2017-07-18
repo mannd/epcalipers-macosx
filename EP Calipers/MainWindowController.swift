@@ -50,6 +50,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var showPromptsCheckBox: NSButton!
     @IBOutlet weak var roundMsecRateCheckBox: NSButton!
     @IBOutlet weak var transparencyCheckBox: NSButton!
+    
+    
  
 
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
@@ -69,6 +71,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     var preferencesChanged = false
     var preferencesAlert: NSAlert? = nil
     var calibrationAlert: NSAlert? = nil
+    var meanIntervalAlert: NSAlert? = nil
+    var qtcMeanIntervalAlert: NSAlert? = nil
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
@@ -1098,17 +1102,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 showNoTimeCaliperSelectedAlert()
                 return
             }
-            
-            let alert = NSAlert()
-            alert.messageText = "Enter number of intervals"
-            alert.informativeText = "How many intervals is this caliper measuring?  "
-            alert.alertStyle = NSAlertStyle.informational
-            alert.addButton(withTitle: "Calculate")
-            alert.addButton(withTitle: "Cancel")
-            alert.accessoryView = numberInputView
+            if meanIntervalAlert == nil {
+                let alert = NSAlert()
+                alert.messageText = "Enter number of intervals"
+                alert.informativeText = "How many intervals is this caliper measuring?  "
+                alert.alertStyle = NSAlertStyle.informational
+                alert.addButton(withTitle: "Calculate")
+                alert.addButton(withTitle: "Cancel")
+                alert.accessoryView = numberInputView
+                meanIntervalAlert = alert
+            }
             numberTextField.stringValue = String(appPreferences.defaultNumberOfMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
-            let result = alert.runModal()
+            let result = meanIntervalAlert!.runModal()
             if result == NSAlertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
@@ -1172,16 +1178,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func doQTcStep1() {
         if let c = calipersView.activeCaliper() {
-            let alert = NSAlert()
-            alert.alertStyle = .informational
-            alert.messageText = "QTc: Enter number of RR intervals"
-            alert.informativeText = "How many RR intervals is this caliper measuring?"
-            alert.addButton(withTitle: "Continue")
-            alert.addButton(withTitle: "Back")
-            alert.accessoryView = numberInputView
+            if qtcMeanIntervalAlert == nil {
+                let alert = NSAlert()
+                alert.alertStyle = .informational
+                alert.messageText = "QTc: Enter number of RR intervals"
+                alert.informativeText = "How many RR intervals is this caliper measuring?"
+                alert.addButton(withTitle: "Continue")
+                alert.addButton(withTitle: "Back")
+                alert.accessoryView = numberInputView
+                qtcMeanIntervalAlert = alert
+            }
             numberTextField.stringValue = String(appPreferences.defaultNumberOfQTcMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
-            let result = alert.runModal()
+            let result = qtcMeanIntervalAlert!.runModal()
             if result == NSAlertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
