@@ -350,6 +350,11 @@ class CalipersView: NSView {
         }
     }
     
+    func deleteAllCalipers() {
+        calipers.removeAll()
+        needsDisplay = true
+    }
+    
     func moveChosenComponent(movementDirection: MovementDirection) {
         if let c = chosenCaliper {
             c.moveBarInDirection(movementDirection: movementDirection, distance: tweakDistance, forComponent: chosenComponent)
