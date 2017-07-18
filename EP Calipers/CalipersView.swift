@@ -41,8 +41,7 @@ class CalipersView: NSView {
     var chosenCaliper: Caliper? = nil
     var chosenComponent: CaliperComponent = .noComponent
     var tweakingComponent = false
-    // FIXME: big disance for debugging, change to 0.1
-    let tweakDistance: CGFloat = 0.5
+    let tweakDistance: CGFloat = 0.2
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -357,8 +356,10 @@ class CalipersView: NSView {
     
     func moveChosenComponent(movementDirection: MovementDirection) {
         if let c = chosenCaliper {
-            c.moveBarInDirection(movementDirection: movementDirection, distance: tweakDistance, forComponent: chosenComponent)
-            needsDisplay = true
+            if tweakingComponent {
+                c.moveBarInDirection(movementDirection: movementDirection, distance: tweakDistance, forComponent: chosenComponent)
+                needsDisplay = true
+            }
         }
     }
     
