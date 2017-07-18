@@ -36,6 +36,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet var numberInputView: NSView!
     @IBOutlet weak var numberStepper: NSStepper!
     @IBOutlet weak var numberTextField: NSTextField!
+    @IBOutlet var qtcNumberInputView: NSView!
+    @IBOutlet weak var qtcNumberStepper: NSStepper!
+    @IBOutlet weak var qtcNumberTextField: NSTextField!
     // Preferences accessory view
     @IBOutlet var preferencesAccessoryView: NSView!
     @IBOutlet weak var caliperColorWell: NSColorWell!
@@ -50,6 +53,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var showPromptsCheckBox: NSButton!
     @IBOutlet weak var roundMsecRateCheckBox: NSButton!
     @IBOutlet weak var transparencyCheckBox: NSButton!
+    
+    
  
 
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
@@ -69,6 +74,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     var preferencesChanged = false
     var preferencesAlert: NSAlert? = nil
     var calibrationAlert: NSAlert? = nil
+    var meanIntervalAlert: NSAlert? = nil
+    var qtcMeanIntervalAlert: NSAlert? = nil
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
@@ -184,6 +191,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
+        qtcNumberTextField.delegate = self
         
         // window must be non opaque for transparency to work
         self.window?.isOpaque = false
@@ -797,7 +805,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             break
         }
     }
-    
+        
     func calibrateWithPossiblePrompts() {
         // not allowed to calibrate in middle of a measurement
         if calipersView.locked || inMeanRR {
@@ -1094,17 +1102,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 showNoTimeCaliperSelectedAlert()
                 return
             }
-            
-            let alert = NSAlert()
-            alert.messageText = "Enter number of intervals"
-            alert.informativeText = "How many intervals is this caliper measuring?  "
-            alert.alertStyle = NSAlertStyle.informational
-            alert.addButton(withTitle: "Calculate")
-            alert.addButton(withTitle: "Cancel")
-            alert.accessoryView = numberInputView
+            if meanIntervalAlert == nil {
+                let alert = NSAlert()
+                alert.messageText = "Enter number of intervals"
+                alert.informativeText = "How many intervals is this caliper measuring?  "
+                alert.alertStyle = NSAlertStyle.informational
+                alert.addButton(withTitle: "Calculate")
+                alert.addButton(withTitle: "Cancel")
+                alert.accessoryView = numberInputView
+                meanIntervalAlert = alert
+            }
             numberTextField.stringValue = String(appPreferences.defaultNumberOfMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
-            let result = alert.runModal()
+            let result = meanIntervalAlert!.runModal()
             if result == NSAlertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
@@ -1168,24 +1178,27 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func doQTcStep1() {
         if let c = calipersView.activeCaliper() {
-            let alert = NSAlert()
-            alert.alertStyle = .informational
-            alert.messageText = "QTc: Enter number of RR intervals"
-            alert.informativeText = "How many RR intervals is this caliper measuring?"
-            alert.addButton(withTitle: "Continue")
-            alert.addButton(withTitle: "Back")
-            alert.accessoryView = numberInputView
-            numberTextField.stringValue = String(appPreferences.defaultNumberOfQTcMeanRRIntervals)
-            numberStepper.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
-            let result = alert.runModal()
+            if qtcMeanIntervalAlert == nil {
+                let alert = NSAlert()
+                alert.alertStyle = .informational
+                alert.messageText = "QTc: Enter number of RR intervals"
+                alert.informativeText = "How many RR intervals is this caliper measuring?"
+                alert.addButton(withTitle: "Continue")
+                alert.addButton(withTitle: "Back")
+                alert.accessoryView = qtcNumberInputView
+                qtcMeanIntervalAlert = alert
+            }
+            qtcNumberTextField.stringValue = String(appPreferences.defaultNumberOfQTcMeanRRIntervals)
+            qtcNumberStepper.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
+            let result = qtcMeanIntervalAlert!.runModal()
             if result == NSAlertFirstButtonReturn {
-                if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
+                if qtcNumberTextField.integerValue < 1 || qtcNumberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
                     exitQTc()
                     return
                 }
                 // get integer from the stepper
-                let divisor = numberStepper.integerValue
+                let divisor = qtcNumberStepper.integerValue
                 assert (divisor != 0)
                 let intervalResult = fabs(c.intervalResult())
                 let meanInterval = intervalResult / Double(divisor)
@@ -1311,6 +1324,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     @IBAction func stepperAction(_ sender: AnyObject) {
         numberTextField.integerValue = numberStepper.integerValue
+        qtcNumberTextField.integerValue = qtcNumberStepper.integerValue
     }
     
     override func controlTextDidChange(_ obj: Notification) {
@@ -1323,6 +1337,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             if obj.object as AnyObject? === numberOfQTcMeanRRIntervalsTextField {
                 numberOfQTcMeanRRIntervalsStepper.integerValue = numberOfQTcMeanRRIntervalsTextField.integerValue
+            }
+            if obj.object as AnyObject? === qtcNumberTextField {
+                qtcNumberStepper.integerValue = qtcNumberTextField.integerValue
             }
         }
     }
