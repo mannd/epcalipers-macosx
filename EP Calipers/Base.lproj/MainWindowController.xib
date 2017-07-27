@@ -107,10 +107,10 @@
                                 <segment toolTip="Add amplitude caliper" image="calipers-amplitude-icon-bw-20x20" width="32" tag="1">
                                     <nil key="label"/>
                                 </segment>
-                                <segment toolTip="Calibrate" image="angle_icon_2_20x20">
+                                <segment toolTip="Add angle caliper" image="angle_icon_2_20x20">
                                     <nil key="label"/>
                                 </segment>
-                                <segment label="Calibrate" toolTip="Clear calibration"/>
+                                <segment label="Calibrate" toolTip="Calibrate"/>
                                 <segment label="Clear" toolTip="Clear calibration"/>
                             </segments>
                         </segmentedCell>
