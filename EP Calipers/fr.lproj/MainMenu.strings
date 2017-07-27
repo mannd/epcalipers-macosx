@@ -1,15 +1,15 @@
 
 /* Class = "NSMenuItem"; title = "Rotate 90° Left"; ObjectID = "1UF-a2-1md"; */
-"1UF-a2-1md.title" = "Rotate 90° Left";
+"1UF-a2-1md.title" = "Tourner 90° à gauche";
 
 /* Class = "NSMenuItem"; title = "EP Calipers"; ObjectID = "1Xt-HY-uBw"; */
-"1Xt-HY-uBw.title" = "EP Calipers";
+"1Xt-HY-uBw.title" = "Compas EP";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "1b7-l0-nxx"; */
 "1b7-l0-nxx.title" = "Recherche";
 
 /* Class = "NSMenuItem"; title = "Mean Rate/Interval"; ObjectID = "2hW-zW-ivA"; */
-"2hW-zW-ivA.title" = "Mean Rate/Interval";
+"2hW-zW-ivA.title" = "Intervalle moyen/Fréquence moyenne";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "2oI-Rn-ZJC"; */
 "2oI-Rn-ZJC.title" = "Transformations";
@@ -24,22 +24,22 @@
 "4EN-yA-p0u.title" = "Recherche";
 
 /* Class = "NSMenuItem"; title = "Quit EP Calipers"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "Quit EP Calipers";
+"4sb-4s-VLi.title" = "Quitter Compas EP";
 
 /* Class = "NSMenuItem"; title = "Lock Image"; ObjectID = "54R-by-BUe"; */
-"54R-by-BUe.title" = "Lock Image";
+"54R-by-BUe.title" = "Fixer l'image";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
 "5QF-Oa-p0T.title" = "Édition";
 
 /* Class = "NSMenuItem"; title = "QTc Measurement"; ObjectID = "5VV-jo-nu6"; */
-"5VV-jo-nu6.title" = "QTc Measurement";
+"5VV-jo-nu6.title" = "Mésurement de QTc";
 
 /* Class = "NSMenuItem"; title = "About EP Calipers"; ObjectID = "5kV-Vb-QxS"; */
-"5kV-Vb-QxS.title" = "About EP Calipers";
+"5kV-Vb-QxS.title" = "Sur Compas EP";
 
 /* Class = "NSMenuItem"; title = "Rotate 0.1° Right"; ObjectID = "6aq-d3-Qez"; */
-"6aq-d3-Qez.title" = "Rotate 0.1° Right";
+"6aq-d3-Qez.title" = "Tourner 0.1° à droite";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
 "6dh-zS-Vam.title" = "Rétablir";
@@ -60,7 +60,7 @@
 "BOF-NM-1cW.title" = "Préférences…";
 
 /* Class = "NSMenuItem"; title = "Clear Calibration"; ObjectID = "CWG-n0-m2k"; */
-"CWG-n0-m2k.title" = "Clear Calibration";
+"CWG-n0-m2k.title" = "Effacer l'étallonage";
 
 /* Class = "NSMenuItem"; title = "Caliper"; ObjectID = "D0w-6S-BDp"; */
 "D0w-6S-BDp.title" = "Compas";
@@ -72,19 +72,19 @@
 "Dv1-io-Yv7.title" = "Orthographe et grammaire";
 
 /* Class = "NSMenuItem"; title = "Image Editor"; ObjectID = "Eqb-7y-vN9"; */
-"Eqb-7y-vN9.title" = "Image Editor";
+"Eqb-7y-vN9.title" = "Éditeur d'image";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "Aide";
 
 /* Class = "NSMenuItem"; title = "EP Calipers Help"; ObjectID = "FKE-Sm-Kum"; */
-"FKE-Sm-Kum.title" = "EP Calipers Help";
+"FKE-Sm-Kum.title" = "Aide Compas EP";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "FeM-D8-WVr"; */
 "FeM-D8-WVr.title" = "Substitutions";
 
 /* Class = "NSMenuItem"; title = "Rotate 0.1° Left"; ObjectID = "GfO-UW-Lf3"; */
-"GfO-UW-Lf3.title" = "Rotate 0.1° Left";
+"GfO-UW-Lf3.title" = "Tourner 0.1° à gauche";
 
 /* Class = "NSMenuItem"; title = "Image"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "Image";
@@ -108,7 +108,7 @@
 "LE2-aR-0XJ.title" = "Tout ramener au premier plan";
 
 /* Class = "NSMenuItem"; title = "Delete Caliper"; ObjectID = "MGL-eL-tFp"; */
-"MGL-eL-tFp.title" = "Delete Caliper";
+"MGL-eL-tFp.title" = "Supprimer un compas";
 
 /* Class = "NSMenu"; title = "Caliper"; ObjectID = "MrP-RE-zcc"; */
 "MrP-RE-zcc.title" = "Compas";
@@ -120,10 +120,10 @@
 "OY7-WF-poV.title" = "Placer dans le Dock";
 
 /* Class = "NSMenuItem"; title = "Hide EP Calipers"; ObjectID = "Olw-nP-bQN"; */
-"Olw-nP-bQN.title" = "Hide EP Calipers";
+"Olw-nP-bQN.title" = "Cacher Compas EP";
 
 /* Class = "NSMenuItem"; title = "Rotate 1° Right"; ObjectID = "Osb-se-4Ge"; */
-"Osb-se-4Ge.title" = "Rotate 1° Right";
+"Osb-se-4Ge.title" = "Tourner 1° à droite";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "OwM-mh-QMV"; */
 "OwM-mh-QMV.title" = "Rechercher le précédent";
@@ -132,7 +132,7 @@
 "Oyz-dy-DGm.title" = "Arrêter la lecture";
 
 /* Class = "NSMenuItem"; title = "Grab All"; ObjectID = "P6q-PG-2Hd"; */
-"P6q-PG-2Hd.title" = "Grab All";
+"P6q-PG-2Hd.title" = "Saisir tout";
 
 /* Class = "NSMenuItem"; title = "Zoom Out"; ObjectID = "PfA-hX-1iQ"; */
 "PfA-hX-1iQ.title" = "Zoom arrière";
@@ -159,10 +159,10 @@
 "UEZ-Bs-lqG.title" = "Mettre en lettres capitales";
 
 /* Class = "NSMenuItem"; title = "Rotate 1° Left"; ObjectID = "UTb-hN-uvE"; */
-"UTb-hN-uvE.title" = "Rotate 1° Left";
+"UTb-hN-uvE.title" = "Tourner 1° à gauche";
 
 /* Class = "NSMenuItem"; title = "Add Time Caliper"; ObjectID = "VXG-nN-9pi"; */
-"VXG-nN-9pi.title" = "Add Time Caliper";
+"VXG-nN-9pi.title" = "Ajouter compas de temps";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Masquer les autres";
@@ -186,13 +186,13 @@
 "Ynk-f8-cLZ.title" = "Commencer la lecture";
 
 /* Class = "NSMenuItem"; title = "Toggle Rate/Interval"; ObjectID = "aNU-cw-RNz"; */
-"aNU-cw-RNz.title" = "Toggle Rate/Interval";
+"aNU-cw-RNz.title" = "Alterner intervalle/fréquence";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "Window";
 
 /* Class = "NSMenuItem"; title = "Calibrate"; ObjectID = "bCr-le-ZI5"; */
-"bCr-le-ZI5.title" = "Calibrate";
+"bCr-le-ZI5.title" = "Étalonner";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "Fichier";
@@ -219,25 +219,25 @@
 "dRJ-4n-Yzg.title" = "Annuler";
 
 /* Class = "NSMenuItem"; title = "Zoom To Actual Size"; ObjectID = "e1s-vQ-Cdy"; */
-"e1s-vQ-Cdy.title" = "Zoom To Actual Size";
+"e1s-vQ-Cdy.title" = "Zoom à dimension réelle";
 
 /* Class = "NSMenuItem"; title = "Cursor"; ObjectID = "fPv-by-kue"; */
 "fPv-by-kue.title" = "Curseur";
 
 /* Class = "NSMenuItem"; title = "Add Amplitude Caliper"; ObjectID = "fyJ-Gr-6Q4"; */
-"fyJ-Gr-6Q4.title" = "Add Amplitude Caliper";
+"fyJ-Gr-6Q4.title" = "Ajouter compas d'amplitude";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
 "gVA-U4-sdL.title" = "Coller";
 
 /* Class = "NSMenuItem"; title = "Delete All Calipers"; ObjectID = "gb9-F9-bXn"; */
-"gb9-F9-bXn.title" = "Delete All Calipers";
+"gb9-F9-bXn.title" = "Supprimer tous les compas";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "hQb-2v-fYv"; */
 "hQb-2v-fYv.title" = "Guillemets courbes";
 
 /* Class = "NSMenuItem"; title = "Rotate 90° Right"; ObjectID = "hX3-m3-BnY"; */
-"hX3-m3-BnY.title" = "Rotate 90° Right";
+"hX3-m3-BnY.title" = "Tourner 90° à droite";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "hz2-CU-CR7"; */
 "hz2-CU-CR7.title" = "Vérifier le document maintenant";
@@ -249,13 +249,13 @@
 "ihw-lr-h7M.title" = "Page suivante";
 
 /* Class = "NSMenuItem"; title = "Add Angle Caliper"; ObjectID = "jfR-HV-VKA"; */
-"jfR-HV-VKA.title" = "Add Angle Caliper";
+"jfR-HV-VKA.title" = "Ajouter compas d'angle";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "mK6-2p-4JG"; */
 "mK6-2p-4JG.title" = "Vérifier la grammaire et l’orthographe";
 
 /* Class = "NSMenuItem"; title = "Reset Rotation"; ObjectID = "mRi-px-TI8"; */
-"mRi-px-TI8.title" = "Reset Rotation";
+"mRi-px-TI8.title" = "Réinitialiser la rRRotation";
 
 /* Class = "NSMenuItem"; title = "Zoom In"; ObjectID = "oLP-ek-a3b"; */
 "oLP-ek-a3b.title" = "Zoom avant";
@@ -264,7 +264,7 @@
 "oas-Oc-fiZ.title" = "Ouvrir un élément récent";
 
 /* Class = "NSMenuItem"; title = "Delete "; ObjectID = "pa3-QI-u2k"; */
-"pa3-QI-u2k.title" = "Delete ";
+"pa3-QI-u2k.title" = "Supprimer";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "q09-fT-Sye"; */
 "q09-fT-Sye.title" = "Rechercher le suivant";
@@ -282,7 +282,7 @@
 "tXI-mr-wws.title" = "Ouvrir un élément récent";
 
 /* Class = "NSMenu"; title = "EP Calipers"; ObjectID = "uQy-DD-JDr"; */
-"uQy-DD-JDr.title" = "EP Calipers";
+"uQy-DD-JDr.title" = "Compas EP";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG"; */
 "uRl-iY-unG.title" = "Couper";

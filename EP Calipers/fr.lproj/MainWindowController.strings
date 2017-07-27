@@ -32,7 +32,7 @@
 /* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[2] = "Add angle caliper"; ObjectID = "F0P-3a-q84"; */
 "F0P-3a-q84.ibShadowedToolTips[2]" = "Ajouter un compas d'angle";
 
-* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[3] = "Calibrate"; ObjectID = "F0P-3a-q84"; */
+/* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[3] = "Calibrate"; ObjectID = "F0P-3a-q84"; */
 "F0P-3a-q84.ibShadowedToolTips[3]" = "Étalonner";
 
 /* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[4] = "Clear calibration"; ObjectID = "F0P-3a-q84"; */
@@ -57,7 +57,7 @@
 "lRw-HE-u64.ibShadowedToolTips[1]" = "Zoom arrière";
 
 /* Class = "NSSegmentedCell"; lRw-HE-u64.ibShadowedToolTips[2] = "Zoom to actual size"; ObjectID = "lRw-HE-u64"; */
-"lRw-HE-u64.ibShadowedToolTips[2]" = "Zoom to actual size";
+"lRw-HE-u64.ibShadowedToolTips[2]" = "Zoom à dimension réelle";
 
 /* Class = "NSSegmentedCell"; lxO-ww-kvY.ibShadowedLabels[0] = "Next"; ObjectID = "lxO-ww-kvY"; */
 "lxO-ww-kvY.ibShadowedLabels[0]" = "Prochain";
