@@ -84,7 +84,7 @@
                                 <segment toolTip="Grab image or caliper" image="TB_move" selected="YES">
                                     <nil key="label"/>
                                 </segment>
-                                <segment toolTip="Rotate image" image="lock-16" width="32" tag="1">
+                                <segment toolTip="Lock image" image="lock-16" width="32" tag="1">
                                     <nil key="label"/>
                                 </segment>
                             </segments>
