@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
 		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
+		8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E2867821F2A5CD700AF335C /* Localizable.strings */; };
 		8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */; };
 		8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */; };
 		8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F21C2E264000AD9556 /* Assets.xcassets */; };
@@ -60,6 +61,8 @@
 		8E02593E1E37B49700820703 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		8E2867811F2A5CD700AF335C /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8E2867831F2A5CDB00AF335C /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EP Calipers-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedIKImageView.h; sourceTree = "<group>"; };
 		8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedIKImageView.m; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 		8E3DA7EF1C2E264000AD9556 /* EP Calipers */ = {
 			isa = PBXGroup;
 			children = (
+				8E2867821F2A5CD700AF335C /* Localizable.strings */,
 				8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */,
 				8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */,
 				8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */,
@@ -341,6 +345,7 @@
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
 				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
 				8EAE6EC61E25BEBD009C01F7 /* EPCalipers.help in Resources */,
+				8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */,
 				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
 				8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */,
 				8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */,
@@ -413,6 +418,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8E2867821F2A5CD700AF335C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E2867811F2A5CD700AF335C /* en */,
+				8E2867831F2A5CDB00AF335C /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		8E3DA7F41C2E264000AD9556 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

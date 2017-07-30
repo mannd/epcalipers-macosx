@@ -255,7 +255,7 @@
 "mK6-2p-4JG.title" = "Vérifier la grammaire et l’orthographe";
 
 /* Class = "NSMenuItem"; title = "Reset Rotation"; ObjectID = "mRi-px-TI8"; */
-"mRi-px-TI8.title" = "Réinitialiser la rRRotation";
+"mRi-px-TI8.title" = "Réinitialiser la rotation";
 
 /* Class = "NSMenuItem"; title = "Zoom In"; ObjectID = "oLP-ek-a3b"; */
 "oLP-ek-a3b.title" = "Zoom avant";

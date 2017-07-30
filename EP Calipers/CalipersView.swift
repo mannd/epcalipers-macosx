@@ -99,8 +99,8 @@ class CalipersView: NSView {
         // only show menu if not in middle of tweaking
         if !tweakingComponent {
             let theMenu = NSMenu()
-            let colorMenuItem = NSMenuItem(title: "Caliper Color", action: #selector(colorCaliper(_:)), keyEquivalent: "")
-            let tweakMenuItem = NSMenuItem(title: "Tweak Caliper Position", action: #selector(tweakCaliper(_:)), keyEquivalent: "")
+            let colorMenuItem = NSMenuItem(title: NSLocalizedString("Caliper Color", comment:""), action: #selector(colorCaliper(_:)), keyEquivalent: "")
+            let tweakMenuItem = NSMenuItem(title: NSLocalizedString("Tweak Caliper Position", comment:""), action: #selector(tweakCaliper(_:)), keyEquivalent: "")
             theMenu.addItem(colorMenuItem)
             theMenu.addItem(tweakMenuItem)
             NSMenu.popUpContextMenu(theMenu, with: event, for: self)
