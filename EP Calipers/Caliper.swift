@@ -165,7 +165,7 @@ class Caliper: NSObject {
             s = String(format: "%d %@", Int(round(calibratedResult())), calibration.units)
         }
         else {
-            s = String(format: "%.4g %@", calibratedResult(), calibration.units)
+            s = NSString.localizedStringWithFormat("%.4g %@", calibratedResult(), calibration.units) as String
         }
         return s
     }
@@ -268,17 +268,17 @@ class Caliper: NSObject {
         let s: String?
         switch (component) {
         case .leftBar:
-            s = "left bar"
+            s = NSLocalizedString("left bar", comment:"") as String
         case .rightBar:
-            s = "right bar"
+            s = NSLocalizedString("right bar", comment:"") as String
         case .crossBar:
-            s = "crossbar"
+            s = NSLocalizedString("crossbar", comment:"") as String
         case .upperBar:
-            s = "upper bar"
+            s = NSLocalizedString("upper bar", comment:"") as String
         case .lowerBar:
-            s = "lower bar"
+            s = NSLocalizedString("lower bar", comment:"") as String
         case .apex:
-            s = "apex"
+            s = NSLocalizedString("apex", comment:"") as String
         default:
             s = nil
         }

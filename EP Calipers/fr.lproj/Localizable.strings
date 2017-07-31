@@ -44,7 +44,7 @@
 "Do you want to turn off transparent window mode and load image?" = "Voulez-vous éteindre la fenêtre transparente et charger une image ?";
 
 /* No comment provided by engineer. */
-"Enter calibration measurement (e.g. \(example))" = "Entrer la mesure d'étalonnage (p.e. \(example))";
+"Enter calibration measurement (e.g. %@)" = "Entrer la mesure d'étalonnage (p.e. %@)";
 
 /* No comment provided by engineer. */
 "Enter number of intervals" = "Entrer le nombre d'intervales";
@@ -62,7 +62,7 @@
 "How many RR intervals is this caliper measuring?" = "Combien d'intervalles RR ce compas mesure-t-il ?";
 
 /* No comment provided by engineer. */
-"In order to proceed, you must first add a caliper." = "Avant de continuer, vous voulez ajouter un compas.";
+"In order to proceed, you must first add a caliper." = "Avant de continuer, il faut ajouter un compas.";
 
 /* No comment provided by engineer. */
 "In order to proceed, you must first add a time caliper." = "Avant de continuer, vous voulez ajouter un compas de temps.";
@@ -130,3 +130,21 @@
 /* No comment provided by engineer. */
 "Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel." = "Utiliser un compas à mesurer un intervalle connu, puis choisir Prochain pour étalonner à cet intervalle, ou Annuler.";
 
+/* manually added */
+"Mean interval = %.4g %@\nMean rate = %.4g bpm" = "Intervalle moyen = %.4g %@\nFréquence cardiaque moyenne = %.4g bpm";
+
+"Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)" = "RR moyen = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(formule de Bazett)";
+
+"Tweak %@ with arrow keys.  Press Escape (esc) to stop tweaking." = "Régler %@ en utilisant les touches fléchées.  Appuyer sur la touche Échap pour quitter.";
+
+"left bar" = "la barre gauche";
+
+"right bar" = "la barre droite";
+
+"crossbar" = "la barre transversale";
+
+"upper bar" = "la barre supérieure";
+
+"lower bar" = "la barre inférieure";
+
+"apex" = "le sommet";

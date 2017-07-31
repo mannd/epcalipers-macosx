@@ -157,7 +157,7 @@ class CalipersView: NSView {
     
     func tweakCaliper(_ sender: AnyObject) {
         if let componentName = Caliper.componentName(chosenComponent) {
-            let message = "Tweak " + componentName + " with arrow keys.  Press Escape (esc) to stop tweaking."
+            let message = String(format: NSLocalizedString("Tweak %@ with arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
             if !tweakingComponent {
                 delegate?.showMessageAndSaveLast(message)
                 tweakingComponent = true

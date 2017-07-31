@@ -859,7 +859,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             else {
                 example = NSLocalizedString("1000 msec", comment:"")
             }
-            let message = String(NSLocalizedString("Enter calibration measurement (e.g. \(example))", comment:""))!
+            let message = String(format:NSLocalizedString("Enter calibration measurement (e.g. %@)", comment:""), example)
             if calibrationAlert == nil {
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
@@ -1034,7 +1034,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let alert = NSAlert()
         alert.alertStyle = NSAlertStyle.informational
         alert.messageText = NSLocalizedString("Mean interval and rate", comment:"")
-        alert.informativeText = String(format: "Mean interval = %.4g %@\nMean rate = %.4g bpm", meanInterval, intervalUnits, meanRate)
+        alert.informativeText = NSString.localizedStringWithFormat(NSLocalizedString("Mean interval = %.4g %@\nMean rate = %.4g bpm", comment:"") as NSString, meanInterval, intervalUnits, meanRate) as String;
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
@@ -1236,7 +1236,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     qt *= 1000
                     qtc *= 1000
                 }
-                result = String(format: "Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)", meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units)
+                result = NSString.localizedStringWithFormat(NSLocalizedString("Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)", comment:"") as NSString, meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units) as String
                 let alert = NSAlert()
                 alert.alertStyle = .informational
                 alert.messageText = NSLocalizedString("Calculated QTc", comment:"")
