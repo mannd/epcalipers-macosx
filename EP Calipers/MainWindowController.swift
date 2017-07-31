@@ -767,6 +767,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func addAngleCaliper() {
         let caliper = AngleCaliper()
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
+        caliper.roundMsecRate = appPreferences.roundMsecRate
         caliper.direction = .horizontal
         caliper.calibration = calipersView.horizontalCalibration
         caliper.verticalCalibration = calipersView.verticalCalibration
@@ -1109,7 +1110,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if meanIntervalAlert == nil {
                 let alert = NSAlert()
                 alert.messageText = NSLocalizedString("Enter number of intervals", comment:"")
-                alert.informativeText = NSLocalizedString("How many intervals is this caliper measuring?  ", comment:"")
+                alert.informativeText = NSLocalizedString("How many intervals is this caliper measuring?", comment:"")
                 alert.alertStyle = NSAlertStyle.informational
                 alert.addButton(withTitle: NSLocalizedString("Calculate", comment:""))
                 alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
