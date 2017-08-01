@@ -38,6 +38,7 @@
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */; };
 		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
+		8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,8 @@
 		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		8ED1677F1F1C1D0200F44DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		8ED167821F1C1D1100F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		8EFCD97C1F30D289007B3A45 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8EFCD97E1F30D28C007B3A45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +181,7 @@
 				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
 				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
 				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
+				8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -343,6 +347,7 @@
 				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */,
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
+				8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */,
 				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
 				8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */,
 				8EAE6EC61E25BEBD009C01F7 /* EPCalipers.help in Resources */,
@@ -453,6 +458,15 @@
 				8ED167821F1C1D1100F44DF3 /* fr */,
 			);
 			name = MainWindowController.xib;
+			sourceTree = "<group>";
+		};
+		8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EFCD97C1F30D289007B3A45 /* fr */,
+				8EFCD97E1F30D28C007B3A45 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
