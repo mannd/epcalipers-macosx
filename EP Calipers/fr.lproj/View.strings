@@ -6,10 +6,10 @@
 "8t4-5p-W6t.title" = "Fênetre transparente";
 
 /* Class = "NSTextFieldCell"; title = "Intervals for QTc"; ObjectID = "Eil-yh-RPP"; */
-"Eil-yh-RPP.title" = "No. d'intervalles RR pour QTc";
+"Eil-yh-RPP.title" = "No. d'int. RR pour QTc";
 
 /* Class = "NSTextFieldCell"; title = "Show prompts"; ObjectID = "ITd-fO-WiU"; */
-"ITd-fO-WiU.title" = "Présenter des messages-guides";
+"ITd-fO-WiU.title" = "Des messages-guides";
 
 /* Class = "NSTextFieldCell"; title = "Time calibration"; ObjectID = "KAZ-Mn-Rdt"; */
 "KAZ-Mn-Rdt.title" = "Étalonnage de temps";
@@ -27,4 +27,4 @@
 "iei-ea-eL7.title" = "Arrondir msec et bpm";
 
 /* Class = "NSTextFieldCell"; title = "Intervals for mean RR"; ObjectID = "wc1-iK-rII"; */
-"wc1-iK-rII.title" = "No. d'intervalles pour RR moyen";
+"wc1-iK-rII.title" = "No. d'int. pour RR moyen";
