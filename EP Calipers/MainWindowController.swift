@@ -279,6 +279,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if menuItem.action == #selector(switchToolMode(_:)) {
             return !transparent
         }
+        if menuItem.action == #selector(deleteAllCalipers(_:)) {
+            return !calipersView.locked && !(calipersView.calipers.count < 1)
+        }
         return true
     }
     

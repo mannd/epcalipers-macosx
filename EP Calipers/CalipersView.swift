@@ -62,7 +62,7 @@ class CalipersView: NSView {
     
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(NSResponder.deleteBackward(_:)) {
-            return !locked
+            return !locked && !noCaliperIsSelected()
         }
         if menuItem.action == #selector(colorCaliper(_:)) || menuItem.action == #selector(tweakCaliper(_:)) {
             return chosenCaliper != nil

@@ -445,14 +445,20 @@
                                     <action selector="addCaliper:" target="-1" id="Mbd-Ib-8ph"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Delete Caliper" id="MGL-eL-tFp">
+                            <menuItem title="Delete Selected Caliper" id="MGL-eL-tFp">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="deleteBackward:" target="-1" id="stP-pk-BSH"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Delete All Calipers" id="gb9-F9-bXn">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                                 <connections>
                                     <action selector="deleteAllCalipers:" target="-1" id="Fg4-kw-pYd"/>
                                 </connections>
@@ -463,8 +469,10 @@
                                     <action selector="addCaliper:" target="-1" id="bt5-up-YeT"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Clear Calibration" tag="4" id="CWG-n0-m2k">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Clear Calibration" id="CWG-n0-m2k">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CQ
+</string>
                                 <connections>
                                     <action selector="addCaliper:" target="-1" id="wmy-f3-oAv"/>
                                 </connections>

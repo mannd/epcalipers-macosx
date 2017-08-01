@@ -20,7 +20,7 @@ In order to make measurements or calibrate, it is necessary to "select" a single
 #+CAPTION: Three different types of calipers (time, amplitude, and angle).  The red time caliper is selected.
 [[../../shrd/EPCSelectedCaliper.png]]
 ** Deleting Calipers
-Double-tap on the trackpad or double-click with a mouse on a caliper to delete it.  Note that after calibration, even if you delete all calibrated calipers, new calipers that are added will retain calibration.
+Double-tap on the trackpad or double-click with a mouse on a caliper to delete it.  A selected caliper (highlighted) can be deleted using the keyboard Delete key, or the *Caliper | Delete Selected Caliper* menu item.  All calipers can be deleted at once using Shift Delete on the keyboard, or the *Caliper | Delete All Calipers* menu item.   Note that after calibration, even if you delete all calibrated calipers, new calipers that are added will retain calibration.
 ** Caliper Colors
 If you right-click on a caliper with your mouse, or two-finger click on your trackpad, the secondary menu will appear.  The first item on this menu is *Caliper Color*.  Click this option, and the color selector appears.  Use the color selector to change the color of the caliper you clicked on.  The color change will only affect the individual caliper you clicked on.  You can change the default caliper color of new calipers by changing [[./preferences.html][Preferences]].
 * Moving calipers
