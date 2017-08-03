@@ -67,7 +67,6 @@
   pre.src-fortran:before { content: 'Fortran'; }
   pre.src-gnuplot:before { content: 'gnuplot'; }
   pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
   pre.src-js:before { content: 'Javascript'; }
   pre.src-latex:before { content: 'LaTeX'; }
@@ -179,13 +178,13 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<meta name="AppleTitle" content="EP Calipers Help" />
+<style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2017 Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -229,55 +228,98 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org97ab3ec" class="outline-2">
-<h2 id="org97ab3ec"><img src="../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> EP Calipers Help English</h2>
+<div id="outline-container-org261e20e" class="outline-2">
+<h2 id="org261e20e"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Making measurements</h2>
+<div class="outline-text-2" id="text-org261e20e">
 </div>
-<div id="outline-container-org7b3dd9e" class="outline-2">
-<h2 id="org7b3dd9e"><a href="./pgs/basics.html">Introduction &#x2013; EP Calipers 101</a></h2>
-<div class="outline-text-2" id="text-org7b3dd9e">
+<div id="outline-container-orgc25d39a" class="outline-3">
+<h3 id="orgc25d39a">Caliper interval</h3>
+<div class="outline-text-3" id="text-orgc25d39a">
 <p>
-Rationale and basic use of <b>EP Calipers</b>.
+The interval measured by each caliper is displayed on top of or next to the crossbar of the caliper.  Until the calipers are calibrated, measurements are displayed in arbitrary units (points, roughly equivalent to screen pixels).  Angle calipers show a measurement of the current angle in degrees and do not need to be calibrated to display angles.
 </p>
 </div>
 </div>
-<div id="outline-container-org5f2d5f8" class="outline-2">
-<h2 id="org5f2d5f8"><a href="./pgs/images.html">Image operations</a></h2>
-<div class="outline-text-2" id="text-org5f2d5f8">
+<div id="outline-container-org570ffa3" class="outline-3">
+<h3 id="org570ffa3">Measurement prompts</h3>
+<div class="outline-text-3" id="text-org570ffa3">
 <p>
-Open, rotate, move, and save ECG images.
+If the Show Prompts preference is selected (see <a href="./preferences.html">Preferences</a> (it is by default) the program will guide you with detailed instructions on how to make each measurement.  When you become familiar with how to make measurements you may consider turning off the Show Prompts preference.  This minimizes the prompting the program gives.  Prompts appear at the top of the window, right under the toolbars.  For example, when measuring the mean RR interval, if Show Prompts is enabled, the program will first prompt you to select a time caliper, stretch it over a number of intervals, and then click Next on the Navigation Toolbar.  A dialog will then appear asking how many intervals you are measuring.  After entering the number and clicking the calculate button, the result will appear.  If Show Prompts is disabled, you can select a caliper and stretch it over a number of intervals without prompting, and then press the mean RR (mRR) button or the <b>Caliper | Mean Rate/Interval</b> menu item.  The rest of the process is the same.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf6d9a5b" class="outline-2">
-<h2 id="orgf6d9a5b"><a href="./pgs/calipers.html">Caliper operations</a></h2>
-<div class="outline-text-2" id="text-orgf6d9a5b">
+<div id="outline-container-org0468c91" class="outline-3">
+<h3 id="org0468c91">Calibration</h3>
+<div class="outline-text-3" id="text-org0468c91">
 <p>
-Add, move, and delete calipers.
+Calibration is necessary before any measurements can be made!  If the Show Prompts preference is enabled, select the Calibrate button or the <b>Caliper | Calibrate</b> menu item.  Follow the prompts to select a caliper and stretch it over a known interval (such as 1000 msec for time, or 10 mm for amplitude calipers).  Select the Next button.  In the dialog box that appears, make sure the interval matches what you are measuring.  Enter both the calibration interval and units (e.g. 1000 msec,  or 1 mV).  Select the Calibrate button in the dialog box to set the calibration.  Note that time and amplitude calipers need to be calibrated separately.  Once calibrated, calipers will show intervals in the units used to calibrate.  Newly created calipers will use the same calibration.
+</p>
+
+<p>
+If you are not using prompts, then simply select and stretch a caliper over the interval you will be using for calibration, select Calibrate on the toolbar, and enter the calibration interval.
+</p>
+
+<p>
+It is important to use time units such as <i>msec</i> or <i>sec</i> when providing a time calibration if you want to do calculated measurements such as the corrected QT interval.  In other words, type in your calibration measurement as <i>1000 msec</i> and not just <i>1000</i>.  Negative calibration intervals are treated as positive numbers (i.e. the negative sign is ignored).
 </p>
 </div>
 </div>
-<div id="outline-container-org34c312a" class="outline-2">
-<h2 id="org34c312a"><a href="./pgs/measurements.html">Making measurements</a></h2>
-<div class="outline-text-2" id="text-org34c312a">
+<div id="outline-container-org85268f2" class="outline-3">
+<h3 id="org85268f2">Changing calibration</h3>
+<div class="outline-text-3" id="text-org85268f2">
 <p>
-Calibrate calipers, measure, and do ECG calculations.
+You can recalibrate at any time just by repeating the calibration process.  You can clear all calibration by selecting <b>Clear</b> in the calibration toolbar.  Note that calibration is maintained if the image is zoomed.  However, if you are using transparent window mode, you must manually recalibrate if you zoom the image on the Desktop (for example an image loaded in the Preview app).  Selecting a new image will reset calibration.  If you need to rotate the image, you must first clear calibration.
 </p>
 </div>
 </div>
-<div id="outline-container-org0a9edfb" class="outline-2">
-<h2 id="org0a9edfb"><a href="./pgs/preferences.html">Preferences</a></h2>
-<div class="outline-text-2" id="text-org0a9edfb">
+<div id="outline-container-orgdfae087" class="outline-3">
+<h3 id="orgdfae087">Interval/Rate</h3>
+<div class="outline-text-3" id="text-orgdfae087">
 <p>
-Change app preferences, such as caliper color, default calibration, etc.
+Once a time caliper is calibrated, provided you use time units (such as msec or sec) for the calibration, it is possible to toggle between interval measurements (e.g. 600 msec) and heart rate measurements (e.g. 100 bpm) by selecting the R/I button or <b>Caliper | Toggle Rate/Interval</b> menu command.
 </p>
 </div>
 </div>
-<div id="outline-container-org58b1f96" class="outline-2">
-<h2 id="org58b1f96"><a href="./pgs/misc.html">Fine print</a></h2>
-<div class="outline-text-2" id="text-org58b1f96">
+<div id="outline-container-orgc69fdf8" class="outline-3">
+<h3 id="orgc69fdf8">Mean rate and interval calculation</h3>
+<div class="outline-text-3" id="text-orgc69fdf8">
 <p>
-Miscellaneous stuff.
+Select a calibrated caliper and stretch it over a number of intervals.  Select the mRR button or <b>Caliper | Mean Rate/Interval</b> menu command and enter the number of intervals measured in the dialog box that appears.  Select the Calculate button to see the result.  If the Show Prompts preference is selected, prompts will appear to guide you through the process.  Using <b>EP Calipers</b> to calculate mean rates and intervals is very useful in irregular rhythms, such as atrial fibrillation.
 </p>
+</div>
+</div>
+<div id="outline-container-org904ee1b" class="outline-3">
+<h3 id="org904ee1b">QTc calculation</h3>
+<div class="outline-text-3" id="text-org904ee1b">
+<p>
+QTc measurement is a multiple step process, and prompts are always shown.  Select the QTc button on the toolbar or the <b>Caliper | QTc Measurement</b> menu command.  Follow the prompt to stretch the selected caliper over one or more RR intervals and select the Next button.  Enter the number of intervals the caliper is stretched over and select Continue.  Then use the same caliper to measure the QT interval.  Select Next.  A dialog box will give the calculated QTc using Bazett's formula.
+</p>
+
+<div class="figure">
+<p><img src="../../shrd/qtc-measurement.png" alt="qtc-measurement.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>QTc measurement</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org73a96cc" class="outline-3">
+<h3 id="org73a96cc">Brugadometer</h3>
+<div class="outline-text-3" id="text-org73a96cc">
+<p>
+The <b>Brugadometer</b> is a diagnostic tool for Brugada syndrome developed in collaboration with Dr. Adrian Baranchuk and his colleagues at Queen's University Kingston, Ontario, Canada.  It is a tool intended to distinguish between ECGs with a Brugada syndrome pattern in leads V1 or V2 and ECGs with incomplete right bundle branch block.  This tool is under development in <b>EP Calipers</b> and will likely evolve in future updates.  In order to use the <b>Brugadometer</b>, it is necessary to calibrate an amplitude caliper in millimeters (mm) and to calibrate a time caliper preferably in msec or mm.  After doing so, an angle caliper will appear to have a triangle at its apex as shown below.
+</p>
+
+<div class="figure">
+<p><img src="../../shrd/brugadometer.png" alt="brugadometer.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Brugadometer showing triangle base 5 mm below apex of caliper</p>
+</div>
+
+<p>
+The triangle base will be located 5 mm below the apex of the triangle.  Proper alignment of this triangle with an r' wave in a person with a suspected Brugada ECG will provide measurement of the so-called <i>beta angle</i> and the triangle base.  A triangle base &gt; 160 msec (4 mm at standard ECG recording speed of 25 mm/sec) has an increased probability of being a Brugada ECG.   Please see <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4040869/">de Luna AB, Garcia-Niebla J, Baranchuk A.  New electrocardiographic features in Brugada syndrome. Curr Cardiol Rev. 2014 Aug; 10(3): 175-180</a> for further information.
+</p>
+</div>
 </div>
 </div>
 </div>

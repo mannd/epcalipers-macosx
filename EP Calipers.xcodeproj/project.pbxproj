@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E00D4E11F32CFD000DC7ED2 /* EPCalipers.help in Resources */ = {isa = PBXBuildFile; fileRef = 8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */; };
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
 		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
 		8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E2867821F2A5CD700AF335C /* Localizable.strings */; };
@@ -33,7 +34,6 @@
 		8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD21C4742E4002E0085 /* lock-16.png */; };
 		8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */; };
 		8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */; };
-		8EAE6EC61E25BEBD009C01F7 /* EPCalipers.help in Resources */ = {isa = PBXBuildFile; fileRef = 8EAE6EC51E25BEBD009C01F7 /* EPCalipers.help */; };
 		8EB06E351F1E5D6300C65879 /* Normal 12_Lead ECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */; };
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */; };
@@ -59,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipers.help; sourceTree = "<group>"; };
 		8E02593E1E37B49700820703 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -96,7 +97,6 @@
 		8EA7EFD21C4742E4002E0085 /* lock-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-16.png"; sourceTree = "<group>"; };
 		8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-icon-bw-20x20.png"; sourceTree = "<group>"; };
 		8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-amplitude-icon-bw-20x20.png"; sourceTree = "<group>"; };
-		8EAE6EC51E25BEBD009C01F7 /* EPCalipers.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipers.help; sourceTree = "<group>"; };
 		8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 		8EB72C991E2154340083DE96 /* AngleCaliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleCaliper.swift; sourceTree = "<group>"; };
 		8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angle_icon_2_20x20.png; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 		8EA7EFC31C472909002E0085 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8EAE6EC51E25BEBD009C01F7 /* EPCalipers.help */,
+				8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */,
 				8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */,
 				8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */,
 				8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */,
@@ -344,13 +344,13 @@
 				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
 				8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */,
 				8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */,
+				8E00D4E11F32CFD000DC7ED2 /* EPCalipers.help in Resources */,
 				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */,
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
 				8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */,
 				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
 				8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */,
-				8EAE6EC61E25BEBD009C01F7 /* EPCalipers.help in Resources */,
 				8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */,
 				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
 				8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */,

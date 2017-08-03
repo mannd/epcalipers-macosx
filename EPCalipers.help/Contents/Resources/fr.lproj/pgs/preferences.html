@@ -67,7 +67,6 @@
   pre.src-fortran:before { content: 'Fortran'; }
   pre.src-gnuplot:before { content: 'gnuplot'; }
   pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
   pre.src-js:before { content: 'Javascript'; }
   pre.src-latex:before { content: 'LaTeX'; }
@@ -179,13 +178,13 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<meta name="AppleTitle" content="EP Calipers Help" />
+<style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2017 Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -229,55 +228,35 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org97ab3ec" class="outline-2">
-<h2 id="org97ab3ec"><img src="../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> EP Calipers Help English</h2>
-</div>
-<div id="outline-container-org7b3dd9e" class="outline-2">
-<h2 id="org7b3dd9e"><a href="./pgs/basics.html">Introduction &#x2013; EP Calipers 101</a></h2>
-<div class="outline-text-2" id="text-org7b3dd9e">
+<div id="outline-container-org619d410" class="outline-2">
+<h2 id="org619d410"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Preferences</h2>
+<div class="outline-text-2" id="text-org619d410">
 <p>
-Rationale and basic use of <b>EP Calipers</b>.
+Preferences can be selected using the <b>EP Calipers | Preferences</b> menu item.  You can change caliper colors, line width of the calipers, as well as default calibration intervals and number of intervals used to calculate mean intervals.  For example, if you usually use just 1 RR interval to calculate the QTc, set the number of mean RR intervals for the QTc measurement to 1 interval.  Remember though you can override any of these values when you actually do the measurements.  You can also use the dialog to change to a transparent window.
 </p>
-</div>
-</div>
-<div id="outline-container-org5f2d5f8" class="outline-2">
-<h2 id="org5f2d5f8"><a href="./pgs/images.html">Image operations</a></h2>
-<div class="outline-text-2" id="text-org5f2d5f8">
-<p>
-Open, rotate, move, and save ECG images.
+
+<div class="figure">
+<p><img src="../../shrd/preferences.png" alt="preferences.png" />
 </p>
+<p><span class="figure-number">Figure 1: </span>Preferences</p>
 </div>
 </div>
-<div id="outline-container-orgf6d9a5b" class="outline-2">
-<h2 id="orgf6d9a5b"><a href="./pgs/calipers.html">Caliper operations</a></h2>
-<div class="outline-text-2" id="text-orgf6d9a5b">
-<p>
-Add, move, and delete calipers.
-</p>
+<div id="outline-container-orgc9a2335" class="outline-3">
+<h3 id="orgc9a2335">Preferences explained</h3>
+<div class="outline-text-3" id="text-orgc9a2335">
+<ul class="org-ul">
+<li>Caliper color: This is the color of unselected newly added calipers.  Note that this color can be overwritten by right-clicking on a caliper and selecting <b>Caliper Color</b>.</li>
+<li>Selected caliper color: This is the color of the selected caliper.</li>
+<li>Caliper line width: Increase or decrease this slider to make the caliper lines thicker or thinner.</li>
+<li>Time calibration: This is the default value that appears in the text box when calibrating time calipers.  If you usually calibrate to a certain value (say 200 msec) then it is useful to change this default value.</li>
+<li>Amplitude calibration: This is the default value for calibration of amplitude calipers.  Put whatever value you usually use to calibrate here.</li>
+<li>Intervals for mean RR: The default number of intervals you use to measure mean RR intervals.</li>
+<li>Intervals for QTc: The default number of intervals you use to measure the mean RR interval for QTc measurements.</li>
+<li>Show prompts:  Prompting is useful when you are first learning the program, but it is faster to disable this option.  Prompts guide you through the steps of calibrating and making measurements.</li>
+<li>Round msec and rate: Rounds intervals in msec to the nearest msec and heart rates to the nearest bpm.  If unchecked, values are shown with higher precision using up to 3 decimal places.  Note that values in secs or values using other units are never rounded regardless of this preference.</li>
+<li>Transparent window: Makes the main window transparent.  <b>EP Calipers</b> can then be used as a floating caliper to measure anything you have open on your Desktop.</li>
+</ul>
 </div>
-</div>
-<div id="outline-container-org34c312a" class="outline-2">
-<h2 id="org34c312a"><a href="./pgs/measurements.html">Making measurements</a></h2>
-<div class="outline-text-2" id="text-org34c312a">
-<p>
-Calibrate calipers, measure, and do ECG calculations.
-</p>
-</div>
-</div>
-<div id="outline-container-org0a9edfb" class="outline-2">
-<h2 id="org0a9edfb"><a href="./pgs/preferences.html">Preferences</a></h2>
-<div class="outline-text-2" id="text-org0a9edfb">
-<p>
-Change app preferences, such as caliper color, default calibration, etc.
-</p>
-</div>
-</div>
-<div id="outline-container-org58b1f96" class="outline-2">
-<h2 id="org58b1f96"><a href="./pgs/misc.html">Fine print</a></h2>
-<div class="outline-text-2" id="text-org58b1f96">
-<p>
-Miscellaneous stuff.
-</p>
 </div>
 </div>
 </div>
