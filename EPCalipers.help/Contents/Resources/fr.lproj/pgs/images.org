@@ -9,14 +9,16 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 * [[../../shrd/icon_32x32@2x.png]] Images
-Images include files in typical image formats such as JPG and PNG, as well as PDF files.  When you start *EP Calipers* a sample normal ECG is loaded.  To load your own ECG images use one of the following methods.
-* Loading an image
-** Open command
-Use the *File | Open* or *File | Open Recent* menu commands to select an image stored on your computer.
-** Drag and drop
-You can drag and drop an image file onto the app window and it will load.
-** Right click menu
-Even when *EP Calipers* is not open, you can use the right click menu to open an image file.  The right click menu is opened either by right clicking on a file if you have a mouse, or using the left mouse button with the Control key held down, or, if you have a track pad, two-finger tapping on the trackpad.  After selecting *Open With* a list of apps will appear.  *EP Calipers* will be on the list of apps that can open the image.  Click it and the app will start with the loaded image.  This method is especially useful for opening email attachments.
+Parmi les images sont des formats typiques comme JPG et PNG ansi que les fichiers PDF.  Quand vous démarrez *Compas EP* un exemple ECG est chargé.  Pour charger votre images ECG vous utilisez l’une des techniques suivantes.
+* Charger une image
+** Ouvrer un fichier
+Utiliser la commande du menu *Fichier | Ouvrir* ou *Fichier | Ouvrir un élément récent* pour choisir une image enregistrée sur votre ordinateur.
+** Glisser-déposer
+Vous pouvez glisser-déposer un fichier d’image sur la fênetre d’application et il chargera.
+** Menu par clic-droit
+Même quand *Compas EP* n’est pas ouvert, vous pouvez utiliser le menu par clic-droit pour ouvrir un fichier d’image.  Le menu par clic-droit est ouvert soit par un clic-droit sur un fichier si vous avez une souris ou en utilisant le bouton gauche de souris avec la touche contrôle, ou, si vous avez un trackpad, en le tappant avec deux droigts.  Après la sélection de *Ouvrir avec* *(!!!!!!!!!!TODO - check this)* une liste d’applications apparaîtra.  *Compas EP* sera dans la liste d’applications qui peux ouvrir l’image.  Cliquer-le et l’application commencera avec l’image chargée.  Cette méthode très utile en ouvrant de fichiers joints.
+** PDFs à pages multiples
+Quand les fichiers PDF ont plus d'une page, l'application affichera la première page au début. Vous pouvez naviguer sur les autres pages avec la sélection des touches *<* ou *>* ou 
 ** Multi-page PDFs
 If you load a PDF file with multiple pages, the first page will be shown initially.  You can use the *Image | Previous Page* and *Next Page* menu items to change pages, or the left and right arrow keys on your keyboard.
 ** Opening /AliveCor™/ ECGs

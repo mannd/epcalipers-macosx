@@ -8,16 +8,16 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="AppleTitle" content="EP Calipers Help" />
-* [[../shrd/icon_32x32@2x.png]] EP Calipers Help English
-* [[./pgs/basics.html][Introduction -- EP Calipers 101]]
-Rationale and basic use of *EP Calipers*.
-* [[./pgs/images.org][Image operations]]
+* [[../shrd/icon_32x32@2x.png]] Aide de Compas EP
+* [[./pgs/basics.html][Introduction]]
+La justification et l’utilisation essentielle.
+* [[./pgs/images.org][Operations d’image]]
 Open, rotate, move, and save ECG images.
-* [[./pgs/calipers.html][Caliper operations]]
-Add, move, and delete calipers.
-* [[./pgs/measurements.html][Making measurements]]
-Calibrate calipers, measure, and do ECG calculations.
-* [[./pgs/preferences.html][Preferences]]
-Change app preferences, such as caliper color, default calibration, etc.
-* [[./pgs/misc.html][Fine print]]
-Miscellaneous stuff.
+* [[./pgs/calipers.html][Operations de compas]]
+Ajouter, déplacer, et supprimer des compas.
+* [[./pgs/measurements.html][Prendre des mesures]]
+Étalonner des compas, mesurer, et faire les calculs.
+* [[./pgs/preferences.html][Préférences]]
+Changer les préférences de l’application, p.e. la couleur des compas, l’étalonnage par défaut, etc.
+* [[./pgs/misc.html][Miscellaneous]]
+Quelques choses miscellaneous.
