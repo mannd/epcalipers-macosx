@@ -18,30 +18,28 @@ Vous pouvez glisser-déposer un fichier d’image sur la fênetre d’applicatio
 ** Menu par clic-droit
 Même quand *Compas EP* n’est pas ouvert, vous pouvez utiliser le menu par clic-droit pour ouvrir un fichier d’image.  Le menu par clic-droit est ouvert soit par un clic-droit sur un fichier si vous avez une souris ou en utilisant le bouton gauche de souris avec la touche contrôle, ou, si vous avez un trackpad, en le tappant avec deux droigts.  Après la sélection de *Ouvrir avec* *(!!!!!!!!!!TODO - check this)* une liste d’applications apparaîtra.  *Compas EP* sera dans la liste d’applications qui peux ouvrir l’image.  Cliquer-le et l’application commencera avec l’image chargée.  Cette méthode très utile en ouvrant de fichiers joints.
 ** PDFs à pages multiples
-Quand les fichiers PDF ont plus d'une page, l'application affichera la première page au début. Vous pouvez naviguer sur les autres pages avec la sélection des touches *<* ou *>* ou 
-** Multi-page PDFs
-If you load a PDF file with multiple pages, the first page will be shown initially.  You can use the *Image | Previous Page* and *Next Page* menu items to change pages, or the left and right arrow keys on your keyboard.
-** Opening /AliveCor™/ ECGs
-/AliveCor/ ECGs can be saved as PDF files.  Load them with any of the above methods.
-* Adjusting the image
-** Moving the image
-If you have a track pad, you can move the image around using two finger scrolling.  You can also move the image using the Grab cursor.  [[../../shrd/TB_move.png]]  Click the Cursor Toolbar to select the Grab cursor (the hand) if it is not already selected.  Hold down the left mouse button or click the trackpad to grab the ECG image.  Holding down the button or your finger on the trackpad, move the mouse or finger to move the image.  Note that if you grab over a caliper, the caliper will move instead of the ECG image.  If you change the cursor to the Lock cursor [[../../shrd/lock-16.png]] then clicking and holding down the button or your finger will not move the image, but will move the calipers.  This is useful if you want to move the calipers without inadvertently moving the underlying image.  Note that even when using the Lock cursor, it is still possible to use trackpad gestures to move and zoom the underlying image.  
+Quand les fichiers PDF ont plus d'une page, l'application affichera la première page au début. Vous pouvez naviguer sur les autres pages avec la sélection des touches *^P* et *^N* ou en utilisant le menu *Image | Page précédente* et *Image | Page suivante*.
+** Charger un ECG d’/AliveCor™ Kardia/
+Les ECGs d’/AliveCor/ peuvent être enregistrés comme des fichiers PDF.  Charger-les avec les méthodes précédentes.
+* Ajustement de l’image
+** Déplacer l’image
+Si vous avez un trackpad, vous pouvez réajuster la position de l’image en utilisant le déroulement avec deux droigts.  Vous pouvez aussi déplacer une image en utilisant le curseur /Saisir/[[../../shrd/TB_move.png]].  Cliquer la barre d’outils du curseur pour choisir le curseur /Saisir/ (la main) si il n’est pas déja sélectionné.  Enfoncer le bouton gauche de la souris ou cliquer le trackpad pour saisir l’image d’ECG.  En enfonçant le bouton or votre doigt sur le trackpad, déplacer la souris ou votre doigt pour déplacer l’image.  Noter que si vous saisissez un compas, le compas déplacera au lieu de l’image.  Si vous changez le curseur à le curseur /Fixer/[[../../shrd/lock-16.png]] en suite seulement le compas peux être déplacé.  L’image sera fixée.  C’est utile si vous voulez déplacer les compas sans déplacement accidentel de l’image.  Noter que même en utilisant le curseur /Fixer/, c’est toujours possible d’utiliser les gestes de multitouche pour déplacer et zommer l’image.
 ** Rotation
-If your ECG image is rotated or tilted, use the *Image | Rotation* menu commands to correct this.  You can rotate by 90°, 1°, or 0.1° increments in either direction.  The keyboard shortcuts for rotation are useful.  *Important:* You should rotate your image before calibrating your calipers or making measurements.  Once an image has been calibrated, rotation will affect the accuracy of the calibration.  For this reason, you can only rotate an image before you calibrate.  If you need to rotate the image after calibration, you will need to clear calibration (using *Clear* on the Calibration Toolbar or the *Calipers | Clear* menu command) before you can rotate.
+Si l’image d’ECG est tournée ou inclinée, utiliser la commande du menu *Image | Rotation* pour la corriger.  Vous pouvez pivoter l’image par les incréments de 90°, 1°, ou 0.1° dans les deux directions. Les raccourcis clavier de rotation sont utiles.  *Important:* Vous devez pivoter l’image avant l’étalonnage des compas et avant que vous fassiez des mesures. Quand une image a éte étalonnée, la rotation affectera l’exactitude de l’étalonnage.  Pour cette raison, vous pouvez seulement tourner une image avant l’étalonnage.  Si vous devez tourner l’image après l’étalonnage, vous devrez effacer l’étalonnage (en utilisant *Effacer* sur la barre d’outils /Étalonnage/ ou la commande du menu *Compas | Effacer*) avant que vous puissiez la tourner. 
 ** Zooming
-If you have a track pad, pinch to zoom works.  You can also use the Zoom Toolbar to zoom in and out, or to set the image to its actual size.  Zooming is also available in the *Image* menu.  Note that Caliper calibration *does* adjust with zooming.  There is no need to recalibrate the calipers after zooming.
-** Image Editor
-Use the *Image | Image Editor* menu command to open the Image Editor.  The editor has many options that can be used to alter the appearance of the ECG, such as changing its color or contrast.
-#+CAPTION: Image Editor
+Si vous avez un trackpad, vous pouvez pincer pour zoomer.  Vous pouvez aussi utiliser la barre d’outils Zoom pour zoomer en avant et en arrière ou pour rétablir l’image à sa dimension originale.  Le zoom est aussi disponible dans le menu *Image*.  Noter que l'étalonnage continue quand l'image est zoomée.  Il est inutile de réétalonner les compas après zoomer.
+** Éditeur d’image
+Utiliser la commande du menu *Image | Éditeur d’image* pour ouvrir l’éditeur d’image.  Cet éditeur a beaucoup d’options pour modifier l’apparence de l’ECG, p.e. le changement de couleur ou de contraste.
+#+CAPTION: Éditeur d’image
 [[../../shrd/EPCImageEdit.png]]
-* Transparent windows
-** What is transparent window mode?
-Sometimes it is easier to open an image or PDF file on your Desktop using the Preview app, and then make measurements directly on this image.  *EP Calipers* allows you do this using /transparent window mode/.  In this mode, the main window is transparent, allowing you to measure whatever is underneath the window using calipers.  Transparent window mode looks like this:
-#+CAPTION: Transparent window mode
+* Fênetre transparente
+** Quel est le mode de fênetre transparente?
+Parfois il est plus facile d’ouvrir une image ou un fichier PDF en utilisant une autre application, p.e. votre navigateur web, et puis d’effectuer les mesures directement sur cette image.  *Compas EP* permit cela en utilisant /le mode de fênetre transparente/.  Dans ce mode, la fênetre principale est transparente, permettant la mesure de ce qui est sous la fênetre avec les compas.  Le mode de fênetre transparente ressemble à ça:
+#+CAPTION: le mode de fênetre transparente
 [[../../shrd/transparentwindow.png]]
-** Activating transparent window mode
-Use the *EP Calipers | Show Preferences* menu item to display the Preferences dialog.  Check the Transparent window checkbox to change to transparent window mode.  Uncheck the check box to return to normal image mode.
-** Things to watch out for with transparent windows
-When you load an image into *EP Calipers* the normal way and calibrate your calipers, the program will automatically adjust the calibration factor when you zoom the image.  In transparent window mode, the program has no clue if you zoom the underlying image that the calibration is now incorrect.  Take care to recalibrate your calipers if you zoom your image in a program external to *EP Calipers*.  Also note that if run *EP Calipers* in full screen mode, transparent window mode won't work, since there is no Desktop under the window in full screen mode.  Finally, if you open a file while in transparent window mode, a dialog will appear asking if you wish to leave transparent window mode in order to load the image file.
-* Saving an image from *EP Calipers*
-Use the Mac system screenshot functions if you wish to save an image from *EP Calipers*.  *Command-Shift 3* takes a screenshot of your entire desktop.  Press *Command-Shift 4* and then *Space* to set up taking a screenshot of a window on the desktop.  Click the camera icon on the *EP Calipers* window.  Press the Escape (esc) key to cancel a screenshot.  
+** L’activation du mode de fênetre transparente
+Utiliser la commande du menu *Compas EP | Préférences...* pour montrer la boîte de dialogue des préférences.  Cocher la case /Fênetre transparente/ pour changer au mode de fênetre transparente.  Décocher la case pour retourner au mode d’image normale. 
+** Les prudences en utilisant le mode de fênetre transparente
+Quand vous chargez une image dans le mode d’image normale et étalonnez les compas, l’application va automatiquement ajuster le facteur d’étalonnage en zoomant l’image.  Dans le mode de fênetre transparente, ce n’est pas possible de l’ajuster automatiquement.  Il faut réétalonner les compas si vous zoomez l’image avec un program externe.  Noter aussi qu’en utilisant le mode plein écran, le mode de fênetre transparente ne marche pas.  Enfin, si vous charger un fichier dans le mode de fênetre transparente, une boîte de dialogue apparaîtra qui se demande si vous voulez sortir le mode de fênetre transparente pour le charger.
+* Enregistrer une image
+Prendre une capture d’écran pour enregistrer une image de *Compas EP*.  Prendre une capture d’écran du bureaur complet en appuyant *Commande-Maj-3*.  Appuyer *Commande-Maj-4* et puis la touche *Espace* pour prendre une capture d’écran d’une fênetre.  Cliquer l’icône de camera sur la fênetre de *Compas EP*.  Appuyer la touche *Échap* pour annuler une capture d’écran.
