@@ -8,18 +8,18 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
-* [[../../shrd/icon_32x32@2x.png]] Preferences
-Preferences can be selected using the *EP Calipers | Preferences* menu item.  You can change caliper colors, line width of the calipers, as well as default calibration intervals and number of intervals used to calculate mean intervals.  For example, if you usually use just 1 RR interval to calculate the QTc, set the number of mean RR intervals for the QTc measurement to 1 interval.  Remember though you can override any of these values when you actually do the measurements.  You can also use the dialog to change to a transparent window.
+* [[../../shrd/icon_32x32@2x.png]] Préférences
+Les préférences d’application peuvent être choisies en utilisant la commande de menu *Compas EP | Préférences*.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, ainsi que l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le /Nombre d’intervalles RR pour QTc/ à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
 #+CAPTION: Preferences
 [[../../shrd/preferences.png]]
-** Preferences explained
-- Caliper color: This is the color of unselected newly added calipers.  Note that this color can be overwritten by right-clicking on a caliper and selecting *Caliper Color*.
-- Selected caliper color: This is the color of the selected caliper.
-- Caliper line width: Increase or decrease this slider to make the caliper lines thicker or thinner.
-- Time calibration: This is the default value that appears in the text box when calibrating time calipers.  If you usually calibrate to a certain value (say 200 msec) then it is useful to change this default value.
-- Amplitude calibration: This is the default value for calibration of amplitude calipers.  Put whatever value you usually use to calibrate here.
-- Intervals for mean RR: The default number of intervals you use to measure mean RR intervals.
-- Intervals for QTc: The default number of intervals you use to measure the mean RR interval for QTc measurements.
-- Show prompts:  Prompting is useful when you are first learning the program, but it is faster to disable this option.  Prompts guide you through the steps of calibrating and making measurements.
-- Round msec and rate: Rounds intervals in msec to the nearest msec and heart rates to the nearest bpm.  If unchecked, values are shown with higher precision using up to 3 decimal places.  Note that values in secs or values using other units are never rounded regardless of this preference.
-- Transparent window: Makes the main window transparent.  *EP Calipers* can then be used as a floating caliper to measure anything you have open on your Desktop.
+** Préférences expliquées
+- Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant *Couleur de compas*. 
+- Couleur de compas choisi: C’est la couleur d’un compas sélectioné.
+- Largeur de ligne: Utiliser la glissière pour ajuster la larguer de ligne des compas.
+- Étalonnage de temps: C’est la valeur par défaut qui apparait dans la boîte de texte en étalonnant les compas de temps.  Si vous souvent utiliser une certaine valeur d’étalonnage (p.e. 200 msec), alors vous devriez cette préférence.
+- Étalonnage d’amplitude: C’est la valeur par défaut pour étalonner les compas d’amplitude.  
+- No. d’int pour RR moyen: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen.
+- No. d’int RR pour QTc: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen pour calculer le QT corrigé.
+- Des message-guides: Des messages-guides sont utiles quand vous êtes en train d’apprendre l’application. Vous pouvez l’accélérer en désactivant cette option.  Des messages-guides vous guident dans les étapes d’étalonnage et de mesures.
+- Arrondir msec et bpm: Arrondir des intervalles dans msec et des fréquences à l’entier le plus proche.  Noter que les valeurs dans secs ou autres unités ne sont arrondies jamais.
+- Fênetre transparente: La fênetre primaire doit transparente.  *Compas EP* peut alors être utilisé comme un compas flottant pour mesurer des images sur votre bureau.

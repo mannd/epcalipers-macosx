@@ -12,9 +12,9 @@
 ** Vous êtes encore de garde ...
 Il est 2h00 du matin et le téléphone sonne.  C'est une infirmière des soins intensifs du département de cardiologie.  Il faut que M. Smith reçoive son médicament antiarythmique (qui crée ces calendriers de médicaments farfelus?) et son ECG a un intervalle QTc qui est un peu prolongé, selon l'ordinateur.  L'infirmière craint que l'administration soit dangereuse.  Elle veut vous transmettre l'ECG.
 
-Vous téléchargez l'ECG sur votre ordinateur portable.  Vous étudiez l'intervalle QT.  Vous n'êtes pas certain que la mesure prise par l'ordinateur soit correcte.  Vous devez le mesurer vous-même.  Vous commencez à compter les petites boîtes.  Vous faites sortir de votre poche les vieux compas mécaniques qu'un délégué médical vous avait donnés il y a quelques années, à l'époque où une telle générosité était encore légale.  Vous pensez: je vis dans une époque numérique. Suis-je réellement en train de prendre des mesures avec mon ordinateur pour un compas mécanique?
+Vous téléchargez l'ECG sur votre ordinateur portable.  Vous étudiez l'intervalle QT.  Vous n'êtes pas certain que la mesure prise par l'ordinateur soit correcte.  Vous devez le mesurer vous-même.  Vous commencez à compter les petites boîtes.  Vous faites sortir de votre poche le vieux compas mécanique qu'un délégué médical vous avait donné il y a quelques années, à l'époque où une telle générosité était encore légale.  Vous pensez: je vis dans une époque numérique. Suis-je réellement en train de prendre des mesures avec mon ordinateur pour un compas mécanique?
 ** Compas électroniques
-L'application *Compas EP* offre des *compas électroniques* pour mesurer les intervalles sur les images des enregistrements électrocardiographiques ou électrophysiologiques.  Dans le laboratoire d'électrophysiologie les compas électroniques font partie du système d'enregistrement informatisé.  *L'application Compas EP* fournit les mêmes compas électroniques pour votre Mac.  Les compas électroniques de *Compas EP* sont plus précis, plus faciles à utiliser, et moins dangereux que les compas mécaniques (ils n'ont pas de points tranchants!).
+L'application *Compas EP* offre des *compas électroniques* pour mesurer les intervalles sur les images des enregistrements électrocardiographiques ou électrophysiologiques.  Dans le laboratoire d'électrophysiologie les compas électroniques font partie du système d'enregistrement informatisé.  L'application *Compas EP* fournit les mêmes compas électroniques pour votre Mac.  Les compas électroniques de *Compas EP* sont plus précis, plus faciles à utiliser, et moins dangereux que les compas mécaniques (ils n'ont pas de points tranchants!).
 ** Commencement rapide
 Quand le *Compas EP* commence, un échantillon d'ECG et un compas de temps sont chargés.  Déplacer le compas en cliquant la barre transversale et en la faisant glisser avec la souris ou le trackpad.  Élargir et contracter le compas en cliquant la barre verticale et en le glissant.  Pincer et zoomer l'image de l'ECG ou utiliser les boutons de zoom pour l'agrandir ou le rétrécir selon votre besoin.  Si l'ECG est plus grand que votre écran, vous pouvez le glisser avec votre doigt ou la souris afin de trouver un endroit pour mesurer.  Le reste des instructions explique comment charger les images de l'ECG, ajouter et supprimer les compas, les étalonner, et rendre les calculs avancés comme l'intervalle QT corrigé.
 ** Barres d’outils 
@@ -37,7 +37,7 @@ Noter que toutes les barres d'outils ne seront pas disponibles en permanence, se
 - *Étalonner* Étalonner un compas
 - *Effacer* Effacer tout l’étalonnage
 *** Measurement toolbar
-- *I/FC* Alterner l’intervalle et la fréquence
+- *I/FC* Alterner l’intervalle et la fréquence cardiaque
 - *FCM* Calculer l’intervalle moyen et la fréquence moyenne
 - *QTc* Calculer le QTc corrigé
 *** Navigation toolbar
@@ -45,31 +45,31 @@ Noter que toutes les barres d'outils ne seront pas disponibles en permanence, se
 - *Retour* Passer à l’étape précédente
 - *Annuler* Annuler la mesure
 ** Menus
-Presque toutes les fonctions de l’application sont contenues dans les commandes du menu principal en haut de l’écran.  Noter qu’il existe des raccourcis clavier dans le menu pour plusieurs fonctions du programme.  Par exemple, il est plus facile de faire tourner une image à l’aide d’une touche de raccourci clavier qu’en utilisant d’une commande de menu.  Comme pour les barres d’outils, certaines commandes de menu sont désactivées lorsque leur utilisation n’est pas autorisée.  Par exemple, la rotation de l’image n’est pas autorisée après étalonnage des compas.  Il est nécessaire d’effacer l’étalonnage pour restaurer les commandes du menu de rotation.
+Presque toutes les fonctions de l’application sont contenues dans les commandes du menu principal en haut de l’écran.  Noter qu’il existe des raccourcis clavier dans le menu pour plusieurs fonctions du programme.  Par exemple, il est plus facile de faire tourner une image à l’aide d’une touche de raccourci clavier qu’en utilisant d’une commande de menu.  Comme pour les barres d’outils, certaines commandes de menu sont désactivées lorsque leur utilisation n’est pas autorisée.  Par exemple, la rotation de l’image n’est pas autorisée après étalonnage des compas.  Il est nécessaire d’effacer l’étalonnage pour restaurer les commandes de rotation.
 ** Raccourcis clavier
-| Touche | Fonction                         |
-|--------+----------------------------------|
-| ⇧⌃R    | Tourner l’image 90° à doite      |
-| ⇧⌃L    | Tourner l’image 90° à gauche     |
-| ⌃R     | Tourner l’image 1° à droite      |
-| ⌃L     | Tourner l’image 1° à gauche      |
-| ⌘R     | Tourner l’image 0.1 à droite     |
-| ⌘L     | Tourner l’image 0.1 à gauche     |
-| ⌃0     | Réinitialiser la rotation        |
-| ⌘+     | Zoom avant                       |
-| ⌘-     | Zoom arrière                     |
-| ⌘=     | Zoom à dimension réelle          |
-| ⌃E     | Éditeur d’image                  |
-| ⌃T     | Ajouter un compas de temps       |
-| ⌃A     | Ajouter un compas d’amplitude    |
-| ⌃G     | Ajouter un compas d’angle        |
-| ⌃C     | Étalonner                        |
-| Del    | Supprimer le compas choisi       |
-| ⇧Del   | Supprimer tous les compas        |
-| ^P     | Page précédente de multipage PDF |
-| ^N     | Page suivante de multipage PDF   |
-| ←      | Régler le composant gauche       |
-| →      | Régler le composant droite       |
-| ↑      | Régler le composant supérieur    |
-| ↓      | Régler le composant inférieur    |
-| ⌘,     | Ouvrer les préférences           |
+| Touche | Fonction                           |
+|--------+------------------------------------|
+| ⇧⌃R    | Tourner l’image 90° à doite        |
+| ⇧⌃L    | Tourner l’image 90° à gauche       |
+| ⌃R     | Tourner l’image 1° à droite        |
+| ⌃L     | Tourner l’image 1° à gauche        |
+| ⌘R     | Tourner l’image 0,1 à droite       |
+| ⌘L     | Tourner l’image 0,1 à gauche       |
+| ⌃0     | Réinitialiser la rotation          |
+| ⌘+     | Zoom avant                         |
+| ⌘-     | Zoom arrière                       |
+| ⌘=     | Zoom à dimension réelle            |
+| ⌃E     | Éditeur d’image                    |
+| ⌃T     | Ajouter un compas de temps         |
+| ⌃A     | Ajouter un compas d’amplitude      |
+| ⌃G     | Ajouter un compas d’angle          |
+| ⌃C     | Étalonner                          |
+| Del    | Supprimer le compas choisi         |
+| ⇧Del   | Supprimer tous les compas          |
+| ^P     | Page précédente de multipage PDF   |
+| ^N     | Page suivante de multipage PDF     |
+| ←      | Régler le composant vers la gauche |
+| →      | Régler le composant vers la droite |
+| ↑      | Régler le composant vers le haut   |
+| ↓      | Régler le composant vers le bas    |
+| ⌘,     | Ouvrer les préférences             |

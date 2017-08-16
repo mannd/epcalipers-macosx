@@ -67,6 +67,7 @@
   pre.src-fortran:before { content: 'Fortran'; }
   pre.src-gnuplot:before { content: 'gnuplot'; }
   pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
   pre.src-js:before { content: 'Javascript'; }
   pre.src-latex:before { content: 'LaTeX'; }
@@ -184,7 +185,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -228,11 +229,11 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org619d410" class="outline-2">
-<h2 id="org619d410"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Preferences</h2>
-<div class="outline-text-2" id="text-org619d410">
+<div id="outline-container-org3defa51" class="outline-2">
+<h2 id="org3defa51"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Préférences</h2>
+<div class="outline-text-2" id="text-org3defa51">
 <p>
-Preferences can be selected using the <b>EP Calipers | Preferences</b> menu item.  You can change caliper colors, line width of the calipers, as well as default calibration intervals and number of intervals used to calculate mean intervals.  For example, if you usually use just 1 RR interval to calculate the QTc, set the number of mean RR intervals for the QTc measurement to 1 interval.  Remember though you can override any of these values when you actually do the measurements.  You can also use the dialog to change to a transparent window.
+Les préférences d’application peuvent être choisies en utilisant la commande de menu <b>Compas EP | Préférences</b>.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, ainsi que l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le <i>Nombre d’intervalles RR pour QTc</i> à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
 </p>
 
 <div class="figure">
@@ -241,20 +242,20 @@ Preferences can be selected using the <b>EP Calipers | Preferences</b> menu item
 <p><span class="figure-number">Figure 1: </span>Preferences</p>
 </div>
 </div>
-<div id="outline-container-orgc9a2335" class="outline-3">
-<h3 id="orgc9a2335">Preferences explained</h3>
-<div class="outline-text-3" id="text-orgc9a2335">
+<div id="outline-container-org97c7e0f" class="outline-3">
+<h3 id="org97c7e0f">Préférences expliquées</h3>
+<div class="outline-text-3" id="text-org97c7e0f">
 <ul class="org-ul">
-<li>Caliper color: This is the color of unselected newly added calipers.  Note that this color can be overwritten by right-clicking on a caliper and selecting <b>Caliper Color</b>.</li>
-<li>Selected caliper color: This is the color of the selected caliper.</li>
-<li>Caliper line width: Increase or decrease this slider to make the caliper lines thicker or thinner.</li>
-<li>Time calibration: This is the default value that appears in the text box when calibrating time calipers.  If you usually calibrate to a certain value (say 200 msec) then it is useful to change this default value.</li>
-<li>Amplitude calibration: This is the default value for calibration of amplitude calipers.  Put whatever value you usually use to calibrate here.</li>
-<li>Intervals for mean RR: The default number of intervals you use to measure mean RR intervals.</li>
-<li>Intervals for QTc: The default number of intervals you use to measure the mean RR interval for QTc measurements.</li>
-<li>Show prompts:  Prompting is useful when you are first learning the program, but it is faster to disable this option.  Prompts guide you through the steps of calibrating and making measurements.</li>
-<li>Round msec and rate: Rounds intervals in msec to the nearest msec and heart rates to the nearest bpm.  If unchecked, values are shown with higher precision using up to 3 decimal places.  Note that values in secs or values using other units are never rounded regardless of this preference.</li>
-<li>Transparent window: Makes the main window transparent.  <b>EP Calipers</b> can then be used as a floating caliper to measure anything you have open on your Desktop.</li>
+<li>Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant <b>Couleur de compas</b>.</li>
+<li>Couleur de compas choisi: C’est la couleur d’un compas sélectioné.</li>
+<li>Largeur de ligne: Utiliser la glissière pour ajuster la larguer de ligne des compas.</li>
+<li>Étalonnage de temps: C’est la valeur par défaut qui apparait dans la boîte de texte en étalonnant les compas de temps.  Si vous souvent utiliser une certaine valeur d’étalonnage (p.e. 200 msec), alors vous devriez cette préférence.</li>
+<li>Étalonnage d’amplitude: C’est la valeur par défaut pour étalonner les compas d’amplitude.</li>
+<li>No. d’int pour RR moyen: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen.</li>
+<li>No. d’int RR pour QTc: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen pour calculer le QT corrigé.</li>
+<li>Des message-guides: Des messages-guides sont utiles quand vous êtes en train d’apprendre l’application. Vous pouvez l’accélérer en désactivant cette option.  Des messages-guides vous guident dans les étapes d’étalonnage et de mesures.</li>
+<li>Arrondir msec et bpm: Arrondir des intervalles dans msec et des fréquences à l’entier le plus proche.  Noter que les valeurs dans secs ou autres unités ne sont arrondies jamais.</li>
+<li>Fênetre transparente: La fênetre primaire doit transparente.  <b>Compas EP</b> peut alors être utilisé comme un compas flottant pour mesurer des images sur votre bureau.</li>
 </ul>
 </div>
 </div>

@@ -15,7 +15,7 @@
 "5zE-4y-ufs.ibShadowedToolTips[1]" = "Calculer l'intervalle moyen et la fréquence moyenne";
 
 /* Class = "NSSegmentedCell"; 5zE-4y-ufs.ibShadowedToolTips[2] = "Calculate corrected QT"; ObjectID = "5zE-4y-ufs"; */
-"5zE-4y-ufs.ibShadowedToolTips[2]" = "Calculer le QTc corrigé";
+"5zE-4y-ufs.ibShadowedToolTips[2]" = "Calculer le QT corrigé";
 
 /* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedLabels[3] = "Calibrate"; ObjectID = "F0P-3a-q84"; */
 "F0P-3a-q84.ibShadowedLabels[3]" = "Étalonner";

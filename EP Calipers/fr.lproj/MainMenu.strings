@@ -33,13 +33,13 @@
 "5QF-Oa-p0T.title" = "Édition";
 
 /* Class = "NSMenuItem"; title = "QTc Measurement"; ObjectID = "5VV-jo-nu6"; */
-"5VV-jo-nu6.title" = "Mésurement de QTc";
+"5VV-jo-nu6.title" = "Mesurer le QTc";
 
 /* Class = "NSMenuItem"; title = "About EP Calipers"; ObjectID = "5kV-Vb-QxS"; */
 "5kV-Vb-QxS.title" = "Sur Compas EP";
 
 /* Class = "NSMenuItem"; title = "Rotate 0.1° Right"; ObjectID = "6aq-d3-Qez"; */
-"6aq-d3-Qez.title" = "Tourner 0.1° à droite";
+"6aq-d3-Qez.title" = "Tourner 0,1° à droite";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
 "6dh-zS-Vam.title" = "Rétablir";
@@ -84,7 +84,7 @@
 "FeM-D8-WVr.title" = "Substitutions";
 
 /* Class = "NSMenuItem"; title = "Rotate 0.1° Left"; ObjectID = "GfO-UW-Lf3"; */
-"GfO-UW-Lf3.title" = "Tourner 0.1° à gauche";
+"GfO-UW-Lf3.title" = "Tourner 0,1° à gauche";
 
 /* Class = "NSMenuItem"; title = "Image"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "Image";
@@ -162,7 +162,7 @@
 "UTb-hN-uvE.title" = "Tourner 1° à gauche";
 
 /* Class = "NSMenuItem"; title = "Add Time Caliper"; ObjectID = "VXG-nN-9pi"; */
-"VXG-nN-9pi.title" = "Ajouter compas de temps";
+"VXG-nN-9pi.title" = "Ajouter un compas de temps";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Masquer les autres";
@@ -225,7 +225,7 @@
 "fPv-by-kue.title" = "Curseur";
 
 /* Class = "NSMenuItem"; title = "Add Amplitude Caliper"; ObjectID = "fyJ-Gr-6Q4"; */
-"fyJ-Gr-6Q4.title" = "Ajouter compas d'amplitude";
+"fyJ-Gr-6Q4.title" = "Ajouter un compas d'amplitude";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
 "gVA-U4-sdL.title" = "Coller";
@@ -249,7 +249,7 @@
 "ihw-lr-h7M.title" = "Page suivante";
 
 /* Class = "NSMenuItem"; title = "Add Angle Caliper"; ObjectID = "jfR-HV-VKA"; */
-"jfR-HV-VKA.title" = "Ajouter compas d'angle";
+"jfR-HV-VKA.title" = "Ajouter un compas d'angle";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "mK6-2p-4JG"; */
 "mK6-2p-4JG.title" = "Vérifier la grammaire et l’orthographe";
