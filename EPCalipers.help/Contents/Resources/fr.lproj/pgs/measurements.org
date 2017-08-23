@@ -28,11 +28,11 @@ Sélectionner un compas étalonné et mesurer un nombre d'intervalles.  Choisir 
 ** Calcul du QT corrigé
 La mesure de QTc est un procédé en plusieurs étapes et donc les messages-guides se montrent toujours.  Choisir le bouton /QTc/ ou la commande de menu *Compas | Mesurer le QTc*.  Étendre le compas sélectionné sur un ou plusieurs intervalles RR et puis choisir le bouton /Prochain/.  Entrer le nombre d'intervalles étant mesurés et puis choisir *Continuer*.  Utiliser le même compas pour mesurer l'intervalle QT.  Choisir le bouton /Prochain/.  Une boîte de dialogue montrera le QT calculé en utilisant la formule de Bazett.
 #+CAPTION: QTc measurement
-[[../../shrd/qtc-measurement.png]]
+[[../gfx/qtc-measurement.png]]
 
 ** <<Brugadometer>>Brugadometer
 Le *Brugadometer* est un outil de diagnostic, utilisé pour l'analyse du syndrome de Brugada.  Cet outil a été développé en collaboration avec Dr. Adrian Baranchuk et ses collègues à l'Université Queens, Kingston, en Ontario.  Le Brugadometer peut distinguer entre un bloc de branche droite incomplète, et un motif du syndrome de Brugada aux fils V1 ou V2.  Cet outil est en cours de développement dans *Compas EP* et il évoluera dans des futures versions.  Pour utiliser le *Brugadometer*, il faut étalonner un compas de temps en msec ou mm et un compas d'amplitude en mm.  Ensuite, un compas d'angle apparaîtra avec un triangle au sommet comme ceci.
 #+CAPTION: Brugadometer avec une base de triangle 5 mm au-dessous du sommet de le compas
-[[../../shrd/brugadometer.png]]
+[[../gfx/brugadometer.png]]
 
 La base du triangle sera localisée à 5 mm au-dessous du sommet du triangle.  L'alignement correct de ce triangle avec l'onde /r'/ pour un individu soupçonné d'avoir le syndrome de Brugada donnera la mesure de l'angle beta et la mesure de la base du triangle 5 mm au-dessous du sommet.  Une base de triangle qui est > 160 msec (4 mm à une vitesse standard de 25 mm par seconde) suggère la présence du syndrome de Brugada.  Voici [[https://www.ncbi.nlm.nih.gov /pmc/articles/PMC4040869/][de Luna AB, Garcia-Niebla J, Baranchuk A.  New electrocardiographic features in Brugada syndrome. Curr Cardiol Rev. 2014 Aug; 10(3): 175-180]] pour plus d'informations.

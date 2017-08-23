@@ -11,7 +11,7 @@
 * [[../../shrd/icon_32x32@2x.png]] Préférences
 Les préférences d’application peuvent être choisies en utilisant la commande de menu *Compas EP | Préférences*.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, ainsi que l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le /Nombre d’intervalles RR pour QTc/ à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
 #+CAPTION: Preferences
-[[../../shrd/preferences.png]]
+[[../gfx/preferences.png]]
 ** Préférences expliquées
 - Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant *Couleur de compas*. 
 - Couleur de compas choisi: C’est la couleur d’un compas sélectioné.

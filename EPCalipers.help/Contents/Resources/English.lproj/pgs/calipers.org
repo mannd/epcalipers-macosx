@@ -14,11 +14,11 @@ Calipers come in three flavors.  Calipers with a horizontal crossbar and vertica
 ** Add Calipers
 Add calipers by clicking on one of the caliper icons on the /Calipers Toolbar/, or use the *Caliper* menu to do this.
 #+CAPTION: Add Calipers
-[[../../shrd/EPCCaliperIcons.png]]
+[[../gfx/EPCCaliperIcons.png]]
 ** Selecting Calipers
 In order to make measurements or calibrate, it is necessary to "select" a single caliper when there are multiple calipers on the screen.  A single mouse click or single tap on any part of a caliper selects it.  A selected caliper is evident because it is a different color (by default red, but you can change this) than unselected calipers (by default blue).  Single-tapping or single-clicking a selected caliper will unselect it.  Only one caliper at a time can be selected.
 #+CAPTION: Three different types of calipers (time, amplitude, and angle).  The red time caliper is selected.
-[[../../shrd/EPCSelectedCaliper.png]]
+[[../gfx/EPCSelectedCaliper.png]]
 ** Deleting Calipers
 Double-tap on the trackpad or double-click with a mouse on a caliper to delete it.  A selected caliper (highlighted) can be deleted using the keyboard /Delete/ key, or the *Caliper | Delete Selected Caliper* menu item.  All calipers can be deleted at once using /Shift Delete/ on the keyboard, or the *Caliper | Delete All Calipers* menu item.   Note that after calibration, even if you delete all calibrated calipers, new calipers that are added will retain calibration.
 ** Caliper Colors

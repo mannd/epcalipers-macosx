@@ -18,7 +18,7 @@ extension IKImageView: IKImageEditPanelDataSource {
 }
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate {
-    let appName = "EP Calipers"
+    let appName = NSLocalizedString("EP Calipers", comment:"")
     
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: FixedIKImageView!
@@ -193,14 +193,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.delegate = self
         qtcNumberTextField.delegate = self
         
-        // window must be non opaque for transparency to work
-        self.window?.isOpaque = false
-        transparent = appPreferences.transparency
         
         if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+        
+        // window must be non opaque for transparency to work
+        self.window?.isOpaque = false
+        transparent = appPreferences.transparency
+        
         
         calipersView.delegate = self
 

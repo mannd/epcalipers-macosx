@@ -20,7 +20,7 @@ Quand le *Compas EP* commence, un échantillon d'ECG et un compas de temps sont 
 ** Barres d’outils 
 L’application est contrôlée par les boutons des barres d’outils en haut de la fênetre ou par le menu en haut de l’écran.  Les barres d’outils ressemblent ça:
 #+CAPTION: Barres d’outils
-[[../../shrd/EPCtoolbar.png]]
+[[../gfx/EPCtoolbar.png]]
 
 Noter que toutes les barres d'outils ne seront pas disponibles en permanence, selon que l'étalonnage a été effectué. Certains éléments des barres d'outils sont désactivés en mode fenêtre transparente également. Les barres d'outils désactivées sont "grisées". 
 *** Zoom toolbar
@@ -38,7 +38,7 @@ Noter que toutes les barres d'outils ne seront pas disponibles en permanence, se
 - *Effacer* Effacer tout l’étalonnage
 *** Measurement toolbar
 - *I/FC* Alterner l’intervalle et la fréquence cardiaque
-- *FCM* Calculer l’intervalle moyen et la fréquence moyenne
+- *FCM* Calculer la fréquence cardiaque moyenne et l’intervalle moyen 
 - *QTc* Calculer le QTc corrigé
 *** Navigation toolbar
 - *Prochain* Passer à l’étape suivante
@@ -72,4 +72,4 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 | →      | Régler le composant vers la droite |
 | ↑      | Régler le composant vers le haut   |
 | ↓      | Régler le composant vers le bas    |
-| ⌘,     | Ouvrer les préférences             |
+| ⌘,     | Ouvrir les préférences             |

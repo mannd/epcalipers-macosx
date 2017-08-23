@@ -31,12 +31,12 @@ Si vous avez un trackpad, vous pouvez pincer pour zoomer.  Vous pouvez aussi uti
 ** Éditeur d’image
 Utiliser la commande de menu *Image | Éditeur d’image* pour ouvrir l’éditeur d’image.  Cet éditeur a beaucoup d’options pour modifier l’apparence de l’ECG, p.e. le changement de couleur ou de contraste.
 #+CAPTION: Éditeur d’image
-[[../../shrd/EPCImageEdit.png]]
+[[../gfx/EPCImageEdit.png]]
 * Fênetre transparente
 ** Quel est le mode de fênetre transparente?
 Parfois il est plus facile d’ouvrir une image ou un fichier PDF en utilisant une autre application, p.e. votre navigateur web, et puis d’effectuer les mesures directement sur cette image.  *Compas EP* permit cela en utilisant /le mode de fênetre transparente/.  Dans ce mode, la fênetre principale est transparente, permettant la mesure de ce qui est sous la fênetre avec les compas.  Le mode de fênetre transparente ressemble à ça:
 #+CAPTION: le mode de fênetre transparente
-[[../../shrd/transparentwindow.png]]
+[[../gfx/transparentwindow.png]]
 ** L’activation du mode de fênetre transparente
 Utiliser la commande de menu *Compas EP | Préférences...* pour montrer la boîte de dialogue de préférences.  Cocher la case /Fênetre transparente/ pour changer au mode de fênetre transparente.  Décocher la case pour retourner au mode d’image normale. 
 ** Les prudences en utilisant le mode de fênetre transparente

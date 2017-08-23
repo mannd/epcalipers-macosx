@@ -20,4 +20,4 @@ Ajouter, déplacer, et supprimer des compas.
 * [[./pgs/preferences.html][Préférences]]
 Changer les préférences de l’application, p.e. la couleur des compas, l’étalonnage par défaut, etc.
 * [[./pgs/misc.html][Remerciements]]
-Quelques choses divers.
+Quelques choses diverses.

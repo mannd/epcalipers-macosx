@@ -14,11 +14,11 @@ Il y a trois types de compas.  Les compas peuvent être horizontaux pour les mes
 ** Addition de compas
 Cliquer sur les icônes de compas sur la barre d’outils /Compas/, ou utiliser le menu *Compas* pour ajouter de nouveaux compas.
 #+CAPTION: Barre d’outil /Compas/ pour ajouter des compas
-[[../../shrd/EPCCaliperIcons.png]]
+[[../gfx/EPCCaliperIcons.png]]
 ** Sélection d'un compas
 Quand il y a plus d'un compas sur l'écran, il faut qu'un compas soit choisi comme le compas actif pour l'étalonner ou pour faire les calculs.  Par défaut un compas non choisi est bleu et un compas choisi est rouge. Vous pouvez changer les couleurs en utilisant les [[./preferences.html][préférences]].  Il est aussi possible de [[colors][changer les couleurs de compas individuels]].  Un clic de souris ou une frappe sur le touchpad sur un compas non choisi le choisira.  Un deuxième clic encore (mais pas trop vite, parce que un double clic supprimera le compas) le désélectionnera.  Comme il peut y avoir un seul compas choisi à la fois, la sélection d'un compas va désélectionner un autre compas qui est sélectionné.  Parfois un compas sera choisi automatiquement, par exemple pour faire de l'étalonnage, si aucun compas n'est déjà choisi.  Si vous voulez choisir un autre compas, il faut simplement le taper.
 #+CAPTION: Trois types de compas (de temps, d’amplitude, et d’angle).  Le compas rouge est choisi.
-[[../../shrd/EPCSelectedCaliper.png]]
+[[../gfx/EPCSelectedCaliper.png]]
 ** Suppression de compas
 Un double clic avec la souris ou une double frappe du trackpad sur un compas le supprimera.  Un compas choisi peut être supprimé par la touche /Suppr/ ou par la commande de menu *Compas | Supprimer le compas choisi*.  Tous les compas peuvent être supprimés en même temps en utilisant /Maj + Suppr/ de votre clavier ou la commande de menu *Compas | Supprimer tous les compas*.  Noter que l’étalonnage continue même si tous les compas sont supprimés.  Des compas nouvellement ajoutés utilisent l’étalonnage précédent.
 ** <<colors>>Changer les couleurs de compas

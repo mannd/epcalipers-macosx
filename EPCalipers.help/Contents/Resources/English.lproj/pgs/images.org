@@ -31,12 +31,12 @@ If you have a trackpad, pinch to zoom works.  You can also use the /Zoom Toolbar
 ** Image Editor
 Use the *Image | Image Editor* menu command to open the /Image Editor/.  The editor has many options that can be used to alter the appearance of the ECG, such as changing its color or contrast.
 #+CAPTION: Image Editor
-[[../../shrd/EPCImageEdit.png]]
+[[../gfx/EPCImageEdit.png]]
 * Transparent windows
 ** What is transparent window mode?
 Sometimes it is easier to open an image or PDF file on your Desktop using the Preview app, and then make measurements directly on this image.  *EP Calipers* allows you do this using /transparent window mode/.  In this mode, the main window is transparent, allowing you to measure whatever is underneath the window using calipers.  Transparent window mode looks like this:
 #+CAPTION: Transparent window mode
-[[../../shrd/transparentwindow.png]]
+[[../gfx/transparentwindow.png]]
 ** Activating transparent window mode
 Use the *EP Calipers | Show Preferences* menu item to display the /Preferences/ dialog.  Check the /Transparent window/ checkbox to change to transparent window mode.  Uncheck the check box to return to normal image mode.
 ** Things to watch out for with transparent windows
