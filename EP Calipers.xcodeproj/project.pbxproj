@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E00D4E11F32CFD000DC7ED2 /* EPCalipers.help in Resources */ = {isa = PBXBuildFile; fileRef = 8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */; };
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
 		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
+		8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E2867821F2A5CD700AF335C /* Localizable.strings */; };
 		8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */; };
 		8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */; };
 		8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F21C2E264000AD9556 /* Assets.xcassets */; };
@@ -16,9 +18,9 @@
 		8E3DA8011C2E264000AD9556 /* EP_CalipersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA8001C2E264000AD9556 /* EP_CalipersTests.swift */; };
 		8E3DA80C1C2E264000AD9556 /* EP_CalipersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA80B1C2E264000AD9556 /* EP_CalipersUITests.swift */; };
 		8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA8191C306C1300AD9556 /* MainWindowController.swift */; };
-		8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */; };
 		8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81D1C30850200AD9556 /* Quartz.framework */; };
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
+		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
 		8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */; };
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
 		8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC11C4378A4002E0085 /* Calibration.swift */; };
@@ -32,11 +34,11 @@
 		8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD21C4742E4002E0085 /* lock-16.png */; };
 		8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */; };
 		8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */; };
-		8EAE6EC61E25BEBD009C01F7 /* EPCalipers.help in Resources */ = {isa = PBXBuildFile; fileRef = 8EAE6EC51E25BEBD009C01F7 /* EPCalipers.help */; };
 		8EB06E351F1E5D6300C65879 /* Normal 12_Lead ECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */; };
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */; };
-		8ECC76C71C48B1830091F87A /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ECC76C61C48B1830091F87A /* View.xib */; };
+		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
+		8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,9 +59,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipers.help; sourceTree = "<group>"; };
 		8E02593E1E37B49700820703 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		8E2867811F2A5CD700AF335C /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8E2867831F2A5CDB00AF335C /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EP Calipers-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedIKImageView.h; sourceTree = "<group>"; };
 		8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedIKImageView.m; sourceTree = "<group>"; };
@@ -75,9 +80,10 @@
 		8E3DA80B1C2E264000AD9556 /* EP_CalipersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EP_CalipersUITests.swift; sourceTree = "<group>"; };
 		8E3DA80D1C2E264000AD9556 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E3DA8191C306C1300AD9556 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
-		8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		8E3DA81D1C30850200AD9556 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8E7C36D11F2ED89000E5FDA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View.xib; sourceTree = "<group>"; };
+		8E7C36D31F2ED94F00E5FDA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/View.strings; sourceTree = "<group>"; };
 		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
 		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
@@ -91,12 +97,15 @@
 		8EA7EFD21C4742E4002E0085 /* lock-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-16.png"; sourceTree = "<group>"; };
 		8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-icon-bw-20x20.png"; sourceTree = "<group>"; };
 		8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-amplitude-icon-bw-20x20.png"; sourceTree = "<group>"; };
-		8EAE6EC51E25BEBD009C01F7 /* EPCalipers.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipers.help; sourceTree = "<group>"; };
 		8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 		8EB72C991E2154340083DE96 /* AngleCaliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleCaliper.swift; sourceTree = "<group>"; };
 		8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angle_icon_2_20x20.png; sourceTree = "<group>"; };
-		8ECC76C61C48B1830091F87A /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EP Calipers.entitlements"; sourceTree = "<group>"; };
+		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		8ED1677F1F1C1D0200F44DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
+		8ED167821F1C1D1100F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		8EFCD97C1F30D289007B3A45 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8EFCD97E1F30D28C007B3A45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +161,8 @@
 		8E3DA7EF1C2E264000AD9556 /* EP Calipers */ = {
 			isa = PBXGroup;
 			children = (
+				8E7C36CE1F2ED88200E5FDA8 /* View.xib */,
+				8E2867821F2A5CD700AF335C /* Localizable.strings */,
 				8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */,
 				8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */,
 				8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */,
@@ -159,18 +170,18 @@
 				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
 				8E3DA7F71C2E264000AD9556 /* Info.plist */,
 				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
-				8E3DA81B1C306C7B00AD9556 /* MainWindowController.xib */,
+				8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */,
 				8E2282471C398B1300337695 /* CalipersView.swift */,
 				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
 				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
 				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
-				8ECC76C61C48B1830091F87A /* View.xib */,
 				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
 				8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */,
 				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
 				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
 				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
 				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
+				8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -196,7 +207,7 @@
 		8EA7EFC31C472909002E0085 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8EAE6EC51E25BEBD009C01F7 /* EPCalipers.help */,
+				8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */,
 				8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */,
 				8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */,
 				8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */,
@@ -307,6 +318,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 8E3DA7E41C2E264000AD9556;
 			productRefGroup = 8E3DA7EE1C2E264000AD9556 /* Products */;
@@ -327,18 +339,20 @@
 			files = (
 				8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */,
 				8EB06E351F1E5D6300C65879 /* Normal 12_Lead ECG.jpg in Resources */,
-				8ECC76C71C48B1830091F87A /* View.xib in Resources */,
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
 				8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */,
 				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
 				8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */,
 				8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */,
+				8E00D4E11F32CFD000DC7ED2 /* EPCalipers.help in Resources */,
 				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */,
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
+				8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */,
 				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
-				8EAE6EC61E25BEBD009C01F7 /* EPCalipers.help in Resources */,
-				8E3DA81C1C306C7B00AD9556 /* MainWindowController.xib in Resources */,
+				8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */,
+				8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */,
+				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
 				8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */,
 				8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
@@ -410,12 +424,49 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8E2867821F2A5CD700AF335C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E2867811F2A5CD700AF335C /* en */,
+				8E2867831F2A5CDB00AF335C /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		8E3DA7F41C2E264000AD9556 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8E3DA7F51C2E264000AD9556 /* Base */,
+				8ED1677D1F1C19B200F44DF3 /* fr */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		8E7C36CE1F2ED88200E5FDA8 /* View.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E7C36D11F2ED89000E5FDA8 /* Base */,
+				8E7C36D31F2ED94F00E5FDA8 /* fr */,
+			);
+			name = View.xib;
+			sourceTree = "<group>";
+		};
+		8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8ED1677F1F1C1D0200F44DF3 /* Base */,
+				8ED167821F1C1D1100F44DF3 /* fr */,
+			);
+			name = MainWindowController.xib;
+			sourceTree = "<group>";
+		};
+		8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EFCD97C1F30D289007B3A45 /* fr */,
+				8EFCD97E1F30D28C007B3A45 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -425,6 +476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -471,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

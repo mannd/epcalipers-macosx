@@ -1,0 +1,152 @@
+﻿/* No comment provided by engineer. */
+"1 mV" = "1 mV";
+
+/* No comment provided by engineer. */
+"1000 msec" = "1000 msec";
+
+/* No comment provided by engineer. */
+"Angle caliper" = "Compas d'angle";
+
+/* No comment provided by engineer. */
+"Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers." = "Les compas d'angle ne nécessitent pas d'étalonnage.  Seuls les compas de temps ou d'amplitude doivent être étalonnés.\n\nSi vous voulez utiliser un compas d'angle comme un « Brugadometer » vous devez d'abord étalonner les compas de temps et d'amplitude.";
+
+/* No comment provided by engineer. */
+"Back" = "Retour";
+
+/* No comment provided by engineer. */
+"Bad number of intervals" = "Mauvais nombre d'intervalles";
+
+/* No comment provided by engineer. */
+"Calculate" = "Calculer";
+
+/* No comment provided by engineer. */
+"Calculated QTc" = "QTc calculé";
+
+/* No comment provided by engineer. */
+"Calibrate" = "Étalonner";
+
+/* No comment provided by engineer. */
+"Calibrate caliper" = "Étalonner le compas";
+
+/* No comment provided by engineer. */
+"Caliper Color" = "Couleur de compas";
+
+/* No comment provided by engineer. */
+"Can't open \(url)" = "Can't open \(url)";
+
+/* No comment provided by engineer. */
+"Cancel" = "Annuler";
+
+/* No comment provided by engineer. */
+"Continue" = "Continuer";
+
+/* No comment provided by engineer. */
+"Do you want to turn off transparent window mode and load image?" = "Voulez-vous éteindre la fenêtre transparente et charger une image ?";
+
+/* No comment provided by engineer. */
+"Enter calibration measurement (e.g. %@)" = "Entrer la mesure d'étalonnage (p.e. %@)";
+
+/* No comment provided by engineer. */
+"Enter number of intervals" = "Entrer le nombre d'intervales";
+
+/* No comment provided by engineer. */
+"EP Calipers preferences" = "Préférences de Compas EP";
+
+/* No comment provided by engineer. */
+"File not opened" = "Fichier non ouvert";
+
+/* No comment provided by engineer. */
+"How many intervals is this caliper measuring?" = "Combien d'intervalles ce compas mesure-t-il ?";
+
+/* No comment provided by engineer. */
+"How many RR intervals is this caliper measuring?" = "Combien d'intervalles RR ce compas mesure-t-il ?";
+
+/* No comment provided by engineer. */
+"In order to proceed, you must first add a caliper." = "Avant de continuer, il faut ajouter un compas.";
+
+/* No comment provided by engineer. */
+"In order to proceed, you must first add a time caliper." = "Avant de continuer, vous voulez ajouter un compas de temps.";
+
+/* No comment provided by engineer. */
+"Invalid Result" = "Résultat invalide";
+
+/* No comment provided by engineer. */
+"Keep transparency and don't load image" = "Continuer la fênetre transparente et ne pas charger une image";
+
+/* No comment provided by engineer. */
+"Mean interval and rate" = "Intervalle moyen et fréquence moyenne";
+
+/* No comment provided by engineer. */
+"Measure 1 or more RR intervals.  Select Next to continue." = "Mesurer un (ou plus) intervalle RR.  Choisir Prochain à continuer.";
+
+/* No comment provided by engineer. */
+"No caliper selected" = "Compas pas choisi";
+
+/* No comment provided by engineer. */
+"No calipers available" = "Pas de compas disponibles";
+
+/* No comment provided by engineer. */
+"No time caliper available" = "Pas de compas de temps disponible";
+
+/* No comment provided by engineer. */
+"No time caliper selected" = "Compas de temps pas choisi";
+
+/* No comment provided by engineer. */
+"Now measure QT interval and select Next, or Cancel" = "Maintenant mesurer l'intervalle QT et choisir Prochain, ou Annuler";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Please enter a number between 1 and 10" = "Entrer un nombre entre 1 et 10";
+
+/* No comment provided by engineer. */
+"QTc: Enter number of RR intervals" = "QTc: Entrer le nombre d'intervalles RR";
+
+/* No comment provided by engineer. */
+"Screenshot cancelled" = "Capture d'écran annulée";
+
+/* No comment provided by engineer. */
+"Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine." = "Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine.";
+
+/* No comment provided by engineer. */
+"Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV" = "Choisir (par un simple clic) le compas que vous voulez étalonner, et puis le déplacer à un intervalle connu, p.e. 1000 msec ou 1 mV";
+
+/* No comment provided by engineer. */
+"Select a time caliper.  Stretch the caliper over several intervals to get an average interval and rate." = "Choisir un compas de temps.  Déplacer-le à plusieurs intervalles pour mesurer l'intervalle moyen et la fréquence moyenne.";
+
+/* No comment provided by engineer. */
+"Transparent window mode on" = "Le mode de la fênetre transparente est activé";
+
+/* No comment provided by engineer. */
+"Turn off transparency and load image" = "Éteindre la fênetre transparente et charger une image";
+
+/* No comment provided by engineer. */
+"Tweak Caliper Position" = "Régler la position du compas";
+
+/* No comment provided by engineer. */
+"Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel." = "Utiliser un compas à mesurer 2 ou plus d'intervalles, puis choisir Prochain à calculer la moyenne, ou Annuler.";
+
+/* No comment provided by engineer. */
+"Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel." = "Utiliser un compas à mesurer un intervalle connu, puis choisir Prochain pour étalonner à cet intervalle, ou Annuler.";
+
+/* manually added */
+"Mean interval = %.4g %@\nMean rate = %.4g bpm" = "Intervalle moyen = %.4g %@\nFréquence cardiaque moyenne = %.4g bpm";
+
+"Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)" = "RR moyen = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(formule de Bazett)";
+
+"Tweak %@ with arrow keys.  Press Escape (esc) to stop tweaking." = "Régler %@ en utilisant les touches fléchées.  Appuyer sur la touche Échap pour quitter.";
+
+"left bar" = "la barre gauche";
+
+"right bar" = "la barre droite";
+
+"crossbar" = "la barre transversale";
+
+"upper bar" = "la barre supérieure";
+
+"lower bar" = "la barre inférieure";
+
+"apex" = "le sommet";
+
+"EP Calipers" = "Compas EP";

@@ -18,7 +18,7 @@ extension IKImageView: IKImageEditPanelDataSource {
 }
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate {
-    let appName = "EP Calipers"
+    let appName = NSLocalizedString("EP Calipers", comment:"")
     
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: FixedIKImageView!
@@ -193,14 +193,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.delegate = self
         qtcNumberTextField.delegate = self
         
-        // window must be non opaque for transparency to work
-        self.window?.isOpaque = false
-        transparent = appPreferences.transparency
         
         if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+        
+        // window must be non opaque for transparency to work
+        self.window?.isOpaque = false
+        transparent = appPreferences.transparency
+        
         
         calipersView.delegate = self
 
@@ -279,6 +281,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if menuItem.action == #selector(switchToolMode(_:)) {
             return !transparent
         }
+        if menuItem.action == #selector(deleteAllCalipers(_:)) {
+            return !calipersView.locked && !(calipersView.calipers.count < 1)
+        }
         return true
     }
     
@@ -290,10 +295,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if preferencesAlert == nil {
             let alert = NSAlert()
             alert.alertStyle = .informational
-            alert.messageText = "EP Calipers preferences"
+            alert.messageText = NSLocalizedString("EP Calipers preferences", comment:"")
             	alert.accessoryView = preferencesAccessoryView
-            alert.addButton(withTitle: "OK")
-            alert.addButton(withTitle: "Cancel")
+                alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
+                alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             preferencesAlert = alert
         }
         if let color = appPreferences.caliperColor {
@@ -504,12 +509,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // ensure no opening of anything if transparent mode
         if transparent {
             let alert = NSAlert()
-            alert.messageText = "Transparent window mode on"
-            alert.informativeText = "Do you want to turn off transparent window mode and load image?"
+            alert.messageText = NSLocalizedString("Transparent window mode on", comment:"")
+            alert.informativeText = NSLocalizedString("Do you want to turn off transparent window mode and load image?", comment:"")
             alert.alertStyle = .warning
-            alert.addButton(withTitle: "Turn off transparency and load image")
-            alert.addButton(withTitle: "Keep transparency and don't load image")
-            alert.addButton(withTitle: "Cancel")
+            alert.addButton(withTitle: NSLocalizedString("Turn off transparency and load image", comment:""))
+            alert.addButton(withTitle: NSLocalizedString("Keep transparency and don't load image", comment:""))
+            alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             let result = alert.runModal()
             if result == NSAlertFirstButtonReturn {
                 transparent = false
@@ -576,8 +581,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         catch _ {
             let alert = NSAlert()
-            alert.messageText = "File not opened"
-            alert.informativeText = "Can't open \(url)"
+            alert.messageText = NSLocalizedString("File not opened", comment:"")
+            alert.informativeText = NSLocalizedString("Can't open \(url)", comment:"")
             alert.alertStyle = .critical
             alert.runModal()
         }
@@ -596,8 +601,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if !calipersView.takeScreenshot() {
             let alert = NSAlert()
             alert.alertStyle = .informational
-            alert.messageText = "Screenshot cancelled"
-            alert.informativeText = "Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine."
+            alert.messageText = NSLocalizedString("Screenshot cancelled", comment:"")
+            alert.informativeText = NSLocalizedString("Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine.", comment:"")
             alert.runModal()
         }
     }
@@ -767,6 +772,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func addAngleCaliper() {
         let caliper = AngleCaliper()
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
+        caliper.roundMsecRate = appPreferences.roundMsecRate
         caliper.direction = .horizontal
         caliper.calibration = calipersView.horizontalCalibration
         caliper.verticalCalibration = calipersView.verticalCalibration
@@ -805,7 +811,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             break
         }
     }
-        
+    
+    @IBAction func deleteAllCalipers(_ sender: AnyObject) {
+        calipersView.deleteAllCalipers()
+    }
+    
     func calibrateWithPossiblePrompts() {
         // not allowed to calibrate in middle of a measurement
         if calipersView.locked || inMeanRR {
@@ -818,7 +828,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 calibrate()
                 return
             }
-            showMessage("Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel.")
+            showMessage(NSLocalizedString("Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel.", comment:""))
             navigationSegmentedControl.isEnabled = true
             measurementSegmentedControl.isEnabled = false
             inCalibration = true
@@ -850,19 +860,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             var example: String
             if c.direction == .vertical {
-                example = "1 mV"
+                example = NSLocalizedString("1 mV", comment:"")
             }
             else {
-                example = "1000 msec"
+                example = NSLocalizedString("1000 msec", comment:"")
             }
-            let message = String("Enter calibration measurement (e.g. \(example))")!
+            let message = String(format:NSLocalizedString("Enter calibration measurement (e.g. %@)", comment:""), example)
             if calibrationAlert == nil {
             let alert = NSAlert()
-                alert.messageText = "Calibrate caliper"
+            alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
                 //alert.informativeText = message
                 alert.alertStyle = NSAlertStyle.informational
-                alert.addButton(withTitle: "Calibrate")
-                alert.addButton(withTitle: "Cancel")
+                alert.addButton(withTitle: NSLocalizedString("Calibrate", comment:""))
+                alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
                 alert.accessoryView = textInputView
                 calibrationAlert = alert
             }
@@ -977,61 +987,61 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func showAngleCaliperNoCalibrationAlert() {
         let alert = NSAlert()
-        alert.messageText = "Angle caliper"
-        alert.informativeText = "Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers."
+        alert.messageText = NSLocalizedString("Angle caliper", comment:"")
+        alert.informativeText = NSLocalizedString("Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers.", comment:"")
         alert.alertStyle = NSAlertStyle.informational
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
     
     func showNoCalipersAlert(_ noTimeCaliper: Bool) {
         let alert = NSAlert()
         if noTimeCaliper {
-            alert.messageText = "No time caliper available"
-            alert.informativeText = "In order to proceed, you must first add a time caliper."
+            alert.messageText = NSLocalizedString("No time caliper available", comment:"")
+            alert.informativeText = NSLocalizedString("In order to proceed, you must first add a time caliper.", comment:"")
         }
         else {
-            alert.messageText = "No calipers available"
-            alert.informativeText = "In order to proceed, you must first add a caliper."
+            alert.messageText = NSLocalizedString("No calipers available", comment:"")
+            alert.informativeText = NSLocalizedString("In order to proceed, you must first add a caliper.", comment:"")
         }
         alert.alertStyle = NSAlertStyle.informational
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
     
     func showNoCaliperSelectedAlert() {
         let alert = NSAlert()
-        alert.messageText = "No caliper selected"
-        alert.informativeText = "Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV"
+        alert.messageText = NSLocalizedString("No caliper selected", comment:"")
+        alert.informativeText = NSLocalizedString("Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV", comment:"")
         alert.alertStyle = NSAlertStyle.informational
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
     
     func showNoTimeCaliperSelectedAlert() {
         let alert = NSAlert()
-        alert.messageText = "No time caliper selected"
-        alert.informativeText = "Select a time caliper.  Stretch the caliper over several intervals to get an average interval and rate."
+        alert.messageText = NSLocalizedString("No time caliper selected", comment:"")
+        alert.informativeText = NSLocalizedString("Select a time caliper.  Stretch the caliper over several intervals to get an average interval and rate.", comment:"")
         alert.alertStyle = NSAlertStyle.informational
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
     
     func showDivisorErrorAlert() {
         let alert = NSAlert()
         alert.alertStyle = NSAlertStyle.warning
-        alert.messageText = "Bad number of intervals"
-        alert.informativeText = "Please enter a number between 1 and 10"
-        alert.addButton(withTitle: "OK")
+        alert.messageText = NSLocalizedString("Bad number of intervals", comment:"")
+        alert.informativeText = NSLocalizedString("Please enter a number between 1 and 10", comment:"")
+        alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
     
     func showMeanRRResultAlert(_ meanInterval: Double, meanRate: Double, intervalUnits: String) {
         let alert = NSAlert()
         alert.alertStyle = NSAlertStyle.informational
-        alert.messageText = "Mean interval and rate"
-        alert.informativeText = String(format: "Mean interval = %.4g %@\nMean rate = %.4g bpm", meanInterval, intervalUnits, meanRate)
-        alert.addButton(withTitle: "OK")
+        alert.messageText = NSLocalizedString("Mean interval and rate", comment:"")
+        alert.informativeText = NSString.localizedStringWithFormat(NSLocalizedString("Mean interval = %.4g %@\nMean rate = %.4g bpm", comment:"") as NSString, meanInterval, intervalUnits, meanRate) as String;
+        alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
 
@@ -1071,7 +1081,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 meanRR()
                 return
             }
-            showMessage("Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel.")
+            showMessage(NSLocalizedString("Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel.", comment:""))
             navigationSegmentedControl.isEnabled = true
             // don't allow pressing QTc button in middle of meanRR
             measurementSegmentedControl.setEnabled(false, forSegment: 2)
@@ -1104,11 +1114,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             if meanIntervalAlert == nil {
                 let alert = NSAlert()
-                alert.messageText = "Enter number of intervals"
-                alert.informativeText = "How many intervals is this caliper measuring?  "
+                alert.messageText = NSLocalizedString("Enter number of intervals", comment:"")
+                alert.informativeText = NSLocalizedString("How many intervals is this caliper measuring?", comment:"")
                 alert.alertStyle = NSAlertStyle.informational
-                alert.addButton(withTitle: "Calculate")
-                alert.addButton(withTitle: "Cancel")
+                alert.addButton(withTitle: NSLocalizedString("Calculate", comment:""))
+                alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
                 alert.accessoryView = numberInputView
                 meanIntervalAlert = alert
             }
@@ -1170,7 +1180,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 return
             }
             enterQTc()
-            showMessage("Measure 1 or more RR intervals.  Select Next to continue.")
+            showMessage(NSLocalizedString("Measure 1 or more RR intervals.  Select Next to continue.", comment:""))
             inQTcStep1 = true
         }
         
@@ -1181,10 +1191,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if qtcMeanIntervalAlert == nil {
                 let alert = NSAlert()
                 alert.alertStyle = .informational
-                alert.messageText = "QTc: Enter number of RR intervals"
-                alert.informativeText = "How many RR intervals is this caliper measuring?"
-                alert.addButton(withTitle: "Continue")
-                alert.addButton(withTitle: "Back")
+                alert.messageText = NSLocalizedString("QTc: Enter number of RR intervals", comment:"")
+                alert.informativeText = NSLocalizedString("How many RR intervals is this caliper measuring?", comment:"")
+                alert.addButton(withTitle: NSLocalizedString("Continue", comment:""))
+                alert.addButton(withTitle: NSLocalizedString("Back", comment:""))
                 alert.accessoryView = qtcNumberInputView
                 qtcMeanIntervalAlert = alert
             }
@@ -1215,14 +1225,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func doQTcStep2() {
-        showMessage("Now measure QT interval and select Next, or Cancel")
+        showMessage(NSLocalizedString("Now measure QT interval and select Next, or Cancel", comment:""))
     }
     
     func doQTcResult() {
         if let c = calipersView.activeCaliper() {
             var qt = fabs(c.intervalInSecs(c.intervalResult()))
             var meanRR = fabs(rrIntervalForQTc)
-            var result = "Invalid Result"
+            var result = NSLocalizedString("Invalid Result", comment:"")
             if meanRR > 0 {
                 let sqrtRR = sqrt(meanRR)
                 var qtc = qt / sqrtRR
@@ -1232,12 +1242,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     qt *= 1000
                     qtc *= 1000
                 }
-                result = String(format: "Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)", meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units)
+                result = NSString.localizedStringWithFormat(NSLocalizedString("Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)", comment:"") as NSString, meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units) as String
                 let alert = NSAlert()
                 alert.alertStyle = .informational
-                alert.messageText = "Calculated QTc"
+                alert.messageText = NSLocalizedString("Calculated QTc", comment:"")
                 alert.informativeText = result
-                alert.addButton(withTitle: "OK")
+                alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
                 alert.runModal()
                 exitQTc()
             }

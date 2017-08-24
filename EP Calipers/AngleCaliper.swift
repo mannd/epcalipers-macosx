@@ -99,7 +99,7 @@ class AngleCaliper: Caliper {
     override func measurement() -> String {
         let angle = angleBar1 - angleBar2
         let degrees = radiansToDegrees(radians: Double(angle))
-        let text = String(format: "%.1f°", degrees)
+        let text = NSString.localizedStringWithFormat("%.1f°", degrees) as String
         return text
     }
     
@@ -173,7 +173,7 @@ class AngleCaliper: Caliper {
     }
     
     func baseMeasurement(_ lengthInPoints: Double) -> String {
-        let s = String(format: "%.4g %@", calibratedBaseResult(lengthInPoints), calibration.units)
+        let s = NSString.localizedStringWithFormat("%.4g %@", calibratedBaseResult(lengthInPoints), calibration.units) as String
         return s
     }
     

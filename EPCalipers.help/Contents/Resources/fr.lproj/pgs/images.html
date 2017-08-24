@@ -229,98 +229,143 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org37f80df" class="outline-2">
-<h2 id="org37f80df"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Making measurements</h2>
-<div class="outline-text-2" id="text-org37f80df">
-</div>
-<div id="outline-container-orgd4e8787" class="outline-3">
-<h3 id="orgd4e8787">Caliper interval</h3>
-<div class="outline-text-3" id="text-orgd4e8787">
+<div id="outline-container-org69d4516" class="outline-2">
+<h2 id="org69d4516"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Images</h2>
+<div class="outline-text-2" id="text-org69d4516">
 <p>
-The interval measured by each caliper is displayed on top of or next to the crossbar of the caliper.  Until the calipers are calibrated, measurements are displayed in arbitrary units (<i>points</i>, roughly equivalent to screen pixels).  Angle calipers show a measurement of the current angle in degrees and do not need to be calibrated to display angles.
+Parmi les images sont des formats typiques comme JPG et PNG ansi que les fichiers PDF.  Quand vous démarrez <b>Compas EP</b> un exemple ECG est chargé.  Pour charger votre images ECG vous utilisez l’une des techniques suivantes.
 </p>
 </div>
 </div>
-<div id="outline-container-org4b0dbea" class="outline-3">
-<h3 id="org4b0dbea">Measurement prompts</h3>
-<div class="outline-text-3" id="text-org4b0dbea">
+<div id="outline-container-org34dc4b1" class="outline-2">
+<h2 id="org34dc4b1">Charger une image</h2>
+<div class="outline-text-2" id="text-org34dc4b1">
+</div>
+<div id="outline-container-org1dcb9d0" class="outline-3">
+<h3 id="org1dcb9d0">Ouvrir un fichier</h3>
+<div class="outline-text-3" id="text-org1dcb9d0">
 <p>
-If the Show Prompts <a href="./preferences.html">preference</a> is selected (it is by default) the program will guide you with detailed instructions on how to make each measurement.  When you become familiar with how to make measurements you may consider turning off the <i>Show Prompts</i> preference.  This minimizes the prompting the program gives.  Prompts appear at the top of the window, right under the toolbars.  For example, when measuring the mean RR interval, if <i>Show prompts</i> is enabled, the program will first prompt you to select a time caliper, stretch it over a number of intervals, and then click <b>Next</b> on the <i>Navigation Toolbar</i>.  A dialog will then appear asking how many intervals you are measuring.  After entering the number and clicking the calculate button, the result will appear.  If <i>Show prompts</i> is disabled, you can select a caliper and stretch it over a number of intervals without prompting, and then press the <b>mRR</b> (mean RR) button or the <b>Caliper | Mean Rate/Interval</b> menu item.  The rest of the process is the same.
+Utiliser la commande de menu <b>Fichier | Ouvrir</b> ou <b>Fichier | Ouvrir un élément récent</b> pour choisir une image enregistrée sur votre ordinateur.
 </p>
 </div>
 </div>
-<div id="outline-container-org51d6d4f" class="outline-3">
-<h3 id="org51d6d4f">Calibration</h3>
-<div class="outline-text-3" id="text-org51d6d4f">
+<div id="outline-container-org34ea00b" class="outline-3">
+<h3 id="org34ea00b">Glisser-déposer</h3>
+<div class="outline-text-3" id="text-org34ea00b">
 <p>
-Calibration is necessary before any measurements can be made!  If the <i>Show prompts</i> preference is enabled, select the <b>Calibrate</b> button or the <b>Caliper | Calibrate</b> menu item.  Follow the prompts to select a caliper and stretch it over a known interval (such as 1000 msec for time, or 10 mm for amplitude calipers).  Select the <i>Next</i> button.  In the dialog box that appears, make sure the interval matches what you are measuring.  Enter both the calibration interval and units (e.g. 1000 msec,  or 1 mV).  Select the <i>Calibrate</i> button in the dialog box to set the calibration.  Note that time and amplitude calipers need to be calibrated separately.  Once calibrated, calipers will show intervals in the units used to calibrate.  Newly created calipers will use the same calibration.
-</p>
-
-<p>
-If you are not using prompts, then simply select and stretch a caliper over the interval you will be using for calibration, select <b>Calibrate</b> on the toolbar, and enter the calibration interval.
-</p>
-
-<p>
-It is important to use time units such as <i>msec</i> or <i>sec</i> when providing a time calibration if you want to do calculated measurements such as the corrected QT interval.  In other words, type in your calibration measurement as <i>1000 msec</i> and not just <i>1000</i>.  Negative calibration intervals are treated as positive numbers (i.e. the negative sign is ignored).
+Vous pouvez glisser-déposer un fichier d’image sur la fênetre d’application et il chargera.
 </p>
 </div>
 </div>
-<div id="outline-container-org91875ea" class="outline-3">
-<h3 id="org91875ea">Changing calibration</h3>
-<div class="outline-text-3" id="text-org91875ea">
+<div id="outline-container-org9f2902b" class="outline-3">
+<h3 id="org9f2902b">Menu par clic-droit</h3>
+<div class="outline-text-3" id="text-org9f2902b">
 <p>
-You can recalibrate at any time just by repeating the calibration process.  You can clear all calibration by selecting <b>Clear</b> in the <i>Calibration Toolbar</i>.  Note that calibration is maintained if the image is zoomed.  However, if you are using transparent window mode, you must manually recalibrate if you zoom the image on the Desktop (for example an image loaded in the Preview app).  Selecting a new image will reset calibration.  If you need to rotate the image, you must first clear calibration.
+Même quand <b>Compas EP</b> n’est pas ouvert, vous pouvez utiliser le menu par clic-droit pour ouvrir un fichier d’image.  Le menu par clic-droit est ouvert soit par un clic-droit sur un fichier si vous avez une souris ou en utilisant le bouton gauche de souris avec la touche contrôle, ou, si vous avez un trackpad, en le tappant avec deux droigts.  Après la sélection de <b>Ouvrir avec</b> une liste d’applications apparaîtra.  <b>Compas EP</b> sera dans la liste d’applications qui peut ouvrir l’image.  Cliquer-le et l’application commencera avec l’image chargée.  Cette méthode est très utile en ouvrant de fichiers joints.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd6e28d9" class="outline-3">
-<h3 id="orgd6e28d9">Interval/Rate</h3>
-<div class="outline-text-3" id="text-orgd6e28d9">
+<div id="outline-container-org4777545" class="outline-3">
+<h3 id="org4777545">PDFs à pages multiples</h3>
+<div class="outline-text-3" id="text-org4777545">
 <p>
-Once a time caliper is calibrated, provided you use time units (such as msec or sec) for the calibration, it is possible to toggle between interval measurements (e.g. 600 msec) and heart rate measurements (e.g. 100 bpm) by selecting the <b>R/I</b> button or <b>Caliper | Toggle Rate/Interval</b> menu command.
+Quand les fichiers PDF ont plus d'une page, l'application affichera la première page au début. Vous pouvez naviguer sur les autres pages avec la sélection des touches <b>^P</b> et <b>^N</b> ou en utilisant les commandes de menu <b>Image | Page précédente</b> et <b>Image | Page suivante</b>.
 </p>
 </div>
 </div>
-<div id="outline-container-org14c3e3d" class="outline-3">
-<h3 id="org14c3e3d">Mean rate and interval calculation</h3>
-<div class="outline-text-3" id="text-org14c3e3d">
+<div id="outline-container-orgd1cec5d" class="outline-3">
+<h3 id="orgd1cec5d">Charger un ECG d’/AliveCor™ Kardia/</h3>
+<div class="outline-text-3" id="text-orgd1cec5d">
 <p>
-Select a calibrated caliper and stretch it over a number of intervals.  Select the <b>mRR</b> button or <b>Caliper | Mean Rate/Interval</b> menu command and enter the number of intervals measured in the dialog box that appears.  Select the <b>Calculate</b> button to see the result.  If the <i>Show prompts</i> preference is selected, prompts will appear to guide you through the process.  Using <b>EP Calipers</b> to calculate mean rates and intervals is very useful in irregular rhythms, such as atrial fibrillation.
+Les ECGs d’/AliveCor/ peuvent être enregistrés comme des fichiers PDF.  Charger-les avec les méthodes précédentes.
 </p>
 </div>
 </div>
-<div id="outline-container-org5e0ad16" class="outline-3">
-<h3 id="org5e0ad16">QTc calculation</h3>
-<div class="outline-text-3" id="text-org5e0ad16">
+</div>
+<div id="outline-container-orge1ec7ae" class="outline-2">
+<h2 id="orge1ec7ae">Ajustement de l’image</h2>
+<div class="outline-text-2" id="text-orge1ec7ae">
+</div>
+<div id="outline-container-orgd7d3d0e" class="outline-3">
+<h3 id="orgd7d3d0e">Déplacer l’image</h3>
+<div class="outline-text-3" id="text-orgd7d3d0e">
 <p>
-QTc measurement is a multiple step process, and prompts are always shown.  Select the <b>QTc</b> button on the toolbar or the <b>Caliper | QTc Measurement</b> menu command.  Follow the prompt to stretch the selected caliper over one or more RR intervals and select the <b>Next</b> button.  Enter the number of intervals the caliper is stretched over and select <b>Continue</b>.  Then use the same caliper to measure the QT interval.  Select <b>Next</b>.  A dialog box will give the calculated QTc using Bazett's formula.
+Avec un trackpad, vous pouvez réajuster la position de l’image en utilisant le déroulement avec deux droigts.  Vous pouvez aussi déplacer une image en utilisant le curseur <i>Saisir</i><img src="../../shrd/TB_move.png" alt="TB_move.png" />.  Cliquer la barre d’outils du curseur pour choisir le curseur <i>Saisir</i> (la main) si il n’est pas déja sélectionné.  Enfoncer le bouton gauche de la souris ou cliquer le trackpad pour saisir l’image d’ECG.  En enfonçant le bouton or votre doigt sur le trackpad, déplacer la souris ou votre doigt pour déplacer l’image.  Noter que si vous saisissez un compas, le compas déplacera au lieu de l’image.  Si vous changez le curseur à le curseur <i>Fixer</i><img src="../../shrd/lock-16.png" alt="lock-16.png" /> en suite seulement le compas peut être déplacé.  L’image sera fixée.  C’est utile si vous voulez déplacer les compas sans déplacement accidentel de l’image.  Noter que même en utilisant le curseur <i>Fixer</i>, c’est toujours possible d’utiliser les gestes de multitouche pour déplacer et zoomer l’image.
+</p>
+</div>
+</div>
+<div id="outline-container-org620db99" class="outline-3">
+<h3 id="org620db99">Rotation</h3>
+<div class="outline-text-3" id="text-org620db99">
+<p>
+Si l’image d’ECG est tournée ou inclinée, utiliser la commande de menu <b>Image | Rotation</b> pour la corriger.  Vous pouvez pivoter l’image par les incréments de 90°, 1°, ou 0,1° dans les deux directions. Les raccourcis clavier de rotation sont utiles.  <b>Important:</b> Vous devez pivoter l’image avant l’étalonnage des compas et avant que vous fassiez des mesures. Quand une image a éte étalonnée, la rotation affectera l’exactitude de l’étalonnage.  Pour cette raison, vous pouvez seulement tourner une image avant l’étalonnage.  Si vous devez tourner l’image après l’étalonnage, vous devrez effacer l’étalonnage (en utilisant <b>Effacer</b> sur la barre d’outils <i>Étalonnage</i> ou la commande de menu <b>Compas | Effacer</b>) avant que vous puissiez la tourner. 
+</p>
+</div>
+</div>
+<div id="outline-container-org5fd81bb" class="outline-3">
+<h3 id="org5fd81bb">Zoom</h3>
+<div class="outline-text-3" id="text-org5fd81bb">
+<p>
+Si vous avez un trackpad, vous pouvez pincer pour zoomer.  Vous pouvez aussi utiliser la barre d’outils <i>Zoom</i> pour zoomer en avant et en arrière ou pour rétablir l’image à sa dimension originale.  Le zoom est aussi disponible dans le menu <b>Image</b>.  Noter que l'étalonnage reste correct quand l'image est zoomée.  Il est inutile de réétalonner les compas après zoomer.
+</p>
+</div>
+</div>
+<div id="outline-container-orgcea4dab" class="outline-3">
+<h3 id="orgcea4dab">Éditeur d’image</h3>
+<div class="outline-text-3" id="text-orgcea4dab">
+<p>
+Utiliser la commande de menu <b>Image | Éditeur d’image</b> pour ouvrir l’éditeur d’image.  Cet éditeur a beaucoup d’options pour modifier l’apparence de l’ECG, p.e. le changement de couleur ou de contraste.
 </p>
 
 <div class="figure">
-<p><img src="../gfx/qtc-measurement.png" alt="qtc-measurement.png" />
+<p><img src="../gfx/EPCImageEdit.png" alt="EPCImageEdit.png" />
 </p>
-<p><span class="figure-number">Figure 1: </span>QTc measurement</p>
+<p><span class="figure-number">Figure 1: </span>Éditeur d’image</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org2ce6b1e" class="outline-3">
-<h3 id="org2ce6b1e">Brugadometer</h3>
-<div class="outline-text-3" id="text-org2ce6b1e">
+</div>
+<div id="outline-container-orgecdd8d7" class="outline-2">
+<h2 id="orgecdd8d7">Fênetre transparente</h2>
+<div class="outline-text-2" id="text-orgecdd8d7">
+</div>
+<div id="outline-container-org1caa68b" class="outline-3">
+<h3 id="org1caa68b">Quel est le mode de fênetre transparente?</h3>
+<div class="outline-text-3" id="text-org1caa68b">
 <p>
-The <b>Brugadometer</b> is a diagnostic tool for Brugada syndrome developed in collaboration with Dr. Adrian Baranchuk and his colleagues at Queen's University Kingston, Ontario, Canada.  It is a tool intended to distinguish between ECGs with a Brugada syndrome pattern in leads V1 or V2 and ECGs with incomplete right bundle branch block.  This tool is under development in <b>EP Calipers</b> and will likely evolve in future updates.  In order to use the <b>Brugadometer</b>, it is necessary to calibrate an amplitude caliper in millimeters (mm) and to calibrate a time caliper preferably in msec or mm.  After doing so, an angle caliper will appear to have a triangle at its apex as shown below.
+Parfois il est plus facile d’ouvrir une image ou un fichier PDF en utilisant une autre application, p.e. votre navigateur web, et puis d’effectuer les mesures directement sur cette image.  <b>Compas EP</b> permit cela en utilisant <i>le mode de fênetre transparente</i>.  Dans ce mode, la fênetre principale est transparente, permettant la mesure de ce qui est sous la fênetre avec les compas.  Le mode de fênetre transparente ressemble à ça:
 </p>
 
 <div class="figure">
-<p><img src="../gfx/brugadometer.png" alt="brugadometer.png" />
+<p><img src="../gfx/transparentwindow.png" alt="transparentwindow.png" />
 </p>
-<p><span class="figure-number">Figure 2: </span>Brugadometer showing triangle base 5 mm below apex of caliper</p>
+<p><span class="figure-number">Figure 2: </span>le mode de fênetre transparente</p>
 </div>
-
+</div>
+</div>
+<div id="outline-container-orgf833a51" class="outline-3">
+<h3 id="orgf833a51">L’activation du mode de fênetre transparente</h3>
+<div class="outline-text-3" id="text-orgf833a51">
 <p>
-The triangle base will be located 5 mm below the apex of the triangle.  Proper alignment of this triangle with an r' wave in a person with a suspected Brugada ECG will provide measurement of the so-called <i>beta angle</i> and the triangle base.  A triangle base &gt; 160 msec (4 mm at standard ECG recording speed of 25 mm/sec) has an increased probability of being a Brugada ECG.   Please see <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4040869/">de Luna AB, Garcia-Niebla J, Baranchuk A.  New electrocardiographic features in Brugada syndrome. Curr Cardiol Rev. 2014 Aug; 10(3): 175-180</a> for further information.
+Utiliser la commande de menu <b>Compas EP | Préférences&#x2026;</b> pour montrer la boîte de dialogue <a href="./preferences.html">Préférences</a>.  Cocher la case <i>Fênetre transparente</i> pour changer au mode de fênetre transparente.  Décocher la case pour retourner au mode d’image normale. 
 </p>
 </div>
+</div>
+<div id="outline-container-org8477fe2" class="outline-3">
+<h3 id="org8477fe2">Les prudences en utilisant le mode de fênetre transparente</h3>
+<div class="outline-text-3" id="text-org8477fe2">
+<p>
+Quand vous chargez une image dans le mode d’image normale et étalonnez les compas, l’application va automatiquement ajuster le facteur d’étalonnage en zoomant l’image.  Dans le mode de fênetre transparente, ce n’est pas possible de l’ajuster automatiquement.  Il faut réétalonner les compas si vous zoomez l’image avec un program externe.  Noter aussi qu’en utilisant le mode plein écran, le mode de fênetre transparente ne marche pas.  Enfin, si vous charger un fichier dans le mode de fênetre transparente, une boîte de dialogue apparaîtra qui se demande si vous voulez sortir le mode de fênetre transparente pour le charger.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga13b35b" class="outline-2">
+<h2 id="orga13b35b">Enregistrer une image</h2>
+<div class="outline-text-2" id="text-orga13b35b">
+<p>
+Prendre une capture d’écran pour enregistrer une image de <i>Compas EP</i>.  Prendre une capture d’écran du bureau complet en appuyant <i>Commande-Maj-3</i>.  Appuyer <i>Commande-Maj-4</i> et puis la touche <i>Espace</i> pour prendre une capture d’écran d’une fênetre.  Cliquer l’icône de camera sur la fênetre de <b>Compas EP</b>.  Appuyer la touche <i>Échap</i> pour annuler une capture d’écran.
+</p>
 </div>
 </div>
 </div>

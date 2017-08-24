@@ -1,0 +1,23 @@
+#+AUTHOR:    David Mann
+#+EMAIL:     mannd@epstudiossoftware.com
+#+DATE:      
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+HTML_HEAD: <meta name="AppleTitle" content="EP Calipers Help" />
+* [[../shrd/icon_32x32@2x.png]] Aide de Compas EP
+* [[./pgs/basics.html][Introduction]]
+La justification et l’utilisation essentielle.
+* [[./pgs/images.org][Operations d’image]]
+Charger, tourner, zoomer, et déplacer des images ECG.
+* [[./pgs/calipers.html][Operations de compas]]
+Ajouter, déplacer, et supprimer des compas.
+* [[./pgs/measurements.html][Prendre des mesures]]
+Étalonner des compas, mesurer, et faire les calculs.
+* [[./pgs/preferences.html][Préférences]]
+Changer les préférences de l’application, p.e. la couleur des compas, l’étalonnage par défaut, etc.
+* [[./pgs/misc.html][Remerciements]]
+Quelques choses diverses.

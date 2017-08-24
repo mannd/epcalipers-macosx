@@ -229,97 +229,34 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org37f80df" class="outline-2">
-<h2 id="org37f80df"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Making measurements</h2>
-<div class="outline-text-2" id="text-org37f80df">
-</div>
-<div id="outline-container-orgd4e8787" class="outline-3">
-<h3 id="orgd4e8787">Caliper interval</h3>
-<div class="outline-text-3" id="text-orgd4e8787">
+<div id="outline-container-org53de5d9" class="outline-2">
+<h2 id="org53de5d9"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Préférences</h2>
+<div class="outline-text-2" id="text-org53de5d9">
 <p>
-The interval measured by each caliper is displayed on top of or next to the crossbar of the caliper.  Until the calipers are calibrated, measurements are displayed in arbitrary units (<i>points</i>, roughly equivalent to screen pixels).  Angle calipers show a measurement of the current angle in degrees and do not need to be calibrated to display angles.
-</p>
-</div>
-</div>
-<div id="outline-container-org4b0dbea" class="outline-3">
-<h3 id="org4b0dbea">Measurement prompts</h3>
-<div class="outline-text-3" id="text-org4b0dbea">
-<p>
-If the Show Prompts <a href="./preferences.html">preference</a> is selected (it is by default) the program will guide you with detailed instructions on how to make each measurement.  When you become familiar with how to make measurements you may consider turning off the <i>Show Prompts</i> preference.  This minimizes the prompting the program gives.  Prompts appear at the top of the window, right under the toolbars.  For example, when measuring the mean RR interval, if <i>Show prompts</i> is enabled, the program will first prompt you to select a time caliper, stretch it over a number of intervals, and then click <b>Next</b> on the <i>Navigation Toolbar</i>.  A dialog will then appear asking how many intervals you are measuring.  After entering the number and clicking the calculate button, the result will appear.  If <i>Show prompts</i> is disabled, you can select a caliper and stretch it over a number of intervals without prompting, and then press the <b>mRR</b> (mean RR) button or the <b>Caliper | Mean Rate/Interval</b> menu item.  The rest of the process is the same.
-</p>
-</div>
-</div>
-<div id="outline-container-org51d6d4f" class="outline-3">
-<h3 id="org51d6d4f">Calibration</h3>
-<div class="outline-text-3" id="text-org51d6d4f">
-<p>
-Calibration is necessary before any measurements can be made!  If the <i>Show prompts</i> preference is enabled, select the <b>Calibrate</b> button or the <b>Caliper | Calibrate</b> menu item.  Follow the prompts to select a caliper and stretch it over a known interval (such as 1000 msec for time, or 10 mm for amplitude calipers).  Select the <i>Next</i> button.  In the dialog box that appears, make sure the interval matches what you are measuring.  Enter both the calibration interval and units (e.g. 1000 msec,  or 1 mV).  Select the <i>Calibrate</i> button in the dialog box to set the calibration.  Note that time and amplitude calipers need to be calibrated separately.  Once calibrated, calipers will show intervals in the units used to calibrate.  Newly created calipers will use the same calibration.
-</p>
-
-<p>
-If you are not using prompts, then simply select and stretch a caliper over the interval you will be using for calibration, select <b>Calibrate</b> on the toolbar, and enter the calibration interval.
-</p>
-
-<p>
-It is important to use time units such as <i>msec</i> or <i>sec</i> when providing a time calibration if you want to do calculated measurements such as the corrected QT interval.  In other words, type in your calibration measurement as <i>1000 msec</i> and not just <i>1000</i>.  Negative calibration intervals are treated as positive numbers (i.e. the negative sign is ignored).
-</p>
-</div>
-</div>
-<div id="outline-container-org91875ea" class="outline-3">
-<h3 id="org91875ea">Changing calibration</h3>
-<div class="outline-text-3" id="text-org91875ea">
-<p>
-You can recalibrate at any time just by repeating the calibration process.  You can clear all calibration by selecting <b>Clear</b> in the <i>Calibration Toolbar</i>.  Note that calibration is maintained if the image is zoomed.  However, if you are using transparent window mode, you must manually recalibrate if you zoom the image on the Desktop (for example an image loaded in the Preview app).  Selecting a new image will reset calibration.  If you need to rotate the image, you must first clear calibration.
-</p>
-</div>
-</div>
-<div id="outline-container-orgd6e28d9" class="outline-3">
-<h3 id="orgd6e28d9">Interval/Rate</h3>
-<div class="outline-text-3" id="text-orgd6e28d9">
-<p>
-Once a time caliper is calibrated, provided you use time units (such as msec or sec) for the calibration, it is possible to toggle between interval measurements (e.g. 600 msec) and heart rate measurements (e.g. 100 bpm) by selecting the <b>R/I</b> button or <b>Caliper | Toggle Rate/Interval</b> menu command.
-</p>
-</div>
-</div>
-<div id="outline-container-org14c3e3d" class="outline-3">
-<h3 id="org14c3e3d">Mean rate and interval calculation</h3>
-<div class="outline-text-3" id="text-org14c3e3d">
-<p>
-Select a calibrated caliper and stretch it over a number of intervals.  Select the <b>mRR</b> button or <b>Caliper | Mean Rate/Interval</b> menu command and enter the number of intervals measured in the dialog box that appears.  Select the <b>Calculate</b> button to see the result.  If the <i>Show prompts</i> preference is selected, prompts will appear to guide you through the process.  Using <b>EP Calipers</b> to calculate mean rates and intervals is very useful in irregular rhythms, such as atrial fibrillation.
-</p>
-</div>
-</div>
-<div id="outline-container-org5e0ad16" class="outline-3">
-<h3 id="org5e0ad16">QTc calculation</h3>
-<div class="outline-text-3" id="text-org5e0ad16">
-<p>
-QTc measurement is a multiple step process, and prompts are always shown.  Select the <b>QTc</b> button on the toolbar or the <b>Caliper | QTc Measurement</b> menu command.  Follow the prompt to stretch the selected caliper over one or more RR intervals and select the <b>Next</b> button.  Enter the number of intervals the caliper is stretched over and select <b>Continue</b>.  Then use the same caliper to measure the QT interval.  Select <b>Next</b>.  A dialog box will give the calculated QTc using Bazett's formula.
+Les préférences d’application peuvent être choisies en utilisant la commande de menu <b>Compas EP | Préférences</b>.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, ainsi que l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le <i>Nombre d’intervalles RR pour QTc</i> à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
 </p>
 
 <div class="figure">
-<p><img src="../gfx/qtc-measurement.png" alt="qtc-measurement.png" />
+<p><img src="../gfx/preferences.png" alt="preferences.png" />
 </p>
-<p><span class="figure-number">Figure 1: </span>QTc measurement</p>
+<p><span class="figure-number">Figure 1: </span>Préférences</p>
 </div>
 </div>
-</div>
-
-<div id="outline-container-org2ce6b1e" class="outline-3">
-<h3 id="org2ce6b1e">Brugadometer</h3>
-<div class="outline-text-3" id="text-org2ce6b1e">
-<p>
-The <b>Brugadometer</b> is a diagnostic tool for Brugada syndrome developed in collaboration with Dr. Adrian Baranchuk and his colleagues at Queen's University Kingston, Ontario, Canada.  It is a tool intended to distinguish between ECGs with a Brugada syndrome pattern in leads V1 or V2 and ECGs with incomplete right bundle branch block.  This tool is under development in <b>EP Calipers</b> and will likely evolve in future updates.  In order to use the <b>Brugadometer</b>, it is necessary to calibrate an amplitude caliper in millimeters (mm) and to calibrate a time caliper preferably in msec or mm.  After doing so, an angle caliper will appear to have a triangle at its apex as shown below.
-</p>
-
-<div class="figure">
-<p><img src="../gfx/brugadometer.png" alt="brugadometer.png" />
-</p>
-<p><span class="figure-number">Figure 2: </span>Brugadometer showing triangle base 5 mm below apex of caliper</p>
-</div>
-
-<p>
-The triangle base will be located 5 mm below the apex of the triangle.  Proper alignment of this triangle with an r' wave in a person with a suspected Brugada ECG will provide measurement of the so-called <i>beta angle</i> and the triangle base.  A triangle base &gt; 160 msec (4 mm at standard ECG recording speed of 25 mm/sec) has an increased probability of being a Brugada ECG.   Please see <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4040869/">de Luna AB, Garcia-Niebla J, Baranchuk A.  New electrocardiographic features in Brugada syndrome. Curr Cardiol Rev. 2014 Aug; 10(3): 175-180</a> for further information.
-</p>
+<div id="outline-container-org4e2bfeb" class="outline-3">
+<h3 id="org4e2bfeb">Préférences expliquées</h3>
+<div class="outline-text-3" id="text-org4e2bfeb">
+<ul class="org-ul">
+<li>Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant <b>Couleur de compas</b>.</li>
+<li>Couleur de compas choisi: C’est la couleur d’un compas sélectioné.</li>
+<li>Largeur de ligne: Utiliser la glissière pour ajuster la larguer de ligne des compas.</li>
+<li>Étalonnage de temps: C’est la valeur par défaut qui apparait dans la boîte de texte en étalonnant les compas de temps.  Si vous souvent utiliser une certaine valeur d’étalonnage (p.e. 200 msec), alors vous devriez cette préférence.</li>
+<li>Étalonnage d’amplitude: C’est la valeur par défaut pour étalonner les compas d’amplitude.</li>
+<li>No. d’int pour RR moyen: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen.</li>
+<li>No. d’int RR pour QTc: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen pour calculer le QT corrigé.</li>
+<li>Des message-guides: Des messages-guides sont utiles quand vous êtes en train d’apprendre l’application. Vous pouvez l’accélérer en désactivant cette option.  Des messages-guides vous guident dans les étapes d’étalonnage et de mesures.</li>
+<li>Arrondir msec et bpm: Arrondir des intervalles dans msec et des fréquences à l’entier le plus proche.  Noter que les valeurs dans secs ou autres unités ne sont arrondies jamais.</li>
+<li>Fênetre transparente: La fênetre primaire doit transparente.  <b>Compas EP</b> peut alors être utilisé comme un compas flottant pour mesurer des images sur votre bureau.</li>
+</ul>
 </div>
 </div>
 </div>

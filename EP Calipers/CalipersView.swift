@@ -62,7 +62,7 @@ class CalipersView: NSView {
     
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(NSResponder.deleteBackward(_:)) {
-            return !locked
+            return !locked && !noCaliperIsSelected()
         }
         if menuItem.action == #selector(colorCaliper(_:)) || menuItem.action == #selector(tweakCaliper(_:)) {
             return chosenCaliper != nil
@@ -99,8 +99,8 @@ class CalipersView: NSView {
         // only show menu if not in middle of tweaking
         if !tweakingComponent {
             let theMenu = NSMenu()
-            let colorMenuItem = NSMenuItem(title: "Caliper Color", action: #selector(colorCaliper(_:)), keyEquivalent: "")
-            let tweakMenuItem = NSMenuItem(title: "Tweak Caliper Position", action: #selector(tweakCaliper(_:)), keyEquivalent: "")
+            let colorMenuItem = NSMenuItem(title: NSLocalizedString("Caliper Color", comment:""), action: #selector(colorCaliper(_:)), keyEquivalent: "")
+            let tweakMenuItem = NSMenuItem(title: NSLocalizedString("Tweak Caliper Position", comment:""), action: #selector(tweakCaliper(_:)), keyEquivalent: "")
             theMenu.addItem(colorMenuItem)
             theMenu.addItem(tweakMenuItem)
             NSMenu.popUpContextMenu(theMenu, with: event, for: self)
@@ -157,7 +157,7 @@ class CalipersView: NSView {
     
     func tweakCaliper(_ sender: AnyObject) {
         if let componentName = Caliper.componentName(chosenComponent) {
-            let message = "Tweak " + componentName + " with arrow keys.  Press Escape (esc) to stop tweaking."
+            let message = String(format: NSLocalizedString("Tweak %@ with arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
             if !tweakingComponent {
                 delegate?.showMessageAndSaveLast(message)
                 tweakingComponent = true
@@ -347,6 +347,11 @@ class CalipersView: NSView {
                 needsDisplay = true
             }
         }
+    }
+    
+    func deleteAllCalipers() {
+        calipers.removeAll()
+        needsDisplay = true
     }
     
     func moveChosenComponent(movementDirection: MovementDirection) {

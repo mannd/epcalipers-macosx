@@ -1,0 +1,132 @@
+﻿/* No comment provided by engineer. */
+"1 mV" = "1 mV";
+
+/* No comment provided by engineer. */
+"1000 msec" = "1000 msec";
+
+/* No comment provided by engineer. */
+"Angle caliper" = "Angle caliper";
+
+/* No comment provided by engineer. */
+"Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers." = "Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers.";
+
+/* No comment provided by engineer. */
+"Back" = "Back";
+
+/* No comment provided by engineer. */
+"Bad number of intervals" = "Bad number of intervals";
+
+/* No comment provided by engineer. */
+"Calculate" = "Calculate";
+
+/* No comment provided by engineer. */
+"Calculated QTc" = "Calculated QTc";
+
+/* No comment provided by engineer. */
+"Calibrate" = "Calibrate";
+
+/* No comment provided by engineer. */
+"Calibrate caliper" = "Calibrate caliper";
+
+/* No comment provided by engineer. */
+"Caliper Color" = "Caliper Color";
+
+/* No comment provided by engineer. */
+"Can't open \(url)" = "Can't open \(url)";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancel";
+
+/* No comment provided by engineer. */
+"Continue" = "Continue";
+
+/* No comment provided by engineer. */
+"Do you want to turn off transparent window mode and load image?" = "Do you want to turn off transparent window mode and load image?";
+
+/* No comment provided by engineer. */
+"Enter calibration measurement (e.g. \(example))" = "Enter calibration measurement (e.g. \(example))";
+
+/* No comment provided by engineer. */
+"Enter number of intervals" = "Enter number of intervals";
+
+/* No comment provided by engineer. */
+"EP Calipers preferences" = "EP Calipers preferences";
+
+/* No comment provided by engineer. */
+"File not opened" = "File not opened";
+
+/* No comment provided by engineer. */
+"How many intervals is this caliper measuring?" = "How many intervals is this caliper measuring?";
+
+/* No comment provided by engineer. */
+"How many RR intervals is this caliper measuring?" = "How many RR intervals is this caliper measuring?";
+
+/* No comment provided by engineer. */
+"In order to proceed, you must first add a caliper." = "In order to proceed, you must first add a caliper.";
+
+/* No comment provided by engineer. */
+"In order to proceed, you must first add a time caliper." = "In order to proceed, you must first add a time caliper.";
+
+/* No comment provided by engineer. */
+"Invalid Result" = "Invalid Result";
+
+/* No comment provided by engineer. */
+"Keep transparency and don't load image" = "Keep transparency and don't load image";
+
+/* No comment provided by engineer. */
+"Mean interval and rate" = "Mean interval and rate";
+
+/* No comment provided by engineer. */
+"Measure 1 or more RR intervals.  Select Next to continue." = "Measure 1 or more RR intervals.  Select Next to continue.";
+
+/* No comment provided by engineer. */
+"No caliper selected" = "No caliper selected";
+
+/* No comment provided by engineer. */
+"No calipers available" = "No calipers available";
+
+/* No comment provided by engineer. */
+"No time caliper available" = "No time caliper available";
+
+/* No comment provided by engineer. */
+"No time caliper selected" = "No time caliper selected";
+
+/* No comment provided by engineer. */
+"Now measure QT interval and select Next, or Cancel" = "Now measure QT interval and select Next, or Cancel";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Please enter a number between 1 and 10" = "Please enter a number between 1 and 10";
+
+/* No comment provided by engineer. */
+"QTc: Enter number of RR intervals" = "QTc: Enter number of RR intervals";
+
+/* No comment provided by engineer. */
+"Screenshot cancelled" = "Screenshot cancelled";
+
+/* No comment provided by engineer. */
+"Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine." = "Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine.";
+
+/* No comment provided by engineer. */
+"Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV" = "Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV";
+
+/* No comment provided by engineer. */
+"Select a time caliper.  Stretch the caliper over several intervals to get an average interval and rate." = "Select a time caliper.  Stretch the caliper over several intervals to get an average interval and rate.";
+
+/* No comment provided by engineer. */
+"Transparent window mode on" = "Transparent window mode on";
+
+/* No comment provided by engineer. */
+"Turn off transparency and load image" = "Turn off transparency and load image";
+
+/* No comment provided by engineer. */
+"Tweak Caliper Position" = "Tweak Caliper Position";
+
+/* No comment provided by engineer. */
+"Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel." = "Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel.";
+
+/* No comment provided by engineer. */
+"Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel." = "Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel.";
+
