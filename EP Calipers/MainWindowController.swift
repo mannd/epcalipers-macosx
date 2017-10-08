@@ -1245,7 +1245,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     qt *= 1000
                     qtc *= 1000
                 }
-                result = NSString.localizedStringWithFormat(NSLocalizedString("Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)", comment:"") as NSString, meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units) as String
+                result = NSString.localizedStringWithFormat(NSLocalizedString("Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@ (Bazett's formula)", comment:"") as NSString, meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units) as String
                 let alert = NSAlert()
                 alert.alertStyle = .informational
                 alert.messageText = NSLocalizedString("Calculated QTc", comment:"")
