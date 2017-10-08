@@ -15,7 +15,7 @@ class MainView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         let rect = NSRect(x: dirtyRect.minX, y: dirtyRect.minY, width:dirtyRect.maxX - dirtyRect.minX, height: dirtyRect.maxY - dirtyRect.minY - headerHeight)
-        NSRectFillUsingOperation(rect, NSCompositingOperation.clear)
+        rect.fill(using: NSCompositingOperation.clear)
 
     }
     

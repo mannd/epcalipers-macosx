@@ -134,13 +134,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
         
-    override var windowNibName: String? {
-        return "MainWindowController"
+    override var windowNibName: NSNib.Name? {
+        return NSNib.Name("MainWindowController")
     }
     
     override func awakeFromNib() {
         
-        let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF]
+        // 2 lines below added for Swift 
+        let NSURLPboardType = NSPasteboard.PasteboardType(kUTTypeURL as String)
+        let NSFilenamesPboardType = NSPasteboard.PasteboardType("NSFilenamesPboardType")
+        let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboard.PasteboardType.tiff]
         self.window!.registerForDraggedTypes(types)
         
         imageView.editable = true
@@ -187,7 +190,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             UserDefaults.standard.setColor(NSColor.red, forKey: "highlightColorKey")
             appPreferences.highlightColor = NSColor.red
         }
-        Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
+        Bundle.main.loadNibNamed(NSNib.Name(rawValue: "View"), owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
@@ -227,7 +230,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func performDragOperation(_ sender: NSDraggingInfo!) -> Bool {
-        if let board = sender.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray {
+        if let board = sender.draggingPasteboard().propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray {
             if let imagePath = board[0] as? String {
                 let url = URL(fileURLWithPath: imagePath)
                 openURL(url, addToRecentDocuments: true)
@@ -238,7 +241,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func checkExtension(_ drag: NSDraggingInfo) -> Bool {
-        if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
+        if let board = drag.draggingPasteboard().propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
             let path = board[0] as? String {
             let url = URL(fileURLWithPath: path)
             let suffix = url.pathExtension
@@ -318,11 +321,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfMeanRRIntervalsStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
-        showPromptsCheckBox.state = appPreferences.showPrompts ? 1 : 0
-        roundMsecRateCheckBox.state = appPreferences.roundMsecRate ? 1 : 0
-        transparencyCheckBox.state = appPreferences.transparency ? 1 : 0
+        showPromptsCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showPrompts ? 1 : 0)
+        roundMsecRateCheckBox.state = NSControl.StateValue(rawValue: appPreferences.roundMsecRate ? 1 : 0)
+        transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
         let result = preferencesAlert!.runModal()
-        if result == NSAlertFirstButtonReturn {
+        if result == NSApplication.ModalResponse.alertFirstButtonReturn {
             // assign new preferences
             appPreferences.caliperColor = caliperColorWell.color
             appPreferences.highlightColor = highlightedCaliperColorWell.color
@@ -492,8 +495,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         openPanel.canSelectHiddenExtension = true
         openPanel.beginSheetModal(for: self.window!,
             completionHandler: {
-                (result: NSInteger) -> Void in
-                if result == NSFileHandlingPanelOKButton {
+                (result: NSApplication.ModalResponse) -> Void in
+                if result == .OK {
                     self.openURL(openPanel.url, addToRecentDocuments: true)
                }
             }
@@ -516,7 +519,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             alert.addButton(withTitle: NSLocalizedString("Keep transparency and don't load image", comment:""))
             alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             let result = alert.runModal()
-            if result == NSAlertFirstButtonReturn {
+            if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 transparent = false
                 appPreferences.transparency = transparent
                 appPreferences.savePreferences()
@@ -571,7 +574,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 self.imageURL = url
                 self.clearCalibration()
                 if addToRecentDocuments {
-                    NSDocumentController.shared().noteNewRecentDocumentURL(url)
+                    NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
             }
                 
@@ -621,7 +624,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 imageURL = url
                 clearCalibration()
                 if addToRecentDocuments {
-                    NSDocumentController.shared().noteNewRecentDocumentURL(url)
+                    NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
             }
         }
@@ -819,7 +822,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func calibrateWithPossiblePrompts() {
         // not allowed to calibrate in middle of a measurement
         if calipersView.locked || inMeanRR {
-            NSBeep()
+            NSSound.beep()
             return
         }
         if appPreferences.showPrompts {
@@ -870,7 +873,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
                 //alert.informativeText = message
-                alert.alertStyle = NSAlertStyle.informational
+                alert.alertStyle = NSAlert.Style.informational
                 alert.addButton(withTitle: NSLocalizedString("Calibrate", comment:""))
                 alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
                 alert.accessoryView = textInputView
@@ -900,7 +903,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             textField.stringValue = calibrationString
             let result = calibrationAlert!.runModal()
-            if result == NSAlertFirstButtonReturn {
+            if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 let inputText = textField.stringValue
                 if inputText.characters.count > 0 {
                     calibrateWithText(inputText)
@@ -921,7 +924,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             let scannerString = scanner.string
             var scannerIndex = scannerString.startIndex
             scannerIndex = scannerString.index(scannerString.startIndex, offsetBy: scanner.scanLocation)
-            trimmedUnits = scanner.string.substring(from: scannerIndex).trimmingCharacters(in: CharacterSet.whitespaces)
+            trimmedUnits = scanner.string[scannerIndex...].trimmingCharacters(in: CharacterSet.whitespaces)
             value = fabs(value)
             if value > 0 {
                 let c = calipersView.activeCaliper()
@@ -989,7 +992,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("Angle caliper", comment:"")
         alert.informativeText = NSLocalizedString("Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers.", comment:"")
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
@@ -1004,7 +1007,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             alert.messageText = NSLocalizedString("No calipers available", comment:"")
             alert.informativeText = NSLocalizedString("In order to proceed, you must first add a caliper.", comment:"")
         }
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
@@ -1013,7 +1016,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("No caliper selected", comment:"")
         alert.informativeText = NSLocalizedString("Select (by single-clicking it) the caliper that you want to calibrate, and then set it to a known interval, e.g. 1000 msec or 1 mV", comment:"")
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
@@ -1022,14 +1025,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("No time caliper selected", comment:"")
         alert.informativeText = NSLocalizedString("Select a time caliper.  Stretch the caliper over several intervals to get an average interval and rate.", comment:"")
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
     
     func showDivisorErrorAlert() {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.warning
+        alert.alertStyle = NSAlert.Style.warning
         alert.messageText = NSLocalizedString("Bad number of intervals", comment:"")
         alert.informativeText = NSLocalizedString("Please enter a number between 1 and 10", comment:"")
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
@@ -1038,7 +1041,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func showMeanRRResultAlert(_ meanInterval: Double, meanRate: Double, intervalUnits: String) {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.messageText = NSLocalizedString("Mean interval and rate", comment:"")
         alert.informativeText = NSString.localizedStringWithFormat(NSLocalizedString("Mean interval = %.4g %@\nMean rate = %.4g bpm", comment:"") as NSString, meanInterval, intervalUnits, meanRate) as String;
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
@@ -1054,7 +1057,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func resetCalibration() {
         // not allowed to do cal stuff in middle of measurement
         if calipersView.locked || inMeanRR {
-            NSBeep()
+            NSSound.beep()
             return
         }
         // if nothing else, clear messages
@@ -1116,7 +1119,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 let alert = NSAlert()
                 alert.messageText = NSLocalizedString("Enter number of intervals", comment:"")
                 alert.informativeText = NSLocalizedString("How many intervals is this caliper measuring?", comment:"")
-                alert.alertStyle = NSAlertStyle.informational
+                alert.alertStyle = NSAlert.Style.informational
                 alert.addButton(withTitle: NSLocalizedString("Calculate", comment:""))
                 alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
                 alert.accessoryView = numberInputView
@@ -1125,7 +1128,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             numberTextField.stringValue = String(appPreferences.defaultNumberOfMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
             let result = meanIntervalAlert!.runModal()
-            if result == NSAlertFirstButtonReturn {
+            if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
                     return
@@ -1201,7 +1204,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             qtcNumberTextField.stringValue = String(appPreferences.defaultNumberOfQTcMeanRRIntervals)
             qtcNumberStepper.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
             let result = qtcMeanIntervalAlert!.runModal()
-            if result == NSAlertFirstButtonReturn {
+            if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 if qtcNumberTextField.integerValue < 1 || qtcNumberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
                     exitQTc()
