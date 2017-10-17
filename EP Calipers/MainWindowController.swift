@@ -17,6 +17,11 @@ extension IKImageView: IKImageEditPanelDataSource {
     
 }
 
+protocol QTcResultProtocol {
+    func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormula,
+                   convertToMsec: Bool, units: String) -> String
+}
+
 class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate {
     let appName = NSLocalizedString("EP Calipers", comment:"")
     
@@ -1246,32 +1251,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func doQTcResult() {
         if let c = calipersView.activeCaliper() {
-            var qt = fabs(c.intervalInSecs(c.intervalResult()))
-            var meanRR = fabs(rrIntervalForQTc)
-            var result = NSLocalizedString("Invalid Result", comment:"")
-            if meanRR > 0 {
-                let sqrtRR = sqrt(meanRR)
-                var qtc = qt / sqrtRR
-                // switch to units that calibration uses
-                if c.calibration.unitsAreMsec {
-                    meanRR *= 1000
-                    qt *= 1000
-                    qtc *= 1000
-                }
-                result = NSString.localizedStringWithFormat(NSLocalizedString("Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@ (Bazett's formula)", comment:"") as NSString, meanRR, c.calibration.units, qt, c.calibration.units, qtc, c.calibration.units) as String
-                let alert = NSAlert()
-                alert.alertStyle = .informational
-                alert.messageText = NSLocalizedString("Calculated QTc", comment:"")
-                alert.informativeText = result
-                alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-                alert.runModal()
-                exitQTc()
-            }
+            let qt = fabs(c.intervalInSecs(c.intervalResult()))
+            let meanRR = fabs(rrIntervalForQTc)
+            
+            let qtcResult: QTcResultProtocol = QTcResult()
+            let result = qtcResult.calculate(qtInSec: qt, rrInSec: meanRR, formula: appPreferences.qtcFormula,
+                                   convertToMsec: c.calibration.unitsAreMsec, units: c.calibration.units)
+            let alert = NSAlert()
+            alert.alertStyle = .informational
+            alert.messageText = NSLocalizedString("Calculated QTc", comment:"")
+            alert.informativeText = result
+            alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
+            alert.runModal()
         }
-        else { // c shouldn't = nil, but if it does
-            exitQTc()
-        }
-        
+        exitQTc()
     }
 
     func enterQTc() {
