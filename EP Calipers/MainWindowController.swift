@@ -54,6 +54,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var roundMsecRateCheckBox: NSButton!
     @IBOutlet weak var transparencyCheckBox: NSButton!
     
+    @IBOutlet weak var formulaPopUpButton: NSPopUpButton!
     
  
 
@@ -304,6 +305,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             preferencesAlert = alert
         }
+        fillQTcFormulaPopUp()
         if let color = appPreferences.caliperColor {
             caliperColorWell.color = color
         }
@@ -324,6 +326,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         showPromptsCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showPrompts ? 1 : 0)
         roundMsecRateCheckBox.state = NSControl.StateValue(rawValue: appPreferences.roundMsecRate ? 1 : 0)
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
+        formulaPopUpButton.selectItem(at: appPreferences.qtcFormula.rawValue)
         let result = preferencesAlert!.runModal()
         if result == NSApplication.ModalResponse.alertFirstButtonReturn {
             // assign new preferences
@@ -337,6 +340,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
             appPreferences.roundMsecRate = roundMsecRateCheckBox.integerValue == 1 ? true : false
             appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
+            appPreferences.qtcFormula = QTcFormula(rawValue: formulaPopUpButton.indexOfSelectedItem)!
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate)
@@ -344,6 +348,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             transparent = appPreferences.transparency
             preferencesChanged = true
         }
+    }
+    
+    private func fillQTcFormulaPopUp() {
+        formulaPopUpButton.removeAllItems()
+        formulaPopUpButton.addItem(withTitle: "Bazett")
+        formulaPopUpButton.addItem(withTitle: "Framingham")
+        formulaPopUpButton.addItem(withTitle: "Hodges")
+        formulaPopUpButton.addItem(withTitle: "Fridericia")
+        formulaPopUpButton.addItem(withTitle: NSLocalizedString("All", comment: ""))
     }
     
     @IBAction func numberOfMeanRRStepperAction(_ sender: AnyObject) {
