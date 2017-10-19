@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import QTc
 
 class QTcResult: QTcResultProtocol {
     func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormula, convertToMsec: Bool, units: String) -> String {
@@ -14,8 +15,10 @@ class QTcResult: QTcResultProtocol {
         var meanRR = rrInSec
         var qt = qtInSec
         if meanRR > 0 {
-            let sqrtRR = sqrt(meanRR)
-            var qtc = qt / sqrtRR
+            let qtcBzt = QTc.qtcCalculator(formula: .qtcBzt)
+            var qtc = qtcBzt.calculate(qtInSec: qt, rrInSec: meanRR)
+//            let sqrtRR = sqrt(meanRR)
+//            var qtc = qt / sqrtRR
             // switch to units that calibration uses
             if convertToMsec {
                 meanRR *= 1000
