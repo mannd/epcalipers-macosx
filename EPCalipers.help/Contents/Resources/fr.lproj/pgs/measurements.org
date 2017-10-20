@@ -26,7 +26,7 @@ Après qu'un compas de temps est étalonné, si vous utilisez des unités du tem
 ** Calcul de la fréquence moyenne et de l'intervalle moyen
 Sélectionner un compas étalonné et mesurer un nombre d'intervalles.  Choisir le bouton /FCM/ et entrer le nombre d'intervalles mesurés.  Une boîte de dialogue montrera la fréquence cardiaque moyenne calculée et l'intervalle moyen.  Cela est utile pour le calcul des fréquences et des intervalles pendant un rythme irrégulier, par exemple la fibrillation auriculaire.
 ** Calcul du QT corrigé
-La mesure de QTc est un procédé en plusieurs étapes et donc les messages-guides se montrent toujours.  Choisir le bouton /QTc/ ou la commande de menu *Compas | Mesurer le QTc*.  Étendre le compas sélectionné sur un ou plusieurs intervalles RR et puis choisir le bouton /Prochain/.  Entrer le nombre d'intervalles étant mesurés et puis choisir *Continuer*.  Utiliser le même compas pour mesurer l'intervalle QT.  Choisir le bouton /Prochain/.  Une boîte de dialogue montrera le QT calculé en utilisant la formule de Bazett.
+La mesure de QTc est un procédé en plusieurs étapes et donc les messages-guides se montrent toujours.  Choisir le bouton /QTc/ ou la commande de menu *Compas | Mesurer le QTc*.  Étendre le compas sélectionné sur un ou plusieurs intervalles RR et puis choisir le bouton /Prochain/.  Entrer le nombre d'intervalles étant mesurés et puis choisir *Continuer*.  Utiliser le même compas pour mesurer l'intervalle QT.  Choisir le bouton /Prochain/.  Une boîte de dialogue montrera le QT calculé en utilisant la formule de Bazett par défaut.  On peut changer la formule en utilisant [[./preferences.html][les préférences]].
 #+CAPTION: Mesure du QTc 
 [[../gfx/qtc-measurement.png]]
 

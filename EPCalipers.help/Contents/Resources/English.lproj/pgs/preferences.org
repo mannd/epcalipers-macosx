@@ -20,6 +20,7 @@ Preferences can be selected using the *EP Calipers | Preferences* menu item.  Yo
 - Amplitude calibration: This is the default value for calibration of amplitude calipers.  Put whatever value you usually use to calibrate here.
 - Intervals for mean RR: The default number of intervals you use to measure mean RR intervals.
 - Intervals for QTc: The default number of intervals you use to measure the mean RR interval for QTc measurements.
+- QTc formula: Choose a QTc formula.  Choose "All" to use all the formulas.
 - Show prompts:  Prompting is useful when you are first learning the program, but it is faster to disable this option.  Prompts guide you through the steps of calibrating and making measurements.
 - Round msec and rate: Rounds intervals in msec to the nearest msec and heart rates to the nearest bpm.  If unchecked, values are shown with higher precision using up to 3 decimal places.  Note that values in secs or values using other units are never rounded regardless of this preference.
 - Transparent window: Makes the main window transparent.  *EP Calipers* can then be used as a floating caliper to measure anything you have open on your Desktop.
