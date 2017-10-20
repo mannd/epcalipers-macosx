@@ -11,8 +11,9 @@ import QTc
 
 class QTcResult: QTcResultProtocol {
     func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormulaPreference, convertToMsec: Bool, units: String) -> String {
+        let errorResult = NSLocalizedString("Invalid Result", comment:"") 
         if rrInSec <= 0 {
-            return NSLocalizedString("Invalid Result", comment:"")
+            return errorResult
         }
         let qtcFormulas: [QTcFormula]
         switch formula {
@@ -37,6 +38,9 @@ class QTcResult: QTcResultProtocol {
         for qtcFormula in qtcFormulas {
             let qtcCalculator = QTc.qtcCalculator(formula: qtcFormula)
             var qtc = qtcCalculator.calculate(qtInSec: qtInSec, rrInSec: rrInSec)
+            if qtc == Double.infinity || qtc.isNaN {
+                return errorResult
+            }
             // switch to units that calibration uses
             if convertToMsec {
                 qtc *= 1000
