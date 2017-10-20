@@ -64,7 +64,7 @@ class Caliper: NSObject {
             self.lineWidth = 2
             self.selected = false
             self.textFont = NSFont(name: "Helvetica", size: 18.0)!
-            self.paragraphStyle = NSParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+            self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
             self.roundMsecRate = true
             super.init()
     }
@@ -132,11 +132,12 @@ class Caliper: NSObject {
         let text = measurement()
         paragraphStyle.lineBreakMode = .byTruncatingTail
         paragraphStyle.alignment = (direction == .horizontal ? .center : .left)
-        let attributes = [
-            NSFontAttributeName: textFont,
-            NSParagraphStyleAttributeName: paragraphStyle,
-            NSForegroundColorAttributeName: color
-            ] as [String : Any]
+        var attributes = [NSAttributedStringKey: Any]()
+        attributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.paragraphStyle: paragraphStyle,
+            NSAttributedStringKey.foregroundColor: color
+            ]
         if direction == .horizontal {
             // the math here insures that the label doesn't get so small that it can't be read
             text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);

@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import EP_Calipers
+@testable import QTc
 
 class EP_CalipersTests: XCTestCase {
     
@@ -119,6 +120,15 @@ class EP_CalipersTests: XCTestCase {
         let angleCaliper = AngleCaliper()
         XCTAssert(!angleCaliper.requiresCalibration);
         XCTAssert(angleCaliper.isAngleCaliper);
+    }
+    
+    func testQTc() {
+        let qtcResult = QTcResult()
+        var result = qtcResult.calculate(qtInSec: 0.4, rrInSec: 1.0, formula: .Bazett, convertToMsec: false, units: "sec")
+        XCTAssertEqual(result, "Mean RR = 1 sec\nQT = 0.4 sec\nQTc = 0.4 sec (Bazett formula)")
+        result = qtcResult.calculate(qtInSec: 0.4, rrInSec: 1.0, formula: .Hodges, convertToMsec: false, units: "sec")
+        XCTAssertEqual(result, "Mean RR = 1 sec\nQT = 0.4 sec\nQTc = 0.4 sec (Hodges formula)")
+        
     }
     
 }

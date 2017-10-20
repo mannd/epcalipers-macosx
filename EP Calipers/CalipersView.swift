@@ -134,11 +134,11 @@ class CalipersView: NSView {
         }
     }
     
-    func colorCaliper(_ sender: AnyObject) {
+    @objc func colorCaliper(_ sender: AnyObject) {
         guard let chosenCaliper = chosenCaliper else {
             return;
         }
-        let colorChooser: NSColorPanel = NSColorPanel.shared()
+        let colorChooser: NSColorPanel = NSColorPanel.shared
         colorChooser.setTarget(self)
         colorChooser.setAction(#selector(setChoosenCaliperColor(_:)))
         colorChooser.makeKeyAndOrderFront(self)
@@ -148,14 +148,14 @@ class CalipersView: NSView {
         colorChooser.color = chosenCaliper.color
     }
 
-    func setChoosenCaliperColor(_ sender: AnyObject) {
-        let colorChooser: NSColorPanel = NSColorPanel.shared()
+    @objc func setChoosenCaliperColor(_ sender: AnyObject) {
+        let colorChooser: NSColorPanel = NSColorPanel.shared
         chosenCaliper?.color = colorChooser.color
         chosenCaliper?.unselectedColor = colorChooser.color
         self.needsDisplay = true
     }
     
-    func tweakCaliper(_ sender: AnyObject) {
+    @objc func tweakCaliper(_ sender: AnyObject) {
         if let componentName = Caliper.componentName(chosenComponent) {
             let message = String(format: NSLocalizedString("Tweak %@ with arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
             if !tweakingComponent {
@@ -380,7 +380,7 @@ class CalipersView: NSView {
     }
     
     override func draw(_ dirtyRect: NSRect) {
-        let context = (NSGraphicsContext.current()?.cgContext)!
+        let context = (NSGraphicsContext.current?.cgContext)!
         for c in calipers {
             c.drawWithContext(context, inRect: dirtyRect)
         }

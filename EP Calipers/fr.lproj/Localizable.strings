@@ -1,4 +1,4 @@
-﻿/* No comment provided by engineer. */
+/* No comment provided by engineer. */
 "1 mV" = "1 mV";
 
 /* No comment provided by engineer. */
@@ -133,7 +133,9 @@
 /* manually added */
 "Mean interval = %.4g %@\nMean rate = %.4g bpm" = "Intervalle moyen = %.4g %@\nFréquence cardiaque moyenne = %.4g bpm";
 
-"Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(Bazett's formula)" = "RR moyen = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@\n(formule de Bazett)";
+"Mean RR = %.4g %@\nQT = %.4g %@" = "RR moyen = %.4g %@\nQT = %.4g %@";
+
+"\nQTc = %.4g %@ (%@ formula)" ="\nQTc = %.4g %@ (formule de %@)";
 
 "Tweak %@ with arrow keys.  Press Escape (esc) to stop tweaking." = "Régler %@ en utilisant les touches fléchées.  Appuyer sur la touche Échap pour quitter.";
 
@@ -150,3 +152,5 @@
 "apex" = "le sommet";
 
 "EP Calipers" = "Compas EP";
+
+"All" = "Toutes";

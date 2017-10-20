@@ -27,7 +27,17 @@ extension UserDefaults {
     }
 }
 
+public enum QTcFormulaPreference: Int {
+    case Bazett = 0
+    case Framingham = 1
+    case Hodges = 2
+    case Fridericia = 3
+    case all = 4
+}
+
 class Preferences: NSObject {
+    
+    
     var caliperColor: NSColor? = NSColor.blue
     var highlightColor: NSColor? = NSColor.red
     var lineWidth: Int = 2
@@ -38,7 +48,7 @@ class Preferences: NSObject {
     var showPrompts: Bool = true
     var roundMsecRate: Bool = true
     var transparency = false
-
+    var qtcFormula: QTcFormulaPreference = .Bazett
     
     func loadPreferences() {
         let preferences = UserDefaults.standard
@@ -52,6 +62,11 @@ class Preferences: NSObject {
         showPrompts = preferences.bool(forKey: "showPromptsKey")
         roundMsecRate = preferences.bool(forKey: "roundMsecRateKey")
         transparency = preferences.bool(forKey: "transparency")
+        guard let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) else {
+            qtcFormula = .Bazett
+            return
+        }
+        qtcFormula = formula
     }
     
     func savePreferences() {
@@ -66,6 +81,7 @@ class Preferences: NSObject {
         preferences.set(showPrompts, forKey: "showPromptsKey")
         preferences.set(roundMsecRate, forKey: "roundMsecRateKey")
         preferences.set(transparency, forKey: "transparency")
+        preferences.set(qtcFormula.rawValue, forKey: "qtcFormula")
     }
 
 }

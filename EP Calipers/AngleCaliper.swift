@@ -163,11 +163,12 @@ class AngleCaliper: Caliper {
         let text = baseMeasurement(lengthInPoints)
         paragraphStyle.lineBreakMode = .byTruncatingTail
         paragraphStyle.alignment = (direction == .horizontal ? .center : .left)
-        let attributes = [
-            NSFontAttributeName: textFont,
-            NSParagraphStyleAttributeName: paragraphStyle,
-            NSForegroundColorAttributeName: color
-            ] as [String : Any]
+        var attributes = [NSAttributedStringKey: Any]()
+        attributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.paragraphStyle: paragraphStyle,
+            NSAttributedStringKey.foregroundColor: color
+            ]
         text.draw(in: CGRect(x: point2.x > point1.x ? point1.x - 25 : point2.x - 25, y: point1.y - 20, width: fmax(100.0, fabs(point2.x - point1.x) + 50), height: 20.0),  withAttributes:attributes)
         
     }
