@@ -18,7 +18,7 @@ extension IKImageView: IKImageEditPanelDataSource {
 }
 
 protocol QTcResultProtocol {
-    func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormula,
+    func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormulaPreference,
                    convertToMsec: Bool, units: String) -> String
 }
 
@@ -345,7 +345,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
             appPreferences.roundMsecRate = roundMsecRateCheckBox.integerValue == 1 ? true : false
             appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
-            appPreferences.qtcFormula = QTcFormula(rawValue: formulaPopUpButton.indexOfSelectedItem)!
+            appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem)!
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate)

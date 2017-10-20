@@ -10,22 +10,38 @@ import Foundation
 import QTc
 
 class QTcResult: QTcResultProtocol {
-    func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormula, convertToMsec: Bool, units: String) -> String {
-        var result = NSLocalizedString("Invalid Result", comment:"")
+    func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormulaPreference, convertToMsec: Bool, units: String) -> String {
+        if rrInSec <= 0 {
+            return NSLocalizedString("Invalid Result", comment:"")
+        }
+        let qtcFormulas: [QTcFormula]
+        switch formula {
+        case .Bazett:
+            qtcFormulas = [.qtcBzt]
+        case .Fridericia:
+            qtcFormulas = [.qtcFrd]
+        case .Framingham:
+            qtcFormulas = [.qtcFrm]
+        case .Hodges:
+            qtcFormulas = [.qtcHdg]
+        case .all:
+            qtcFormulas = [.qtcBzt, .qtcFrd, .qtcFrm, .qtcHdg]
+        }
         var meanRR = rrInSec
         var qt = qtInSec
-        if meanRR > 0 {
-            let qtcBzt = QTc.qtcCalculator(formula: .qtcBzt)
-            var qtc = qtcBzt.calculate(qtInSec: qt, rrInSec: meanRR)
-//            let sqrtRR = sqrt(meanRR)
-//            var qtc = qt / sqrtRR
+        if convertToMsec {
+            meanRR *= 1000
+            qt *= 1000
+        }
+        var result = NSString.localizedStringWithFormat(NSLocalizedString("Mean RR = %.4g %@\nQT = %.4g %@", comment:"") as NSString, meanRR, units, qt, units) as String
+        for qtcFormula in qtcFormulas {
+            let qtcCalculator = QTc.qtcCalculator(formula: qtcFormula)
+            var qtc = qtcCalculator.calculate(qtInSec: qtInSec, rrInSec: rrInSec)
             // switch to units that calibration uses
             if convertToMsec {
-                meanRR *= 1000
-                qt *= 1000
                 qtc *= 1000
             }
-            result = NSString.localizedStringWithFormat(NSLocalizedString("Mean RR = %.4g %@\nQT = %.4g %@\nQTc = %.4g %@ (Bazett's formula)", comment:"") as NSString, meanRR, units, qt, units, qtc, units) as String
+            result += NSString.localizedStringWithFormat(NSLocalizedString("\nQTc = %.4g %@ (%@ formula)", comment:"") as NSString, qtc, units, qtcCalculator.longName) as String
         }
         return result
     }

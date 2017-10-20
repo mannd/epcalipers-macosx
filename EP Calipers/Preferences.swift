@@ -27,12 +27,12 @@ extension UserDefaults {
     }
 }
 
-public enum QTcFormula: Int {
-    case qtcBzt = 0
-    case qtcFrm = 1
-    case qtcHdg = 2
-    case qtcFrd = 3
-    case qtcAll = 4
+public enum QTcFormulaPreference: Int {
+    case Bazett = 0
+    case Framingham = 1
+    case Hodges = 2
+    case Fridericia = 3
+    case all = 4
 }
 
 class Preferences: NSObject {
@@ -48,7 +48,7 @@ class Preferences: NSObject {
     var showPrompts: Bool = true
     var roundMsecRate: Bool = true
     var transparency = false
-    var qtcFormula: QTcFormula = .qtcBzt
+    var qtcFormula: QTcFormulaPreference = .Bazett
     
     func loadPreferences() {
         let preferences = UserDefaults.standard
@@ -62,8 +62,8 @@ class Preferences: NSObject {
         showPrompts = preferences.bool(forKey: "showPromptsKey")
         roundMsecRate = preferences.bool(forKey: "roundMsecRateKey")
         transparency = preferences.bool(forKey: "transparency")
-        guard let formula = QTcFormula(rawValue: preferences.integer(forKey: "qtcFormula")) else {
-            qtcFormula = .qtcBzt
+        guard let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) else {
+            qtcFormula = .Bazett
             return
         }
         qtcFormula = formula
