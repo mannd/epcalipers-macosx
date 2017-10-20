@@ -20,6 +20,7 @@ Les préférences d’application peuvent être choisies en utilisant la command
 - Étalonnage d’amplitude: C’est la valeur par défaut pour étalonner les compas d’amplitude.  
 - No. d’int pour RR moyen: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen.
 - No. d’int RR pour QTc: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen pour calculer le QT corrigé.
+- Formule QTc: Choisir une formule pour calculer le QTc.  Choisir « Toutes » pour utiliser toutes les formules.
 - Des message-guides: Des messages-guides sont utiles quand vous êtes en train d’apprendre l’application. Vous pouvez l’accélérer en désactivant cette option.  Des messages-guides vous guident dans les étapes d’étalonnage et de mesures.
 - Arrondir msec et bpm: Arrondir des intervalles dans msec et des fréquences à l’entier le plus proche.  Noter que les valeurs dans secs ou autres unités ne sont arrondies jamais.
 - Fênetre transparente: La fênetre primaire doit transparente.  *Compas EP* peut alors être utilisé comme un compas flottant pour mesurer des images sur votre bureau.
