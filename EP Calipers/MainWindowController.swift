@@ -22,7 +22,7 @@ protocol QTcResultProtocol {
                    convertToMsec: Bool, units: String) -> String
 }
 
-class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate {
+class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination {
     let appName = NSLocalizedString("EP Calipers", comment:"")
     
     @IBOutlet weak var scrollView: NSScrollView!
@@ -147,10 +147,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     override func awakeFromNib() {
         
         // 2 lines below added for Swift 
-        let NSURLPboardType = NSPasteboard.PasteboardType(kUTTypeURL as String)
-        let NSFilenamesPboardType = NSPasteboard.PasteboardType("NSFilenamesPboardType")
+        let NSURLPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeURL as String)
+        let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String)
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboard.PasteboardType.tiff]
         self.window!.registerForDraggedTypes(types)
+        
+
         
         imageView.editable = true
         // below is no longer true, open IKImageEditPanel only from menu
@@ -217,7 +219,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     }
     
-    func draggingEntered(_ sender: NSDraggingInfo!) -> NSDragOperation  {
+    func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
         if checkExtension(sender) == true {
             self.fileTypeIsOk = true
             return .copy
@@ -235,7 +237,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
     
-    func performDragOperation(_ sender: NSDraggingInfo!) -> Bool {
+    func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         if let board = sender.draggingPasteboard().propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray {
             if let imagePath = board[0] as? String {
                 let url = URL(fileURLWithPath: imagePath)
@@ -252,7 +254,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             let url = URL(fileURLWithPath: path)
             let suffix = url.pathExtension
             for ext in validFileExtensions() {
-                if ext.lowercased() == suffix {
+                if ext == suffix {
                     return true
                 }
             }
@@ -522,7 +524,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func validFileExtensions() -> [String] {
-        let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/pdf/PDF"
+        let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/bmp/BMP/pdf/PDF"
         return extensions.components(separatedBy: "/")
     }
     
