@@ -40,6 +40,7 @@
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */; };
 		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
+		8EFBEE4C1F9B081D00F03E23 /* QTc.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 8E61A21C1F98454C00625288 /* QTc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,20 @@
 			remoteInfo = QTc_Mac;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8EFBEE481F9B07C200F03E23 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8EFBEE4C1F9B081D00F03E23 /* QTc.framework in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipers.help; sourceTree = "<group>"; };
@@ -279,6 +294,7 @@
 				8E3DA7E91C2E264000AD9556 /* Sources */,
 				8E3DA7EA1C2E264000AD9556 /* Frameworks */,
 				8E3DA7EB1C2E264000AD9556 /* Resources */,
+				8EFBEE481F9B07C200F03E23 /* Copy Files */,
 			);
 			buildRules = (
 			);
