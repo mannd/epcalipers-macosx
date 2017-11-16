@@ -78,7 +78,7 @@ class Calibration: NSObject {
     
     var unitsAreSeconds: Bool {
         get {
-            if rawUnits.characters.count < 1 {
+            if rawUnits.isEmpty {
                 return false
             }
             let units = rawUnits.uppercased()
@@ -89,7 +89,7 @@ class Calibration: NSObject {
     }
     
     var unitsAreMsec: Bool {
-        if rawUnits.characters.count < 1 {
+        if rawUnits.isEmpty {
             return false
         }
         let units = rawUnits.uppercased()
