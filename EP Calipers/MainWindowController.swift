@@ -1321,7 +1321,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         var n: Int = 0
         if calipersView.calipers.count > 0 {
             for caliper in calipersView.calipers {
-                if caliper.direction == .horizontal {
+                if caliper.direction == .horizontal && !caliper.isAngleCaliper {
                     c = caliper
                     n += 1
                 }
