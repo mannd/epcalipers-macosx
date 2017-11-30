@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E00D4E11F32CFD000DC7ED2 /* EPCalipers.help in Resources */ = {isa = PBXBuildFile; fileRef = 8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */; };
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
 		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
 		8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E2867821F2A5CD700AF335C /* Localizable.strings */; };
 		8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */; };
+		8E3C818D1FCFB11F004BD5FD /* EPCalipersHelp in Resources */ = {isa = PBXBuildFile; fileRef = 8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */; };
 		8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */; };
 		8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F21C2E264000AD9556 /* Assets.xcassets */; };
 		8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F41C2E264000AD9556 /* MainMenu.xib */; };
@@ -97,7 +97,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipers.help; sourceTree = "<group>"; };
 		8E02593E1E37B49700820703 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -106,6 +105,7 @@
 		8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EP Calipers-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedIKImageView.h; sourceTree = "<group>"; };
 		8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedIKImageView.m; sourceTree = "<group>"; };
+		8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipersHelp; sourceTree = "<group>"; };
 		8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EP Calipers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E3DA7F21C2E264000AD9556 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -268,7 +268,7 @@
 		8EA7EFC31C472909002E0085 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8E00D4E01F32CFD000DC7ED2 /* EPCalipers.help */,
+				8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */,
 				8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */,
 				8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */,
 				8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */,
@@ -436,7 +436,6 @@
 				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
 				8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */,
 				8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */,
-				8E00D4E11F32CFD000DC7ED2 /* EPCalipers.help in Resources */,
 				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */,
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
@@ -446,6 +445,7 @@
 				8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */,
 				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
 				8EA7EFCB1C472973002E0085 /* TB_zoomIn.png in Resources */,
+				8E3C818D1FCFB11F004BD5FD /* EPCalipersHelp in Resources */,
 				8EA7EFCD1C472973002E0085 /* TB_zoomToFit.png in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
 			);
