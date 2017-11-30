@@ -201,7 +201,7 @@ class AngleCaliper: Caliper {
     }
     
     func angleInSouthernHemisphere(_ angle:CGFloat) -> Bool {
-        return (0 <= Double(angle) && Double(angle) <= Double.pi)
+        return (0 < Double(angle) && Double(angle) < Double.pi)
     }
   
     

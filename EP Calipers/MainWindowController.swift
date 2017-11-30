@@ -925,7 +925,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             let result = calibrationAlert!.runModal()
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 let inputText = textField.stringValue
-                if inputText.characters.count > 0 {
+                if !inputText.isEmpty {
                     calibrateWithText(inputText)
                     exitCalibration()
                 }
@@ -936,7 +936,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func calibrateWithText(_ inputText: String) {
         // caller must guarantee this
-        assert(inputText.characters.count > 0)
+        assert(!inputText.isEmpty)
         var value: Double = 0.0
         var trimmedUnits: String = ""
         let scanner: Scanner = Scanner.localizedScanner(with: inputText) as! Scanner
@@ -1321,7 +1321,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         var n: Int = 0
         if calipersView.calipers.count > 0 {
             for caliper in calipersView.calipers {
-                if caliper.direction == .horizontal {
+                if caliper.direction == .horizontal && !caliper.isAngleCaliper {
                     c = caliper
                     n += 1
                 }

@@ -229,88 +229,18 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org6ac9455" class="outline-2">
-<h2 id="org6ac9455"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Calipers</h2>
-</div>
-<div id="outline-container-org721f2fa" class="outline-2">
-<h2 id="org721f2fa">Addition et suppression de compas</h2>
-<div class="outline-text-2" id="text-org721f2fa">
-<p>
-Il y a trois types de compas.  Les compas peuvent être horizontaux pour les mesures de temps, verticaux pour les mesures d'amplitude, ou angulaires pour les mesures d'angles en degrés.  Les compas de temps ressemblent à la lettre <b>H</b>, les compas d'amplitude à la lettre <b>H</b> couchée sur le côté, et les compas d'angle au début à la lettre <b>V</b> inversée.
-</p>
-</div>
-<div id="outline-container-org71933bc" class="outline-3">
-<h3 id="org71933bc">Addition de compas</h3>
-<div class="outline-text-3" id="text-org71933bc">
-<p>
-Cliquer sur les icônes de compas sur la barre d’outils <i>Compas</i>, ou utiliser le menu <b>Compas</b> pour ajouter de nouveaux compas.
-</p>
-
-<div class="figure">
-<p><img src="../gfx/EPCCaliperIcons.png" alt="EPCCaliperIcons.png" />
-</p>
-<p><span class="figure-number">Figure 1: </span>Barre d’outil <i>Compas</i> pour ajouter des compas</p>
-</div>
-</div>
-</div>
-<div id="outline-container-orga67a1e5" class="outline-3">
-<h3 id="orga67a1e5">Sélection d'un compas</h3>
-<div class="outline-text-3" id="text-orga67a1e5">
-<p>
-Quand il y a plus d'un compas sur l'écran, il faut qu'un compas soit choisi comme le compas actif pour l'étalonner ou pour faire les calculs.  Par défaut un compas non choisi est bleu et un compas choisi est rouge. Vous pouvez changer les couleurs en utilisant les <a href="./preferences.html">préférences</a>.  Il est aussi possible de <a href="#orgfe16ed9">changer les couleurs de compas individuels</a>.  Un clic de souris ou une frappe sur le touchpad sur un compas non choisi le choisira.  Un deuxième clic encore (mais pas trop vite, parce que un double clic supprimera le compas) le désélectionnera.  Comme il peut y avoir un seul compas choisi à la fois, la sélection d'un compas va désélectionner un autre compas qui est sélectionné.  Parfois un compas sera choisi automatiquement, par exemple pour faire de l'étalonnage, si aucun compas n'est déjà choisi.  Si vous voulez choisir un autre compas, il faut simplement le taper.
-</p>
-
-<div class="figure">
-<p><img src="../gfx/EPCSelectedCaliper.png" alt="EPCSelectedCaliper.png" />
-</p>
-<p><span class="figure-number">Figure 2: </span>Trois types de compas (de temps, d’amplitude, et d’angle).  Le compas rouge est choisi.</p>
-</div>
-</div>
-</div>
-<div id="outline-container-org7bae1e0" class="outline-3">
-<h3 id="org7bae1e0">Suppression de compas</h3>
-<div class="outline-text-3" id="text-org7bae1e0">
-<p>
-Un double clic avec la souris ou une double frappe du trackpad sur un compas le supprimera.  Un compas choisi peut être supprimé par la touche <i>Suppr</i> ou par la commande de menu <b>Compas | Supprimer le compas choisi</b>.  Tous les compas peuvent être supprimés en même temps en utilisant <i>Maj + Suppr</i> de votre clavier ou la commande de menu <b>Compas | Supprimer tous les compas</b>.  Noter que l’étalonnage continue même si tous les compas sont supprimés.  Des compas nouvellement ajoutés utilisent l’étalonnage précédent.
-</p>
-</div>
-</div>
-<div id="outline-container-org779cbdc" class="outline-3">
-<h3 id="org779cbdc"><a id="orgfe16ed9"></a>Changer les couleurs de compas</h3>
-<div class="outline-text-3" id="text-org779cbdc">
-<p>
-Au début les couleurs de compas sont fixés par les <a href="./preferences.html">préférences</a> et ces couleurs sont appliquées à tous les nouveaux compas ajoutés.  Cependant, après qu'un compas est ajouté, sa couleur peut être changée.  Les changements de couleur persistent jusqu'à ce que les compas soient supprimés ou l'application soit arrêtée.  En utilisant un clic droit de la souris ou une frappe avec deux droigts du trackpad sur un compas, le menu secondaire apparaîtra.  Choisir <b>Couleur de compas</b>.  Choisir une couleur dans la boîte de dialogue et le compas prendra cette couleur-là.  Le changement affectera seulement le compas choisi.  Vous pouvez changer la couleur par défaut de nouveaux compas en utilisant le menu de <a href="./preferences.html">Préférences</a>.
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-orgc6f7df7" class="outline-2">
-<h2 id="orgc6f7df7">Déplacement des compas</h2>
-<div class="outline-text-2" id="text-orgc6f7df7">
-</div>
-<div id="outline-container-org4a083e4" class="outline-3">
-<h3 id="org4a083e4">Mouvement</h3>
-<div class="outline-text-3" id="text-org4a083e4">
-<p>
-Les compas peuvent être déplacés sans tenir compte de l’état de curseur.  Utiliser le bouton gauche de souris ou appuyer et maintenir le trackpad avec votre droigt sur la barre transversale d’un compas de temps ou d’amplitude.  Pour déplacer des compas d’angle, choisir le sommet de l’angle où les deux lignes se joignent.  Bouger la souris ou votre droigt pour déplacer le compas comme une unité.
-</p>
-</div>
-</div>
-<div id="outline-container-orgc9a5b12" class="outline-3">
-<h3 id="orgc9a5b12">Étendre ou réduire un compas</h3>
-<div class="outline-text-3" id="text-orgc9a5b12">
-<p>
-Si le curseur est placé sur les barres gauches ou droites d’un compas de temps (ou sur les barres supérieures ou inférieures d’un compas d’amplitude) vous pouvez déplacer ces barres seules et étendre ou réduire le compas.  Noter que ce n’est pas possible de déplacer les deux barres au même temps.  Quand vous déplacez une barre d’un compas, l’autre reste fixée.  On peut déplacer les barres d’un compas d’angle de la meme façon.  Avec la combinaison de mouvements c’est possible de placer un compas partout sur un ECG.
-</p>
-</div>
-</div>
-<div id="outline-container-orge51d32c" class="outline-3">
-<h3 id="orge51d32c">Petits mouvements</h3>
-<div class="outline-text-3" id="text-orge51d32c">
-<p>
-Parfois vous aimeriez raffiner la position d'un compas, ou vous trouvez qu'il est trop difficile de le positionner exactement en glissant ses composants avec votre doigt ou avec la souris.  Vous pouvez faire ces petits mouvements avec les touches flèches du clavier.  En utilisant un clic droit de la souris ou une frappe avec deux droigts du trackpad sur un compas, le menu secondaire apparaîtra. Choisir <b>Régler la position du compas</b>.  Un message apparaîtra pour montrer quelque composant du compas a été choisi (barre transversale, barre latérale ou, en cas d'un compas d'angle, peut-être le sommet).  Des touches flèches à gauche, à droite, montantes ou descendantes déplaceront le composant choisi ou tout le compas en utilisant des petits mouvements.  Appuyer la touche <i>Échap</i> pour quitter les petits mouvements.
-</p>
-</div>
+<div id="outline-container-orgccc5536" class="outline-2">
+<h2 id="orgccc5536"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Remerciements</h2>
+<div class="outline-text-2" id="text-orgccc5536">
+<ul class="org-ul">
+<li>Je remercie Dr. Michael Katz pour l'idée.</li>
+<li>Je remercie Dr. Adrian Baranchuk et ses collaborateurs de l'Université Queen de Kingston en Ontario au Canada pour le concept du « Brugadometer » et pour leur aide en appliquant cet algorithme.</li>
+<li>Je remercie Scott Kankkala pour l’idée des compas marchants.</li>
+<li>Le code source de <b>Compas EP</b> est disponible sur <a href="https://github.com/mannd/epc%20alipers-macosx">GitHub</a>.</li>
+<li><b>Compas EP</b> est un logiciel libre et il est sous <a href="https://www.apache.org/licen%20ses/LICENSE-2.0.html">Apache License Version 2.0</a>.  Nous ne fournissons aucune garantie sur la précision de l'application.  Utilisez-la à vos risques et périls.</li>
+<li>Pour des questions, des rapports d'erreurs, ou des suggestions, contactez mannd@epstudiossoftware.com.</li>
+<li>Le site Internet: <a href="https://www.epstudiossoftware.com">https://www.epstudiossoftware.com</a>.</li>
+</ul>
 </div>
 </div>
 </div>

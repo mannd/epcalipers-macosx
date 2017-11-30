@@ -67,6 +67,9 @@ class CalipersView: NSView {
         if menuItem.action == #selector(colorCaliper(_:)) || menuItem.action == #selector(tweakCaliper(_:)) {
             return chosenCaliper != nil
         }
+        if menuItem.action == #selector(marchCaliper(_:)) {
+            return chosenCaliper != nil && (chosenCaliper?.isTimeCaliper())!
+        }
         return true;
     }
         
@@ -101,8 +104,10 @@ class CalipersView: NSView {
             let theMenu = NSMenu()
             let colorMenuItem = NSMenuItem(title: NSLocalizedString("Caliper Color", comment:""), action: #selector(colorCaliper(_:)), keyEquivalent: "")
             let tweakMenuItem = NSMenuItem(title: NSLocalizedString("Tweak Caliper Position", comment:""), action: #selector(tweakCaliper(_:)), keyEquivalent: "")
+            let marchMenuItem = NSMenuItem(title: NSLocalizedString("Marching Caliper", comment:""), action:#selector(marchCaliper(_:)), keyEquivalent:"")
             theMenu.addItem(colorMenuItem)
             theMenu.addItem(tweakMenuItem)
+            theMenu.addItem(marchMenuItem)
             NSMenu.popUpContextMenu(theMenu, with: event, for: self)
         }
         else {
@@ -134,9 +139,17 @@ class CalipersView: NSView {
         }
     }
     
+    @objc func marchCaliper(_ sender: AnyObject) {
+        guard let chosenCaliper = chosenCaliper else {
+            return
+        }
+        chosenCaliper.isMarching = !chosenCaliper.isMarching
+        needsDisplay = true
+    }
+    
     @objc func colorCaliper(_ sender: AnyObject) {
         guard let chosenCaliper = chosenCaliper else {
-            return;
+            return
         }
         let colorChooser: NSColorPanel = NSColorPanel.shared
         colorChooser.setTarget(self)

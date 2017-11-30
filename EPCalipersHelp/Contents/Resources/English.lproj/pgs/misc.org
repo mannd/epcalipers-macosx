@@ -10,6 +10,7 @@
 * [[../../shrd/icon_32x32@2x.png]] Acknowledgments
 - Thanks to Dr. Michael Katz for the concept.
 - Thanks to Dr. Adrian Baranchuk and his colleagues at Queen's University Kingston, Ontario, Canada for the concept of the Brugadometer and for assistance in implementing this algorithm.
+- Thanks to Scott Krankkala for the idea behind marching calipers.
 - The source code for *EP Calipers* is available on [[https://github.com/mannd/epcalipers-macosx][GitHub]].
 - *EP Calipers* is also available for iOS and Android devices as well as computers running Windows® 10.  Look for it on the Apple App Store, Google Play and the Microsoft® App Store.
 - *EP Calipers* is open source software and is licensed under the
