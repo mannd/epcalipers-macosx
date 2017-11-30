@@ -41,7 +41,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleHelpBookFolder</key>
-	<string>EPCalipers.help</string>
+	<string>EPCalipersHelp</string>
 	<key>CFBundleHelpBookName</key>
 	<string>EP Calipers Help</string>
 	<key>CFBundleIconFile</key>

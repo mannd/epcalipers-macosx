@@ -35,6 +35,9 @@ enum MovementDirection {
 class Caliper: NSObject {
 
     let delta: Double = 20.0
+    let minDistanceForMarch: CGFloat = 20
+    let maxMarchingCalipers: Int = 20
+    
     var bar1Position: CGFloat
     var bar2Position: CGFloat
     var crossBarPosition: CGFloat
@@ -50,6 +53,7 @@ class Caliper: NSObject {
     var roundMsecRate: Bool
     var requiresCalibration: Bool = true
     var isAngleCaliper:Bool = false
+    var isMarching: Bool
     
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
         crossBarPosition: CGFloat) {
@@ -66,6 +70,7 @@ class Caliper: NSObject {
             self.textFont = NSFont(name: "Helvetica", size: 18.0)!
             self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
             self.roundMsecRate = true
+            self.isMarching = false
             super.init()
     }
     
@@ -125,7 +130,56 @@ class Caliper: NSObject {
             context.addLine(to: CGPoint(x: crossBarPosition, y: bar1Position))
         }
         context.strokePath()
+        if isMarching && isTimeCaliper() {
+            drawMarchingCalipers(context, inRect: rect)
+        }
         caliperText()
+    }
+    
+    func isTimeCaliper() -> Bool {
+        return direction == .horizontal && !isAngleCaliper
+    }
+    
+    func drawMarchingCalipers(_ context: CGContext, inRect rect:CGRect) {
+        let difference = fabs(bar1Position - bar2Position)
+        if difference < minDistanceForMarch {
+            return
+        }
+        let greaterBar = fmax(bar1Position, bar2Position)
+        let lesserBar = fmin(bar1Position, bar2Position)
+        var biggerBars = Array<CGFloat>(repeating: 0, count: maxMarchingCalipers)
+        var smallerBars = Array<CGFloat>(repeating: 0, count: maxMarchingCalipers)
+        var point = greaterBar + difference
+        var index = 0
+        while point < rect.size.width && index < maxMarchingCalipers {
+            biggerBars[index] = point
+            point += difference
+            index += 1
+        }
+        let maxBiggerBars = index
+        index = 0
+        point = lesserBar - difference
+        while point > 0 && index < maxMarchingCalipers {
+            smallerBars[index] = point
+            point -= difference
+            index += 1
+        }
+        let maxSmallerBars = index
+        // draw them
+        var i = 0
+        while i < maxBiggerBars {
+            context.move(to: CGPoint(x: biggerBars[i], y: 0))
+            context.addLine(to: CGPoint(x: biggerBars[i], y: rect.size.height))
+            i += 1
+        }
+        i = 0
+        while i < maxSmallerBars {
+            context.move(to: CGPoint(x: smallerBars[i], y: 0))
+            context.addLine(to: CGPoint(x: smallerBars[i], y: rect.size.height))
+            i += 1
+        }
+        context.setLineWidth(fmax(lineWidth - 1, 1))
+        context.strokePath()
     }
     
     func caliperText() {

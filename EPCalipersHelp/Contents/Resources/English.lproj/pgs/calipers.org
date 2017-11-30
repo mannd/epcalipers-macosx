@@ -23,6 +23,10 @@ In order to make measurements or calibrate, it is necessary to "select" a single
 Double-tap on the trackpad or double-click with a mouse on a caliper to delete it.  A selected caliper (highlighted) can be deleted using the keyboard /Delete/ key, or the *Caliper | Delete Selected Caliper* menu item.  All calipers can be deleted at once using /Shift Delete/ on the keyboard, or the *Caliper | Delete All Calipers* menu item.   Note that after calibration, even if you delete all calibrated calipers, new calipers that are added will retain calibration.
 ** Caliper Colors
 If you right-click on a caliper with your mouse, or two-finger click on your trackpad, the secondary menu will appear.  The first item on this menu is *Caliper Color*.  Click this option, and the color selector appears.  Use the color selector to change the color of the caliper you clicked on.  The color change will only affect the individual caliper you clicked on.  You can change the default caliper color of new calipers by changing [[./preferences.html][Preferences]].
+** Marching calipers
+Right-clicking a /time caliper/ with your mouse, or clicking with two fingers on the trackpad will open the secondary menu with the option *Marching Caliper* available.  Click this and the time caliper will be converted to a /marching caliper/.  Vertical caliper lines will appear equal to the caliper width on either side of the caliper.  This is very useful to assess the regularity or irregularity of a rhythm, or to detect P waves marching through a tachycardia or during heart block.  Select *Marching Caliper* again to change the marching caliper back to normal again.
+#+CAPTION: Marching caliper
+[[../gfx/marching_caliper.png]]
 * Moving calipers
 ** Moving
 Calipers can be moved regardless of the cursor state.  Use the left mouse button or press and hold the trackpad with your finger over the crossbar area of a time or amplitude caliper to grab it. To grab angle calipers, select the top (apex) of the angle where the two lines join together.  Drag the mouse or your finger to move the caliper as a unit.  
