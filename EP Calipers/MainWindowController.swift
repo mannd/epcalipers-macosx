@@ -1263,8 +1263,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             alert.alertStyle = .informational
             alert.messageText = NSLocalizedString("Calculated QTc", comment:"")
             alert.informativeText = result
-            alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-            alert.runModal()
+            alert.addButton(withTitle: NSLocalizedString("Done", comment:""))
+            alert.addButton(withTitle: NSLocalizedString("Repeat QT", comment: ""))
+            let alertResult = alert.runModal()
+            if  alertResult == NSApplication.ModalResponse.alertSecondButtonReturn {
+                doQTcStep2()
+                return
+            }
         }
         exitQTc()
     }
