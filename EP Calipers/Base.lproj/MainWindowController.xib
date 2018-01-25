@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -95,22 +95,16 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
-                        <rect key="frame" x="211" y="450" width="237" height="24"/>
+                        <rect key="frame" x="211" y="450" width="245" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
                         </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="F0P-3a-q84">
                             <font key="font" metaFont="system"/>
                             <segments>
-                                <segment toolTip="Add time caliper" image="calipers-icon-bw-20x20" width="32">
-                                    <nil key="label"/>
-                                </segment>
-                                <segment toolTip="Add amplitude caliper" image="calipers-amplitude-icon-bw-20x20" width="32" tag="1">
-                                    <nil key="label"/>
-                                </segment>
-                                <segment toolTip="Add angle caliper" image="angle_icon_2_20x20">
-                                    <nil key="label"/>
-                                </segment>
+                                <segment toolTip="Add time caliper" image="calipers-icon-bw-20x20" width="32"/>
+                                <segment toolTip="Add amplitude caliper" image="calipers-amplitude-icon-bw-20x20" width="32" tag="1"/>
+                                <segment toolTip="Add angle caliper" image="angle_icon_2_20x20"/>
                                 <segment label="Calibrate" toolTip="Calibrate"/>
                                 <segment label="Clear" toolTip="Clear calibration"/>
                             </segments>
@@ -120,7 +114,7 @@
                         </connections>
                     </segmentedControl>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
-                        <rect key="frame" x="452" y="450" width="109" height="24"/>
+                        <rect key="frame" x="460" y="450" width="149" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="wj5-y7-FoH"/>
                         </constraints>
@@ -128,8 +122,8 @@
                             <font key="font" metaFont="system"/>
                             <segments>
                                 <segment label="R/I" toolTip="Toggle rate/interval"/>
-                                <segment label="mRR" toolTip="Calculate mean interval and rate" width="32" tag="1"/>
-                                <segment label="QTc" toolTip="Calculate corrected QT" width="32"/>
+                                <segment label="mRR" toolTip="Calculate mean interval and rate" tag="1"/>
+                                <segment label="QTc" toolTip="Calculate corrected QT" width="47"/>
                             </segments>
                         </segmentedCell>
                         <connections>
@@ -149,7 +143,7 @@
                         </textFieldCell>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Qk-Lr-dNR">
-                        <rect key="frame" x="565" y="450" width="169" height="24"/>
+                        <rect key="frame" x="613" y="450" width="181" height="24"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="lxO-ww-kvY">
                             <font key="font" metaFont="system"/>
                             <segments>
@@ -189,7 +183,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
             </connections>
-            <point key="canvasLocation" x="384" y="561"/>
+            <point key="canvasLocation" x="420" y="476"/>
         </window>
         <customView id="1nv-Ch-vgn">
             <rect key="frame" x="0.0" y="0.0" width="249" height="133"/>
