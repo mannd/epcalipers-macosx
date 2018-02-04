@@ -44,10 +44,10 @@
 "Do you want to turn off transparent window mode and load image?" = "Voulez-vous éteindre la fenêtre transparente et charger une image ?";
 
 /* No comment provided by engineer. */
-"Enter calibration measurement (e.g. %@)" = "Entrer la mesure d'étalonnage (p.e. %@)";
+"Enter calibration measurement (e.g. %@)" = "Saisir la mesure d'étalonnage (p.e. %@)";
 
 /* No comment provided by engineer. */
-"Enter number of intervals" = "Entrer le nombre d'intervales";
+"Enter number of intervals" = "Saisir le nombre d'intervales";
 
 /* No comment provided by engineer. */
 "EP Calipers preferences" = "Préférences de Compas EP";
@@ -98,10 +98,10 @@
 "OK" = "OK";
 
 /* No comment provided by engineer. */
-"Please enter a number between 1 and 10" = "Entrer un nombre entre 1 et 10";
+"Please enter a number between 1 and 10" = "Saisir un nombre entre 1 et 10";
 
 /* No comment provided by engineer. */
-"QTc: Enter number of RR intervals" = "QTc: Entrer le nombre d'intervalles RR";
+"QTc: Enter number of RR intervals" = "QTc: Saisir le nombre d'intervalles RR";
 
 /* No comment provided by engineer. */
 "Screenshot cancelled" = "Capture d'écran annulée";
