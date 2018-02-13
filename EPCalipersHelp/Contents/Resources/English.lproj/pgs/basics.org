@@ -78,7 +78,7 @@ Nearly all the functions of the app are contained in the main menu commands at t
 | ⌃G   | Add angle caliper             |
 | ⌃C   | Calibrate                     |
 | Del  | Delete selected caliper       |
-| ⇧Del | Delete all calipers           |
+| ⌘Del | Delete all calipers           |
 | ^P   | Prev page of multipage PDF    |
 | ^N   | Next page of multipage PDF    |
 | ←    | Tweak caliper component left  |
