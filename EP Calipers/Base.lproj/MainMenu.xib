@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -458,7 +459,6 @@ CA
                                 <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
-                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                                 <connections>
                                     <action selector="deleteAllCalipers:" target="-1" id="Fg4-kw-pYd"/>
                                 </connections>
@@ -470,9 +470,7 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem title="Clear Calibration" id="CWG-n0-m2k">
-                                <string key="keyEquivalent" base64-UTF8="YES">
-CQ
-</string>
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="addCaliper:" target="-1" id="wmy-f3-oAv"/>
                                 </connections>
