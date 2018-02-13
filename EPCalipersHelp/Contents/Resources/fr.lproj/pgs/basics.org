@@ -65,7 +65,7 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 | ⌃G     | Ajouter un compas d’angle          |
 | ⌃C     | Étalonner                          |
 | Del    | Supprimer le compas choisi         |
-| ⇧Del   | Supprimer tous les compas          |
+| ⌘Del   | Supprimer tous les compas          |
 | ^P     | Page précédente de multipage PDF   |
 | ^N     | Page suivante de multipage PDF     |
 | ←      | Régler le composant vers la gauche |

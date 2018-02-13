@@ -174,7 +174,7 @@ class AngleCaliper: Caliper {
     }
     
     func baseMeasurement(_ lengthInPoints: Double) -> String {
-        let s = NSString.localizedStringWithFormat("%.4g %@", calibratedBaseResult(lengthInPoints), calibration.units) as String
+        let s = NSString.localizedStringWithFormat("%.4g %@", calibratedBaseResult(lengthInPoints), calibration.rawUnits) as String
         return s
     }
     
