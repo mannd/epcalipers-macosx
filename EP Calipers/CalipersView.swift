@@ -42,6 +42,8 @@ class CalipersView: NSView {
     var chosenComponent: CaliperComponent = .noComponent
     var tweakingComponent = false
     let tweakDistance: CGFloat = 0.2
+    // distance below will allow hundredths of point precision
+//    let tweakDistance: CGFloat = 0.01
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
