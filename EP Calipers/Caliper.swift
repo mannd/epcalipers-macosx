@@ -37,6 +37,11 @@ class Caliper: NSObject {
     let delta: Double = 20.0
     let minDistanceForMarch: CGFloat = 20
     let maxMarchingCalipers: Int = 20
+    let roundToIntString: NSString = "%d %@"
+    let roundToFourPlacesString: NSString = "%.4g %@"
+    let roundToTenthsString: NSString = "%.1f %@"
+    let roundToHundredthsString: NSString = "%.2f %@"
+    let noRoundingString: NSString = "%f %@"
     
     var bar1Position: CGFloat
     var bar2Position: CGFloat
@@ -51,6 +56,7 @@ class Caliper: NSObject {
     var paragraphStyle: NSMutableParagraphStyle
     var calibration: Calibration = Calibration()
     var roundMsecRate: Bool
+    var rounding: Rounding
     var requiresCalibration: Bool = true
     var isAngleCaliper:Bool = false
     var isMarching: Bool
@@ -70,6 +76,7 @@ class Caliper: NSObject {
             self.textFont = NSFont(name: "Helvetica", size: 18.0)!
             self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
             self.roundMsecRate = true
+            self.rounding = .ToInteger
             self.isMarching = false
             super.init()
     }
@@ -213,14 +220,38 @@ class Caliper: NSObject {
             return CGRect(x: 0, y: bar1Position, width: containerRect.size.width, height: bar2Position - bar1Position)
         }
     }
-    
+
+    // TODO: Fix rounding here: We need to use the chosen rounding in preferences
+    // Also need to make rounding match in QTc and mRR interval result dialogs
+    // TODO: values displayed should actually be rounded and not truncated as they are
+    // now.  E.g., a value 123.45000 should be displaed as 123.5 and not 123.4.  This
+    // is important for scientific use.  Need to refactor the whole number generating
+    // process.
     func measurement() -> String {
         var s: String
-        if roundMsecRate && (calibration.displayRate || calibration.unitsAreMsec) {
-            s = String(format: "%d %@", Int(round(calibratedResult())), calibration.units)
+        var format: NSString
+        if calibration.unitsAreMsecOrRate {
+            switch rounding {
+            case .ToInteger:
+                format = roundToIntString
+            case .ToFourPlaces:
+                format = roundToFourPlacesString
+            case .ToTenths:
+                format = roundToTenthsString
+            case .ToHundredths:
+                format = roundToHundredthsString
+            case .None:
+                format = noRoundingString
+            }
+            if (rounding == .ToInteger) {
+                s = NSString.localizedStringWithFormat(format, Int(round(calibratedResult())), calibration.units) as String
+            }
+            else {
+                s = NSString.localizedStringWithFormat(format, calibratedResult(), calibration.units) as String
+            }
         }
         else {
-            s = NSString.localizedStringWithFormat("%.4g %@", calibratedResult(), calibration.units) as String
+            s = NSString.localizedStringWithFormat(roundToFourPlacesString, calibratedResult(), calibration.units) as String
         }
         return s
     }

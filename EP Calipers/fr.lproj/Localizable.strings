@@ -160,3 +160,11 @@
 "Done" = "OK";
 
 "Repeat QT" = "Répéter QT";
+
+"To integer" = "au entier";
+
+"To 4 digits" = "à 4 chiffres";
+
+"To tenths" = "à 1 décimale";
+
+"To hundredths" = "à 2 décimales";

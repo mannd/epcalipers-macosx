@@ -36,7 +36,7 @@ public enum QTcFormulaPreference: Int {
 }
 
 public enum Rounding: Int {
-    case ToInt = 0 // 123 msec
+    case ToInteger = 0 // 123 msec
     case ToFourPlaces = 1 // 12.34 msec 123.4 msec
     case ToTenths = 2 // 123.4 msec 12.3 msec
     case ToHundredths = 3 // 123.45 msec 12.34 msec
@@ -58,8 +58,7 @@ class Preferences: NSObject {
     var transparency = false
     var qtcFormula: QTcFormulaPreference = .Bazett
     // new preferences
-    var rounding: Rounding = .ToInt
-//    var hiresTweaking = false
+    var rounding: Rounding = .ToInteger
 
     func loadPreferences() {
         let preferences = UserDefaults.standard
@@ -73,11 +72,18 @@ class Preferences: NSObject {
         showPrompts = preferences.bool(forKey: "showPromptsKey")
         roundMsecRate = preferences.bool(forKey: "roundMsecRateKey")
         transparency = preferences.bool(forKey: "transparency")
-        guard let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) else {
-            qtcFormula = .Bazett
-            return
+        if let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) {
+            qtcFormula = formula
         }
-        qtcFormula = formula
+        else {
+            qtcFormula = .Bazett
+        }
+        if let roundPreference = Rounding(rawValue: preferences.integer(forKey: "rounding")) {
+            rounding = roundPreference
+        }
+        else {
+            rounding = .ToInteger
+        }
     }
     
     func savePreferences() {
@@ -93,6 +99,7 @@ class Preferences: NSObject {
         preferences.set(roundMsecRate, forKey: "roundMsecRateKey")
         preferences.set(transparency, forKey: "transparency")
         preferences.set(qtcFormula.rawValue, forKey: "qtcFormula")
+        preferences.set(rounding.rawValue, forKey: "rounding")
     }
 
 }

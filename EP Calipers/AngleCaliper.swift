@@ -172,15 +172,35 @@ class AngleCaliper: Caliper {
         text.draw(in: CGRect(x: point2.x > point1.x ? point1.x - 25 : point2.x - 25, y: point1.y - 20, width: fmax(100.0, fabs(point2.x - point1.x) + 50), height: 20.0),  withAttributes:attributes)
         
     }
-    
+
+    // TODO: Fix rounding here: We need to use the chosen rounding in preferences
     func baseMeasurement(_ lengthInPoints: Double) -> String {
-        let s = NSString.localizedStringWithFormat("%.4g %@", calibratedBaseResult(lengthInPoints), calibration.rawUnits) as String
+        var s: String
+        var format: NSString
+        switch rounding {
+        case .ToInteger:
+            format = roundToIntString
+        case .ToFourPlaces:
+            format = roundToFourPlacesString
+        case .ToTenths:
+            format = roundToTenthsString
+        case .ToHundredths:
+            format = roundToHundredthsString
+        case .None:
+            format = noRoundingString
+        }
+        if rounding == .ToInteger {
+            s = NSString.localizedStringWithFormat(format, Int(calibratedBaseResult(lengthInPoints)), calibration.rawUnits) as String
+        }
+        else {
+            s = NSString.localizedStringWithFormat(format, calibratedBaseResult(lengthInPoints), calibration.rawUnits) as String
+        }
         return s
     }
     
     func calibratedBaseResult(_ lengthInPoints: Double) -> Double {
         var length = lengthInPoints * calibration.multiplier()
-        if roundMsecRate && calibration.unitsAreMsec {
+        if rounding == .ToInteger && calibration.unitsAreMsec {
            length = round(length)
         }
         return length

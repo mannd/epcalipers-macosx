@@ -319,7 +319,8 @@ class CalipersView: NSView {
     override func keyDown(with theEvent: NSEvent) {
         interpretKeyEvents([theEvent])
     }
-    
+
+    // Arrow keys, up, down, right, and left for gross movements
     override func moveUp(_ sender: Any?) {
         moveChosenComponent(movementDirection: .up, distance: tweakDistance)
     }
@@ -336,6 +337,7 @@ class CalipersView: NSView {
         moveChosenComponent(movementDirection: .right, distance: tweakDistance)
     }
 
+    // Command + arrow keys for very fine movements
     override func moveToEndOfLine(_ sender: Any?) {
         moveChosenComponent(movementDirection: .right, distance: hiresTweakDistance)
     }
@@ -392,7 +394,7 @@ class CalipersView: NSView {
         }
     }
     
-    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool) {
+    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool, rounding: Rounding) {
          for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
             // new calipers get the default color
@@ -404,6 +406,7 @@ class CalipersView: NSView {
             }
             c.lineWidth = CGFloat(lineWidth)
             c.roundMsecRate = roundMsecRate
+            c.rounding = rounding
         }
         needsDisplay = true
     }
