@@ -47,29 +47,33 @@ Noter que toutes les barres d'outils ne seront pas disponibles en permanence, se
 ** Menus
 Presque toutes les fonctions de l’application sont contenues dans les commandes du menu principal en haut de l’écran.  Noter qu’il existe des raccourcis clavier dans le menu pour plusieurs fonctions du programme.  Par exemple, il est plus facile de faire tourner une image à l’aide d’une touche de raccourci clavier qu’en utilisant d’une commande de menu.  Comme pour les barres d’outils, certaines commandes de menu sont désactivées lorsque leur utilisation n’est pas autorisée.  Par exemple, la rotation de l’image n’est pas autorisée après étalonnage des compas.  Il est nécessaire d’effacer l’étalonnage pour restaurer les commandes de rotation.
 ** Raccourcis clavier
-| Touche | Fonction                           |
-|--------+------------------------------------|
-| ⇧⌃R    | Tourner l’image 90° à doite        |
-| ⇧⌃L    | Tourner l’image 90° à gauche       |
-| ⌃R     | Tourner l’image 1° à droite        |
-| ⌃L     | Tourner l’image 1° à gauche        |
-| ⌘R     | Tourner l’image 0,1 à droite       |
-| ⌘L     | Tourner l’image 0,1 à gauche       |
-| ⌃0     | Réinitialiser la rotation          |
-| ⌘+     | Zoom avant                         |
-| ⌘-     | Zoom arrière                       |
-| ⌘=     | Zoom à dimension réelle            |
-| ⌃E     | Éditeur d’image                    |
-| ⌃T     | Ajouter un compas de temps         |
-| ⌃A     | Ajouter un compas d’amplitude      |
-| ⌃G     | Ajouter un compas d’angle          |
-| ⌃C     | Étalonner                          |
-| Del    | Supprimer le compas choisi         |
-| ⌘Del   | Supprimer tous les compas          |
-| ^P     | Page précédente de multipage PDF   |
-| ^N     | Page suivante de multipage PDF     |
-| ←      | Régler le composant vers la gauche |
-| →      | Régler le composant vers la droite |
-| ↑      | Régler le composant vers le haut   |
-| ↓      | Régler le composant vers le bas    |
-| ⌘,     | Ouvrir les préférences             |
+| Touche | Fonction                                    |
+|--------+---------------------------------------------|
+| ⇧⌃R    | Tourner l’image 90° à doite                 |
+| ⇧⌃L    | Tourner l’image 90° à gauche                |
+| ⌃R     | Tourner l’image 1° à droite                 |
+| ⌃L     | Tourner l’image 1° à gauche                 |
+| ⌘R     | Tourner l’image 0,1 à droite                |
+| ⌘L     | Tourner l’image 0,1 à gauche                |
+| ⌃0     | Réinitialiser la rotation                   |
+| ⌘+     | Zoom avant                                  |
+| ⌘-     | Zoom arrière                                |
+| ⌘=     | Zoom à dimension réelle                     |
+| ⌃E     | Éditeur d’image                             |
+| ⌃T     | Ajouter un compas de temps                  |
+| ⌃A     | Ajouter un compas d’amplitude               |
+| ⌃G     | Ajouter un compas d’angle                   |
+| ⌃C     | Étalonner                                   |
+| Del    | Supprimer le compas choisi                  |
+| ⌘Del   | Supprimer tous les compas                   |
+| ^P     | Page précédente de multipage PDF            |
+| ^N     | Page suivante de multipage PDF              |
+| ←      | Régler le composant vers la gauche          |
+| →      | Régler le composant vers la droite          |
+| ↑      | Régler le composant vers le haut            |
+| ↓      | Régler le composant vers le bas             |
+| ⌘←     | Régler le composant finement vers la gauche |
+| ⌘→     | Régler le composant finement vers la droite |
+| ⌘↑     | Régler le composant finement vers le haut   |
+| ⌘↓     | Régler le composant finement vers le bas    |
+| ⌘,     | Ouvrir les préférences                      |

@@ -35,9 +35,17 @@ public enum QTcFormulaPreference: Int {
     case all = 4
 }
 
+public enum Rounding: Int {
+    case ToInt = 0 // 123 msec
+    case ToFourPlaces = 1 // 12.34 msec 123.4 msec
+    case ToTenths = 2 // 123.4 msec 12.3 msec
+    case ToHundredths = 3 // 123.45 msec 12.34 msec
+    case None = 4 // for debugging only 123.456789 msec
+}
+
+
+
 class Preferences: NSObject {
-    
-    
     var caliperColor: NSColor? = NSColor.blue
     var highlightColor: NSColor? = NSColor.red
     var lineWidth: Int = 2
@@ -49,7 +57,10 @@ class Preferences: NSObject {
     var roundMsecRate: Bool = true
     var transparency = false
     var qtcFormula: QTcFormulaPreference = .Bazett
-    
+    // new preferences
+    var rounding: Rounding = .ToInt
+//    var hiresTweaking = false
+
     func loadPreferences() {
         let preferences = UserDefaults.standard
         caliperColor = preferences.colorForKey("caliperColorKey")

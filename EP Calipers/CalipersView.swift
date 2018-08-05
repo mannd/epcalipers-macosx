@@ -43,7 +43,7 @@ class CalipersView: NSView {
     var tweakingComponent = false
     let tweakDistance: CGFloat = 0.2
     // distance below will allow hundredths of point precision
-//    let tweakDistance: CGFloat = 0.01
+    let hiresTweakDistance: CGFloat = 0.01
 
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
@@ -172,7 +172,7 @@ class CalipersView: NSView {
     
     @objc func tweakCaliper(_ sender: AnyObject) {
         if let componentName = Caliper.componentName(chosenComponent) {
-            let message = String(format: NSLocalizedString("Tweak %@ with arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
+            let message = String(format: NSLocalizedString("Tweak %@ with arrow keys and ⌘-arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
             if !tweakingComponent {
                 delegate?.showMessageAndSaveLast(message)
                 tweakingComponent = true
@@ -207,8 +207,6 @@ class CalipersView: NSView {
         }
         
     }
-    
-
     
     func getSelectedCaliper(_ point: CGPoint) -> Caliper?{
         var caliper: Caliper? = nil
@@ -323,21 +321,37 @@ class CalipersView: NSView {
     }
     
     override func moveUp(_ sender: Any?) {
-        moveChosenComponent(movementDirection: .up)
+        moveChosenComponent(movementDirection: .up, distance: tweakDistance)
     }
     
     override func moveDown(_ sender: Any?) {
-        moveChosenComponent(movementDirection: .down)
+        moveChosenComponent(movementDirection: .down, distance: tweakDistance)
     }
     
     override func moveLeft(_ sender: Any?) {
-        moveChosenComponent(movementDirection: .left)
+        moveChosenComponent(movementDirection: .left, distance: tweakDistance)
     }
     
     override func moveRight(_ sender: Any?) {
-        moveChosenComponent(movementDirection: .right)
+        moveChosenComponent(movementDirection: .right, distance: tweakDistance)
+    }
+
+    override func moveToEndOfLine(_ sender: Any?) {
+        moveChosenComponent(movementDirection: .right, distance: hiresTweakDistance)
     }
     
+    override func moveToBeginningOfLine(_ sender: Any?) {
+        moveChosenComponent(movementDirection: .left, distance: hiresTweakDistance)
+    }
+
+    override func moveToBeginningOfDocument(_ sender: Any?) {
+        moveChosenComponent(movementDirection: .up, distance: hiresTweakDistance)
+    }
+
+    override func moveToEndOfDocument(_ sender: Any?) {
+        moveChosenComponent(movementDirection: .down, distance: hiresTweakDistance)
+    }
+
     override func cancelOperation(_ sender: Any?) {
         stopTweaking()
     }
@@ -369,10 +383,10 @@ class CalipersView: NSView {
         needsDisplay = true
     }
     
-    func moveChosenComponent(movementDirection: MovementDirection) {
+    func moveChosenComponent(movementDirection: MovementDirection, distance: CGFloat) {
         if let c = chosenCaliper {
             if tweakingComponent {
-                c.moveBarInDirection(movementDirection: movementDirection, distance: tweakDistance, forComponent: chosenComponent)
+                c.moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: chosenComponent)
                 needsDisplay = true
             }
         }

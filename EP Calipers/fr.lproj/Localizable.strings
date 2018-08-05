@@ -137,7 +137,7 @@
 
 "\nQTc = %.4g %@ (%@ formula)" ="\nQTc = %.4g %@ (formule de %@)";
 
-"Tweak %@ with arrow keys.  Press Escape (esc) to stop tweaking." = "Régler %@ en utilisant les touches fléchées.  Appuyer sur la touche Échap pour quitter.";
+"Tweak %@ with arrow keys and ⌘-arrow keys.  Press Escape (esc) to stop tweaking." = "Régler %@ en utilisant les touches fléchées et ⌘-fléchées.  Appuyer sur la touche Échap pour quitter.";
 
 "left bar" = "la barre gauche";
 
