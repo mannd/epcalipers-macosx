@@ -73,8 +73,7 @@ class Caliper: NSObject {
         self.selectedColor = NSColor.red
         self.lineWidth = 2
         self.selected = false
-        self.textFont = NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.medium)
-        //self.textFont = NSFont(name: "Helvetica", size: 18.0)!
+        self.textFont = NSFont(name: "Helvetica Neue Medium", size: 18.0) ?? NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.medium)
         self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         self.roundMsecRate = true
         self.rounding = .ToInteger
@@ -222,12 +221,6 @@ class Caliper: NSObject {
         }
     }
 
-    // TODO: Fix rounding here: We need to use the chosen rounding in preferences
-    // Also need to make rounding match in QTc and mRR interval result dialogs
-    // TODO: values displayed should actually be rounded and not truncated as they are
-    // now.  E.g., a value 123.45000 should be displaed as 123.5 and not 123.4.  This
-    // is important for scientific use.  Need to refactor the whole number generating
-    // process.
     func measurement() -> String {
         var s: String
         var format: NSString

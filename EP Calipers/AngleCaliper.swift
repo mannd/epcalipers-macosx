@@ -170,7 +170,6 @@ class AngleCaliper: Caliper {
         text.draw(in: CGRect(x: point2.x > point1.x ? point1.x - 25 : point2.x - 25, y: point1.y - 25, width: fmax(100.0, fabs(point2.x - point1.x) + 50), height: 20),  withAttributes:attributes)
     }
 
-    // TODO: Fix rounding here: We need to use the chosen rounding in preferences
     func baseMeasurement(_ lengthInPoints: Double) -> String {
         var s: String
         var format: NSString

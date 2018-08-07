@@ -346,9 +346,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
             appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
-            // TODO: remove forced unwrapping here
-            appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem)!
-            appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem)!
+            appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem) ?? QTcFormulaPreference.Bazett
+            appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, rounding: appPreferences.rounding)
@@ -375,7 +374,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To tenths", comment: ""))
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To hundredths", comment: ""))
         // TODO: remove in production
-        roundingPopUpButton.addItem(withTitle: "Raw")
+        //roundingPopUpButton.addItem(withTitle: "Raw")
     }
     
     @IBAction func numberOfMeanRRStepperAction(_ sender: AnyObject) {

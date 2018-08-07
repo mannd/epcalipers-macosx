@@ -41,9 +41,9 @@ class EP_CalipersUITests: XCTestCase {
 //        app.dialogs["alert"].buttons["Calibrate"].click()
 //        normal12LeadEcgJpgWindow.buttons["R/I"].click()
 //        normal12LeadEcgJpgWindow.buttons["Clear"].click()
-//        
-//    
-    
+//
+
+
     }
     
 }
