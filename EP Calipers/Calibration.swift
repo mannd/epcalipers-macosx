@@ -104,5 +104,9 @@ class Calibration: NSObject {
         let upcasedUnits = units.uppercased()
         return upcasedUnits == "MM" || upcasedUnits.contains("MILLIM")
     }
+
+    var unitsAreMsecOrRate: Bool {
+        return unitsAreMsec || displayRate
+    }
     
 }

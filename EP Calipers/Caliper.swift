@@ -37,6 +37,11 @@ class Caliper: NSObject {
     let delta: Double = 20.0
     let minDistanceForMarch: CGFloat = 20
     let maxMarchingCalipers: Int = 20
+    let roundToIntString: NSString = "%d %@"
+    let roundToFourPlacesString: NSString = "%.4g %@"
+    let roundToTenthsString: NSString = "%.1f %@"
+    let roundToHundredthsString: NSString = "%.2f %@"
+    let noRoundingString: NSString = "%f %@"
     
     var bar1Position: CGFloat
     var bar2Position: CGFloat
@@ -51,27 +56,30 @@ class Caliper: NSObject {
     var paragraphStyle: NSMutableParagraphStyle
     var calibration: Calibration = Calibration()
     var roundMsecRate: Bool
+    var rounding: Rounding
     var requiresCalibration: Bool = true
     var isAngleCaliper:Bool = false
     var isMarching: Bool
     
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
-        crossBarPosition: CGFloat) {
+         crossBarPosition: CGFloat) {
 
-            self.direction = direction
-            self.bar1Position = bar1Position
-            self.bar2Position = bar2Position
-            self.crossBarPosition = crossBarPosition
-            self.color = NSColor.blue
-            self.unselectedColor = NSColor.blue
-            self.selectedColor = NSColor.red
-            self.lineWidth = 2
-            self.selected = false
-            self.textFont = NSFont(name: "Helvetica", size: 18.0)!
-            self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-            self.roundMsecRate = true
-            self.isMarching = false
-            super.init()
+        self.direction = direction
+        self.bar1Position = bar1Position
+        self.bar2Position = bar2Position
+        self.crossBarPosition = crossBarPosition
+        self.color = NSColor.blue
+        self.unselectedColor = NSColor.blue
+        self.selectedColor = NSColor.red
+        self.lineWidth = 2
+        self.selected = false
+        self.textFont = NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.medium)
+        //self.textFont = NSFont(name: "Helvetica", size: 18.0)!
+        self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        self.roundMsecRate = true
+        self.rounding = .ToInteger
+        self.isMarching = false
+        super.init()
     }
     
     convenience override init() {
@@ -194,10 +202,10 @@ class Caliper: NSObject {
             ]
         if direction == .horizontal {
             // the math here insures that the label doesn't get so small that it can't be read
-            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);
+            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 22),  withAttributes:attributes);
         }
         else {
-            text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position + (bar2Position - bar1Position) / 2, width: 140, height: 20), withAttributes:attributes);
+            text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position - 10 + (bar2Position - bar1Position) / 2, width: 140, height: 22), withAttributes:attributes);
         }
     }
     
@@ -213,14 +221,38 @@ class Caliper: NSObject {
             return CGRect(x: 0, y: bar1Position, width: containerRect.size.width, height: bar2Position - bar1Position)
         }
     }
-    
+
+    // TODO: Fix rounding here: We need to use the chosen rounding in preferences
+    // Also need to make rounding match in QTc and mRR interval result dialogs
+    // TODO: values displayed should actually be rounded and not truncated as they are
+    // now.  E.g., a value 123.45000 should be displaed as 123.5 and not 123.4.  This
+    // is important for scientific use.  Need to refactor the whole number generating
+    // process.
     func measurement() -> String {
         var s: String
-        if roundMsecRate && (calibration.displayRate || calibration.unitsAreMsec) {
-            s = String(format: "%d %@", Int(round(calibratedResult())), calibration.units)
+        var format: NSString
+        if calibration.unitsAreMsecOrRate {
+            switch rounding {
+            case .ToInteger:
+                format = roundToIntString
+            case .ToFourPlaces:
+                format = roundToFourPlacesString
+            case .ToTenths:
+                format = roundToTenthsString
+            case .ToHundredths:
+                format = roundToHundredthsString
+            case .None:
+                format = noRoundingString
+            }
+            if (rounding == .ToInteger) {
+                s = NSString.localizedStringWithFormat(format, Int(round(calibratedResult())), calibration.units) as String
+            }
+            else {
+                s = NSString.localizedStringWithFormat(format, calibratedResult(), calibration.units) as String
+            }
         }
         else {
-            s = NSString.localizedStringWithFormat("%.4g %@", calibratedResult(), calibration.units) as String
+            s = NSString.localizedStringWithFormat(roundToFourPlacesString, calibratedResult(), calibration.units) as String
         }
         return s
     }
