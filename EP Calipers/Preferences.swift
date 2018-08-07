@@ -54,10 +54,8 @@ class Preferences: NSObject {
     var defaultNumberOfMeanRRIntervals: Int = 3
     var defaultNumberOfQTcMeanRRIntervals: Int = 1
     var showPrompts: Bool = true
-    var roundMsecRate: Bool = true
     var transparency = false
     var qtcFormula: QTcFormulaPreference = .Bazett
-    // new preferences
     var rounding: Rounding = .ToInteger
 
     func loadPreferences() {
@@ -70,7 +68,6 @@ class Preferences: NSObject {
         defaultNumberOfMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfMeanRRIntervalsKey")
         defaultNumberOfQTcMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         showPrompts = preferences.bool(forKey: "showPromptsKey")
-        roundMsecRate = preferences.bool(forKey: "roundMsecRateKey")
         transparency = preferences.bool(forKey: "transparency")
         if let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) {
             qtcFormula = formula
@@ -96,7 +93,6 @@ class Preferences: NSObject {
         preferences.set(defaultNumberOfMeanRRIntervals, forKey: "defaultNumberOfMeanRRIntervalsKey")
         preferences.set(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         preferences.set(showPrompts, forKey: "showPromptsKey")
-        preferences.set(roundMsecRate, forKey: "roundMsecRateKey")
         preferences.set(transparency, forKey: "transparency")
         preferences.set(qtcFormula.rawValue, forKey: "qtcFormula")
         preferences.set(rounding.rawValue, forKey: "rounding")

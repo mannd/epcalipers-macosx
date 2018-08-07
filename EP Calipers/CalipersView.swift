@@ -394,7 +394,7 @@ class CalipersView: NSView {
         }
     }
     
-    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, roundMsecRate: Bool, rounding: Rounding) {
+    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, rounding: Rounding) {
          for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
             // new calipers get the default color
@@ -405,7 +405,6 @@ class CalipersView: NSView {
                 c.color = c.selectedColor
             }
             c.lineWidth = CGFloat(lineWidth)
-            c.roundMsecRate = roundMsecRate
             c.rounding = rounding
         }
         needsDisplay = true

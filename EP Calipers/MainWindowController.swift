@@ -351,7 +351,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem)!
             appPreferences.savePreferences()
             // update calipersView
-            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate, rounding: appPreferences.rounding)
+            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, rounding: appPreferences.rounding)
             // update transparency
             transparent = appPreferences.transparency
             preferencesChanged = true
@@ -776,7 +776,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let caliper = Caliper()
         // initiallize with Preferences here
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
-        caliper.roundMsecRate = appPreferences.roundMsecRate
         caliper.rounding = appPreferences.rounding
         if let color = appPreferences.caliperColor {
             caliper.unselectedColor = color
@@ -808,7 +807,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func addAngleCaliper() {
         let caliper = AngleCaliper()
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
-        caliper.roundMsecRate = appPreferences.roundMsecRate
         caliper.rounding = appPreferences.rounding
         caliper.direction = .horizontal
         caliper.calibration = calipersView.horizontalCalibration
