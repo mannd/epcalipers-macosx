@@ -1,0 +1,776 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D968E69583DA169AB49AA328FA92B9A /* QtMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B473EE5B26C6490869FD325EE6CC18 /* QtMeasurement.swift */; };
+		30615C5E44748E024D34407C8EB41BE6 /* Pods-EP Calipers-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B1CA83E261C88D8D0712635D330E1A67 /* Pods-EP Calipers-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3900A9A58DB7C1AEF88B08D71C019B33 /* Pods-EP CalipersTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B05A20218C41CA0315B21B6C782C75 /* Pods-EP CalipersTests-dummy.m */; };
+		627774EE4CE56B4AC362E1C2DCF63F17 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		6D9C9E40FAB0BF3172CBF3AB9488B5A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		718AC87722ACAEABF89419E87807DA78 /* QTc-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E44B4D195236E78FA2A1D44067F71D8 /* QTc-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7911EE07E1654F8A27C69D3FF0D41493 /* AbnormalQTc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883CD43FBE46F80275945A3C37ED5862 /* AbnormalQTc.swift */; };
+		876B7D54871C7A47158269F3C7545B05 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		91F8C83A2B4927F0655EB4E84F06E7E1 /* QTc.h in Headers */ = {isa = PBXBuildFile; fileRef = DB9FF13B19631ECC59C3495EC1338946 /* QTc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A00ABE069C55B6A113BDA3275CA5CB49 /* QTc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B034ACBEAB5748ED73C7B8366EAF034 /* QTc.swift */; };
+		CC9CC94E0C64B8CAA523E59306A2A1CD /* Pods-EP CalipersTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CB557B2A9F8363D1101F8C24BA9D4F /* Pods-EP CalipersTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2B7E519B612C8A08051A46E9DB1880E /* Pods-EP Calipers-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7545EF78C8D17B6AEDE68B45881A382B /* Pods-EP Calipers-dummy.m */; };
+		E42E43D0205FFE5C247BE5C40BC69BA5 /* Formulas.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9417043068DFF9246CEC50D2BE8B75E /* Formulas.swift */; };
+		EED89449B5ECCAD9277621B915887AF0 /* QTc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF77344A133782966C601225FF61703 /* QTc-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5CB2F99ED3321D9E1CC46C07404A5657 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 39CFB88ED67AECBE779F812A2E46925E;
+			remoteInfo = QTc;
+		};
+		8417769F4C24A9CF7A78AADFDEAF83D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C985C8C627CFDD1FB1CBF8D7CE1AF524;
+			remoteInfo = "Pods-EP Calipers";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		010FF1B5744930658E0FE8FD3EE0D78C /* Pods-EP Calipers-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EP Calipers-acknowledgements.plist"; sourceTree = "<group>"; };
+		06B05A20218C41CA0315B21B6C782C75 /* Pods-EP CalipersTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EP CalipersTests-dummy.m"; sourceTree = "<group>"; };
+		0E5EBECF073B1434557F1E06864A2ECA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1DF77344A133782966C601225FF61703 /* QTc-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QTc-dummy.m"; sourceTree = "<group>"; };
+		1EAE7347FA3317D511E41242C77E742B /* Pods-EP Calipers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EP Calipers.release.xcconfig"; sourceTree = "<group>"; };
+		26DA1B04E17A760EF3FB4D999D709488 /* Pods-EP CalipersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EP CalipersTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2A1C2769A0CCAF338FEE0BD2E7CCE8A5 /* Pods-EP Calipers-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EP Calipers-frameworks.sh"; sourceTree = "<group>"; };
+		2B034ACBEAB5748ED73C7B8366EAF034 /* QTc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QTc.swift; path = CommonSource/QTc.swift; sourceTree = "<group>"; };
+		32AAE46978398B67C9FAFE7179C84F03 /* QTc-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QTc-prefix.pch"; sourceTree = "<group>"; };
+		3DD181CB74A95CDD2D0E744F265A5AC8 /* Pods-EP CalipersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EP CalipersTests.release.xcconfig"; sourceTree = "<group>"; };
+		3E44B4D195236E78FA2A1D44067F71D8 /* QTc-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QTc-umbrella.h"; sourceTree = "<group>"; };
+		3EAEC52D22B735D92DEEFEC324437A5B /* Pods-EP CalipersTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EP CalipersTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		5C27CEE69602CA524BBF35356F2DC153 /* README.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		64C9A22D7F3506AFC7E4EA880CB48858 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		670C2188FC698690A9694DE80B97B563 /* QTc.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = QTc.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		7545EF78C8D17B6AEDE68B45881A382B /* Pods-EP Calipers-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EP Calipers-dummy.m"; sourceTree = "<group>"; };
+		802AA5B11FD17447DA1D3C92C229D9ED /* Pods-EP CalipersTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EP CalipersTests-resources.sh"; sourceTree = "<group>"; };
+		883CD43FBE46F80275945A3C37ED5862 /* AbnormalQTc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AbnormalQTc.swift; path = CommonSource/AbnormalQTc.swift; sourceTree = "<group>"; };
+		8D9C9ED290BC303F528C6B20DFD46AB8 /* Pods-EP CalipersTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EP CalipersTests-frameworks.sh"; sourceTree = "<group>"; };
+		91D03DDA4A8E131B833A6BD75E6A59CE /* Pods-EP Calipers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EP Calipers.debug.xcconfig"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F88F966FBD5FE9C6CF4D2F07AC3EBB3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A51D3F7C97E392BB4B443488CD32D489 /* QTc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QTc.xcconfig; sourceTree = "<group>"; };
+		AB819DFF47AC3CE41056650B69821053 /* QTc.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = QTc.modulemap; sourceTree = "<group>"; };
+		B1CA83E261C88D8D0712635D330E1A67 /* Pods-EP Calipers-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EP Calipers-umbrella.h"; sourceTree = "<group>"; };
+		BBF834F9FF467CB8EBCA1A385C0EAC41 /* Pods-EP Calipers.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EP Calipers.modulemap"; sourceTree = "<group>"; };
+		BE945F967A17AE54719C92040F5C7727 /* Pods-EP CalipersTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EP CalipersTests.modulemap"; sourceTree = "<group>"; };
+		C3CB557B2A9F8363D1101F8C24BA9D4F /* Pods-EP CalipersTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EP CalipersTests-umbrella.h"; sourceTree = "<group>"; };
+		C3D584869936CF4CD6ED2B4E722AB640 /* Pods-EP CalipersTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EP CalipersTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		C6B473EE5B26C6490869FD325EE6CC18 /* QtMeasurement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QtMeasurement.swift; path = CommonSource/QtMeasurement.swift; sourceTree = "<group>"; };
+		D3B1C75769819D5BB4A1B27EEB265449 /* Pods_EP_CalipersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_CalipersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9417043068DFF9246CEC50D2BE8B75E /* Formulas.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Formulas.swift; path = CommonSource/Formulas.swift; sourceTree = "<group>"; };
+		DB4D231A1F8DA43A920A9D46FBB7D94C /* QTc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QTc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB8A6C7E2D898D4CE754FCB234E1ABBE /* Pods_EP_Calipers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_Calipers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB9FF13B19631ECC59C3495EC1338946 /* QTc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QTc.h; path = CommonSource/QTc.h; sourceTree = "<group>"; };
+		DE1486AEA2D845867324259903F41DEF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		E947C7EF7BB2AF0D21F1D262360A47B6 /* Pods-EP Calipers-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EP Calipers-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F0D9097784B0E0B0D1F7EACB6D764882 /* Pods-EP Calipers-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EP Calipers-resources.sh"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6C4DCF398FDB659C1ECD03332E1B2182 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				876B7D54871C7A47158269F3C7545B05 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE1309FBD883B490F6FF7B8BF374EB8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D9C9E40FAB0BF3172CBF3AB9488B5A8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D873AB2ED3BD0A1653E7CA65AEA45AA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				627774EE4CE56B4AC362E1C2DCF63F17 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07CA72C5D153E458773B1A11EBC34E10 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6BB0304D74DD21FF3B37D2B1FEB6B618 /* Pods-EP Calipers */,
+				819D68A8FD59D383EE57798E73F5ACC4 /* Pods-EP CalipersTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		205D81BD3909D5FDBAC6775693D3D4E8 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D21C20C5FE8FD20F38156BC5B1DFD30 /* QTc */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA7AC8429882A95AA0810A9DCDED54FF /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C0039C5218A009697FF1E32E8B0A2C5 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DE1486AEA2D845867324259903F41DEF /* Info.plist */,
+				AB819DFF47AC3CE41056650B69821053 /* QTc.modulemap */,
+				A51D3F7C97E392BB4B443488CD32D489 /* QTc.xcconfig */,
+				1DF77344A133782966C601225FF61703 /* QTc-dummy.m */,
+				32AAE46978398B67C9FAFE7179C84F03 /* QTc-prefix.pch */,
+				3E44B4D195236E78FA2A1D44067F71D8 /* QTc-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../MacOSX/EP Calipers/Pods/Target Support Files/QTc";
+			sourceTree = "<group>";
+		};
+		6BB0304D74DD21FF3B37D2B1FEB6B618 /* Pods-EP Calipers */ = {
+			isa = PBXGroup;
+			children = (
+				0E5EBECF073B1434557F1E06864A2ECA /* Info.plist */,
+				BBF834F9FF467CB8EBCA1A385C0EAC41 /* Pods-EP Calipers.modulemap */,
+				E947C7EF7BB2AF0D21F1D262360A47B6 /* Pods-EP Calipers-acknowledgements.markdown */,
+				010FF1B5744930658E0FE8FD3EE0D78C /* Pods-EP Calipers-acknowledgements.plist */,
+				7545EF78C8D17B6AEDE68B45881A382B /* Pods-EP Calipers-dummy.m */,
+				2A1C2769A0CCAF338FEE0BD2E7CCE8A5 /* Pods-EP Calipers-frameworks.sh */,
+				F0D9097784B0E0B0D1F7EACB6D764882 /* Pods-EP Calipers-resources.sh */,
+				B1CA83E261C88D8D0712635D330E1A67 /* Pods-EP Calipers-umbrella.h */,
+				91D03DDA4A8E131B833A6BD75E6A59CE /* Pods-EP Calipers.debug.xcconfig */,
+				1EAE7347FA3317D511E41242C77E742B /* Pods-EP Calipers.release.xcconfig */,
+			);
+			name = "Pods-EP Calipers";
+			path = "Target Support Files/Pods-EP Calipers";
+			sourceTree = "<group>";
+		};
+		6D21C20C5FE8FD20F38156BC5B1DFD30 /* QTc */ = {
+			isa = PBXGroup;
+			children = (
+				883CD43FBE46F80275945A3C37ED5862 /* AbnormalQTc.swift */,
+				D9417043068DFF9246CEC50D2BE8B75E /* Formulas.swift */,
+				DB9FF13B19631ECC59C3495EC1338946 /* QTc.h */,
+				2B034ACBEAB5748ED73C7B8366EAF034 /* QTc.swift */,
+				C6B473EE5B26C6490869FD325EE6CC18 /* QtMeasurement.swift */,
+				FFC28CAA92B4F20AFCE8F6C21859F3BB /* Pod */,
+				4C0039C5218A009697FF1E32E8B0A2C5 /* Support Files */,
+			);
+			name = QTc;
+			path = /Users/mannd/dev/QTc;
+			sourceTree = "<absolute>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				205D81BD3909D5FDBAC6775693D3D4E8 /* Development Pods */,
+				39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */,
+				A4865C0A359B3F16A02C884ECFEC54FD /* Products */,
+				07CA72C5D153E458773B1A11EBC34E10 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		819D68A8FD59D383EE57798E73F5ACC4 /* Pods-EP CalipersTests */ = {
+			isa = PBXGroup;
+			children = (
+				9F88F966FBD5FE9C6CF4D2F07AC3EBB3 /* Info.plist */,
+				BE945F967A17AE54719C92040F5C7727 /* Pods-EP CalipersTests.modulemap */,
+				3EAEC52D22B735D92DEEFEC324437A5B /* Pods-EP CalipersTests-acknowledgements.markdown */,
+				C3D584869936CF4CD6ED2B4E722AB640 /* Pods-EP CalipersTests-acknowledgements.plist */,
+				06B05A20218C41CA0315B21B6C782C75 /* Pods-EP CalipersTests-dummy.m */,
+				8D9C9ED290BC303F528C6B20DFD46AB8 /* Pods-EP CalipersTests-frameworks.sh */,
+				802AA5B11FD17447DA1D3C92C229D9ED /* Pods-EP CalipersTests-resources.sh */,
+				C3CB557B2A9F8363D1101F8C24BA9D4F /* Pods-EP CalipersTests-umbrella.h */,
+				26DA1B04E17A760EF3FB4D999D709488 /* Pods-EP CalipersTests.debug.xcconfig */,
+				3DD181CB74A95CDD2D0E744F265A5AC8 /* Pods-EP CalipersTests.release.xcconfig */,
+			);
+			name = "Pods-EP CalipersTests";
+			path = "Target Support Files/Pods-EP CalipersTests";
+			sourceTree = "<group>";
+		};
+		A4865C0A359B3F16A02C884ECFEC54FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB8A6C7E2D898D4CE754FCB234E1ABBE /* Pods_EP_Calipers.framework */,
+				D3B1C75769819D5BB4A1B27EEB265449 /* Pods_EP_CalipersTests.framework */,
+				DB4D231A1F8DA43A920A9D46FBB7D94C /* QTc.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA7AC8429882A95AA0810A9DCDED54FF /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		FFC28CAA92B4F20AFCE8F6C21859F3BB /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				64C9A22D7F3506AFC7E4EA880CB48858 /* LICENSE */,
+				670C2188FC698690A9694DE80B97B563 /* QTc.podspec */,
+				5C27CEE69602CA524BBF35356F2DC153 /* README.markdown */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9A92EDC55B08EACA1B935EB6DCF58336 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30615C5E44748E024D34407C8EB41BE6 /* Pods-EP Calipers-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A19B25D40A842FC13C03554E5480B1C6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC9CC94E0C64B8CAA523E59306A2A1CD /* Pods-EP CalipersTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F014DA5C8A3C1017B7144D2B3FF4BD9C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				718AC87722ACAEABF89419E87807DA78 /* QTc-umbrella.h in Headers */,
+				91F8C83A2B4927F0655EB4E84F06E7E1 /* QTc.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0F4C736A984528C4C3476CC726A50186 /* Pods-EP CalipersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79EE5F30475A5BE7456CD9280E003FD5 /* Build configuration list for PBXNativeTarget "Pods-EP CalipersTests" */;
+			buildPhases = (
+				F7095F77A17F650B200F1EFAA9C324BA /* Sources */,
+				D873AB2ED3BD0A1653E7CA65AEA45AA1 /* Frameworks */,
+				A19B25D40A842FC13C03554E5480B1C6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				909F2D542AD74F95F5710F480C68727C /* PBXTargetDependency */,
+			);
+			name = "Pods-EP CalipersTests";
+			productName = "Pods-EP CalipersTests";
+			productReference = D3B1C75769819D5BB4A1B27EEB265449 /* Pods_EP_CalipersTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		39CFB88ED67AECBE779F812A2E46925E /* QTc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D45553138797BA49658FAEA65EE4E3BD /* Build configuration list for PBXNativeTarget "QTc" */;
+			buildPhases = (
+				11B86DA4FB2B57E52FA21EB232CEEB9B /* Sources */,
+				6C4DCF398FDB659C1ECD03332E1B2182 /* Frameworks */,
+				F014DA5C8A3C1017B7144D2B3FF4BD9C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QTc;
+			productName = QTc;
+			productReference = DB4D231A1F8DA43A920A9D46FBB7D94C /* QTc.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C985C8C627CFDD1FB1CBF8D7CE1AF524 /* Pods-EP Calipers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7F14F9CA6D5409F445E7CCB52F242DE /* Build configuration list for PBXNativeTarget "Pods-EP Calipers" */;
+			buildPhases = (
+				9FDF29DA06B65C0B277B3D5DA3A2FEE7 /* Sources */,
+				BE1309FBD883B490F6FF7B8BF374EB8B /* Frameworks */,
+				9A92EDC55B08EACA1B935EB6DCF58336 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDB414F268417127DBE244AF50A1DD71 /* PBXTargetDependency */,
+			);
+			name = "Pods-EP Calipers";
+			productName = "Pods-EP Calipers";
+			productReference = DB8A6C7E2D898D4CE754FCB234E1ABBE /* Pods_EP_Calipers.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0940;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = A4865C0A359B3F16A02C884ECFEC54FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C985C8C627CFDD1FB1CBF8D7CE1AF524 /* Pods-EP Calipers */,
+				0F4C736A984528C4C3476CC726A50186 /* Pods-EP CalipersTests */,
+				39CFB88ED67AECBE779F812A2E46925E /* QTc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		11B86DA4FB2B57E52FA21EB232CEEB9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7911EE07E1654F8A27C69D3FF0D41493 /* AbnormalQTc.swift in Sources */,
+				E42E43D0205FFE5C247BE5C40BC69BA5 /* Formulas.swift in Sources */,
+				EED89449B5ECCAD9277621B915887AF0 /* QTc-dummy.m in Sources */,
+				A00ABE069C55B6A113BDA3275CA5CB49 /* QTc.swift in Sources */,
+				0D968E69583DA169AB49AA328FA92B9A /* QtMeasurement.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FDF29DA06B65C0B277B3D5DA3A2FEE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2B7E519B612C8A08051A46E9DB1880E /* Pods-EP Calipers-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7095F77A17F650B200F1EFAA9C324BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3900A9A58DB7C1AEF88B08D71C019B33 /* Pods-EP CalipersTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		909F2D542AD74F95F5710F480C68727C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-EP Calipers";
+			target = C985C8C627CFDD1FB1CBF8D7CE1AF524 /* Pods-EP Calipers */;
+			targetProxy = 8417769F4C24A9CF7A78AADFDEAF83D3 /* PBXContainerItemProxy */;
+		};
+		FDB414F268417127DBE244AF50A1DD71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QTc;
+			target = 39CFB88ED67AECBE779F812A2E46925E /* QTc */;
+			targetProxy = 5CB2F99ED3321D9E1CC46C07404A5657 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		10E850B85F3451D5157989C3751F075F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		2A8C12B8D324668861C498F80C460FE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A51D3F7C97E392BB4B443488CD32D489 /* QTc.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/QTc/QTc-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QTc/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/QTc/QTc.modulemap";
+				PRODUCT_MODULE_NAME = QTc;
+				PRODUCT_NAME = QTc;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3EF2BE7CC447836354D4E2A0D65497E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26DA1B04E17A760EF3FB4D999D709488 /* Pods-EP CalipersTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-EP CalipersTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Pods-EP CalipersTests/Pods-EP CalipersTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3FB94D8824EEC1CD51AACF8DBFC6E3F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91D03DDA4A8E131B833A6BD75E6A59CE /* Pods-EP Calipers.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-EP Calipers/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Pods-EP Calipers/Pods-EP Calipers.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4942DCA6C2CAC7E5177F58254DF9B91D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EAE7347FA3317D511E41242C77E742B /* Pods-EP Calipers.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-EP Calipers/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Pods-EP Calipers/Pods-EP Calipers.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		649B055A52E88B7D4D75D57A28E6D489 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A51D3F7C97E392BB4B443488CD32D489 /* QTc.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/QTc/QTc-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QTc/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/QTc/QTc.modulemap";
+				PRODUCT_MODULE_NAME = QTc;
+				PRODUCT_NAME = QTc;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7CEC6BACE10075D20429B6C34020CB82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DD181CB74A95CDD2D0E744F265A5AC8 /* Pods-EP CalipersTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-EP CalipersTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Pods-EP CalipersTests/Pods-EP CalipersTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D5B651532ED11AFBC5E147B64848AFB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5B651532ED11AFBC5E147B64848AFB4 /* Debug */,
+				10E850B85F3451D5157989C3751F075F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79EE5F30475A5BE7456CD9280E003FD5 /* Build configuration list for PBXNativeTarget "Pods-EP CalipersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EF2BE7CC447836354D4E2A0D65497E7 /* Debug */,
+				7CEC6BACE10075D20429B6C34020CB82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D45553138797BA49658FAEA65EE4E3BD /* Build configuration list for PBXNativeTarget "QTc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A8C12B8D324668861C498F80C460FE8 /* Debug */,
+				649B055A52E88B7D4D75D57A28E6D489 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7F14F9CA6D5409F445E7CCB52F242DE /* Build configuration list for PBXNativeTarget "Pods-EP Calipers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FB94D8824EEC1CD51AACF8DBFC6E3F6 /* Debug */,
+				4942DCA6C2CAC7E5177F58254DF9B91D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

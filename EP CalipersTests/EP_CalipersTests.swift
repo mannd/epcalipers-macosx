@@ -7,8 +7,8 @@
 //
 
 import XCTest
-@testable import EP_Calipers
 @testable import QTc
+@testable import EP_Calipers
 
 class EP_CalipersTests: XCTestCase {
     
@@ -91,7 +91,7 @@ class EP_CalipersTests: XCTestCase {
 
     }
     
-    func textUnitsAreMM() {
+    func testUnitsAreMM() {
         let cal = Calibration()
         cal.calibrated = true
         cal.direction = .vertical
@@ -128,7 +128,20 @@ class EP_CalipersTests: XCTestCase {
         XCTAssertEqual(result, "Mean RR = 1 sec\nQT = 0.4 sec\nQTc = 0.4 sec (Bazett formula)")
         result = qtcResult.calculate(qtInSec: 0.4, rrInSec: 1.0, formula: .Hodges, convertToMsec: false, units: "sec")
         XCTAssertEqual(result, "Mean RR = 1 sec\nQT = 0.4 sec\nQTc = 0.4 sec (Hodges formula)")
-        
+    }
+
+    func testNumberFormatting() {
+        let x = 305.463
+        let y = 1010.728
+        XCTAssertEqual(String(format: "%d", Int(round(x))), "305")
+        XCTAssertEqual(String(format: "%d", Int(round(y))), "1011")
+        XCTAssertEqual(String(format: "%.4g", x), "305.5")
+        XCTAssertEqual(String(format: "%.4g", y), "1011")
+        XCTAssertEqual(String(format: "%.1f", x), "305.5")
+        XCTAssertEqual(String(format: "%.1f", y), "1010.7")
+        XCTAssertEqual(String(format: "%.2f", x), "305.46")
+        XCTAssertEqual(String(format: "%.2f", y), "1010.73")
+
     }
     
 }

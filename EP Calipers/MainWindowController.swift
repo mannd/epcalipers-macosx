@@ -56,9 +56,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
     @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
     @IBOutlet weak var showPromptsCheckBox: NSButton!
-    @IBOutlet weak var roundMsecRateCheckBox: NSButton!
     @IBOutlet weak var transparencyCheckBox: NSButton!
     
+    @IBOutlet weak var roundingPopUpButton: NSPopUpButton!
     @IBOutlet weak var formulaPopUpButton: NSPopUpButton!
     
  
@@ -185,6 +185,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             "defaultNumberOfQTcMeanRRIntervalsKey": 1,
             "showPromptsKey": true,
             "roundMsecRateKey": true,
+            "rounding": Rounding.ToInteger.rawValue,
+            "qtcFormula": QTcFormulaPreference.Bazett.rawValue,
             "transparency": false
         ] as [String : Any]
         UserDefaults.standard.register(defaults: defaults)
@@ -213,10 +215,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // window must be non opaque for transparency to work
         self.window?.isOpaque = false
         transparent = appPreferences.transparency
-        
-        
         calipersView.delegate = self
-
     }
     
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -313,6 +312,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             preferencesAlert = alert
         }
         fillQTcFormulaPopUp()
+        fillRoundingPopUp()
         if let color = appPreferences.caliperColor {
             caliperColorWell.color = color
         }
@@ -331,9 +331,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showPrompts ? 1 : 0)
-        roundMsecRateCheckBox.state = NSControl.StateValue(rawValue: appPreferences.roundMsecRate ? 1 : 0)
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
         formulaPopUpButton.selectItem(at: appPreferences.qtcFormula.rawValue)
+        roundingPopUpButton.selectItem(at: appPreferences.rounding.rawValue)
         let result = preferencesAlert!.runModal()
         if result == NSApplication.ModalResponse.alertFirstButtonReturn {
             // assign new preferences
@@ -345,12 +345,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
-            appPreferences.roundMsecRate = roundMsecRateCheckBox.integerValue == 1 ? true : false
             appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
-            appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem)!
+            appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem) ?? QTcFormulaPreference.Bazett
+            appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
             appPreferences.savePreferences()
             // update calipersView
-            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, roundMsecRate: appPreferences.roundMsecRate)
+            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, rounding: appPreferences.rounding)
             // update transparency
             transparent = appPreferences.transparency
             preferencesChanged = true
@@ -364,6 +364,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         formulaPopUpButton.addItem(withTitle: "Hodges")
         formulaPopUpButton.addItem(withTitle: "Fridericia")
         formulaPopUpButton.addItem(withTitle: NSLocalizedString("All", comment: ""))
+    }
+
+    // TODO: use localized strings here
+    private func fillRoundingPopUp() {
+        roundingPopUpButton.removeAllItems()
+        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To integer", comment: ""))
+        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To 4 digits", comment: ""))
+        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To tenths", comment: ""))
+        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To hundredths", comment: ""))
+        // TODO: remove in production
+        //roundingPopUpButton.addItem(withTitle: "Raw")
     }
     
     @IBAction func numberOfMeanRRStepperAction(_ sender: AnyObject) {
@@ -764,7 +775,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let caliper = Caliper()
         // initiallize with Preferences here
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
-        caliper.roundMsecRate = appPreferences.roundMsecRate
+        caliper.rounding = appPreferences.rounding
         if let color = appPreferences.caliperColor {
             caliper.unselectedColor = color
         }
@@ -795,7 +806,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func addAngleCaliper() {
         let caliper = AngleCaliper()
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
-        caliper.roundMsecRate = appPreferences.roundMsecRate
+        caliper.rounding = appPreferences.rounding
         caliper.direction = .horizontal
         caliper.calibration = calipersView.horizontalCalibration
         caliper.verticalCalibration = calipersView.verticalCalibration

@@ -15,7 +15,7 @@ class QTcResult: QTcResultProtocol {
         if rrInSec <= 0 {
             return errorResult
         }
-        let qtcFormulas: [QTcFormula]
+        let qtcFormulas: [Formula]
         switch formula {
         case .Bazett:
             qtcFormulas = [.qtcBzt]
@@ -37,7 +37,7 @@ class QTcResult: QTcResultProtocol {
         var result = NSString.localizedStringWithFormat(NSLocalizedString("Mean RR = %.4g %@\nQT = %.4g %@", comment:"") as NSString, meanRR, units, qt, units) as String
         for qtcFormula in qtcFormulas {
             let qtcCalculator = QTc.qtcCalculator(formula: qtcFormula)
-            var qtc = qtcCalculator.calculate(qtInSec: qtInSec, rrInSec: rrInSec)
+            guard var qtc = try? qtcCalculator.calculate(qtInSec: qtInSec, rrInSec: rrInSec) else { return errorResult }
             if qtc == Double.infinity || qtc.isNaN {
                 return errorResult
             }

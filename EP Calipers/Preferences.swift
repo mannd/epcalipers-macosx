@@ -35,9 +35,17 @@ public enum QTcFormulaPreference: Int {
     case all = 4
 }
 
+public enum Rounding: Int {
+    case ToInteger = 0 // 123 msec
+    case ToFourPlaces = 1 // 12.34 msec 123.4 msec
+    case ToTenths = 2 // 123.4 msec 12.3 msec
+    case ToHundredths = 3 // 123.45 msec 12.34 msec
+    case None = 4 // for debugging only 123.456789 msec
+}
+
+
+
 class Preferences: NSObject {
-    
-    
     var caliperColor: NSColor? = NSColor.blue
     var highlightColor: NSColor? = NSColor.red
     var lineWidth: Int = 2
@@ -46,10 +54,10 @@ class Preferences: NSObject {
     var defaultNumberOfMeanRRIntervals: Int = 3
     var defaultNumberOfQTcMeanRRIntervals: Int = 1
     var showPrompts: Bool = true
-    var roundMsecRate: Bool = true
     var transparency = false
     var qtcFormula: QTcFormulaPreference = .Bazett
-    
+    var rounding: Rounding = .ToInteger
+
     func loadPreferences() {
         let preferences = UserDefaults.standard
         caliperColor = preferences.colorForKey("caliperColorKey")
@@ -60,13 +68,19 @@ class Preferences: NSObject {
         defaultNumberOfMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfMeanRRIntervalsKey")
         defaultNumberOfQTcMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         showPrompts = preferences.bool(forKey: "showPromptsKey")
-        roundMsecRate = preferences.bool(forKey: "roundMsecRateKey")
         transparency = preferences.bool(forKey: "transparency")
-        guard let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) else {
-            qtcFormula = .Bazett
-            return
+        if let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) {
+            qtcFormula = formula
         }
-        qtcFormula = formula
+        else {
+            qtcFormula = .Bazett
+        }
+        if let roundPreference = Rounding(rawValue: preferences.integer(forKey: "rounding")) {
+            rounding = roundPreference
+        }
+        else {
+            rounding = .ToInteger
+        }
     }
     
     func savePreferences() {
@@ -79,9 +93,9 @@ class Preferences: NSObject {
         preferences.set(defaultNumberOfMeanRRIntervals, forKey: "defaultNumberOfMeanRRIntervalsKey")
         preferences.set(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         preferences.set(showPrompts, forKey: "showPromptsKey")
-        preferences.set(roundMsecRate, forKey: "roundMsecRateKey")
         preferences.set(transparency, forKey: "transparency")
         preferences.set(qtcFormula.rawValue, forKey: "qtcFormula")
+        preferences.set(rounding.rawValue, forKey: "rounding")
     }
 
 }
