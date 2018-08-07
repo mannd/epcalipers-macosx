@@ -62,23 +62,24 @@ class Caliper: NSObject {
     var isMarching: Bool
     
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
-        crossBarPosition: CGFloat) {
+         crossBarPosition: CGFloat) {
 
-            self.direction = direction
-            self.bar1Position = bar1Position
-            self.bar2Position = bar2Position
-            self.crossBarPosition = crossBarPosition
-            self.color = NSColor.blue
-            self.unselectedColor = NSColor.blue
-            self.selectedColor = NSColor.red
-            self.lineWidth = 2
-            self.selected = false
-            self.textFont = NSFont(name: "Helvetica", size: 18.0)!
-            self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-            self.roundMsecRate = true
-            self.rounding = .ToInteger
-            self.isMarching = false
-            super.init()
+        self.direction = direction
+        self.bar1Position = bar1Position
+        self.bar2Position = bar2Position
+        self.crossBarPosition = crossBarPosition
+        self.color = NSColor.blue
+        self.unselectedColor = NSColor.blue
+        self.selectedColor = NSColor.red
+        self.lineWidth = 2
+        self.selected = false
+        self.textFont = NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.medium)
+        //self.textFont = NSFont(name: "Helvetica", size: 18.0)!
+        self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        self.roundMsecRate = true
+        self.rounding = .ToInteger
+        self.isMarching = false
+        super.init()
     }
     
     convenience override init() {
@@ -201,10 +202,10 @@ class Caliper: NSObject {
             ]
         if direction == .horizontal {
             // the math here insures that the label doesn't get so small that it can't be read
-            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 20),  withAttributes:attributes);
+            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 22),  withAttributes:attributes);
         }
         else {
-            text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position + (bar2Position - bar1Position) / 2, width: 140, height: 20), withAttributes:attributes);
+            text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position - 10 + (bar2Position - bar1Position) / 2, width: 140, height: 22), withAttributes:attributes);
         }
     }
     

@@ -150,8 +150,6 @@ class AngleCaliper: Caliper {
         }
     }
     
-    
-    
     func drawTriangleBase(_ context: CGContext, forHeight height:Double) {
         let point1 = getBasePoint1ForHeight(height)
         let point2 = getBasePoint2ForHeight(height)
@@ -169,8 +167,7 @@ class AngleCaliper: Caliper {
             NSAttributedStringKey.paragraphStyle: paragraphStyle,
             NSAttributedStringKey.foregroundColor: color
             ]
-        text.draw(in: CGRect(x: point2.x > point1.x ? point1.x - 25 : point2.x - 25, y: point1.y - 20, width: fmax(100.0, fabs(point2.x - point1.x) + 50), height: 20.0),  withAttributes:attributes)
-        
+        text.draw(in: CGRect(x: point2.x > point1.x ? point1.x - 25 : point2.x - 25, y: point1.y - 25, width: fmax(100.0, fabs(point2.x - point1.x) + 50), height: 20),  withAttributes:attributes)
     }
 
     // TODO: Fix rounding here: We need to use the chosen rounding in preferences
