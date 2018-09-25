@@ -62,7 +62,7 @@ class CalipersView: NSView {
         needsDisplay = true
     }
     
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(NSResponder.deleteBackward(_:)) {
             return !locked && !noCaliperIsSelected()
         }
@@ -107,6 +107,24 @@ class CalipersView: NSView {
             let colorMenuItem = NSMenuItem(title: NSLocalizedString("Caliper Color", comment:""), action: #selector(colorCaliper(_:)), keyEquivalent: "")
             let tweakMenuItem = NSMenuItem(title: NSLocalizedString("Tweak Caliper Position", comment:""), action: #selector(tweakCaliper(_:)), keyEquivalent: "")
             let marchMenuItem = NSMenuItem(title: NSLocalizedString("Marching Caliper", comment:""), action:#selector(marchCaliper(_:)), keyEquivalent:"")
+            if let chosenCaliper = chosenCaliper {
+                // It should not be possible to set isMarching on a non-time caliper,
+                // but will leave in this check anyway.
+                if chosenCaliper.isMarching && chosenCaliper.isTimeCaliper() {
+                    marchMenuItem.state = .on
+                }
+                if !chosenCaliper.isTimeCaliper() {
+                    marchMenuItem.isEnabled = false
+                }
+            }
+            else {
+                // If you don't click near a caliper, all is disabled.
+                colorMenuItem.isEnabled = false
+                tweakMenuItem.isEnabled = false
+                marchMenuItem.isEnabled = false
+            }
+            // autoenablesItems must be false or items never disabled
+            theMenu.autoenablesItems = false
             theMenu.addItem(colorMenuItem)
             theMenu.addItem(tweakMenuItem)
             theMenu.addItem(marchMenuItem)
@@ -142,9 +160,9 @@ class CalipersView: NSView {
     }
     
     @objc func marchCaliper(_ sender: AnyObject) {
-        guard let chosenCaliper = chosenCaliper else {
-            return
-        }
+        guard let chosenCaliper = chosenCaliper else { return }
+        // only time calipers can march, ignore others
+        guard chosenCaliper.isTimeCaliper() else { return }
         chosenCaliper.isMarching = !chosenCaliper.isMarching
         needsDisplay = true
     }
