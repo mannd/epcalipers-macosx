@@ -141,7 +141,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
         
     override var windowNibName: NSNib.Name? {
-        return NSNib.Name("MainWindowController")
+        return "MainWindowController"
     }
     
     override func awakeFromNib() {
@@ -200,7 +200,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             UserDefaults.standard.setColor(NSColor.red, forKey: "highlightColorKey")
             appPreferences.highlightColor = NSColor.red
         }
-        Bundle.main.loadNibNamed(NSNib.Name(rawValue: "View"), owner: self, topLevelObjects: nil)
+        Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
@@ -237,7 +237,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        if let board = sender.draggingPasteboard().propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray {
+        if let board = sender.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray {
             if let imagePath = board[0] as? String {
                 let url = URL(fileURLWithPath: imagePath)
                 openURL(url, addToRecentDocuments: true)
@@ -248,7 +248,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func checkExtension(_ drag: NSDraggingInfo) -> Bool {
-        if let board = drag.draggingPasteboard().propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
+        if let board = drag.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
             let path = board[0] as? String {
             let url = URL(fileURLWithPath: path)
             let suffix = url.pathExtension
@@ -263,7 +263,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
 
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !transparent && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
@@ -1364,7 +1364,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         qtcNumberTextField.integerValue = qtcNumberStepper.integerValue
     }
     
-    override func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidChange(_ obj: Notification) {
         if obj.name.rawValue == "NSControlTextDidChangeNotification" {
             if obj.object as AnyObject? === numberTextField {
                 numberStepper.integerValue = numberTextField.integerValue

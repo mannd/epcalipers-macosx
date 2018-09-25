@@ -148,7 +148,7 @@ class Caliper: NSObject {
     }
     
     func drawMarchingCalipers(_ context: CGContext, inRect rect:CGRect) {
-        let difference = fabs(bar1Position - bar2Position)
+        let difference = abs(bar1Position - bar2Position)
         if difference < minDistanceForMarch {
             return
         }
@@ -193,15 +193,15 @@ class Caliper: NSObject {
         let text = measurement()
         paragraphStyle.lineBreakMode = .byTruncatingTail
         paragraphStyle.alignment = (direction == .horizontal ? .center : .left)
-        var attributes = [NSAttributedStringKey: Any]()
+        var attributes = [NSAttributedString.Key: Any]()
         attributes = [
-            NSAttributedStringKey.font: textFont,
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.foregroundColor: color
+            NSAttributedString.Key.font: textFont,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.foregroundColor: color
             ]
         if direction == .horizontal {
             // the math here insures that the label doesn't get so small that it can't be read
-            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, fabs(bar2Position - bar1Position) + 50), height: 22),  withAttributes:attributes);
+            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, abs(bar2Position - bar1Position) + 50), height: 22),  withAttributes:attributes);
         }
         else {
             text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position - 10 + (bar2Position - bar1Position) / 2, width: 140, height: 22), withAttributes:attributes);

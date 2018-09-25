@@ -344,7 +344,7 @@
 					8E3DA7EC1C2E264000AD9556 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = W74NPJXYEG;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -354,7 +354,7 @@
 					};
 					8E3DA7FB1C2E264000AD9556 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = 8E3DA7EC1C2E264000AD9556;
 					};
 					8E3DA8061C2E264000AD9556 = {
@@ -453,7 +453,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-EP Calipers/Pods-EP Calipers-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-EP Calipers/Pods-EP Calipers-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/QTc/QTc.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -462,7 +462,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EP Calipers/Pods-EP Calipers-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EP Calipers/Pods-EP Calipers-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AB3980D920C107ACE3EF976C /* [CP] Check Pods Manifest.lock */ = {
@@ -706,8 +706,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EP Calipers/EP Calipers-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -732,8 +731,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EP Calipers/EP Calipers-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -747,8 +745,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EP Calipers.app/Contents/MacOS/EP Calipers";
 			};
 			name = Debug;
@@ -764,8 +761,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EP Calipers.app/Contents/MacOS/EP Calipers";
 			};
 			name = Release;
