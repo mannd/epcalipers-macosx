@@ -15,7 +15,6 @@
                 <outlet property="messageLabel" destination="7Kx-dG-EsR" id="cbR-jv-99t"/>
                 <outlet property="navigationSegmentedControl" destination="8Qk-Lr-dNR" id="exd-vp-4Cn"/>
                 <outlet property="scrollView" destination="AxA-IY-0Zx" id="E2e-dv-DLM"/>
-                <outlet property="toolSegmentedControl" destination="xw2-IA-d6A" id="Xrv-aA-NNd"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
                 <outlet property="zoomSegmentedControl" destination="IkW-Sz-7Vn" id="Rwl-87-hgS"/>
             </connections>
@@ -34,26 +33,27 @@
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="422"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
-                            <rect key="frame" x="1" y="1" width="783" height="405"/>
+                            <rect key="frame" x="1" y="1" width="798" height="420"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="FixedIKImageView">
-                                    <rect key="frame" x="88" y="-179" width="69" height="8"/>
+                                    <rect key="frame" x="88" y="-164" width="69" height="8"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </view>
                             </subviews>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
-                            <rect key="frame" x="1" y="406" width="783" height="15"/>
+                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
+                            <rect key="frame" x="1" y="405" width="798" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrJ-fG-BcI">
-                            <rect key="frame" x="784" y="1" width="15" height="405"/>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrJ-fG-BcI">
+                            <rect key="frame" x="783" y="1" width="16" height="420"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="18" width="782" height="404"/>
+                        <rect key="frame" x="0.0" y="14" width="786" height="408"/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="2zd-0Q-IMq" customClass="PanelView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="422" width="800" height="60"/>
@@ -77,28 +77,8 @@
                                     <action selector="doZoom:" target="-2" id="opd-CW-vQJ"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xw2-IA-d6A">
-                                <rect key="frame" x="138" y="21" width="69" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="EZO-Ew-XTK"/>
-                                </constraints>
-                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="GJ2-vD-tvz">
-                                    <font key="font" metaFont="system"/>
-                                    <segments>
-                                        <segment toolTip="Grab image or caliper" image="TB_move" selected="YES">
-                                            <nil key="label"/>
-                                        </segment>
-                                        <segment toolTip="Lock image" image="lock" width="32" tag="1">
-                                            <nil key="label"/>
-                                        </segment>
-                                    </segments>
-                                </segmentedCell>
-                                <connections>
-                                    <action selector="switchToolMode:" target="-2" id="hbC-b3-4pR"/>
-                                </connections>
-                            </segmentedControl>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
-                                <rect key="frame" x="211" y="21" width="245" height="24"/>
+                                <rect key="frame" x="138" y="21" width="245" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
                                 </constraints>
@@ -117,7 +97,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
-                                <rect key="frame" x="460" y="21" width="149" height="24"/>
+                                <rect key="frame" x="387" y="21" width="149" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="wj5-y7-FoH"/>
                                 </constraints>
@@ -146,7 +126,7 @@
                                 </textFieldCell>
                             </textField>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Qk-Lr-dNR">
-                                <rect key="frame" x="613" y="21" width="181" height="24"/>
+                                <rect key="frame" x="540" y="21" width="181" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="lxO-ww-kvY">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -161,10 +141,8 @@
                             </segmentedControl>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="xw2-IA-d6A" firstAttribute="leading" secondItem="IkW-Sz-7Vn" secondAttribute="trailing" constant="8" symbolic="YES" id="1ca-31-FaP"/>
-                            <constraint firstItem="80d-Qz-dhr" firstAttribute="leading" secondItem="xw2-IA-d6A" secondAttribute="trailing" constant="8" symbolic="YES" id="3PC-qL-iR7"/>
                             <constraint firstItem="IkW-Sz-7Vn" firstAttribute="top" secondItem="2zd-0Q-IMq" secondAttribute="top" constant="16" id="552-hv-xeI"/>
-                            <constraint firstItem="xw2-IA-d6A" firstAttribute="top" secondItem="2zd-0Q-IMq" secondAttribute="top" constant="16" id="8TQ-4y-ffs"/>
+                            <constraint firstItem="80d-Qz-dhr" firstAttribute="leading" secondItem="IkW-Sz-7Vn" secondAttribute="trailing" constant="8" symbolic="YES" id="99f-83-V2i"/>
                             <constraint firstItem="7Ej-cN-zsf" firstAttribute="top" secondItem="2zd-0Q-IMq" secondAttribute="top" constant="16" id="DC0-zf-Tl9"/>
                             <constraint firstItem="7Kx-dG-EsR" firstAttribute="leading" secondItem="2zd-0Q-IMq" secondAttribute="leading" constant="20" symbolic="YES" id="WwZ-Vp-6hQ"/>
                             <constraint firstItem="7Ej-cN-zsf" firstAttribute="leading" secondItem="80d-Qz-dhr" secondAttribute="trailing" constant="8" symbolic="YES" id="gyy-An-XjO"/>
@@ -181,9 +159,9 @@
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="AxA-IY-0Zx" secondAttribute="top" id="6BM-Xp-gFU"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
                     <constraint firstItem="2zd-0Q-IMq" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="CyT-KA-Y8S"/>
-                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" constant="18" id="IaX-XN-0Pv"/>
-                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" constant="18" id="TUz-x3-9lI"/>
+                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" constant="14" id="TUz-x3-9lI"/>
                     <constraint firstAttribute="bottom" secondItem="AxA-IY-0Zx" secondAttribute="bottom" id="V2e-go-KHO"/>
+                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" constant="14" id="XCc-Bt-f5Y"/>
                     <constraint firstItem="2zd-0Q-IMq" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="aV4-Gk-FVS"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="60" id="bba-bA-hru"/>
                     <constraint firstAttribute="trailing" secondItem="AxA-IY-0Zx" secondAttribute="trailing" id="iaZ-99-NTX"/>
@@ -231,10 +209,8 @@
         </textField>
     </objects>
     <resources>
-        <image name="TB_move" width="14" height="14"/>
         <image name="amplitude-caliper-icon" width="20" height="20"/>
         <image name="angle-caliper-icon" width="20" height="20"/>
-        <image name="lock" width="16" height="16"/>
         <image name="time-caliper-icon" width="20" height="20"/>
         <image name="zoom-in" width="20" height="20"/>
         <image name="zoom-out" width="20" height="20"/>
