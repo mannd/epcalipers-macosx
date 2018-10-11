@@ -34,26 +34,26 @@
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="422"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
-                            <rect key="frame" x="1" y="1" width="798" height="420"/>
+                            <rect key="frame" x="1" y="1" width="783" height="405"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
-                                    <rect key="frame" x="88" y="-164" width="69" height="8"/>
+                                <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="FixedIKImageView">
+                                    <rect key="frame" x="88" y="-179" width="69" height="8"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </view>
                             </subviews>
                         </clipView>
-                        <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
-                            <rect key="frame" x="1" y="405" width="798" height="16"/>
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
+                            <rect key="frame" x="1" y="406" width="783" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrJ-fG-BcI">
-                            <rect key="frame" x="783" y="1" width="16" height="420"/>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrJ-fG-BcI">
+                            <rect key="frame" x="784" y="1" width="15" height="405"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="422"/>
+                        <rect key="frame" x="0.0" y="18" width="782" height="404"/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="2zd-0Q-IMq" customClass="PanelView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="422" width="800" height="60"/>
@@ -181,8 +181,8 @@
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="AxA-IY-0Zx" secondAttribute="top" id="6BM-Xp-gFU"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
                     <constraint firstItem="2zd-0Q-IMq" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="CyT-KA-Y8S"/>
-                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="IaX-XN-0Pv"/>
-                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="TUz-x3-9lI"/>
+                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" constant="18" id="IaX-XN-0Pv"/>
+                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" constant="18" id="TUz-x3-9lI"/>
                     <constraint firstAttribute="bottom" secondItem="AxA-IY-0Zx" secondAttribute="bottom" id="V2e-go-KHO"/>
                     <constraint firstItem="2zd-0Q-IMq" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="aV4-Gk-FVS"/>
                     <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" constant="60" id="bba-bA-hru"/>
