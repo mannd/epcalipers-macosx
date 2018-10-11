@@ -27,9 +27,6 @@ Noter que toutes les barres d'outils ne seront pas disponibles en permanence, se
 - [[../../shrd/TB_zoomIn.png]] Zoom avant
 - [[../../shrd/TB_zoomOut.png]] Zoom arrière
 - [[../../shrd/TB_zoomActual.png]] Zoom à dimension réelle
-*** Cursors toolbar
-- [[../../shrd/grab.png]] Saisir (cliquer et faire glisser) pour déplacer l’image ou les compas
-- [[../../shrd/lock-16.png]] Immobiliser l’image (cliquer et faire glisser pour déplacer seulement les compas)
 *** Calipers toolbar
 - [[../../shrd/calipers-icon-bw-20x20.png]] Ajouter un compas de temps
 - [[../../shrd/calipers-amplitude-icon-bw-20x20.png]] Ajouter un compas d’amplitude

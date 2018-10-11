@@ -40,9 +40,6 @@ Note that not all toolbar buttons will be available all the time, depending on w
 - [[../../shrd/TB_zoomIn.png]] Zoom in
 - [[../../shrd/TB_zoomOut.png]] Zoom out
 - [[../../shrd/TB_zoomActual.png]] Zoom to actual size
-*** Cursors toolbar
-- [[../../shrd/grab.png]] Grab (click and drag) to move image or calipers
-- [[../../shrd/lock-16.png]] Lock image (click and drag only moves calipers)
 *** Calipers toolbar
 - [[../../shrd/calipers-icon-bw-20x20.png]] Add time (horizontal) caliper
 - [[../../shrd/calipers-amplitude-icon-bw-20x20.png]] Add amplitude (vertical) caliper
