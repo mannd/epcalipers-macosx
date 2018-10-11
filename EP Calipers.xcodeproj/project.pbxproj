@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		757ACDCF67FBFAF6E4C39E31 /* Pods_EP_Calipers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E13E2CC0D294FA41ABD1069 /* Pods_EP_Calipers.framework */; };
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
 		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
 		8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E2867821F2A5CD700AF335C /* Localizable.strings */; };
@@ -22,6 +21,7 @@
 		8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81D1C30850200AD9556 /* Quartz.framework */; };
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
 		8E545CA91F95A27500B1CEB0 /* QTcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E545CA81F95A27500B1CEB0 /* QTcResult.swift */; };
+		8E6834E7216FEA120099CEFF /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6834E6216FEA120099CEFF /* PanelView.swift */; };
 		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
 		8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */; };
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
@@ -102,6 +102,7 @@
 		8E3DA81D1C30850200AD9556 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E545CA81F95A27500B1CEB0 /* QTcResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTcResult.swift; sourceTree = "<group>"; };
+		8E6834E6216FEA120099CEFF /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		8E7C36D11F2ED89000E5FDA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View.xib; sourceTree = "<group>"; };
 		8E7C36D31F2ED94F00E5FDA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/View.strings; sourceTree = "<group>"; };
 		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 			files = (
 				8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */,
 				8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */,
-				757ACDCF67FBFAF6E4C39E31 /* Pods_EP_Calipers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +210,7 @@
 				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
 				8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */,
 				8E545CA81F95A27500B1CEB0 /* QTcResult.swift */,
+				8E6834E6216FEA120099CEFF /* PanelView.swift */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -494,6 +495,7 @@
 				8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */,
 				8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */,
 				8E545CA91F95A27500B1CEB0 /* QTcResult.swift in Sources */,
+				8E6834E7216FEA120099CEFF /* PanelView.swift in Sources */,
 				8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */,
 				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,
 				8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */,

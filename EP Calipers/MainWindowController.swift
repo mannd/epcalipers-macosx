@@ -117,6 +117,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             clearCalibration()
             if isTransparent {
                 scrollView.drawsBackground = false
+                window?.backgroundColor = NSColor.clear
                 imageView.isHidden = true
                 toolSegmentedControl.selectedSegment = 1
                 imageView.currentToolMode = IKToolModeNone
@@ -125,6 +126,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             else {
                 scrollView.drawsBackground = true
+                window?.backgroundColor = NSColor.windowBackgroundColor
                 imageView.isHidden = false
                 toolSegmentedControl.selectedSegment = 0
                 imageView.currentToolMode = IKToolModeMove
@@ -211,7 +213,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
-        
         // window must be non opaque for transparency to work
         self.window?.isOpaque = false
         transparent = appPreferences.transparency
