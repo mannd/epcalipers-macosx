@@ -28,7 +28,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: FixedIKImageView!
     @IBOutlet weak var calipersView: CalipersView!
-    @IBOutlet weak var toolSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var calipersSegementedControl: NSSegmentedControl!
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var messageLabel: NSTextField!
@@ -112,21 +111,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             isTransparent = newValue
             zoomSegmentedControl.isEnabled = !isTransparent
-            toolSegmentedControl.isEnabled = !isTransparent
             calipersView.lockedMode = isTransparent
             clearCalibration()
             if isTransparent {
+                // Calipers sometimes leave ghosts during transition to transparent mode
+                // in Mojave.
+                calipersView.deleteAllCalipers()
                 scrollView.drawsBackground = false
+                window?.backgroundColor = NSColor.clear
                 imageView.isHidden = true
-                toolSegmentedControl.selectedSegment = 1
                 imageView.currentToolMode = IKToolModeNone
                 // deal with title
                 self.window?.title = appName
             }
             else {
                 scrollView.drawsBackground = true
+                window?.backgroundColor = NSColor.windowBackgroundColor
                 imageView.isHidden = false
-                toolSegmentedControl.selectedSegment = 0
                 imageView.currentToolMode = IKToolModeMove
                 if let title = oldWindowTitle {
                     self.window?.setTitleWithRepresentedFilename(title)
@@ -211,7 +212,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
-        
         // window must be non opaque for transparency to work
         self.window?.isOpaque = false
         transparent = appPreferences.transparency
@@ -286,9 +286,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return !transparent
         }
         if menuItem.action == #selector(openImage(_:)) {
-            return !transparent
-        }
-        if menuItem.action == #selector(switchToolMode(_:)) {
             return !transparent
         }
         if menuItem.action == #selector(deleteAllCalipers(_:)) {
@@ -385,41 +382,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.integerValue = numberOfQTcMeanRRIntervalsStepper.integerValue
     }
     
-    
-    
-    @IBAction func switchToolMode(_ sender: AnyObject) {
-        // consider updating menuitmes with checks when switching tools
-        var newTool: Int
-        if sender is NSSegmentedControl {
-            newTool = sender.selectedSegment
-        }
-        else {
-            // menu items tagged
-            newTool = sender.tag
-            // also make segmented control match selected tool
-            toolSegmentedControl.selectedSegment = newTool
-        }
-        switch newTool {
-        case 0:
-            imageView.currentToolMode = IKToolModeMove
-            calipersView.lockedMode = false
-        case 1:
-            imageView.currentToolMode = IKToolModeNone
-            // If we make this true, 2 finger scrolling and zooming is disabled, and
-            // the main purpose is to prevent scrolling with grabbing, so we'll leave it false
-            calipersView.lockedMode = false
-        default:
-            break
-        }
-    }
-    
     @IBAction func openIKImageEditPanel(_ sender: AnyObject) {
         let editor = IKImageEditPanel.shared()
         editor?.setFrameOrigin(NSMakePoint(400,200))
         editor?.dataSource = imageView
         editor?.makeKeyAndOrderFront(nil)
     }
-    
     
     // Give up on Recenter after zoom
     // see IKImageView specs and
