@@ -31,6 +31,14 @@ enum MovementDirection {
     case stationary
 }
 
+enum TextPosition: Int {
+    case centerAbove
+    case centerBelow
+    case left
+    case right
+    case top
+    case bottom
+}
 
 class Caliper: NSObject {
 
@@ -60,7 +68,9 @@ class Caliper: NSObject {
     var requiresCalibration: Bool = true
     var isAngleCaliper:Bool = false
     var isMarching: Bool
-    
+    var autoPositionText: Bool
+    var textPosition: TextPosition
+
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
          crossBarPosition: CGFloat) {
 
@@ -78,6 +88,8 @@ class Caliper: NSObject {
         self.roundMsecRate = true
         self.rounding = .ToInteger
         self.isMarching = false
+        self.textPosition = .right
+        self.autoPositionText = true
         super.init()
     }
     
@@ -140,7 +152,7 @@ class Caliper: NSObject {
         if isMarching && isTimeCaliper() {
             drawMarchingCalipers(context, inRect: rect)
         }
-        caliperText()
+        caliperText(rect: rect, textPosition: textPosition, optimizeTextPosition: true)
     }
     
     func isTimeCaliper() -> Bool {
@@ -189,23 +201,178 @@ class Caliper: NSObject {
         context.strokePath()
     }
     
-    func caliperText() {
+    func caliperText(rect: CGRect, textPosition: TextPosition, optimizeTextPosition: Bool) {
         let text = measurement()
         paragraphStyle.lineBreakMode = .byTruncatingTail
-        paragraphStyle.alignment = (direction == .horizontal ? .center : .left)
+        paragraphStyle.alignment = .center
         var attributes = [NSAttributedString.Key: Any]()
         attributes = [
             NSAttributedString.Key.font: textFont,
             NSAttributedString.Key.paragraphStyle: paragraphStyle,
             NSAttributedString.Key.foregroundColor: color
             ]
+        let size = text.size(withAttributes: attributes)
+        let textRect = caliperTextPosition(left: fmin(bar1Position, bar2Position), right: fmax(bar1Position, bar2Position), center: crossBarPosition, size: size, rect: rect, textPosition: textPosition, optimizeTextPosition: optimizeTextPosition)
+        text.draw(in: textRect, withAttributes: attributes)
+    }
+
+    func caliperTextPosition(left: CGFloat, right: CGFloat, center: CGFloat,
+                             size: CGSize, rect: CGRect,
+                             textPosition: TextPosition,
+                             optimizeTextPosition: Bool) -> CGRect {
+        // assumes X is center of text block and y is text baseline
+        // TODO: need to check this on Cocoa!
+        var textOrigin = CGPoint()
+        var origin = CGPoint()
+        let textHeight = size.height
+        let textWidth = size.width
+        let yOffset: CGFloat = 5
+        let xOffset: CGFloat = 5
+        let optimizedPosition = optimizedTextPosition(left: left, right: right, center: center, rect: rect, textPosition: textPosition, textWidth: textWidth, textHeight: textHeight, optimizeTextPosition: optimizeTextPosition)
         if direction == .horizontal {
-            // the math here insures that the label doesn't get so small that it can't be read
-            text.draw(in: CGRect(x: (bar2Position > bar1Position ? bar1Position - 25: bar2Position - 25), y: crossBarPosition + 5,  width: fmax(100.0, abs(bar2Position - bar1Position) + 50), height: 22),  withAttributes:attributes);
+            // Guard against the margin obsucring left and right labels.
+            origin.y = center
+            switch optimizedPosition {
+            case .centerAbove:
+                origin.x = left + (right - left) / 2
+                textOrigin.x = origin.x
+                textOrigin.y = origin.y + yOffset
+            case .centerBelow:
+                origin.x = left + (right - left) / 2
+                textOrigin.x = origin.x
+                textOrigin.y = origin.y - yOffset - textHeight
+            case .left:
+                origin.x = left
+                textOrigin.x = origin.x - xOffset - textWidth / 2
+                textOrigin.y = origin.y + yOffset
+            case .right:
+                origin.x = right
+                textOrigin.x = origin.x + xOffset + textWidth / 2
+                textOrigin.y = origin.y + yOffset
+            default:
+                assertionFailure("Invalid text position.")
+            }
         }
-        else {
-            text.draw(in: CGRect(x: crossBarPosition + 5, y: bar1Position - 10 + (bar2Position - bar1Position) / 2, width: 140, height: 22), withAttributes:attributes);
+        else { // vertical caliper
+            textOrigin.y = left + (right - left) / 2 - textHeight / 2
+            switch optimizedPosition {
+            case .left:
+                textOrigin.x = center - xOffset - textWidth / 2;
+            case .right:
+                textOrigin.x = center + xOffset + textWidth / 2;
+            case .top:
+                textOrigin.y = right + yOffset;
+                textOrigin.x = center;
+            case .bottom:
+                textOrigin.y = left - yOffset - textHeight;
+                textOrigin.x = center;
+            default:
+                assertionFailure("Invalid text position.")
+            }
         }
+            // Adjust rectangle so that it is centered
+        return CGRect(x: textOrigin.x - textWidth / 2,
+                      y: textOrigin.y,
+                      width: textWidth,
+                      height: textHeight)
+    }
+
+    private func optimizedTextPosition(left: CGFloat,
+                                       right: CGFloat,
+                                       center: CGFloat,
+                                       rect: CGRect,
+                                       textPosition: TextPosition,
+                                       textWidth: CGFloat,
+                                       textHeight: CGFloat,
+                                       optimizeTextPosition: Bool) -> TextPosition {
+        // Just use textPosition if we're not auto-positioning the text.
+        if !autoPositionText || !optimizeTextPosition {
+            return textPosition
+        }
+        // Allow a few pixels margin so that screen edges never obscures text
+        let offset: CGFloat = 4
+        var optimizedPosition = textPosition
+        if direction == .horizontal {
+            switch optimizedPosition {
+            case .centerAbove:
+                fallthrough
+            case .centerBelow:
+                // Avoid squeezing label.
+                if textWidth + offset > right - left {
+                    if textWidth + right + offset > rect.width {
+                        optimizedPosition = .left
+                    }
+                    else {
+                        optimizedPosition = .right
+                    }
+                }
+            case .left:
+                if textWidth + offset > left {
+                    if textWidth + right + offset > rect.width {
+                        optimizedPosition = .centerAbove
+                    }
+                    else {
+                        optimizedPosition = .right
+                    }
+                }
+            case .right:
+                if textWidth + right + offset > rect.width {
+                    if textWidth + offset > left {
+                        optimizedPosition = .centerAbove
+                    }
+                    else {
+                        optimizedPosition = .left
+                    }
+                }
+            default:
+                // should not be here, but least painful thing to do is...
+                optimizedPosition = textPosition
+            }
+        }
+        else if direction == .vertical {
+            // watch for squeeze
+            if (optimizedPosition == .left || optimizedPosition == .right) && textHeight + offset > right - left {
+                if left - textHeight - offset < 0 {
+                    optimizedPosition = .top
+                }
+                else {
+                    optimizedPosition = .bottom
+                }
+            }
+            else {
+                switch optimizedPosition {
+                case .left:
+                    if textWidth + offset > center {
+                        optimizedPosition = .right
+                    }
+                case .right:
+                    if textWidth + center + offset > rect.width {
+                        optimizedPosition = .left
+                    }
+                case .top:
+                    if right + textHeight + offset > rect.height {
+                        if left - textHeight - offset < 0 {
+                            optimizedPosition = .right
+                        }
+                        else {
+                            optimizedPosition = .bottom
+                        }
+                    }
+                case .bottom:
+                    if left - textHeight - offset < 0 {
+                        if right + textHeight + offset > rect.height {
+                            optimizedPosition = .right
+                        }
+                        else {
+                            optimizedPosition = .top
+                        }
+                    }
+                default:
+                    optimizedPosition = textPosition
+                }
+            }
+        }
+        return optimizedPosition
     }
     
     func barCoord(_ p: CGPoint) -> CGFloat {

@@ -412,7 +412,7 @@ class CalipersView: NSView {
         }
     }
     
-    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, rounding: Rounding) {
+    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, rounding: Rounding, autoPositionText: Bool, timeCaliperTextPosition: TextPosition, amplitudeCaliperTextPosition: TextPosition) {
          for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
             // new calipers get the default color
@@ -424,6 +424,13 @@ class CalipersView: NSView {
             }
             c.lineWidth = CGFloat(lineWidth)
             c.rounding = rounding
+            c.autoPositionText = autoPositionText
+            if c.direction == .horizontal {
+                c.textPosition = timeCaliperTextPosition
+            }
+            else if c.direction == .vertical {
+                c.textPosition = amplitudeCaliperTextPosition
+            }
         }
         needsDisplay = true
     }
