@@ -9,7 +9,7 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 * [[../../shrd/icon_32x32@2x.png]] Preferences
-Preferences can be selected using the *EP Calipers | Preferences* menu item.  You can change caliper colors, line width of the calipers, as well as default calibration intervals and number of intervals used to calculate mean intervals.  For example, if you usually use just 1 RR interval to calculate the QTc, set the number of mean RR intervals for the QTc measurement to 1 interval.  Remember though you can override any of these values when you actually do the measurements.  You can also use the dialog to change to a transparent window.
+Preferences can be selected using the *EP Calipers | Preferences* menu item.  You can change caliper colors, line width of the calipers, positioning of the text labels of calipers, default calibration intervals and number of intervals used to calculate mean intervals.  For example, if you usually use just 1 RR interval to calculate the QTc, set the number of mean RR intervals for the QTc measurement to 1 interval.  Remember though you can override any of these values when you actually do the measurements.  You can also use the dialog to change to a transparent window.
 #+CAPTION: Preferences
 [[../gfx/preferences.png]]
 ** Preferences explained
@@ -24,3 +24,6 @@ Preferences can be selected using the *EP Calipers | Preferences* menu item.  Yo
 - Show prompts:  Prompting is useful when you are first learning the program, but it is faster to disable this option.  Prompts guide you through the steps of calibrating and making measurements.
 - Round msec and rate: Choose how msec and rate values are displayed.  Choices include round to the nearest integer (e.g. 305.463 becomes 305, 1010.728 becomes 1011), display 4 digits (e.g. 305.5 and 1011), round to tenths (e.g. 305.5 and 1010.7), and round to hundredths (305.46 and 1010.73).  Note that values in secs or values using other units and calculated values such as QTc are always shown using 4 digits.
 - Transparent window: Makes the main window transparent.  *EP Calipers* can then be used as a floating caliper to measure anything you have open on your Desktop.
+- Auto-position text: If selected, caliper text labels will avoid being obscured by the window edges or the caliper itself by shifting position.  For example, if a caliper text label is to the right of the caliper and the caliper gets too close to the right side of the window, it will shift over to the left of the caliper.
+- Time caliper text position: Adjust the text label of time calipers to be above or below the center of the crossbar, or on the left or right side of the caliper.
+- Amplitude caliper text position: Adjust the text label of amplitude calipers on the top or bottom of the caliper, or left or right of the crossbar.
