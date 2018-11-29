@@ -26,7 +26,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     let appName = NSLocalizedString("EP Calipers", comment:"")
     
     @IBOutlet weak var scrollView: NSScrollView!
-    @IBOutlet weak var imageView: FixedIKImageView!
+    @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var calipersSegementedControl: NSSegmentedControl!
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
@@ -606,9 +606,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             // it seems that the code works when compiled as stand-alone code.
             // Weird!!
             let reachable = try (url as URL).checkResourceIsReachable()
-            if reachable {
-                // note below can fail with bad image file and crash program
-                self.imageView.setImageWith(url)
+            if reachable, let data = NSData(contentsOf: url), let image = NSImage(data: data as Data) {
+                self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
+                // Setting imageview with url can crash program
+                //                self.imageView.setImageWith(url)
                 self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
                 self.oldWindowTitle = urlPath
