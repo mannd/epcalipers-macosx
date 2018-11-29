@@ -654,9 +654,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
     func openPDF(_ url: URL, addToRecentDocuments: Bool) {
-        let pdfData = try? Data(contentsOf: url)
-        if pdfData != nil {
-            if let pdf = NSPDFImageRep(data: pdfData!) {
+        do {
+            if let pdfData = try? Data(contentsOf: url), let pdf = NSPDFImageRep(data: pdfData) {
                 pdfRef = pdf
                 numberOfPDFPages = pdf.pageCount
                 imageIsPDF = true
@@ -669,9 +668,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
             }
+            else {
+                throw OpenError.Nonspecific
+            }
+        }
+        catch _ {
+            let alert = NSAlert()
+            alert.messageText = NSLocalizedString("File not opened", comment:"")
+            alert.informativeText = NSLocalizedString("Can't open \(url)", comment:"")
+            alert.alertStyle = .critical
+            alert.runModal()
         }
     }
-    
+
     func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
         // consider add preference for low res, hi res (2.0, 4.0 scale?)
         let scale: CGFloat = 4.0
