@@ -77,7 +77,7 @@
          <EnvironmentVariable
             key = "CG_PDF_VERBOSE"
             value = ""
-            isEnabled = "NO">
+            isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "CA_ASSERT_MAIN_THREAD_TRANSACTIONS"

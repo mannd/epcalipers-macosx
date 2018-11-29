@@ -590,26 +590,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func openImageUrl(_ url: URL, addToRecentDocuments: Bool) {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
-        // Default value of kCGImageSourceShouldCache depends on platform.
-        // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
-//        let error: NSErrorPointer? = nil
         do {
-            // FIXME: When run under Xcode, scrolling large images immediately after
-            // they are loaded gives a crash in NSScrollWheel with message:
-            // "Unexpected outstanding background CATransaction".
-            // However, actual compiled program run as itself does not crash!!
-            // This may be another problem with IKImageView (the Move tool also
-            // no longer works with Xcode 10, Mojave), but it is not something in
-            // my code.  Apparently the error message indicates that something is
-            // being run on a background thread that should be on the main thread.
-            // I can partially correct this my intoducing a delay in the code, but
-            // it seems that the code works when compiled as stand-alone code.
-            // Weird!!
             let reachable = try (url as URL).checkResourceIsReachable()
+            // Setting imageview with url, as in imageView.setImage(url:) can crash program,
+            // if you are loading a large image and then try to scroll it.  Must load as below.
             if reachable, let data = NSData(contentsOf: url), let image = NSImage(data: data as Data) {
                 self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
-                // Setting imageview with url can crash program
-                //                self.imageView.setImageWith(url)
                 self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
                 self.oldWindowTitle = urlPath
