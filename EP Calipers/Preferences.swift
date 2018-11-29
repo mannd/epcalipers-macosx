@@ -57,6 +57,9 @@ class Preferences: NSObject {
     var transparency = false
     var qtcFormula: QTcFormulaPreference = .Bazett
     var rounding: Rounding = .ToInteger
+    var autoPositionText: Bool = true
+    var timeCaliperTextPosition: TextPosition = .centerAbove
+    var amplitudeCaliperTextPosition: TextPosition = .right
 
     func loadPreferences() {
         let preferences = UserDefaults.standard
@@ -81,6 +84,9 @@ class Preferences: NSObject {
         else {
             rounding = .ToInteger
         }
+        autoPositionText = preferences.bool(forKey: "autoPositionText")
+        timeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: "timeCaliperTextPosition")) ?? .centerAbove
+        amplitudeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: "amplitudeCaliperTextPosition")) ?? .right
     }
     
     func savePreferences() {
@@ -96,6 +102,8 @@ class Preferences: NSObject {
         preferences.set(transparency, forKey: "transparency")
         preferences.set(qtcFormula.rawValue, forKey: "qtcFormula")
         preferences.set(rounding.rawValue, forKey: "rounding")
+        preferences.set(autoPositionText, forKey: "autoPositionText")
+        preferences.set(timeCaliperTextPosition.rawValue, forKey: "timeCaliperTextPosition")
+        preferences.set(amplitudeCaliperTextPosition.rawValue, forKey: "amplitudeCaliperTextPosition")
     }
-
 }

@@ -1,5 +1,5 @@
 PODS:
-  - QTc (3.3.1)
+  - QTc (3.4.1)
 
 DEPENDENCIES:
   - QTc (from `~/dev/QTc`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "~/dev/QTc"
 
 SPEC CHECKSUMS:
-  QTc: 22e3abcfcf3395f56c5a96d457193aed53eb431c
+  QTc: ede7a196a674e49a94a2e06be7a43347ceefae51
 
 PODFILE CHECKSUM: 2f384162f3e06433978db1ae5ce8b521acd89253
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.6.0.beta.2

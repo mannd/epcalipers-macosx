@@ -9,7 +9,7 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 * [[../../shrd/icon_32x32@2x.png]] Préférences
-Les préférences d’application peuvent être choisies en utilisant la commande de menu *Compas EP | Préférences*.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, ainsi que l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le /Nombre d’intervalles RR pour QTc/ à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
+Les préférences d’application peuvent être choisies en utilisant la commande de menu *Compas EP | Préférences*.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, la position du texte de compas, l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le /Nombre d’intervalles RR pour QTc/ à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
 #+CAPTION: Préférences
 [[../gfx/preferences.png]]
 ** Préférences expliquées
@@ -24,3 +24,7 @@ Les préférences d’application peuvent être choisies en utilisant la command
 - Des message-guides: Des messages-guides sont utiles quand vous êtes en train d’apprendre l’application. Vous pouvez l’accélérer en désactivant cette option.  Des messages-guides vous guident dans les étapes d’étalonnage et de mesures.
 - Arrondir msec et bpm: Choisir comment arrondir les intervalles dans msec et les fréquences.  Les choix sont d’arrondir à l’entier le plus proche (examples: 305,463 devient 305, 1010,728 devient 1011), à 4 chiffres (305,5 et 1011), à 1 decimale (305,5 et 1010,7), ou à 2 decimales (305,46 et 1010,73).  Noter que les valeurs dans secs ou autres unités et les valeurs calculées comme le QTc sont toujours arrondées à 4 chiffres.
 - Fênetre transparente: La fênetre primaire doit transparente.  *Compas EP* peut alors être utilisé comme un compas flottant pour mesurer des images sur votre bureau.
+- Auto-positionner texte: Positionner automatiquement le texte de chaque compas par rapport au compas.  Par exemple, si la position du texte est à droite et le compas est trop proche au côté droit de la fenêtre, elle changera à gauche.
+- Position du texte pour compas de temps: Positionner le texte pour les compas de temps au-dessus du centre, au-dessous du centre, à gauche ou à droite du compas.
+- Position du texte pour compas d'amplitude: Positionner le texte pour les compas d'amplitude au-dessus, au-dessous, à gauche ou à droite du compas.
+

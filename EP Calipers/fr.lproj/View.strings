@@ -6,7 +6,7 @@
 "8t4-5p-W6t.title" = "Fênetre transparente";
 
 /* Class = "NSTextFieldCell"; title = "Intervals for QTc"; ObjectID = "Eil-yh-RPP"; */
-"Eil-yh-RPP.title" = "No. d'int. RR pour QTc";
+"Eil-yh-RPP.title" = "Nombre d'intervalles RR pour QTc";
 
 /* Class = "NSTextFieldCell"; title = "Show prompts"; ObjectID = "ITd-fO-WiU"; */
 "ITd-fO-WiU.title" = "Des messages-guides";
@@ -27,7 +27,17 @@
 "iei-ea-eL7.title" = "Arrondir msec et bpm";
 
 /* Class = "NSTextFieldCell"; title = "Intervals for mean RR"; ObjectID = "wc1-iK-rII"; */
-"wc1-iK-rII.title" = "No. d'int. pour RR moyen";
+"wc1-iK-rII.title" = "Nombre d'intervalles pour RR moyen";
 
 /* added for "QTc Formula" */
 "Vyw-aG-c11.title" = "Formule QTc";
+
+/* added for "Auto-position text" */
+"cNf-Ho-YZt.title" = "Auto-positionner texte";
+
+/* added for "Time caliper text position" */
+"ugO-iW-y67.title" = "Position du texte pour compas de temps";
+
+/* added for "Amplitude caliper text position" */
+"xhX-kK-4ju.title" = "Position du texte pour compas d'amplitude";
+/*

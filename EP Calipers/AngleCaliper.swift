@@ -13,11 +13,22 @@ class AngleCaliper: Caliper {
     var angleBar2 = CGFloat(0.25 * Double.pi)
     var verticalCalibration: Calibration? = nil
     let angleDelta = 0.15
+    var triangleBaseTextPosition: TextPosition = .centerAbove
+
+    override var textPosition: TextPosition {
+        get {
+            return super.textPosition
+        }
+        set (newValue) {
+            triangleBaseTextPosition = newValue
+        }
+    }
     
     init() {
         super.init(direction: .horizontal, bar1Position: 100.0, bar2Position: 100.0, crossBarPosition: 100.0)
         requiresCalibration = false
         isAngleCaliper = true
+        triangleBaseTextPosition = textPosition
     }
     
     override func setInitialPositionInRect(_ rect: CGRect) {
@@ -54,12 +65,12 @@ class AngleCaliper: Caliper {
         context.addLine(to: CGPoint(x: endPointBar2.x, y: endPointBar2.y))
         
         context.strokePath()
-        caliperText()
+        caliperText(rect: rect, textPosition: .centerAbove, optimizeTextPosition: false)
         
         if (verticalCalibration?.calibrated)! && (verticalCalibration?.unitsAreMM)! {
             if angleInSouthernHemisphere(angleBar1) && angleInSouthernHemisphere(angleBar2) {
                 let pointsPerMM = 1.0 / (verticalCalibration?.multiplier())!
-                drawTriangleBase(context, forHeight: 5 * pointsPerMM)
+                drawTriangleBase(context, forHeight: 5 * pointsPerMM, rect: rect)
             }
         }
     }
@@ -150,7 +161,7 @@ class AngleCaliper: Caliper {
         }
     }
     
-    func drawTriangleBase(_ context: CGContext, forHeight height:Double) {
+    func drawTriangleBase(_ context: CGContext, forHeight height:Double, rect: CGRect) {
         let point1 = getBasePoint1ForHeight(height)
         let point2 = getBasePoint2ForHeight(height)
         let lengthInPoints = Double(point2.x - point1.x)
@@ -167,7 +178,9 @@ class AngleCaliper: Caliper {
             NSAttributedString.Key.paragraphStyle: paragraphStyle,
             NSAttributedString.Key.foregroundColor: color
             ]
-        text.draw(in: CGRect(x: point2.x > point1.x ? point1.x - 25 : point2.x - 25, y: point1.y - 25, width: fmax(100.0, abs(point2.x - point1.x) + 50), height: 20),  withAttributes:attributes)
+        let size = text.size(withAttributes: attributes)
+        let textRect = caliperTextPosition(left: fmin(point1.x, point2.x), right: fmax(point1.x, point2.x), center: point1.y, size: size, rect: rect, textPosition: triangleBaseTextPosition, optimizeTextPosition: true)
+        text.draw(in: textRect,  withAttributes:attributes)
     }
 
     func baseMeasurement(_ lengthInPoints: Double) -> String {

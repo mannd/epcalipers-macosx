@@ -26,7 +26,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     let appName = NSLocalizedString("EP Calipers", comment:"")
     
     @IBOutlet weak var scrollView: NSScrollView!
-    @IBOutlet weak var imageView: FixedIKImageView!
+    @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var calipersSegementedControl: NSSegmentedControl!
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
@@ -59,9 +59,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     @IBOutlet weak var roundingPopUpButton: NSPopUpButton!
     @IBOutlet weak var formulaPopUpButton: NSPopUpButton!
+    @IBOutlet weak var autoPositionTextCheckBox: NSButton!
+    @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
+    @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
     
- 
-
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
@@ -120,7 +121,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 scrollView.drawsBackground = false
                 window?.backgroundColor = NSColor.clear
                 imageView.isHidden = true
-                imageView.currentToolMode = IKToolModeNone
+                imageView.currentToolMode = IKToolModeMove
                 // deal with title
                 self.window?.title = appName
             }
@@ -188,7 +189,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             "roundMsecRateKey": true,
             "rounding": Rounding.ToInteger.rawValue,
             "qtcFormula": QTcFormulaPreference.Bazett.rawValue,
-            "transparency": false
+            "transparency": false,
+            "autoPositionText": true,
+            "timeCaliperTextPosition": TextPosition.centerAbove.rawValue,
+            "amplitudeCaliperTextPosition": TextPosition.right.rawValue
         ] as [String : Any]
         UserDefaults.standard.register(defaults: defaults)
         appPreferences.loadPreferences()
@@ -206,7 +210,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
         qtcNumberTextField.delegate = self
-        
         
         if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
                 let url = URL(fileURLWithPath: path)
@@ -293,7 +296,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         return true
     }
-    
+
+    // TODO: map popupbutton for text position to actual text positions, both directions
+    // and add them here.
     @IBAction func showPreferences(_ sender: AnyObject) {
         // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
         // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
@@ -310,6 +315,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         fillQTcFormulaPopUp()
         fillRoundingPopUp()
+        fillTimeCaliperTextPositionPopUp()
+        fillAmplitudeCaliperTextPositionPopUp()
+        let timeCaliperTextPositionArray: [TextPosition] = [.centerAbove, .centerBelow, .left, .right]
+        let amplitudeCaliperTextPositionArray: [TextPosition] = [.top, .bottom, .left, .right]
+        let timeCaliperTextPositionIndex = timeCaliperTextPositionArray.firstIndex(of: appPreferences.timeCaliperTextPosition) ?? 0
+        let amplitudeCaliperTextPositionIndex = amplitudeCaliperTextPositionArray.firstIndex(of: appPreferences.amplitudeCaliperTextPosition) ?? 0
+        timeCaliperTextPositionPopUpButton.selectItem(at: timeCaliperTextPositionIndex)
+        amplitudeCaliperTextPositionPopUpButton.selectItem(at: amplitudeCaliperTextPositionIndex)
         if let color = appPreferences.caliperColor {
             caliperColorWell.color = color
         }
@@ -329,6 +342,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showPrompts ? 1 : 0)
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
+        autoPositionTextCheckBox.state = NSControl.StateValue(rawValue: appPreferences.autoPositionText ? 1 : 0)
         formulaPopUpButton.selectItem(at: appPreferences.qtcFormula.rawValue)
         roundingPopUpButton.selectItem(at: appPreferences.rounding.rawValue)
         let result = preferencesAlert!.runModal()
@@ -343,11 +357,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
             appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
+            appPreferences.autoPositionText = autoPositionTextCheckBox.integerValue == 1 ? true : false
+            appPreferences.timeCaliperTextPosition = timeCaliperTextPositionArray[timeCaliperTextPositionPopUpButton.indexOfSelectedItem]
+            appPreferences.amplitudeCaliperTextPosition = amplitudeCaliperTextPositionArray[amplitudeCaliperTextPositionPopUpButton.indexOfSelectedItem]
             appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem) ?? QTcFormulaPreference.Bazett
             appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
             appPreferences.savePreferences()
             // update calipersView
-            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, rounding: appPreferences.rounding)
+            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, rounding: appPreferences.rounding, autoPositionText: appPreferences.autoPositionText, timeCaliperTextPosition: appPreferences.timeCaliperTextPosition, amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition)
             // update transparency
             transparent = appPreferences.transparency
             preferencesChanged = true
@@ -363,7 +380,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         formulaPopUpButton.addItem(withTitle: NSLocalizedString("All", comment: ""))
     }
 
-    // TODO: use localized strings here
     private func fillRoundingPopUp() {
         roundingPopUpButton.removeAllItems()
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To integer", comment: ""))
@@ -373,7 +389,23 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // TODO: remove in production
         //roundingPopUpButton.addItem(withTitle: "Raw")
     }
-    
+
+    private func fillTimeCaliperTextPositionPopUp() {
+        timeCaliperTextPositionPopUpButton.removeAllItems()
+        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Center above", comment: ""))
+        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Center below", comment: ""))
+        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Left", comment: ""))
+        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Right", comment: ""))
+    }
+
+    private func fillAmplitudeCaliperTextPositionPopUp() {
+        amplitudeCaliperTextPositionPopUpButton.removeAllItems()
+        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Top", comment: ""))
+        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Bottom", comment: ""))
+        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Left", comment: ""))
+        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Right", comment: ""))
+    }
+
     @IBAction func numberOfMeanRRStepperAction(_ sender: AnyObject) {
         numberOfMeanRRIntervalsTextField.integerValue = numberOfMeanRRIntervalsStepper.integerValue
     }
@@ -533,7 +565,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 openPDF(goodURL, addToRecentDocuments: addToRecentDocuments)
             }
             else {
-                openImageUrl(goodURL, addToRecentDocuments: addToRecentDocuments)
+                self.openImageUrl(goodURL, addToRecentDocuments: addToRecentDocuments)
             }
         }
     }
@@ -558,17 +590,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func openImageUrl(_ url: URL, addToRecentDocuments: Bool) {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
-        // Default value of kCGImageSourceShouldCache depends on platform.
-        // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
-//        let error: NSErrorPointer? = nil
         do {
             let reachable = try (url as URL).checkResourceIsReachable()
-            if reachable {
-                // note below can fail with bad image file and crash program
-                self.imageView.setImageWith(url)
+            // Setting imageview with url, as in imageView.setImage(url:) can crash program,
+            // if you are loading a large image and then try to scroll it.  Must load as below.
+            if reachable, let data = NSData(contentsOf: url), let image = NSImage(data: data as Data) {
+                self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
                 self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
-                oldWindowTitle = urlPath
+                self.oldWindowTitle = urlPath
                 self.window?.setTitleWithRepresentedFilename(urlPath)
                 self.imageURL = url
                 self.clearCalibration()
@@ -576,7 +606,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
             }
-                
             else {
                 throw OpenError.Nonspecific
             }
@@ -611,9 +640,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
     func openPDF(_ url: URL, addToRecentDocuments: Bool) {
-        let pdfData = try? Data(contentsOf: url)
-        if pdfData != nil {
-            if let pdf = NSPDFImageRep(data: pdfData!) {
+        do {
+            if let pdfData = try? Data(contentsOf: url), let pdf = NSPDFImageRep(data: pdfData) {
                 pdfRef = pdf
                 numberOfPDFPages = pdf.pageCount
                 imageIsPDF = true
@@ -626,9 +654,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
             }
+            else {
+                throw OpenError.Nonspecific
+            }
+        }
+        catch _ {
+            let alert = NSAlert()
+            alert.messageText = NSLocalizedString("File not opened", comment:"")
+            alert.informativeText = NSLocalizedString("Can't open \(url)", comment:"")
+            alert.alertStyle = .critical
+            alert.runModal()
         }
     }
-    
+
     func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
         // consider add preference for low res, hi res (2.0, 4.0 scale?)
         let scale: CGFloat = 4.0
@@ -751,12 +789,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             caliper.selectedColor = color
         }
         caliper.color = caliper.unselectedColor
+        caliper.autoPositionText = appPreferences.autoPositionText
         caliper.direction = direction
         if direction == .horizontal {
             caliper.calibration = calipersView.horizontalCalibration
+            caliper.textPosition = appPreferences.timeCaliperTextPosition
         }
         else {
             caliper.calibration = calipersView.verticalCalibration
+            caliper.textPosition = appPreferences.amplitudeCaliperTextPosition
         }
         caliper.setInitialPositionInRect(calipersView.bounds)
         calipersView.calipers.append(caliper)
@@ -776,6 +817,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
         caliper.rounding = appPreferences.rounding
         caliper.direction = .horizontal
+        caliper.autoPositionText = appPreferences.autoPositionText
+        caliper.textPosition = appPreferences.timeCaliperTextPosition
         caliper.calibration = calipersView.horizontalCalibration
         caliper.verticalCalibration = calipersView.verticalCalibration
         if let color = appPreferences.caliperColor {
