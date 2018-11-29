@@ -36,11 +36,16 @@
                             <rect key="frame" x="1" y="1" width="798" height="420"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
-                                    <rect key="frame" x="88" y="-164" width="69" height="8"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
+                                    <rect key="frame" x="0.0" y="0.0" width="798" height="420"/>
                                 </view>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="oIK-MS-rQb" firstAttribute="top" secondItem="TeI-oG-eGn" secondAttribute="top" id="OR2-wI-MX3"/>
+                                <constraint firstAttribute="trailing" secondItem="oIK-MS-rQb" secondAttribute="trailing" id="WWB-M6-FIo"/>
+                                <constraint firstItem="oIK-MS-rQb" firstAttribute="leading" secondItem="TeI-oG-eGn" secondAttribute="leading" id="c8O-SF-0Rd"/>
+                                <constraint firstAttribute="bottom" secondItem="oIK-MS-rQb" secondAttribute="bottom" id="t97-sm-0l5"/>
+                            </constraints>
                         </clipView>
                         <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
@@ -195,7 +200,7 @@
                 <constraint firstItem="nas-NK-EXN" firstAttribute="centerY" secondItem="1nv-Ch-vgn" secondAttribute="centerY" id="7o1-9d-1eT"/>
                 <constraint firstItem="nas-NK-EXN" firstAttribute="centerX" secondItem="1nv-Ch-vgn" secondAttribute="centerX" id="Wsf-hl-6gJ"/>
             </constraints>
-            <point key="canvasLocation" x="464.5" y="221.5"/>
+            <point key="canvasLocation" x="463" y="57"/>
         </customView>
         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="Hsh-8H-9Ny">
             <rect key="frame" x="0.0" y="0.0" width="38" height="17"/>

@@ -121,7 +121,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 scrollView.drawsBackground = false
                 window?.backgroundColor = NSColor.clear
                 imageView.isHidden = true
-                imageView.currentToolMode = IKToolModeNone
+                imageView.currentToolMode = IKToolModeMove
                 // deal with title
                 self.window?.title = appName
             }
@@ -565,7 +565,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 openPDF(goodURL, addToRecentDocuments: addToRecentDocuments)
             }
             else {
-                openImageUrl(goodURL, addToRecentDocuments: addToRecentDocuments)
+                self.openImageUrl(goodURL, addToRecentDocuments: addToRecentDocuments)
             }
         }
     }
@@ -594,13 +594,24 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
 //        let error: NSErrorPointer? = nil
         do {
+            // FIXME: When run under Xcode, scrolling large images immediately after
+            // they are loaded gives a crash in NSScrollWheel with message:
+            // "Unexpected outstanding background CATransaction".
+            // However, actual compiled program run as itself does not crash!!
+            // This may be another problem with IKImageView (the Move tool also
+            // no longer works with Xcode 10, Mojave), but it is not something in
+            // my code.  Apparently the error message indicates that something is
+            // being run on a background thread that should be on the main thread.
+            // I can partially correct this my intoducing a delay in the code, but
+            // it seems that the code works when compiled as stand-alone code.
+            // Weird!!
             let reachable = try (url as URL).checkResourceIsReachable()
             if reachable {
                 // note below can fail with bad image file and crash program
                 self.imageView.setImageWith(url)
                 self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
-                oldWindowTitle = urlPath
+                self.oldWindowTitle = urlPath
                 self.window?.setTitleWithRepresentedFilename(urlPath)
                 self.imageURL = url
                 self.clearCalibration()
@@ -608,7 +619,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
             }
-                
             else {
                 throw OpenError.Nonspecific
             }

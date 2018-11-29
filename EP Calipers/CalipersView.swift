@@ -48,7 +48,6 @@ class CalipersView: NSView {
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
         return true }
-    
 
     func selectCaliper(_ c: Caliper) {
         c.color = c.selectedColor
@@ -148,7 +147,7 @@ class CalipersView: NSView {
             super.scrollWheel(with: event)
         }
     }
-    
+
     func updateCalibration() {
         if horizontalCalibration.calibrated || verticalCalibration.calibrated {
             horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
