@@ -26,7 +26,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     let appName = NSLocalizedString("EP Calipers", comment:"")
     
     @IBOutlet weak var scrollView: NSScrollView!
-    @IBOutlet weak var imageView: FixedIKImageView!
+    @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
     @IBOutlet weak var calipersSegementedControl: NSSegmentedControl!
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
@@ -590,25 +590,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func openImageUrl(_ url: URL, addToRecentDocuments: Bool) {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
-        // Default value of kCGImageSourceShouldCache depends on platform.
-        // Because CGImageSourceCreateImageAtIndex can't handle PDF, we use simple method below to open image
-//        let error: NSErrorPointer? = nil
         do {
-            // FIXME: When run under Xcode, scrolling large images immediately after
-            // they are loaded gives a crash in NSScrollWheel with message:
-            // "Unexpected outstanding background CATransaction".
-            // However, actual compiled program run as itself does not crash!!
-            // This may be another problem with IKImageView (the Move tool also
-            // no longer works with Xcode 10, Mojave), but it is not something in
-            // my code.  Apparently the error message indicates that something is
-            // being run on a background thread that should be on the main thread.
-            // I can partially correct this my intoducing a delay in the code, but
-            // it seems that the code works when compiled as stand-alone code.
-            // Weird!!
             let reachable = try (url as URL).checkResourceIsReachable()
-            if reachable {
-                // note below can fail with bad image file and crash program
-                self.imageView.setImageWith(url)
+            // Setting imageview with url, as in imageView.setImage(url:) can crash program,
+            // if you are loading a large image and then try to scroll it.  Must load as below.
+            if reachable, let data = NSData(contentsOf: url), let image = NSImage(data: data as Data) {
+                self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
                 self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
                 self.oldWindowTitle = urlPath
@@ -653,9 +640,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
     func openPDF(_ url: URL, addToRecentDocuments: Bool) {
-        let pdfData = try? Data(contentsOf: url)
-        if pdfData != nil {
-            if let pdf = NSPDFImageRep(data: pdfData!) {
+        do {
+            if let pdfData = try? Data(contentsOf: url), let pdf = NSPDFImageRep(data: pdfData) {
                 pdfRef = pdf
                 numberOfPDFPages = pdf.pageCount
                 imageIsPDF = true
@@ -668,9 +654,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
             }
+            else {
+                throw OpenError.Nonspecific
+            }
+        }
+        catch _ {
+            let alert = NSAlert()
+            alert.messageText = NSLocalizedString("File not opened", comment:"")
+            alert.informativeText = NSLocalizedString("Can't open \(url)", comment:"")
+            alert.alertStyle = .critical
+            alert.runModal()
         }
     }
-    
+
     func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
         // consider add preference for low res, hi res (2.0, 4.0 scale?)
         let scale: CGFloat = 4.0

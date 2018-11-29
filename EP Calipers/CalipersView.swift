@@ -20,7 +20,7 @@ protocol CalipersViewDelegate {
 
 class CalipersView: NSView {
 
-    var imageView: FixedIKImageView? = nil
+    var imageView: IKImageView? = nil
     var calipersMode = false
     var calipers: [Caliper] = []
     var lockedMode = false
