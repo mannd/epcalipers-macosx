@@ -1,5 +1,6 @@
 os: osx
 language: swift
 osx_image: xcode10.1
-script:
-    - xcodebuild clean test -project "EP Calipers.xcworkspace" -scheme "EP Calipers" -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
+xcode_workspace: "EP Calipers.xcworkspace"
+xcode_scheme: "EP Calipers"
+xcode_destination: platform=macOS
