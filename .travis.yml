@@ -1,9 +1,8 @@
 os: osx
 language: swift
 osx_image: xcode10.1
-xcode_workspace: "EP Calipers.xcworkspace"
-xcode_scheme: "EP Calipers"
-xcode_destination: platform=macOS
 before_install:
   - gem install cocoapods --pre
   - pod install --repo-update
+script: xcodebuild -workspace EP\ Calipers.xcworkspace -scheme EP\ Calipers -destination platform\=macOS build test CODE_SIGNING_REQUIRED=NO
+
