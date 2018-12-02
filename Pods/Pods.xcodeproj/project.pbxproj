@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		138732823D820E1730BBA14D6C434BAE /* QTc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D55318F4D4EC61F85D97580DBBD227 /* QTc.swift */; };
+		138732823D820E1730BBA14D6C434BAE /* QTc.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB69C7F554AB3FF17FD1E5D2DA3446D1 /* QTc.swift */; };
 		4C78329E6297B0DD8F3FF1C212E9A009 /* Pods-EP Calipers-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B716145C280D909068581F13B4E9E212 /* Pods-EP Calipers-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57309FB30E8E5A8A63B6E68B2BBC032F /* QTc-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFD1A883251946B707DE05430A7A996 /* QTc-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57309FB30E8E5A8A63B6E68B2BBC032F /* QTc-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 22B8B1731EE23223B962E131A405C4E1 /* QTc-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CBDFAFDF4CA1449E564260C1146A380 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AFE638F59E262D940905854A013372 /* Cocoa.framework */; };
 		78625052C90FF100696AF6DF256D4C3F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AFE638F59E262D940905854A013372 /* Cocoa.framework */; };
 		8B14B691A1EA7E7AE0A7881879E3A62A /* Pods-EP CalipersTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE757797F1DD012DBC55175DEA526790 /* Pods-EP CalipersTests-dummy.m */; };
-		919EFDE318A948542D5423BEBCF45B7F /* AbnormalQTc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ABE1827E335193A432F8884D6FEA51 /* AbnormalQTc.swift */; };
-		96C1F0B04716F4ED0582279E7915D067 /* Formulas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6189972FF473640373A776C315FCFE7C /* Formulas.swift */; };
+		919EFDE318A948542D5423BEBCF45B7F /* AbnormalQTc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CC054415DE75B00C1B2F1702FE3C40 /* AbnormalQTc.swift */; };
+		96C1F0B04716F4ED0582279E7915D067 /* Formulas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91F3DA02D593C303BE2EA6B338E912 /* Formulas.swift */; };
 		96E601CA16B5CFF473E70BEC39E00C15 /* Pods-EP CalipersTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DD59B1970FCDF8EDDF9EE036B477BCA5 /* Pods-EP CalipersTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		971A8F8F4A0A7B48D0C40A0A65AF947A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AFE638F59E262D940905854A013372 /* Cocoa.framework */; };
-		9B3131BEEFEA5B902B6414A152B89671 /* QtMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09683DB235B1F05D3E64008F3EABC203 /* QtMeasurement.swift */; };
+		9B3131BEEFEA5B902B6414A152B89671 /* QtMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73EDA2EBBCEF078BCE7DD4DC4D6D2AF /* QtMeasurement.swift */; };
 		C828E13A12EFA1260C8199728F5BEE39 /* Pods-EP Calipers-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 435615589798CADCD14F13DE42E7949E /* Pods-EP Calipers-dummy.m */; };
-		D581C1221FC0A843EB8B04953A16FDE7 /* QTc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3E608B31C18BEEA57C32B65513EBE /* QTc-dummy.m */; };
-		E62AEF38A7EB9D881120C5FB4AB55117 /* QTc.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C63DF3B0903778B0716BB96012578B8 /* QTc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFEBB3BE02683ED7A3CCC084E1D7AEE5 /* QtcRbk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8F81F3BA5453E001BD4196C2BEBFF /* QtcRbk.swift */; };
+		D581C1221FC0A843EB8B04953A16FDE7 /* QTc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 33841D3F80C471D0D9BE62BFAF6752F6 /* QTc-dummy.m */; };
+		E62AEF38A7EB9D881120C5FB4AB55117 /* QTc.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D169F255F66C71DF4336E41C880532D /* QTc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFEBB3BE02683ED7A3CCC084E1D7AEE5 /* QtcRbk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ED9902964C1347299522D436EA810A /* QtcRbk.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,42 +42,39 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09683DB235B1F05D3E64008F3EABC203 /* QtMeasurement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QtMeasurement.swift; path = CommonSource/QtMeasurement.swift; sourceTree = "<group>"; };
 		0EAF1304842B69CB54D440AEBE296CA6 /* Pods-EP CalipersTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EP CalipersTests-Info.plist"; sourceTree = "<group>"; };
-		0EECA181A73B00C4A669C1D2715C6A7C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		0FADCB9F4C9181348836D5AD31B45E88 /* QTc.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = QTc.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		19ABE1827E335193A432F8884D6FEA51 /* AbnormalQTc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AbnormalQTc.swift; path = CommonSource/AbnormalQTc.swift; sourceTree = "<group>"; };
-		1A1983FD7897B9934893F29D1BC18E2B /* QTc-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "QTc-Info.plist"; sourceTree = "<group>"; };
 		1C53BD101EA3B94356CC491D68BA8394 /* Pods-EP CalipersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EP CalipersTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1C76B0E425186316869B76CC6E928345 /* Pods-EP CalipersTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EP CalipersTests.modulemap"; sourceTree = "<group>"; };
 		2184F039E06D409CB4D5DF628D499981 /* Pods-EP CalipersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EP CalipersTests.release.xcconfig"; sourceTree = "<group>"; };
+		22B8B1731EE23223B962E131A405C4E1 /* QTc-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QTc-umbrella.h"; sourceTree = "<group>"; };
+		33841D3F80C471D0D9BE62BFAF6752F6 /* QTc-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QTc-dummy.m"; sourceTree = "<group>"; };
 		38C28A91EF9FBFFA8B17A64D5A270EC4 /* Pods-EP Calipers-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EP Calipers-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3FB3E608B31C18BEEA57C32B65513EBE /* QTc-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QTc-dummy.m"; sourceTree = "<group>"; };
+		38CC054415DE75B00C1B2F1702FE3C40 /* AbnormalQTc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AbnormalQTc.swift; path = CommonSource/AbnormalQTc.swift; sourceTree = "<group>"; };
 		435615589798CADCD14F13DE42E7949E /* Pods-EP Calipers-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EP Calipers-dummy.m"; sourceTree = "<group>"; };
 		457DA9AEB281E9711A5A2C40853D12A2 /* Pods-EP CalipersTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EP CalipersTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		4F5EAC59C53A026A28D9F89590DCEF83 /* Pods-EP CalipersTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EP CalipersTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		505ECEB3E2C2FBEEDC76E7C0E1A9066A /* Pods-EP Calipers-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EP Calipers-frameworks.sh"; sourceTree = "<group>"; };
-		6189972FF473640373A776C315FCFE7C /* Formulas.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Formulas.swift; path = CommonSource/Formulas.swift; sourceTree = "<group>"; };
-		6C63DF3B0903778B0716BB96012578B8 /* QTc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QTc.h; path = CommonSource/QTc.h; sourceTree = "<group>"; };
+		5E91F3DA02D593C303BE2EA6B338E912 /* Formulas.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Formulas.swift; path = CommonSource/Formulas.swift; sourceTree = "<group>"; };
+		64ED9902964C1347299522D436EA810A /* QtcRbk.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QtcRbk.swift; path = CommonSource/QtcRbk.swift; sourceTree = "<group>"; };
+		7D169F255F66C71DF4336E41C880532D /* QTc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QTc.h; path = CommonSource/QTc.h; sourceTree = "<group>"; };
 		7D375BA5E331A7B043BB2AFBCA280AFB /* Pods-EP Calipers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EP Calipers.debug.xcconfig"; sourceTree = "<group>"; };
-		81819E9109314DEC36A22EDF35A695AE /* README.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		90D55318F4D4EC61F85D97580DBBD227 /* QTc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QTc.swift; path = CommonSource/QTc.swift; sourceTree = "<group>"; };
-		A3B8F81F3BA5453E001BD4196C2BEBFF /* QtcRbk.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QtcRbk.swift; path = CommonSource/QtcRbk.swift; sourceTree = "<group>"; };
-		AC156DB54989C191103EFB513133E2AD /* QTc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QTc.xcconfig; sourceTree = "<group>"; };
-		ADFD1A883251946B707DE05430A7A996 /* QTc-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QTc-umbrella.h"; sourceTree = "<group>"; };
-		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B587B5D1E6A7713BA63E00FD91C372FD /* QTc.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = QTc.modulemap; sourceTree = "<group>"; };
+		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B716145C280D909068581F13B4E9E212 /* Pods-EP Calipers-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EP Calipers-umbrella.h"; sourceTree = "<group>"; };
 		BDBD6534999BC2D156F5C78A708A7F1F /* Pods-EP Calipers-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EP Calipers-acknowledgements.plist"; sourceTree = "<group>"; };
+		C179D2DEEE711927C34079063F31EE1F /* QTc.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = QTc.modulemap; sourceTree = "<group>"; };
 		C4278C938738FB704D99C32A91552651 /* Pods-EP Calipers-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EP Calipers-Info.plist"; sourceTree = "<group>"; };
-		D3B1C75769819D5BB4A1B27EEB265449 /* Pods_EP_CalipersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_CalipersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB4D231A1F8DA43A920A9D46FBB7D94C /* QTc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QTc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB8A6C7E2D898D4CE754FCB234E1ABBE /* Pods_EP_Calipers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_Calipers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF4A853ADB257DF342C6523E1F2EC794 /* QTc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QTc.xcconfig; sourceTree = "<group>"; };
+		D3B1C75769819D5BB4A1B27EEB265449 /* Pods_EP_CalipersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_EP_CalipersTests.framework; path = "Pods-EP CalipersTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB4D231A1F8DA43A920A9D46FBB7D94C /* QTc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = QTc.framework; path = QTc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB8A6C7E2D898D4CE754FCB234E1ABBE /* Pods_EP_Calipers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_EP_Calipers.framework; path = "Pods-EP Calipers.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD59B1970FCDF8EDDF9EE036B477BCA5 /* Pods-EP CalipersTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EP CalipersTests-umbrella.h"; sourceTree = "<group>"; };
+		E39CF0439B809A0A80D1D26F9E75DFC6 /* QTc-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "QTc-Info.plist"; sourceTree = "<group>"; };
 		E46B5BF33BB3704C5DFF51A1D19C28AD /* Pods-EP Calipers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EP Calipers.release.xcconfig"; sourceTree = "<group>"; };
+		EB69C7F554AB3FF17FD1E5D2DA3446D1 /* QTc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QTc.swift; path = CommonSource/QTc.swift; sourceTree = "<group>"; };
+		EC10EFEBF6AD4D1811D9706AB481F481 /* QTc-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QTc-prefix.pch"; sourceTree = "<group>"; };
 		EE757797F1DD012DBC55175DEA526790 /* Pods-EP CalipersTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EP CalipersTests-dummy.m"; sourceTree = "<group>"; };
 		F2AFE638F59E262D940905854A013372 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		FC23B60E932B2D17A70C6549BD294C6F /* QTc-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QTc-prefix.pch"; sourceTree = "<group>"; };
+		F73EDA2EBBCEF078BCE7DD4DC4D6D2AF /* QtMeasurement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QtMeasurement.swift; path = CommonSource/QtMeasurement.swift; sourceTree = "<group>"; };
 		FFB2EB28C1612B64844226DCD7744DE0 /* Pods-EP Calipers.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EP Calipers.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,16 +106,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		18580A0100BA0C1D6030CA205F66615F /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				0EECA181A73B00C4A669C1D2715C6A7C /* LICENSE */,
-				0FADCB9F4C9181348836D5AD31B45E88 /* QTc.podspec */,
-				81819E9109314DEC36A22EDF35A695AE /* README.markdown */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
 		39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,28 +114,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		67FB330CFA9EEA24327F4171E1689DFD /* QTc */ = {
+		5A4437D5EDBCE75B4A0DE34D42EAEB7A /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				19ABE1827E335193A432F8884D6FEA51 /* AbnormalQTc.swift */,
-				6189972FF473640373A776C315FCFE7C /* Formulas.swift */,
-				6C63DF3B0903778B0716BB96012578B8 /* QTc.h */,
-				90D55318F4D4EC61F85D97580DBBD227 /* QTc.swift */,
-				A3B8F81F3BA5453E001BD4196C2BEBFF /* QtcRbk.swift */,
-				09683DB235B1F05D3E64008F3EABC203 /* QtMeasurement.swift */,
-				18580A0100BA0C1D6030CA205F66615F /* Pod */,
-				B58BAD2C35B8261EF2C62AA83CA30235 /* Support Files */,
+				C179D2DEEE711927C34079063F31EE1F /* QTc.modulemap */,
+				CF4A853ADB257DF342C6523E1F2EC794 /* QTc.xcconfig */,
+				33841D3F80C471D0D9BE62BFAF6752F6 /* QTc-dummy.m */,
+				E39CF0439B809A0A80D1D26F9E75DFC6 /* QTc-Info.plist */,
+				EC10EFEBF6AD4D1811D9706AB481F481 /* QTc-prefix.pch */,
+				22B8B1731EE23223B962E131A405C4E1 /* QTc-umbrella.h */,
 			);
-			name = QTc;
-			path = /Users/mannd/dev/QTc;
-			sourceTree = "<absolute>";
+			name = "Support Files";
+			path = "../Target Support Files/QTc";
+			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */,
-				810A5309195D0FE4B71CDC519DA866B7 /* Development Pods */,
 				39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */,
+				DDEACA660E0BB8B91E766737C4088458 /* Pods */,
 				A4865C0A359B3F16A02C884ECFEC54FD /* Products */,
 				7F50C37C2C76A4B4C58C7317B6AF4D42 /* Targets Support Files */,
 			);
@@ -163,12 +148,19 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		810A5309195D0FE4B71CDC519DA866B7 /* Development Pods */ = {
+		99DCEC5F4180A567D50A36F9A9AE9211 /* QTc */ = {
 			isa = PBXGroup;
 			children = (
-				67FB330CFA9EEA24327F4171E1689DFD /* QTc */,
+				38CC054415DE75B00C1B2F1702FE3C40 /* AbnormalQTc.swift */,
+				5E91F3DA02D593C303BE2EA6B338E912 /* Formulas.swift */,
+				7D169F255F66C71DF4336E41C880532D /* QTc.h */,
+				EB69C7F554AB3FF17FD1E5D2DA3446D1 /* QTc.swift */,
+				64ED9902964C1347299522D436EA810A /* QtcRbk.swift */,
+				F73EDA2EBBCEF078BCE7DD4DC4D6D2AF /* QtMeasurement.swift */,
+				5A4437D5EDBCE75B4A0DE34D42EAEB7A /* Support Files */,
 			);
-			name = "Development Pods";
+			name = QTc;
+			path = QTc;
 			sourceTree = "<group>";
 		};
 		A4865C0A359B3F16A02C884ECFEC54FD /* Products */ = {
@@ -179,20 +171,6 @@
 				DB4D231A1F8DA43A920A9D46FBB7D94C /* QTc.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B58BAD2C35B8261EF2C62AA83CA30235 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B587B5D1E6A7713BA63E00FD91C372FD /* QTc.modulemap */,
-				AC156DB54989C191103EFB513133E2AD /* QTc.xcconfig */,
-				3FB3E608B31C18BEEA57C32B65513EBE /* QTc-dummy.m */,
-				1A1983FD7897B9934893F29D1BC18E2B /* QTc-Info.plist */,
-				FC23B60E932B2D17A70C6549BD294C6F /* QTc-prefix.pch */,
-				ADFD1A883251946B707DE05430A7A996 /* QTc-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../MacOSX/EP Calipers/Pods/Target Support Files/QTc";
 			sourceTree = "<group>";
 		};
 		B9C629BF05A48192C42376E938397781 /* Pods-EP CalipersTests */ = {
@@ -226,6 +204,14 @@
 			);
 			name = "Pods-EP Calipers";
 			path = "Target Support Files/Pods-EP Calipers";
+			sourceTree = "<group>";
+		};
+		DDEACA660E0BB8B91E766737C4088458 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				99DCEC5F4180A567D50A36F9A9AE9211 /* QTc */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		E0A0F44171C587A61184070F950DD686 /* OS X */ = {
@@ -330,7 +316,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -425,8 +411,9 @@
 /* Begin XCBuildConfiguration section */
 		2D8E2E0BB5FE140EFDA1151A2B9E7FC2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC156DB54989C191103EFB513133E2AD /* QTc.xcconfig */;
+			baseConfigurationReference = CF4A853ADB257DF342C6523E1F2EC794 /* QTc.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -461,6 +448,7 @@
 			baseConfigurationReference = E46B5BF33BB3704C5DFF51A1D19C28AD /* Pods-EP Calipers.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -560,6 +548,7 @@
 			baseConfigurationReference = 7D375BA5E331A7B043BB2AFBCA280AFB /* Pods-EP Calipers.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -643,7 +632,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -651,8 +641,9 @@
 		};
 		803382EC4BB3652FB70B1744D3D7B5E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC156DB54989C191103EFB513133E2AD /* QTc.xcconfig */;
+			baseConfigurationReference = CF4A853ADB257DF342C6523E1F2EC794 /* QTc.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -687,6 +678,7 @@
 			baseConfigurationReference = 1C53BD101EA3B94356CC491D68BA8394 /* Pods-EP CalipersTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -722,6 +714,7 @@
 			baseConfigurationReference = 2184F039E06D409CB4D5DF628D499981 /* Pods-EP CalipersTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
