@@ -7,8 +7,8 @@ target 'EP Calipers' do
   use_frameworks!
 
   # Pods for EP QTc
-  # pod 'QTc', :git => 'https://github.com/mannd/QTc.git', :branch => 'master'
-  pod 'QTc', :path => '~/dev/QTc'
+  pod 'QTc', :git => 'https://github.com/mannd/QTc.git', :branch => 'master'
+  #pod 'QTc', :path => '~/dev/QTc'
   
   target 'EP CalipersTests' do
     inherit! :search_paths

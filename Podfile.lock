@@ -2,15 +2,21 @@ PODS:
   - QTc (3.4.1)
 
 DEPENDENCIES:
-  - QTc (from `~/dev/QTc`)
+  - QTc (from `https://github.com/mannd/QTc.git`, branch `master`)
 
 EXTERNAL SOURCES:
   QTc:
-    :path: "~/dev/QTc"
+    :branch: master
+    :git: https://github.com/mannd/QTc.git
+
+CHECKOUT OPTIONS:
+  QTc:
+    :commit: 49048895ab486b9bd8475674c44fd5b12060ea6e
+    :git: https://github.com/mannd/QTc.git
 
 SPEC CHECKSUMS:
   QTc: ede7a196a674e49a94a2e06be7a43347ceefae51
 
-PODFILE CHECKSUM: 2f384162f3e06433978db1ae5ce8b521acd89253
+PODFILE CHECKSUM: eb77c2c5ade8ffc8b0797c225e986ad943d606f8
 
 COCOAPODS: 1.6.0.beta.2
