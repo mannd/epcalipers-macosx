@@ -65,6 +65,7 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 | ⌘Del   | Supprimer tous les compas                   |
 | ^P     | Page précédente de multipage PDF            |
 | ^N     | Page suivante de multipage PDF              |
+| ⌥⌘G    | Aller à la page PDF                         |
 | ←      | Régler le composant vers la gauche          |
 | →      | Régler le composant vers la droite          |
 | ↑      | Régler le composant vers le haut            |

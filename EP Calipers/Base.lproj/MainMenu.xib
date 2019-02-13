@@ -394,8 +394,10 @@
                                     <action selector="nextPage:" target="-1" id="Cqt-dO-4kB"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Go to Page" keyEquivalent="g" id="F8h-Nk-s3y">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Go to Page" id="F8h-Nk-s3y">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CQ
+</string>
                                 <connections>
                                     <action selector="gotoPage:" target="-1" id="vKd-SH-Rpe"/>
                                 </connections>

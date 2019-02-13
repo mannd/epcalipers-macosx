@@ -18,7 +18,7 @@ Vous pouvez glisser-déposer un fichier d’image sur la fênetre d’applicatio
 ** Menu par clic-droit
 Même quand *Compas EP* n’est pas ouvert, vous pouvez utiliser le menu par clic-droit pour ouvrir un fichier d’image.  Le menu par clic-droit est ouvert soit par un clic-droit sur un fichier si vous avez une souris ou en utilisant le bouton gauche de souris avec la touche contrôle, ou, si vous avez un trackpad, en le tappant avec deux droigts.  Après la sélection de *Ouvrir avec* une liste d’applications apparaîtra.  *Compas EP* sera dans la liste d’applications qui peut ouvrir l’image.  Cliquer-le et l’application commencera avec l’image chargée.  Cette méthode est très utile en ouvrant de fichiers joints.
 ** PDFs à pages multiples
-Quand les fichiers PDF ont plus d'une page, l'application affichera la première page au début. Vous pouvez naviguer sur les autres pages avec la sélection des touches *^P* et *^N* ou en utilisant les commandes de menu *Image | Page précédente* et *Image | Page suivante*.
+Quand les fichiers PDF ont plus d'une page, l'application affichera la première page au début. Vous pouvez naviguer sur les autres pages avec la sélection des touches *^P* et *^N* ou en utilisant les commandes de menu *Image | Page précédente* et *Image | Page suivante*.  Naviguer à une page specifique en utilisant la commande de menu *Image | Aller à la page*.
 ** Charger un ECG d’/AliveCor™ Kardia/
 Les ECGs d’/AliveCor/ peuvent être enregistrés comme des fichiers PDF.  Charger-les avec les méthodes précédentes.
 * Ajustement de l’image

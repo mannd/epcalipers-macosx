@@ -18,7 +18,7 @@ You can drag and drop an image file onto the app window and it will load.
 ** Right click menu
 Even when *EP Calipers* is not open, you can use the right click menu to open an image file.  The right click menu is opened either by right clicking on a file if you have a mouse, or using the left mouse button with the Control key held down, or, if you have a track pad, two-finger tapping on the trackpad.  After selecting *Open With* a list of apps will appear.  *EP Calipers* will be on the list of apps that can open the image.  Click it and the app will start with the loaded image.  This method is especially useful for opening email attachments.
 ** Multi-page PDFs
-If you load a PDF file with multiple pages, the first page will be shown initially.  You can use the *Image | Previous Page* and *Next Page* menu items to change pages, or the /</ and />/ arrow keys on your keyboard.
+If you load a PDF file with multiple pages, the first page will be shown initially.  You can use the *Image | Previous Page* and *Next Page* menu items to change pages, or the ^P and ^N (Control-P and Control-N) keys on your keyboard.  Use *Image | Go to page* to jump to a specific PDF page.
 ** Opening /AliveCor™/ ECGs
 /AliveCor/ ECGs can be saved as PDF files.  Load them with any of the above methods.
 * Adjusting the image
