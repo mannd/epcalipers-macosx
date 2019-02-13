@@ -22,7 +22,7 @@ protocol QTcResultProtocol {
                    convertToMsec: Bool, units: String) -> String
 }
 
-class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination {
+class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation {
     let appName = NSLocalizedString("EP Calipers", comment:"")
     
     @IBOutlet weak var scrollView: NSScrollView!
@@ -43,6 +43,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet var qtcNumberInputView: NSView!
     @IBOutlet weak var qtcNumberStepper: NSStepper!
     @IBOutlet weak var qtcNumberTextField: NSTextField!
+
+    @IBOutlet var pageInputView: NSView!
+    @IBOutlet weak var pageTextField: NSTextField!
+    
+
     // Preferences accessory view
     @IBOutlet var preferencesAccessoryView: NSView!
     @IBOutlet weak var caliperColorWell: NSColorWell!
@@ -279,6 +284,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if menuItem.action == #selector(MainWindowController.previousPage(_:)) {
             return !transparent && imageIsPDF && pdfPageNumber > 0
         }
+        if menuItem.action == #selector(MainWindowController.gotoPage(_:)) {
+            return !transparent && imageIsPDF && numberOfPDFPages > 1
+        }
         if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
             return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
         }
@@ -419,6 +427,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         editor?.setFrameOrigin(NSMakePoint(400,200))
         editor?.dataSource = imageView
         editor?.makeKeyAndOrderFront(nil)
+    }
+    
+    @IBAction func gotoPage(_ sender: Any) {
+        NSLog("Go to page")
+        getPageNumber()
     }
     
     // Give up on Recenter after zoom
@@ -1229,6 +1242,31 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             inQTcStep1 = true
         }
         
+    }
+
+    func getPageNumber() {
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = NSLocalizedString("Go to page", comment:"")
+        alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
+        alert.addButton(withTitle: NSLocalizedString("Cancel", comment: ""))
+        alert.accessoryView = pageInputView
+        pageTextField.stringValue = String(pdfPageNumber + 1)
+        let result = alert.runModal()
+        if result == NSApplication.ModalResponse.alertFirstButtonReturn {
+            var pageNumber = pageTextField.integerValue - 1
+            if pageNumber < 0 {
+                pageNumber = 0
+            }
+            if pageNumber > numberOfPDFPages - 1{
+                pageNumber = numberOfPDFPages - 1
+            }
+            NSLog("page is %d", pageNumber)
+            pdfPageNumber = pageNumber
+            if let pdf = pdfRef {
+                showPDFPage(pdf, page: pdfPageNumber)
+            }
+        }
     }
     
     func doQTcStep1() {

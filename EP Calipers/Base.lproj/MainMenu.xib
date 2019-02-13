@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -394,6 +394,12 @@
                                     <action selector="nextPage:" target="-1" id="Cqt-dO-4kB"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Go to Page" keyEquivalent="g" id="F8h-Nk-s3y">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="gotoPage:" target="-1" id="vKd-SH-Rpe"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="Ujb-7A-52k"/>
                             <menuItem title="Image Editor" keyEquivalent="e" id="Eqb-7y-vN9">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
@@ -446,13 +452,13 @@ CA
                             <menuItem title="Calibrate" tag="3" keyEquivalent="c" id="bCr-le-ZI5">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
-                                    <action selector="addCaliper:" target="-1" id="bt5-up-YeT"/>
+                                    <action selector="addCaliper:" target="-1" id="hWK-BY-iq2"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Clear Calibration" id="CWG-n0-m2k">
+                            <menuItem title="Clear Calibration" tag="4" id="CWG-n0-m2k">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="addCaliper:" target="-1" id="wmy-f3-oAv"/>
+                                    <action selector="addCaliper:" target="-1" id="zP1-O0-4mE"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xvL-Ml-etX"/>

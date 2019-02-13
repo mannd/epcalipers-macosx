@@ -23,6 +23,8 @@
                 <outlet property="numberOfQTcMeanRRIntervalsTextField" destination="yA2-g0-kdT" id="bbU-Ey-VCJ"/>
                 <outlet property="numberStepper" destination="wW7-cL-Gjc" id="pqR-gf-OEb"/>
                 <outlet property="numberTextField" destination="lNA-AR-KId" id="lqF-rT-b4b"/>
+                <outlet property="pageInputView" destination="vou-9S-Ftl" id="0ZI-6S-7I3"/>
+                <outlet property="pageTextField" destination="iVo-tD-QmP" id="yCF-jp-0CM"/>
                 <outlet property="preferencesAccessoryView" destination="jm6-Ye-gwX" id="VtZ-nt-0Z5"/>
                 <outlet property="qtcNumberInputView" destination="qm3-V8-T6z" id="FBg-jx-FvI"/>
                 <outlet property="qtcNumberStepper" destination="v2D-1f-vok" id="g9f-dX-84r"/>
@@ -484,6 +486,37 @@
                 <constraint firstItem="8r0-Q5-TdV" firstAttribute="centerX" secondItem="qm3-V8-T6z" secondAttribute="centerX" id="jrr-4X-uPt"/>
             </constraints>
             <point key="canvasLocation" x="291" y="710"/>
+        </customView>
+        <customView id="vou-9S-Ftl">
+            <rect key="frame" x="0.0" y="0.0" width="173" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sz1-AL-cUb">
+                    <rect key="frame" x="18" y="40" width="39" height="17"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Page:" id="Rea-da-liX">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iVo-tD-QmP">
+                    <rect key="frame" x="63" y="37" width="90" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Xtx-km-eLm">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="E74-lQ-O3y"/>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Sz1-AL-cUb" firstAttribute="centerY" secondItem="vou-9S-Ftl" secondAttribute="centerY" id="26W-gz-QPm"/>
+                <constraint firstItem="Sz1-AL-cUb" firstAttribute="leading" secondItem="vou-9S-Ftl" secondAttribute="leading" constant="20" id="NgK-yv-bBg"/>
+                <constraint firstItem="iVo-tD-QmP" firstAttribute="leading" secondItem="Sz1-AL-cUb" secondAttribute="trailing" constant="8" id="Pld-gF-p5s"/>
+                <constraint firstAttribute="trailing" secondItem="iVo-tD-QmP" secondAttribute="trailing" constant="20" id="eUt-oA-gUI"/>
+                <constraint firstItem="iVo-tD-QmP" firstAttribute="centerY" secondItem="vou-9S-Ftl" secondAttribute="centerY" id="k8a-W0-dwc"/>
+            </constraints>
+            <point key="canvasLocation" x="82.5" y="863"/>
         </customView>
     </objects>
 </document>
