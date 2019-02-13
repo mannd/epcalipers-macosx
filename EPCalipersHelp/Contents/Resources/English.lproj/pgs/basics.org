@@ -57,33 +57,34 @@ Note that not all toolbar buttons will be available all the time, depending on w
 ** Menus
 Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
 ** Keyboard shortcuts
-| Key  | Function                             |   |
-|------+--------------------------------------+---|
-| ⇧⌃R  | Rotate image 90° right               |   |
-| ⇧⌃L  | Rotate image 90° left                |   |
-| ⌃R   | Rotate image 1° right                |   |
-| ⌃L   | Rotate image 1° left                 |   |
-| ⌘R   | Rotate image 0.1 right               |   |
-| ⌘L   | Rotate image 0.1 left                |   |
-| ⌃0   | Reset image rotation                 |   |
-| ⌘+   | Zoom in                              |   |
-| ⌘-   | Zoom out                             |   |
-| ⌘=   | Zoom to actual size                  |   |
-| ⌃E   | Image editor                         |   |
-| ⌃T   | Add time caliper                     |   |
-| ⌃A   | Add amplitude caliper                |   |
-| ⌃G   | Add angle caliper                    |   |
-| ⌃C   | Calibrate                            |   |
-| Del  | Delete selected caliper              |   |
-| ⌘Del | Delete all calipers                  |   |
-| ^P   | Prev page of multipage PDF           |   |
-| ^N   | Next page of multipage PDF           |   |
-| ←    | Tweak caliper component left         |   |
-| →    | Tweak caliper component right        |   |
-| ↑    | Tweak caliper component up           |   |
-| ↓    | Tweak caliper component down         |   |
-| ⌘←   | Finely tweak caliper component left  |   |
-| ⌘→   | Finely tweak caliper component right |   |
-| ⌘↑   | Finely tweak caliper component up    |   |
-| ⌘↓   | Finely tweak caliper component down  |   |
-| ⌘,   | Open preferences                     |   |
+| Key  | Function                             |
+|------+--------------------------------------|
+| ⇧⌃R  | Rotate image 90° right               |
+| ⇧⌃L  | Rotate image 90° left                |
+| ⌃R   | Rotate image 1° right                |
+| ⌃L   | Rotate image 1° left                 |
+| ⌘R   | Rotate image 0.1 right               |
+| ⌘L   | Rotate image 0.1 left                |
+| ⌃0   | Reset image rotation                 |
+| ⌘+   | Zoom in                              |
+| ⌘-   | Zoom out                             |
+| ⌘=   | Zoom to actual size                  |
+| ⌃E   | Image editor                         |
+| ⌃T   | Add time caliper                     |
+| ⌃A   | Add amplitude caliper                |
+| ⌃G   | Add angle caliper                    |
+| ⌃C   | Calibrate                            |
+| Del  | Delete selected caliper              |
+| ⌘Del | Delete all calipers                  |
+| ^P   | Prev page of multipage PDF           |
+| ^N   | Next page of multipage PDF           |
+| ⌥⌘G  | Go to PDF page                       |
+| ←    | Tweak caliper component left         |
+| →    | Tweak caliper component right        |
+| ↑    | Tweak caliper component up           |
+| ↓    | Tweak caliper component down         |
+| ⌘←   | Finely tweak caliper component left  |
+| ⌘→   | Finely tweak caliper component right |
+| ⌘↑   | Finely tweak caliper component up    |
+| ⌘↓   | Finely tweak caliper component down  |
+| ⌘,   | Open preferences                     |
