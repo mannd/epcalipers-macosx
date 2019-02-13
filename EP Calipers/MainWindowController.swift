@@ -22,7 +22,7 @@ protocol QTcResultProtocol {
                    convertToMsec: Bool, units: String) -> String
 }
 
-class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination {
+class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation {
     let appName = NSLocalizedString("EP Calipers", comment:"")
     
     @IBOutlet weak var scrollView: NSScrollView!
