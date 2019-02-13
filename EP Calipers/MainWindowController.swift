@@ -1247,7 +1247,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func getPageNumber() {
         let alert = NSAlert()
         alert.alertStyle = .informational
-        alert.messageText = NSLocalizedString("Go to PDF page", comment:"")
+        alert.messageText = NSLocalizedString("Go to page", comment:"")
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.addButton(withTitle: NSLocalizedString("Cancel", comment: ""))
         alert.accessoryView = pageInputView
