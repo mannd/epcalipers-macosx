@@ -394,6 +394,12 @@
                                     <action selector="nextPage:" target="-1" id="Cqt-dO-4kB"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Go to Page" keyEquivalent="g" id="F8h-Nk-s3y">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="gotoPage:" target="-1" id="vKd-SH-Rpe"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="Ujb-7A-52k"/>
                             <menuItem title="Image Editor" keyEquivalent="e" id="Eqb-7y-vN9">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
