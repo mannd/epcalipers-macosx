@@ -23,6 +23,7 @@
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
 		8E545CA91F95A27500B1CEB0 /* QTcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E545CA81F95A27500B1CEB0 /* QTcResult.swift */; };
 		8E6834E7216FEA120099CEFF /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6834E6216FEA120099CEFF /* PanelView.swift */; };
+		8E74037E223B538A002D5ED6 /* sampleECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E74037D223B538A002D5ED6 /* sampleECG.jpg */; };
 		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
 		8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */; };
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
@@ -104,6 +105,7 @@
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E545CA81F95A27500B1CEB0 /* QTcResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTcResult.swift; sourceTree = "<group>"; };
 		8E6834E6216FEA120099CEFF /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
+		8E74037D223B538A002D5ED6 /* sampleECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleECG.jpg; sourceTree = "<group>"; };
 		8E7C36D11F2ED89000E5FDA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View.xib; sourceTree = "<group>"; };
 		8E7C36D31F2ED94F00E5FDA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/View.strings; sourceTree = "<group>"; };
 		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 		8E3DA7EF1C2E264000AD9556 /* EP Calipers */ = {
 			isa = PBXGroup;
 			children = (
+				8E74037D223B538A002D5ED6 /* sampleECG.jpg */,
 				8E7C36CE1F2ED88200E5FDA8 /* View.xib */,
 				8E2867821F2A5CD700AF335C /* Localizable.strings */,
 				8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */,
@@ -402,6 +405,7 @@
 				8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */,
 				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */,
+				8E74037E223B538A002D5ED6 /* sampleECG.jpg in Resources */,
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
 				8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */,
 				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,

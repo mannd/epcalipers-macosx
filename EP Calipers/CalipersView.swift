@@ -24,8 +24,6 @@ class CalipersView: NSView {
     var calipersMode = false
     var calipers: [Caliper] = []
     var lockedMode = false
-    // not sure if still need this
-    var locked = false
     var selectedCaliper: Caliper? = nil
     var mouseWasDragged = false
     var bar1Selected = false
@@ -63,7 +61,7 @@ class CalipersView: NSView {
     
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(NSResponder.deleteBackward(_:)) {
-            return !locked && !noCaliperIsSelected()
+            return !noCaliperIsSelected()
         }
         if menuItem.action == #selector(colorCaliper(_:)) || menuItem.action == #selector(tweakCaliper(_:)) {
             return chosenCaliper != nil
@@ -264,7 +262,7 @@ class CalipersView: NSView {
     
     override func mouseUp(with theEvent: NSEvent) {
         if selectedCaliper != nil {
-            if !mouseWasDragged && !locked {
+            if !mouseWasDragged {
                 if theEvent.clickCount == 1 {
                     toggleCaliperState()
                 }
@@ -314,6 +312,16 @@ class CalipersView: NSView {
         var noneSelected = true
         for c in calipers {
             if c.selected {
+                noneSelected = false
+            }
+        }
+        return noneSelected
+    }
+
+    func noTimeCaliperIsSelected() -> Bool {
+        var noneSelected = true
+        for c in calipers {
+            if c.selected && c.isTimeCaliper() {
                 noneSelected = false
             }
         }
@@ -386,9 +394,6 @@ class CalipersView: NSView {
     }
     
     override func deleteBackward(_ sender: Any?) {
-        if locked {
-            return
-        }
         for c in calipers {
             if c.selected {
                 calipers.remove(at: calipers.index(of: c)!)

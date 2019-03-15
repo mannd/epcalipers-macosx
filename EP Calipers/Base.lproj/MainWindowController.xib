@@ -8,7 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
-                <outlet property="calipersSegementedControl" destination="80d-Qz-dhr" id="SBu-di-cRc"/>
+                <outlet property="calipersSegmentedControl" destination="80d-Qz-dhr" id="SBu-di-cRc"/>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
                 <outlet property="imageView" destination="oIK-MS-rQb" id="tvd-y9-ClO"/>
                 <outlet property="measurementSegmentedControl" destination="7Ej-cN-zsf" id="Hhd-nv-Ud9"/>
