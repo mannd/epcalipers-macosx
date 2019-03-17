@@ -1026,6 +1026,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         clearMessage()
         inCalibration = false
         navigationSegmentedControl.isEnabled = false
+        measurementSegmentedControl.isEnabled = calipersView.horizontalCalibration.calibrated 
     }
     
     func showMessage(_ message: String) {
