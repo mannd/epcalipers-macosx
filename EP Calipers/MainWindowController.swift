@@ -28,7 +28,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
-    @IBOutlet weak var calipersSegementedControl: NSSegmentedControl!
+    @IBOutlet weak var calipersSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var messageLabel: NSTextField!
     @IBOutlet weak var navigationSegmentedControl: NSSegmentedControl!
@@ -216,7 +216,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.delegate = self
         qtcNumberTextField.delegate = self
         
-        if let path = Bundle.main.path(forResource: "Normal 12_Lead ECG", ofType: "jpg") {
+        if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg") {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
@@ -270,16 +270,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         return false
     }
 
-
+    // TODO: handle shutting down calibration and clear calibration in both menu
+    // and toolbar when doing meanRR or QTc, otherwise calibration buttons shut off
+    // permanently!
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !transparent && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
         if menuItem.action == #selector(MainWindowController.doMeasurement(_:)) {
-            return calipersView.horizontalCalibration.calibrated && !calipersView.locked && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate
-        }
-        if menuItem.action == #selector(MainWindowController.addCaliper(_:)) {
-            return !calipersView.locked
+            return calipersView.horizontalCalibration.calibrated && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate
         }
         if menuItem.action == #selector(MainWindowController.previousPage(_:)) {
             return !transparent && imageIsPDF && pdfPageNumber > 0
@@ -299,10 +298,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if menuItem.action == #selector(openImage(_:)) {
             return !transparent
         }
+        if menuItem.action == #selector(doCalibration(_:)) {
+            return !doingMeasurement()
+        }
         if menuItem.action == #selector(deleteAllCalipers(_:)) {
-            return !calipersView.locked && !(calipersView.calipers.count < 1)
+            return !(calipersView.calipers.count < 1)
         }
         return true
+    }
+
+    private func doingMeasurement() -> Bool {
+        return inMeanRR || inQTcStep1 || inQTcStep2
     }
 
     // TODO: map popupbutton for text position to actual text positions, both directions
@@ -869,17 +875,25 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             break
         }
     }
+
+    @IBAction func doCalibration(_ sender: AnyObject) {
+        let calibrationTag = sender.tag
+        switch calibrationTag {
+        case 3:
+            calibrateWithPossiblePrompts()
+        case 4:
+            clearCalibration()
+        default:
+            break
+        }
+
+    }
     
     @IBAction func deleteAllCalipers(_ sender: AnyObject) {
         calipersView.deleteAllCalipers()
     }
     
     func calibrateWithPossiblePrompts() {
-        // not allowed to calibrate in middle of a measurement
-        if calipersView.locked || inMeanRR {
-            NSSound.beep()
-            return
-        }
         if appPreferences.showPrompts {
             if inCalibration {
                 // user pressed Calibrate again instead of Next, it's OK, do what s/he wants
@@ -1012,6 +1026,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         clearMessage()
         inCalibration = false
         navigationSegmentedControl.isEnabled = false
+        measurementSegmentedControl.isEnabled = calipersView.horizontalCalibration.calibrated 
     }
     
     func showMessage(_ message: String) {
@@ -1110,11 +1125,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func resetCalibration() {
-        // not allowed to do cal stuff in middle of measurement
-        if calipersView.locked || inMeanRR {
-            NSSound.beep()
-            return
-        }
+        // calibration buttons locked during QTc and MeanRR
         // if nothing else, clear messages
         exitCalibration()
         if calipersView.horizontalCalibration.calibrated ||
@@ -1139,6 +1150,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 meanRR()
                 return
             }
+            calipersSegmentedControl.setEnabled(false, forSegment: 3)
+            calipersSegmentedControl.setEnabled(false, forSegment: 4)
             showMessage(NSLocalizedString("Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel.", comment:""))
             navigationSegmentedControl.isEnabled = true
             // don't allow pressing QTc button in middle of meanRR
@@ -1161,15 +1174,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.selectCaliper(caliper)
             calipersView.unselectCalipersExcept(caliper)
         }
-        if calipersView.noCaliperIsSelected() {
+        if calipersView.noTimeCaliperIsSelected() {
             showNoTimeCaliperSelectedAlert()
             return
         }
         if let c = calipersView.activeCaliper() {
-            if c.direction == .vertical {
-                showNoTimeCaliperSelectedAlert()
-                return
-            }
             if meanIntervalAlert == nil {
                 let alert = NSAlert()
                 alert.messageText = NSLocalizedString("Enter number of intervals", comment:"")
@@ -1186,7 +1195,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
-                    return
+                    exitMeanRR()
                 }
                 // get integer from the stepper
                 let divisor = numberStepper.integerValue
@@ -1204,6 +1213,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func exitMeanRR() {
         clearMessage()
         inMeanRR = false
+        calipersSegmentedControl.setEnabled(true, forSegment: 3)
+        calipersSegmentedControl.setEnabled(true, forSegment: 4)
         navigationSegmentedControl.isEnabled = false
         measurementSegmentedControl.setEnabled(true, forSegment: 2)
     }
@@ -1211,10 +1222,18 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func calculateQTc() {
         if inQTcStep1 {
             // user pressed QTc button instead of Next.  That's OK
+            if calipersView.noTimeCaliperIsSelected() {
+                showNoTimeCaliperSelectedAlert()
+                return
+            }
             doQTcStep1()
             return
         }
         if inQTcStep2 {
+            if calipersView.noTimeCaliperIsSelected() {
+                showNoTimeCaliperSelectedAlert()
+                return
+            }
             doQTcResult()
             return
         }
@@ -1228,20 +1247,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.selectCaliper(caliper)
             calipersView.unselectCalipersExcept(caliper)
         }
-        if calipersView.noCaliperIsSelected() {
+        if calipersView.noTimeCaliperIsSelected() {
             showNoTimeCaliperSelectedAlert()
             return
         }
-        if let c = calipersView.activeCaliper() {
-            if c.direction == .vertical {
-                showNoTimeCaliperSelectedAlert()
-                return
-            }
-            enterQTc()
-            showMessage(NSLocalizedString("Measure 1 or more RR intervals.  Select Next to continue.", comment:""))
-            inQTcStep1 = true
-        }
-        
+        enterQTc()
+        showMessage(NSLocalizedString("Measure 1 or more RR intervals.  Select Next to continue.", comment:""))
+        inQTcStep1 = true
     }
 
     func getPageNumber() {
@@ -1337,19 +1349,22 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func enterQTc() {
         navigationSegmentedControl.isEnabled = true
         // don't mess with calibration during QTc measurment
-        calipersSegementedControl.isEnabled = false
+//        calipersSegmentedControl.isEnabled = false
+        calipersSegmentedControl.setEnabled(false, forSegment: 3)
+        calipersSegmentedControl.setEnabled(false, forSegment: 4)
+
         // don't allow pushing R/I or meanRR buttons either
         measurementSegmentedControl.setEnabled(false, forSegment: 0)
         measurementSegmentedControl.setEnabled(false, forSegment: 1)
-        calipersView.locked = true
     }
 
     func exitQTc() {
         navigationSegmentedControl.isEnabled = false
-        calipersSegementedControl.isEnabled = true
+        calipersSegmentedControl.isEnabled = true
+        calipersSegmentedControl.setEnabled(true, forSegment: 3)
+        calipersSegmentedControl.setEnabled(true, forSegment: 4)
         measurementSegmentedControl.setEnabled(true, forSegment: 0)
         measurementSegmentedControl.setEnabled(true, forSegment: 1)
-        calipersView.locked = false
         clearMessage()
         inQTcStep1 = false
         inQTcStep2 = false
@@ -1357,9 +1372,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     func doNextQTcStep() {
         if inQTcStep1 {
+            if calipersView.noTimeCaliperIsSelected() {
+                showNoTimeCaliperSelectedAlert()
+                return
+            }
             doQTcStep1()
         }
         else if inQTcStep2 {
+            if calipersView.noTimeCaliperIsSelected() {
+                showNoTimeCaliperSelectedAlert()
+                return
+            }
             doQTcResult()
         }
     }
