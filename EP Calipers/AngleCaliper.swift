@@ -186,23 +186,28 @@ class AngleCaliper: Caliper {
     func baseMeasurement(_ lengthInPoints: Double) -> String {
         var s: String
         var format: NSString
-        switch rounding {
-        case .ToInteger:
-            format = roundToIntString
-        case .ToFourPlaces:
-            format = roundToFourPlacesString
-        case .ToTenths:
-            format = roundToTenthsString
-        case .ToHundredths:
-            format = roundToHundredthsString
-        case .None:
-            format = noRoundingString
-        }
-        if rounding == .ToInteger {
-            s = NSString.localizedStringWithFormat(format, Int(calibratedBaseResult(lengthInPoints)), calibration.rawUnits) as String
+        if (calibration.unitsAreMsec) {
+            switch rounding {
+            case .ToInteger:
+                format = roundToIntString
+            case .ToFourPlaces:
+                format = roundToFourPlacesString
+            case .ToTenths:
+                format = roundToTenthsString
+            case .ToHundredths:
+                format = roundToHundredthsString
+            case .None:
+                format = noRoundingString
+            }
+            if rounding == .ToInteger {
+                s = NSString.localizedStringWithFormat(format, Int(calibratedBaseResult(lengthInPoints)), calibration.rawUnits) as String
+            }
+            else {
+                s = NSString.localizedStringWithFormat(format, calibratedBaseResult(lengthInPoints), calibration.rawUnits) as String
+            }
         }
         else {
-            s = NSString.localizedStringWithFormat(format, calibratedBaseResult(lengthInPoints), calibration.rawUnits) as String
+            s = NSString.localizedStringWithFormat(roundToFourPlacesString, calibratedBaseResult(lengthInPoints), calibration.units) as String
         }
         return s
     }
