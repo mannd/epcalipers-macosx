@@ -350,7 +350,7 @@
 					8E3DA7EC1C2E264000AD9556 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = W74NPJXYEG;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -360,7 +360,7 @@
 					};
 					8E3DA7FB1C2E264000AD9556 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = 8E3DA7EC1C2E264000AD9556;
 					};
 					8E3DA8061C2E264000AD9556 = {
@@ -714,7 +714,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EP Calipers/EP Calipers-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -739,7 +739,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EP Calipers/EP Calipers-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -753,7 +753,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EP Calipers.app/Contents/MacOS/EP Calipers";
 			};
 			name = Debug;
@@ -769,7 +769,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EP Calipers.app/Contents/MacOS/EP Calipers";
 			};
 			name = Release;

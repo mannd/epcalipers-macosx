@@ -269,7 +269,7 @@ class CalipersView: NSView {
                 else {  // at least double click
                     for c in calipers {
                         if c == selectedCaliper {
-                            calipers.remove(at: calipers.index(of: c)!)
+                            calipers.remove(at: calipers.firstIndex(of: c)!)
                         }
                         needsDisplay = true
                     }
@@ -396,7 +396,7 @@ class CalipersView: NSView {
     override func deleteBackward(_ sender: Any?) {
         for c in calipers {
             if c.selected {
-                calipers.remove(at: calipers.index(of: c)!)
+                calipers.remove(at: calipers.firstIndex(of: c)!)
                 needsDisplay = true
             }
         }
