@@ -372,7 +372,7 @@
 			};
 			buildConfigurationList = 8E3DA7E81C2E264000AD9556 /* Build configuration list for PBXProject "EP Calipers" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
