@@ -8,6 +8,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
 * [[../../shrd/icon_32x32@2x.png]] Images
 Parmi les images sont des formats typiques comme JPG et PNG ansi que les fichiers PDF.  Quand vous démarrez *Compas EP* un exemple ECG est chargé.  Pour charger votre images ECG vous utilisez l’une des techniques suivantes.
 * Charger une image

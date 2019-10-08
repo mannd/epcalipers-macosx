@@ -8,6 +8,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
 * [[../../shrd/icon_32x32@2x.png]] Introduction 
 ** Vous êtes encore de garde ...
 Il est 2h00 du matin et le téléphone sonne.  C'est une infirmière des soins intensifs du département de cardiologie.  Il faut que M. Smith reçoive son médicament antiarythmique (qui crée ces calendriers de médicaments farfelus?) et son ECG a un intervalle QTc qui est un peu prolongé, selon l'ordinateur.  L'infirmière craint que l'administration soit dangereuse.  Elle veut vous transmettre l'ECG.
