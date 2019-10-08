@@ -125,6 +125,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 calipersView.deleteAllCalipers()
                 scrollView.drawsBackground = false
                 window?.backgroundColor = NSColor.clear
+                messageLabel.textColor = NSColor.white
                 imageView.isHidden = true
                 imageView.currentToolMode = IKToolModeMove
                 // deal with title
@@ -133,6 +134,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             else {
                 scrollView.drawsBackground = true
                 window?.backgroundColor = NSColor.windowBackgroundColor
+                messageLabel.textColor = NSColor.labelColor
                 imageView.isHidden = false
                 imageView.currentToolMode = IKToolModeMove
                 if let title = oldWindowTitle {

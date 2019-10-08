@@ -15,7 +15,8 @@ class PanelView: NSView {
     }
 
     override func updateLayer() {
-        self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        //self.layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
+        //self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
     }
 
     override func draw(_ dirtyRect: NSRect) {
