@@ -12,6 +12,9 @@ class PanelView: NSView {
 
     override func viewWillDraw() {
         super.viewWillDraw()
+    }
+
+    override func updateLayer() {
         self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
     }
 

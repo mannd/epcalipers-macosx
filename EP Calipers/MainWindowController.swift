@@ -146,6 +146,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             self.window?.display()
         }
     }
+
+
         
     override var windowNibName: NSNib.Name? {
         return "MainWindowController"
