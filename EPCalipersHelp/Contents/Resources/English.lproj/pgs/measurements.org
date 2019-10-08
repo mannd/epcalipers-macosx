@@ -8,6 +8,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
 * [[../../shrd/icon_32x32@2x.png]] Making measurements
 ** Caliper interval
 The interval measured by each caliper is displayed on top of or next to the crossbar of the caliper.  Until the calipers are calibrated, measurements are displayed in arbitrary units (/points/, roughly equivalent to screen pixels).  Angle calipers show a measurement of the current angle in degrees and do not need to be calibrated to display angles.

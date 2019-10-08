@@ -8,6 +8,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="AppleTitle" content="EP Calipers Help" />
+#+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
 * [[../shrd/icon_32x32@2x.png]] Aide de Compas EP
 * [[./pgs/basics.html][Introduction]]
 La justification et l’utilisation essentielle.

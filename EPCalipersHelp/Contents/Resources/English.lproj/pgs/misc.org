@@ -7,6 +7,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
 * [[../../shrd/icon_32x32@2x.png]] Acknowledgments
 - Thanks to Dr. Michael Katz for the concept.
 - Thanks to Dr. Adrian Baranchuk and his colleagues at Queen's University Kingston, Ontario, Canada for the concept of the Brugadometer and for assistance in implementing this algorithm.
