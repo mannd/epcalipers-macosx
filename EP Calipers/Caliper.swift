@@ -78,9 +78,9 @@ class Caliper: NSObject {
         self.bar1Position = bar1Position
         self.bar2Position = bar2Position
         self.crossBarPosition = crossBarPosition
-        self.color = NSColor.blue
-        self.unselectedColor = NSColor.blue
-        self.selectedColor = NSColor.red
+        self.color = NSColor.systemBlue
+        self.unselectedColor = NSColor.systemBlue
+        self.selectedColor = NSColor.systemRed
         self.lineWidth = 2
         self.selected = false
         self.textFont = NSFont(name: "Helvetica Neue Medium", size: 18.0) ?? NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.medium)

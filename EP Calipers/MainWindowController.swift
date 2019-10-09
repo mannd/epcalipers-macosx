@@ -209,12 +209,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         appPreferences.loadPreferences()
         // need to manually register colors, using extension to NSUserDefaults
         if (appPreferences.caliperColor == nil) {
-            UserDefaults.standard.setColor(NSColor.blue, forKey:"caliperColorKey")
-            appPreferences.caliperColor = NSColor.blue
+            UserDefaults.standard.setColor(NSColor.systemBlue, forKey:"caliperColorKey")
+            appPreferences.caliperColor = NSColor.systemBlue
         }
         if (appPreferences.highlightColor == nil) {
-            UserDefaults.standard.setColor(NSColor.red, forKey: "highlightColorKey")
-            appPreferences.highlightColor = NSColor.red
+            UserDefaults.standard.setColor(NSColor.systemRed, forKey: "highlightColorKey")
+            appPreferences.highlightColor = NSColor.systemRed
         }
         Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
