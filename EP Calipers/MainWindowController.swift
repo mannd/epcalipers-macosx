@@ -144,6 +144,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     self.window?.title = appName
                 }
             }
+            // Make sure calibration button not stuck off if in middle of QTc measurement.
+            exitQTc()
             // Need to force window display, otherwise black background sometimes drawn
             self.window?.display()
         }
