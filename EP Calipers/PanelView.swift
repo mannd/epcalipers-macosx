@@ -12,11 +12,14 @@ class PanelView: NSView {
 
     override func viewWillDraw() {
         super.viewWillDraw()
+        print("PanelView viewWillDraw()")
+        self.layer?.backgroundColor = NSColor.controlColor.cgColor
+//        self.layer?.backgroundColor = NSColor.systemGray.cgColor
     }
 
     override func updateLayer() {
+        print("PanelView updateLayer()")
         //self.layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
-        //self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
     }
 
     override func draw(_ dirtyRect: NSRect) {
