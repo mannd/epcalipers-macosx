@@ -46,8 +46,8 @@ public enum Rounding: Int {
 
 
 class Preferences: NSObject {
-    var caliperColor: NSColor? = NSColor.blue
-    var highlightColor: NSColor? = NSColor.red
+    var caliperColor: NSColor? = NSColor.systemBlue
+    var highlightColor: NSColor? = NSColor.systemRed
     var lineWidth: Int = 2
     var defaultCalibration: String? = "1000 msec"
     var defaultVerticalCalibration: String? = "10 mm"

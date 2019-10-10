@@ -24,7 +24,8 @@ protocol QTcResultProtocol {
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation {
     let appName = NSLocalizedString("EP Calipers", comment:"")
-    
+
+    @IBOutlet weak var panelView: NSView!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
@@ -101,10 +102,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     var imageIsPDF = false
     var pdfRef: NSPDFImageRep? = nil
     
-    
     var oldWindowTitle : String? = nil
     var lastMessage: String? = ""
-    
+
     private var isTransparent: Bool = false
     var transparent : Bool {
         get {
@@ -125,6 +125,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 calipersView.deleteAllCalipers()
                 scrollView.drawsBackground = false
                 window?.backgroundColor = NSColor.clear
+                messageLabel.textColor = NSColor.white
                 imageView.isHidden = true
                 imageView.currentToolMode = IKToolModeMove
                 // deal with title
@@ -133,6 +134,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             else {
                 scrollView.drawsBackground = true
                 window?.backgroundColor = NSColor.windowBackgroundColor
+                messageLabel.textColor = NSColor.labelColor
                 imageView.isHidden = false
                 imageView.currentToolMode = IKToolModeMove
                 if let title = oldWindowTitle {
@@ -142,10 +144,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     self.window?.title = appName
                 }
             }
+            // Make sure calibration button not stuck off if in middle of QTc measurement.
+            exitQTc()
             // Need to force window display, otherwise black background sometimes drawn
             self.window?.display()
         }
     }
+
+
         
     override var windowNibName: NSNib.Name? {
         return "MainWindowController"
@@ -158,9 +164,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String)
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboard.PasteboardType.tiff]
         self.window!.registerForDraggedTypes(types)
-        
 
-        
         imageView.editable = true
         // below is no longer true, open IKImageEditPanel only from menu
         imageView.doubleClickOpensImageEditPanel = false
@@ -203,12 +207,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         appPreferences.loadPreferences()
         // need to manually register colors, using extension to NSUserDefaults
         if (appPreferences.caliperColor == nil) {
-            UserDefaults.standard.setColor(NSColor.blue, forKey:"caliperColorKey")
-            appPreferences.caliperColor = NSColor.blue
+            UserDefaults.standard.setColor(NSColor.systemBlue, forKey:"caliperColorKey")
+            appPreferences.caliperColor = NSColor.systemBlue
         }
         if (appPreferences.highlightColor == nil) {
-            UserDefaults.standard.setColor(NSColor.red, forKey: "highlightColorKey")
-            appPreferences.highlightColor = NSColor.red
+            UserDefaults.standard.setColor(NSColor.systemRed, forKey: "highlightColorKey")
+            appPreferences.highlightColor = NSColor.systemRed
         }
         Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
@@ -220,10 +224,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
-        // window must be non opaque for transparency to work
         self.window?.isOpaque = false
+
+
         transparent = appPreferences.transparency
         calipersView.delegate = self
+
     }
     
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
