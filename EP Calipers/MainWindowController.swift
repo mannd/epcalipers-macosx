@@ -111,16 +111,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return isTransparent
         }
         set (newValue) {
-            // do nothing if value unchanged
-            if (newValue == isTransparent) {
-                return;
-            }
             isTransparent = newValue
             setTransparency()
         }
     }
 
     func setTransparency() {
+        print("setTransparency()")
         zoomSegmentedControl.isEnabled = !isTransparent
         calipersView.lockedMode = isTransparent
         clearCalibration()
@@ -130,7 +127,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.deleteAllCalipers()
             scrollView.drawsBackground = false
             window?.backgroundColor = NSColor.clear
-            panelView.layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
             messageLabel.textColor = NSColor.white
             imageView.isHidden = true
             imageView.currentToolMode = IKToolModeMove
@@ -140,7 +136,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         else {
             scrollView.drawsBackground = true
             window?.backgroundColor = NSColor.windowBackgroundColor
-            panelView.layer?.backgroundColor = nil
             messageLabel.textColor = NSColor.labelColor
             imageView.isHidden = false
             imageView.currentToolMode = IKToolModeMove
@@ -154,7 +149,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // Make sure calibration button not stuck off if in middle of QTc measurement.
         exitQTc()
         // Need to force window display, otherwise black background sometimes drawn
-        self.window?.display()
+//        self.window?.display()
     }
         
     override var windowNibName: NSNib.Name? {
@@ -162,7 +157,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     override func awakeFromNib() {
-        
+        print("awakeFromNib")
         // 2 lines below added for Swift 
         let NSURLPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeURL as String)
         let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String)
@@ -190,6 +185,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     override func windowDidLoad() {
+        print("windowDidLoad")
         // register preference defaults
         super.windowDidLoad()
         let defaults = [
@@ -230,12 +226,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         self.window?.isOpaque = false
 
-
         transparent = appPreferences.transparency
-        setTransparency()
         calipersView.delegate = self
-
     }
+
+
     
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
         if checkExtension(sender) == true {
