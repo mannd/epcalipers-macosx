@@ -24,7 +24,8 @@ protocol QTcResultProtocol {
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation {
     let appName = NSLocalizedString("EP Calipers", comment:"")
-    
+
+    @IBOutlet weak var panelView: NSView!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
@@ -101,10 +102,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     var imageIsPDF = false
     var pdfRef: NSPDFImageRep? = nil
     
-    
     var oldWindowTitle : String? = nil
     var lastMessage: String? = ""
-    
+
     private var isTransparent: Bool = false
     var transparent : Bool {
         get {
@@ -164,9 +164,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String)
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboard.PasteboardType.tiff]
         self.window!.registerForDraggedTypes(types)
-        
 
-        
         imageView.editable = true
         // below is no longer true, open IKImageEditPanel only from menu
         imageView.doubleClickOpensImageEditPanel = false
@@ -226,10 +224,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
-        // window must be non opaque for transparency to work
         self.window?.isOpaque = false
+
+
         transparent = appPreferences.transparency
         calipersView.delegate = self
+
     }
     
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {

@@ -14,6 +14,7 @@
                 <outlet property="measurementSegmentedControl" destination="7Ej-cN-zsf" id="Hhd-nv-Ud9"/>
                 <outlet property="messageLabel" destination="7Kx-dG-EsR" id="cbR-jv-99t"/>
                 <outlet property="navigationSegmentedControl" destination="8Qk-Lr-dNR" id="exd-vp-4Cn"/>
+                <outlet property="panelView" destination="2zd-0Q-IMq" id="Ami-Pt-uXd"/>
                 <outlet property="scrollView" destination="AxA-IY-0Zx" id="E2e-dv-DLM"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
                 <outlet property="zoomSegmentedControl" destination="IkW-Sz-7Vn" id="Rwl-87-hgS"/>
@@ -60,7 +61,7 @@
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="14" width="786" height="408"/>
                     </customView>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="2zd-0Q-IMq" customClass="PanelView" customModule="EP_Calipers" customModuleProvider="target">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="2zd-0Q-IMq">
                         <rect key="frame" x="0.0" y="422" width="800" height="60"/>
                         <subviews>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IkW-Sz-7Vn">
