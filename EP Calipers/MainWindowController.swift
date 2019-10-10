@@ -116,42 +116,46 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 return;
             }
             isTransparent = newValue
-            zoomSegmentedControl.isEnabled = !isTransparent
-            calipersView.lockedMode = isTransparent
-            clearCalibration()
-            if isTransparent {
-                // Calipers sometimes leave ghosts during transition to transparent mode
-                // in Mojave.
-                calipersView.deleteAllCalipers()
-                scrollView.drawsBackground = false
-                window?.backgroundColor = NSColor.clear
-                messageLabel.textColor = NSColor.white
-                imageView.isHidden = true
-                imageView.currentToolMode = IKToolModeMove
-                // deal with title
-                self.window?.title = appName
-            }
-            else {
-                scrollView.drawsBackground = true
-                window?.backgroundColor = NSColor.windowBackgroundColor
-                messageLabel.textColor = NSColor.labelColor
-                imageView.isHidden = false
-                imageView.currentToolMode = IKToolModeMove
-                if let title = oldWindowTitle {
-                    self.window?.setTitleWithRepresentedFilename(title)
-                }
-                else {
-                    self.window?.title = appName
-                }
-            }
-            // Make sure calibration button not stuck off if in middle of QTc measurement.
-            exitQTc()
-            // Need to force window display, otherwise black background sometimes drawn
-            self.window?.display()
+            setTransparency()
         }
     }
 
-
+    func setTransparency() {
+        zoomSegmentedControl.isEnabled = !isTransparent
+        calipersView.lockedMode = isTransparent
+        clearCalibration()
+        if isTransparent {
+            // Calipers sometimes leave ghosts during transition to transparent mode
+            // in Mojave.
+            calipersView.deleteAllCalipers()
+            scrollView.drawsBackground = false
+            window?.backgroundColor = NSColor.clear
+            panelView.layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
+            messageLabel.textColor = NSColor.white
+            imageView.isHidden = true
+            imageView.currentToolMode = IKToolModeMove
+            // deal with title
+            self.window?.title = appName
+        }
+        else {
+            scrollView.drawsBackground = true
+            window?.backgroundColor = NSColor.windowBackgroundColor
+            panelView.layer?.backgroundColor = nil
+            messageLabel.textColor = NSColor.labelColor
+            imageView.isHidden = false
+            imageView.currentToolMode = IKToolModeMove
+            if let title = oldWindowTitle {
+                self.window?.setTitleWithRepresentedFilename(title)
+            }
+            else {
+                self.window?.title = appName
+            }
+        }
+        // Make sure calibration button not stuck off if in middle of QTc measurement.
+        exitQTc()
+        // Need to force window display, otherwise black background sometimes drawn
+        self.window?.display()
+    }
         
     override var windowNibName: NSNib.Name? {
         return "MainWindowController"
@@ -228,6 +232,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
 
         transparent = appPreferences.transparency
+        setTransparency()
         calipersView.delegate = self
 
     }
