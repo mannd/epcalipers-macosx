@@ -22,8 +22,10 @@ protocol QTcResultProtocol {
                    convertToMsec: Bool, units: String) -> String
 }
 
-class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation {
+class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation, NSToolbarDelegate {
     let appName = NSLocalizedString("EP Calipers", comment:"")
+
+    @IBOutlet weak var toolbar: NSToolbar!
 
     @IBOutlet weak var panelView: NSView!
     @IBOutlet weak var scrollView: NSScrollView!
@@ -119,6 +121,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func setTransparency() {
         print("setTransparency()")
         zoomSegmentedControl.isEnabled = !isTransparent
+        let item = itemFromToolbarIdentifier("newZoomToolbar") as? ToolbarItem
+        item?.valid = !isTransparent
+        item?.validate()
         calipersView.lockedMode = isTransparent
         clearCalibration()
         if isTransparent {
@@ -230,8 +235,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.delegate = self
     }
 
-
-    
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
         if checkExtension(sender) == true {
             self.fileTypeIsOk = true
@@ -276,9 +279,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         return false
     }
 
-    // TODO: handle shutting down calibration and clear calibration in both menu
-    // and toolbar when doing meanRR or QTc, otherwise calibration buttons shut off
-    // permanently!
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !transparent && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
@@ -1458,5 +1458,39 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
         }
     }
-    
+
+    // Toolbar
+    func itemFromToolbarIdentifier(_ identifier: String) -> NSToolbarItem? {
+        let toolbarItemIdentifier = NSToolbarItem.Identifier(identifier)
+        for item in toolbar.items {
+            if item.itemIdentifier == toolbarItemIdentifier {
+                return item
+                }
+            }
+        return nil
+    }
+
+}
+
+@available(OSX 10.12.2, *)
+extension MainWindowController: NSTouchBarDelegate {
+    override open func makeTouchBar() -> NSTouchBar? {
+        let touchBar = NSTouchBar()
+        touchBar.delegate = self
+        touchBar.customizationIdentifier = .epcalipersBar
+        touchBar.defaultItemIdentifiers = [.infoLabelItem, .flexibleSpace, .infoLabelItem]
+        touchBar.customizationAllowedItemIdentifiers = [.infoLabelItem]
+        return touchBar
+    }
+
+    public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+        switch identifier {
+        case NSTouchBarItem.Identifier.infoLabelItem:
+            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+            customViewItem.view = NSTextField(labelWithString: "Calibrate")
+            return customViewItem
+        default:
+            return nil
+        }
+    }
 }

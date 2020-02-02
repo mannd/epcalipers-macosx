@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,6 +16,7 @@
                 <outlet property="navigationSegmentedControl" destination="8Qk-Lr-dNR" id="exd-vp-4Cn"/>
                 <outlet property="panelView" destination="2zd-0Q-IMq" id="Ami-Pt-uXd"/>
                 <outlet property="scrollView" destination="AxA-IY-0Zx" id="E2e-dv-DLM"/>
+                <outlet property="toolbar" destination="Y6y-q2-GOt" id="BhB-8V-vGL"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
                 <outlet property="zoomSegmentedControl" destination="IkW-Sz-7Vn" id="Rwl-87-hgS"/>
             </connections>
@@ -26,7 +27,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="800" height="482"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1097"/>
             <view key="contentView" id="uHL-zZ-C20" customClass="MainView" customModule="EP_Calipers" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,7 +54,7 @@
                             <rect key="frame" x="1" y="405" width="798" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrJ-fG-BcI">
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lrJ-fG-BcI">
                             <rect key="frame" x="783" y="1" width="16" height="420"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -84,7 +85,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80d-Qz-dhr">
-                                <rect key="frame" x="138" y="21" width="245" height="24"/>
+                                <rect key="frame" x="138" y="21" width="237" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="MVA-B1-c7J"/>
                                 </constraints>
@@ -103,7 +104,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-cN-zsf">
-                                <rect key="frame" x="387" y="21" width="149" height="24"/>
+                                <rect key="frame" x="379" y="21" width="141" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="wj5-y7-FoH"/>
                                 </constraints>
@@ -132,7 +133,7 @@
                                 </textFieldCell>
                             </textField>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Qk-Lr-dNR">
-                                <rect key="frame" x="540" y="21" width="181" height="24"/>
+                                <rect key="frame" x="524" y="21" width="169" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="lxO-ww-kvY">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -175,6 +176,94 @@
                     <constraint firstItem="AxA-IY-0Zx" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="yj3-hc-ldc"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="3E5303CA-7595-4674-BA40-1A23AC02742F" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Y6y-q2-GOt">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="DbN-gq-grY"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ouh-LL-r0x"/>
+                    <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" sizingBehavior="auto" autovalidates="NO" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="gC6-ej-kGp">
+                            <rect key="frame" x="0.0" y="14" width="108" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Lag-Q9-xVH">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment image="TB_zoomIn" width="32"/>
+                                    <segment image="TB_zoomOut" width="32" tag="1"/>
+                                    <segment image="TB_zoomActual" width="32" tag="2">
+                                        <nil key="label"/>
+                                    </segment>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="doZoom:" target="-1" id="FLw-aI-7ZY"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" autovalidates="NO" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
+                            <rect key="frame" x="0.0" y="14" width="237" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment image="calipers-icon-bw-20x20" width="32"/>
+                                    <segment image="calipers-amplitude-icon-bw-20x20" width="32" tag="1"/>
+                                    <segment image="angle_icon_2_20x20" width="32" tag="2"/>
+                                    <segment label="Calibrate" tag="3"/>
+                                    <segment label="Clear" tag="4"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="addCaliper:" target="-1" id="RDv-Gf-Utn"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" autovalidates="NO" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
+                            <rect key="frame" x="0.0" y="14" width="192" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Cqb-X5-vZ6">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment label="R/I" width="60"/>
+                                    <segment label="mRR" width="60" tag="1"/>
+                                    <segment label="QTc" width="60" tag="2"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="28EF6856-4364-4261-9F5C-3B34B8A23D4C" label="Navigation" paletteLabel="Navigation" sizingBehavior="auto" autovalidates="NO" id="xM6-hc-OkX" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="Anb-ED-7DP">
+                            <rect key="frame" x="0.0" y="14" width="187" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="NNS-9z-Ml8">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment label="Next" width="60"/>
+                                    <segment label="Back" width="60" tag="1"/>
+                                    <segment label="Cancel" width="59" tag="2"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="doNavigation:" target="-1" id="PxD-5g-QbW"/>
+                        </connections>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="BUH-5G-BGq"/>
+                    <toolbarItem reference="uO8-MM-MEU"/>
+                    <toolbarItem reference="zIV-EH-MOz"/>
+                    <toolbarItem reference="xM6-hc-OkX"/>
+                </defaultToolbarItems>
+            </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
             </connections>
@@ -215,8 +304,14 @@
         </textField>
     </objects>
     <resources>
+        <image name="TB_zoomActual" width="20" height="20"/>
+        <image name="TB_zoomIn" width="20" height="20"/>
+        <image name="TB_zoomOut" width="20" height="20"/>
         <image name="amplitude-caliper-icon" width="20" height="20"/>
         <image name="angle-caliper-icon" width="20" height="20"/>
+        <image name="angle_icon_2_20x20" width="20" height="20"/>
+        <image name="calipers-amplitude-icon-bw-20x20" width="20" height="20"/>
+        <image name="calipers-icon-bw-20x20" width="20" height="20"/>
         <image name="time-caliper-icon" width="20" height="20"/>
         <image name="zoom-in" width="20" height="20"/>
         <image name="zoom-out" width="20" height="20"/>
