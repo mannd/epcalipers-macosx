@@ -188,9 +188,9 @@
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Lag-Q9-xVH">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment image="TB_zoomIn" width="32"/>
-                                    <segment image="TB_zoomOut" width="32" tag="1"/>
-                                    <segment image="TB_zoomActual" width="32" tag="2">
+                                    <segment toolTip="Zoom in" image="zoom-in" width="32"/>
+                                    <segment toolTip="Zoom out" image="zoom-out" width="32" tag="1"/>
+                                    <segment toolTip="Zoom to actual size" image="zoom-reset" width="32" tag="2">
                                         <nil key="label"/>
                                     </segment>
                                 </segments>
@@ -208,11 +208,11 @@
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment image="caliper-20x20" width="32"/>
-                                    <segment image="amplitude-caliper-20x20" width="32" tag="1"/>
-                                    <segment image="angle-caliper-20x20" width="32" tag="2"/>
-                                    <segment label="Calibrate" tag="3"/>
-                                    <segment label="Clear" tag="4"/>
+                                    <segment toolTip="Add time caliper" image="new-time-caliper-icon" width="32"/>
+                                    <segment toolTip="Add amplitude caliper" image="new-amplitude-caliper-icon" width="32" tag="1"/>
+                                    <segment toolTip="Add angle caliper" image="new-angle-caliper-icon" width="32" tag="2"/>
+                                    <segment label="Calibrate" toolTip="Calibrate" tag="3"/>
+                                    <segment label="Clear" toolTip="Clear calibration" tag="4"/>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
@@ -228,9 +228,9 @@
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Cqb-X5-vZ6">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment label="R/I" width="60"/>
-                                    <segment label="mRR" width="60" tag="1"/>
-                                    <segment label="QTc" width="60" tag="2"/>
+                                    <segment label="R/I" toolTip="Toggle rate/interval" width="60"/>
+                                    <segment label="mRR" toolTip="Calculate mean interval and rate" width="60" tag="1"/>
+                                    <segment label="QTc" toolTip="Calculate corrected QT" width="60" tag="2"/>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
@@ -304,14 +304,11 @@
         </textField>
     </objects>
     <resources>
-        <image name="TB_zoomActual" width="20" height="20"/>
-        <image name="TB_zoomIn" width="20" height="20"/>
-        <image name="TB_zoomOut" width="20" height="20"/>
-        <image name="amplitude-caliper-20x20" width="20" height="20"/>
         <image name="amplitude-caliper-icon" width="20" height="20"/>
-        <image name="angle-caliper-20x20" width="20" height="20"/>
         <image name="angle-caliper-icon" width="20" height="20"/>
-        <image name="caliper-20x20" width="20" height="20"/>
+        <image name="new-amplitude-caliper-icon" width="20" height="20"/>
+        <image name="new-angle-caliper-icon" width="20" height="20"/>
+        <image name="new-time-caliper-icon" width="20" height="20"/>
         <image name="time-caliper-icon" width="20" height="20"/>
         <image name="zoom-in" width="20" height="20"/>
         <image name="zoom-out" width="20" height="20"/>

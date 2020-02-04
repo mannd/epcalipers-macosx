@@ -202,29 +202,18 @@
 		8E3DA7EF1C2E264000AD9556 /* EP Calipers */ = {
 			isa = PBXGroup;
 			children = (
-				8E74037D223B538A002D5ED6 /* sampleECG.jpg */,
-				8E7C36CE1F2ED88200E5FDA8 /* View.xib */,
+				8EFAE9C923E9FCE000D5EE9B /* ViewControllers */,
+				8EFAE9C823E9FCA000D5EE9B /* Views */,
+				8EFAE9C723E9FC6900D5EE9B /* Models */,
+				8EFAE9C623E9F64600D5EE9B /* Objc */,
+				8EFAE9C423E9F5BD00D5EE9B /* Xib */,
+				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
 				8E2867821F2A5CD700AF335C /* Localizable.strings */,
-				8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */,
 				8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */,
 				8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */,
 				8E3DA7F21C2E264000AD9556 /* Assets.xcassets */,
-				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
 				8E3DA7F71C2E264000AD9556 /* Info.plist */,
-				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
-				8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */,
-				8E2282471C398B1300337695 /* CalipersView.swift */,
-				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
-				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
-				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
-				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
-				8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */,
-				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
-				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
-				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
-				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
 				8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */,
-				8E545CA81F95A27500B1CEB0 /* QTcResult.swift */,
 				8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */,
 				8E8B541A23E664D400751830 /* ToolbarIdentifiers.swift */,
 				8E8B541C23E6792900751830 /* ToolbarItem.swift */,
@@ -262,6 +251,8 @@
 		8EA7EFC31C472909002E0085 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */,
+				8E74037D223B538A002D5ED6 /* sampleECG.jpg */,
 				8EFAE9C123E91FA700D5EE9B /* amplitude-caliper-20x20.png */,
 				8EFAE9C023E91FA700D5EE9B /* angle-caliper-20x20.png */,
 				8EFAE9BE23E91F0600D5EE9B /* caliper-20x20.png */,
@@ -279,6 +270,55 @@
 				8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		8EFAE9C423E9F5BD00D5EE9B /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				8E7C36CE1F2ED88200E5FDA8 /* View.xib */,
+				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
+				8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
+		8EFAE9C623E9F64600D5EE9B /* Objc */ = {
+			isa = PBXGroup;
+			children = (
+				8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */,
+				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
+				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
+			);
+			path = Objc;
+			sourceTree = "<group>";
+		};
+		8EFAE9C723E9FC6900D5EE9B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
+				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
+				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
+				8E545CA81F95A27500B1CEB0 /* QTcResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8EFAE9C823E9FCA000D5EE9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E2282471C398B1300337695 /* CalipersView.swift */,
+				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
+				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8EFAE9C923E9FCE000D5EE9B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		94B026D62EEB50920342AE38 /* Pods */ = {
