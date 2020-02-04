@@ -49,7 +49,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @IBOutlet var pageInputView: NSView!
     @IBOutlet weak var pageTextField: NSTextField!
-    
+
+    // InfoWindow
+    @IBOutlet var instructionPanel: NSPanel!
+    @IBOutlet var instructionLabel: NSTextField!
+
 
     // Preferences accessory view
     @IBOutlet var preferencesAccessoryView: NSView!
@@ -233,6 +237,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         transparent = appPreferences.transparency
         calipersView.delegate = self
+
+        instructionPanel.setIsVisible(false)
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -500,7 +506,47 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             break
         }
     }
-    
+
+    func setInstructionText(_ text: String) {
+        instructionLabel.stringValue = text
+    }
+
+    @IBAction func nextAction(_ sender: Any) {
+        if inCalibration {
+            calibrate()
+        }
+        else if inMeanRR {
+            meanRR()
+        }
+        else { // in QTc
+            doNextQTcStep()
+        }
+    }
+
+    @IBAction func backAction(_ sender: Any) {
+        if inCalibration {
+            exitCalibration()
+        }
+        else if inMeanRR {
+            exitMeanRR()
+        }
+        else { // in QTc
+            doPreviousQTcStep()
+        }
+    }
+
+    @IBAction func cancelAction(_ sender: Any) {
+        if inCalibration {
+            exitCalibration()
+        }
+        else if inMeanRR {
+            exitMeanRR()
+        }
+        else { // in QTc
+            cancelQTcSteps()
+        }
+    }
+
     @IBAction func doNavigation(_ sender: AnyObject) {
         var navigation: Int
         if sender is NSSegmentedControl {
@@ -1044,15 +1090,24 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     // will return to last pre-Tweak message when restoreLastMessage called.
     func showMessageWithoutSaving(_ message: String) {
         messageLabel.stringValue = message
+
+        instructionPanel.setIsVisible(true)
+        instructionLabel.stringValue = message
     }
     
     func showMessageAndSaveLast(_ message: String) {
         lastMessage = messageLabel.stringValue
         messageLabel.stringValue = message
+
+        instructionPanel.setIsVisible(true)
+        instructionLabel.stringValue = message
     }
     
     func clearMessage() {
         showMessage("")
+
+        instructionPanel.setIsVisible(false)
+        instructionLabel.stringValue = ""
     }
     
     func restoreLastMessage() {

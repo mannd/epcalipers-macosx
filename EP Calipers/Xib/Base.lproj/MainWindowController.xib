@@ -11,6 +11,8 @@
                 <outlet property="calipersSegmentedControl" destination="80d-Qz-dhr" id="SBu-di-cRc"/>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
                 <outlet property="imageView" destination="oIK-MS-rQb" id="tvd-y9-ClO"/>
+                <outlet property="instructionLabel" destination="Muj-mg-GQi" id="Uao-u3-Dau"/>
+                <outlet property="instructionPanel" destination="rGN-02-IWd" id="OUX-FL-fkZ"/>
                 <outlet property="measurementSegmentedControl" destination="7Ej-cN-zsf" id="Hhd-nv-Ud9"/>
                 <outlet property="messageLabel" destination="7Kx-dG-EsR" id="cbR-jv-99t"/>
                 <outlet property="navigationSegmentedControl" destination="8Qk-Lr-dNR" id="exd-vp-4Cn"/>
@@ -302,6 +304,83 @@
             </textFieldCell>
             <point key="canvasLocation" x="723" y="466.5"/>
         </textField>
+        <window title="Instructions" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="rGN-02-IWd" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="181" y="118" width="276" height="200"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1097"/>
+            <value key="minSize" type="size" width="276" height="200"/>
+            <view key="contentView" id="sz9-UB-bmo">
+                <rect key="frame" x="0.0" y="0.0" width="276" height="200"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-mg-GQi">
+                        <rect key="frame" x="18" y="164" width="240" height="16"/>
+                        <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="0Nj-hp-8mI">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QHr-hO-0HN">
+                        <rect key="frame" x="47" y="20" width="209" height="21"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="28L-W2-YfJ">
+                                <rect key="frame" x="-6" y="-7" width="69" height="32"/>
+                                <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m2z-0I-G6V">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="nextAction:" target="-2" id="gJf-YD-AdQ"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0aM-Qt-RYr">
+                                <rect key="frame" x="63" y="-7" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Back" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4GB-iM-rLF">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="backAction:" target="-2" id="tlS-Wm-eok"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FqT-PI-a7P">
+                                <rect key="frame" x="133" y="-7" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RCc-FP-2UB">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancelAction:" target="-2" id="eZK-ss-fZo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <visibilityPriorities>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                        </visibilityPriorities>
+                        <customSpacing>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                        </customSpacing>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Muj-mg-GQi" secondAttribute="trailing" constant="20" id="87j-Cm-hkj"/>
+                    <constraint firstItem="Muj-mg-GQi" firstAttribute="top" secondItem="sz9-UB-bmo" secondAttribute="top" constant="20" symbolic="YES" id="SR9-6Z-hbu"/>
+                    <constraint firstItem="Muj-mg-GQi" firstAttribute="leading" secondItem="sz9-UB-bmo" secondAttribute="leading" constant="20" symbolic="YES" id="Vg8-99-5yx"/>
+                    <constraint firstAttribute="trailing" secondItem="QHr-hO-0HN" secondAttribute="trailing" constant="20" id="cFn-W0-WMo"/>
+                    <constraint firstAttribute="bottom" secondItem="QHr-hO-0HN" secondAttribute="bottom" constant="20" id="mMH-GS-7bh"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="405" y="-76"/>
+        </window>
     </objects>
     <resources>
         <image name="amplitude-caliper-icon" width="20" height="20"/>
