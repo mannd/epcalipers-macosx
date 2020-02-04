@@ -31,11 +31,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
-    @IBOutlet weak var calipersSegmentedControl: NSSegmentedControl!
-    @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
-    @IBOutlet weak var messageLabel: NSTextField!
-    @IBOutlet weak var navigationSegmentedControl: NSSegmentedControl!
-    @IBOutlet weak var zoomSegmentedControl: NSSegmentedControl!
+//    @IBOutlet weak var calipersSegmentedControl: NSSegmentedControl!
+//    @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
+//    @IBOutlet weak var messageLabel: NSTextField!
+//    @IBOutlet weak var navigationSegmentedControl: NSSegmentedControl!
+//    @IBOutlet weak var zoomSegmentedControl: NSSegmentedControl!
 
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
@@ -131,8 +131,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     func setTransparency() {
         print("setTransparency()")
-        zoomSegmentedControl.isEnabled = !isTransparent
-        // FIXME: isolate this
         let item = itemFromToolbarIdentifier("newZoomToolbar") as? ToolbarItem
         item?.valid = !isTransparent
         item?.validate()
@@ -144,7 +142,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.deleteAllCalipers()
             scrollView.drawsBackground = false
             window?.backgroundColor = NSColor.clear
-            messageLabel.textColor = NSColor.white
+            window?.hasShadow = false
             imageView.isHidden = true
             imageView.currentToolMode = IKToolModeMove
             // deal with title
@@ -153,7 +151,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         else {
             scrollView.drawsBackground = true
             window?.backgroundColor = NSColor.windowBackgroundColor
-            messageLabel.textColor = NSColor.labelColor
+            window?.hasShadow = true
             imageView.isHidden = false
             imageView.currentToolMode = IKToolModeMove
             if let title = oldWindowTitle {
@@ -1102,24 +1100,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     // This doesn't overwrite lastMessage, thus allowing multiple tweak messages that
     // will return to last pre-Tweak message when restoreLastMessage called.
     func showMessageWithoutSaving(_ message: String) {
-        messageLabel.stringValue = message
-
         instructionPanel.setIsVisible(true)
         instructionLabel.stringValue = message
     }
     
     func showMessageAndSaveLast(_ message: String) {
-        lastMessage = messageLabel.stringValue
-        messageLabel.stringValue = message
-
+        lastMessage = instructionLabel.stringValue
         instructionPanel.setIsVisible(true)
         instructionLabel.stringValue = message
     }
     
     func clearMessage() {
-        // FIXME: delete this when panel is gone
-        showMessage("")
-
         instructionPanel.setIsVisible(false)
         instructionLabel.stringValue = ""
     }
@@ -1239,14 +1230,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     private func disableCalibrationControls() {
-        calipersSegmentedControl.setEnabled(false, forSegment: 3)
-        calipersSegmentedControl.setEnabled(false, forSegment: 4)
+        let newCalipersSegementedControl = getNewCalipersToolbar()
+        newCalipersSegementedControl?.setEnabled(false, forSegment: 3)
+        newCalipersSegementedControl?.setEnabled(false, forSegment: 4)
     }
 
     private func enableCalibrationControls() {
-        calipersSegmentedControl.isEnabled = true
-        calipersSegmentedControl.setEnabled(true, forSegment: 3)
-        calipersSegmentedControl.setEnabled(true, forSegment: 4)
+        let newCalipersSegementedControl = getNewCalipersToolbar()
+        newCalipersSegementedControl?.isEnabled = true
+        newCalipersSegementedControl?.setEnabled(true, forSegment: 3)
+        newCalipersSegementedControl?.setEnabled(true, forSegment: 4)
     }
     
     func meanRR() {
@@ -1459,70 +1452,64 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         return view
     }
 
+    private func getNewCalipersToolbar() -> NSSegmentedControl? {
+        let item = itemFromToolbarIdentifier("newCalipersToolbar")
+        let view = item?.view as? NSSegmentedControl
+        return view
+    }
+
     // FIXME: These are all pulled out for refactoring to new toolbar/touchbar
     private func setZoomEnabled(_ enable: Bool) {
-        zoomSegmentedControl.isEnabled = !isTransparent
         let newZoomSegmentedControl = getNewZoomToolbar()
         newZoomSegmentedControl?.isEnabled = enable
     }
 
 
     private func disableMeasurementsOtherThanQTc() {
-        measurementSegmentedControl.setEnabled(false, forSegment: 0)
-        measurementSegmentedControl.setEnabled(false, forSegment: 1)
         let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.setEnabled(false, forSegment: 0)
         newMeasurementSegmentedControl?.setEnabled(false, forSegment: 1)
     }
 
     private func enableMeasurementOfQTc() {
-        measurementSegmentedControl.setEnabled(true, forSegment: 2)
         let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.setEnabled(true, forSegment: 2)
     }
 
     private func disableQTcMeasurement() {
-        measurementSegmentedControl.setEnabled(false, forSegment: 2)
         let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.setEnabled(false, forSegment: 2)
     }
 
     private func enableMeasurements() {
-        measurementSegmentedControl.isEnabled = true
         let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.isEnabled = true
 
     }
 
     private func setMeasurementsEnabled(_ enable: Bool) {
-        measurementSegmentedControl.isEnabled = enable
         let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.isEnabled = enable
         enableRateAndMeanRRMeasurements()
     }
 
     private func disableMeasurements() {
-        measurementSegmentedControl.isEnabled = false
         let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.isEnabled = false
     }
 
     private func enableRateAndMeanRRMeasurements() {
-        measurementSegmentedControl.setEnabled(true, forSegment: 0)
-        measurementSegmentedControl.setEnabled(true, forSegment: 1)
         let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.setEnabled(true, forSegment: 0)
         newMeasurementSegmentedControl?.setEnabled(true, forSegment: 1)
     }
 
     private func disableNavigation() {
-        navigationSegmentedControl.isEnabled = false
         let newNavigationSegmentedControl = getNewNavigationToolbar()
         newNavigationSegmentedControl?.isEnabled = false
     }
 
     private func enableNavigation() {
-        navigationSegmentedControl.isEnabled = true
         let newNavigationSegmentedControl = getNewNavigationToolbar()
         newNavigationSegmentedControl?.isEnabled = true
     }
