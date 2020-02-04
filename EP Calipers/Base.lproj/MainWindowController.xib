@@ -208,9 +208,9 @@
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment image="calipers-icon-bw-20x20" width="32"/>
-                                    <segment image="calipers-amplitude-icon-bw-20x20" width="32" tag="1"/>
-                                    <segment image="angle_icon_2_20x20" width="32" tag="2"/>
+                                    <segment image="caliper-20x20" width="32"/>
+                                    <segment image="amplitude-caliper-20x20" width="32" tag="1"/>
+                                    <segment image="angle-caliper-20x20" width="32" tag="2"/>
                                     <segment label="Calibrate" tag="3"/>
                                     <segment label="Clear" tag="4"/>
                                 </segments>
@@ -307,11 +307,11 @@
         <image name="TB_zoomActual" width="20" height="20"/>
         <image name="TB_zoomIn" width="20" height="20"/>
         <image name="TB_zoomOut" width="20" height="20"/>
+        <image name="amplitude-caliper-20x20" width="20" height="20"/>
         <image name="amplitude-caliper-icon" width="20" height="20"/>
+        <image name="angle-caliper-20x20" width="20" height="20"/>
         <image name="angle-caliper-icon" width="20" height="20"/>
-        <image name="angle_icon_2_20x20" width="20" height="20"/>
-        <image name="calipers-amplitude-icon-bw-20x20" width="20" height="20"/>
-        <image name="calipers-icon-bw-20x20" width="20" height="20"/>
+        <image name="caliper-20x20" width="20" height="20"/>
         <image name="time-caliper-icon" width="20" height="20"/>
         <image name="zoom-in" width="20" height="20"/>
         <image name="zoom-out" width="20" height="20"/>
