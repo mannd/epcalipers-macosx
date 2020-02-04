@@ -122,9 +122,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
 
+    @IBAction func makeTransparent(_ sender: AnyObject) {
+        NSLog("make transparent")
+        isTransparent = !isTransparent
+        setTransparency()
+        appPreferences.transparency = isTransparent
+    }
+
     func setTransparency() {
         print("setTransparency()")
         zoomSegmentedControl.isEnabled = !isTransparent
+        // FIXME: isolate this
         let item = itemFromToolbarIdentifier("newZoomToolbar") as? ToolbarItem
         item?.valid = !isTransparent
         item?.validate()
@@ -315,6 +323,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         if menuItem.action == #selector(deleteAllCalipers(_:)) {
             return !(calipersView.calipers.count < 1)
+        }
+        if menuItem.action == #selector(makeTransparent(_:)) {
+            menuItem.state = isTransparent ? .on : .off
         }
         return true
     }
@@ -1077,6 +1088,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func exitCalibration() {
         clearMessage()
         inCalibration = false
+        inQTcStep1 = false
+        inQTcStep2 = false
         disableNavigation()
         setMeasurementsEnabled(calipersView.horizontalCalibration.calibrated)
     }
@@ -1104,6 +1117,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func clearMessage() {
+        // FIXME: delete this when panel is gone
         showMessage("")
 
         instructionPanel.setIsVisible(false)
@@ -1484,6 +1498,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         measurementSegmentedControl.isEnabled = enable
         let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.isEnabled = enable
+        enableRateAndMeanRRMeasurements()
     }
 
     private func disableMeasurements() {
