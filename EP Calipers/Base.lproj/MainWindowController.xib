@@ -176,7 +176,7 @@
                     <constraint firstItem="AxA-IY-0Zx" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="yj3-hc-ldc"/>
                 </constraints>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="3E5303CA-7595-4674-BA40-1A23AC02742F" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Y6y-q2-GOt">
+            <toolbar key="toolbar" implicitIdentifier="3E5303CA-7595-4674-BA40-1A23AC02742F" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="Y6y-q2-GOt">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="DbN-gq-grY"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ouh-LL-r0x"/>
@@ -200,7 +200,7 @@
                             <action selector="doZoom:" target="-1" id="FLw-aI-7ZY"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" autovalidates="NO" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" explicitItemIdentifier="newCalipersToolbar" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" autovalidates="NO" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
                             <rect key="frame" x="0.0" y="14" width="237" height="27"/>
@@ -220,7 +220,7 @@
                             <action selector="addCaliper:" target="-1" id="RDv-Gf-Utn"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" autovalidates="NO" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" explicitItemIdentifier="newMeasurementToolbar" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" autovalidates="NO" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
                             <rect key="frame" x="0.0" y="14" width="192" height="27"/>
@@ -238,7 +238,7 @@
                             <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="28EF6856-4364-4261-9F5C-3B34B8A23D4C" label="Navigation" paletteLabel="Navigation" sizingBehavior="auto" autovalidates="NO" id="xM6-hc-OkX" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="28EF6856-4364-4261-9F5C-3B34B8A23D4C" explicitItemIdentifier="newNavigationToolbar" label="Navigation" paletteLabel="Navigation" sizingBehavior="auto" autovalidates="NO" id="xM6-hc-OkX" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="Anb-ED-7DP">
                             <rect key="frame" x="0.0" y="14" width="187" height="25"/>
