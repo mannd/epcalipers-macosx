@@ -26,7 +26,6 @@
 		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
 		8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */; };
 		8E8B541B23E664D400751830 /* ToolbarIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B541A23E664D400751830 /* ToolbarIdentifiers.swift */; };
-		8E8B541D23E6792900751830 /* ToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B541C23E6792900751830 /* ToolbarItem.swift */; };
 		8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */; };
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
 		8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC11C4378A4002E0085 /* Calibration.swift */; };
@@ -114,7 +113,6 @@
 		8E7C36D31F2ED94F00E5FDA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/View.strings; sourceTree = "<group>"; };
 		8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarIdentifiers.swift; sourceTree = "<group>"; };
 		8E8B541A23E664D400751830 /* ToolbarIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarIdentifiers.swift; sourceTree = "<group>"; };
-		8E8B541C23E6792900751830 /* ToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarItem.swift; sourceTree = "<group>"; };
 		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
 		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
@@ -216,7 +214,6 @@
 				8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */,
 				8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */,
 				8E8B541A23E664D400751830 /* ToolbarIdentifiers.swift */,
-				8E8B541C23E6792900751830 /* ToolbarItem.swift */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -564,7 +561,6 @@
 				8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8E8B541B23E664D400751830 /* ToolbarIdentifiers.swift in Sources */,
-				8E8B541D23E6792900751830 /* ToolbarItem.swift in Sources */,
 				8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */,
 				8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,

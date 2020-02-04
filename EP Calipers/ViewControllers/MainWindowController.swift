@@ -27,15 +27,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @IBOutlet weak var toolbar: NSToolbar!
 
-    @IBOutlet weak var panelView: NSView!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
-//    @IBOutlet weak var calipersSegmentedControl: NSSegmentedControl!
-//    @IBOutlet weak var measurementSegmentedControl: NSSegmentedControl!
-//    @IBOutlet weak var messageLabel: NSTextField!
-//    @IBOutlet weak var navigationSegmentedControl: NSSegmentedControl!
-//    @IBOutlet weak var zoomSegmentedControl: NSSegmentedControl!
 
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
@@ -131,9 +125,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     func setTransparency() {
         print("setTransparency()")
-        let item = itemFromToolbarIdentifier("newZoomToolbar") as? ToolbarItem
-        item?.valid = !isTransparent
-        item?.validate()
+        let item = getNewZoomToolbar()
+        item?.isEnabled = !isTransparent
         calipersView.lockedMode = isTransparent
         clearCalibration()
         if isTransparent {
@@ -163,8 +156,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         // Make sure calibration button not stuck off if in middle of QTc measurement.
         exitQTc()
-        // Need to force window display, otherwise black background sometimes drawn
-//        self.window?.display()
     }
         
     override var windowNibName: NSNib.Name? {
@@ -240,10 +231,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
         self.window?.isOpaque = false
-
         transparent = appPreferences.transparency
-        calipersView.delegate = self
 
+        calipersView.delegate = self
         instructionPanel.setIsVisible(false)
     }
 

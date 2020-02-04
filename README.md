@@ -18,6 +18,8 @@ EP Calipers for Mac OS X is open source, and licensed under the
 Lock icon from [iconshow](http://iconshow.me/lock-2).  By: designmodo.
 License: CC
 ([Attribution 3.0 Unported](http://creativecommons.org/licenses/by/3.0/)).
+[Caliper](https://www.flaticon.com/free-icon/caliper_1888593) icon made by
+[Freepick](https://www.flaticon.com/authors/freepik) from [Flaticon](https://www.flaticon.com/).
 Other icons from Apple
 [IKImageViewDemo](https://developer.apple.com/library/mac/samplecode/IKImageViewDemo/Introduction/Intro.html).
 Unlimited rights to reproduce and modify portions of this demo are
@@ -26,7 +28,7 @@ granted by Apple in the disclaimer attached to the source code
 
 ## Copyright
 
-Copyright © 2015-2019
+Copyright © 2015-2020
 [EP Studios, Inc.](http://www.epstudiossoftware.com)
 
 ##Acknowledgments
