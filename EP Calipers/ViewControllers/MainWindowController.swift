@@ -235,6 +235,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         calipersView.delegate = self
         instructionPanel.setIsVisible(false)
+        instructionPanel.becomesKeyOnlyIfNeeded = true
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -1111,6 +1112,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             clearMessage()
         }
     }
+
+    // TODO: make a preference to show dialogs as actionsheets or modal dialogs???
+    func showAlert(_ alert: NSAlert) {
+        alert.beginSheetModal(for: window!, completionHandler: nil)
+    }
     
     func showAngleCaliperNoCalibrationAlert() {
         let alert = NSAlert()
@@ -1133,7 +1139,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-        alert.runModal()
+        showAlert(alert)
     }
     
     func showNoCaliperSelectedAlert() {
@@ -1169,7 +1175,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         alert.messageText = NSLocalizedString("Mean interval and rate", comment:"")
         alert.informativeText = NSString.localizedStringWithFormat(NSLocalizedString("Mean interval = %.4g %@\nMean rate = %.4g bpm", comment:"") as NSString, meanInterval, intervalUnits, meanRate) as String;
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-        alert.runModal()
+        showAlert(alert)
+//        alert.runModal()
     }
 
     

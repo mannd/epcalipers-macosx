@@ -451,35 +451,64 @@ CA
                                     <action selector="deleteAllCalipers:" target="-1" id="Fg4-kw-pYd"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Calibrate" tag="3" keyEquivalent="c" id="bCr-le-ZI5">
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Measurements" id="Jql-ev-LuH">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Measurements" id="ZZc-JB-ggM">
+                        <items>
+                            <menuItem title="Calibrate" tag="3" keyEquivalent="c" id="uzx-E2-kHE">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
-                                    <action selector="doCalibration:" target="-1" id="H4A-MQ-iRp"/>
+                                    <action selector="doCalibration:" target="-1" id="oz8-rn-lFn"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Clear Calibration" tag="4" id="CWG-n0-m2k">
+                            <menuItem title="Clear Calibration" tag="4" id="eaS-UG-Ej5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="doCalibration:" target="-1" id="f9h-RY-Tjo"/>
+                                    <action selector="doCalibration:" target="-1" id="QGI-49-SDz"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="xvL-Ml-etX"/>
-                            <menuItem title="Toggle Rate/Interval" id="aNU-cw-RNz">
+                            <menuItem isSeparatorItem="YES" id="jWW-OU-EqC"/>
+                            <menuItem title="Toggle Rate/Interval" id="gMM-q1-7Fz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="doMeasurement:" target="-1" id="MTn-l6-ORC"/>
+                                    <action selector="doMeasurement:" target="-1" id="bB8-uj-2rW"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Mean Rate/Interval" tag="1" id="2hW-zW-ivA">
+                            <menuItem title="Mean Rate/Interval" tag="1" id="Wh1-Jd-crH">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="doMeasurement:" target="-1" id="PGx-Qp-YTC"/>
+                                    <action selector="doMeasurement:" target="-1" id="eBB-iJ-tNb"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="QTc Measurement" tag="2" id="5VV-jo-nu6">
+                            <menuItem title="QTc" tag="2" id="3Rf-ZX-6aX">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="doMeasurement:" target="-1" id="lGh-oH-PQp"/>
+                                    <action selector="doMeasurement:" target="-1" id="fAK-6u-ioh"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="WN9-3H-pMd"/>
+                            <menuItem title="Next" id="tQW-My-M1b">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doNavigation:" target="-1" id="T0i-Db-wRF"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Back" tag="1" id="Nlq-w3-VNa">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doNavigation:" target="-1" id="Q0c-yi-WZH"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Cancel" tag="2" id="vTS-1B-eL3">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doNavigation:" target="-1" id="XcF-pA-Gab"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -532,5 +561,8 @@ CA
             </items>
             <point key="canvasLocation" x="140" y="290"/>
         </menu>
+        <menuItem title="Item" id="iem-gM-cuM">
+            <modifierMask key="keyEquivalentModifierMask"/>
+        </menuItem>
     </objects>
 </document>

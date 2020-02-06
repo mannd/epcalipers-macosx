@@ -593,7 +593,11 @@ class Caliper: NSObject {
         }
         return s
     }
-    
+
+    func moveBarInDirection(movementDirection: MovementDirection, distance: CGFloat) {
+        moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: chosenComponent)
+    }
+
     func moveBarInDirection(movementDirection: MovementDirection, distance: CGFloat, forComponent component: CaliperComponent) {
         if component == .noComponent {
             return

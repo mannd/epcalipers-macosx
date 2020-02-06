@@ -38,8 +38,6 @@ class CalipersView: NSView {
     // for color and tweak menu
     var chosenCaliper: Caliper? = nil
     
-    // FIXME: chosen component needs to become Caliper.chosenComponent
-    var chosenComponent: CaliperComponent = .noComponent
     var isTweakingComponent = false
     let tweakDistance: CGFloat = 0.2
     // distance below will allow hundredths of point precision
@@ -94,11 +92,8 @@ class CalipersView: NSView {
 
     override func rightMouseDown(with event: NSEvent) {
         chosenCaliper = getSelectedCaliper(event.locationInWindow)
-        let chosenComponent = (chosenCaliper?.getSelectedCaliperComponent(atPoint: event.locationInWindow)) ?? .noComponent
-        chosenCaliper?.chosenComponent = chosenComponent
+        chosenCaliper?.chosenComponent = chosenCaliper?.getSelectedCaliperComponent(atPoint: event.locationInWindow) ?? .noComponent
         if chosenCaliper == nil && isTweakingComponent {
-//            setChosenComponent(component: .noComponent, caliper: chosenCaliper!)
-//            chosenComponent = .noComponent
             isTweakingComponent = false
             delegate?.restoreLastMessage()
         }
@@ -415,7 +410,7 @@ class CalipersView: NSView {
     func moveChosenComponent(movementDirection: MovementDirection, distance: CGFloat) {
         if let c = chosenCaliper {
             if isTweakingComponent {
-                c.moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: chosenCaliper?.chosenComponent ?? .noComponent)
+                c.moveBarInDirection(movementDirection: movementDirection, distance: distance)
                 needsDisplay = true
             }
         }
