@@ -322,8 +322,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         return inMeanRR || inQTcStep1 || inQTcStep2
     }
 
-    // TODO: map popupbutton for text position to actual text positions, both directions
-    // and add them here.
     @IBAction func showPreferences(_ sender: AnyObject) {
         // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
         // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
@@ -411,7 +409,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To 4 digits", comment: ""))
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To tenths", comment: ""))
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To hundredths", comment: ""))
-        // TODO: remove in production
+        // TODO: remove in production.  For debugging only.
         //roundingPopUpButton.addItem(withTitle: "Raw")
     }
 

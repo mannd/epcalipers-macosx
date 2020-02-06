@@ -44,6 +44,7 @@ class AngleCaliper: Caliper {
         }
     }
     
+    // FIXME: highlight tweaked bars
     override func drawWithContext(_ context: CGContext, inRect rect:CGRect) {
         context.setStrokeColor(color.cgColor)
         context.setLineWidth(lineWidth)
@@ -73,8 +74,34 @@ class AngleCaliper: Caliper {
                 drawTriangleBase(context, forHeight: 5 * pointsPerMM, rect: rect)
             }
         }
+
+        print("original endpointBar1 = \(endPointBar1)")
+        print("original endpointBar2 = \(endPointBar2)")
+        drawChosenComponent(context, inRect: rect, endPointBar1: endPointBar1, endPointBar2: endPointBar2)
     }
-    
+
+    func drawChosenComponent(_ context: CGContext, inRect rect: CGRect, endPointBar1: CGPoint, endPointBar2: CGPoint) {
+        guard chosenComponent != .noComponent else { return }
+        context.setStrokeColor(getChosenComponentColor())
+        switch chosenComponent {
+        case .leftBar:
+            context.move(to: CGPoint(x: bar1Position, y: crossBarPosition))
+            context.addLine(to: CGPoint(x: endPointBar1.x, y: endPointBar1.y))
+        case .rightBar:
+            context.move(to: CGPoint(x: bar2Position, y: crossBarPosition))
+            context.addLine(to: CGPoint(x: endPointBar2.x, y: endPointBar2.y))
+        case .apex:
+            context.move(to: CGPoint(x: bar1Position, y: crossBarPosition))
+            context.addLine(to: CGPoint(x: endPointBar1.x, y: endPointBar1.y))
+            context.move(to: CGPoint(x: bar2Position, y: crossBarPosition))
+            context.addLine(to: CGPoint(x: endPointBar2.x, y: endPointBar2.y))
+        default:
+            break
+        }
+
+        context.strokePath()
+    }
+
     func endPointForPosition(p: CGPoint, angle: CGFloat, length: CGFloat) -> CGPoint {
         let endX = cos(angle) * length + p.x
         let endY = p.y - sin(angle) * length

@@ -37,8 +37,10 @@ class CalipersView: NSView {
     
     // for color and tweak menu
     var chosenCaliper: Caliper? = nil
+    
+    // FIXME: chosen component needs to become Caliper.chosenComponent
     var chosenComponent: CaliperComponent = .noComponent
-    var tweakingComponent = false
+    var isTweakingComponent = false
     let tweakDistance: CGFloat = 0.2
     // distance below will allow hundredths of point precision
     let hiresTweakDistance: CGFloat = 0.01
@@ -89,17 +91,19 @@ class CalipersView: NSView {
             imageView!.mouseDown(with: theEvent)
         }
     }
-    
+
     override func rightMouseDown(with event: NSEvent) {
         chosenCaliper = getSelectedCaliper(event.locationInWindow)
-        chosenComponent = getSelectedCaliperComponent(forCaliper: chosenCaliper, atPoint: event.locationInWindow)
-        if chosenCaliper == nil && tweakingComponent {
-            chosenComponent = .noComponent
-            tweakingComponent = false
+        let chosenComponent = (chosenCaliper?.getSelectedCaliperComponent(atPoint: event.locationInWindow)) ?? .noComponent
+        chosenCaliper?.chosenComponent = chosenComponent
+        if chosenCaliper == nil && isTweakingComponent {
+//            setChosenComponent(component: .noComponent, caliper: chosenCaliper!)
+//            chosenComponent = .noComponent
+            isTweakingComponent = false
             delegate?.restoreLastMessage()
         }
         // only show menu if not in middle of tweaking
-        if !tweakingComponent {
+        if !isTweakingComponent {
             let theMenu = NSMenu()
             let colorMenuItem = NSMenuItem(title: NSLocalizedString("Caliper Color", comment:""), action: #selector(colorCaliper(_:)), keyEquivalent: "")
             let tweakMenuItem = NSMenuItem(title: NSLocalizedString("Tweak Caliper Position", comment:""), action: #selector(tweakCaliper(_:)), keyEquivalent: "")
@@ -130,7 +134,7 @@ class CalipersView: NSView {
         else {
             tweakCaliper(self)
         }
-        
+        needsDisplay = true
     }
     
     override func magnify(with theEvent: NSEvent) {
@@ -186,11 +190,11 @@ class CalipersView: NSView {
     }
     
     @objc func tweakCaliper(_ sender: AnyObject) {
-        if let componentName = Caliper.componentName(chosenComponent) {
+        if let componentName = Caliper.componentName(chosenCaliper?.chosenComponent ?? .noComponent) {
             let message = String(format: NSLocalizedString("Tweak %@ with arrow keys and ⌘-arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
-            if !tweakingComponent {
+            if !isTweakingComponent {
                 delegate?.showMessageAndSaveLast(message)
-                tweakingComponent = true
+                isTweakingComponent = true
             }
             else {
                 // showTweakMessage doesn't overwrite last message
@@ -387,10 +391,11 @@ class CalipersView: NSView {
         if (chosenCaliper == nil) {
             return
         }
+        chosenCaliper?.chosenComponent = .noComponent
         chosenCaliper = nil
-        chosenComponent = .noComponent
-        tweakingComponent = false
+        isTweakingComponent = false
         delegate?.restoreLastMessage()
+        needsDisplay = true
     }
     
     override func deleteBackward(_ sender: Any?) {
@@ -409,8 +414,8 @@ class CalipersView: NSView {
     
     func moveChosenComponent(movementDirection: MovementDirection, distance: CGFloat) {
         if let c = chosenCaliper {
-            if tweakingComponent {
-                c.moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: chosenComponent)
+            if isTweakingComponent {
+                c.moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: chosenCaliper?.chosenComponent ?? .noComponent)
                 needsDisplay = true
             }
         }
