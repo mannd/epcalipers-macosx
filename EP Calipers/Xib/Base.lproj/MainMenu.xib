@@ -434,6 +434,7 @@ CQ
                                     <action selector="addCaliper:" target="-1" id="Mbd-Ib-8ph"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="puu-az-GD5"/>
                             <menuItem title="Delete Selected Caliper" id="MGL-eL-tFp">
                                 <string key="keyEquivalent" base64-UTF8="YES">
 CA
@@ -451,6 +452,19 @@ CA
                                     <action selector="deleteAllCalipers:" target="-1" id="Fg4-kw-pYd"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="SPV-R3-c8z"/>
+                            <menuItem title="Calibrate" tag="3" keyEquivalent="c" id="fgl-ih-SXX">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                <connections>
+                                    <action selector="doCalibration:" target="-1" id="NNi-zd-QuT"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Clear" tag="4" id="c6v-3u-K7F">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doCalibration:" target="-1" id="IMY-uC-Znf"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -458,18 +472,6 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Measurements" id="ZZc-JB-ggM">
                         <items>
-                            <menuItem title="Calibrate" tag="3" keyEquivalent="c" id="uzx-E2-kHE">
-                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
-                                <connections>
-                                    <action selector="doCalibration:" target="-1" id="oz8-rn-lFn"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Clear Calibration" tag="4" id="eaS-UG-Ej5">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="doCalibration:" target="-1" id="QGI-49-SDz"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="jWW-OU-EqC"/>
                             <menuItem title="Toggle Rate/Interval" id="gMM-q1-7Fz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -487,28 +489,6 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="doMeasurement:" target="-1" id="fAK-6u-ioh"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="WN9-3H-pMd"/>
-                            <menuItem title="Next" id="tQW-My-M1b">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="doNavigation:" target="-1" id="T0i-Db-wRF"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Back" tag="1" id="Nlq-w3-VNa">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="doNavigation:" target="-1" id="Q0c-yi-WZH"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Cancel" tag="2" id="vTS-1B-eL3">
-                                <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="doNavigation:" target="-1" id="XcF-pA-Gab"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -561,8 +541,5 @@ Gw
             </items>
             <point key="canvasLocation" x="140" y="290"/>
         </menu>
-        <menuItem title="Item" id="iem-gM-cuM">
-            <modifierMask key="keyEquivalentModifierMask"/>
-        </menuItem>
     </objects>
 </document>

@@ -77,14 +77,14 @@
                     <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" sizingBehavior="auto" autovalidates="NO" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="gC6-ej-kGp">
-                            <rect key="frame" x="0.0" y="14" width="108" height="27"/>
+                            <rect key="frame" x="0.0" y="14" width="119" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Lag-Q9-xVH">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="Zoom in" image="zoom-in" width="32"/>
-                                    <segment toolTip="Zoom out" image="zoom-out" width="32" tag="1"/>
-                                    <segment toolTip="Zoom to actual size" image="zoom-reset" width="32" tag="2">
+                                    <segment toolTip="Zoom in" image="zoom-in" width="36"/>
+                                    <segment toolTip="Zoom out" image="zoom-out" width="39" tag="1"/>
+                                    <segment toolTip="Zoom to actual size" image="zoom-reset" width="36" tag="2">
                                         <nil key="label"/>
                                     </segment>
                                 </segments>
@@ -97,14 +97,14 @@
                     <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" explicitItemIdentifier="newCalipersToolbar" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" autovalidates="NO" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
-                            <rect key="frame" x="0.0" y="14" width="237" height="27"/>
+                            <rect key="frame" x="0.0" y="14" width="245" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="Add time caliper" image="new-time-caliper-icon" width="32"/>
-                                    <segment toolTip="Add amplitude caliper" image="new-amplitude-caliper-icon" width="32" tag="1"/>
-                                    <segment toolTip="Add angle caliper" image="new-angle-caliper-icon" width="32" tag="2"/>
+                                    <segment toolTip="Add time caliper" image="new-time-caliper-icon"/>
+                                    <segment toolTip="Add amplitude caliper" image="new-amplitude-caliper-icon" tag="1"/>
+                                    <segment toolTip="Add angle caliper" image="new-angle-caliper-icon" tag="2"/>
                                     <segment label="Calibrate" toolTip="Calibrate" tag="3"/>
                                     <segment label="Clear" toolTip="Clear calibration" tag="4"/>
                                 </segments>
@@ -117,14 +117,14 @@
                     <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" explicitItemIdentifier="newMeasurementToolbar" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" autovalidates="NO" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
-                            <rect key="frame" x="0.0" y="14" width="192" height="27"/>
+                            <rect key="frame" x="0.0" y="14" width="223" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Cqb-X5-vZ6">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment label="R/I" toolTip="Toggle rate/interval" width="60"/>
-                                    <segment label="mRR" toolTip="Calculate mean interval and rate" width="60" tag="1"/>
-                                    <segment label="QTc" toolTip="Calculate corrected QT" width="60" tag="2"/>
+                                    <segment label="Rate/Interval" toolTip="Toggle rate/interval"/>
+                                    <segment label="mean RR" toolTip="Calculate mean interval and rate" tag="1"/>
+                                    <segment label="QTc" toolTip="Calculate corrected QT" tag="2"/>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
@@ -132,30 +132,11 @@
                             <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="28EF6856-4364-4261-9F5C-3B34B8A23D4C" explicitItemIdentifier="newNavigationToolbar" label="Navigation" paletteLabel="Navigation" sizingBehavior="auto" autovalidates="NO" id="xM6-hc-OkX" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
-                        <nil key="toolTip"/>
-                        <segmentedControl key="view" verticalHuggingPriority="750" id="Anb-ED-7DP">
-                            <rect key="frame" x="0.0" y="14" width="187" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="NNS-9z-Ml8">
-                                <font key="font" metaFont="system"/>
-                                <segments>
-                                    <segment label="Next" width="60"/>
-                                    <segment label="Back" width="60" tag="1"/>
-                                    <segment label="Cancel" width="59" tag="2"/>
-                                </segments>
-                            </segmentedCell>
-                        </segmentedControl>
-                        <connections>
-                            <action selector="doNavigation:" target="-1" id="PxD-5g-QbW"/>
-                        </connections>
-                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="BUH-5G-BGq"/>
                     <toolbarItem reference="uO8-MM-MEU"/>
                     <toolbarItem reference="zIV-EH-MOz"/>
-                    <toolbarItem reference="xM6-hc-OkX"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>

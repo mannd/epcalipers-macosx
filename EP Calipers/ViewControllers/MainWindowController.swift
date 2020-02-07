@@ -48,6 +48,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet var instructionPanel: NSPanel!
     @IBOutlet var instructionLabel: NSTextField!
 
+    // New toolbar segmented controls
+    lazy var newZoomSegmentedControl = getNewZoomToolbar()
+    lazy var newCalipersSegmentedControl = getNewCalipersToolbar()
+    lazy var newMeasurementSegmentedControl = getNewMeasurementToolbar()
 
     // Preferences accessory view
     @IBOutlet var preferencesAccessoryView: NSView!
@@ -183,7 +187,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.horizontalCalibration.direction = .horizontal
         calipersView.verticalCalibration.direction = .vertical
         disableMeasurements()
-        disableNavigation()
         clearMessage()
         if NSWindowController.instancesRespond(to: #selector(NSObject.awakeFromNib)) {
             super.awakeFromNib()
@@ -545,49 +548,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
 
-    @IBAction func doNavigation(_ sender: AnyObject) {
-        var navigation: Int
-        if sender is NSSegmentedControl {
-            navigation = sender.selectedSegment
-        }
-        else {
-            navigation = sender.tag
-        }
-        if inCalibration {
-            switch navigation {
-            case 0:
-                calibrate()
-            case 1, 2:
-                exitCalibration()
-            default:
-                break
-            }
-            
-        }
-        else if inMeanRR {
-            switch navigation {
-            case 0:
-                meanRR()
-            case 1,2:
-                exitMeanRR()
-            default:
-                break
-            }
-        }
-        else {  // inQTn
-            switch navigation {
-            case 0:
-                doNextQTcStep()
-            case 1:
-                doPreviousQTcStep()
-            case 2:
-                cancelQTcSteps()
-            default:
-                break
-            }
-        }
-    }
-    
+
     @IBAction func openImage(_ sender: AnyObject) {
         /* Present open panel. */
         let openPanel = NSOpenPanel()
@@ -950,8 +911,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 calibrate()
                 return
             }
-            showMessage(NSLocalizedString("Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel.", comment:""))
-            enableNavigation()
+            showMessage(NSLocalizedString("Use a caliper to measure a known interval, then select Calibrate.", comment:""))
             disableMeasurements()
             inCalibration = true
         }
@@ -1077,7 +1037,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         inCalibration = false
         inQTcStep1 = false
         inQTcStep2 = false
-        disableNavigation()
         setMeasurementsEnabled(calipersView.horizontalCalibration.calibrated)
     }
     
@@ -1089,6 +1048,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     // This doesn't overwrite lastMessage, thus allowing multiple tweak messages that
     // will return to last pre-Tweak message when restoreLastMessage called.
     func showMessageWithoutSaving(_ message: String) {
+        guard !message.isEmpty else {
+            instructionPanel.setIsVisible(false)
+            return
+        }
         instructionPanel.setIsVisible(true)
         instructionLabel.stringValue = message
     }
@@ -1139,7 +1102,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-        showAlert(alert)
+        alert.runModal()
     }
     
     func showNoCaliperSelectedAlert() {
@@ -1175,8 +1138,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         alert.messageText = NSLocalizedString("Mean interval and rate", comment:"")
         alert.informativeText = NSString.localizedStringWithFormat(NSLocalizedString("Mean interval = %.4g %@\nMean rate = %.4g bpm", comment:"") as NSString, meanInterval, intervalUnits, meanRate) as String;
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-        showAlert(alert)
-//        alert.runModal()
+        alert.runModal()
     }
 
     
@@ -1212,8 +1174,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 return
             }
             disableCalibrationControls()
-            showMessage(NSLocalizedString("Use a caliper to measure 2 or more intervals, then select Next to calculate mean, or Cancel.", comment:""))
-            enableNavigation()
+            showMessage(NSLocalizedString("Use a caliper to measure 2 or more intervals, then select meanRR to calculate mean.", comment:""))
             // don't allow pressing QTc button in middle of meanRR
             disableQTcMeasurement()
             inMeanRR = true
@@ -1225,16 +1186,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     private func disableCalibrationControls() {
-        let newCalipersSegementedControl = getNewCalipersToolbar()
-        newCalipersSegementedControl?.setEnabled(false, forSegment: 3)
-        newCalipersSegementedControl?.setEnabled(false, forSegment: 4)
+        newCalipersSegmentedControl?.setEnabled(false, forSegment: 3)
+        newCalipersSegmentedControl?.setEnabled(false, forSegment: 4)
     }
 
     private func enableCalibrationControls() {
-        let newCalipersSegementedControl = getNewCalipersToolbar()
-        newCalipersSegementedControl?.isEnabled = true
-        newCalipersSegementedControl?.setEnabled(true, forSegment: 3)
-        newCalipersSegementedControl?.setEnabled(true, forSegment: 4)
+        newCalipersSegmentedControl?.isEnabled = true
+        newCalipersSegmentedControl?.setEnabled(true, forSegment: 3)
+        newCalipersSegmentedControl?.setEnabled(true, forSegment: 4)
     }
     
     func meanRR() {
@@ -1286,8 +1245,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func exitMeanRR() {
         clearMessage()
         inMeanRR = false
-        disableCalibrationControls()
-        disableNavigation()
+        enableCalibrationControls()
         enableMeasurementOfQTc()
     }
     
@@ -1324,7 +1282,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return
         }
         enterQTc()
-        showMessage(NSLocalizedString("Measure 1 or more RR intervals.  Select Next to continue.", comment:""))
+        showMessage(NSLocalizedString("Measure 1 or more RR intervals.  Select QTc again to continue.", comment:""))
         inQTcStep1 = true
     }
 
@@ -1392,7 +1350,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func doQTcStep2() {
-        showMessage(NSLocalizedString("Now measure QT interval and select Next, or Cancel", comment:""))
+        showMessage(NSLocalizedString("Now measure QT interval and select QTc again to calculate the QTc.", comment:""))
     }
     
     func doQTcResult() {
@@ -1419,7 +1377,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     func enterQTc() {
-        enableNavigation()
         // don't mess with calibration during QTc measurment
         disableCalibrationControls()
 
@@ -1441,12 +1398,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         return view
     }
 
-    private func getNewNavigationToolbar() -> NSSegmentedControl? {
-        let item = itemFromToolbarIdentifier("newNavigationToolbar")
-        let view = item?.view as? NSSegmentedControl
-        return view
-    }
-
     private func getNewCalipersToolbar() -> NSSegmentedControl? {
         let item = itemFromToolbarIdentifier("newCalipersToolbar")
         let view = item?.view as? NSSegmentedControl
@@ -1455,63 +1406,43 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     // FIXME: These are all pulled out for refactoring to new toolbar/touchbar
     private func setZoomEnabled(_ enable: Bool) {
-        let newZoomSegmentedControl = getNewZoomToolbar()
         newZoomSegmentedControl?.isEnabled = enable
     }
 
 
     private func disableMeasurementsOtherThanQTc() {
-        let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.setEnabled(false, forSegment: 0)
         newMeasurementSegmentedControl?.setEnabled(false, forSegment: 1)
     }
 
     private func enableMeasurementOfQTc() {
-        let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.setEnabled(true, forSegment: 2)
     }
 
     private func disableQTcMeasurement() {
-        let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.setEnabled(false, forSegment: 2)
     }
 
     private func enableMeasurements() {
-        let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.isEnabled = true
 
     }
 
     private func setMeasurementsEnabled(_ enable: Bool) {
-        let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.isEnabled = enable
         enableRateAndMeanRRMeasurements()
     }
 
     private func disableMeasurements() {
-        let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.isEnabled = false
     }
 
     private func enableRateAndMeanRRMeasurements() {
-        let newMeasurementSegmentedControl = getNewMeasurementToolbar()
         newMeasurementSegmentedControl?.setEnabled(true, forSegment: 0)
         newMeasurementSegmentedControl?.setEnabled(true, forSegment: 1)
     }
 
-    private func disableNavigation() {
-        let newNavigationSegmentedControl = getNewNavigationToolbar()
-        newNavigationSegmentedControl?.isEnabled = false
-    }
-
-    private func enableNavigation() {
-        let newNavigationSegmentedControl = getNewNavigationToolbar()
-        newNavigationSegmentedControl?.isEnabled = true
-    }
-
-
     func exitQTc() {
-        disableNavigation()
         enableCalibrationControls()
         enableRateAndMeanRRMeasurements()
         clearMessage()
