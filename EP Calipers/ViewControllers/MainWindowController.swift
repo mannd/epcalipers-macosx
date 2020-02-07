@@ -129,8 +129,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     func setTransparency() {
         print("setTransparency()")
-        let item = getNewZoomToolbar()
-        item?.isEnabled = !isTransparent
+        newZoomSegmentedControl?.isEnabled = !isTransparent
         calipersView.lockedMode = isTransparent
         clearCalibration()
         if isTransparent {
@@ -239,6 +238,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.delegate = self
         instructionPanel.setIsVisible(false)
         instructionPanel.becomesKeyOnlyIfNeeded = true
+
+        toolbar.delegate = self
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -305,9 +306,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return !transparent
         }
         if menuItem.action == #selector(openIKImageEditPanel(_:)) {
-            return !transparent
-        }
-        if menuItem.action == #selector(openImage(_:)) {
             return !transparent
         }
         if menuItem.action == #selector(doCalibration(_:)) {
@@ -1508,6 +1506,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 }
             }
         return nil
+    }
+
+    func loadToolbarItems() {
+        newZoomSegmentedControl = getNewZoomToolbar()
+        newCalipersSegmentedControl = getNewCalipersToolbar()
+        newMeasurementSegmentedControl = getNewMeasurementToolbar()
+    }
+
+    func toolbarWillAddItem(_ notification: Notification) {
+        print("toolbar added items")
     }
 
 }

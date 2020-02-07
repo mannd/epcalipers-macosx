@@ -74,7 +74,7 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="DbN-gq-grY"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ouh-LL-r0x"/>
-                    <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" sizingBehavior="auto" autovalidates="NO" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" sizingBehavior="auto" autovalidates="NO" id="BUH-5G-BGq">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="gC6-ej-kGp">
                             <rect key="frame" x="0.0" y="14" width="119" height="24"/>
@@ -94,7 +94,7 @@
                             <action selector="doZoom:" target="-1" id="FLw-aI-7ZY"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" explicitItemIdentifier="newCalipersToolbar" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" autovalidates="NO" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" explicitItemIdentifier="newCalipersToolbar" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" autovalidates="NO" id="uO8-MM-MEU">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
                             <rect key="frame" x="0.0" y="14" width="245" height="24"/>
@@ -114,7 +114,7 @@
                             <action selector="addCaliper:" target="-1" id="RDv-Gf-Utn"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" explicitItemIdentifier="newMeasurementToolbar" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" autovalidates="NO" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" explicitItemIdentifier="newMeasurementToolbar" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" autovalidates="NO" id="zIV-EH-MOz">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
                             <rect key="frame" x="0.0" y="14" width="223" height="24"/>
@@ -130,6 +130,20 @@
                         </segmentedControl>
                         <connections>
                             <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="08FBA811-9D6E-4006-8938-9C0068D87981" label="Files" paletteLabel="Files" sizingBehavior="auto" id="PpK-uR-opo">
+                        <nil key="toolTip"/>
+                        <button key="view" verticalHuggingPriority="750" id="rPH-6X-DKQ">
+                            <rect key="frame" x="0.0" y="14" width="82" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NhF-BJ-pBj">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="openImage:" target="-1" id="DM4-ga-HEO"/>
                         </connections>
                     </toolbarItem>
                 </allowedToolbarItems>

@@ -37,15 +37,9 @@
 		8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFCE1C473049002E0085 /* TB_move.tiff */; };
 		8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD01C4740C0002E0085 /* lock-20.png */; };
 		8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD21C4742E4002E0085 /* lock-16.png */; };
-		8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */; };
-		8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */; };
-		8EB06E351F1E5D6300C65879 /* Normal 12_Lead ECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */; };
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */; };
 		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
-		8EFAE9BF23E91F0600D5EE9B /* caliper-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAE9BE23E91F0600D5EE9B /* caliper-20x20.png */; };
-		8EFAE9C223E91FA700D5EE9B /* angle-caliper-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAE9C023E91FA700D5EE9B /* angle-caliper-20x20.png */; };
-		8EFAE9C323E91FA700D5EE9B /* amplitude-caliper-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAE9C123E91FA700D5EE9B /* amplitude-caliper-20x20.png */; };
 		8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */; };
 		BC22D256FB148CA20F171A61 /* Pods_EP_CalipersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B808683C218942F5BC15DDB /* Pods_EP_CalipersTests.framework */; };
 /* End PBXBuildFile section */
@@ -124,18 +118,12 @@
 		8EA7EFCE1C473049002E0085 /* TB_move.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TB_move.tiff; sourceTree = "<group>"; };
 		8EA7EFD01C4740C0002E0085 /* lock-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-20.png"; sourceTree = "<group>"; };
 		8EA7EFD21C4742E4002E0085 /* lock-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-16.png"; sourceTree = "<group>"; };
-		8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-icon-bw-20x20.png"; sourceTree = "<group>"; };
-		8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calipers-amplitude-icon-bw-20x20.png"; sourceTree = "<group>"; };
-		8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Normal 12_Lead ECG.jpg"; sourceTree = "<group>"; };
 		8EB72C991E2154340083DE96 /* AngleCaliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleCaliper.swift; sourceTree = "<group>"; };
 		8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angle_icon_2_20x20.png; sourceTree = "<group>"; };
 		8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EP Calipers.entitlements"; sourceTree = "<group>"; };
 		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		8ED1677F1F1C1D0200F44DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		8ED167821F1C1D1100F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
-		8EFAE9BE23E91F0600D5EE9B /* caliper-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "caliper-20x20.png"; sourceTree = "<group>"; };
-		8EFAE9C023E91FA700D5EE9B /* angle-caliper-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-caliper-20x20.png"; sourceTree = "<group>"; };
-		8EFAE9C123E91FA700D5EE9B /* amplitude-caliper-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amplitude-caliper-20x20.png"; sourceTree = "<group>"; };
 		8EFCD97C1F30D289007B3A45 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8EFCD97E1F30D28C007B3A45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9E13E2CC0D294FA41ABD1069 /* Pods_EP_Calipers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_Calipers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,15 +236,9 @@
 		8EA7EFC31C472909002E0085 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */,
 				8E74037D223B538A002D5ED6 /* sampleECG.jpg */,
-				8EFAE9C123E91FA700D5EE9B /* amplitude-caliper-20x20.png */,
-				8EFAE9C023E91FA700D5EE9B /* angle-caliper-20x20.png */,
-				8EFAE9BE23E91F0600D5EE9B /* caliper-20x20.png */,
 				8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */,
 				8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */,
-				8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */,
-				8EA7EFD41C47545B002E0085 /* calipers-icon-bw-20x20.png */,
 				8EA7EFD21C4742E4002E0085 /* lock-16.png */,
 				8EA7EFD01C4740C0002E0085 /* lock-20.png */,
 				8EA7EFCE1C473049002E0085 /* TB_move.tiff */,
@@ -449,21 +431,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */,
-				8EFAE9BF23E91F0600D5EE9B /* caliper-20x20.png in Resources */,
-				8EB06E351F1E5D6300C65879 /* Normal 12_Lead ECG.jpg in Resources */,
-				8EFAE9C223E91FA700D5EE9B /* angle-caliper-20x20.png in Resources */,
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
 				8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */,
 				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
-				8EA7EFD71C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png in Resources */,
 				8EA7EFCF1C473049002E0085 /* TB_move.tiff in Resources */,
 				8EA7EFCC1C472973002E0085 /* TB_zoomOut.png in Resources */,
 				8EA7EFD11C4740C0002E0085 /* lock-20.png in Resources */,
 				8E74037E223B538A002D5ED6 /* sampleECG.jpg in Resources */,
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
 				8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */,
-				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
-				8EFAE9C323E91FA700D5EE9B /* amplitude-caliper-20x20.png in Resources */,
 				8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */,
 				8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */,
 				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
