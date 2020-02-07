@@ -40,6 +40,7 @@
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */; };
 		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
+		8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE97F7523ED332F00C3FEE7 /* ToolbarItem.swift */; };
 		8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */; };
 		BC22D256FB148CA20F171A61 /* Pods_EP_CalipersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B808683C218942F5BC15DDB /* Pods_EP_CalipersTests.framework */; };
 /* End PBXBuildFile section */
@@ -124,6 +125,7 @@
 		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		8ED1677F1F1C1D0200F44DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		8ED167821F1C1D1100F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		8EE97F7523ED332F00C3FEE7 /* ToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarItem.swift; sourceTree = "<group>"; };
 		8EFCD97C1F30D289007B3A45 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8EFCD97E1F30D28C007B3A45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9E13E2CC0D294FA41ABD1069 /* Pods_EP_Calipers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_Calipers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +290,7 @@
 				8E2282471C398B1300337695 /* CalipersView.swift */,
 				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
 				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
+				8EE97F7523ED332F00C3FEE7 /* ToolbarItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8E8B541B23E664D400751830 /* ToolbarIdentifiers.swift in Sources */,
+				8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */,
 				8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */,
 				8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,

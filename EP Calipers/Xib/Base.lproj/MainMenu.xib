@@ -491,6 +491,13 @@ CA
                                     <action selector="doMeasurement:" target="-1" id="fAK-6u-ioh"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="1z4-we-sCB"/>
+                            <menuItem title="Cancel Measurment" tag="3" id="02z-TO-MfZ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doMeasurement:" target="-1" id="O0S-EB-5mv"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

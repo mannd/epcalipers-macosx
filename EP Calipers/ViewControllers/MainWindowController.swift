@@ -49,7 +49,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet var instructionLabel: NSTextField!
 
     // New toolbar segmented controls
-    lazy var newZoomSegmentedControl = getNewZoomToolbar()
+    var newZoomSegmentedControl: NSSegmentedControl? = nil
+//    lazy var newZoomSegmentedControl = getNewZoomToolbar()
     lazy var newCalipersSegmentedControl = getNewCalipersToolbar()
     lazy var newMeasurementSegmentedControl = getNewMeasurementToolbar()
 
@@ -286,6 +287,22 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         return false
     }
 
+    @objc func validateToolbarItem(_ toolbarItem: NSToolbarItem) -> Bool {
+        if toolbarItem.itemIdentifier.rawValue == "newZoomToolbar" {
+            return !isTransparent
+        }
+        if toolbarItem.itemIdentifier.rawValue == "newCalipersToolbar" {
+            return !doingMeasurement()
+        }
+        if toolbarItem.itemIdentifier.rawValue == "newCalibrationToolbar" {
+            return !doingMeasurement()
+        }
+        if toolbarItem.itemIdentifier.rawValue == "newMeasurementToolbar" {
+            return calipersView.horizontalCalibration.calibrated
+        }
+        return true
+    }
+
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !transparent && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
@@ -501,9 +518,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             meanRRWithPossiblePrompts()
         case 2:
             calculateQTc()
+        case 3:
+            cancelMeasurement()
         default:
             break
         }
+    }
+
+    func cancelMeasurement() {
+        print("cancel measurement")
     }
 
     func setInstructionText(_ text: String) {
@@ -849,7 +872,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     @IBAction func doCalibration(_ sender: AnyObject) {
-        let calibrationTag = sender.tag
+        print("doCalibration")
+        let calibrationTag: Int
+        if sender is NSSegmentedControl {
+            calibrationTag = sender.selectedTag()
+        }
+        else {
+            calibrationTag = sender.tag
+        }
+        print("calibrationTag = \(calibrationTag)")
         switch calibrationTag {
         case 3:
             calibrateWithPossiblePrompts()
@@ -1074,7 +1105,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
     }
-    
+
     func showNoTimeCaliperSelectedAlert() {
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("No time caliper selected", comment:"")
@@ -1123,6 +1154,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func toggleIntervalRate() {
+        // Don't do anthing if no time caliper on screen.
+        guard !noTimeCaliperExists() else { return }
         calipersView.horizontalCalibration.displayRate = !calipersView.horizontalCalibration.displayRate
         calipersView.needsDisplay = true
     }
@@ -1130,7 +1163,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func meanRRWithPossiblePrompts() {
         if appPreferences.showPrompts {
             if inMeanRR {
-                // user pressed mRR again instead of Next, it's OK, do what s/he wants
                 meanRR()
                 return
             }
@@ -1155,6 +1187,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         newCalipersSegmentedControl?.isEnabled = true
         newCalipersSegmentedControl?.setEnabled(true, forSegment: 3)
         newCalipersSegmentedControl?.setEnabled(true, forSegment: 4)
+    }
+
+    func enterMeasurements() {
+        print("enterMeasurements")
+        toolbar.allowsUserCustomization = false
+    }
+
+    func exitMeasurements() {
+        print("exitMeasurements")
+        toolbar.allowsUserCustomization = true
     }
     
     func meanRR() {
@@ -1215,7 +1257,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func calculateQTc() {
         if inQTcStep1 {
-            // user pressed QTc button instead of Next.  That's OK
             if calipersView.noTimeCaliperIsSelected() {
                 showNoTimeCaliperSelectedAlert()
                 return
@@ -1283,7 +1324,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 alert.messageText = NSLocalizedString("QTc: Enter number of RR intervals", comment:"")
                 alert.informativeText = NSLocalizedString("How many RR intervals is this caliper measuring?", comment:"")
                 alert.addButton(withTitle: NSLocalizedString("Continue", comment:""))
-                alert.addButton(withTitle: NSLocalizedString("Back", comment:""))
+                alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
                 alert.accessoryView = qtcNumberInputView
                 qtcMeanIntervalAlert = alert
             }
@@ -1306,6 +1347,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 inQTcStep1 = false
                 inQTcStep2 = true
                 doQTcStep2()
+            }
+            else {
+                exitQTc()
             }
         }
         else {  // on error (c = nil) exit QTc
@@ -1344,28 +1388,31 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // don't mess with calibration during QTc measurment
         disableCalibrationControls()
 
-        // don't allow pushing R/I or meanRR buttons either
+        // don't allow pushing R/I or meanRR buttons either#imageLiteral(resourceName: "sampleECG.jpg")
         disableMeasurementsOtherThanQTc()
     }
 
     // get toolbars
     // These toolbars should be inited once when view loads, not here.
     private func getNewMeasurementToolbar() -> NSSegmentedControl? {
-        let item = itemFromToolbarIdentifier("newMeasurementToolbar")
-        let view = item?.view as? NSSegmentedControl
-        return view
+//        let item = itemFromToolbarIdentifier("newMeasurementToolbar")
+//        let view = item?.view as? NSSegmentedControl
+//        return view
+        return nil
     }
 
     private func getNewZoomToolbar() -> NSSegmentedControl? {
-        let item = itemFromToolbarIdentifier("newZoomToolbar")
-        let view = item?.view as? NSSegmentedControl
-        return view
+//        let item = itemFromToolbarIdentifier("newZoomToolbar")
+//        let view = item?.view as? NSSegmentedControl
+//        return view
+        return nil
     }
 
     private func getNewCalipersToolbar() -> NSSegmentedControl? {
-        let item = itemFromToolbarIdentifier("newCalipersToolbar")
-        let view = item?.view as? NSSegmentedControl
-        return view
+//        let item = itemFromToolbarIdentifier("newCalipersToolbar")
+//        let view = item?.view as? NSSegmentedControl
+//        return view
+        return nil
     }
 
     // FIXME: These are all pulled out for refactoring to new toolbar/touchbar
