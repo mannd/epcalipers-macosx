@@ -144,39 +144,6 @@
             </connections>
             <point key="canvasLocation" x="420" y="476"/>
         </window>
-        <customView id="1nv-Ch-vgn">
-            <rect key="frame" x="0.0" y="0.0" width="249" height="133"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nas-NK-EXN">
-                    <rect key="frame" x="20" y="56" width="209" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="cEz-Fq-rD9"/>
-                        <constraint firstAttribute="width" constant="209" id="eKV-7u-m9D"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="I1j-RQ-6Ut">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstItem="nas-NK-EXN" firstAttribute="centerY" secondItem="1nv-Ch-vgn" secondAttribute="centerY" id="7o1-9d-1eT"/>
-                <constraint firstItem="nas-NK-EXN" firstAttribute="centerX" secondItem="1nv-Ch-vgn" secondAttribute="centerX" id="Wsf-hl-6gJ"/>
-            </constraints>
-            <point key="canvasLocation" x="463" y="57"/>
-        </customView>
-        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="Hsh-8H-9Ny">
-            <rect key="frame" x="0.0" y="0.0" width="38" height="17"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Oux-CQ-MYK">
-                <font key="font" metaFont="system"/>
-                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-            </textFieldCell>
-            <point key="canvasLocation" x="723" y="466.5"/>
-        </textField>
         <window title="Instructions" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="rGN-02-IWd" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -201,7 +168,7 @@
                     <constraint firstItem="Muj-mg-GQi" firstAttribute="leading" secondItem="sz9-UB-bmo" secondAttribute="leading" constant="20" symbolic="YES" id="Vg8-99-5yx"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="447" y="-106.5"/>
+            <point key="canvasLocation" x="338" y="53"/>
         </window>
     </objects>
     <resources>

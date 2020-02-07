@@ -1162,6 +1162,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func meanRR() {
         if noTimeCaliperExists() {
             showNoCalipersAlert(true)
+            exitMeanRR()
             return
         }
         let singleHorizontalCaliper = getLoneTimeCaliper()
@@ -1171,6 +1172,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         if calipersView.noTimeCaliperIsSelected() {
             showNoTimeCaliperSelectedAlert()
+            exitMeanRR()
             return
         }
         if let c = calipersView.activeCaliper() {
@@ -1191,6 +1193,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
                     exitMeanRR()
+                    return
                 }
                 // get integer from the stepper
                 let divisor = numberStepper.integerValue
@@ -1200,9 +1203,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 let meanRate = c.rateResult(meanInterval)
                 let intervalUnits = c.calibration.rawUnits
                 showMeanRRResultAlert(meanInterval, meanRate: meanRate, intervalUnits: intervalUnits)
-                exitMeanRR()
             }
         }
+        exitMeanRR()
     }
     
     func exitMeanRR() {
