@@ -24,6 +24,8 @@
 		8E545CA91F95A27500B1CEB0 /* QTcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E545CA81F95A27500B1CEB0 /* QTcResult.swift */; };
 		8E74037E223B538A002D5ED6 /* sampleECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E74037D223B538A002D5ED6 /* sampleECG.jpg */; };
 		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
+		8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */; };
+		8E8B541B23E664D400751830 /* ToolbarIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B541A23E664D400751830 /* ToolbarIdentifiers.swift */; };
 		8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */; };
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
 		8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC11C4378A4002E0085 /* Calibration.swift */; };
@@ -41,6 +43,9 @@
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */; };
 		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
+		8EFAE9BF23E91F0600D5EE9B /* caliper-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAE9BE23E91F0600D5EE9B /* caliper-20x20.png */; };
+		8EFAE9C223E91FA700D5EE9B /* angle-caliper-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAE9C023E91FA700D5EE9B /* angle-caliper-20x20.png */; };
+		8EFAE9C323E91FA700D5EE9B /* amplitude-caliper-20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAE9C123E91FA700D5EE9B /* amplitude-caliper-20x20.png */; };
 		8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */; };
 		BC22D256FB148CA20F171A61 /* Pods_EP_CalipersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B808683C218942F5BC15DDB /* Pods_EP_CalipersTests.framework */; };
 /* End PBXBuildFile section */
@@ -106,6 +111,8 @@
 		8E74037D223B538A002D5ED6 /* sampleECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleECG.jpg; sourceTree = "<group>"; };
 		8E7C36D11F2ED89000E5FDA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View.xib; sourceTree = "<group>"; };
 		8E7C36D31F2ED94F00E5FDA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/View.strings; sourceTree = "<group>"; };
+		8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarIdentifiers.swift; sourceTree = "<group>"; };
+		8E8B541A23E664D400751830 /* ToolbarIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarIdentifiers.swift; sourceTree = "<group>"; };
 		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
 		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
@@ -126,6 +133,9 @@
 		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		8ED1677F1F1C1D0200F44DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		8ED167821F1C1D1100F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		8EFAE9BE23E91F0600D5EE9B /* caliper-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "caliper-20x20.png"; sourceTree = "<group>"; };
+		8EFAE9C023E91FA700D5EE9B /* angle-caliper-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-caliper-20x20.png"; sourceTree = "<group>"; };
+		8EFAE9C123E91FA700D5EE9B /* amplitude-caliper-20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amplitude-caliper-20x20.png"; sourceTree = "<group>"; };
 		8EFCD97C1F30D289007B3A45 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8EFCD97E1F30D28C007B3A45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9E13E2CC0D294FA41ABD1069 /* Pods_EP_Calipers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_Calipers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,29 +200,20 @@
 		8E3DA7EF1C2E264000AD9556 /* EP Calipers */ = {
 			isa = PBXGroup;
 			children = (
-				8E74037D223B538A002D5ED6 /* sampleECG.jpg */,
-				8E7C36CE1F2ED88200E5FDA8 /* View.xib */,
+				8EFAE9C923E9FCE000D5EE9B /* ViewControllers */,
+				8EFAE9C823E9FCA000D5EE9B /* Views */,
+				8EFAE9C723E9FC6900D5EE9B /* Models */,
+				8EFAE9C623E9F64600D5EE9B /* Objc */,
+				8EFAE9C423E9F5BD00D5EE9B /* Xib */,
+				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
 				8E2867821F2A5CD700AF335C /* Localizable.strings */,
-				8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */,
 				8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */,
 				8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */,
 				8E3DA7F21C2E264000AD9556 /* Assets.xcassets */,
-				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
 				8E3DA7F71C2E264000AD9556 /* Info.plist */,
-				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
-				8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */,
-				8E2282471C398B1300337695 /* CalipersView.swift */,
-				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
-				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
-				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
-				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
-				8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */,
-				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
-				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
-				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
-				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
 				8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */,
-				8E545CA81F95A27500B1CEB0 /* QTcResult.swift */,
+				8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */,
+				8E8B541A23E664D400751830 /* ToolbarIdentifiers.swift */,
 			);
 			path = "EP Calipers";
 			sourceTree = "<group>";
@@ -247,6 +248,11 @@
 		8EA7EFC31C472909002E0085 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8EB06E341F1E5D6300C65879 /* Normal 12_Lead ECG.jpg */,
+				8E74037D223B538A002D5ED6 /* sampleECG.jpg */,
+				8EFAE9C123E91FA700D5EE9B /* amplitude-caliper-20x20.png */,
+				8EFAE9C023E91FA700D5EE9B /* angle-caliper-20x20.png */,
+				8EFAE9BE23E91F0600D5EE9B /* caliper-20x20.png */,
 				8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */,
 				8EB72C9D1E21A94F0083DE96 /* angle_icon_2_20x20.png */,
 				8EA7EFD61C47546D002E0085 /* calipers-amplitude-icon-bw-20x20.png */,
@@ -261,6 +267,55 @@
 				8EA7EFC81C472973002E0085 /* TB_zoomToFit.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		8EFAE9C423E9F5BD00D5EE9B /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				8E7C36CE1F2ED88200E5FDA8 /* View.xib */,
+				8E3DA7F41C2E264000AD9556 /* MainMenu.xib */,
+				8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
+		8EFAE9C623E9F64600D5EE9B /* Objc */ = {
+			isa = PBXGroup;
+			children = (
+				8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */,
+				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
+				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
+			);
+			path = Objc;
+			sourceTree = "<group>";
+		};
+		8EFAE9C723E9FC6900D5EE9B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
+				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
+				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
+				8E545CA81F95A27500B1CEB0 /* QTcResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8EFAE9C823E9FCA000D5EE9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E2282471C398B1300337695 /* CalipersView.swift */,
+				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
+				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8EFAE9C923E9FCE000D5EE9B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		94B026D62EEB50920342AE38 /* Pods */ = {
@@ -394,7 +449,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA7EFCA1C472973002E0085 /* TB_zoomActual.png in Resources */,
+				8EFAE9BF23E91F0600D5EE9B /* caliper-20x20.png in Resources */,
 				8EB06E351F1E5D6300C65879 /* Normal 12_Lead ECG.jpg in Resources */,
+				8EFAE9C223E91FA700D5EE9B /* angle-caliper-20x20.png in Resources */,
 				8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */,
 				8EB72C9E1E21A94F0083DE96 /* angle_icon_2_20x20.png in Resources */,
 				8EA7EFC91C472973002E0085 /* TB_rotate.tiff in Resources */,
@@ -406,6 +463,7 @@
 				8EA7EFD31C4742E4002E0085 /* lock-16.png in Resources */,
 				8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */,
 				8EA7EFD51C47545B002E0085 /* calipers-icon-bw-20x20.png in Resources */,
+				8EFAE9C323E91FA700D5EE9B /* amplitude-caliper-20x20.png in Resources */,
 				8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */,
 				8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */,
 				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
@@ -502,7 +560,9 @@
 				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,
 				8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
+				8E8B541B23E664D400751830 /* ToolbarIdentifiers.swift in Sources */,
 				8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */,
+				8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

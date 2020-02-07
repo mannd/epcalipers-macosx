@@ -70,6 +70,7 @@ class Caliper: NSObject {
     var isMarching: Bool
     var autoPositionText: Bool
     var textPosition: TextPosition
+    var chosenComponent: CaliperComponent = .noComponent
 
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
          crossBarPosition: CGFloat) {
@@ -119,7 +120,8 @@ class Caliper: NSObject {
             Holder.differential = 0
         }
     }
-    
+
+    // FIXME: highlight tweaked bars
     func drawWithContext(_ context: CGContext, inRect rect:CGRect) {
         context.setStrokeColor(color.cgColor)
         context.setLineWidth(lineWidth)
@@ -153,8 +155,69 @@ class Caliper: NSObject {
             drawMarchingCalipers(context, inRect: rect)
         }
         caliperText(rect: rect, textPosition: textPosition, optimizeTextPosition: true)
+        drawChosenComponent(context, inRect: rect)
     }
-    
+
+    // could be calculated property
+    func getChosenComponentColor() -> CGColor {
+        let chosenComponentColor: NSColor
+        if selected {
+            chosenComponentColor = unselectedColor
+        }
+        else {
+            chosenComponentColor = selectedColor
+        }
+        return chosenComponentColor.cgColor
+    }
+
+    // TODO: complete this
+    func drawChosenComponent(_ context: CGContext, inRect rect: CGRect) {
+        guard chosenComponent != .noComponent else { return }
+        context.setStrokeColor(getChosenComponentColor())
+
+        switch self.chosenComponent {
+        case .leftBar:
+            context.move(to: CGPoint(x: bar1Position, y: rect.size.height))
+            context.addLine(to: CGPoint(x: bar1Position, y: 0))
+        case .lowerBar:
+            context.move(to: CGPoint(x: 0, y: bar1Position))
+            context.addLine(to: CGPoint(x: rect.size.width, y: bar1Position))
+        case .rightBar:
+                context.move(to: CGPoint(x: bar2Position, y: rect.size.height))
+                context.addLine(to: CGPoint(x: bar2Position, y: 0))
+        case .upperBar:
+            context.move(to: CGPoint(x: 0, y: bar2Position))
+            context.addLine(to: CGPoint(x: rect.size.width, y: bar2Position))
+        case .crossBar:
+            if (direction == .horizontal) {
+                context.move(to: CGPoint(x: bar2Position, y: crossBarPosition))
+                context.addLine(to: CGPoint(x: bar1Position, y: crossBarPosition))
+            }
+            else {
+                context.move(to: CGPoint(x: crossBarPosition, y: bar2Position))
+                context.addLine(to: CGPoint(x: crossBarPosition, y: bar1Position))
+            }
+        default:
+            break
+        }
+        context.strokePath()
+    }
+
+    func getSelectedCaliperComponent(atPoint p: NSPoint) -> CaliperComponent {
+        if pointNearBar1(p: p) {
+            return direction == .horizontal ? .leftBar : .lowerBar
+        }
+        else if pointNearBar2(p: p) {
+            return direction == .horizontal ? .rightBar : .upperBar
+        }
+        else if pointNearCrossBar(p) {
+            return isAngleCaliper ? .apex : .crossBar
+        }
+        else {
+            return .noComponent
+        }
+    }
+
     func isTimeCaliper() -> Bool {
         return direction == .horizontal && !isAngleCaliper
     }
@@ -221,7 +284,6 @@ class Caliper: NSObject {
                              textPosition: TextPosition,
                              optimizeTextPosition: Bool) -> CGRect {
         // assumes X is center of text block and y is text baseline
-        // TODO: need to check this on Cocoa!
         var textOrigin = CGPoint()
         var origin = CGPoint()
         let textHeight = size.height
@@ -531,7 +593,11 @@ class Caliper: NSObject {
         }
         return s
     }
-    
+
+    func moveBarInDirection(movementDirection: MovementDirection, distance: CGFloat) {
+        moveBarInDirection(movementDirection: movementDirection, distance: distance, forComponent: chosenComponent)
+    }
+
     func moveBarInDirection(movementDirection: MovementDirection, distance: CGFloat, forComponent component: CaliperComponent) {
         if component == .noComponent {
             return
