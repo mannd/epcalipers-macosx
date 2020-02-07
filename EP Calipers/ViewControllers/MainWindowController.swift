@@ -512,43 +512,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         instructionLabel.stringValue = text
     }
 
-    @IBAction func nextAction(_ sender: Any) {
-        if inCalibration {
-            calibrate()
-        }
-        else if inMeanRR {
-            meanRR()
-        }
-        else { // in QTc
-            doNextQTcStep()
-        }
-    }
-
-    @IBAction func backAction(_ sender: Any) {
-        if inCalibration {
-            exitCalibration()
-        }
-        else if inMeanRR {
-            exitMeanRR()
-        }
-        else { // in QTc
-            doPreviousQTcStep()
-        }
-    }
-
-    @IBAction func cancelAction(_ sender: Any) {
-        if inCalibration {
-            exitCalibration()
-        }
-        else if inMeanRR {
-            exitMeanRR()
-        }
-        else { // in QTc
-            cancelQTcSteps()
-        }
-    }
-
-
     @IBAction func openImage(_ sender: AnyObject) {
         /* Present open panel. */
         let openPanel = NSOpenPanel()

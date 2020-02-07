@@ -180,15 +180,14 @@
         <window title="Instructions" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="rGN-02-IWd" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="181" y="118" width="276" height="200"/>
+            <rect key="contentRect" x="181" y="118" width="360" height="139"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1097"/>
-            <value key="minSize" type="size" width="276" height="200"/>
             <view key="contentView" id="sz9-UB-bmo">
-                <rect key="frame" x="0.0" y="0.0" width="276" height="200"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="139"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-mg-GQi">
-                        <rect key="frame" x="18" y="164" width="240" height="16"/>
+                        <rect key="frame" x="18" y="103" width="324" height="16"/>
                         <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="0Nj-hp-8mI">
                             <font key="font" usesAppearanceFont="YES"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -202,7 +201,7 @@
                     <constraint firstItem="Muj-mg-GQi" firstAttribute="leading" secondItem="sz9-UB-bmo" secondAttribute="leading" constant="20" symbolic="YES" id="Vg8-99-5yx"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="405" y="-76"/>
+            <point key="canvasLocation" x="447" y="-106.5"/>
         </window>
     </objects>
     <resources>
