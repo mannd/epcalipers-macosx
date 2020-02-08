@@ -44,6 +44,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet var pageInputView: NSView!
     @IBOutlet weak var pageTextField: NSTextField!
 
+    // Touchbar
+    @IBOutlet var zoomTouchBarItem: NSTouchBarItem!
+
     // InfoWindow
     @IBOutlet var instructionPanel: NSPanel!
     @IBOutlet var instructionLabel: NSTextField!
@@ -229,6 +232,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         transparent = appPreferences.transparency
 
         calipersView.delegate = self
+
+        // Draw concurrently, possibly not safe, as must guarantee thread-safety of the view, so...
+//        calipersView.canDrawConcurrently = true
+//        self.window?.allowsConcurrentViewDrawing = true
+
         instructionPanel.setIsVisible(false)
         instructionPanel.becomesKeyOnlyIfNeeded = true
 
@@ -1236,6 +1244,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         inQTcStep1 = false
         inQTcStep2 = false
         inCalibration = false
+        calipersView.stopTweaking()
     }
     
     func calculateQTc() {
@@ -1464,23 +1473,29 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
 @available(OSX 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
-    override open func makeTouchBar() -> NSTouchBar? {
-        let touchBar = NSTouchBar()
-        touchBar.delegate = self
-        touchBar.customizationIdentifier = .epcalipersBar
-        touchBar.defaultItemIdentifiers = [.infoLabelItem, .flexibleSpace, .infoLabelItem]
-        touchBar.customizationAllowedItemIdentifiers = [.infoLabelItem]
-        return touchBar
-    }
 
-    public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
-        switch identifier {
-        case NSTouchBarItem.Identifier.infoLabelItem:
-            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
-            customViewItem.view = NSTextField(labelWithString: "Calibrate")
-            return customViewItem
-        default:
-            return nil
-        }
-    }
+
+
+
+
+
+//    override open func makeTouchBar() -> NSTouchBar? {
+//        let touchBar = NSTouchBar()
+//        touchBar.delegate = self
+//        touchBar.customizationIdentifier = .epcalipersBar
+//        touchBar.defaultItemIdentifiers = [.infoLabelItem, .flexibleSpace, .infoLabelItem]
+//        touchBar.customizationAllowedItemIdentifiers = [.infoLabelItem]
+//        return touchBar
+//    }
+//
+//    public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+//        switch identifier {
+//        case NSTouchBarItem.Identifier.infoLabelItem:
+//            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+//            customViewItem.view = NSTextField(labelWithString: "Calibrate")
+//            return customViewItem
+//        default:
+//            return nil
+//        }
+//    }
 }

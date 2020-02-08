@@ -90,6 +90,25 @@ class CalipersView: NSView {
         }
     }
 
+    func clearChosenComponents(exceptFor caliper: Caliper?) {
+        if let caliper = caliper {
+            for c in calipers {
+                if c != caliper {
+                    c.chosenComponent = .noComponent
+                }
+            }
+        }
+        else {
+            clearAllChosenComponents()
+        }
+    }
+
+    func clearAllChosenComponents() {
+        for c in calipers {
+            c.chosenComponent = .noComponent
+        }
+    }
+
     override func rightMouseDown(with event: NSEvent) {
         chosenCaliper = getSelectedCaliper(event.locationInWindow)
         chosenCaliper?.chosenComponent = chosenCaliper?.getSelectedCaliperComponent(atPoint: event.locationInWindow) ?? .noComponent
@@ -185,6 +204,8 @@ class CalipersView: NSView {
     }
     
     @objc func tweakCaliper(_ sender: AnyObject) {
+        chosenCaliper?.isTweaking = true
+        clearChosenComponents(exceptFor: chosenCaliper)
         if let componentName = Caliper.componentName(chosenCaliper?.chosenComponent ?? .noComponent) {
             let message = String(format: NSLocalizedString("Tweak %@ with arrow keys and ⌘-arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
             if !isTweakingComponent {
@@ -383,10 +404,11 @@ class CalipersView: NSView {
     }
     
     func stopTweaking() {
+        clearAllChosenComponents()
         if (chosenCaliper == nil) {
             return
         }
-        chosenCaliper?.chosenComponent = .noComponent
+        chosenCaliper?.isTweaking = false
         chosenCaliper = nil
         isTweakingComponent = false
         delegate?.restoreLastMessage()

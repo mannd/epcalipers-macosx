@@ -68,6 +68,7 @@ class Caliper: NSObject {
     var requiresCalibration: Bool = true
     var isAngleCaliper:Bool = false
     var isMarching: Bool
+    var isTweaking: Bool = false
     var autoPositionText: Bool
     var textPosition: TextPosition
     var chosenComponent: CaliperComponent = .noComponent
@@ -121,7 +122,6 @@ class Caliper: NSObject {
         }
     }
 
-    // FIXME: highlight tweaked bars
     func drawWithContext(_ context: CGContext, inRect rect:CGRect) {
         context.setStrokeColor(color.cgColor)
         context.setLineWidth(lineWidth)
@@ -172,7 +172,7 @@ class Caliper: NSObject {
 
     // TODO: complete this
     func drawChosenComponent(_ context: CGContext, inRect rect: CGRect) {
-        guard chosenComponent != .noComponent else { return }
+        guard chosenComponent != .noComponent, isTweaking else { return }
         context.setStrokeColor(getChosenComponentColor())
 
         switch self.chosenComponent {

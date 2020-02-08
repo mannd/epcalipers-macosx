@@ -81,7 +81,7 @@ class AngleCaliper: Caliper {
     }
 
     func drawChosenComponent(_ context: CGContext, inRect rect: CGRect, endPointBar1: CGPoint, endPointBar2: CGPoint) {
-        guard chosenComponent != .noComponent else { return }
+        guard chosenComponent != .noComponent, isTweaking else { return }
         context.setStrokeColor(getChosenComponentColor())
         switch chosenComponent {
         case .leftBar:

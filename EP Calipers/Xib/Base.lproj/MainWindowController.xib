@@ -2,8 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="14550"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="the Touch Bar" minToolsVersion="8.1" minSystemVersion="10.12.2" requiredIntegratedClassName="NSTouchBar"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
@@ -15,6 +17,7 @@
                 <outlet property="scrollView" destination="AxA-IY-0Zx" id="E2e-dv-DLM"/>
                 <outlet property="toolbar" destination="Y6y-q2-GOt" id="BhB-8V-vGL"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
+                <outlet property="zoomTouchBarItem" destination="Urd-4C-hG1" id="EEZ-Sj-7g4"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -69,6 +72,51 @@
                     <constraint firstAttribute="trailing" secondItem="AxA-IY-0Zx" secondAttribute="trailing" id="iaZ-99-NTX"/>
                     <constraint firstItem="AxA-IY-0Zx" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="yj3-hc-ldc"/>
                 </constraints>
+                <touchBar key="touchBar" id="yoN-i5-zbn">
+                    <touchBarItems>
+                        <touchBarItem identifier="zoomTouchBar" id="Urd-4C-hG1">
+                            <viewController key="viewController" id="Ceb-lc-oq1">
+                                <segmentedControl key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CpQ-32-ZTA">
+                                    <rect key="frame" x="0.0" y="0.0" width="180" height="30"/>
+                                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="selectOne" id="FHa-P4-L2d">
+                                        <font key="font" metaFont="system"/>
+                                        <segments>
+                                            <segment image="zoom-in"/>
+                                            <segment image="zoom-out" selected="YES" tag="1"/>
+                                            <segment image="zoom-reset">
+                                                <nil key="label"/>
+                                            </segment>
+                                        </segments>
+                                    </segmentedCell>
+                                    <connections>
+                                        <action selector="doZoom:" target="-1" id="lhZ-hf-S1k"/>
+                                    </connections>
+                                </segmentedControl>
+                            </viewController>
+                        </touchBarItem>
+                        <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFixedSpaceSmall" id="fGi-nz-ayp"/>
+                        <touchBarItem identifier="calipersTouchBar" id="1eU-9e-BvC">
+                            <viewController key="viewController" id="VKI-qP-Se7">
+                                <segmentedControl key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G4C-aG-SjU">
+                                    <rect key="frame" x="0.0" y="0.0" width="180" height="30"/>
+                                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="selectOne" id="iT5-W9-Ppz">
+                                        <font key="font" metaFont="system"/>
+                                        <segments>
+                                            <segment image="new-time-caliper-icon"/>
+                                            <segment image="new-amplitude-caliper-icon" selected="YES" tag="1"/>
+                                            <segment image="new-angle-caliper-icon">
+                                                <nil key="label"/>
+                                            </segment>
+                                        </segments>
+                                    </segmentedCell>
+                                    <connections>
+                                        <action selector="addCaliper:" target="-1" id="3Sf-mA-HOe"/>
+                                    </connections>
+                                </segmentedControl>
+                            </viewController>
+                        </touchBarItem>
+                    </touchBarItems>
+                </touchBar>
             </view>
             <toolbar key="toolbar" implicitIdentifier="3E5303CA-7595-4674-BA40-1A23AC02742F" explicitIdentifier="newToolbar" displayMode="iconOnly" sizeMode="regular" id="Y6y-q2-GOt">
                 <allowedToolbarItems>
@@ -166,6 +214,7 @@
                 <defaultToolbarItems>
                     <toolbarItem reference="BUH-5G-BGq"/>
                     <toolbarItem reference="uO8-MM-MEU"/>
+                    <toolbarItem reference="XnC-gj-7nY"/>
                     <toolbarItem reference="zIV-EH-MOz"/>
                 </defaultToolbarItems>
             </toolbar>
