@@ -501,6 +501,10 @@ CA
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="View" id="mxi-yI-UP0">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="View" id="CBJ-J5-GAI"/>
+                </menuItem>
                 <menuItem title="Window" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">

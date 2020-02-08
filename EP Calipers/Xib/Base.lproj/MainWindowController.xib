@@ -131,7 +131,7 @@
                             <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="08FBA811-9D6E-4006-8938-9C0068D87981" label="Files" paletteLabel="Files" sizingBehavior="auto" id="PpK-uR-opo" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="08FBA811-9D6E-4006-8938-9C0068D87981" explicitItemIdentifier="openFilesToolbar" label="Files" paletteLabel="Files" sizingBehavior="auto" id="PpK-uR-opo" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <button key="view" verticalHuggingPriority="750" id="rPH-6X-DKQ">
                             <rect key="frame" x="0.0" y="14" width="82" height="32"/>
