@@ -97,7 +97,7 @@
                     <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" explicitItemIdentifier="newCalipersToolbar" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
-                            <rect key="frame" x="0.0" y="14" width="245" height="24"/>
+                            <rect key="frame" x="0.0" y="14" width="120" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
                                 <font key="font" metaFont="system"/>
@@ -105,8 +105,6 @@
                                     <segment toolTip="Add time caliper" image="new-time-caliper-icon"/>
                                     <segment toolTip="Add amplitude caliper" image="new-amplitude-caliper-icon" tag="1"/>
                                     <segment toolTip="Add angle caliper" image="new-angle-caliper-icon" tag="2"/>
-                                    <segment label="Calibrate" toolTip="Calibrate" tag="3"/>
-                                    <segment label="Clear" toolTip="Clear calibration" tag="4"/>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
@@ -117,12 +115,12 @@
                     <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" explicitItemIdentifier="newMeasurementToolbar" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
-                            <rect key="frame" x="0.0" y="14" width="290" height="27"/>
+                            <rect key="frame" x="0.0" y="14" width="261" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Cqb-X5-vZ6">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment label="Rate/Interval" toolTip="Toggle rate/interval"/>
+                                    <segment label="Rate/Int" toolTip="Toggle rate/interval"/>
                                     <segment label="mean RR" toolTip="Calculate mean interval and rate" tag="1"/>
                                     <segment label="QTc" toolTip="Calculate corrected QT" tag="2"/>
                                     <segment label="Cancel" toolTip="Cancel measurment"/>
@@ -147,7 +145,7 @@
                             <action selector="openImage:" target="-1" id="DM4-ga-HEO"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3178DB5C-CDC8-4F40-9C33-9F06D76BD3D2" explicitItemIdentifier="newCalibrationToolbar" label="Calibration" paletteLabel="Calibration" sizingBehavior="auto" id="XnC-gj-7nY">
+                    <toolbarItem implicitItemIdentifier="3178DB5C-CDC8-4F40-9C33-9F06D76BD3D2" explicitItemIdentifier="newCalibrationToolbar" label="Calibration" paletteLabel="Calibration" sizingBehavior="auto" id="XnC-gj-7nY" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="sBn-yF-ACb">
                             <rect key="frame" x="0.0" y="14" width="134" height="24"/>
