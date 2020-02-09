@@ -15,6 +15,7 @@ protocol CalipersViewDelegate {
     func showMessageAndSaveLast(_ message: String)
     func clearMessage()
     func restoreLastMessage()
+    func resetTouchBar()
 }
 
 
@@ -38,7 +39,11 @@ class CalipersView: NSView {
     // for color and tweak menu
     var chosenCaliper: Caliper? = nil
     
-    var isTweakingComponent = false
+    var isTweakingComponent = false {
+        didSet {
+            delegate?.resetTouchBar()
+        }
+    }
     let tweakDistance: CGFloat = 0.2
     // distance below will allow hundredths of point precision
     let hiresTweakDistance: CGFloat = 0.01

@@ -10,11 +10,13 @@ import AppKit
 
 @available(OSX 10.12.2, *)
 extension NSTouchBarItem.Identifier {
-    static let infoLabelItem = NSTouchBarItem.Identifier("org.epstudios.epcalipers.InfoLabel")
+    static let zoom = NSTouchBarItem.Identifier("org.epstudios.epcalipers.zoom")
+    static let addCalipers = NSTouchBarItem.Identifier("org.epstudios.epcalipers.addCalipers")
+    static let calibration = NSTouchBarItem.Identifier("org.epstudios.epcalipers.calibration")
 }
 
 @available(OSX 10.12.2, *)
 extension NSTouchBar.CustomizationIdentifier {
-    static let epcalipersBar = NSTouchBar.CustomizationIdentifier("org.epstudios.epcalipers.TravelBar")
+    static let epcalipersBar = NSTouchBar.CustomizationIdentifier("org.epstudios.epcalipers.TouchBar")
 }
 

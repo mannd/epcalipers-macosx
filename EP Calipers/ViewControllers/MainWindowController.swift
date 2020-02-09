@@ -43,10 +43,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @IBOutlet var pageInputView: NSView!
     @IBOutlet weak var pageTextField: NSTextField!
-
-    // Touchbar
-    @IBOutlet var zoomTouchBarItem: NSTouchBarItem!
-
+    
     // InfoWindow
     @IBOutlet var instructionPanel: NSPanel!
     @IBOutlet var instructionLabel: NSTextField!
@@ -77,10 +74,24 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     var imageURL: URL? = nil
     var firstWindowResize = true
     
-    var inQTcStep1 = false
-    var inQTcStep2 = false
+    var inQTcStep1 = false {
+        didSet {
+            resetTouchBar()
+        }
+    }
+    var inQTcStep2 = false {
+        didSet {
+            resetTouchBar()
+        }
+    }
     var inCalibration = false
-    var inMeanRR = false
+    var inMeanRR = false {
+        didSet {
+            if #available(OSX 10.12.2, *) {
+                self.touchBar = nil
+            }
+        }
+    }
     var rrIntervalForQTc: Double = 0.0
     
     let calipersMenuTag = 999
@@ -121,6 +132,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBAction func makeTransparent(_ sender: AnyObject) {
         NSLog("make transparent")
         isTransparent = !isTransparent
+        // reset the touchbar
+        if #available(OSX 10.12.2, *) {
+            self.touchBar = nil
+        } 
         setTransparency()
         appPreferences.transparency = isTransparent
     }
@@ -295,7 +310,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 //            return !doingMeasurement()
 //        }
         if toolbarItem.itemIdentifier.rawValue == "newCalibrationToolbar" {
-            return !doingMeasurement()
+            return !doingMeasurement() && !calipersView.isTweakingComponent
         }
         if toolbarItem.itemIdentifier.rawValue == "newMeasurementToolbar" {
             return calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate
@@ -326,7 +341,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return !transparent
         }
         if menuItem.action == #selector(doCalibration(_:)) {
-            return !doingMeasurement()
+            return !doingMeasurement() && !calipersView.isTweakingComponent
         }
         if menuItem.action == #selector(deleteAllCalipers(_:)) {
             return !(calipersView.calipers.count < 1)
@@ -877,16 +892,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         print("doCalibration")
         let calibrationTag: Int
         if sender is NSSegmentedControl {
-            calibrationTag = sender.selectedTag()
+            calibrationTag = sender.selectedSegment
         }
         else {
             calibrationTag = sender.tag
         }
         print("calibrationTag = \(calibrationTag)")
         switch calibrationTag {
-        case 3:
+        case 0:
             calibrateWithPossiblePrompts()
-        case 4:
+        case 1:
             clearCalibration()
         default:
             break
@@ -1034,6 +1049,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func showMessage(_ message: String) {
         calipersView.stopTweaking()
         showMessageWithoutSaving(message)
+    }
+
+    func resetTouchBar() {
+        if #available(OSX 10.12.2, *) {
+            touchBar = nil
+        }
     }
     
     // This doesn't overwrite lastMessage, thus allowing multiple tweak messages that
@@ -1474,28 +1495,51 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 @available(OSX 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
 
+    override open func makeTouchBar() -> NSTouchBar? {
+        let touchBar = NSTouchBar()
+        touchBar.delegate = self
+        touchBar.customizationIdentifier = .epcalipersBar
+        if !isTransparent {
+            if doingMeasurement() || calipersView.isTweakingComponent {
+                touchBar.defaultItemIdentifiers = [.zoom, .fixedSpaceSmall, .addCalipers]
+            }
+            else {
+                touchBar.defaultItemIdentifiers = [.zoom, .fixedSpaceSmall, .addCalipers, .fixedSpaceSmall, .calibration]
+            }
+        }
+        else {
+            if doingMeasurement() || calipersView.isTweakingComponent {
+                touchBar.defaultItemIdentifiers = [.addCalipers]
+            }
+            else {
+                touchBar.defaultItemIdentifiers = [.fixedSpaceSmall, .addCalipers, .fixedSpaceSmall, .calibration]
+            }
+        }
+        return touchBar
+    }
 
-
-
-
-
-//    override open func makeTouchBar() -> NSTouchBar? {
-//        let touchBar = NSTouchBar()
-//        touchBar.delegate = self
-//        touchBar.customizationIdentifier = .epcalipersBar
-//        touchBar.defaultItemIdentifiers = [.infoLabelItem, .flexibleSpace, .infoLabelItem]
-//        touchBar.customizationAllowedItemIdentifiers = [.infoLabelItem]
-//        return touchBar
-//    }
-//
-//    public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
-//        switch identifier {
-//        case NSTouchBarItem.Identifier.infoLabelItem:
-//            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
-//            customViewItem.view = NSTextField(labelWithString: "Calibrate")
-//            return customViewItem
-//        default:
-//            return nil
-//        }
-//    }
+    public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+        switch identifier {
+        case NSTouchBarItem.Identifier.zoom:
+            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+            let control = NSSegmentedControl(images: [NSImage(named: "zoom-in")!, NSImage(named: "zoom-out")!, NSImage(named:"zoom-reset")!], trackingMode: .momentary, target: self, action: #selector(doZoom(_:)))
+            control.segmentStyle = .separated
+            customViewItem.view = control
+            return customViewItem
+        case NSTouchBarItem.Identifier.addCalipers:
+            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+            let control = NSSegmentedControl(images: [NSImage(named: "new-time-caliper-icon")!, NSImage(named: "new-amplitude-caliper-icon")!, NSImage(named: "new-angle-caliper-icon")!], trackingMode: .momentary, target: self, action: #selector(addCaliper(_:)))
+            control.segmentStyle = .separated
+            customViewItem.view = control
+            return customViewItem
+        case NSTouchBarItem.Identifier.calibration:
+            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+            let control = NSSegmentedControl(labels: ["Calibrate", "Clear"], trackingMode: .momentary, target: self, action: #selector(doCalibration(_:)))
+            control.segmentStyle = .separated
+            customViewItem.view = control
+            return customViewItem
+        default:
+            return nil
+        }
+    }
 }
