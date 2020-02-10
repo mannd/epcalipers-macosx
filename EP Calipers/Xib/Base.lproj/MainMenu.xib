@@ -325,7 +325,7 @@
                                     <action selector="toggleToolbarShown:" target="-1" id="erw-Ze-8vf"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Customize Toolbar" id="nQH-xt-HtG">
+                            <menuItem title="Customize Toolbar..." id="nQH-xt-HtG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="runToolbarCustomizationPalette:" target="-1" id="jwd-zI-NRF"/>
@@ -432,6 +432,13 @@ CQ
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
                                     <action selector="openIKImageEditPanel:" target="-1" id="HOL-5M-QdF"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="hzH-mt-kSg"/>
+                            <menuItem title="Transparent Window" keyEquivalent="h" id="5WC-uV-bwg">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                <connections>
+                                    <action selector="makeTransparent:" target="-1" id="f9h-ul-7f8"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -549,12 +556,6 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="HrS-ow-fzk"/>
-                            <menuItem title="Transparent Window" keyEquivalent="h" id="5WC-uV-bwg">
-                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
-                                <connections>
-                                    <action selector="makeTransparent:" target="-1" id="f9h-ul-7f8"/>
-                                </connections>
-                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -569,6 +570,9 @@ CA
                             </menuItem>
                         </items>
                     </menu>
+                </menuItem>
+                <menuItem title="Window" id="Lx7-oi-evL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
             </items>
             <point key="canvasLocation" x="140" y="290"/>

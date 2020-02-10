@@ -209,6 +209,7 @@ class CalipersView: NSView {
     }
     
     @objc func tweakCaliper(_ sender: AnyObject) {
+        delegate?.resetTouchBar()
         chosenCaliper?.isTweaking = true
         clearChosenComponents(exceptFor: chosenCaliper)
         if let componentName = Caliper.componentName(chosenCaliper?.chosenComponent ?? .noComponent) {
@@ -409,6 +410,7 @@ class CalipersView: NSView {
     }
     
     func stopTweaking() {
+        delegate?.resetTouchBar()
         clearAllChosenComponents()
         if (chosenCaliper == nil) {
             return

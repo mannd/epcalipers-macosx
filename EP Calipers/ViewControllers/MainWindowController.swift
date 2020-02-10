@@ -1494,11 +1494,36 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
 @available(OSX 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
+    @objc func tweakCaliper(_ sender: AnyObject) {
+        if sender is NSSegmentedControl {
+            let direction = sender.selectedSegment
+            switch direction {
+            case 0:
+                calipersView.moveLeft(sender)
+            case 1:
+                calipersView.moveRight(sender)
+            case 2:
+                calipersView.moveUp(sender)
+            case 3:
+                calipersView.moveDown(sender)
+            default:
+                break
+            }
+        }
+    }
+
+    @objc func cancelTweak(_ sender: AnyObject) {
+        calipersView.stopTweaking()
+    }
 
     override open func makeTouchBar() -> NSTouchBar? {
         let touchBar = NSTouchBar()
         touchBar.delegate = self
         touchBar.customizationIdentifier = .epcalipersBar
+        if calipersView.isTweakingComponent {
+            touchBar.defaultItemIdentifiers = [.tweak, .cancel]
+            return touchBar
+        }
         if !isTransparent {
             if doingMeasurement() || calipersView.isTweakingComponent {
                 touchBar.defaultItemIdentifiers = [.zoom, .fixedSpaceSmall, .addCalipers]
@@ -1536,6 +1561,23 @@ extension MainWindowController: NSTouchBarDelegate {
             let customViewItem = NSCustomTouchBarItem(identifier: identifier)
             let control = NSSegmentedControl(labels: ["Calibrate", "Clear"], trackingMode: .momentary, target: self, action: #selector(doCalibration(_:)))
             control.segmentStyle = .separated
+            customViewItem.view = control
+            return customViewItem
+        case NSTouchBarItem.Identifier.tweak:
+            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+            let images = [
+                NSImage(named: "NSTouchBarGoBackTemplate")!,
+                NSImage(named: "NSTouchBarGoForwardTemplate")!,
+                NSImage(named: "NSTouchBarGoUpTemplate")!,
+                NSImage(named: "NSTouchBarGoDownTemplate")!,
+            ]
+            let control = NSSegmentedControl(images: images, trackingMode: .momentary, target: self, action: #selector(tweakCaliper(_:)))
+            control.segmentStyle = .separated
+            customViewItem.view = control
+            return customViewItem
+        case NSTouchBarItem.Identifier.cancel:
+            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+            let control = NSButton(title: "Cancel", target: self, action: #selector(cancelTweak(_:)))
             customViewItem.view = control
             return customViewItem
         default:
