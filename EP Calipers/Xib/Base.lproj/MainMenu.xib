@@ -315,6 +315,31 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="View" id="K7J-jW-zpk">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="View" id="rBu-dp-dWV">
+                        <items>
+                            <menuItem title="Show Toolbar" keyEquivalent="t" id="IaA-4u-Ji8">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="toggleToolbarShown:" target="-1" id="erw-Ze-8vf"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Customize Toolbar" id="nQH-xt-HtG">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="jwd-zI-NRF"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Enter Full Screen" keyEquivalent="f" id="TIM-aR-W1J">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                <connections>
+                                    <action selector="toggleFullScreen:" target="-1" id="9hI-YQ-8Ol"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Image" id="H8h-7b-M4v">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Image" id="HyV-fh-RgO">
@@ -500,10 +525,6 @@ CA
                             </menuItem>
                         </items>
                     </menu>
-                </menuItem>
-                <menuItem title="View" id="mxi-yI-UP0">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="View" id="CBJ-J5-GAI"/>
                 </menuItem>
                 <menuItem title="Window" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>

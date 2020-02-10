@@ -185,9 +185,9 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-mg-GQi">
-                        <rect key="frame" x="18" y="103" width="324" height="16"/>
+                        <rect key="frame" x="18" y="102" width="324" height="17"/>
                         <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="0Nj-hp-8mI">
-                            <font key="font" usesAppearanceFont="YES"/>
+                            <font key="font" metaFont="menu" size="14"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
