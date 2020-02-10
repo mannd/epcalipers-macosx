@@ -491,7 +491,7 @@ CA
                                     <action selector="doCalibration:" target="-1" id="NNi-zd-QuT"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Clear" tag="1" id="c6v-3u-K7F">
+                            <menuItem title="Clear Calibration" tag="1" id="c6v-3u-K7F">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="doCalibration:" target="-1" id="IMY-uC-Znf"/>
@@ -524,7 +524,7 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1z4-we-sCB"/>
-                            <menuItem title="Cancel Measurment" tag="3" id="02z-TO-MfZ">
+                            <menuItem title="Cancel Measurement" tag="3" id="02z-TO-MfZ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="doMeasurement:" target="-1" id="O0S-EB-5mv"/>

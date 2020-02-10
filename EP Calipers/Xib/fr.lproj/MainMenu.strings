@@ -1,4 +1,7 @@
 
+/* Class = "NSMenuItem"; title = "Cancel Measurement"; ObjectID = "02z-TO-MfZ"; */
+"02z-TO-MfZ.title" = "Annuler mesure";
+
 /* Class = "NSMenuItem"; title = "Rotate 90° Left"; ObjectID = "1UF-a2-1md"; */
 "1UF-a2-1md.title" = "Tourner 90° à gauche";
 
@@ -36,7 +39,7 @@
 "5VV-jo-nu6.title" = "Mesurer le QTc";
 
 /* Class = "NSMenuItem"; title = "About EP Calipers"; ObjectID = "5kV-Vb-QxS"; */
-"5kV-Vb-QxS.title" = "Sur Compas EP";
+"5kV-Vb-QxS.title" = "À propos de Compas EP";
 
 /* Class = "NSMenuItem"; title = "Rotate 0.1° Right"; ObjectID = "6aq-d3-Qez"; */
 "6aq-d3-Qez.title" = "Tourner 0,1° à droite";
@@ -306,3 +309,38 @@
 "z6F-FW-3nz.title" = "Afficher les substitutions";
 
 "F8h-Nk-s3y.title" = "Aller à la page";
+
+/* new french menu items */
+
+/* Class = "NSMenu"; title = "View"; ObjectID = "rBu-dp-dWV"; */
+"rBu-dp-dWV.title" = "Présentation";
+
+/* Class = "NSMenuItem"; title = "Transparent Window"; ObjectID = "5WC-uV-bwg"; */
+"5WC-uV-bwg.title" = "Fenêtre transparente";
+
+/* Class = "NSMenuItem"; title = "Measurements"; ObjectID = "Jql-ev-LuH"; */
+"Jql-ev-LuH.title" = "Mesures";
+
+/* Class = "NSMenuItem"; title = "Mean Rate/Interval"; ObjectID = "Wh1-Jd-crH"; */
+"Wh1-Jd-crH.title" = "Intervalle moyen/Fréquence moyenne";
+
+/* Class = "NSMenuItem"; title = "Toggle Rate/Interval"; ObjectID = "gMM-q1-7Fz"; */
+"gMM-q1-7Fz.title" = "Alterner intervalle/fréquence";
+
+/* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "IaA-4u-Ji8"; */
+"IaA-4u-Ji8.title" = "Basculer la barre d'outils";
+
+/* Class = "NSMenu"; title = "Measurements"; ObjectID = "ZZc-JB-ggM"; */
+"ZZc-JB-ggM.title" = "Mesures";
+
+/* Class = "NSMenuItem"; title = "Measurements"; ObjectID = "Jql-ev-LuH"; */
+"Jql-ev-LuH.title" = "Mesures";
+
+/* Class = "NSMenuItem"; title = "Customize Toolbar..."; ObjectID = "nQH-xt-HtG"; */
+"nQH-xt-HtG.title" = "Personnaliser la barre d'outils...";
+
+/* Class = "NSMenuItem"; title = "Calibrate"; ObjectID = "fgl-ih-SXX"; */
+"fgl-ih-SXX.title" = "Étalonner";
+
+/* Class = "NSMenuItem"; title = "Clear"; ObjectID = "c6v-3u-K7F"; */
+"c6v-3u-K7F.title" = "Effacer l'étallonage";

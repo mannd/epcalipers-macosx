@@ -131,18 +131,20 @@
                             <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="08FBA811-9D6E-4006-8938-9C0068D87981" explicitItemIdentifier="openFilesToolbar" label="Files" paletteLabel="Files" sizingBehavior="auto" id="PpK-uR-opo" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="671D5437-D9E4-4ED4-9362-69DE326CAD32" label="Files" paletteLabel="Files" sizingBehavior="auto" id="q9h-cp-i9R" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
-                        <button key="view" verticalHuggingPriority="750" id="rPH-6X-DKQ">
-                            <rect key="frame" x="0.0" y="14" width="82" height="32"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="pjM-VC-7LA">
+                            <rect key="frame" x="0.0" y="14" width="59" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NhF-BJ-pBj">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="BCX-fN-8ly">
                                 <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
+                                <segments>
+                                    <segment label="Open" toolTip="Open files"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
                         <connections>
-                            <action selector="openImage:" target="-1" id="DM4-ga-HEO"/>
+                            <action selector="openImage:" target="-1" id="yqE-CX-3AN"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3178DB5C-CDC8-4F40-9C33-9F06D76BD3D2" explicitItemIdentifier="newCalibrationToolbar" label="Calibration" paletteLabel="Calibration" sizingBehavior="auto" id="XnC-gj-7nY" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
@@ -153,8 +155,8 @@
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="0B4-Jy-LzB">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment label="Calibrate" tag="3"/>
-                                    <segment label="Clear" tag="4"/>
+                                    <segment label="Calibrate" toolTip="Calibrate calipers" tag="3"/>
+                                    <segment label="Clear" toolTip="Clear calibration" tag="4"/>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
