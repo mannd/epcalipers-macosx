@@ -44,7 +44,6 @@ class AngleCaliper: Caliper {
         }
     }
     
-    // FIXME: highlight tweaked bars
     override func drawWithContext(_ context: CGContext, inRect rect:CGRect) {
         context.setStrokeColor(color.cgColor)
         context.setLineWidth(lineWidth)

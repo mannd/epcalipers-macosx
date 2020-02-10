@@ -1077,10 +1077,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func clearMessage() {
         instructionPanel.setIsVisible(false)
         instructionLabel.stringValue = ""
+        lastMessage = nil
     }
     
     func restoreLastMessage() {
-        if let message = lastMessage {
+        if let message = lastMessage, !message.isEmpty {
             showMessageWithoutSaving(message)
         }
         else {
@@ -1088,11 +1089,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
 
-    // TODO: make a preference to show dialogs as actionsheets or modal dialogs???
-    func showAlert(_ alert: NSAlert) {
-        alert.beginSheetModal(for: window!, completionHandler: nil)
-    }
-    
     func showAngleCaliperNoCalibrationAlert() {
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("Angle caliper", comment:"")

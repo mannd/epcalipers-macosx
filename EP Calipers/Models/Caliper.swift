@@ -170,7 +170,6 @@ class Caliper: NSObject {
         return chosenComponentColor.cgColor
     }
 
-    // TODO: complete this
     func drawChosenComponent(_ context: CGContext, inRect rect: CGRect) {
         guard chosenComponent != .noComponent, isTweaking else { return }
         context.setStrokeColor(getChosenComponentColor())
