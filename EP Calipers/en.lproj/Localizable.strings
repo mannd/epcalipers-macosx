@@ -1,4 +1,4 @@
-﻿/* No comment provided by engineer. */
+/* No comment provided by engineer. */
 "1 mV" = "1 mV";
 
 /* No comment provided by engineer. */
@@ -130,3 +130,12 @@
 /* No comment provided by engineer. */
 "Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel." = "Use a caliper to measure a known interval, then select Next to calibrate to that interval, or Cancel.";
 
+"angleCalibrationMessage" = "Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers.";
+
+"calibrationMessage" = "Use a caliper to measure a known interval, then select Calibrate.";
+
+"meanRRMessage" = "Use a caliper to measure 2 or more intervals, then select meanRR to calculate mean.";
+
+"qtcStep1Message" = "Measure 1 or more RR intervals.  Select QTc again to continue.";
+
+"qtcStep2Message" = "Now measure QT interval and select QTc again to calculate the QTc.";

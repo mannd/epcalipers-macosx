@@ -920,7 +920,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 calibrate()
                 return
             }
-            showMessage(NSLocalizedString("Use a caliper to measure a known interval, then select Calibrate.", comment:""))
+            showMessage(NSLocalizedString("calibrationMessage", comment:""))
             inCalibration = true
         }
         else {
@@ -1092,7 +1092,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func showAngleCaliperNoCalibrationAlert() {
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("Angle caliper", comment:"")
-        alert.informativeText = NSLocalizedString("Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers.", comment:"")
+        alert.informativeText = NSLocalizedString("angleCalibrationMessage", comment: "")
         alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
         alert.runModal()
@@ -1182,7 +1182,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 meanRR()
                 return
             }
-            showMessage(NSLocalizedString("Use a caliper to measure 2 or more intervals, then select meanRR to calculate mean.", comment:""))
+            showMessage(NSLocalizedString("meanRRMessage", comment:""))
             inMeanRR = true
         }
         else {
@@ -1297,7 +1297,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return
         }
         enterQTc()
-        showMessage(NSLocalizedString("Measure 1 or more RR intervals.  Select QTc again to continue.", comment:""))
+        showMessage(NSLocalizedString("qtcStep1Message", comment:""))
         inQTcStep1 = true
     }
 
@@ -1368,7 +1368,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func doQTcStep2() {
-        showMessage(NSLocalizedString("Now measure QT interval and select QTc again to calculate the QTc.", comment:""))
+        showMessage(NSLocalizedString("qtcStep2Message", comment:""))
     }
     
     func doQTcResult() {

@@ -8,7 +8,7 @@
 "Angle caliper" = "Compas d'angle";
 
 /* No comment provided by engineer. */
-"Angle calipers don't require calibration.  Only time or amplitude calipers need to be calibrated.\n\nIf you want to use an angle caliper as a Brugadometer, you must first calibrate time and amplitude calipers." = "Les compas d'angle ne nécessitent pas d'étalonnage.  Seuls les compas de temps ou d'amplitude doivent être étalonnés.\n\nSi vous voulez utiliser un compas d'angle comme un « Brugadometer » vous devez d'abord étalonner les compas de temps et d'amplitude.";
+"angleCalibrationMessage" = "Les compas d'angle ne nécessitent pas d'étalonnage.  Seuls les compas de temps ou d'amplitude doivent être étalonnés.\n\nSi vous voulez utiliser un compas d'angle comme un « Brugadometer » vous devez d'abord étalonner les compas de temps et d'amplitude.";
 
 /* No comment provided by engineer. */
 "Back" = "Retour";
@@ -182,3 +182,11 @@
 "Bottom" = "au-dessous";
 
 "Go to page" = "Aller à la page";
+
+"calibrationMessage" =  "Utiliser un compas à mesurer un intervalle connu, puis choisir Êtalonner pour étalonner à cet intervalle.";
+
+"meanRRMessage" =  "Utiliser un compas à mesurer 2 ou plus d'intervalles, puis choisir RR moyen à calculer la moyenne.";
+
+"qtcStep1Message" =  "Mesurer un ou plusieurs intervalles RR.  Choisir QTc à continuer.";
+
+"qtcStep2Message" = "Maintenant mesurer l'intervalle QT et choisir encore QTc pour faire le calcul QTc.";
