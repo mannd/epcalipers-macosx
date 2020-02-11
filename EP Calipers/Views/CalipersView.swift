@@ -120,6 +120,7 @@ class CalipersView: NSView {
         if chosenCaliper == nil && isTweakingComponent {
             isTweakingComponent = false
             delegate?.restoreLastMessage()
+            stopTweaking()
         }
         // only show menu if not in middle of tweaking
         if !isTweakingComponent {
@@ -184,6 +185,7 @@ class CalipersView: NSView {
         // only time calipers can march, ignore others
         guard chosenCaliper.isTimeCaliper() else { return }
         chosenCaliper.isMarching = !chosenCaliper.isMarching
+        stopTweaking()
         needsDisplay = true
     }
     
@@ -413,6 +415,7 @@ class CalipersView: NSView {
         delegate?.resetTouchBar()
         clearAllChosenComponents()
         if (chosenCaliper == nil) {
+            needsDisplay = true
             return
         }
         chosenCaliper?.isTweaking = false
