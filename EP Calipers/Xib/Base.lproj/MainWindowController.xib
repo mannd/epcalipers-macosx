@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
+            <connections>
+                <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
+                <outlet property="imageView" destination="oIK-MS-rQb" id="tvd-y9-ClO"/>
+                <outlet property="instructionLabel" destination="Muj-mg-GQi" id="Uao-u3-Dau"/>
+                <outlet property="instructionPanel" destination="rGN-02-IWd" id="OUX-FL-fkZ"/>
+                <outlet property="scrollView" destination="AxA-IY-0Zx" id="E2e-dv-DLM"/>
+                <outlet property="toolbar" destination="Y6y-q2-GOt" id="BhB-8V-vGL"/>
+                <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="EP Calipers" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="faX-Do-WYj">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="131" y="158" width="800" height="482"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1097"/>
+            <view key="contentView" id="uHL-zZ-C20" customClass="MainView" customModule="EP_Calipers" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
+                        <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
+                            <rect key="frame" x="1" y="1" width="798" height="480"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <view wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
+                                    <rect key="frame" x="0.0" y="0.0" width="798" height="480"/>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="oIK-MS-rQb" firstAttribute="top" secondItem="TeI-oG-eGn" secondAttribute="top" id="OR2-wI-MX3"/>
+                                <constraint firstAttribute="trailing" secondItem="oIK-MS-rQb" secondAttribute="trailing" id="WWB-M6-FIo"/>
+                                <constraint firstItem="oIK-MS-rQb" firstAttribute="leading" secondItem="TeI-oG-eGn" secondAttribute="leading" id="c8O-SF-0Rd"/>
+                                <constraint firstAttribute="bottom" secondItem="oIK-MS-rQb" secondAttribute="bottom" id="t97-sm-0l5"/>
+                            </constraints>
+                        </clipView>
+                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
+                            <rect key="frame" x="1" y="465" width="798" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrJ-fG-BcI">
+                            <rect key="frame" x="783" y="1" width="16" height="480"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="14" width="786" height="468"/>
+                    </customView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="AxA-IY-0Zx" secondAttribute="top" id="6BM-Xp-gFU"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
+                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" constant="14" id="TUz-x3-9lI"/>
+                    <constraint firstAttribute="bottom" secondItem="AxA-IY-0Zx" secondAttribute="bottom" id="V2e-go-KHO"/>
+                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" constant="14" id="XCc-Bt-f5Y"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="bba-bA-hru"/>
+                    <constraint firstAttribute="trailing" secondItem="AxA-IY-0Zx" secondAttribute="trailing" id="iaZ-99-NTX"/>
+                    <constraint firstItem="AxA-IY-0Zx" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="yj3-hc-ldc"/>
+                </constraints>
+            </view>
+            <toolbar key="toolbar" implicitIdentifier="3E5303CA-7595-4674-BA40-1A23AC02742F" explicitIdentifier="newToolbar" displayMode="iconOnly" sizeMode="regular" id="Y6y-q2-GOt">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="DbN-gq-grY"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ouh-LL-r0x"/>
+                    <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" sizingBehavior="auto" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="gC6-ej-kGp">
+                            <rect key="frame" x="0.0" y="14" width="119" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Lag-Q9-xVH">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment toolTip="Zoom in" image="zoom-in" width="36"/>
+                                    <segment toolTip="Zoom out" image="zoom-out" width="39" tag="1"/>
+                                    <segment toolTip="Zoom to actual size" image="zoom-reset" width="36" tag="2">
+                                        <nil key="label"/>
+                                    </segment>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="doZoom:" target="-1" id="FLw-aI-7ZY"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" explicitItemIdentifier="newCalipersToolbar" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
+                            <rect key="frame" x="0.0" y="14" width="120" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment toolTip="Add time caliper" image="new-time-caliper-icon"/>
+                                    <segment toolTip="Add amplitude caliper" image="new-amplitude-caliper-icon" tag="1"/>
+                                    <segment toolTip="Add angle caliper" image="new-angle-caliper-icon" tag="2"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="addCaliper:" target="-1" id="RDv-Gf-Utn"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" explicitItemIdentifier="newMeasurementToolbar" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
+                            <rect key="frame" x="0.0" y="14" width="261" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Cqb-X5-vZ6">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment label="Rate/Int" toolTip="Toggle rate/interval"/>
+                                    <segment label="mean RR" toolTip="Calculate mean interval and rate" tag="1"/>
+                                    <segment label="QTc" toolTip="Calculate corrected QT" tag="2"/>
+                                    <segment label="Cancel" toolTip="Cancel measurment"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="671D5437-D9E4-4ED4-9362-69DE326CAD32" label="Files" paletteLabel="Files" sizingBehavior="auto" id="q9h-cp-i9R" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="pjM-VC-7LA">
+                            <rect key="frame" x="0.0" y="14" width="59" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="BCX-fN-8ly">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment label="Open" toolTip="Open files"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="openImage:" target="-1" id="yqE-CX-3AN"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="3178DB5C-CDC8-4F40-9C33-9F06D76BD3D2" explicitItemIdentifier="newCalibrationToolbar" label="Calibration" paletteLabel="Calibration" sizingBehavior="auto" id="XnC-gj-7nY" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <nil key="toolTip"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="sBn-yF-ACb">
+                            <rect key="frame" x="0.0" y="14" width="138" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="0B4-Jy-LzB">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment label="Calibrate" toolTip="Calibrate calipers" tag="3"/>
+                                    <segment label="Clear" toolTip="Clear calibration" tag="4"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="doCalibration:" target="-1" id="WRn-RR-Y9Y"/>
+                        </connections>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="BUH-5G-BGq"/>
+                    <toolbarItem reference="uO8-MM-MEU"/>
+                    <toolbarItem reference="XnC-gj-7nY"/>
+                    <toolbarItem reference="zIV-EH-MOz"/>
+                </defaultToolbarItems>
+            </toolbar>
+            <connections>
+                <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
+            </connections>
+            <point key="canvasLocation" x="420" y="476"/>
+        </window>
+        <window title="Instructions" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="rGN-02-IWd" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="181" y="118" width="360" height="139"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1097"/>
+            <view key="contentView" id="sz9-UB-bmo">
+                <rect key="frame" x="0.0" y="0.0" width="360" height="139"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-mg-GQi">
+                        <rect key="frame" x="18" y="102" width="324" height="17"/>
+                        <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="0Nj-hp-8mI">
+                            <font key="font" metaFont="menu" size="14"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Muj-mg-GQi" secondAttribute="trailing" constant="20" id="87j-Cm-hkj"/>
+                    <constraint firstItem="Muj-mg-GQi" firstAttribute="top" secondItem="sz9-UB-bmo" secondAttribute="top" constant="20" symbolic="YES" id="SR9-6Z-hbu"/>
+                    <constraint firstItem="Muj-mg-GQi" firstAttribute="leading" secondItem="sz9-UB-bmo" secondAttribute="leading" constant="20" symbolic="YES" id="Vg8-99-5yx"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="338" y="53"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="new-amplitude-caliper-icon" width="20" height="20"/>
+        <image name="new-angle-caliper-icon" width="20" height="20"/>
+        <image name="new-time-caliper-icon" width="20" height="20"/>
+        <image name="zoom-in" width="20" height="20"/>
+        <image name="zoom-out" width="20" height="20"/>
+        <image name="zoom-reset" width="20" height="20"/>
+    </resources>
+</document>

@@ -10,38 +10,30 @@
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
 * [[../../shrd/icon_32x32@2x.png]] Introduction 
-** Vous êtes encore de garde ...
-Il est 2h00 du matin et le téléphone sonne.  C'est une infirmière des soins intensifs du département de cardiologie.  Il faut que M. Smith reçoive son médicament antiarythmique (qui crée ces calendriers de médicaments farfelus?) et son ECG a un intervalle QTc qui est un peu prolongé, selon l'ordinateur.  L'infirmière craint que l'administration soit dangereuse.  Elle veut vous transmettre l'ECG.
-
-Vous téléchargez l'ECG sur votre ordinateur portable.  Vous étudiez l'intervalle QT.  Vous n'êtes pas certain que la mesure prise par l'ordinateur soit correcte.  Vous devez le mesurer vous-même.  Vous commencez à compter les petites boîtes.  Vous faites sortir de votre poche le vieux compas mécanique qu'un délégué médical vous avait donné il y a quelques années, à l'époque où une telle générosité était encore légale.  Vous pensez: je vis dans une époque numérique. Suis-je réellement en train de prendre des mesures avec mon ordinateur pour un compas mécanique?
 ** Compas électroniques
 L'application *Compas EP* offre des *compas électroniques* pour mesurer les intervalles sur les images des enregistrements électrocardiographiques ou électrophysiologiques.  Dans le laboratoire d'électrophysiologie les compas électroniques font partie du système d'enregistrement informatisé.  L'application *Compas EP* fournit les mêmes compas électroniques pour votre Mac.  Les compas électroniques de *Compas EP* sont plus précis, plus faciles à utiliser, et moins dangereux que les compas mécaniques (ils n'ont pas de points tranchants!).
 ** Commencement rapide
-Quand le *Compas EP* commence, un échantillon d'ECG et un compas de temps sont chargés.  Déplacer le compas en cliquant la barre transversale et en la faisant glisser avec la souris ou le trackpad.  Élargir et contracter le compas en cliquant la barre verticale et en le glissant.  Pincer et zoomer l'image de l'ECG ou utiliser les boutons de zoom pour l'agrandir ou le rétrécir selon votre besoin.  Si l'ECG est plus grand que votre écran, vous pouvez le glisser avec votre doigt ou la souris afin de trouver un endroit pour mesurer.  Le reste des instructions explique comment charger les images de l'ECG, ajouter et supprimer les compas, les étalonner, et rendre les calculs avancés comme l'intervalle QT corrigé.
+Quand le *Compas EP* commence, un échantillon d'ECG et un compas de temps sont chargés.  Déplacer le compas en cliquant la barre transversale et en la faisant glisser avec la souris ou le trackpad.  Élargir et contracter le compas en cliquant la barre verticale et en le glissant.  Pincer et zoomer l'image de l'ECG ou utiliser les boutons de zoom pour l'agrandir ou le rétrécir selon votre besoin.  Si l'ECG est plus grand que votre écran, vous pouvez le glisser avec vos doigts ou la souris afin de trouver un endroit pour mesurer.  Le reste des instructions explique comment charger les images de l'ECG, ajouter et supprimer les compas, les étalonner, et rendre les calculs avancés comme l'intervalle QT corrigé.
 ** Barres d’outils 
-L’application est contrôlée par les boutons des barres d’outils en haut de la fênetre ou par le menu en haut de l’écran.  Les barres d’outils ressemblent ça:
-#+CAPTION: Barres d’outils
+L’application est contrôlée par les boutons de la barre d’outils en haut de la fênetre ou par le menu en haut de l’écran.  La barre d’outils ressemble ça:
+#+CAPTION: Barre d’outils
 [[../gfx/EPCtoolbar.png]]
 
-Noter que toutes les barres d'outils ne seront pas disponibles en permanence, selon que l'étalonnage a été effectué. Certains éléments des barres d'outils sont désactivés en mode fenêtre transparente également. Les barres d'outils désactivées sont "grisées". 
+Noter que tous les boutons de la barre d'outils ne seront pas disponibles en permanence, selon que l'étalonnage a été effectué. Certains éléments de la barre d'outils sont désactivés en mode fenêtre transparente également. Les boutons désactivés sont "grisés". On peut personnaliser la barre d'outils.  Sur nouveaux Macs certaines fonctions sont disponibles sur la Touch Bar.
 *** Zoom toolbar
 - [[../../shrd/TB_zoomIn.png]] Zoom avant
 - [[../../shrd/TB_zoomOut.png]] Zoom arrière
 - [[../../shrd/TB_zoomActual.png]] Zoom à dimension réelle
 *** Calipers toolbar
-- [[../../shrd/calipers-icon-bw-20x20.png]] Ajouter un compas de temps
-- [[../../shrd/calipers-amplitude-icon-bw-20x20.png]] Ajouter un compas d’amplitude
-- [[../../shrd/angle_icon_2_20x20.png]] Ajouter un compas d’angle
+- [[../../shrd/caliper-20x20.png]] Ajouter un compas de temps
+- [[../../shrd/amplitude-caliper-20x20.png]] Ajouter un compas d’amplitude
+- [[../../shrd/angle-caliper-20x20.png]] Ajouter un compas d’angle
 - *Étalonner* Étalonner un compas
 - *Effacer* Effacer tout l’étalonnage
 *** Measurement toolbar
-- *I/FC* Alterner l’intervalle et la fréquence cardiaque
-- *FCM* Calculer la fréquence cardiaque moyenne et l’intervalle moyen 
+- *Int/Fréq* Alterner l’intervalle et la fréquence cardiaque
+- *RR moyen* Calculer la fréquence cardiaque moyenne et l’intervalle moyen 
 - *QTc* Calculer le QTc corrigé
-*** Navigation toolbar
-- *Prochain* Passer à l’étape suivante
-- *Retour* Passer à l’étape précédente
-- *Annuler* Annuler la mesure
 ** Menus
 Presque toutes les fonctions de l’application sont contenues dans les commandes du menu principal en haut de l’écran.  Noter qu’il existe des raccourcis clavier dans le menu pour plusieurs fonctions du programme.  Par exemple, il est plus facile de faire tourner une image à l’aide d’une touche de raccourci clavier qu’en utilisant d’une commande de menu.  Comme pour les barres d’outils, certaines commandes de menu sont désactivées lorsque leur utilisation n’est pas autorisée.  Par exemple, la rotation de l’image n’est pas autorisée après étalonnage des compas.  Il est nécessaire d’effacer l’étalonnage pour restaurer les commandes de rotation.
 ** Raccourcis clavier
@@ -58,6 +50,7 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 | ⌘-     | Zoom arrière                                |
 | ⌘=     | Zoom à dimension réelle                     |
 | ⌃E     | Éditeur d’image                             |
+| ⌃H     | Basculer la fenêtre transparente            |
 | ⌃T     | Ajouter un compas de temps                  |
 | ⌃A     | Ajouter un compas d’amplitude               |
 | ⌃G     | Ajouter un compas d’angle                   |

@@ -1,7 +1,7 @@
 QTc
 ===
 
-[![Build Status](https://travis-ci.org/mannd/QTc.svg?branch=master)](https://travis-ci.org/mannd/QTc)
+[![Version](https://img.shields.io/cocoapods/v/QTc.svg?style=flat)](https://cocoapods.org/pods/QTc) [![Build Status](https://travis-ci.org/mannd/QTc.svg?branch=master)](https://travis-ci.org/mannd/QTc)
 
 ## iOS/macOS framework for QTc calculations
 This QTc framework includes a multitude of formulas for QTc and QTp calculation, both common and obscure.  It is intended for use in iOS and macOS programs.  It is written in Swift but can be used in Objective C projects.  This framework is free to use in your own apps and programs.  Usages include designing simple QTc calculators to medical research involving calculated QTc and QTp intervals.  For more background on this project, see the blog post [Hacking the QTc](https://www.epstudiossoftware.com/hacking-the-qtc/).

@@ -21,6 +21,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
 
         // Insert code here to initialize your application
+
+        // Add touchbar support
+        if #available(OSX 10.12.2, *) {
+            NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
+        } 
+
         let mainWindowController = MainWindowController()
         mainWindowController.showWindow(self)
         self.mainWindowController = mainWindowController

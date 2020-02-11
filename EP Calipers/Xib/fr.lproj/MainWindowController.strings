@@ -1,0 +1,172 @@
+
+/* Class = "NSSegmentedCell"; 5zE-4y-ufs.ibShadowedLabels[0] = "R/I"; ObjectID = "5zE-4y-ufs"; */
+"5zE-4y-ufs.ibShadowedLabels[0]" = "I/FC";
+
+/* Class = "NSSegmentedCell"; 5zE-4y-ufs.ibShadowedLabels[1] = "mRR"; ObjectID = "5zE-4y-ufs"; */
+"5zE-4y-ufs.ibShadowedLabels[1]" = "FCM";
+
+/* Class = "NSSegmentedCell"; 5zE-4y-ufs.ibShadowedLabels[2] = "QTc"; ObjectID = "5zE-4y-ufs"; */
+"5zE-4y-ufs.ibShadowedLabels[2]" = "QTc";
+
+/* Class = "NSSegmentedCell"; 5zE-4y-ufs.ibShadowedToolTips[0] = "Toggle rate/interval"; ObjectID = "5zE-4y-ufs"; */
+"5zE-4y-ufs.ibShadowedToolTips[0]" = "Alterner l'intervalle et la fréquence";
+
+/* Class = "NSSegmentedCell"; 5zE-4y-ufs.ibShadowedToolTips[1] = "Calculate mean interval and rate"; ObjectID = "5zE-4y-ufs"; */
+"5zE-4y-ufs.ibShadowedToolTips[1]" = "Calculer l'intervalle moyen et la fréquence moyenne";
+
+/* Class = "NSSegmentedCell"; 5zE-4y-ufs.ibShadowedToolTips[2] = "Calculate corrected QT"; ObjectID = "5zE-4y-ufs"; */
+"5zE-4y-ufs.ibShadowedToolTips[2]" = "Calculer le QT corrigé";
+
+/* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedLabels[3] = "Calibrate"; ObjectID = "F0P-3a-q84"; */
+"F0P-3a-q84.ibShadowedLabels[3]" = "Étalonner";
+
+/* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedLabels[4] = "Clear"; ObjectID = "F0P-3a-q84"; */
+"F0P-3a-q84.ibShadowedLabels[4]" = "Effacer";
+
+/* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[0] = "Add time caliper"; ObjectID = "F0P-3a-q84"; */
+"F0P-3a-q84.ibShadowedToolTips[0]" = "Ajouter un compas de temps";
+
+/* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[1] = "Add amplitude caliper"; ObjectID = "F0P-3a-q84"; */
+"F0P-3a-q84.ibShadowedToolTips[1]" = "Ajouter un compas d'amplitude";
+
+/* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[2] = "Add angle caliper"; ObjectID = "F0P-3a-q84"; */
+"F0P-3a-q84.ibShadowedToolTips[2]" = "Ajouter un compas d'angle";
+
+/* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[3] = "Calibrate"; ObjectID = "F0P-3a-q84"; */
+"F0P-3a-q84.ibShadowedToolTips[3]" = "Étalonner";
+
+/* Class = "NSSegmentedCell"; F0P-3a-q84.ibShadowedToolTips[4] = "Clear calibration"; ObjectID = "F0P-3a-q84"; */
+"F0P-3a-q84.ibShadowedToolTips[4]" = "Effacer l'étalonnage";
+
+/* Class = "NSSegmentedCell"; GJ2-vD-tvz.ibShadowedToolTips[0] = "Grab image or caliper"; ObjectID = "GJ2-vD-tvz"; */
+"GJ2-vD-tvz.ibShadowedToolTips[0]" = "Saisir l'image ou un compas";
+
+/* Class = "NSSegmentedCell"; GJ2-vD-tvz.ibShadowedToolTips[1] = "Lock image"; ObjectID = "GJ2-vD-tvz"; */
+"GJ2-vD-tvz.ibShadowedToolTips[1]" = "Fixer l'image";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Oux-CQ-MYK"; */
+"Oux-CQ-MYK.title" = "Étiquette";
+
+/* Class = "NSWindow"; title = "EP Calipers"; ObjectID = "faX-Do-WYj"; */
+"faX-Do-WYj.title" = "Compas EP";
+
+/* Class = "NSSegmentedCell"; lRw-HE-u64.ibShadowedToolTips[0] = "Zoom in"; ObjectID = "lRw-HE-u64"; */
+"lRw-HE-u64.ibShadowedToolTips[0]" = "Zoom avant";
+
+/* Class = "NSSegmentedCell"; lRw-HE-u64.ibShadowedToolTips[1] = "Zoom out"; ObjectID = "lRw-HE-u64"; */
+"lRw-HE-u64.ibShadowedToolTips[1]" = "Zoom arrière";
+
+/* Class = "NSSegmentedCell"; lRw-HE-u64.ibShadowedToolTips[2] = "Zoom to actual size"; ObjectID = "lRw-HE-u64"; */
+"lRw-HE-u64.ibShadowedToolTips[2]" = "Zoom à dimension réelle";
+
+/* Class = "NSSegmentedCell"; lxO-ww-kvY.ibShadowedLabels[0] = "Next"; ObjectID = "lxO-ww-kvY"; */
+"lxO-ww-kvY.ibShadowedLabels[0]" = "Prochain";
+
+/* Class = "NSSegmentedCell"; lxO-ww-kvY.ibShadowedLabels[1] = "Back"; ObjectID = "lxO-ww-kvY"; */
+"lxO-ww-kvY.ibShadowedLabels[1]" = "Retour";
+
+/* Class = "NSSegmentedCell"; lxO-ww-kvY.ibShadowedLabels[2] = "Cancel"; ObjectID = "lxO-ww-kvY"; */
+"lxO-ww-kvY.ibShadowedLabels[2]" = "Annuler";
+
+/* new strings */
+
+/* Class = "NSSegmentedCell"; 0B4-Jy-LzB.ibShadowedLabels[0] = "Calibrate"; ObjectID = "0B4-Jy-LzB"; */
+"0B4-Jy-LzB.ibShadowedLabels[0]" = "Étalonner";
+
+/* Class = "NSSegmentedCell"; 0B4-Jy-LzB.ibShadowedLabels[1] = "Clear"; ObjectID = "0B4-Jy-LzB"; */
+"0B4-Jy-LzB.ibShadowedLabels[1]" = "Effacer";
+
+/* Class = "NSSegmentedCell"; 0B4-Jy-LzB.ibShadowedToolTips[0] = "Calibrate calipers"; ObjectID = "0B4-Jy-LzB"; */
+"0B4-Jy-LzB.ibShadowedToolTips[0]" = "Étalonner les compas";
+
+/* Class = "NSSegmentedCell"; 0B4-Jy-LzB.ibShadowedToolTips[1] = "Clear calibration"; ObjectID = "0B4-Jy-LzB"; */
+"0B4-Jy-LzB.ibShadowedToolTips[1]" = "Effacer l'étalonnage";
+
+/* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedLabels[0] = "Rate/Int"; ObjectID = "Cqb-X5-vZ6"; */
+"Cqb-X5-vZ6.ibShadowedLabels[0]" = "Int/Fréq";
+
+/* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedLabels[1] = "mean RR"; ObjectID = "Cqb-X5-vZ6"; */
+"Cqb-X5-vZ6.ibShadowedLabels[1]" = "RR moyen";
+
+/* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedLabels[3] = "Cancel"; ObjectID = "Cqb-X5-vZ6"; */
+"Cqb-X5-vZ6.ibShadowedLabels[3]" = "Annuler";
+
+/* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedToolTips[0] = "Toggle rate/interval"; ObjectID = "Cqb-X5-vZ6"; */
+"Cqb-X5-vZ6.ibShadowedToolTips[0]" = "Basculer l'intervalle et la fréquence";
+
+/* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedToolTips[1] = "Calculate mean interval and rate"; ObjectID = "Cqb-X5-vZ6"; */
+"Cqb-X5-vZ6.ibShadowedToolTips[1]" = "Calculer l'intervalle moyen et la fréquence moyenne";
+
+/* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedToolTips[2] = "Calculate corrected QT"; ObjectID = "Cqb-X5-vZ6"; */
+"Cqb-X5-vZ6.ibShadowedToolTips[2]" = "Calculer le QT corrigé";
+
+/* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedToolTips[3] = "Cancel measurment"; ObjectID = "Cqb-X5-vZ6"; */
+"Cqb-X5-vZ6.ibShadowedToolTips[3]" = "Annuler la mesure";
+
+/* Class = "NSButtonCell"; title = "Open"; ObjectID = "NhF-BJ-pBj"; */
+"NhF-BJ-pBj.title" = "Ouvrir";
+
+/* Class = "NSToolbarItem"; label = "Files"; ObjectID = "PpK-uR-opo"; */
+"PpK-uR-opo.label" = "Fichiers";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Files"; ObjectID = "PpK-uR-opo"; */
+"PpK-uR-opo.paletteLabel" = "Fichiers";
+
+/* Class = "NSToolbarItem"; label = "Calibration"; ObjectID = "XnC-gj-7nY"; */
+"XnC-gj-7nY.label" = "Étalonnage";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Calibration"; ObjectID = "XnC-gj-7nY"; */
+"XnC-gj-7nY.paletteLabel" = "Étalonnage";
+
+/* Class = "NSWindow"; title = "EP Calipers"; ObjectID = "faX-Do-WYj"; */
+"faX-Do-WYj.title" = "EP Calipers";
+
+/* Class = "NSSegmentedCell"; gZY-WC-scr.ibShadowedToolTips[0] = "Add time caliper"; ObjectID = "gZY-WC-scr"; */
+"gZY-WC-scr.ibShadowedToolTips[0]" = "Ajouter un compas de temps";
+
+/* Class = "NSSegmentedCell"; gZY-WC-scr.ibShadowedToolTips[1] = "Add amplitude caliper"; ObjectID = "gZY-WC-scr"; */
+"gZY-WC-scr.ibShadowedToolTips[1]" = "Ajouter un compas d'amplitude";
+
+/* Class = "NSSegmentedCell"; gZY-WC-scr.ibShadowedToolTips[2] = "Add angle caliper"; ObjectID = "gZY-WC-scr"; */
+"gZY-WC-scr.ibShadowedToolTips[2]" = "Ajouter un compas d'angle";
+
+/* Class = "NSWindow"; title = "Instructions"; ObjectID = "rGN-02-IWd"; */
+"rGN-02-IWd.title" = "Instructions";
+
+/* Class = "NSToolbarItem"; label = "Calipers"; ObjectID = "uO8-MM-MEU"; */
+"uO8-MM-MEU.label" = "Compas";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Calipers"; ObjectID = "uO8-MM-MEU"; */
+"uO8-MM-MEU.paletteLabel" = "Compas";
+
+/* Class = "NSToolbarItem"; label = "Measurements"; ObjectID = "zIV-EH-MOz"; */
+"zIV-EH-MOz.label" = "Mesures";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Measurements"; ObjectID = "zIV-EH-MOz"; */
+"zIV-EH-MOz.paletteLabel" = "Mesures";
+
+/* Class = "NSWindow"; title = "Instructions"; ObjectID = "rGN-02-IWd"; */
+"rGN-02-IWd.title" = "Instructions";
+
+/* Class = "NSSegmentedCell"; Lag-Q9-xVH.ibShadowedToolTips[0] = "Zoom in"; ObjectID = "Lag-Q9-xVH"; */
+"Lag-Q9-xVH.ibShadowedToolTips[0]" = "Zoom avant";
+
+/* Class = "NSSegmentedCell"; Lag-Q9-xVH.ibShadowedToolTips[1] = "Zoom out"; ObjectID = "Lag-Q9-xVH"; */
+"Lag-Q9-xVH.ibShadowedToolTips[1]" = "Zoom arrière";
+
+/* Class = "NSSegmentedCell"; Lag-Q9-xVH.ibShadowedToolTips[2] = "Zoom to actual size"; ObjectID = "Lag-Q9-xVH"; */
+"Lag-Q9-xVH.ibShadowedToolTips[2]" = "Zoom à dimension réelle";
+
+/* Class = "NSSegmentedCell"; BCX-fN-8ly.ibShadowedLabels[0] = "Open"; ObjectID = "BCX-fN-8ly"; */
+"BCX-fN-8ly.ibShadowedLabels[0]" = "Ouvrir";
+				 
+/* Class = "NSToolbarItem"; label = "Files"; ObjectID = "q9h-cp-i9R"; */
+"q9h-cp-i9R.label" = "Fichiers";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Files"; ObjectID = "q9h-cp-i9R"; */
+"q9h-cp-i9R.paletteLabel" = "Fichiers";
+
+/* Class = "NSSegmentedCell"; BCX-fN-8ly.ibShadowedToolTips[0] = "Open files"; ObjectID = "BCX-fN-8ly"; */
+"BCX-fN-8ly.ibShadowedToolTips[0]" = "Ouvrier un fichier";
+
+
