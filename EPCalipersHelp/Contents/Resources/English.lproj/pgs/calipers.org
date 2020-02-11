@@ -13,7 +13,7 @@
 * Adding and deleting calipers
 Calipers come in three flavors.  Calipers with a horizontal crossbar and vertical sidebars are used to make time measurements and are called /time calipers/.  Calipers with a vertical crossbar and horizontal sidebars are used to make amplitude measurements and are called, you guessed it, /amplitude calipers/.  Finally /angle calipers/ are used to measure angles, such as the 𝞫 angle in Brugada syndrome.
 ** Add Calipers
-Add calipers by clicking on one of the caliper icons on the /Calipers Toolbar/, or use the *Caliper* menu to do this.
+Add calipers by clicking on one of the caliper icons on the toolbar, or use the *Caliper* menu to do this.
 #+CAPTION: Add Calipers
 [[../gfx/EPCCaliperIcons.png]]
 ** Selecting Calipers
@@ -30,7 +30,7 @@ Right-clicking a /time caliper/ with your mouse, or clicking with two fingers on
 [[../../shrd/marching_caliper.png]]
 * Moving calipers
 ** Moving
-Calipers can be moved regardless of the cursor state.  Use the left mouse button or press and hold the trackpad with your finger over the crossbar area of a time or amplitude caliper to grab it. To grab angle calipers, select the top (apex) of the angle where the two lines join together.  Drag the mouse or your finger to move the caliper as a unit.  
+Calipers can be moved.  Use the left mouse button or press and hold the trackpad with your finger over the crossbar area of a time or amplitude caliper to grab it. To grab angle calipers, select the top (apex) of the angle where the two lines join together.  Drag the mouse or your finger to move the caliper as a unit.  
 ** Stretching (opening and closing)
 If the cursor is positioned over either the left or right sidebars of a time caliper (or top or bottom bars of an amplitude caliper) clicking with the left mouse button or holding your finger down on the track pad and then dragging will move that caliper bar by itself.  In this way you can widen or narrow the caliper interval.  Note that you cannot move both bars at the same time.  When you move one caliper bar, the other one always stays fixed.  With angle calipers, select either of the two bars of the angle a little distance away from the apex and drag to open and close the angle.
 

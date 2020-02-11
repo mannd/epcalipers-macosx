@@ -13,7 +13,7 @@
 * Addition et suppression de compas
 Il y a trois types de compas.  Les compas peuvent être horizontaux pour les mesures de temps, verticaux pour les mesures d'amplitude, ou angulaires pour les mesures d'angles en degrés.  Les compas de temps ressemblent à la lettre *H*, les compas d'amplitude à la lettre *H* couchée sur le côté, et les compas d'angle au début à la lettre *V* inversée.
 ** Addition de compas
-Cliquer sur les icônes de compas sur la barre d’outils /Compas/, ou utiliser le menu *Compas* pour ajouter de nouveaux compas.
+Cliquer sur les icônes de compas sur la barre d’outils, ou utiliser le menu *Compas* pour ajouter de nouveaux compas.
 #+CAPTION: Barre d’outil /Compas/ pour ajouter des compas
 [[../gfx/EPCCaliperIcons.png]]
 ** Sélection d'un compas
@@ -31,7 +31,7 @@ En utilisant un clic droit de la souris ou une frappe avec deux droigts du track
 
 * Déplacement des compas
 ** Mouvement
-Les compas peuvent être déplacés sans tenir compte de l’état de curseur.  Utiliser le bouton gauche de souris ou appuyer et maintenir le trackpad avec votre droigt sur la barre transversale d’un compas de temps ou d’amplitude.  Pour déplacer des compas d’angle, choisir le sommet de l’angle où les deux lignes se joignent.  Bouger la souris ou votre droigt pour déplacer le compas comme une unité.
+Les compas peuvent être déplacés.  Utiliser le bouton gauche de souris ou appuyer et maintenir le trackpad avec votre droigt sur la barre transversale d’un compas de temps ou d’amplitude.  Pour déplacer des compas d’angle, choisir le sommet de l’angle où les deux lignes se joignent.  Bouger la souris ou votre droigt pour déplacer le compas comme une unité.
 ** Étendre ou réduire un compas
 Si le curseur est placé sur les barres gauches ou droites d’un compas de temps (ou sur les barres supérieures ou inférieures d’un compas d’amplitude) vous pouvez déplacer ces barres seules et étendre ou réduire le compas.  Noter que ce n’est pas possible de déplacer les deux barres au même temps.  Quand vous déplacez une barre d’un compas, l’autre reste fixée.  On peut déplacer les barres d’un compas d’angle de la meme façon.  Avec la combinaison de mouvements c’est possible de placer un compas partout sur un ECG.
 ** Petits mouvements
