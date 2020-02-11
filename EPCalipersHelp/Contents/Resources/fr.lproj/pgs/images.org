@@ -39,7 +39,7 @@ Parfois il est plus facile d’ouvrir une image ou un fichier PDF en utilisant u
 #+CAPTION: le mode de fênetre transparente
 [[../gfx/transparentwindow.png]]
 ** L’activation du mode de fênetre transparente
-Utiliser la commande de menu *Compas EP | Préférences...* pour montrer la boîte de dialogue [[./preferences.html][Préférences]].  Cocher la case /Fênetre transparente/ pour changer au mode de fênetre transparente.  Décocher la case pour retourner au mode d’image normale. 
+Vouv pouvez rapidement basculer entre la fenêtre transparente et une image en utilisant la commande de menu *Image | Fenêtre transparente* ou la touche /Control-H/.  Si vous voulez que l'application démarre avec une fenêtre transparent, utilisez la commande de menu *Compas EP | Préférences...* pour montrer la boîte de dialogue [[./preferences.html][Préférences]].  Cocher la case /Fênetre transparente/ pour changer au mode de fênetre transparente.  Décocher la case pour retourner au mode d’image normale. 
 ** Les prudences en utilisant le mode de fênetre transparente
 Quand vous chargez une image dans le mode d’image normale et étalonnez les compas, l’application va automatiquement ajuster le facteur d’étalonnage en zoomant l’image.  Dans le mode de fênetre transparente, ce n’est pas possible de l’ajuster automatiquement.  Il faut réétalonner les compas si vous zoomez l’image avec un program externe.  Noter aussi qu’en utilisant le mode plein écran, le mode de fênetre transparente ne marche pas.  Enfin, si vous charger un fichier dans le mode de fênetre transparente, une boîte de dialogue apparaîtra qui se demande si vous voulez sortir le mode de fênetre transparente pour le charger.
 * Enregistrer une image

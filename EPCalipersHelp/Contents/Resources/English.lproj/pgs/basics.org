@@ -10,10 +10,6 @@
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
 * [[../../shrd/icon_32x32@2x.png]] Introduction -- EP Calipers 101
-** You're on call, again...
-It's 2 AM and the phone rings.  It's a nurse on the cardiac unit.  Mr. Smith is due to get his antiarrhythmic drug (who comes up with these crazy drug schedules?) and the ECG shows a borderline prolonged QTc interval, at least according to the computer.  She's not sure if it is safe to give the drug.  She wants to send you the ECG.
-
-You drag yourself out of bed and open up your laptop.  There's the ECG in question.  You look at the QT interval.  Eyeballing it, the QT looks OK.  Mentally you start counting little boxes.  You pull out the (t)rusty old pair of mechanical calipers some drug rep gave you many years ago, when such largesse was still legal.  You think to yourself: I live in a digital age.  Am I really making measurements on a computer screen with a pair of mechanical calipers?
 ** Electronic calipers
 *EP Calipers* provides *electronic calipers* for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  *EP Calipers* is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of *EP Calipers* are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
 ** Quick start
@@ -24,37 +20,33 @@ mouse or your finger on the track pad.  Expand and contract the
 caliper by dragging the bars on either end of the caliper.  Pinch and
 zoom the underlying ECG or use the zoom toolbar to enlarge or shrink
 the image as needed.  If the ECG is bigger than your screen, you can
-drag the image around with your mouse or finger, or use two finger
+drag the image around with your mouse or use two finger
 scrolling if you have a trackpad.  As an alternative to loading an
 image you can make the main window transparent and use your electronic
 calipers to measure any image that is open on your Desktop.  The rest
 of these help pages will go over how to load ECG images, add and
 delete calipers, calibrate the calipers and make advanced measurements
 like the corrected QT interval.
-** Toolbars
-The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The toolbars look like this:
-#+CAPTION: Toolbars
+** Toolbar
+The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The default toolbar looks like this:
+#+CAPTION: Toolbar
 [[../gfx/EPCtoolbar.png]]
 
-Note that not all toolbar buttons will be available all the time, depending on whether calibration has been performed.  Some toolbar buttons are disabled when in transparent window mode also.  Disabled toolbar buttons are "grayed" out.
+Note that not all toolbar buttons will be available all the time, depending on whether calibration has been performed.  Some toolbar buttons are disabled when in transparent window mode also.  Disabled toolbar buttons are "grayed" out.  You can customize the toolbar items if you wish.  On newer Macs some of the toolbar items are also shown on the Touch Bar.
 *** Zoom toolbar
 - [[../../shrd/TB_zoomIn.png]] Zoom in
 - [[../../shrd/TB_zoomOut.png]] Zoom out
 - [[../../shrd/TB_zoomActual.png]] Zoom to actual size
 *** Calipers toolbar
-- [[../../shrd/calipers-icon-bw-20x20.png]] Add time (horizontal) caliper
-- [[../../shrd/calipers-amplitude-icon-bw-20x20.png]] Add amplitude (vertical) caliper
-- [[../../shrd/angle_icon_2_20x20.png]] Add angle caliper
+- [[../../shrd/caliper-20x20.png]] Add time (horizontal) caliper
+- [[../../shrd/amplitude-caliper-20x20.png]] Add amplitude (vertical) caliper
+- [[../../shrd/angle-caliper-20x20.png]] Add angle caliper
 - *Calibrate* Calibrate caliper
 - *Clear* Clear all calibration
 *** Measurement toolbar
-- *R/I* Toggle heart rate and time interval
-- *mRR* Calculate mean interval from several intervals
+- *Rate/Int* Toggle heart rate and time interval
+- *mean RR* Calculate mean interval from several intervals
 - *QTc* Measure corrected QT (QTc)
-*** Navigation toolbar
-- *Next* Go to next measurement step
-- *Back* Go back a step
-- *Cancel* Cancel measurement
 ** Menus
 Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
 ** Keyboard shortcuts
@@ -71,6 +63,7 @@ Nearly all the functions of the app are contained in the main menu commands at t
 | ⌘-   | Zoom out                             |
 | ⌘=   | Zoom to actual size                  |
 | ⌃E   | Image editor                         |
+| ⌃H   | Toggle transparent window            |
 | ⌃T   | Add time caliper                     |
 | ⌃A   | Add amplitude caliper                |
 | ⌃G   | Add angle caliper                    |
