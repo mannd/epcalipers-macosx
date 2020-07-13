@@ -145,9 +145,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.lockedMode = isTransparent
         clearCalibration()
         if isTransparent {
-            // Calipers sometimes leave ghosts during transition to transparent mode
-            // in Mojave.
             calipersView.deleteAllCalipers()
+            // Hide useless scrollers while transparent.
+            scrollView.hasVerticalScroller = false
+            scrollView.hasHorizontalScroller = false
+            // FIXME: ? use this.  This makes window a little more translucent on macOS 11.
+            scrollView.alphaValue = 0.2
             scrollView.drawsBackground = false
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
@@ -158,6 +161,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         else {
             scrollView.drawsBackground = true
+            scrollView.hasVerticalScroller = true
+            scrollView.hasHorizontalScroller = true
+            scrollView.alphaValue = 1
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
