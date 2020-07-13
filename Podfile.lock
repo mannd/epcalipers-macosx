@@ -1,5 +1,5 @@
 PODS:
-  - QTc (3.4.1)
+  - QTc (3.5)
 
 DEPENDENCIES:
   - QTc (from `https://github.com/mannd/QTc.git`, branch `master`)
@@ -11,12 +11,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   QTc:
-    :commit: fd2a0c53df5a1f98e11d8d2966b4bbc4566df12d
+    :commit: cd6e8d623ea0456f6086b013b0e1c4becf975f47
     :git: https://github.com/mannd/QTc.git
 
 SPEC CHECKSUMS:
-  QTc: ede7a196a674e49a94a2e06be7a43347ceefae51
+  QTc: b5c1403b0110e618c19968a28613f12c39bbb399
 
 PODFILE CHECKSUM: 7dbbe2c19078ae1b940c56134788c6d14c5ee9a7
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.8.0.beta.1

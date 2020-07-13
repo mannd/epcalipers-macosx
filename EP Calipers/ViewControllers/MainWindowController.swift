@@ -145,8 +145,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.lockedMode = isTransparent
         clearCalibration()
         if isTransparent {
-            // Calipers sometimes leave ghosts during transition to transparent mode
-            // in Mojave.
             calipersView.deleteAllCalipers()
             scrollView.drawsBackground = false
             window?.backgroundColor = NSColor.clear

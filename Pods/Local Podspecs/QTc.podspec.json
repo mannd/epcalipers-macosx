@@ -1,6 +1,6 @@
 {
   "name": "QTc",
-  "version": "3.4.1",
+  "version": "3.5",
   "summary": "Framework for doing QTc calculations",
   "description": "The goal is to provide an exhaustive set of documented and tested corrected QT (QTc) formulas for using in medical apps.",
   "homepage": "https://epstudiossoftware.com",
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/mannd/QTc.git",
-    "tag": "3.4.1"
+    "tag": "3.5"
   },
   "source_files": [
     "CommonSource",
