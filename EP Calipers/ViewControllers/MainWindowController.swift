@@ -150,7 +150,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             scrollView.hasVerticalScroller = false
             scrollView.hasHorizontalScroller = false
             // FIXME: ? use this.  This makes window a little more translucent on macOS 11.
-            scrollView.alphaValue = 0.2
+            scrollView.alphaValue = transparencyAlpha()
             scrollView.drawsBackground = false
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
@@ -177,6 +177,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         // Make sure calibration button not stuck off if in middle of QTc measurement.
         exitQTc()
+    }
+    
+    private func transparencyAlpha() -> CGFloat {
+        guard #available(OSX 11, *) else  { return 1.0 }
+        NSLog("osx is 11")
+        return 0.2
     }
         
     override var windowNibName: NSNib.Name? {
