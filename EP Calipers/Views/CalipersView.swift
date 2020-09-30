@@ -21,7 +21,8 @@ protocol CalipersViewDelegate {
 
 class CalipersView: NSView {
 
-    var imageView: IKImageView? = nil
+    weak var imageView: IKImageView? = nil
+    weak var scrollView: NSScrollView? = nil
     var calipersMode = false
     var calipers: [Caliper] = []
     var lockedMode = false
@@ -159,10 +160,10 @@ class CalipersView: NSView {
 
     // This allows pinch to zoom to work.
     override func magnify(with theEvent: NSEvent) {
+        NSLog("magnify")
         if !lockedMode {
             imageView!.magnify(with: theEvent)
-            // FIXME: Need to update calibration.
-//            updateCalibration(offset: scrollView.documentVisibleRect.origin)
+            updateCalibration()
         }
     }
     
@@ -172,16 +173,37 @@ class CalipersView: NSView {
         }
     }
 
-    func updateCalibration(offset: CGPoint) {
-        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
+//    func updateCalibration(offset: CGPoint) {
+//        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
+//            horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
+//            verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
+//            horizontalCalibration.offset = offset
+//            verticalCalibration.offset = offset
+//            if calipers.count > 0 {
+//                needsDisplay = true
+//            }
+//        }
+//    }
+
+    private func getOffset() -> CGPoint {
+        guard let scrollView = scrollView else { return CGPoint() }
+        if scrollView.contentSize.width < frame.width || scrollView.contentSize.height < frame.height {
+            return CGPoint(x: scrollView.contentSize.width - frame.width, y: scrollView.contentSize.height - frame.height)
+        }
+        return scrollView.documentVisibleRect.origin
+    }
+
+    func updateCalibration() {
+        NSLog("getOffset = %f, %f", getOffset().x, getOffset().y)
+//        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
             horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
             verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
-            horizontalCalibration.offset = offset
-            verticalCalibration.offset = offset
+            horizontalCalibration.offset = scrollView!.documentVisibleRect.origin
+            verticalCalibration.offset = scrollView!.documentVisibleRect.origin
             if calipers.count > 0 {
                 needsDisplay = true
             }
-        }
+//        }
     }
     
     @objc func marchCaliper(_ sender: AnyObject) {

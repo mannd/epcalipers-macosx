@@ -193,6 +193,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         
         calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
+        calipersView.scrollView = scrollView
         calipersView.horizontalCalibration.direction = .horizontal
         calipersView.verticalCalibration.direction = .vertical
         clearMessage()
@@ -255,15 +256,24 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         toolbar.delegate = self
 
+        scrollView.postsFrameChangedNotifications = true
         scrollView.contentView.postsBoundsChangedNotifications = true;
         NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name:NSView.boundsDidChangeNotification, object:scrollView.contentView)
+        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
     }
 
     @objc
     func imageBoundsDidChange() {
         NSLog("Bounds did change")
-        NSLog("offset = %f, %f", scrollView.documentVisibleRect.origin.x, scrollView.documentVisibleRect.origin.y)
-        calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
+//        NSLog("offset = %f, %f", scrollView.documentVisibleRect.origin.x, scrollView.documentVisibleRect.origin.y)
+//        NSLog("zoom = %f", imageView.zoomFactor)
+        calipersView.updateCalibration()
+    }
+
+    // FIXME: delete
+    @objc
+    func imageFrameDidChange() {
+        NSLog("Frame did change")
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -515,14 +525,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         case 0:
             zoomFactor = imageView.zoomFactor
             imageView.zoomFactor = zoomFactor * zoomInFactor
-            calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
+            calipersView.updateCalibration()
         case 1:
             zoomFactor = imageView.zoomFactor
+//            // FIXME: kludge
+//            if zoomFactor < 1.0 {
+//                zoomFactor = 1.0
+//                imageView.zoomFactor = zoomFactor
+//                calipersView.updateCalibration()
+//                break
+//            }
             imageView.zoomFactor = zoomFactor * zoomOutFactor
-            calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
+            calipersView.updateCalibration()
         case 2:
             imageView.zoomImageToActualSize(self)
-            calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
+            calipersView.updateCalibration()
         default:
             break
         }
@@ -718,7 +735,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         imageView.zoomImageToActualSize(self)
         // keep size of image manageable by scaling down
         imageView.zoomFactor = imageView.zoomFactor / scale
-        calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
+        calipersView.updateCalibration()
     }
     
     // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion

@@ -127,9 +127,9 @@ class Caliper: NSObject {
 
     var crossBarPosition: CGFloat {
         get {
-            Position.translateToScaledPosition(absolutePosition: _crossBarPosition, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom)) }
+            Position.translateToScaledPosition(absolutePosition: _crossBarPosition, offset: correctedOffsetCrossBar(), scale: CGFloat(calibration.currentZoom)) }
         set(position) {
-            _crossBarPosition = Position.translateToAbsolutePosition(scaledPosition: position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom))
+            _crossBarPosition = Position.translateToAbsolutePosition(scaledPosition: position, offset: correctedOffsetCrossBar(), scale: CGFloat(calibration.currentZoom))
         }
     }
 
