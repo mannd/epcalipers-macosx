@@ -156,11 +156,13 @@ class CalipersView: NSView {
         }
         needsDisplay = true
     }
-    
+
+    // This allows pinch to zoom to work.
     override func magnify(with theEvent: NSEvent) {
         if !lockedMode {
             imageView!.magnify(with: theEvent)
-            updateCalibration()
+            // FIXME: Need to update calibration.
+//            updateCalibration(offset: scrollView.documentVisibleRect.origin)
         }
     }
     
@@ -170,10 +172,12 @@ class CalipersView: NSView {
         }
     }
 
-    func updateCalibration() {
+    func updateCalibration(offset: CGPoint) {
         if horizontalCalibration.calibrated || verticalCalibration.calibrated {
             horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
             verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
+            horizontalCalibration.offset = offset
+            verticalCalibration.offset = offset
             if calipers.count > 0 {
                 needsDisplay = true
             }

@@ -51,9 +51,9 @@ class Caliper: NSObject {
     let roundToHundredthsString: NSString = "%.2f %@"
     let noRoundingString: NSString = "%f %@"
     
-    var bar1Position: CGFloat
-    var bar2Position: CGFloat
-    var crossBarPosition: CGFloat
+    var _bar1Position: CGFloat = 0
+    var _bar2Position: CGFloat = 0
+    var _crossBarPosition: CGFloat = 0
     var direction: CaliperDirection
     var color: NSColor
     var unselectedColor: NSColor
@@ -74,12 +74,10 @@ class Caliper: NSObject {
     var chosenComponent: CaliperComponent = .noComponent
 
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
-         crossBarPosition: CGFloat) {
+         crossBarPosition: CGFloat, calibration: Calibration) {
 
         self.direction = direction
-        self.bar1Position = bar1Position
-        self.bar2Position = bar2Position
-        self.crossBarPosition = crossBarPosition
+        self.calibration = calibration
         self.color = NSColor.systemBlue
         self.unselectedColor = NSColor.systemBlue
         self.selectedColor = NSColor.systemRed
@@ -93,12 +91,49 @@ class Caliper: NSObject {
         self.textPosition = .right
         self.autoPositionText = true
         super.init()
+        self.bar1Position = bar1Position
+        self.bar2Position = bar2Position
+        self.crossBarPosition = crossBarPosition
     }
     
     convenience override init() {
         self.init(direction: .horizontal, bar1Position: 0.0, bar2Position: 0.0,
-            crossBarPosition: 100)
+                  crossBarPosition: 100, calibration: Calibration())
     }
+
+    private func correctedOffsetBar() -> CGFloat {
+        return direction == .horizontal ? calibration.offset.x : calibration.offset.y
+    }
+
+    private func correctedOffsetCrossBar() -> CGFloat {
+        return direction == .horizontal ? calibration.offset.y : calibration.offset.x
+    }
+
+    var bar1Position: CGFloat {
+        get {
+            Position.translateToScaledPosition(absolutePosition: _bar1Position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom)) }
+        set(position) {
+            _bar1Position = Position.translateToAbsolutePosition(scaledPosition: position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom))
+        }
+    }
+
+    var bar2Position: CGFloat {
+        get {
+            Position.translateToScaledPosition(absolutePosition: _bar2Position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom)) }
+        set(position) {
+            _bar2Position = Position.translateToAbsolutePosition(scaledPosition: position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom))
+        }
+    }
+
+    var crossBarPosition: CGFloat {
+        get {
+            Position.translateToScaledPosition(absolutePosition: _crossBarPosition, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom)) }
+        set(position) {
+            _crossBarPosition = Position.translateToAbsolutePosition(scaledPosition: position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom))
+        }
+    }
+
+        
     
     // set slightly different position for each new caliper
     func setInitialPositionInRect(_ rect: CGRect) {

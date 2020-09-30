@@ -254,6 +254,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         instructionPanel.becomesKeyOnlyIfNeeded = true
 
         toolbar.delegate = self
+
+        scrollView.contentView.postsBoundsChangedNotifications = true;
+        NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name:NSView.boundsDidChangeNotification, object:scrollView.contentView)
+    }
+
+    @objc
+    func imageBoundsDidChange() {
+        NSLog("Bounds did change")
+        NSLog("offset = %f, %f", scrollView.documentVisibleRect.origin.x, scrollView.documentVisibleRect.origin.y)
+        calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -505,14 +515,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         case 0:
             zoomFactor = imageView.zoomFactor
             imageView.zoomFactor = zoomFactor * zoomInFactor
-            calipersView.updateCalibration()
+            calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
         case 1:
             zoomFactor = imageView.zoomFactor
             imageView.zoomFactor = zoomFactor * zoomOutFactor
-            calipersView.updateCalibration()
+            calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
         case 2:
             imageView.zoomImageToActualSize(self)
-            calipersView.updateCalibration()
+            calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
         default:
             break
         }
@@ -708,7 +718,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         imageView.zoomImageToActualSize(self)
         // keep size of image manageable by scaling down
         imageView.zoomFactor = imageView.zoomFactor / scale
-        calipersView.updateCalibration()
+        calipersView.updateCalibration(offset: scrollView.documentVisibleRect.origin)
     }
     
     // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion

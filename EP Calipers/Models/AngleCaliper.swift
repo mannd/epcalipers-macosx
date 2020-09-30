@@ -25,7 +25,7 @@ class AngleCaliper: Caliper {
     }
     
     init() {
-        super.init(direction: .horizontal, bar1Position: 100.0, bar2Position: 100.0, crossBarPosition: 100.0)
+        super.init(direction: .horizontal, bar1Position: 100.0, bar2Position: 100.0, crossBarPosition: 100.0, calibration: Calibration())
         requiresCalibration = false
         isAngleCaliper = true
         triangleBaseTextPosition = textPosition
