@@ -485,7 +485,7 @@ class Caliper: NSObject {
         }
         return result
     }
-    
+
     func points() -> CGFloat {
         return bar2Position - bar1Position
     }
