@@ -190,6 +190,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeMove
         imageView.delegate = self
+        // FIXME:
+        scrollView.contentView.backgroundColor = NSColor.red
+
         
         calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
@@ -523,26 +526,30 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         switch zoom {
         case 0:
-            zoomFactor = imageView.zoomFactor
-            imageView.zoomFactor = zoomFactor * zoomInFactor
+            scrollView.magnification = 5.0
+//            zoomFactor = imageView.zoomFactor
+//            imageView.zoomFactor = zoomFactor * zoomInFactor
             calipersView.updateCalibration()
         case 1:
             zoomFactor = imageView.zoomFactor
 //            // FIXME: kludge
-//            if zoomFactor < 1.0 {
+//            if zoomFactor * zoomOutFactor < 1.0 {
 //                zoomFactor = 1.0
 //                imageView.zoomFactor = zoomFactor
 //                calipersView.updateCalibration()
 //                break
 //            }
-            imageView.zoomFactor = zoomFactor * zoomOutFactor
-            calipersView.updateCalibration()
+            zoomFactor = scrollView.magnification
+            scrollView.magnification = zoomFactor * zoomOutFactor
+//            imageView.zoomFactor = zoomFactor * zoomOutFactor
+//            calipersView.updateCalibration()
         case 2:
             imageView.zoomImageToActualSize(self)
             calipersView.updateCalibration()
         default:
             break
         }
+        NSLog("content size = %f, %f", scrollView.contentSize.width, scrollView.contentSize.height)
     }
     
     @IBAction func doMeasurement(_ sender: AnyObject) {
