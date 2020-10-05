@@ -163,6 +163,12 @@ class CalipersView: NSView {
         NSLog("magnify")
         if !lockedMode {
             imageView!.magnify(with: theEvent)
+            NSLog("magnify zoom factor = %f", imageView!.zoomFactor)
+            NSLog("contentSize width = %f, height = %f", scrollView!.documentView!.frame.size.width, scrollView!.documentView!.frame.size.height)
+            NSLog("contentOffset x = %f, y = %f", scrollView!.documentVisibleRect.origin.x, scrollView!.documentVisibleRect.origin.y)
+            NSLog("document frame x = %f, y = %f", scrollView!.documentView!.frame.origin.x, scrollView!.documentView!.frame.origin.y)
+            let documentOriginX = (frame.size.width - scrollView!.documentView!.frame.size.width) / 2
+            NSLog("document origin x = %f", documentOriginX)
             updateCalibration()
         }
     }
@@ -187,8 +193,9 @@ class CalipersView: NSView {
 
     private func getOffset() -> CGPoint {
         guard let scrollView = scrollView else { return CGPoint() }
-        if scrollView.contentSize.width < frame.width || scrollView.contentSize.height < frame.height {
-            return CGPoint(x: scrollView.contentSize.width - frame.width, y: scrollView.contentSize.height - frame.height)
+        // FIXME: add scrollbar 14 to height and width?
+        if scrollView.documentView!.frame.width < frame.width && scrollView.documentView!.frame.height < frame.height {
+            return CGPoint(x: (scrollView.documentView!.frame.width - frame.width) / 2, y: (scrollView.documentView!.frame.height - frame.height) / 2)
         }
         return scrollView.documentVisibleRect.origin
     }
@@ -198,8 +205,10 @@ class CalipersView: NSView {
 //        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
             horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
             verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
-            horizontalCalibration.offset = scrollView!.documentVisibleRect.origin
-            verticalCalibration.offset = scrollView!.documentVisibleRect.origin
+        horizontalCalibration.offset = getOffset()
+        verticalCalibration.offset = getOffset()
+//            horizontalCalibration.offset = scrollView!.documentVisibleRect.origin
+//            verticalCalibration.offset = scrollView!.documentVisibleRect.origin
             if calipers.count > 0 {
                 needsDisplay = true
             }

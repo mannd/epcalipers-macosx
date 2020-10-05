@@ -98,7 +98,7 @@ class Caliper: NSObject {
     
     convenience override init() {
         self.init(direction: .horizontal, bar1Position: 0.0, bar2Position: 0.0,
-                  crossBarPosition: 100, calibration: Calibration())
+                  crossBarPosition: 0, calibration: Calibration())
     }
 
     private func correctedOffsetBar() -> CGFloat {
