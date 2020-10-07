@@ -184,15 +184,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         self.window!.registerForDraggedTypes(types)
 
         imageView.editable = true
-        // below is no longer true, open IKImageEditPanel only from menu
         imageView.doubleClickOpensImageEditPanel = false
-        imageView.zoomImageToActualSize(self)
+//        imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
-        imageView.currentToolMode = IKToolModeMove
+        // FIXME: Why is mouse still a hand?
+        imageView.currentToolMode = IKToolModeNone
         imageView.delegate = self
-        // FIXME:
-        scrollView.contentView.backgroundColor = NSColor.red
-
         
         calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
@@ -250,6 +247,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         calipersView.delegate = self
 
+
+        // FIXME: ?Switch to magnify as opposed to zoom?
+        scrollView.allowsMagnification = true
+        scrollView.minMagnification = 0.25
+        scrollView.maxMagnification = 10.0
+        scrollView.magnification = 1.0
+
+        calipersView.horizontalCalibration.currentZoom = Double(scrollView.magnification)
+        calipersView.verticalCalibration.currentZoom = Double(scrollView.magnification)
+        calipersView.horizontalCalibration.originalZoom = Double(scrollView.magnification)
+        calipersView.verticalCalibration.originalZoom = Double(scrollView.magnification)
+
+        NSLog("imageView.zoomFactor = %f", imageView.zoomFactor)
+        NSLog("scrollView.magnification = %f", scrollView.magnification)
+
         // Draw concurrently, possibly not safe, as must guarantee thread-safety of the view, so...
 //        calipersView.canDrawConcurrently = true
 //        self.window?.allowsConcurrentViewDrawing = true
@@ -259,24 +271,27 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         toolbar.delegate = self
 
-        scrollView.postsFrameChangedNotifications = true
+//        scrollView.postsFrameChangedNotifications = true
         scrollView.contentView.postsBoundsChangedNotifications = true;
         NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name:NSView.boundsDidChangeNotification, object:scrollView.contentView)
-        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
+//        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
+    }
+
+    // FIXME: why is mouse still a hand??
+    override
+    func mouseEntered(with event: NSEvent) {
+        super.mouseEntered(with: event)
+        NSCursor.arrow.set()
     }
 
     @objc
     func imageBoundsDidChange() {
-        NSLog("Bounds did change")
-//        NSLog("offset = %f, %f", scrollView.documentVisibleRect.origin.x, scrollView.documentVisibleRect.origin.y)
-//        NSLog("zoom = %f", imageView.zoomFactor)
+        NSLog("getOffset() = %f, %f", calipersView.getOffset().x, calipersView.getOffset().y)
+        NSLog("calipersView.origin = %f, %f", calipersView.frame.origin.x, calipersView.frame.origin.y)
+        if let barPosition = calipersView.caliper0Bar1Position() {
+            NSLog("caliper 0 bar1Position = %f", barPosition)
+        }
         calipersView.updateCalibration()
-    }
-
-    // FIXME: delete
-    @objc
-    func imageFrameDidChange() {
-        NSLog("Frame did change")
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -506,15 +521,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         getPageNumber()
     }
     
-    // Give up on Recenter after zoom
-    // see IKImageView specs and
-    // - (void)setImageZoomFactor:(CGFloat)zoomFactor centerPoint:(NSPoint)centerPoint
-    // also could use method to get center of view's image point and use
-    // - (NSPoint)convertViewPointToImagePoint:(NSPoint)viewPoint
-    // to recenter image after zoom.
-    // but see this too: https://lists.apple.com/archives/cocoa-dev/2008/Mar/msg00774.html
-    // in Summary, setImageZoomFactor:centerPoint: doesn't work.  centerPoint doesn't affect
-    // zooming, which is always recentered to the origin (lower left).
     @IBAction func doZoom(_ sender: AnyObject) {
         var zoom: Int
         var zoomFactor: CGFloat
@@ -526,15 +532,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         switch zoom {
         case 0:
-            zoomFactor = imageView.zoomFactor
-            imageView.zoomFactor = zoomFactor * zoomInFactor
+            zoomFactor = scrollView.magnification
+            scrollView.magnification = zoomFactor * zoomInFactor
+
+//            zoomFactor = imageView.zoomFactor
+//            imageView.zoomFactor = zoomFactor * zoomInFactor
             calipersView.updateCalibration()
         case 1:
-            zoomFactor = imageView.zoomFactor
-            imageView.zoomFactor = zoomFactor * zoomOutFactor
+            zoomFactor = scrollView.magnification
+            scrollView.magnification = scrollView.magnification * zoomOutFactor
+//            zoomFactor = imageView.zoomFactor
+//            imageView.zoomFactor = zoomFactor * zoomOutFactor
             calipersView.updateCalibration()
         case 2:
-            imageView.zoomImageToActualSize(self)
+            scrollView.magnification = 1.0
+//            imageView.zoomImageToActualSize(self)
             calipersView.updateCalibration()
         default:
             break
@@ -648,7 +660,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             // if you are loading a large image and then try to scroll it.  Must load as below.
             if reachable, let data = NSData(contentsOf: url), let image = NSImage(data: data as Data) {
                 self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
-                self.imageView.zoomImageToActualSize(self)
+                //self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
                 self.oldWindowTitle = urlPath
                 self.window?.setTitleWithRepresentedFilename(urlPath)
@@ -728,7 +740,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         tempImage = scaleImage(tempImage, byFactor: scale)
         let image = nsImageToCGImage(tempImage)
         imageView.setImage(image, imageProperties: nil)
-        imageView.zoomImageToActualSize(self)
+        // FIXME: I have removed all imageView.zoomImageToActualSize()
+//        imageView.zoomImageToActualSize(self)
         // keep size of image manageable by scaling down
         imageView.zoomFactor = imageView.zoomFactor / scale
         calipersView.updateCalibration()
@@ -822,7 +835,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func adjustImageAfterRotation() {
-        imageView.zoomImageToActualSize(self)
+//        imageView.zoomImageToActualSize(self)
         // since rotation can adjust zoom factor, must clear calibration
         clearCalibration()
     }
@@ -1050,7 +1063,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 if !calibration.canDisplayRate {
                     calibration.displayRate = false
                 }
-                calibration.originalZoom = Double(imageView.zoomFactor)
+                calibration.originalZoom = Double(scrollView.magnification)
                 calibration.originalCalFactor = value / Double(c!.points())
                 calibration.currentZoom = calibration.originalZoom
                 calibration.calibrated = true

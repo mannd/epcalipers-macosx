@@ -53,7 +53,7 @@ class AngleCaliper: Caliper {
         
         crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
         crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
-        bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
+//        bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
         bar2Position = bar1Position
         
         let endPointBar1 = endPointForPosition(p: CGPoint(x: bar1Position, y: crossBarPosition), angle: angleBar1, length: length)

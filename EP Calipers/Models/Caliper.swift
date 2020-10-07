@@ -164,8 +164,8 @@ class Caliper: NSObject {
         if self.direction == .horizontal {
             crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
             crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
-            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
-            bar2Position = CGFloat(fmax(Double(bar2Position), delta));
+//            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
+//            bar2Position = CGFloat(fmax(Double(bar2Position), delta));
             context.move(to: CGPoint(x: bar1Position, y: 0));
             context.addLine(to: CGPoint(x: bar1Position, y: rect.size.height))
             context.move(to: CGPoint(x: bar2Position, y: 0))
@@ -176,8 +176,8 @@ class Caliper: NSObject {
         } else {    // vertical caliper
             crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.width) - delta))
             crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
-            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.height) - delta))
-            bar2Position = CGFloat(fmax(Double(bar2Position), delta))
+//            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.height) - delta))
+//            bar2Position = CGFloat(fmax(Double(bar2Position), delta))
             context.move(to: CGPoint(x: 0, y: bar1Position))
             context.addLine(to: CGPoint(x: rect.size.width, y: bar1Position))
             context.move(to: CGPoint(x: 0, y: bar2Position))

@@ -34,7 +34,8 @@ class CalipersView: NSView {
     // references to MainWindowController calibrations
     let horizontalCalibration = Calibration()
     let verticalCalibration = Calibration()
-    
+
+    // FIXME: weak var?
     var delegate: CalipersViewDelegate? = nil;
     
     // for color and tweak menu
@@ -79,6 +80,8 @@ class CalipersView: NSView {
     }
         
     override func mouseDown(with theEvent: NSEvent) {
+        // FIXME: do this?
+//        guard theEvent.locationInWindow.x < frame.width - 16 && theEvent.locationInWindow.y < frame.height - 16 else { return }
         selectedCaliper = getSelectedCaliper(theEvent.locationInWindow)
         if selectedCaliper != nil {
             if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
@@ -162,15 +165,22 @@ class CalipersView: NSView {
     override func magnify(with theEvent: NSEvent) {
         NSLog("magnify")
         if !lockedMode {
-            imageView!.magnify(with: theEvent)
-            NSLog("magnify zoom factor = %f", imageView!.zoomFactor)
-            NSLog("contentSize width = %f, height = %f", scrollView!.documentView!.frame.size.width, scrollView!.documentView!.frame.size.height)
-            NSLog("contentOffset x = %f, y = %f", scrollView!.documentVisibleRect.origin.x, scrollView!.documentVisibleRect.origin.y)
-            NSLog("document frame x = %f, y = %f", scrollView!.documentView!.frame.origin.x, scrollView!.documentView!.frame.origin.y)
-            let documentOriginX = (frame.size.width - scrollView!.documentView!.frame.size.width) / 2
-            NSLog("document origin x = %f", documentOriginX)
+            scrollView!.magnify(with: theEvent)
+            vitalSigns()
             updateCalibration()
         }
+    }
+
+    func vitalSigns() {
+        NSLog("imageView zoom factor = %f", imageView!.zoomFactor)
+        NSLog("scrollView magnify = %f", scrollView!.magnification)
+        NSLog("documentViewSize width = %f, height = %f", scrollView!.documentView!.frame.size.width, scrollView!.documentView!.frame.size.height)
+        NSLog("contentViewSize width = %f, height = %f", scrollView!.contentView.frame.width, scrollView!.contentView.frame.height)
+        NSLog("================================")
+        NSLog("contentOffset x = %f, y = %f", scrollView!.documentVisibleRect.origin.x, scrollView!.documentVisibleRect.origin.y)
+        NSLog("document frame x = %f, y = %f", scrollView!.documentView!.frame.origin.x, scrollView!.documentView!.frame.origin.y)
+        let documentOriginX = (frame.size.width - scrollView!.documentView!.frame.size.width) / 2
+        NSLog("document origin x = %f", documentOriginX)
     }
     
     override func scrollWheel(with event: NSEvent) {
@@ -191,28 +201,24 @@ class CalipersView: NSView {
 //        }
 //    }
 
-    private func getOffset() -> CGPoint {
+    func getOffset() -> CGPoint {
         guard let scrollView = scrollView else { return CGPoint() }
-        // FIXME: add scrollbar 14 to height and width?
+        // FIXME: add scrollbar 14 (16?) to height and width?
         if scrollView.documentView!.frame.width < frame.width && scrollView.documentView!.frame.height < frame.height {
+            NSLog("content smaller than window")
             return CGPoint(x: (scrollView.documentView!.frame.width - frame.width) / 2, y: (scrollView.documentView!.frame.height - frame.height) / 2)
         }
         return scrollView.documentVisibleRect.origin
     }
 
     func updateCalibration() {
-        NSLog("getOffset = %f, %f", getOffset().x, getOffset().y)
-//        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
-            horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
-            verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
+        horizontalCalibration.currentZoom = Double(scrollView!.magnification)
+        verticalCalibration.currentZoom = Double(scrollView!.magnification)
         horizontalCalibration.offset = getOffset()
         verticalCalibration.offset = getOffset()
-//            horizontalCalibration.offset = scrollView!.documentVisibleRect.origin
-//            verticalCalibration.offset = scrollView!.documentVisibleRect.origin
-            if calipers.count > 0 {
-                needsDisplay = true
-            }
-//        }
+        if calipers.count > 0 {
+            needsDisplay = true
+        }
     }
     
     @objc func marchCaliper(_ sender: AnyObject) {
@@ -511,6 +517,13 @@ class CalipersView: NSView {
         for c in calipers {
             c.drawWithContext(context, inRect: dirtyRect)
         }
+    }
+
+    func caliper0Bar1Position() -> CGFloat? {
+        if calipers.count > 0 {
+            return calipers[0].bar1Position
+        }
+        return nil
     }
     
     // This doesn't work as of OS 10.12.  Less need for screenshots now that transparent windows are possible.
