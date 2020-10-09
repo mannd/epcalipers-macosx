@@ -51,8 +51,8 @@ class AngleCaliper: Caliper {
         // Ensure caliper always extends past the screen edges
         let length = CGFloat(fmax(Double(rect.size.height), Double(rect.size.width)) * 2.0)
         
-        crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
-        crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
+//        crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
+//        crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
 //        bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
         bar2Position = bar1Position
         

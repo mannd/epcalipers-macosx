@@ -14,7 +14,7 @@ import AppKit
 // When image is zoomed, double click makes panel disappear, it is somewhere off screen.
 // see http://stackoverflow.com/questions/30110720/how-to-get-ikimageeditpanel-to-work-in-swift
 extension IKImageView: IKImageEditPanelDataSource {
-    
+
 }
 
 protocol QTcResultProtocol {
@@ -67,6 +67,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var autoPositionTextCheckBox: NSButton!
     @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
     @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
+    
+    @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
+    @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
     
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
@@ -276,8 +279,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
 //        scrollView.postsFrameChangedNotifications = true
         scrollView.contentView.postsBoundsChangedNotifications = true;
-        NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name:NSView.boundsDidChangeNotification, object:scrollView.contentView)
+        NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
 //        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
+
+
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
     }
 
 
@@ -296,6 +302,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             NSLog("caliper 0 bar1Position = %f", barPosition)
         }
         calipersView.updateCalibration()
+    }
+
+    @objc
+    func scrollBarsDidChange() {
+        NSLog("scrollbars did change")
+        NSLog("scrollbar style = %@", scrollView.scrollerStyle == .legacy ? "legacy" : "overlay")
+        if scrollView.scrollerStyle == .legacy {
+            calipersViewBottomConstraint.constant = 16
+            calipersViewTrailingContraint.constant = 16
+        } else {
+            calipersViewBottomConstraint.constant = 0
+            calipersViewTrailingContraint.constant = 0
+        }
+
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
