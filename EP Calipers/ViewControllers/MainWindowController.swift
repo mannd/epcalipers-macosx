@@ -190,10 +190,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         imageView.editable = true
         imageView.doubleClickOpensImageEditPanel = false
         // FIXME: experimental
-        imageView.zoomImageToFit(self)
+      //  imageView.zoomImageToFit(self)
 //        imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
-        // FIXME: Why is mouse still a hand?
         imageView.currentToolMode = IKToolModeNone
         imageView.delegate = self
         
@@ -253,12 +252,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         calipersView.delegate = self
 
-
-        // FIXME: ?Switch to magnify as opposed to zoom?
         scrollView.allowsMagnification = true
         scrollView.minMagnification = 0.25
         scrollView.maxMagnification = 10.0
-        scrollView.magnification = 1.0
+        // Main queue needs a little time to settle before setting magnification, apparently.
+        DispatchQueue.main.async { [self] in
+            scrollView.magnification = 1.0
+        }
 
         calipersView.horizontalCalibration.currentZoom = Double(scrollView.magnification)
         calipersView.verticalCalibration.currentZoom = Double(scrollView.magnification)
@@ -277,27 +277,29 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         toolbar.delegate = self
 
-//        scrollView.postsFrameChangedNotifications = true
+        scrollView.postsFrameChangedNotifications = true
         scrollView.contentView.postsBoundsChangedNotifications = true;
         NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
-//        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
+        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
 
 
         NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
     }
 
 
-    // FIXME: why is mouse still a hand??
-    override
-    func mouseEntered(with event: NSEvent) {
-        super.mouseEntered(with: event)
-        NSCursor.arrow.set()
-    }
-
     @objc
     func imageBoundsDidChange() {
         NSLog("getOffset() = %f, %f", calipersView.getOffset().x, calipersView.getOffset().y)
         NSLog("magnification = %f", scrollView!.magnification)
+        if let barPosition = calipersView.caliper0Bar1Position() {
+            NSLog("caliper 0 bar1Position = %f", barPosition)
+        }
+        calipersView.updateCalibration()
+    }
+
+    @objc
+    func imageFrameDidChange() {
+        NSLog("imageFrameDidChange")
         if let barPosition = calipersView.caliper0Bar1Position() {
             NSLog("caliper 0 bar1Position = %f", barPosition)
         }
@@ -570,7 +572,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.updateCalibration()
         case 2:
             scrollView.magnification = 1.0
-            imageView.zoomImageToActualSize(self)
+//            imageView.zoomImageToActualSize(self)
             calipersView.updateCalibration()
         default:
             break

@@ -202,15 +202,15 @@ class CalipersView: NSView {
 
     func getOffset() -> CGPoint {
         guard let scrollView = scrollView else { return CGPoint() }
-        // FIXME: add scrollbar 14 (16?) to height and width?
-//        if scrollView.documentVisibleRect.origin.x <= 1 && scrollView.documentVisibleRect.origin.y <= 1 {
-//            NSLog("no offset")
+        var x = scrollView.documentVisibleRect.origin.x
+        var y = scrollView.documentVisibleRect.origin.y
+//        if scrollView.documentVisibleRect.origin.x < 0.001  {
+//            x = (frame.width - scrollView.documentVisibleRect.width) / 2
 //        }
-//        if scrollView.contentView.frame.width < frame.width && scrollView.contentView.frame.height < frame.height {
-//            NSLog("content smaller than window")
-//            return CGPoint(x: (scrollView.documentView!.frame.width - frame.width) / 2, y: (scrollView.documentView!.frame.height - frame.height) / 2)
+//        if scrollView.documentVisibleRect.origin.y < 0.001 {
+//            y = (frame.height - scrollView.documentVisibleRect.height) / 2
 //        }
-        return scrollView.documentVisibleRect.origin
+        return CGPoint(x: x, y: y)
     }
 
     func updateCalibration() {
