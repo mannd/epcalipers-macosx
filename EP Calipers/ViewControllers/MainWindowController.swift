@@ -150,7 +150,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
-            imageView.currentToolMode = IKToolModeMove
+            // FIXME: Do you want the hand cursor??
+//            imageView.currentToolMode = IKToolModeMove
             // deal with title
             self.window?.title = appName
         }
@@ -159,7 +160,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
-            imageView.currentToolMode = IKToolModeMove
+//            imageView.currentToolMode = IKToolModeMove
             if let title = oldWindowTitle {
                 self.window?.setTitleWithRepresentedFilename(title)
             }
@@ -185,6 +186,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         imageView.editable = true
         imageView.doubleClickOpensImageEditPanel = false
+        // FIXME: experimental
+        imageView.zoomImageToFit(self)
 //        imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         // FIXME: Why is mouse still a hand?
@@ -277,6 +280,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 //        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
     }
 
+
     // FIXME: why is mouse still a hand??
     override
     func mouseEntered(with event: NSEvent) {
@@ -287,7 +291,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @objc
     func imageBoundsDidChange() {
         NSLog("getOffset() = %f, %f", calipersView.getOffset().x, calipersView.getOffset().y)
-        NSLog("calipersView.origin = %f, %f", calipersView.frame.origin.x, calipersView.frame.origin.y)
+        NSLog("magnification = %f", scrollView!.magnification)
         if let barPosition = calipersView.caliper0Bar1Position() {
             NSLog("caliper 0 bar1Position = %f", barPosition)
         }
@@ -546,7 +550,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.updateCalibration()
         case 2:
             scrollView.magnification = 1.0
-//            imageView.zoomImageToActualSize(self)
+            imageView.zoomImageToActualSize(self)
             calipersView.updateCalibration()
         default:
             break
@@ -660,7 +664,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             // if you are loading a large image and then try to scroll it.  Must load as below.
             if reachable, let data = NSData(contentsOf: url), let image = NSImage(data: data as Data) {
                 self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
-                //self.imageView.zoomImageToActualSize(self)
+                self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
                 self.oldWindowTitle = urlPath
                 self.window?.setTitleWithRepresentedFilename(urlPath)
@@ -740,8 +744,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         tempImage = scaleImage(tempImage, byFactor: scale)
         let image = nsImageToCGImage(tempImage)
         imageView.setImage(image, imageProperties: nil)
-        // FIXME: I have removed all imageView.zoomImageToActualSize()
-//        imageView.zoomImageToActualSize(self)
+        imageView.zoomImageToActualSize(self)
         // keep size of image manageable by scaling down
         imageView.zoomFactor = imageView.zoomFactor / scale
         calipersView.updateCalibration()
@@ -835,7 +838,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func adjustImageAfterRotation() {
-//        imageView.zoomImageToActualSize(self)
+        imageView.zoomImageToActualSize(self)
         // since rotation can adjust zoom factor, must clear calibration
         clearCalibration()
     }

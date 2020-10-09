@@ -80,8 +80,7 @@ class CalipersView: NSView {
     }
         
     override func mouseDown(with theEvent: NSEvent) {
-        // FIXME: do this?
-//        guard theEvent.locationInWindow.x < frame.width - 16 && theEvent.locationInWindow.y < frame.height - 16 else { return }
+        // FIXME: do this?  Leave room for scrollbars
         selectedCaliper = getSelectedCaliper(theEvent.locationInWindow)
         if selectedCaliper != nil {
             if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
@@ -204,10 +203,13 @@ class CalipersView: NSView {
     func getOffset() -> CGPoint {
         guard let scrollView = scrollView else { return CGPoint() }
         // FIXME: add scrollbar 14 (16?) to height and width?
-        if scrollView.documentView!.frame.width < frame.width && scrollView.documentView!.frame.height < frame.height {
-            NSLog("content smaller than window")
-            return CGPoint(x: (scrollView.documentView!.frame.width - frame.width) / 2, y: (scrollView.documentView!.frame.height - frame.height) / 2)
-        }
+//        if scrollView.documentVisibleRect.origin.x <= 1 && scrollView.documentVisibleRect.origin.y <= 1 {
+//            NSLog("no offset")
+//        }
+//        if scrollView.contentView.frame.width < frame.width && scrollView.contentView.frame.height < frame.height {
+//            NSLog("content smaller than window")
+//            return CGPoint(x: (scrollView.documentView!.frame.width - frame.width) / 2, y: (scrollView.documentView!.frame.height - frame.height) / 2)
+//        }
         return scrollView.documentVisibleRect.origin
     }
 
