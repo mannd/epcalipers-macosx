@@ -253,7 +253,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.delegate = self
 
         scrollView.allowsMagnification = true
-        scrollView.minMagnification = 0.25
+        scrollView.minMagnification = 0.01
         scrollView.maxMagnification = 10.0
         // Main queue needs a little time to settle before setting magnification, apparently.
         DispatchQueue.main.async { [self] in
@@ -264,9 +264,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.verticalCalibration.currentZoom = Double(scrollView.magnification)
         calipersView.horizontalCalibration.originalZoom = Double(scrollView.magnification)
         calipersView.verticalCalibration.originalZoom = Double(scrollView.magnification)
-
-        NSLog("imageView.zoomFactor = %f", imageView.zoomFactor)
-        NSLog("scrollView.magnification = %f", scrollView.magnification)
 
         // Draw concurrently, possibly not safe, as must guarantee thread-safety of the view, so...
 //        calipersView.canDrawConcurrently = true

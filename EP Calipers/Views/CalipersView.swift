@@ -81,15 +81,16 @@ class CalipersView: NSView {
         
     override func mouseDown(with theEvent: NSEvent) {
         // FIXME: do this?  Leave room for scrollbars
-        selectedCaliper = getSelectedCaliper(theEvent.locationInWindow)
+        var location = theEvent.locationInWindow
+        selectedCaliper = getSelectedCaliper(location)
         if selectedCaliper != nil {
-            if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
+            if selectedCaliper!.pointNearCrossBar(location) {
                 crossBarSelected = true
             }
-            else if selectedCaliper!.pointNearBar1(p: theEvent.locationInWindow) {
+            else if selectedCaliper!.pointNearBar1(p: location) {
                 bar1Selected = true
             }
-            else if selectedCaliper!.pointNearBar2(p: theEvent.locationInWindow) {
+            else if selectedCaliper!.pointNearBar2(p: location) {
                 bar2Selected = true
             }
         }
@@ -214,7 +215,10 @@ class CalipersView: NSView {
 //        }
         NSLog("scrollView.documentVisibleRect.origin = %f, %f", scrollView.documentVisibleRect.origin.x, scrollView.documentVisibleRect.origin.y)
         NSLog("scrollView.documentVisibileRect.size = %f, %f", scrollView.documentVisibleRect.width, scrollView.documentVisibleRect.height)
-        NSLog("frame.size = %f, %f", frame.width, frame.height)
+        NSLog("calipersView.frame.size = %f, %f", frame.width, frame.height)
+        NSLog("imageView.frame.size = %f, %f", imageView!.frame.width, imageView!.frame.height)
+        NSLog("window.frame.size = %f, %f", window!.frame.width, window!.frame.height)
+        NSLog("scrollView.magnification = %f", scrollView.magnification)
         return CGPoint(x: x, y: y)
     }
 
