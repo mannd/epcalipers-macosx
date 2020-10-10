@@ -202,14 +202,19 @@ class CalipersView: NSView {
 
     func getOffset() -> CGPoint {
         guard let scrollView = scrollView else { return CGPoint() }
-        var x = scrollView.documentVisibleRect.origin.x
-        var y = scrollView.documentVisibleRect.origin.y
+        let x = scrollView.documentVisibleRect.origin.x
+        let y = scrollView.documentVisibleRect.origin.y
 //        if scrollView.documentVisibleRect.origin.x < 0.001  {
 //            x = (frame.width - scrollView.documentVisibleRect.width) / 2
 //        }
-//        if scrollView.documentVisibleRect.origin.y < 0.001 {
+//        if scrollView.documentVisibleRect.origin.y <= 0 {
+//            NSLog("documentVisibleRect.height = %f", scrollView.documentVisibleRect.height)
+//            NSLog("frame.height = %f", frame.height)
 //            y = (frame.height - scrollView.documentVisibleRect.height) / 2
 //        }
+        NSLog("scrollView.documentVisibleRect.origin = %f, %f", scrollView.documentVisibleRect.origin.x, scrollView.documentVisibleRect.origin.y)
+        NSLog("scrollView.documentVisibileRect.size = %f, %f", scrollView.documentVisibleRect.width, scrollView.documentVisibleRect.height)
+        NSLog("frame.size = %f, %f", frame.width, frame.height)
         return CGPoint(x: x, y: y)
     }
 

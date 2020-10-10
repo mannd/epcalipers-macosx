@@ -12,9 +12,9 @@ class Position: NSObject {
     static func translateToAbsolutePosition(scaledPosition position: CGFloat, offset: CGFloat, scale: CGFloat) -> CGFloat {
         return position / scale + offset
     }
-
+    
     static func translateToScaledPosition(absolutePosition position: CGFloat, offset: CGFloat, scale: CGFloat) -> CGFloat {
         return scale * (position - offset)
     }
-
+    
 }
