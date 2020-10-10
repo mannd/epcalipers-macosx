@@ -35,7 +35,6 @@ class CalipersView: NSView {
     let horizontalCalibration = Calibration()
     let verticalCalibration = Calibration()
 
-    // FIXME: weak var?
     var delegate: CalipersViewDelegate? = nil;
     
     // for color and tweak menu
@@ -80,8 +79,7 @@ class CalipersView: NSView {
     }
         
     override func mouseDown(with theEvent: NSEvent) {
-        // FIXME: do this?  Leave room for scrollbars
-        var location = theEvent.locationInWindow
+        let location = theEvent.locationInWindow
         selectedCaliper = getSelectedCaliper(location)
         if selectedCaliper != nil {
             if selectedCaliper!.pointNearCrossBar(location) {
@@ -163,7 +161,6 @@ class CalipersView: NSView {
 
     // This allows pinch to zoom to work.
     override func magnify(with theEvent: NSEvent) {
-        NSLog("magnify")
         if !lockedMode {
             scrollView!.magnify(with: theEvent)
             updateCalibration()
@@ -195,29 +192,14 @@ class CalipersView: NSView {
         }
     }
 
-//    func updateCalibration(offset: CGPoint) {
-//        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
-//            horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
-//            verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
-//            horizontalCalibration.offset = offset
-//            verticalCalibration.offset = offset
-//            if calipers.count > 0 {
-//                needsDisplay = true
-//            }
-//        }
-//    }
-
     func getOffset() -> CGPoint {
         guard let scrollView = scrollView else { return CGPoint() }
         var x = scrollView.documentVisibleRect.origin.x
         var y = scrollView.documentVisibleRect.origin.y
-        // Cannot test for == 0 here, since floating point comparison isn't exact.
         if scrollView.documentView!.frame.size.width < scrollView.documentVisibleRect.width {
-//        if scrollView.documentVisibleRect.origin.x < 0.01  {
             x = (scrollView.documentView!.frame.size.width - scrollView.documentVisibleRect.width) / 2
         }
         if scrollView.documentView!.frame.size.height < scrollView.documentVisibleRect.height {
-//        if scrollView.documentVisibleRect.origin.y < 0.01 {
             y = (scrollView.documentView!.frame.size.height - scrollView.documentVisibleRect.height) / 2
         }
         return CGPoint(x: x, y: y)

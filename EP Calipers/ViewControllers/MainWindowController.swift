@@ -133,7 +133,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     @IBAction func makeTransparent(_ sender: AnyObject) {
-        NSLog("make transparent")
         isTransparent = !isTransparent
         // reset the touchbar
         if #available(OSX 10.12.2, *) {
@@ -144,7 +143,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     func setTransparency() {
-        print("setTransparency()")
         calipersView.lockedMode = isTransparent
         clearCalibration()
         if isTransparent {
@@ -153,8 +151,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
-            // FIXME: Do you want the hand cursor??
-//            imageView.currentToolMode = IKToolModeMove
+            // If you prefer a hand cursor, use IKToolModeMove (and replace this elsewhere too).
+            imageView.currentToolMode = IKToolModeNone
             // deal with title
             self.window?.title = appName
         }
@@ -189,9 +187,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         imageView.editable = true
         imageView.doubleClickOpensImageEditPanel = false
-        // FIXME: experimental
-      //  imageView.zoomImageToFit(self)
-//        imageView.zoomImageToActualSize(self)
+        imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeNone
         imageView.delegate = self
@@ -253,8 +249,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.delegate = self
 
         scrollView.allowsMagnification = true
-        // FIXME: minMagnification too low just for testing.  Should be 0.25 or 0.5 perhaps.
-        scrollView.minMagnification = 0.01
+        scrollView.minMagnification = 0.25
         scrollView.maxMagnification = 10.0
         // Main queue needs a little time to settle before setting magnification, apparently.
         DispatchQueue.main.async { [self] in
@@ -279,11 +274,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         scrollView.contentView.postsBoundsChangedNotifications = true;
         NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
-
-
         NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
     }
-
 
     @objc
     func imageBoundsDidChange() {
@@ -297,8 +289,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @objc
     func scrollBarsDidChange() {
-        NSLog("scrollbars did change")
-        NSLog("scrollbar style = %@", scrollView.scrollerStyle == .legacy ? "legacy" : "overlay")
+//        NSLog("scrollbars did change")
+//        NSLog("scrollbar style = %@", scrollView.scrollerStyle == .legacy ? "legacy" : "overlay")
         if scrollView.scrollerStyle == .legacy {
             calipersViewBottomConstraint.constant = 16
             calipersViewTrailingContraint.constant = 16
@@ -532,7 +524,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     @IBAction func gotoPage(_ sender: Any) {
-        NSLog("Go to page")
         getPageNumber()
     }
     
@@ -950,9 +941,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         case 0:
             calibrateWithPossiblePrompts()
         case 1:
-            calipersView.vitalSigns()
-            // FIXME: Temporary
-//            clearCalibration()
+            clearCalibration()
         default:
             break
         }
@@ -1368,7 +1357,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if pageNumber > numberOfPDFPages - 1{
                 pageNumber = numberOfPDFPages - 1
             }
-            NSLog("page is %d", pageNumber)
             pdfPageNumber = pageNumber
             if let pdf = pdfRef {
                 showPDFPage(pdf, page: pdfPageNumber)
