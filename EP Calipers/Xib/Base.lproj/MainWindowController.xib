@@ -33,27 +33,22 @@
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
-                            <rect key="frame" x="1" y="1" width="783" height="465"/>
+                            <rect key="frame" x="1" y="1" width="798" height="480"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
-                                    <rect key="frame" x="0.0" y="0.0" width="783" height="465"/>
+                                <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
+                                    <rect key="frame" x="0.0" y="15" width="798" height="465"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </view>
                             </subviews>
-                            <constraints>
-                                <constraint firstItem="oIK-MS-rQb" firstAttribute="top" secondItem="TeI-oG-eGn" secondAttribute="top" id="OR2-wI-MX3"/>
-                                <constraint firstAttribute="trailing" secondItem="oIK-MS-rQb" secondAttribute="trailing" id="WWB-M6-FIo"/>
-                                <constraint firstItem="oIK-MS-rQb" firstAttribute="leading" secondItem="TeI-oG-eGn" secondAttribute="leading" id="c8O-SF-0Rd"/>
-                                <constraint firstAttribute="bottom" secondItem="oIK-MS-rQb" secondAttribute="bottom" id="t97-sm-0l5"/>
-                            </constraints>
                         </clipView>
                         <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
-                            <rect key="frame" x="1" y="466" width="783" height="15"/>
+                            <rect key="frame" x="1" y="465" width="798" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lrJ-fG-BcI">
-                            <rect key="frame" x="784" y="1" width="15" height="465"/>
+                            <rect key="frame" x="783" y="1" width="16" height="480"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
