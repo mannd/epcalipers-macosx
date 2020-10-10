@@ -14,7 +14,7 @@ import AppKit
 // When image is zoomed, double click makes panel disappear, it is somewhere off screen.
 // see http://stackoverflow.com/questions/30110720/how-to-get-ikimageeditpanel-to-work-in-swift
 extension IKImageView: IKImageEditPanelDataSource {
-    
+
 }
 
 protocol QTcResultProtocol {
@@ -67,6 +67,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var autoPositionTextCheckBox: NSButton!
     @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
     @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
+    
+    @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
+    @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
     
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
@@ -150,7 +153,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
-            imageView.currentToolMode = IKToolModeMove
+            // FIXME: Do you want the hand cursor??
+//            imageView.currentToolMode = IKToolModeMove
             // deal with title
             self.window?.title = appName
         }
@@ -159,7 +163,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
-            imageView.currentToolMode = IKToolModeMove
+//            imageView.currentToolMode = IKToolModeMove
             if let title = oldWindowTitle {
                 self.window?.setTitleWithRepresentedFilename(title)
             }
@@ -184,15 +188,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         self.window!.registerForDraggedTypes(types)
 
         imageView.editable = true
-        // below is no longer true, open IKImageEditPanel only from menu
         imageView.doubleClickOpensImageEditPanel = false
-        imageView.zoomImageToActualSize(self)
+        // FIXME: experimental
+      //  imageView.zoomImageToFit(self)
+//        imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
-        imageView.currentToolMode = IKToolModeMove
+        imageView.currentToolMode = IKToolModeNone
         imageView.delegate = self
         
         calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
+        calipersView.scrollView = scrollView
         calipersView.horizontalCalibration.direction = .horizontal
         calipersView.verticalCalibration.direction = .vertical
         clearMessage()
@@ -246,6 +252,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         calipersView.delegate = self
 
+        scrollView.allowsMagnification = true
+        // FIXME: minMagnification too low just for testing.  Should be 0.25 or 0.5 perhaps.
+        scrollView.minMagnification = 0.01
+        scrollView.maxMagnification = 10.0
+        // Main queue needs a little time to settle before setting magnification, apparently.
+        DispatchQueue.main.async { [self] in
+            scrollView.magnification = 1.0
+        }
+
+        calipersView.horizontalCalibration.currentZoom = Double(scrollView.magnification)
+        calipersView.verticalCalibration.currentZoom = Double(scrollView.magnification)
+        calipersView.horizontalCalibration.originalZoom = Double(scrollView.magnification)
+        calipersView.verticalCalibration.originalZoom = Double(scrollView.magnification)
+
         // Draw concurrently, possibly not safe, as must guarantee thread-safety of the view, so...
 //        calipersView.canDrawConcurrently = true
 //        self.window?.allowsConcurrentViewDrawing = true
@@ -254,6 +274,39 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         instructionPanel.becomesKeyOnlyIfNeeded = true
 
         toolbar.delegate = self
+
+        scrollView.postsFrameChangedNotifications = true
+        scrollView.contentView.postsBoundsChangedNotifications = true;
+        NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
+        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
+
+
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
+    }
+
+
+    @objc
+    func imageBoundsDidChange() {
+        calipersView.updateCalibration()
+    }
+
+    @objc
+    func imageFrameDidChange() {
+        calipersView.updateCalibration()
+    }
+
+    @objc
+    func scrollBarsDidChange() {
+        NSLog("scrollbars did change")
+        NSLog("scrollbar style = %@", scrollView.scrollerStyle == .legacy ? "legacy" : "overlay")
+        if scrollView.scrollerStyle == .legacy {
+            calipersViewBottomConstraint.constant = 16
+            calipersViewTrailingContraint.constant = 16
+        } else {
+            calipersViewBottomConstraint.constant = 0
+            calipersViewTrailingContraint.constant = 0
+        }
+
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -483,15 +536,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         getPageNumber()
     }
     
-    // Give up on Recenter after zoom
-    // see IKImageView specs and
-    // - (void)setImageZoomFactor:(CGFloat)zoomFactor centerPoint:(NSPoint)centerPoint
-    // also could use method to get center of view's image point and use
-    // - (NSPoint)convertViewPointToImagePoint:(NSPoint)viewPoint
-    // to recenter image after zoom.
-    // but see this too: https://lists.apple.com/archives/cocoa-dev/2008/Mar/msg00774.html
-    // in Summary, setImageZoomFactor:centerPoint: doesn't work.  centerPoint doesn't affect
-    // zooming, which is always recentered to the origin (lower left).
     @IBAction func doZoom(_ sender: AnyObject) {
         var zoom: Int
         var zoomFactor: CGFloat
@@ -503,15 +547,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         switch zoom {
         case 0:
-            zoomFactor = imageView.zoomFactor
-            imageView.zoomFactor = zoomFactor * zoomInFactor
+            zoomFactor = scrollView.magnification
+            scrollView.magnification = zoomFactor * zoomInFactor
+
+//            zoomFactor = imageView.zoomFactor
+//            imageView.zoomFactor = zoomFactor * zoomInFactor
             calipersView.updateCalibration()
         case 1:
-            zoomFactor = imageView.zoomFactor
-            imageView.zoomFactor = zoomFactor * zoomOutFactor
+            zoomFactor = scrollView.magnification
+            scrollView.magnification = scrollView.magnification * zoomOutFactor
+//            zoomFactor = imageView.zoomFactor
+//            imageView.zoomFactor = zoomFactor * zoomOutFactor
             calipersView.updateCalibration()
         case 2:
-            imageView.zoomImageToActualSize(self)
+            scrollView.magnification = 1.0
+//            imageView.zoomImageToActualSize(self)
             calipersView.updateCalibration()
         default:
             break
@@ -900,7 +950,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         case 0:
             calibrateWithPossiblePrompts()
         case 1:
-            clearCalibration()
+            calipersView.vitalSigns()
+            // FIXME: Temporary
+//            clearCalibration()
         default:
             break
         }
@@ -1027,7 +1079,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 if !calibration.canDisplayRate {
                     calibration.displayRate = false
                 }
-                calibration.originalZoom = Double(imageView.zoomFactor)
+                calibration.originalZoom = Double(scrollView.magnification)
                 calibration.originalCalFactor = value / Double(c!.points())
                 calibration.currentZoom = calibration.originalZoom
                 calibration.calibrated = true

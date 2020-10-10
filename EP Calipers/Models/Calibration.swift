@@ -17,6 +17,7 @@ class Calibration: NSObject {
     var originalCalFactor: Double = 1.0
     var calibrated: Bool = false
     var rawUnits: String = "points"
+    var offset: CGPoint = CGPoint()
     
     init(direction: CaliperDirection) {
         self.direction = direction
@@ -59,8 +60,8 @@ class Calibration: NSObject {
     func reset() {
         rawUnits = "points"
         displayRate = false
-        originalZoom = 1.0
-        currentZoom = 1.0
+        // originalZoom = 1.0
+        // currentZoom = 1.0
         calibrated = false
     }
     

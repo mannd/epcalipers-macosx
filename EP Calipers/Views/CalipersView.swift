@@ -21,7 +21,8 @@ protocol CalipersViewDelegate {
 
 class CalipersView: NSView {
 
-    var imageView: IKImageView? = nil
+    weak var imageView: IKImageView? = nil
+    weak var scrollView: NSScrollView? = nil
     var calipersMode = false
     var calipers: [Caliper] = []
     var lockedMode = false
@@ -33,7 +34,8 @@ class CalipersView: NSView {
     // references to MainWindowController calibrations
     let horizontalCalibration = Calibration()
     let verticalCalibration = Calibration()
-    
+
+    // FIXME: weak var?
     var delegate: CalipersViewDelegate? = nil;
     
     // for color and tweak menu
@@ -78,15 +80,17 @@ class CalipersView: NSView {
     }
         
     override func mouseDown(with theEvent: NSEvent) {
-        selectedCaliper = getSelectedCaliper(theEvent.locationInWindow)
+        // FIXME: do this?  Leave room for scrollbars
+        var location = theEvent.locationInWindow
+        selectedCaliper = getSelectedCaliper(location)
         if selectedCaliper != nil {
-            if selectedCaliper!.pointNearCrossBar(theEvent.locationInWindow) {
+            if selectedCaliper!.pointNearCrossBar(location) {
                 crossBarSelected = true
             }
-            else if selectedCaliper!.pointNearBar1(p: theEvent.locationInWindow) {
+            else if selectedCaliper!.pointNearBar1(p: location) {
                 bar1Selected = true
             }
-            else if selectedCaliper!.pointNearBar2(p: theEvent.locationInWindow) {
+            else if selectedCaliper!.pointNearBar2(p: location) {
                 bar2Selected = true
             }
         }
@@ -156,12 +160,33 @@ class CalipersView: NSView {
         }
         needsDisplay = true
     }
-    
+
+    // This allows pinch to zoom to work.
     override func magnify(with theEvent: NSEvent) {
+        NSLog("magnify")
         if !lockedMode {
-            imageView!.magnify(with: theEvent)
+            scrollView!.magnify(with: theEvent)
             updateCalibration()
         }
+    }
+
+    func vitalSigns() {
+        NSLog("imageView zoom factor = %f", imageView!.zoomFactor)
+        NSLog("scrollView magnify = %f", scrollView!.magnification)
+        NSLog("======================")
+        NSLog("documentViewSize width = %f, height = %f", scrollView!.documentView!.frame.size.width, scrollView!.documentView!.frame.size.height)
+        NSLog("imageView.frame.size = %f, %f", imageView!.frame.width, imageView!.frame.height)
+        NSLog("======================")
+        NSLog("calipersView.frame.size = %f, %f", frame.width, frame.height)
+        NSLog("contentViewSize width = %f, height = %f", scrollView!.contentView.frame.width, scrollView!.contentView.frame.height)
+        NSLog("scrollView.documentVisibileRect.size = %f, %f", scrollView!.documentVisibleRect.width, scrollView!.documentVisibleRect.height)
+        NSLog("window.frame.size = %f, %f", window!.frame.width, window!.frame.height)
+        NSLog("======================")
+        NSLog("scrollView.documentVisibleRect.origin = %f, %f", scrollView!.documentVisibleRect.origin.x, scrollView!.documentVisibleRect.origin.y)
+        NSLog("======================")
+        NSLog("documentViewSize - documentVisibleRectSize = %f, %f",
+              scrollView!.documentView!.frame.size.width - scrollView!.documentVisibleRect.width,
+              scrollView!.documentView!.frame.size.height - scrollView!.documentVisibleRect.height)
     }
     
     override func scrollWheel(with event: NSEvent) {
@@ -170,13 +195,41 @@ class CalipersView: NSView {
         }
     }
 
+//    func updateCalibration(offset: CGPoint) {
+//        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
+//            horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
+//            verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
+//            horizontalCalibration.offset = offset
+//            verticalCalibration.offset = offset
+//            if calipers.count > 0 {
+//                needsDisplay = true
+//            }
+//        }
+//    }
+
+    func getOffset() -> CGPoint {
+        guard let scrollView = scrollView else { return CGPoint() }
+        var x = scrollView.documentVisibleRect.origin.x
+        var y = scrollView.documentVisibleRect.origin.y
+        // Cannot test for == 0 here, since floating point comparison isn't exact.
+        if scrollView.documentView!.frame.size.width < scrollView.documentVisibleRect.width {
+//        if scrollView.documentVisibleRect.origin.x < 0.01  {
+            x = (scrollView.documentView!.frame.size.width - scrollView.documentVisibleRect.width) / 2
+        }
+        if scrollView.documentView!.frame.size.height < scrollView.documentVisibleRect.height {
+//        if scrollView.documentVisibleRect.origin.y < 0.01 {
+            y = (scrollView.documentView!.frame.size.height - scrollView.documentVisibleRect.height) / 2
+        }
+        return CGPoint(x: x, y: y)
+    }
+
     func updateCalibration() {
-        if horizontalCalibration.calibrated || verticalCalibration.calibrated {
-            horizontalCalibration.currentZoom = Double(imageView!.zoomFactor)
-            verticalCalibration.currentZoom = Double(imageView!.zoomFactor)
-            if calipers.count > 0 {
-                needsDisplay = true
-            }
+        horizontalCalibration.currentZoom = Double(scrollView!.magnification)
+        verticalCalibration.currentZoom = Double(scrollView!.magnification)
+        horizontalCalibration.offset = getOffset()
+        verticalCalibration.offset = getOffset()
+        if calipers.count > 0 {
+            needsDisplay = true
         }
     }
     
@@ -476,6 +529,13 @@ class CalipersView: NSView {
         for c in calipers {
             c.drawWithContext(context, inRect: dirtyRect)
         }
+    }
+
+    func caliper0Bar1Position() -> CGFloat? {
+        if calipers.count > 0 {
+            return calipers[0].bar1Position
+        }
+        return nil
     }
     
     // This doesn't work as of OS 10.12.  Less need for screenshots now that transparent windows are possible.

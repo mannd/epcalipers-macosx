@@ -25,7 +25,7 @@ class AngleCaliper: Caliper {
     }
     
     init() {
-        super.init(direction: .horizontal, bar1Position: 100.0, bar2Position: 100.0, crossBarPosition: 100.0)
+        super.init(direction: .horizontal, bar1Position: 100.0, bar2Position: 100.0, crossBarPosition: 100.0, calibration: Calibration())
         requiresCalibration = false
         isAngleCaliper = true
         triangleBaseTextPosition = textPosition
@@ -51,9 +51,9 @@ class AngleCaliper: Caliper {
         // Ensure caliper always extends past the screen edges
         let length = CGFloat(fmax(Double(rect.size.height), Double(rect.size.width)) * 2.0)
         
-        crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
-        crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
-        bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
+//        crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
+//        crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
+//        bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
         bar2Position = bar1Position
         
         let endPointBar1 = endPointForPosition(p: CGPoint(x: bar1Position, y: crossBarPosition), angle: angleBar1, length: length)

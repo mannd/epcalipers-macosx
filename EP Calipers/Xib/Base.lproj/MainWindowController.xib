@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
+                <outlet property="calipersViewBottomConstraint" destination="I1R-Mt-nXA" id="CpM-RM-zAA"/>
+                <outlet property="calipersViewTrailingContraint" destination="hrq-BO-vXD" id="JZE-gH-hXO"/>
                 <outlet property="imageView" destination="oIK-MS-rQb" id="tvd-y9-ClO"/>
                 <outlet property="instructionLabel" destination="Muj-mg-GQi" id="Uao-u3-Dau"/>
                 <outlet property="instructionPanel" destination="rGN-02-IWd" id="OUX-FL-fkZ"/>
@@ -34,39 +36,34 @@
                             <rect key="frame" x="1" y="1" width="798" height="480"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
-                                    <rect key="frame" x="0.0" y="0.0" width="798" height="480"/>
+                                <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
+                                    <rect key="frame" x="0.0" y="15" width="798" height="465"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </view>
                             </subviews>
-                            <constraints>
-                                <constraint firstItem="oIK-MS-rQb" firstAttribute="top" secondItem="TeI-oG-eGn" secondAttribute="top" id="OR2-wI-MX3"/>
-                                <constraint firstAttribute="trailing" secondItem="oIK-MS-rQb" secondAttribute="trailing" id="WWB-M6-FIo"/>
-                                <constraint firstItem="oIK-MS-rQb" firstAttribute="leading" secondItem="TeI-oG-eGn" secondAttribute="leading" id="c8O-SF-0Rd"/>
-                                <constraint firstAttribute="bottom" secondItem="oIK-MS-rQb" secondAttribute="bottom" id="t97-sm-0l5"/>
-                            </constraints>
                         </clipView>
                         <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
                             <rect key="frame" x="1" y="465" width="798" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrJ-fG-BcI">
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lrJ-fG-BcI">
                             <rect key="frame" x="783" y="1" width="16" height="480"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="14" width="786" height="468"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="AxA-IY-0Zx" secondAttribute="top" id="6BM-Xp-gFU"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="BLE-s1-5IM"/>
-                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" constant="14" id="TUz-x3-9lI"/>
+                    <constraint firstItem="AxA-IY-0Zx" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="Hpr-hJ-5RL"/>
+                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="I1R-Mt-nXA"/>
                     <constraint firstAttribute="bottom" secondItem="AxA-IY-0Zx" secondAttribute="bottom" id="V2e-go-KHO"/>
-                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" constant="14" id="XCc-Bt-f5Y"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="bba-bA-hru"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="eEs-U7-Dts"/>
+                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="hrq-BO-vXD"/>
                     <constraint firstAttribute="trailing" secondItem="AxA-IY-0Zx" secondAttribute="trailing" id="iaZ-99-NTX"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="q5E-SG-xkP"/>
                     <constraint firstItem="AxA-IY-0Zx" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="yj3-hc-ldc"/>
                 </constraints>
             </view>
