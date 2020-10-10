@@ -9,7 +9,7 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
-* [[../../shrd/icon_32x32@2x.png]] Calipers
+* [[../../shrd/64.png]] Calipers
 * Adding and deleting calipers
 Calipers come in three flavors.  Calipers with a horizontal crossbar and vertical sidebars are used to make time measurements and are called /time calipers/.  Calipers with a vertical crossbar and horizontal sidebars are used to make amplitude measurements and are called, you guessed it, /amplitude calipers/.  Finally /angle calipers/ are used to measure angles, such as the 𝞫 angle in Brugada syndrome.
 ** Add Calipers

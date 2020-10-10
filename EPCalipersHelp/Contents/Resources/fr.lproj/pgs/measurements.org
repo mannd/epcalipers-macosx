@@ -9,7 +9,7 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
-* [[../../shrd/icon_32x32@2x.png]] Prendre des mesures
+* [[../../shrd/64.png]] Prendre des mesures
 ** L’intervalle du compas
 L’intervalle mesuré par chaque compas est indiqué au dessus ou à coté de la barre transversale du compas.  Avant l’étalonnage des compas, les mesures sont indiquées dans des unités arbitraires (des points, égals environ aux pixels d’écran).  Les compas d’angle montrent l’angle mesuré en degrés et il ne faut pas de les étalonner. 
 ** Invites sur écran

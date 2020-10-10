@@ -9,7 +9,7 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
-* [[../../shrd/icon_32x32@2x.png]] Calipers
+* [[../../shrd/64.png]] Calipers
 * Addition et suppression de compas
 Il y a trois types de compas.  Les compas peuvent être horizontaux pour les mesures de temps, verticaux pour les mesures d'amplitude, ou angulaires pour les mesures d'angles en degrés.  Les compas de temps ressemblent à la lettre *H*, les compas d'amplitude à la lettre *H* couchée sur le côté, et les compas d'angle au début à la lettre *V* inversée.
 ** Addition de compas

@@ -21,7 +21,7 @@
 	<key>HPDBookAccessPath</key>
 	<string>EPCalipers.html</string>
 	<key>HPDBookIconPath</key>
-	<string>shrd/icon_16x16.png</string>
+	<string>shrd/16.png</string>
 	<key>HPDBookKBProduct</key>
 	<string>epcalipers1</string>
 	<key>HPDBookKBURL</key>

@@ -9,7 +9,7 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
-* [[../../shrd/icon_32x32@2x.png]] Images
+* [[../../shrd/64.png]] Images
 Images include files in typical image formats such as JPG and PNG, as well as PDF files.  When you start *EP Calipers* a sample normal ECG is loaded.  To load your own ECG images use one of the following methods.
 * Loading an image
 ** Open command
@@ -24,7 +24,7 @@ If you load a PDF file with multiple pages, the first page will be shown initial
 /AliveCor/ ECGs can be saved as PDF files.  Load them with any of the above methods.
 * Adjusting the image
 ** Moving the image
-If you have a track pad, you can move the image around using two finger scrolling.  You can also scroll using a mouse. You can also scroll using a mouse.
+If you have a track pad, you can move the image around using two finger scrolling.  You can also scroll using a mouse. 
 ** Rotation
 If your ECG image is rotated or tilted, use the *Image | Rotation* menu commands to correct this.  You can rotate by 90°, 1°, or 0.1° increments in either direction.  The keyboard shortcuts for rotation are useful.  *Important:* You should rotate your image before calibrating your calipers or making measurements.  Once an image has been calibrated, rotation will affect the accuracy of the calibration.  For this reason, *you can only rotate an image before you calibrate.*  If you need to rotate the image after calibration, you will need to clear calibration (using *Clear* on the toolbar or the *Calipers | Clear* menu command) before you can rotate.
 ** Zooming
