@@ -212,10 +212,12 @@ class CalipersView: NSView {
         var x = scrollView.documentVisibleRect.origin.x
         var y = scrollView.documentVisibleRect.origin.y
         // Cannot test for == 0 here, since floating point comparison isn't exact.
-        if scrollView.documentVisibleRect.origin.x < 0.01  {
+        if scrollView.documentView!.frame.size.width < scrollView.documentVisibleRect.width {
+//        if scrollView.documentVisibleRect.origin.x < 0.01  {
             x = (scrollView.documentView!.frame.size.width - scrollView.documentVisibleRect.width) / 2
         }
-        if scrollView.documentVisibleRect.origin.y < 0.01 {
+        if scrollView.documentView!.frame.size.height < scrollView.documentVisibleRect.height {
+//        if scrollView.documentVisibleRect.origin.y < 0.01 {
             y = (scrollView.documentView!.frame.size.height - scrollView.documentVisibleRect.height) / 2
         }
         return CGPoint(x: x, y: y)

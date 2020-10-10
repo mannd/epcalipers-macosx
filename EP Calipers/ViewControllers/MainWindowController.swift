@@ -287,18 +287,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @objc
     func imageBoundsDidChange() {
-        if let barPosition = calipersView.caliper0Bar1Position() {
-            NSLog("caliper 0 bar1Position = %f", barPosition)
-        }
         calipersView.updateCalibration()
     }
 
     @objc
     func imageFrameDidChange() {
-        NSLog("imageFrameDidChange")
-        if let barPosition = calipersView.caliper0Bar1Position() {
-            NSLog("caliper 0 bar1Position = %f", barPosition)
-        }
         calipersView.updateCalibration()
     }
 
