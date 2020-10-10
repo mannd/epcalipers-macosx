@@ -249,8 +249,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         scrollView.minMagnification = 0.25
         scrollView.maxMagnification = 10.0
         // Main queue needs a little time to settle before setting magnification, apparently.
-        DispatchQueue.main.async { [self] in
-            scrollView.magnification = 1.0
+        DispatchQueue.main.async {
+            self.scrollView.magnification = 1.0
         }
 
         calipersView.horizontalCalibration.currentZoom = Double(scrollView.magnification)
