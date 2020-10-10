@@ -166,7 +166,6 @@ class CalipersView: NSView {
         NSLog("magnify")
         if !lockedMode {
             scrollView!.magnify(with: theEvent)
-            vitalSigns()
             updateCalibration()
         }
     }
@@ -174,13 +173,20 @@ class CalipersView: NSView {
     func vitalSigns() {
         NSLog("imageView zoom factor = %f", imageView!.zoomFactor)
         NSLog("scrollView magnify = %f", scrollView!.magnification)
+        NSLog("======================")
         NSLog("documentViewSize width = %f, height = %f", scrollView!.documentView!.frame.size.width, scrollView!.documentView!.frame.size.height)
+        NSLog("imageView.frame.size = %f, %f", imageView!.frame.width, imageView!.frame.height)
+        NSLog("======================")
+        NSLog("calipersView.frame.size = %f, %f", frame.width, frame.height)
         NSLog("contentViewSize width = %f, height = %f", scrollView!.contentView.frame.width, scrollView!.contentView.frame.height)
-        NSLog("================================")
-        NSLog("contentOffset x = %f, y = %f", scrollView!.documentVisibleRect.origin.x, scrollView!.documentVisibleRect.origin.y)
-        NSLog("document frame x = %f, y = %f", scrollView!.documentView!.frame.origin.x, scrollView!.documentView!.frame.origin.y)
-        let documentOriginX = (frame.size.width - scrollView!.documentView!.frame.size.width) / 2
-        NSLog("document origin x = %f", documentOriginX)
+        NSLog("scrollView.documentVisibileRect.size = %f, %f", scrollView!.documentVisibleRect.width, scrollView!.documentVisibleRect.height)
+        NSLog("window.frame.size = %f, %f", window!.frame.width, window!.frame.height)
+        NSLog("======================")
+        NSLog("scrollView.documentVisibleRect.origin = %f, %f", scrollView!.documentVisibleRect.origin.x, scrollView!.documentVisibleRect.origin.y)
+        NSLog("======================")
+        NSLog("documentViewSize - documentVisibleRectSize = %f, %f",
+              scrollView!.documentView!.frame.size.width - scrollView!.documentVisibleRect.width,
+              scrollView!.documentView!.frame.size.height - scrollView!.documentVisibleRect.height)
     }
     
     override func scrollWheel(with event: NSEvent) {
@@ -203,22 +209,15 @@ class CalipersView: NSView {
 
     func getOffset() -> CGPoint {
         guard let scrollView = scrollView else { return CGPoint() }
-        let x = scrollView.documentVisibleRect.origin.x
-        let y = scrollView.documentVisibleRect.origin.y
-//        if scrollView.documentVisibleRect.origin.x < 0.001  {
-//            x = (frame.width - scrollView.documentVisibleRect.width) / 2
-//        }
-//        if scrollView.documentVisibleRect.origin.y <= 0 {
-//            NSLog("documentVisibleRect.height = %f", scrollView.documentVisibleRect.height)
-//            NSLog("frame.height = %f", frame.height)
-//            y = (frame.height - scrollView.documentVisibleRect.height) / 2
-//        }
-        NSLog("scrollView.documentVisibleRect.origin = %f, %f", scrollView.documentVisibleRect.origin.x, scrollView.documentVisibleRect.origin.y)
-        NSLog("scrollView.documentVisibileRect.size = %f, %f", scrollView.documentVisibleRect.width, scrollView.documentVisibleRect.height)
-        NSLog("calipersView.frame.size = %f, %f", frame.width, frame.height)
-        NSLog("imageView.frame.size = %f, %f", imageView!.frame.width, imageView!.frame.height)
-        NSLog("window.frame.size = %f, %f", window!.frame.width, window!.frame.height)
-        NSLog("scrollView.magnification = %f", scrollView.magnification)
+        var x = scrollView.documentVisibleRect.origin.x
+        var y = scrollView.documentVisibleRect.origin.y
+        // Cannot test for == 0 here, since floating point comparison isn't exact.
+        if scrollView.documentVisibleRect.origin.x < 0.01  {
+            x = (scrollView.documentView!.frame.size.width - scrollView.documentVisibleRect.width) / 2
+        }
+        if scrollView.documentVisibleRect.origin.y < 0.01 {
+            y = (scrollView.documentView!.frame.size.height - scrollView.documentVisibleRect.height) / 2
+        }
         return CGPoint(x: x, y: y)
     }
 

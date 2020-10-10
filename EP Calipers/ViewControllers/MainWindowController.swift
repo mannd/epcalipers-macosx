@@ -253,6 +253,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.delegate = self
 
         scrollView.allowsMagnification = true
+        // FIXME: minMagnification too low just for testing.  Should be 0.25 or 0.5 perhaps.
         scrollView.minMagnification = 0.01
         scrollView.maxMagnification = 10.0
         // Main queue needs a little time to settle before setting magnification, apparently.
@@ -286,8 +287,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @objc
     func imageBoundsDidChange() {
-        NSLog("getOffset() = %f, %f", calipersView.getOffset().x, calipersView.getOffset().y)
-        NSLog("magnification = %f", scrollView!.magnification)
         if let barPosition = calipersView.caliper0Bar1Position() {
             NSLog("caliper 0 bar1Position = %f", barPosition)
         }
@@ -958,7 +957,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         case 0:
             calibrateWithPossiblePrompts()
         case 1:
-            clearCalibration()
+            calipersView.vitalSigns()
+            // FIXME: Temporary
+//            clearCalibration()
         default:
             break
         }
