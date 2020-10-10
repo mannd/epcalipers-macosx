@@ -84,6 +84,7 @@ class Caliper: NSObject {
         self.lineWidth = 2
         self.selected = false
         self.textFont = NSFont(name: "Helvetica Neue Medium", size: 18.0) ?? NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.medium)
+        // We'll leave this forced unwrapped optional, if it fails text labels fail anyway.
         self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         self.roundMsecRate = true
         self.rounding = .ToInteger

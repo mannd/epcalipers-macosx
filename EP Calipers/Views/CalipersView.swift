@@ -77,23 +77,23 @@ class CalipersView: NSView {
         }
         return true;
     }
-        
+
     override func mouseDown(with theEvent: NSEvent) {
         let location = theEvent.locationInWindow
         selectedCaliper = getSelectedCaliper(location)
-        if selectedCaliper != nil {
-            if selectedCaliper!.pointNearCrossBar(location) {
+        if let selectedCaliper = selectedCaliper {
+            if selectedCaliper.pointNearCrossBar(location) {
                 crossBarSelected = true
             }
-            else if selectedCaliper!.pointNearBar1(p: location) {
+            else if selectedCaliper.pointNearBar1(p: location) {
                 bar1Selected = true
             }
-            else if selectedCaliper!.pointNearBar2(p: location) {
+            else if selectedCaliper.pointNearBar2(p: location) {
                 bar2Selected = true
             }
         }
         else {
-            imageView!.mouseDown(with: theEvent)
+            imageView?.mouseDown(with: theEvent)
         }
     }
 
@@ -162,11 +162,12 @@ class CalipersView: NSView {
     // This allows pinch to zoom to work.
     override func magnify(with theEvent: NSEvent) {
         if !lockedMode {
-            scrollView!.magnify(with: theEvent)
+            scrollView?.magnify(with: theEvent)
             updateCalibration()
         }
     }
 
+    // For debugging only.
     func vitalSigns() {
         NSLog("imageView zoom factor = %f", imageView!.zoomFactor)
         NSLog("scrollView magnify = %f", scrollView!.magnification)
@@ -193,21 +194,22 @@ class CalipersView: NSView {
     }
 
     func getOffset() -> CGPoint {
-        guard let scrollView = scrollView else { return CGPoint() }
+        guard let scrollView = scrollView, let documentView = scrollView.documentView else { return CGPoint() }
         var x = scrollView.documentVisibleRect.origin.x
         var y = scrollView.documentVisibleRect.origin.y
-        if scrollView.documentView!.frame.size.width < scrollView.documentVisibleRect.width {
-            x = (scrollView.documentView!.frame.size.width - scrollView.documentVisibleRect.width) / 2
+        if documentView.frame.size.width < scrollView.documentVisibleRect.width {
+            x = (documentView.frame.size.width - scrollView.documentVisibleRect.width) / 2
         }
-        if scrollView.documentView!.frame.size.height < scrollView.documentVisibleRect.height {
-            y = (scrollView.documentView!.frame.size.height - scrollView.documentVisibleRect.height) / 2
+        if documentView.frame.size.height < scrollView.documentVisibleRect.height {
+            y = (documentView.frame.size.height - scrollView.documentVisibleRect.height) / 2
         }
         return CGPoint(x: x, y: y)
     }
 
     func updateCalibration() {
-        horizontalCalibration.currentZoom = Double(scrollView!.magnification)
-        verticalCalibration.currentZoom = Double(scrollView!.magnification)
+        guard let scrollView = scrollView else { return }
+        horizontalCalibration.currentZoom = Double(scrollView.magnification)
+        verticalCalibration.currentZoom = Double(scrollView.magnification)
         horizontalCalibration.offset = getOffset()
         verticalCalibration.offset = getOffset()
         if calipers.count > 0 {
@@ -319,7 +321,7 @@ class CalipersView: NSView {
             needsDisplay = true
         }
         else {
-            imageView!.mouseDragged(with: theEvent)
+            imageView?.mouseDragged(with: theEvent)
         }
     }
     
@@ -332,7 +334,9 @@ class CalipersView: NSView {
                 else {  // at least double click
                     for c in calipers {
                         if c == selectedCaliper {
-                            calipers.remove(at: calipers.firstIndex(of: c)!)
+                            if let index = calipers.firstIndex(of: c) {
+                                calipers.remove(at: index)
+                            }
                         }
                         needsDisplay = true
                     }
@@ -346,7 +350,7 @@ class CalipersView: NSView {
             
         }
         else {
-            imageView!.mouseUp(with: theEvent)
+            imageView?.mouseUp(with: theEvent)
         }
     }
     
@@ -463,7 +467,9 @@ class CalipersView: NSView {
     override func deleteBackward(_ sender: Any?) {
         for c in calipers {
             if c.selected {
-                calipers.remove(at: calipers.firstIndex(of: c)!)
+                if let index = calipers.firstIndex(of: c) {
+                    calipers.remove(at: index)
+                }
                 needsDisplay = true
             }
         }
@@ -507,7 +513,7 @@ class CalipersView: NSView {
     }
     
     override func draw(_ dirtyRect: NSRect) {
-        let context = (NSGraphicsContext.current?.cgContext)!
+        guard let context = NSGraphicsContext.current?.cgContext else { return }
         for c in calipers {
             c.drawWithContext(context, inRect: dirtyRect)
         }

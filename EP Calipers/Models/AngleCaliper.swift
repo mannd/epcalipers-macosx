@@ -66,16 +66,15 @@ class AngleCaliper: Caliper {
         
         context.strokePath()
         caliperText(rect: rect, textPosition: .centerAbove, optimizeTextPosition: false)
-        
-        if (verticalCalibration?.calibrated)! && (verticalCalibration?.unitsAreMM)! {
-            if angleInSouthernHemisphere(angleBar1) && angleInSouthernHemisphere(angleBar2) {
-                let pointsPerMM = 1.0 / (verticalCalibration?.multiplier())!
-                drawTriangleBase(context, forHeight: 5 * pointsPerMM, rect: rect)
+
+        if let verticalCalibration = verticalCalibration {
+            if verticalCalibration.calibrated && verticalCalibration.unitsAreMM {
+                if angleInSouthernHemisphere(angleBar1) && angleInSouthernHemisphere(angleBar2) {
+                    let pointsPerMM = 1.0 / verticalCalibration.multiplier()
+                    drawTriangleBase(context, forHeight: 5 * pointsPerMM, rect: rect)
+                }
             }
         }
-
-        print("original endpointBar1 = \(endPointBar1)")
-        print("original endpointBar2 = \(endPointBar2)")
         drawChosenComponent(context, inRect: rect, endPointBar1: endPointBar1, endPointBar2: endPointBar2)
     }
 
