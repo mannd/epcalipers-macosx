@@ -148,6 +148,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if isTransparent {
             calipersView.deleteAllCalipers()
             scrollView.drawsBackground = false
+            scrollView.hasVerticalScroller = false
+            scrollView.hasHorizontalScroller = false
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
@@ -156,6 +158,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         else {
             scrollView.drawsBackground = true
+            scrollView.hasVerticalScroller = true
+            scrollView.hasHorizontalScroller = true
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
