@@ -12,7 +12,6 @@
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
 		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
 		8E2867801F2A5CD700AF335C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E2867821F2A5CD700AF335C /* Localizable.strings */; };
-		8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */; };
 		8E3C818D1FCFB11F004BD5FD /* EPCalipersHelp in Resources */ = {isa = PBXBuildFile; fileRef = 8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */; };
 		8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */; };
 		8E3DA7F31C2E264000AD9556 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DA7F21C2E264000AD9556 /* Assets.xcassets */; };
@@ -70,15 +69,11 @@
 		1FCEDC1A6D19AD2705C6CC7C /* Pods-EP CalipersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EP CalipersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EP CalipersTests/Pods-EP CalipersTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B808683C218942F5BC15DDB /* Pods_EP_CalipersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_CalipersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C1360E6AA6A852758D21FA /* Pods-EP Calipers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EP Calipers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EP Calipers/Pods-EP Calipers.debug.xcconfig"; sourceTree = "<group>"; };
-		8E02593E1E37B49700820703 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		8E1CC9E62531459300F00A49 /* sampleECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleECG.jpg; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		8E2867811F2A5CD700AF335C /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8E2867831F2A5CDB00AF335C /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EP Calipers-Bridging-Header.h"; sourceTree = "<group>"; };
-		8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedIKImageView.h; sourceTree = "<group>"; };
-		8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedIKImageView.m; sourceTree = "<group>"; };
 		8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipersHelp; sourceTree = "<group>"; };
 		8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EP Calipers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,9 +171,7 @@
 				8EFAE9C923E9FCE000D5EE9B /* ViewControllers */,
 				8EFAE9C823E9FCA000D5EE9B /* Views */,
 				8EFAE9C723E9FC6900D5EE9B /* Models */,
-				8EFAE9C623E9F64600D5EE9B /* Objc */,
 				8EFAE9C423E9F5BD00D5EE9B /* Xib */,
-				8E31CB3D1C8F571B00BB3195 /* EP Calipers-Bridging-Header.h */,
 				8E2867821F2A5CD700AF335C /* Localizable.strings */,
 				8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */,
 				8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */,
@@ -241,16 +234,6 @@
 				8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */,
 			);
 			path = Xib;
-			sourceTree = "<group>";
-		};
-		8EFAE9C623E9F64600D5EE9B /* Objc */ = {
-			isa = PBXGroup;
-			children = (
-				8E31CB3E1C8F571C00BB3195 /* FixedIKImageView.h */,
-				8E31CB3F1C8F571C00BB3195 /* FixedIKImageView.m */,
-				8E02593E1E37B49700820703 /* ExceptionCatcher.h */,
-			);
-			path = Objc;
 			sourceTree = "<group>";
 		};
 		8EFAE9C723E9FC6900D5EE9B /* Models */ = {
@@ -513,7 +496,6 @@
 				8E6D21092524D2A600AD1D7D /* Position.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */,
-				8E31CB401C8F571C00BB3195 /* FixedIKImageView.m in Sources */,
 				8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,
 			);

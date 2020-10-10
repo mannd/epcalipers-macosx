@@ -151,8 +151,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
-            // If you prefer a hand cursor, use IKToolModeMove (and replace this elsewhere too).
-            imageView.currentToolMode = IKToolModeNone
             // deal with title
             self.window?.title = appName
         }
@@ -161,7 +159,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
-//            imageView.currentToolMode = IKToolModeMove
             if let title = oldWindowTitle {
                 self.window?.setTitleWithRepresentedFilename(title)
             }
