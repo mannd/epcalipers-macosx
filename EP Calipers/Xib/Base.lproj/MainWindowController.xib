@@ -9,6 +9,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="EP_Calipers" customModuleProvider="target">
             <connections>
                 <outlet property="calipersView" destination="dvW-Uo-B35" id="la6-db-Kgu"/>
+                <outlet property="calipersViewBottomConstraint" destination="I1R-Mt-nXA" id="CpM-RM-zAA"/>
+                <outlet property="calipersViewTrailingContraint" destination="hrq-BO-vXD" id="JZE-gH-hXO"/>
                 <outlet property="imageView" destination="oIK-MS-rQb" id="tvd-y9-ClO"/>
                 <outlet property="instructionLabel" destination="Muj-mg-GQi" id="Uao-u3-Dau"/>
                 <outlet property="instructionPanel" destination="rGN-02-IWd" id="OUX-FL-fkZ"/>
@@ -31,11 +33,11 @@
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
-                            <rect key="frame" x="1" y="1" width="798" height="480"/>
+                            <rect key="frame" x="1" y="1" width="783" height="465"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
-                                    <rect key="frame" x="0.0" y="0.0" width="798" height="480"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="783" height="465"/>
                                 </view>
                             </subviews>
                             <constraints>
@@ -47,11 +49,11 @@
                         </clipView>
                         <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
-                            <rect key="frame" x="1" y="465" width="798" height="16"/>
+                            <rect key="frame" x="1" y="466" width="783" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lrJ-fG-BcI">
-                            <rect key="frame" x="783" y="1" width="16" height="480"/>
+                            <rect key="frame" x="784" y="1" width="15" height="465"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -60,13 +62,13 @@
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="AxA-IY-0Zx" secondAttribute="top" id="6BM-Xp-gFU"/>
                     <constraint firstItem="AxA-IY-0Zx" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="Hpr-hJ-5RL"/>
+                    <constraint firstAttribute="bottom" secondItem="dvW-Uo-B35" secondAttribute="bottom" id="I1R-Mt-nXA"/>
                     <constraint firstAttribute="bottom" secondItem="AxA-IY-0Zx" secondAttribute="bottom" id="V2e-go-KHO"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="top" secondItem="uHL-zZ-C20" secondAttribute="top" id="eEs-U7-Dts"/>
+                    <constraint firstAttribute="trailing" secondItem="dvW-Uo-B35" secondAttribute="trailing" id="hrq-BO-vXD"/>
                     <constraint firstAttribute="trailing" secondItem="AxA-IY-0Zx" secondAttribute="trailing" id="iaZ-99-NTX"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="trailing" secondItem="AxA-IY-0Zx" secondAttribute="trailing" id="j5n-aq-j7y"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="bottom" secondItem="AxA-IY-0Zx" secondAttribute="bottom" id="jT0-uK-QzZ"/>
-                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="AxA-IY-0Zx" secondAttribute="leading" id="skT-9d-OKb"/>
+                    <constraint firstItem="dvW-Uo-B35" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="q5E-SG-xkP"/>
                     <constraint firstItem="AxA-IY-0Zx" firstAttribute="leading" secondItem="uHL-zZ-C20" secondAttribute="leading" id="yj3-hc-ldc"/>
                 </constraints>
             </view>
