@@ -9,7 +9,7 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="AppleTitle" content="EP Calipers Help" />
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
-* [[../shrd/icon_32x32@2x.png]] EP Calipers Help 
+* [[../shrd/64.png]] EP Calipers Help 
 * [[./pgs/basics.html][Introduction -- EP Calipers 101]]
 Rationale and basic use of *EP Calipers*.
 * [[./pgs/images.org][Image operations]]

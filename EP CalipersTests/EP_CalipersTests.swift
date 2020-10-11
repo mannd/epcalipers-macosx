@@ -38,7 +38,7 @@ class EP_CalipersTests: XCTestCase {
         let c = Caliper()
         XCTAssert(c.bar1Position == 0)
         XCTAssert(c.bar2Position == 0);
-        XCTAssert(c.crossBarPosition == 100.0);
+        XCTAssert(c.crossBarPosition == 0);
         let p = CGPoint(x: 100, y: 50);
         XCTAssert(c.barCoord(p) == 100);
         c.direction = .vertical;

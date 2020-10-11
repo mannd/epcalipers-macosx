@@ -36,7 +36,7 @@ public struct Severity: OptionSet {
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
-    public static let undefined = Severity(rawValue: 0)
+    public static let undefined = Severity([])
     public static let normal = Severity(rawValue: 1)
     public static let borderline = Severity(rawValue: 2)
     public static let abnormal = Severity(rawValue: 4)

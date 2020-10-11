@@ -25,7 +25,7 @@ class AngleCaliper: Caliper {
     }
     
     init() {
-        super.init(direction: .horizontal, bar1Position: 100.0, bar2Position: 100.0, crossBarPosition: 100.0)
+        super.init(direction: .horizontal, bar1Position: 100.0, bar2Position: 100.0, crossBarPosition: 100.0, calibration: Calibration())
         requiresCalibration = false
         isAngleCaliper = true
         triangleBaseTextPosition = textPosition
@@ -51,9 +51,9 @@ class AngleCaliper: Caliper {
         // Ensure caliper always extends past the screen edges
         let length = CGFloat(fmax(Double(rect.size.height), Double(rect.size.width)) * 2.0)
         
-        crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
-        crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
-        bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
+//        crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
+//        crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
+//        bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
         bar2Position = bar1Position
         
         let endPointBar1 = endPointForPosition(p: CGPoint(x: bar1Position, y: crossBarPosition), angle: angleBar1, length: length)
@@ -66,16 +66,15 @@ class AngleCaliper: Caliper {
         
         context.strokePath()
         caliperText(rect: rect, textPosition: .centerAbove, optimizeTextPosition: false)
-        
-        if (verticalCalibration?.calibrated)! && (verticalCalibration?.unitsAreMM)! {
-            if angleInSouthernHemisphere(angleBar1) && angleInSouthernHemisphere(angleBar2) {
-                let pointsPerMM = 1.0 / (verticalCalibration?.multiplier())!
-                drawTriangleBase(context, forHeight: 5 * pointsPerMM, rect: rect)
+
+        if let verticalCalibration = verticalCalibration {
+            if verticalCalibration.calibrated && verticalCalibration.unitsAreMM {
+                if angleInSouthernHemisphere(angleBar1) && angleInSouthernHemisphere(angleBar2) {
+                    let pointsPerMM = 1.0 / verticalCalibration.multiplier()
+                    drawTriangleBase(context, forHeight: 5 * pointsPerMM, rect: rect)
+                }
             }
         }
-
-        print("original endpointBar1 = \(endPointBar1)")
-        print("original endpointBar2 = \(endPointBar2)")
         drawChosenComponent(context, inRect: rect, endPointBar1: endPointBar1, endPointBar2: endPointBar2)
     }
 

@@ -160,6 +160,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -186,7 +199,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -230,21 +243,21 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org122a63a" class="outline-2">
-<h2 id="org122a63a"><img src="../../shrd/icon_32x32@2x.png" alt="icon_32x32@2x.png" /> Introduction &#x2013; EP Calipers 101</h2>
-<div class="outline-text-2" id="text-org122a63a">
+<div id="outline-container-org95adcae" class="outline-2">
+<h2 id="org95adcae"><img src="../../shrd/64.png" alt="64.png" /> Introduction &#x2013; EP Calipers 101</h2>
+<div class="outline-text-2" id="text-org95adcae">
 </div>
-<div id="outline-container-orgb47b464" class="outline-3">
-<h3 id="orgb47b464">Electronic calipers</h3>
-<div class="outline-text-3" id="text-orgb47b464">
+<div id="outline-container-orgc34bf2c" class="outline-3">
+<h3 id="orgc34bf2c">Electronic calipers</h3>
+<div class="outline-text-3" id="text-orgc34bf2c">
 <p>
 <b>EP Calipers</b> provides <b>electronic calipers</b> for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  <b>EP Calipers</b> is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of <b>EP Calipers</b> are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
 </p>
 </div>
 </div>
-<div id="outline-container-org68ad4e3" class="outline-3">
-<h3 id="org68ad4e3">Quick start</h3>
-<div class="outline-text-3" id="text-org68ad4e3">
+<div id="outline-container-orgb78b66c" class="outline-3">
+<h3 id="orgb78b66c">Quick start</h3>
+<div class="outline-text-3" id="text-orgb78b66c">
 <p>
 When <b>EP Calipers</b> starts, a sample ECG is loaded.  Click a caliper
 icon on the toolbar to add a caliper to the screen.  Move the caliper
@@ -263,9 +276,9 @@ like the corrected QT interval.
 </p>
 </div>
 </div>
-<div id="outline-container-org830761a" class="outline-3">
-<h3 id="org830761a">Toolbar</h3>
-<div class="outline-text-3" id="text-org830761a">
+<div id="outline-container-org5a5d251" class="outline-3">
+<h3 id="org5a5d251">Toolbar</h3>
+<div class="outline-text-3" id="text-org5a5d251">
 <p>
 The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The default toolbar looks like this:
 </p>
@@ -280,9 +293,9 @@ The program is controlled either by the toolbar buttons at the top of the window
 Note that not all toolbar buttons will be available all the time, depending on whether calibration has been performed.  Some toolbar buttons are disabled when in transparent window mode also.  Disabled toolbar buttons are "grayed" out.  You can customize the toolbar items if you wish.  On newer Macs some of the toolbar items are also shown on the Touch Bar.
 </p>
 </div>
-<div id="outline-container-orga03eb89" class="outline-4">
-<h4 id="orga03eb89">Zoom toolbar</h4>
-<div class="outline-text-4" id="text-orga03eb89">
+<div id="outline-container-orge4cbd9a" class="outline-4">
+<h4 id="orge4cbd9a">Zoom toolbar</h4>
+<div class="outline-text-4" id="text-orge4cbd9a">
 <ul class="org-ul">
 <li><img src="../../shrd/TB_zoomIn.png" alt="TB_zoomIn.png" /> Zoom in</li>
 <li><img src="../../shrd/TB_zoomOut.png" alt="TB_zoomOut.png" /> Zoom out</li>
@@ -290,9 +303,9 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </ul>
 </div>
 </div>
-<div id="outline-container-org01421a1" class="outline-4">
-<h4 id="org01421a1">Calipers toolbar</h4>
-<div class="outline-text-4" id="text-org01421a1">
+<div id="outline-container-orgbb2bd7f" class="outline-4">
+<h4 id="orgbb2bd7f">Calipers toolbar</h4>
+<div class="outline-text-4" id="text-orgbb2bd7f">
 <ul class="org-ul">
 <li><img src="../../shrd/caliper-20x20.png" alt="caliper-20x20.png" /> Add time (horizontal) caliper</li>
 <li><img src="../../shrd/amplitude-caliper-20x20.png" alt="amplitude-caliper-20x20.png" /> Add amplitude (vertical) caliper</li>
@@ -302,9 +315,9 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </ul>
 </div>
 </div>
-<div id="outline-container-org0a5ab07" class="outline-4">
-<h4 id="org0a5ab07">Measurement toolbar</h4>
-<div class="outline-text-4" id="text-org0a5ab07">
+<div id="outline-container-org136c38d" class="outline-4">
+<h4 id="org136c38d">Measurement toolbar</h4>
+<div class="outline-text-4" id="text-org136c38d">
 <ul class="org-ul">
 <li><b>Rate/Int</b> Toggle heart rate and time interval</li>
 <li><b>mean RR</b> Calculate mean interval from several intervals</li>
@@ -313,17 +326,17 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </div>
 </div>
 </div>
-<div id="outline-container-org2b844f0" class="outline-3">
-<h3 id="org2b844f0">Menus</h3>
-<div class="outline-text-3" id="text-org2b844f0">
+<div id="outline-container-org6bfa2f9" class="outline-3">
+<h3 id="org6bfa2f9">Menus</h3>
+<div class="outline-text-3" id="text-org6bfa2f9">
 <p>
 Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
 </p>
 </div>
 </div>
-<div id="outline-container-org724dd7a" class="outline-3">
-<h3 id="org724dd7a">Keyboard shortcuts</h3>
-<div class="outline-text-3" id="text-org724dd7a">
+<div id="outline-container-org2337a14" class="outline-3">
+<h3 id="org2337a14">Keyboard shortcuts</h3>
+<div class="outline-text-3" id="text-org2337a14">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 

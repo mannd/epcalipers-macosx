@@ -14,7 +14,7 @@ import AppKit
 // When image is zoomed, double click makes panel disappear, it is somewhere off screen.
 // see http://stackoverflow.com/questions/30110720/how-to-get-ikimageeditpanel-to-work-in-swift
 extension IKImageView: IKImageEditPanelDataSource {
-    
+
 }
 
 protocol QTcResultProtocol {
@@ -67,6 +67,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var autoPositionTextCheckBox: NSButton!
     @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
     @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
+    
+    @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
+    @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
+
+    let defaultHorizontalCalibration = NSLocalizedString("1000 msec", comment: "")
+    let defaultVerticalCalibration = NSLocalizedString("10 mm", comment: "")
     
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
@@ -130,7 +136,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     @IBAction func makeTransparent(_ sender: AnyObject) {
-        NSLog("make transparent")
         isTransparent = !isTransparent
         // reset the touchbar
         if #available(OSX 10.12.2, *) {
@@ -141,27 +146,26 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     func setTransparency() {
-        print("setTransparency()")
         calipersView.lockedMode = isTransparent
         clearCalibration()
         if isTransparent {
-            // Calipers sometimes leave ghosts during transition to transparent mode
-            // in Mojave.
             calipersView.deleteAllCalipers()
             scrollView.drawsBackground = false
+            scrollView.hasVerticalScroller = false
+            scrollView.hasHorizontalScroller = false
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
-            imageView.currentToolMode = IKToolModeMove
             // deal with title
             self.window?.title = appName
         }
         else {
             scrollView.drawsBackground = true
+            scrollView.hasVerticalScroller = true
+            scrollView.hasHorizontalScroller = true
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
-            imageView.currentToolMode = IKToolModeMove
             if let title = oldWindowTitle {
                 self.window?.setTitleWithRepresentedFilename(title)
             }
@@ -183,18 +187,18 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let NSURLPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeURL as String)
         let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String)
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboard.PasteboardType.tiff]
-        self.window!.registerForDraggedTypes(types)
+        self.window?.registerForDraggedTypes(types)
 
         imageView.editable = true
-        // below is no longer true, open IKImageEditPanel only from menu
         imageView.doubleClickOpensImageEditPanel = false
         imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
-        imageView.currentToolMode = IKToolModeMove
+        imageView.currentToolMode = IKToolModeNone
         imageView.delegate = self
         
         calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
+        calipersView.scrollView = scrollView
         calipersView.horizontalCalibration.direction = .horizontal
         calipersView.verticalCalibration.direction = .vertical
         clearMessage()
@@ -209,8 +213,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         super.windowDidLoad()
         let defaults = [
             "lineWidthKey": 2,
-            "defaultCalibrationKey": "1000 msec",
-            "defaultVerticalCalibrationKey": "10 mm",
+            "defaultCalibrationKey": defaultHorizontalCalibration,
+            "defaultVerticalCalibrationKey": defaultVerticalCalibration,
             "defaultNumberOfMeanRRIntervalsKey": 3,
             "defaultNumberOfQTcMeanRRIntervalsKey": 1,
             "showPromptsKey": true,
@@ -248,6 +252,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         calipersView.delegate = self
 
+        scrollView.allowsMagnification = true
+        scrollView.minMagnification = 0.25
+        scrollView.maxMagnification = 10.0
+        // Main queue needs a little time to settle before setting magnification, apparently.
+        DispatchQueue.main.async {
+            self.scrollView.magnification = 1.0
+        }
+
+        calipersView.horizontalCalibration.currentZoom = Double(scrollView.magnification)
+        calipersView.verticalCalibration.currentZoom = Double(scrollView.magnification)
+        calipersView.horizontalCalibration.originalZoom = Double(scrollView.magnification)
+        calipersView.verticalCalibration.originalZoom = Double(scrollView.magnification)
+
         // Draw concurrently, possibly not safe, as must guarantee thread-safety of the view, so...
 //        calipersView.canDrawConcurrently = true
 //        self.window?.allowsConcurrentViewDrawing = true
@@ -256,6 +273,36 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         instructionPanel.becomesKeyOnlyIfNeeded = true
 
         toolbar.delegate = self
+
+        scrollView.postsFrameChangedNotifications = true
+        scrollView.contentView.postsBoundsChangedNotifications = true;
+        NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
+        NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
+    }
+
+    @objc
+    func imageBoundsDidChange() {
+        calipersView.updateCalibration()
+    }
+
+    @objc
+    func imageFrameDidChange() {
+        calipersView.updateCalibration()
+    }
+
+    @objc
+    func scrollBarsDidChange() {
+//        NSLog("scrollbars did change")
+//        NSLog("scrollbar style = %@", scrollView.scrollerStyle == .legacy ? "legacy" : "overlay")
+        if scrollView.scrollerStyle == .legacy {
+            calipersViewBottomConstraint.constant = 16
+            calipersViewTrailingContraint.constant = 16
+        } else {
+            calipersViewBottomConstraint.constant = 0
+            calipersViewTrailingContraint.constant = 0
+        }
+
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -370,6 +417,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             preferencesAlert = alert
         }
+        guard let preferencesAlert = preferencesAlert else { return }
         fillQTcFormulaPopUp()
         fillRoundingPopUp()
         fillTimeCaliperTextPositionPopUp()
@@ -402,7 +450,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         autoPositionTextCheckBox.state = NSControl.StateValue(rawValue: appPreferences.autoPositionText ? 1 : 0)
         formulaPopUpButton.selectItem(at: appPreferences.qtcFormula.rawValue)
         roundingPopUpButton.selectItem(at: appPreferences.rounding.rawValue)
-        let result = preferencesAlert!.runModal()
+        let result = preferencesAlert.runModal()
         if result == NSApplication.ModalResponse.alertFirstButtonReturn {
             // assign new preferences
             appPreferences.caliperColor = caliperColorWell.color
@@ -481,19 +529,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     @IBAction func gotoPage(_ sender: Any) {
-        NSLog("Go to page")
         getPageNumber()
     }
     
-    // Give up on Recenter after zoom
-    // see IKImageView specs and
-    // - (void)setImageZoomFactor:(CGFloat)zoomFactor centerPoint:(NSPoint)centerPoint
-    // also could use method to get center of view's image point and use
-    // - (NSPoint)convertViewPointToImagePoint:(NSPoint)viewPoint
-    // to recenter image after zoom.
-    // but see this too: https://lists.apple.com/archives/cocoa-dev/2008/Mar/msg00774.html
-    // in Summary, setImageZoomFactor:centerPoint: doesn't work.  centerPoint doesn't affect
-    // zooming, which is always recentered to the origin (lower left).
     @IBAction func doZoom(_ sender: AnyObject) {
         var zoom: Int
         var zoomFactor: CGFloat
@@ -505,15 +543,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         switch zoom {
         case 0:
-            zoomFactor = imageView.zoomFactor
-            imageView.zoomFactor = zoomFactor * zoomInFactor
+            zoomFactor = scrollView.magnification
+            scrollView.magnification = zoomFactor * zoomInFactor
+
+//            zoomFactor = imageView.zoomFactor
+//            imageView.zoomFactor = zoomFactor * zoomInFactor
             calipersView.updateCalibration()
         case 1:
-            zoomFactor = imageView.zoomFactor
-            imageView.zoomFactor = zoomFactor * zoomOutFactor
+            zoomFactor = scrollView.magnification
+            scrollView.magnification = scrollView.magnification * zoomOutFactor
+//            zoomFactor = imageView.zoomFactor
+//            imageView.zoomFactor = zoomFactor * zoomOutFactor
             calipersView.updateCalibration()
         case 2:
-            imageView.zoomImageToActualSize(self)
+            scrollView.magnification = 1.0
+//            imageView.zoomImageToActualSize(self)
             calipersView.updateCalibration()
         default:
             break
@@ -552,10 +596,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @IBAction func openImage(_ sender: AnyObject) {
         /* Present open panel. */
+        guard let window = self.window else { return }
         let openPanel = NSOpenPanel()
         openPanel.allowedFileTypes = validFileExtensions()
         openPanel.canSelectHiddenExtension = true
-        openPanel.beginSheetModal(for: self.window!,
+        openPanel.beginSheetModal(for: window,
             completionHandler: {
                 (result: NSApplication.ModalResponse) -> Void in
                 if result == .OK {
@@ -678,7 +723,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 imageIsPDF = true
                 showPDFPage(pdf, page: 0)
                 let urlPath = url.path
-                self.window!.setTitleWithRepresentedFilename(urlPath)
+                self.window?.setTitleWithRepresentedFilename(urlPath)
                 imageURL = url
                 clearCalibration()
                 if addToRecentDocuments {
@@ -957,8 +1002,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             let message = String(format:NSLocalizedString("Enter calibration measurement (e.g. %@)", comment:""), example)
             if calibrationAlert == nil {
-            let alert = NSAlert()
-            alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
+                let alert = NSAlert()
+                alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
                 //alert.informativeText = message
                 alert.alertStyle = NSAlert.Style.informational
                 alert.addButton(withTitle: NSLocalizedString("Calibrate", comment:""))
@@ -966,18 +1011,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 alert.accessoryView = textInputView
                 calibrationAlert = alert
             }
-            calibrationAlert!.informativeText = message
+            guard let calibrationAlert = calibrationAlert else { return }
+            calibrationAlert.informativeText = message
             if preferencesChanged {
-                calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration!
-                calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration!
+                calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration ?? defaultHorizontalCalibration
+                calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration ?? defaultVerticalCalibration
                 preferencesChanged = false
             }
             else {  // don't bother doing this again if preferencesChanged
                 if calipersView.horizontalCalibration.calibrationString.isEmpty {
-                    calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration!
+                    calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration ?? defaultHorizontalCalibration
                 }
                 if calipersView.verticalCalibration.calibrationString.isEmpty {
-                    calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration!
+                    calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration ?? defaultVerticalCalibration
                 }
             }
             let direction = c.direction
@@ -989,7 +1035,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 calibrationString = calipersView.verticalCalibration.calibrationString
             }
             textField.stringValue = calibrationString
-            let result = calibrationAlert!.runModal()
+            let result = calibrationAlert.runModal()
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 let inputText = textField.stringValue
                 if !inputText.isEmpty {
@@ -1013,12 +1059,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             trimmedUnits = scanner.string[scannerIndex...].trimmingCharacters(in: CharacterSet.whitespaces)
             value = fabs(value)
             if value > 0 {
-                let c = calipersView.activeCaliper()
-                if (c == nil || c!.points() <= 0) {
-                    return
-                }
+                guard let c = calipersView.activeCaliper(), c.points() > 0 else { return }
+
                 var calibration: Calibration
-                if c!.direction == .horizontal {
+                if c.direction == .horizontal {
                     calibration = calipersView.horizontalCalibration
                 }
                 else {
@@ -1029,8 +1073,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 if !calibration.canDisplayRate {
                     calibration.displayRate = false
                 }
-                calibration.originalZoom = Double(imageView.zoomFactor)
-                calibration.originalCalFactor = value / Double(c!.points())
+                calibration.originalZoom = Double(scrollView.magnification)
+                calibration.originalCalFactor = value / Double(c.points())
                 calibration.currentZoom = calibration.originalZoom
                 calibration.calibrated = true
             }
@@ -1228,9 +1272,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 alert.accessoryView = numberInputView
                 meanIntervalAlert = alert
             }
+            guard let meanIntervalAlert = meanIntervalAlert else { return }
             numberTextField.stringValue = String(appPreferences.defaultNumberOfMeanRRIntervals)
             numberStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
-            let result = meanIntervalAlert!.runModal()
+            let result = meanIntervalAlert.runModal()
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 if numberTextField.integerValue < 1 || numberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
@@ -1318,7 +1363,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if pageNumber > numberOfPDFPages - 1{
                 pageNumber = numberOfPDFPages - 1
             }
-            NSLog("page is %d", pageNumber)
             pdfPageNumber = pageNumber
             if let pdf = pdfRef {
                 showPDFPage(pdf, page: pdfPageNumber)
@@ -1338,9 +1382,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 alert.accessoryView = qtcNumberInputView
                 qtcMeanIntervalAlert = alert
             }
+            guard let qtcMeanIntervalAlert = qtcMeanIntervalAlert else { return }
             qtcNumberTextField.stringValue = String(appPreferences.defaultNumberOfQTcMeanRRIntervals)
             qtcNumberStepper.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
-            let result = qtcMeanIntervalAlert!.runModal()
+            let result = qtcMeanIntervalAlert.runModal()
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 if qtcNumberTextField.integerValue < 1 || qtcNumberTextField.integerValue > 10 {
                     showDivisorErrorAlert()
@@ -1540,6 +1585,7 @@ extension MainWindowController: NSTouchBarDelegate {
     }
 
     public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+        // We will leave the forced unwrapped optionals here as these images have to exist, and we should crash otherwise.
         switch identifier {
         case NSTouchBarItem.Identifier.zoom:
             let customViewItem = NSCustomTouchBarItem(identifier: identifier)

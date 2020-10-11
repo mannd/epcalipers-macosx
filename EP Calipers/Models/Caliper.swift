@@ -51,9 +51,9 @@ class Caliper: NSObject {
     let roundToHundredthsString: NSString = "%.2f %@"
     let noRoundingString: NSString = "%f %@"
     
-    var bar1Position: CGFloat
-    var bar2Position: CGFloat
-    var crossBarPosition: CGFloat
+    var _bar1Position: CGFloat = 0
+    var _bar2Position: CGFloat = 0
+    var _crossBarPosition: CGFloat = 0
     var direction: CaliperDirection
     var color: NSColor
     var unselectedColor: NSColor
@@ -74,18 +74,17 @@ class Caliper: NSObject {
     var chosenComponent: CaliperComponent = .noComponent
 
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
-         crossBarPosition: CGFloat) {
+         crossBarPosition: CGFloat, calibration: Calibration) {
 
         self.direction = direction
-        self.bar1Position = bar1Position
-        self.bar2Position = bar2Position
-        self.crossBarPosition = crossBarPosition
+        self.calibration = calibration
         self.color = NSColor.systemBlue
         self.unselectedColor = NSColor.systemBlue
         self.selectedColor = NSColor.systemRed
         self.lineWidth = 2
         self.selected = false
         self.textFont = NSFont(name: "Helvetica Neue Medium", size: 18.0) ?? NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.medium)
+        // We'll leave this forced unwrapped optional, if it fails text labels fail anyway.
         self.paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         self.roundMsecRate = true
         self.rounding = .ToInteger
@@ -93,12 +92,49 @@ class Caliper: NSObject {
         self.textPosition = .right
         self.autoPositionText = true
         super.init()
+        self.bar1Position = bar1Position
+        self.bar2Position = bar2Position
+        self.crossBarPosition = crossBarPosition
     }
     
     convenience override init() {
         self.init(direction: .horizontal, bar1Position: 0.0, bar2Position: 0.0,
-            crossBarPosition: 100)
+                  crossBarPosition: 0, calibration: Calibration())
     }
+
+    private func correctedOffsetBar() -> CGFloat {
+        return direction == .horizontal ? calibration.offset.x : calibration.offset.y
+    }
+
+    private func correctedOffsetCrossBar() -> CGFloat {
+        return direction == .horizontal ? calibration.offset.y : calibration.offset.x
+    }
+
+    var bar1Position: CGFloat {
+        get {
+            Position.translateToScaledPosition(absolutePosition: _bar1Position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom)) }
+        set(position) {
+            _bar1Position = Position.translateToAbsolutePosition(scaledPosition: position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom))
+        }
+    }
+
+    var bar2Position: CGFloat {
+        get {
+            Position.translateToScaledPosition(absolutePosition: _bar2Position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom)) }
+        set(position) {
+            _bar2Position = Position.translateToAbsolutePosition(scaledPosition: position, offset: correctedOffsetBar(), scale: CGFloat(calibration.currentZoom))
+        }
+    }
+
+    var crossBarPosition: CGFloat {
+        get {
+            Position.translateToScaledPosition(absolutePosition: _crossBarPosition, offset: correctedOffsetCrossBar(), scale: CGFloat(calibration.currentZoom)) }
+        set(position) {
+            _crossBarPosition = Position.translateToAbsolutePosition(scaledPosition: position, offset: correctedOffsetCrossBar(), scale: CGFloat(calibration.currentZoom))
+        }
+    }
+
+        
     
     // set slightly different position for each new caliper
     func setInitialPositionInRect(_ rect: CGRect) {
@@ -129,8 +165,8 @@ class Caliper: NSObject {
         if self.direction == .horizontal {
             crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.height) - delta))
             crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
-            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
-            bar2Position = CGFloat(fmax(Double(bar2Position), delta));
+//            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.width) - delta))
+//            bar2Position = CGFloat(fmax(Double(bar2Position), delta));
             context.move(to: CGPoint(x: bar1Position, y: 0));
             context.addLine(to: CGPoint(x: bar1Position, y: rect.size.height))
             context.move(to: CGPoint(x: bar2Position, y: 0))
@@ -141,8 +177,8 @@ class Caliper: NSObject {
         } else {    // vertical caliper
             crossBarPosition = CGFloat(fmin(Double(crossBarPosition), Double(rect.size.width) - delta))
             crossBarPosition = CGFloat(fmax(Double(crossBarPosition), delta))
-            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.height) - delta))
-            bar2Position = CGFloat(fmax(Double(bar2Position), delta))
+//            bar1Position = CGFloat(fmin(Double(bar1Position), Double(rect.size.height) - delta))
+//            bar2Position = CGFloat(fmax(Double(bar2Position), delta))
             context.move(to: CGPoint(x: 0, y: bar1Position))
             context.addLine(to: CGPoint(x: rect.size.width, y: bar1Position))
             context.move(to: CGPoint(x: 0, y: bar2Position))
@@ -485,7 +521,7 @@ class Caliper: NSObject {
         }
         return result
     }
-    
+
     func points() -> CGFloat {
         return bar2Position - bar1Position
     }
