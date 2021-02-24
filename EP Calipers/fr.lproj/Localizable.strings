@@ -191,4 +191,5 @@
 
 "qtcStep2Message" = "Maintenant mesurer l'intervalle QT et choisir encore QTc pour faire le calcul QTc.";
 
+"Maximum number of windows already open." = "Le nombre maximum de fenêtres est déja ouvert.";
 
