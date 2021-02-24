@@ -82,3 +82,5 @@ Nearly all the functions of the app are contained in the main menu commands at t
 | ⌘↑   | Finely tweak caliper component up    |
 | ⌘↓   | Finely tweak caliper component down  |
 | ⌘,   | Open preferences                     |
+| ⌘O   | Open file                            |
+| ⌘N   | New window                           |
