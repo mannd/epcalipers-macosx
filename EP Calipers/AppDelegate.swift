@@ -33,6 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let url = externalURL {
             mainWindowController.openURL(url, addToRecentDocuments: false)
         }
+        
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -59,6 +60,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
-    
+    @IBAction func newWindow(_ sender: Any) {
+        let secondaryController = MainWindowController()
+        secondaryController.showWindow(self)
+    }
+
 }
 
