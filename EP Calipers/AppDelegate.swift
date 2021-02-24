@@ -13,6 +13,7 @@ import Quartz
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var mainWindowController: MainWindowController?
+    var secondaryWindows: [MainWindowController] = [MainWindowController]()
     var externalURL: URL? = nil
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -62,6 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func newWindow(_ sender: Any) {
         let secondaryController = MainWindowController()
+        secondaryWindows.append(secondaryController)
         secondaryController.showWindow(self)
     }
 
