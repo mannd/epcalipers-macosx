@@ -157,7 +157,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
-            // deal with title
             self.window?.title = appName
         }
         else {
@@ -246,8 +245,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         qtcNumberTextField.delegate = self
         
         if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg"), appPreferences.showSampleECG {
-                let url = URL(fileURLWithPath: path)
-                self.openImageUrl(url, addToRecentDocuments: false)
+            let url = URL(fileURLWithPath: path)
+            self.openImageUrl(url, addToRecentDocuments: false, isSampleECG: true)
         }
 
         self.window?.isOpaque = false
@@ -673,7 +672,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         case Nonspecific
     }
     
-    func openImageUrl(_ url: URL, addToRecentDocuments: Bool) {
+    func openImageUrl(_ url: URL, addToRecentDocuments: Bool, isSampleECG: Bool = false) {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
         do {
             let reachable = try (url as URL).checkResourceIsReachable()
@@ -683,9 +682,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
                 self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
-                self.oldWindowTitle = urlPath
-                print("****set title")
-                self.window?.setTitleWithRepresentedFilename(urlPath)
+                if !isSampleECG {
+                    // We just use app name when showing sample ECG
+                    self.oldWindowTitle = urlPath
+                    self.window?.setTitleWithRepresentedFilename(urlPath)
+                }
                 self.imageURL = url
                 self.clearCalibration()
                 if addToRecentDocuments {
