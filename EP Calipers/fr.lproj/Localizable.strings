@@ -190,3 +190,5 @@
 "qtcStep1Message" =  "Mesurer un ou plusieurs intervalles RR.  Choisir QTc à continuer.";
 
 "qtcStep2Message" = "Maintenant mesurer l'intervalle QT et choisir encore QTc pour faire le calcul QTc.";
+
+

@@ -61,7 +61,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
     @IBOutlet weak var showPromptsCheckBox: NSButton!
     @IBOutlet weak var transparencyCheckBox: NSButton!
-    
+    @IBOutlet weak var showSampleECGCheckBox: NSButton!
     @IBOutlet weak var roundingPopUpButton: NSPopUpButton!
     @IBOutlet weak var formulaPopUpButton: NSPopUpButton!
     @IBOutlet weak var autoPositionTextCheckBox: NSButton!
@@ -147,6 +147,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     func setTransparency() {
         calipersView.lockedMode = isTransparent
+        calipersView.isTransparent = isTransparent
         clearCalibration()
         if isTransparent {
             calipersView.deleteAllCalipers()
@@ -195,7 +196,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeNone
         imageView.delegate = self
-        
+
         calipersView.nextResponder = scrollView
         calipersView.imageView = imageView
         calipersView.scrollView = scrollView
@@ -222,6 +223,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             "rounding": Rounding.ToInteger.rawValue,
             "qtcFormula": QTcFormulaPreference.Bazett.rawValue,
             "transparency": false,
+            "showSampleECG": true,
             "autoPositionText": true,
             "timeCaliperTextPosition": TextPosition.centerAbove.rawValue,
             "amplitudeCaliperTextPosition": TextPosition.right.rawValue
@@ -243,10 +245,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.delegate = self
         qtcNumberTextField.delegate = self
         
-        if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg") {
+        if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg"), appPreferences.showSampleECG {
                 let url = URL(fileURLWithPath: path)
                 self.openImageUrl(url, addToRecentDocuments: false)
         }
+
         self.window?.isOpaque = false
         transparent = appPreferences.transparency
 
@@ -351,50 +354,53 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @objc func validateToolbarItem(_ toolbarItem: NSToolbarItem) -> Bool {
         if toolbarItem.itemIdentifier.rawValue == "newZoomToolbar" {
-            return !isTransparent
+            return !isTransparent && imageView.image() != nil
         }
-//        if toolbarItem.itemIdentifier.rawValue == "newCalipersToolbar" {
-//            return !doingMeasurement()
-//        }
+        if toolbarItem.itemIdentifier.rawValue == "newCalipersToolbar" {
+            return imageView.image() != nil || isTransparent
+        }
         if toolbarItem.itemIdentifier.rawValue == "newCalibrationToolbar" {
-            return !doingMeasurement() && !calipersView.isTweakingComponent
+            return !doingMeasurement() && !calipersView.isTweakingComponent && (imageView.image() != nil || isTransparent)
         }
         if toolbarItem.itemIdentifier.rawValue == "newMeasurementToolbar" {
-            return calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate
+            return calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate && (imageView.image() != nil || isTransparent)
         }
         return true
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
-            return !transparent && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
+            return !transparent && imageView.image() != nil && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
         if menuItem.action == #selector(MainWindowController.doMeasurement(_:)) {
-            return calipersView.horizontalCalibration.calibrated && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate
+            return calipersView.horizontalCalibration.calibrated && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate && (imageView.image() != nil || isTransparent)
         }
         if menuItem.action == #selector(MainWindowController.previousPage(_:)) {
-            return !transparent && imageIsPDF && pdfPageNumber > 0
+            return !transparent && imageIsPDF && pdfPageNumber > 0 && imageView.image() != nil
         }
         if menuItem.action == #selector(MainWindowController.gotoPage(_:)) {
-            return !transparent && imageIsPDF && numberOfPDFPages > 1
+            return !transparent && imageIsPDF && numberOfPDFPages > 1 && imageView.image() != nil
         }
         if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
-            return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1
+            return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1 && imageView.image() != nil
         }
         if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
-            return !transparent
+            return !transparent && imageView.image() != nil
         }
         if menuItem.action == #selector(openIKImageEditPanel(_:)) {
-            return !transparent
+            return !transparent && imageView.image() != nil
         }
         if menuItem.action == #selector(doCalibration(_:)) {
-            return !doingMeasurement() && !calipersView.isTweakingComponent
+            return !doingMeasurement() && !calipersView.isTweakingComponent && (imageView.image() != nil || isTransparent)
         }
         if menuItem.action == #selector(deleteAllCalipers(_:)) {
             return !(calipersView.calipers.count < 1)
         }
         if menuItem.action == #selector(makeTransparent(_:)) {
             menuItem.state = isTransparent ? .on : .off
+        }
+        if menuItem.action == #selector(addCaliper(_:)) {
+            return imageView.image() != nil || isTransparent
         }
         return true
     }
@@ -446,7 +452,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showPrompts ? 1 : 0)
+        
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
+        showSampleECGCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showSampleECG ? 1 : 0)
         autoPositionTextCheckBox.state = NSControl.StateValue(rawValue: appPreferences.autoPositionText ? 1 : 0)
         formulaPopUpButton.selectItem(at: appPreferences.qtcFormula.rawValue)
         roundingPopUpButton.selectItem(at: appPreferences.rounding.rawValue)
@@ -462,6 +470,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
             appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
+            appPreferences.showSampleECG = showSampleECGCheckBox.integerValue == 1 ? true : false
             appPreferences.autoPositionText = autoPositionTextCheckBox.integerValue == 1 ? true : false
             appPreferences.timeCaliperTextPosition = timeCaliperTextPositionArray[timeCaliperTextPositionPopUpButton.indexOfSelectedItem]
             appPreferences.amplitudeCaliperTextPosition = amplitudeCaliperTextPositionArray[amplitudeCaliperTextPositionPopUpButton.indexOfSelectedItem]
@@ -675,6 +684,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 self.imageView.zoomImageToActualSize(self)
                 let urlPath = url.path
                 self.oldWindowTitle = urlPath
+                print("****set title")
                 self.window?.setTitleWithRepresentedFilename(urlPath)
                 self.imageURL = url
                 self.clearCalibration()

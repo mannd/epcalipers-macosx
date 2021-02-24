@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,16 +24,16 @@
         <window title="EP Calipers" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="faX-Do-WYj">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="131" y="158" width="800" height="482"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1097"/>
+            <rect key="contentRect" x="131" y="158" width="869" height="482"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1095"/>
             <view key="contentView" id="uHL-zZ-C20" customClass="MainView" customModule="EP_Calipers" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
+                <rect key="frame" x="0.0" y="0.0" width="869" height="482"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
+                        <rect key="frame" x="0.0" y="0.0" width="869" height="482"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
-                            <rect key="frame" x="1" y="1" width="798" height="480"/>
+                            <rect key="frame" x="1" y="1" width="867" height="480"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
@@ -44,16 +44,16 @@
                         </clipView>
                         <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
-                            <rect key="frame" x="1" y="465" width="798" height="16"/>
+                            <rect key="frame" x="1" y="465" width="867" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lrJ-fG-BcI">
-                            <rect key="frame" x="783" y="1" width="16" height="480"/>
+                            <rect key="frame" x="852" y="1" width="16" height="480"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="482"/>
+                        <rect key="frame" x="0.0" y="0.0" width="869" height="482"/>
                     </customView>
                 </subviews>
                 <constraints>
@@ -75,7 +75,7 @@
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="gC6-ej-kGp">
                             <rect key="frame" x="0.0" y="14" width="119" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Lag-Q9-xVH">
                                 <font key="font" metaFont="system"/>
                                 <segments>
@@ -95,7 +95,7 @@
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
                             <rect key="frame" x="0.0" y="14" width="120" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
                                 <font key="font" metaFont="system"/>
                                 <segments>
@@ -113,7 +113,7 @@
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
                             <rect key="frame" x="0.0" y="14" width="261" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Cqb-X5-vZ6">
                                 <font key="font" metaFont="system"/>
                                 <segments>
@@ -132,7 +132,7 @@
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="pjM-VC-7LA">
                             <rect key="frame" x="0.0" y="14" width="59" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="BCX-fN-8ly">
                                 <font key="font" metaFont="system"/>
                                 <segments>
@@ -148,7 +148,7 @@
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="sBn-yF-ACb">
                             <rect key="frame" x="0.0" y="14" width="138" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="0B4-Jy-LzB">
                                 <font key="font" metaFont="system"/>
                                 <segments>
@@ -172,13 +172,13 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
             </connections>
-            <point key="canvasLocation" x="420" y="476"/>
+            <point key="canvasLocation" x="385.5" y="476"/>
         </window>
         <window title="Instructions" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="rGN-02-IWd" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="181" y="118" width="360" height="139"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1097"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1095"/>
             <view key="contentView" id="sz9-UB-bmo">
                 <rect key="frame" x="0.0" y="0.0" width="360" height="139"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

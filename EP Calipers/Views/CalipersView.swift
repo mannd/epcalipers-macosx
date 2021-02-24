@@ -26,6 +26,7 @@ class CalipersView: NSView {
     var calipersMode = false
     var calipers: [Caliper] = []
     var lockedMode = false
+    var isTransparent = false
     var selectedCaliper: Caliper? = nil
     var mouseWasDragged = false
     var bar1Selected = false
@@ -516,6 +517,11 @@ class CalipersView: NSView {
         guard let context = NSGraphicsContext.current?.cgContext else { return }
         for c in calipers {
             c.drawWithContext(context, inRect: dirtyRect)
+        }
+        // This matches the background of the other views.
+        if imageView?.image() == nil && !isTransparent {
+            NSColor.windowBackgroundColor.setFill()
+            dirtyRect.fill()
         }
     }
 

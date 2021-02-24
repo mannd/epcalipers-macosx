@@ -60,6 +60,7 @@ class Preferences: NSObject {
     var autoPositionText: Bool = true
     var timeCaliperTextPosition: TextPosition = .centerAbove
     var amplitudeCaliperTextPosition: TextPosition = .right
+    var showSampleECG: Bool = true
 
     func loadPreferences() {
         let preferences = UserDefaults.standard
@@ -72,6 +73,7 @@ class Preferences: NSObject {
         defaultNumberOfQTcMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         showPrompts = preferences.bool(forKey: "showPromptsKey")
         transparency = preferences.bool(forKey: "transparency")
+        showSampleECG = preferences.bool(forKey: "showSampleECG")
         if let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) {
             qtcFormula = formula
         }
@@ -100,6 +102,7 @@ class Preferences: NSObject {
         preferences.set(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
         preferences.set(showPrompts, forKey: "showPromptsKey")
         preferences.set(transparency, forKey: "transparency")
+        preferences.set(showSampleECG, forKey: "showSampleECG")
         preferences.set(qtcFormula.rawValue, forKey: "qtcFormula")
         preferences.set(rounding.rawValue, forKey: "rounding")
         preferences.set(autoPositionText, forKey: "autoPositionText")
