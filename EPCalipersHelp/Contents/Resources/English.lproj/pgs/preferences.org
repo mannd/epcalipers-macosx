@@ -14,6 +14,7 @@ Preferences can be selected using the *EP Calipers | Preferences* menu item.  Yo
 #+CAPTION: Preferences
 [[../gfx/preferences.png]]
 ** Preferences explained
+- Show sample ECG at start: Select to show a sample normal ECG at startup.
 - Caliper color: This is the color of unselected newly added calipers.  Note that this color can be overwritten by right-clicking on a caliper and selecting *Caliper Color*.
 - Selected caliper color: This is the color of the selected caliper.
 - Caliper line width: Increase or decrease this slider to make the caliper lines thicker or thinner.

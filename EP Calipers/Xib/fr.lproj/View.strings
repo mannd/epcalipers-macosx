@@ -40,4 +40,6 @@
 
 /* added for "Amplitude caliper text position" */
 "xhX-kK-4ju.title" = "Position du texte pour compas d'amplitude";
-/*
+
+/* added for "Show sample ECG at start" */
+"gkb-pl-sKv.title" = "Afficher l'échantillon d'ECG au démarrage";

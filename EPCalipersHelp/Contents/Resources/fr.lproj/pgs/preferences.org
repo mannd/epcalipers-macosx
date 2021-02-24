@@ -14,6 +14,7 @@ Les préférences d’application peuvent être choisies en utilisant la command
 #+CAPTION: Préférences
 [[../gfx/preferences.png]]
 ** Préférences expliquées
+- Afficher l'échantillon d'ECG au démarrage: Choisir d'afficher un échantillon d'ECG normal au démarrage.
 - Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant *Couleur de compas*. 
 - Couleur de compas choisi: C’est la couleur d’un compas sélectioné.
 - Largeur de ligne: Utiliser la glissière pour ajuster la larguer de ligne des compas.

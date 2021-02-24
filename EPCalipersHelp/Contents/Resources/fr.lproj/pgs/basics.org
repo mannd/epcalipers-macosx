@@ -69,3 +69,5 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 | ⌘↑     | Régler le composant finement vers le haut   |
 | ⌘↓     | Régler le composant finement vers le bas    |
 | ⌘,     | Ouvrir les préférences                      |
+| ⌘O     | Ouvrir un fichier                           |
+| ⌘N     | Nouvelle fenêtre                            |
