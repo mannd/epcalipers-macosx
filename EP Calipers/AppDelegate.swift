@@ -11,8 +11,10 @@ import Quartz
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+
+    let secondaryWindowsMaxCount = 5
     var mainWindowController: MainWindowController?
+    var secondaryWindows: [MainWindowController] = [MainWindowController]()
     var externalURL: URL? = nil
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -33,6 +35,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let url = externalURL {
             mainWindowController.openURL(url, addToRecentDocuments: false)
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(removeWindowController(_:)), name: NSWindow.willCloseNotification, object: nil)
+        
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -59,6 +63,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
-    
+    @IBAction func newWindow(_ sender: Any) {
+        if secondaryWindows.count < secondaryWindowsMaxCount {
+        let secondaryController = MainWindowController()
+        secondaryWindows.append(secondaryController)
+        secondaryController.showWindow(self)
+        } else {
+            let alert = NSAlert()
+            alert.alertStyle = NSAlert.Style.warning
+            alert.messageText = NSLocalizedString("Maximum number of windows already open.", comment:"")
+            alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
+            alert.runModal()
+            print("too many windows")
+        }
+    }
+
+    @objc func removeWindowController(_ notification: NSNotification) {
+        if let window = notification.object as? NSWindow {
+            secondaryWindows.removeAll { $0.window == window }
+        }
+    }
+
 }
 

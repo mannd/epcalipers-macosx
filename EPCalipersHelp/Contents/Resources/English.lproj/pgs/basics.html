@@ -39,7 +39,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -51,7 +51,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -195,69 +195,45 @@
 <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org95adcae" class="outline-2">
-<h2 id="org95adcae"><img src="../../shrd/64.png" alt="64.png" /> Introduction &#x2013; EP Calipers 101</h2>
-<div class="outline-text-2" id="text-org95adcae">
+<div id="outline-container-org8f22165" class="outline-2">
+<h2 id="org8f22165"><img src="../../shrd/64.png" alt="64.png" /> Introduction &#x2013; EP Calipers 101</h2>
+<div class="outline-text-2" id="text-org8f22165">
 </div>
-<div id="outline-container-orgc34bf2c" class="outline-3">
-<h3 id="orgc34bf2c">Electronic calipers</h3>
-<div class="outline-text-3" id="text-orgc34bf2c">
+<div id="outline-container-org6ccac83" class="outline-3">
+<h3 id="org6ccac83">Electronic calipers</h3>
+<div class="outline-text-3" id="text-org6ccac83">
 <p>
 <b>EP Calipers</b> provides <b>electronic calipers</b> for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  <b>EP Calipers</b> is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of <b>EP Calipers</b> are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
 </p>
 </div>
 </div>
-<div id="outline-container-orgb78b66c" class="outline-3">
-<h3 id="orgb78b66c">Quick start</h3>
-<div class="outline-text-3" id="text-orgb78b66c">
+<div id="outline-container-orgf4eedf1" class="outline-3">
+<h3 id="orgf4eedf1">Quick start</h3>
+<div class="outline-text-3" id="text-orgf4eedf1">
 <p>
 When <b>EP Calipers</b> starts, a sample ECG is loaded.  Click a caliper
 icon on the toolbar to add a caliper to the screen.  Move the caliper
@@ -276,14 +252,14 @@ like the corrected QT interval.
 </p>
 </div>
 </div>
-<div id="outline-container-org5a5d251" class="outline-3">
-<h3 id="org5a5d251">Toolbar</h3>
-<div class="outline-text-3" id="text-org5a5d251">
+<div id="outline-container-org0682fa4" class="outline-3">
+<h3 id="org0682fa4">Toolbar</h3>
+<div class="outline-text-3" id="text-org0682fa4">
 <p>
 The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The default toolbar looks like this:
 </p>
 
-<div class="figure">
+<div id="org66d0750" class="figure">
 <p><img src="../gfx/EPCtoolbar.png" alt="EPCtoolbar.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Toolbar</p>
@@ -293,9 +269,9 @@ The program is controlled either by the toolbar buttons at the top of the window
 Note that not all toolbar buttons will be available all the time, depending on whether calibration has been performed.  Some toolbar buttons are disabled when in transparent window mode also.  Disabled toolbar buttons are "grayed" out.  You can customize the toolbar items if you wish.  On newer Macs some of the toolbar items are also shown on the Touch Bar.
 </p>
 </div>
-<div id="outline-container-orge4cbd9a" class="outline-4">
-<h4 id="orge4cbd9a">Zoom toolbar</h4>
-<div class="outline-text-4" id="text-orge4cbd9a">
+<div id="outline-container-org8c62221" class="outline-4">
+<h4 id="org8c62221">Zoom toolbar</h4>
+<div class="outline-text-4" id="text-org8c62221">
 <ul class="org-ul">
 <li><img src="../../shrd/TB_zoomIn.png" alt="TB_zoomIn.png" /> Zoom in</li>
 <li><img src="../../shrd/TB_zoomOut.png" alt="TB_zoomOut.png" /> Zoom out</li>
@@ -303,9 +279,9 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbb2bd7f" class="outline-4">
-<h4 id="orgbb2bd7f">Calipers toolbar</h4>
-<div class="outline-text-4" id="text-orgbb2bd7f">
+<div id="outline-container-org5604099" class="outline-4">
+<h4 id="org5604099">Calipers toolbar</h4>
+<div class="outline-text-4" id="text-org5604099">
 <ul class="org-ul">
 <li><img src="../../shrd/caliper-20x20.png" alt="caliper-20x20.png" /> Add time (horizontal) caliper</li>
 <li><img src="../../shrd/amplitude-caliper-20x20.png" alt="amplitude-caliper-20x20.png" /> Add amplitude (vertical) caliper</li>
@@ -315,9 +291,9 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </ul>
 </div>
 </div>
-<div id="outline-container-org136c38d" class="outline-4">
-<h4 id="org136c38d">Measurement toolbar</h4>
-<div class="outline-text-4" id="text-org136c38d">
+<div id="outline-container-org8d15e6e" class="outline-4">
+<h4 id="org8d15e6e">Measurement toolbar</h4>
+<div class="outline-text-4" id="text-org8d15e6e">
 <ul class="org-ul">
 <li><b>Rate/Int</b> Toggle heart rate and time interval</li>
 <li><b>mean RR</b> Calculate mean interval from several intervals</li>
@@ -326,17 +302,17 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </div>
 </div>
 </div>
-<div id="outline-container-org6bfa2f9" class="outline-3">
-<h3 id="org6bfa2f9">Menus</h3>
-<div class="outline-text-3" id="text-org6bfa2f9">
+<div id="outline-container-org1c346ad" class="outline-3">
+<h3 id="org1c346ad">Menus</h3>
+<div class="outline-text-3" id="text-org1c346ad">
 <p>
 Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
 </p>
 </div>
 </div>
-<div id="outline-container-org2337a14" class="outline-3">
-<h3 id="org2337a14">Keyboard shortcuts</h3>
-<div class="outline-text-3" id="text-org2337a14">
+<div id="outline-container-org60366da" class="outline-3">
+<h3 id="org60366da">Keyboard shortcuts</h3>
+<div class="outline-text-3" id="text-org60366da">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -500,6 +476,16 @@ Nearly all the functions of the app are contained in the main menu commands at t
 <tr>
 <td class="org-left">⌘,</td>
 <td class="org-left">Open preferences</td>
+</tr>
+
+<tr>
+<td class="org-left">⌘O</td>
+<td class="org-left">Open file</td>
+</tr>
+
+<tr>
+<td class="org-left">⌘N</td>
+<td class="org-left">New window</td>
 </tr>
 </tbody>
 </table>
