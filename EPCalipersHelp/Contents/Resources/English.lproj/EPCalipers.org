@@ -12,7 +12,7 @@
 * [[../shrd/64.png]] EP Calipers Help 
 * [[./pgs/basics.html][Introduction -- EP Calipers 101]]
 Rationale and basic use of *EP Calipers*.
-* [[./pgs/images.org][Image operations]]
+* [[./pgs/images.html][Image operations]]
 Open, rotate, move, and save ECG images.
 * [[./pgs/calipers.html][Caliper operations]]
 Add, move, and delete calipers.
