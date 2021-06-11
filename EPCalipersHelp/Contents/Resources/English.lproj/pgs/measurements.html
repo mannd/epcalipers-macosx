@@ -8,6 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
+<meta name="keywords" content="measurements, QT, QTc, heart rate, mean heart rate" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -39,7 +40,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -51,7 +52,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -193,79 +194,59 @@
   /*]]>*/-->
 </style>
 <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+<link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
+<meta name="robots" content="anchors" />
+<meta name="robots" content="keywords" />
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
 <div id="content">
-<div id="outline-container-orge99c500" class="outline-2">
-<h2 id="orge99c500"><img src="../../shrd/64.png" alt="64.png" /> Making measurements</h2>
-<div class="outline-text-2" id="text-orge99c500">
+<div id="outline-container-orgce9a4b7" class="outline-2">
+<h2 id="orgce9a4b7"><img src="../../shrd/64.png" alt="64.png" /> Making measurements</h2>
+<div class="outline-text-2" id="text-orgce9a4b7">
+<a name="EP Diagram index"></a>
 </div>
-<div id="outline-container-orgf89f024" class="outline-3">
-<h3 id="orgf89f024">Caliper interval</h3>
-<div class="outline-text-3" id="text-orgf89f024">
+<div id="outline-container-org3b8b195" class="outline-3">
+<h3 id="org3b8b195">Caliper interval</h3>
+<div class="outline-text-3" id="text-org3b8b195">
 <p>
 The interval measured by each caliper is displayed on top of or next to the crossbar of the caliper.  Until the calipers are calibrated, measurements are displayed in arbitrary units (<i>points</i>, roughly equivalent to screen pixels).  Angle calipers show a measurement of the current angle in degrees and do not need to be calibrated to display angles.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfbdae1e" class="outline-3">
-<h3 id="orgfbdae1e">Measurement prompts</h3>
-<div class="outline-text-3" id="text-orgfbdae1e">
+<div id="outline-container-org85e5659" class="outline-3">
+<h3 id="org85e5659">Measurement prompts</h3>
+<div class="outline-text-3" id="text-org85e5659">
 <p>
 If the Show Prompts <a href="./preferences.html">preference</a> is selected the program will guide you with detailed instructions on how to make each measurement.  When you become familiar with how to make measurements you may consider turning off the <i>Show Prompts</i> preference.  This minimizes the prompting the program gives.  Prompts appear in a floating window.  For example, when measuring the mean RR interval, if <i>Show prompts</i> is enabled, the program will first prompt you to select a time caliper, stretch it over a number of intervals, and then click <b>mean RR</b> again on the toolbar.  A dialog will then appear asking how many intervals you are measuring.  After entering the number and clicking the calculate button, the result will appear.  If <i>Show prompts</i> is disabled, you can select a caliper and stretch it over a number of intervals without prompting, and then press the <b>mean RR</b> button or the <b>Measurements | Mean Rate/Interval</b> menu item.  The rest of the process is the same.
 </p>
 </div>
 </div>
-<div id="outline-container-org503362f" class="outline-3">
-<h3 id="org503362f">Calibration</h3>
-<div class="outline-text-3" id="text-org503362f">
+<div id="outline-container-org4e1d475" class="outline-3">
+<h3 id="org4e1d475">Calibration</h3>
+<div class="outline-text-3" id="text-org4e1d475">
 <p>
 Calibration is necessary before any measurements can be made!  If the <i>Show prompts</i> preference is enabled, select the <b>Calibrate</b> button or the <b>Caliper | Calibrate</b> menu item.  Follow the prompts to select a caliper and stretch it over a known interval (such as 1000 msec for time, or 10 mm for amplitude calipers).  Select the <b>Calibrate</b> button again.  In the dialog box that appears, make sure the interval matches what you are measuring.  Enter both the calibration interval and units (e.g. 1000 msec,  or 1 mV).  Select the <b>Calibrate</b> button in the dialog box to set the calibration.  Note that time and amplitude calipers need to be calibrated separately.  Once calibrated, calipers will show intervals in the units used to calibrate.  Newly created calipers will use the same calibration.
 </p>
@@ -279,38 +260,38 @@ It is important to use time units such as <i>msec</i> or <i>sec</i> when providi
 </p>
 </div>
 </div>
-<div id="outline-container-org5cc7fc9" class="outline-3">
-<h3 id="org5cc7fc9">Changing calibration</h3>
-<div class="outline-text-3" id="text-org5cc7fc9">
+<div id="outline-container-org1ee204a" class="outline-3">
+<h3 id="org1ee204a">Changing calibration</h3>
+<div class="outline-text-3" id="text-org1ee204a">
 <p>
 You can recalibrate at any time just by repeating the calibration process.  You can clear all calibration by selecting <b>Clear</b> in the toolbar.  Note that calibration is maintained if the image is zoomed.  However, if you are using transparent window mode, you must manually recalibrate if you zoom the image on the Desktop (for example an image loaded in the Preview app).  Selecting a new image will reset calibration.  <b>If you need to rotate the image, you must first clear calibration.</b>
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3668d4" class="outline-3">
-<h3 id="orgc3668d4">Interval/Rate</h3>
-<div class="outline-text-3" id="text-orgc3668d4">
+<div id="outline-container-org18c27cc" class="outline-3">
+<h3 id="org18c27cc">Interval/Rate</h3>
+<div class="outline-text-3" id="text-org18c27cc">
 <p>
 Once a time caliper is calibrated, provided you use time units (such as msec or sec) for the calibration, it is possible to toggle between interval measurements (e.g. 600 msec) and heart rate measurements (e.g. 100 bpm) by selecting the <b>Rate/Int</b> button or <b>Measurements | Toggle Rate/Interval</b> menu command.
 </p>
 </div>
 </div>
-<div id="outline-container-org2fbe4e6" class="outline-3">
-<h3 id="org2fbe4e6">Mean rate and interval calculation</h3>
-<div class="outline-text-3" id="text-org2fbe4e6">
+<div id="outline-container-org473c18c" class="outline-3">
+<h3 id="org473c18c">Mean rate and interval calculation</h3>
+<div class="outline-text-3" id="text-org473c18c">
 <p>
 Select a calibrated caliper and stretch it over a number of intervals.  Select the <b>mean RR</b> button or <b>Measurements | Mean Rate/Interval</b> menu command and enter the number of intervals measured in the dialog box that appears.  Select the <b>Calculate</b> button in the dialog box to see the result.  If the <i>Show prompts</i> preference is selected, prompts will appear to guide you through the process.  Using <b>EP Calipers</b> to calculate mean rates and intervals is very useful in irregular rhythms, such as atrial fibrillation.
 </p>
 </div>
 </div>
-<div id="outline-container-org44a4a0d" class="outline-3">
-<h3 id="org44a4a0d">QTc calculation</h3>
-<div class="outline-text-3" id="text-org44a4a0d">
+<div id="outline-container-org0edefd2" class="outline-3">
+<h3 id="org0edefd2">QTc calculation</h3>
+<div class="outline-text-3" id="text-org0edefd2">
 <p>
 QTc measurement is a multiple step process, and prompts are always shown.  Select the <b>QTc</b> button on the toolbar or the <b>Measurements | QTc</b> menu command.  Follow the prompt to stretch the selected caliper over one or more RR intervals and select the <b>QTc</b> button.  Enter the number of intervals the caliper is stretched over and select <b>Continue</b> in the dialog box.  Then use the same caliper or another selected caliper to measure the QT interval.  Select <b>QTc</b> again for the results of the calculation.  A dialog box will give the calculated QTc using Bazett's formula by default.  Select <b>Repeat QT</b> to make another QT measurement using the same measured RR interval.  Select <b>Done</b> to finish measuring the QTc.  You can change the QTc formula using <a href="./preferences.html">Preferences</a>.
 </p>
 
-<div class="figure">
+<div id="org24b2e7d" class="figure">
 <p><img src="../gfx/qtc-measurement.png" alt="qtc-measurement.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>QTc measurement</p>
@@ -318,14 +299,14 @@ QTc measurement is a multiple step process, and prompts are always shown.  Selec
 </div>
 </div>
 
-<div id="outline-container-org1a49bb1" class="outline-3">
-<h3 id="org1a49bb1">Brugadometer</h3>
-<div class="outline-text-3" id="text-org1a49bb1">
+<div id="outline-container-org6d8f5ac" class="outline-3">
+<h3 id="org6d8f5ac">Brugadometer</h3>
+<div class="outline-text-3" id="text-org6d8f5ac">
 <p>
 The <b>Brugadometer</b> is a diagnostic tool for Brugada syndrome developed in collaboration with Dr. Adrian Baranchuk and his colleagues at Queen's University Kingston, Ontario, Canada.  It is a tool intended to distinguish between ECGs with a Brugada syndrome pattern in leads V1 or V2 and ECGs with incomplete right bundle branch block.  In order to use the <b>Brugadometer</b>, it is necessary to calibrate an amplitude caliper in millimeters (mm) and to calibrate a time caliper preferably in msec or mm.  After doing so, an angle caliper will appear to have a triangle at its apex as shown below.
 </p>
 
-<div class="figure">
+<div id="org8013d9b" class="figure">
 <p><img src="../../shrd/brugadometer.png" alt="brugadometer.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Brugadometer showing triangle base 5 mm below apex of caliper</p>

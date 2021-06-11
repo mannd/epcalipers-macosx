@@ -1,15 +1,21 @@
 #+AUTHOR:    David Mann
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
-#+KEYWORDS:
+#+KEYWORDS: mesures, étalonnage
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
+#+HTML_HEAD: <meta name="robots" content="anchors" />
+#+HTML_HEAD: <meta name="robots" content="keywords" />
 * [[../../shrd/64.png]] Prendre des mesures
+#+BEGIN_EXPORT html
+<a name="EP Diagram measurements"></a>
+#+END_EXPORT
 ** L’intervalle du compas
 L’intervalle mesuré par chaque compas est indiqué au dessus ou à coté de la barre transversale du compas.  Avant l’étalonnage des compas, les mesures sont indiquées dans des unités arbitraires (des points, égals environ aux pixels d’écran).  Les compas d’angle montrent l’angle mesuré en degrés et il ne faut pas de les étalonner. 
 ** Invites sur écran

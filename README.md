@@ -28,7 +28,7 @@ granted by Apple in the disclaimer attached to the source code
 
 ## Copyright
 
-Copyright © 2015-2020
+Copyright © 2015-2021
 [EP Studios, Inc.](http://www.epstudiossoftware.com)
 
 ##Acknowledgments

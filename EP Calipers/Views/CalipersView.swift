@@ -9,7 +9,7 @@
 import Cocoa
 import Quartz
 
-protocol CalipersViewDelegate {
+protocol CalipersViewDelegate: AnyObject {
     func showMessage(_ message: String)
     func showMessageWithoutSaving(_ message: String)
     func showMessageAndSaveLast(_ message: String)
@@ -36,7 +36,7 @@ class CalipersView: NSView {
     let horizontalCalibration = Calibration()
     let verticalCalibration = Calibration()
 
-    var delegate: CalipersViewDelegate? = nil;
+    weak var delegate: CalipersViewDelegate? = nil;
     
     // for color and tweak menu
     var chosenCaliper: Caliper? = nil
@@ -519,10 +519,17 @@ class CalipersView: NSView {
             c.drawWithContext(context, inRect: dirtyRect)
         }
         // This matches the background of the other views.
-        if imageView?.image() == nil && !isTransparent {
+        if hasNoImage() && !isTransparent {
             NSColor.windowBackgroundColor.setFill()
             dirtyRect.fill()
         }
+    }
+
+    private func hasNoImage() -> Bool {
+        if let imageView = imageView {
+            return !imageView.hasImage()
+        }
+        return false
     }
 
     func caliper0Bar1Position() -> CGFloat? {

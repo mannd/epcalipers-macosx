@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -94,7 +94,7 @@
                     <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" explicitItemIdentifier="newCalipersToolbar" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
-                            <rect key="frame" x="0.0" y="14" width="120" height="27"/>
+                            <rect key="frame" x="0.0" y="14" width="98" height="24"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
                                 <font key="font" metaFont="system"/>
@@ -112,7 +112,7 @@
                     <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" explicitItemIdentifier="newMeasurementToolbar" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
-                            <rect key="frame" x="0.0" y="14" width="261" height="27"/>
+                            <rect key="frame" x="0.0" y="14" width="216" height="24"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Cqb-X5-vZ6">
                                 <font key="font" metaFont="system"/>
@@ -131,12 +131,12 @@
                     <toolbarItem implicitItemIdentifier="671D5437-D9E4-4ED4-9362-69DE326CAD32" label="Files" paletteLabel="Files" sizingBehavior="auto" id="q9h-cp-i9R" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="pjM-VC-7LA">
-                            <rect key="frame" x="0.0" y="14" width="59" height="24"/>
+                            <rect key="frame" x="2" y="14" width="28" height="24"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="BCX-fN-8ly">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment label="Open" toolTip="Open files"/>
+                                    <segment toolTip="Open files" image="import-image"/>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
@@ -147,7 +147,7 @@
                     <toolbarItem implicitItemIdentifier="3178DB5C-CDC8-4F40-9C33-9F06D76BD3D2" explicitItemIdentifier="newCalibrationToolbar" label="Calibration" paletteLabel="Calibration" sizingBehavior="auto" id="XnC-gj-7nY" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="sBn-yF-ACb">
-                            <rect key="frame" x="0.0" y="14" width="138" height="27"/>
+                            <rect key="frame" x="0.0" y="14" width="114" height="24"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="0B4-Jy-LzB">
                                 <font key="font" metaFont="system"/>
@@ -163,6 +163,7 @@
                     </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
+                    <toolbarItem reference="q9h-cp-i9R"/>
                     <toolbarItem reference="BUH-5G-BGq"/>
                     <toolbarItem reference="uO8-MM-MEU"/>
                     <toolbarItem reference="XnC-gj-7nY"/>
@@ -202,6 +203,7 @@
         </window>
     </objects>
     <resources>
+        <image name="import-image" width="12" height="14"/>
         <image name="new-amplitude-caliper-icon" width="20" height="20"/>
         <image name="new-angle-caliper-icon" width="20" height="20"/>
         <image name="new-time-caliper-icon" width="20" height="20"/>

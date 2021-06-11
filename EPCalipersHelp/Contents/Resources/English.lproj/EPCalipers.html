@@ -8,6 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
+<meta name="keywords" content="EP Calipers" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -39,7 +40,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -51,7 +52,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -193,102 +194,84 @@
   /*]]>*/-->
 </style>
 <meta name="AppleTitle" content="EP Calipers Help" />
+<link rel="stylesheet" type="text/css" href="../shrd/org.css"/>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
+<meta name="robots" content="anchors" />
+<meta name="robots" content="keywords" />
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org850fad6" class="outline-2">
-<h2 id="org850fad6"><img src="../shrd/64.png" alt="64.png" /> EP Calipers Help</h2>
+<div id="outline-container-org877b781" class="outline-2">
+<h2 id="org877b781"><img src="../shrd/64.png" alt="64.png" /> EP Calipers Help</h2>
+<div class="outline-text-2" id="text-org877b781">
+<a name="EP Calipers index"></a>
 </div>
-<div id="outline-container-org9c747fe" class="outline-2">
-<h2 id="org9c747fe"><a href="./pgs/basics.html">Introduction &#x2013; EP Calipers 101</a></h2>
-<div class="outline-text-2" id="text-org9c747fe">
+</div>
+<div id="outline-container-orgfb83667" class="outline-2">
+<h2 id="orgfb83667"><a href="./pgs/basics.html">Introduction &#x2013; EP Calipers 101</a></h2>
+<div class="outline-text-2" id="text-orgfb83667">
 <p>
 Rationale and basic use of <b>EP Calipers</b>.
 </p>
 </div>
 </div>
-<div id="outline-container-org06f87c3" class="outline-2">
-<h2 id="org06f87c3"><a href="./pgs/images.html">Image operations</a></h2>
-<div class="outline-text-2" id="text-org06f87c3">
+<div id="outline-container-org031c4df" class="outline-2">
+<h2 id="org031c4df"><a href="./pgs/images.html">Image operations</a></h2>
+<div class="outline-text-2" id="text-org031c4df">
 <p>
 Open, rotate, move, and save ECG images.
 </p>
 </div>
 </div>
-<div id="outline-container-orge8ed600" class="outline-2">
-<h2 id="orge8ed600"><a href="./pgs/calipers.html">Caliper operations</a></h2>
-<div class="outline-text-2" id="text-orge8ed600">
+<div id="outline-container-orgbdacdd9" class="outline-2">
+<h2 id="orgbdacdd9"><a href="./pgs/calipers.html">Caliper operations</a></h2>
+<div class="outline-text-2" id="text-orgbdacdd9">
 <p>
 Add, move, and delete calipers.
 </p>
 </div>
 </div>
-<div id="outline-container-org648f6b5" class="outline-2">
-<h2 id="org648f6b5"><a href="./pgs/measurements.html">Making measurements</a></h2>
-<div class="outline-text-2" id="text-org648f6b5">
+<div id="outline-container-orge71ee14" class="outline-2">
+<h2 id="orge71ee14"><a href="./pgs/measurements.html">Making measurements</a></h2>
+<div class="outline-text-2" id="text-orge71ee14">
 <p>
 Calibrate calipers, measure, and do ECG calculations.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb72fa61" class="outline-2">
-<h2 id="orgb72fa61"><a href="./pgs/preferences.html">Preferences</a></h2>
-<div class="outline-text-2" id="text-orgb72fa61">
+<div id="outline-container-org964e78a" class="outline-2">
+<h2 id="org964e78a"><a href="./pgs/preferences.html">Preferences</a></h2>
+<div class="outline-text-2" id="text-org964e78a">
 <p>
 Change app preferences, such as caliper color, default calibration, etc.
 </p>
 </div>
 </div>
-<div id="outline-container-org19cf4dc" class="outline-2">
-<h2 id="org19cf4dc"><a href="./pgs/misc.html">Fine print</a></h2>
-<div class="outline-text-2" id="text-org19cf4dc">
+<div id="outline-container-org2e54476" class="outline-2">
+<h2 id="org2e54476"><a href="./pgs/misc.html">Fine print</a></h2>
+<div class="outline-text-2" id="text-org2e54476">
 <p>
 Miscellaneous stuff.
 </p>
