@@ -1,15 +1,21 @@
 #+AUTHOR:    David Mann
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
-#+KEYWORDS:
+#+KEYWORDS: préférences
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
+#+HTML_HEAD: <meta name="robots" content="anchors" />
+#+HTML_HEAD: <meta name="robots" content="keywords" />
 * [[../../shrd/64.png]] Préférences
+#+BEGIN_EXPORT html
+<a name="EP Diagram preferences"></a>
+#+END_EXPORT
 Les préférences d’application peuvent être choisies en utilisant la commande de menu *Compas EP | Préférences*.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, la position du texte de compas, l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le /Nombre d’intervalles RR pour QTc/ à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
 #+CAPTION: Préférences
 [[../gfx/preferences.png]]

@@ -8,6 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
+<meta name="keywords" content="mesures, étalonnage" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -39,7 +40,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -51,7 +52,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -193,79 +194,59 @@
   /*]]>*/-->
 </style>
 <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+<link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
+<meta name="robots" content="anchors" />
+<meta name="robots" content="keywords" />
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
 <div id="content">
-<div id="outline-container-org13f278e" class="outline-2">
-<h2 id="org13f278e"><img src="../../shrd/64.png" alt="64.png" /> Prendre des mesures</h2>
-<div class="outline-text-2" id="text-org13f278e">
+<div id="outline-container-org0d1085b" class="outline-2">
+<h2 id="org0d1085b"><img src="../../shrd/64.png" alt="64.png" /> Prendre des mesures</h2>
+<div class="outline-text-2" id="text-org0d1085b">
+<a name="EP Diagram measurements"></a>
 </div>
-<div id="outline-container-org03b103a" class="outline-3">
-<h3 id="org03b103a">L’intervalle du compas</h3>
-<div class="outline-text-3" id="text-org03b103a">
+<div id="outline-container-orge6987f8" class="outline-3">
+<h3 id="orge6987f8">L’intervalle du compas</h3>
+<div class="outline-text-3" id="text-orge6987f8">
 <p>
 L’intervalle mesuré par chaque compas est indiqué au dessus ou à coté de la barre transversale du compas.  Avant l’étalonnage des compas, les mesures sont indiquées dans des unités arbitraires (des points, égals environ aux pixels d’écran).  Les compas d’angle montrent l’angle mesuré en degrés et il ne faut pas de les étalonner. 
 </p>
 </div>
 </div>
-<div id="outline-container-org667a48a" class="outline-3">
-<h3 id="org667a48a">Invites sur écran</h3>
-<div class="outline-text-3" id="text-org667a48a">
+<div id="outline-container-orgfa8aeb1" class="outline-3">
+<h3 id="orgfa8aeb1">Invites sur écran</h3>
+<div class="outline-text-3" id="text-orgfa8aeb1">
 <p>
 Si la <a href="./preferences.html">préférence</a> <i>Des messages-guides</i> est choisi l’application vous guidera avec des instructions détaillées sur comment on prend chaque mesure.  Après que vous apprenez comment faire les mesures vous pouvez désactiver cette préférence pour réduire le nombre des messages-guides.  Des messages-guides se montrent sure un fenêtre flottante. Par exemple, en mesurant l’intervalle RR moyen et la fréquence cardiaque moyenne, si la préférence <i>Des message-guides</i> est activée, l’application va d’abord vous inviter à choisir un compas de temps, puis l’étendre sur un nombre d’intervalles, et enfin cliquer <b>RR moyen</b> sur la barre d’outils.  Une boîte de dialogue apparaîtra et demandera combien d’intervalles sont mesurés.  Après l’entrée du nombre et avoir cliqué sur le bouton <i>Calculer</i>, le résultat apparaîtra.  Si la préférence <i>Des messages-guides</i> est désactivée, vous pouvez choisir un compas et l’étendre sur un nombre d’intervalles sans messages-guides, et puis appuyer le bouton <b>RR moyen</b> ou la commande de menu <b>Mesures | Intervalle moyen/Fréquence moyenne</b>.  Le resultat sera le même.
 </p>
 </div>
 </div>
-<div id="outline-container-org930620a" class="outline-3">
-<h3 id="org930620a">Étalonnage</h3>
-<div class="outline-text-3" id="text-org930620a">
+<div id="outline-container-org79e6b91" class="outline-3">
+<h3 id="org79e6b91">Étalonnage</h3>
+<div class="outline-text-3" id="text-org79e6b91">
 <p>
 Il faut étalonner des compas avant que des mesures peuvent être faire.  Si la préférence <i>Des message-guides</i> est activée, appuyer le bouton <b>Étalonner</b> ou choisir la commande de menu <b>Compas | Étalonner</b>.  Suivre les invites sur écran pour choisir un compas et l’étendre sur un intervalle connu (p.e. 1000 msec pour un compas de temps ou 10 mm pour un compas d’amplitude).  Appuyer encore le bouton <b>Étalonner</b>.  Dans la boîte de dialogue qui apparait, assurer-vous que l’intervalle correspond à la mesure.  Saisir l’intervalle d’étalonnage et les unités (les deux), p.e. 1000 msec ou 1 mV.  Appuyer le bouton <b>Étalonner</b> dans la boîte de dialogue pour fixer l’étalonnage.  Noter qu'il faut que les compas de temps et d'amplitude soient étalonnés individuellement.  Après l'étalonnage, les compas montreront les intervalles avec les unités utilisées pour les étalonner.  Des nouveaux compas créés utiliseront le même étalonnage.
 </p>
@@ -279,38 +260,38 @@ Il est important d’utiliser des unités de temps comme <i>msec</i> ou <i>sec</
 </p>
 </div>
 </div>
-<div id="outline-container-org1e6c223" class="outline-3">
-<h3 id="org1e6c223">Changement de l’étalonnage</h3>
-<div class="outline-text-3" id="text-org1e6c223">
+<div id="outline-container-orgdecd936" class="outline-3">
+<h3 id="orgdecd936">Changement de l’étalonnage</h3>
+<div class="outline-text-3" id="text-orgdecd936">
 <p>
 Vous pouvez réétalonner à tout moment.  L'étalonnage peut être complètement effacé en choisissant <b>Effacer</b> sur le menu d'étalonnage.  Noter que l'étalonnage continue quand l'image est zoomée.  La sélection d'une nouvelle image ou le changement du mode à la fenetre transparente effacera l'étalonnage.  <b>Si vous voulez tourner l’image, vous devez d’abord effacer l’étalonnage.</b>
 </p>
 </div>
 </div>
-<div id="outline-container-org3e1f58e" class="outline-3">
-<h3 id="org3e1f58e">Intervalle/fréquence</h3>
-<div class="outline-text-3" id="text-org3e1f58e">
+<div id="outline-container-orged9882b" class="outline-3">
+<h3 id="orged9882b">Intervalle/fréquence</h3>
+<div class="outline-text-3" id="text-orged9882b">
 <p>
 Après qu'un compas de temps est étalonné, si vous utilisez des unités du temps (par exemple msec ou sec) pour l'étalonnage, il est possible d'alterner entre les mesures d'intervalle (par exemple 600 msec) et les mesures de fréquence cardiaque (par exemple 100 bpm) en choisissant le bouton <b>Int/Fréq</b> ou la commande de menu <b>Mesures | Alterner intervalle/fréquence</b>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgadbef28" class="outline-3">
-<h3 id="orgadbef28">Calcul de la fréquence moyenne et de l'intervalle moyen</h3>
-<div class="outline-text-3" id="text-orgadbef28">
+<div id="outline-container-org0606b82" class="outline-3">
+<h3 id="org0606b82">Calcul de la fréquence moyenne et de l'intervalle moyen</h3>
+<div class="outline-text-3" id="text-org0606b82">
 <p>
 Sélectionner un compas étalonné et mesurer un nombre d'intervalles.  Choisir le bouton <b>Int/Fréq</b> et saisir le nombre d'intervalles mesurés.  Une boîte de dialogue montrera la fréquence cardiaque moyenne calculée et l'intervalle moyen.  Cela est utile pour le calcul des fréquences et des intervalles pendant un rythme irrégulier, par exemple la fibrillation auriculaire.
 </p>
 </div>
 </div>
-<div id="outline-container-org8e5aafc" class="outline-3">
-<h3 id="org8e5aafc">Calcul du QT corrigé</h3>
-<div class="outline-text-3" id="text-org8e5aafc">
+<div id="outline-container-org3b21eda" class="outline-3">
+<h3 id="org3b21eda">Calcul du QT corrigé</h3>
+<div class="outline-text-3" id="text-org3b21eda">
 <p>
 La mesure de QTc est un procédé en plusieurs étapes et donc les messages-guides se montrent toujours.  Choisir le bouton <b>QTc</b> ou la commande de menu <b>Mesures | QTc</b>.  Étendre le compas sélectionné sur un ou plusieurs intervalles RR et puis choisir encore le bouton <b>QTc</b>.  Saisir le nombre d'intervalles étant mesurés et puis choisir encore <b>QTc</b>.  Utiliser le même ou un autre compas sélectionné pour mesurer l'intervalle QT.  Choisir encore le bouton <b>QTc</b>.  Une boîte de dialogue montrera le QT calculé en utilisant la formule de Bazett par défaut.  Choisir <b>Répéter QT</b> pour faire une nouvelle mesure du QT avec le même intervalle RR, ou choisir <b>OK</b> pour terminer.  On peut changer la formule en utilisant <a href="./preferences.html">les préférences</a>.
 </p>
 
-<div class="figure">
+<div id="org4e1badf" class="figure">
 <p><img src="../gfx/qtc-measurement.png" alt="qtc-measurement.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Mesure du QTc</p>
@@ -318,14 +299,14 @@ La mesure de QTc est un procédé en plusieurs étapes et donc les messages-guid
 </div>
 </div>
 
-<div id="outline-container-org68571fd" class="outline-3">
-<h3 id="org68571fd"><a id="orgf005377"></a>Brugadometer</h3>
-<div class="outline-text-3" id="text-org68571fd">
+<div id="outline-container-orgb13a1ca" class="outline-3">
+<h3 id="orgb13a1ca"><a id="org44c623d"></a>Brugadometer</h3>
+<div class="outline-text-3" id="text-orgb13a1ca">
 <p>
 Le <b>Brugadometer</b> est un outil de diagnostic, utilisé pour l'analyse du syndrome de Brugada.  Cet outil a été développé en collaboration avec Dr. Adrian Baranchuk et ses collègues à l'Université Queens, Kingston, en Ontario.  Le Brugadometer peut distinguer entre un bloc de branche droite incomplète, et un motif du syndrome de Brugada aux fils V1 ou V2.  Pour utiliser le <b>Brugadometer</b>, il faut étalonner un compas de temps en msec ou mm et un compas d'amplitude en mm.  Ensuite, un compas d'angle apparaîtra avec un triangle au sommet comme ceci.
 </p>
 
-<div class="figure">
+<div id="org0735a17" class="figure">
 <p><img src="../../shrd/brugadometer.png" alt="brugadometer.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Brugadometer avec une base de triangle 5 mm au-dessous du sommet de le compas</p>

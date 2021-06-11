@@ -1,15 +1,21 @@
 #+AUTHOR:    David Mann
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
-#+KEYWORDS:
+#+KEYWORDS: aide
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <meta name="AppleTitle" content="EP Calipers Help" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../shrd/org.css"/>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
+#+HTML_HEAD: <meta name="robots" content="anchors" />
+#+HTML_HEAD: <meta name="robots" content="keywords" />
 * [[../shrd/64.png]] Aide de Compas EP
+#+BEGIN_EXPORT html
+<a name="EP Diagram index"></a>
+#+END_EXPORT
 * [[./pgs/basics.html][Introduction]]
 La justification et l’utilisation essentielle.
 * [[./pgs/images.org][Operations d’image]]
