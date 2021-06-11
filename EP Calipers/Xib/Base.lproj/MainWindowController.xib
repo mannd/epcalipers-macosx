@@ -131,12 +131,12 @@
                     <toolbarItem implicitItemIdentifier="671D5437-D9E4-4ED4-9362-69DE326CAD32" label="Files" paletteLabel="Files" sizingBehavior="auto" id="q9h-cp-i9R" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="pjM-VC-7LA">
-                            <rect key="frame" x="0.0" y="14" width="49" height="24"/>
+                            <rect key="frame" x="2" y="14" width="28" height="24"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="BCX-fN-8ly">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment label="Open" toolTip="Open files"/>
+                                    <segment toolTip="Open files" image="import-image"/>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
@@ -163,6 +163,7 @@
                     </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
+                    <toolbarItem reference="q9h-cp-i9R"/>
                     <toolbarItem reference="BUH-5G-BGq"/>
                     <toolbarItem reference="uO8-MM-MEU"/>
                     <toolbarItem reference="XnC-gj-7nY"/>
@@ -202,6 +203,7 @@
         </window>
     </objects>
     <resources>
+        <image name="import-image" width="12" height="14"/>
         <image name="new-amplitude-caliper-icon" width="20" height="20"/>
         <image name="new-angle-caliper-icon" width="20" height="20"/>
         <image name="new-time-caliper-icon" width="20" height="20"/>
