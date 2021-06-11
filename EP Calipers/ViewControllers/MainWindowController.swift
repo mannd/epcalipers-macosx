@@ -353,44 +353,44 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @objc func validateToolbarItem(_ toolbarItem: NSToolbarItem) -> Bool {
         if toolbarItem.itemIdentifier.rawValue == "newZoomToolbar" {
-            return !isTransparent && imageView.image() != nil
+            return !isTransparent && hasImage()
         }
         if toolbarItem.itemIdentifier.rawValue == "newCalipersToolbar" {
-            return imageView.image() != nil || isTransparent
+            return hasImage() || isTransparent
         }
         if toolbarItem.itemIdentifier.rawValue == "newCalibrationToolbar" {
-            return !doingMeasurement() && !calipersView.isTweakingComponent && (imageView.image() != nil || isTransparent)
+            return !doingMeasurement() && !calipersView.isTweakingComponent && (hasImage() || isTransparent)
         }
         if toolbarItem.itemIdentifier.rawValue == "newMeasurementToolbar" {
-            return calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate && (imageView.image() != nil || isTransparent)
+            return calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate && (hasImage() || isTransparent)
         }
         return true
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
-            return !transparent && imageView.image() != nil && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
+            return !transparent && hasImage() && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
         if menuItem.action == #selector(MainWindowController.doMeasurement(_:)) {
-            return calipersView.horizontalCalibration.calibrated && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate && (imageView.image() != nil || isTransparent)
+            return calipersView.horizontalCalibration.calibrated && !inMeanRR && !inCalibration && calipersView.horizontalCalibration.canDisplayRate && (hasImage() || isTransparent)
         }
         if menuItem.action == #selector(MainWindowController.previousPage(_:)) {
-            return !transparent && imageIsPDF && pdfPageNumber > 0 && imageView.image() != nil
+            return !transparent && imageIsPDF && pdfPageNumber > 0 && hasImage()
         }
         if menuItem.action == #selector(MainWindowController.gotoPage(_:)) {
-            return !transparent && imageIsPDF && numberOfPDFPages > 1 && imageView.image() != nil
+            return !transparent && imageIsPDF && numberOfPDFPages > 1 && hasImage()
         }
         if menuItem.action == #selector(MainWindowController.nextPage(_:)) {
-            return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1 && imageView.image() != nil
+            return !transparent && imageIsPDF && pdfPageNumber < numberOfPDFPages - 1 && hasImage()
         }
         if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
-            return !transparent && imageView.image() != nil
+            return !transparent && hasImage()
         }
         if menuItem.action == #selector(openIKImageEditPanel(_:)) {
-            return !transparent && imageView.image() != nil
+            return !transparent && hasImage()
         }
         if menuItem.action == #selector(doCalibration(_:)) {
-            return !doingMeasurement() && !calipersView.isTweakingComponent && (imageView.image() != nil || isTransparent)
+            return !doingMeasurement() && !calipersView.isTweakingComponent && (hasImage() || isTransparent)
         }
         if menuItem.action == #selector(deleteAllCalipers(_:)) {
             return !(calipersView.calipers.count < 1)
@@ -399,9 +399,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             menuItem.state = isTransparent ? .on : .off
         }
         if menuItem.action == #selector(addCaliper(_:)) {
-            return imageView.image() != nil || isTransparent
+            return hasImage() || isTransparent
         }
         return true
+    }
+
+    private func hasImage() -> Bool {
+        return imageView.hasImage()
     }
 
     private func doingMeasurement() -> Bool {
@@ -761,7 +765,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         var tempImage = NSImage()
         tempImage.addRepresentation(pdf)
         tempImage = scaleImage(tempImage, byFactor: scale)
-        let image = nsImageToCGImage(tempImage)
+        guard let image = nsImageToCGImage(tempImage) else { return }
         imageView.setImage(image, imageProperties: nil)
         imageView.zoomImageToActualSize(self)
         // keep size of image manageable by scaling down
@@ -1636,5 +1640,12 @@ extension MainWindowController: NSTouchBarDelegate {
         default:
             return nil
         }
+    }
+}
+
+extension IKImageView {
+    func hasImage() -> Bool {
+        let size = imageSize()
+        return size != .zero
     }
 }
