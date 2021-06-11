@@ -1,15 +1,21 @@
 #+AUTHOR:    David Mann
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
-#+KEYWORDS:
+#+KEYWORDS: images
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
+#+HTML_HEAD: <meta name="robots" content="anchors" />
+#+HTML_HEAD: <meta name="robots" content="keywords" />
 * [[../../shrd/64.png]] Images
+#+BEGIN_EXPORT html
+<a name="EP Diagram images"></a>
+#+END_EXPORT
 Parmi les images sont des formats typiques comme JPG et PNG ansi que les fichiers PDF.  Quand vous démarrez *Compas EP* un exemple ECG est chargé.  Pour charger votre images ECG vous utilisez l’une des techniques suivantes.
 * Charger une image
 ** Ouvrir un fichier

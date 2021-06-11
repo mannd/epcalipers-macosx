@@ -1,15 +1,21 @@
 #+AUTHOR:    David Mann
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
-#+KEYWORDS:
+#+KEYWORDS: calipers, calibration
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
+#+HTML_HEAD: <meta name="robots" content="anchors" />
+#+HTML_HEAD: <meta name="robots" content="keywords" />
 * [[../../shrd/64.png]] Calipers
+#+BEGIN_EXPORT html
+<a name="EP Diagram calipers"></a>
+#+END_EXPORT
 * Adding and deleting calipers
 Calipers come in three flavors.  Calipers with a horizontal crossbar and vertical sidebars are used to make time measurements and are called /time calipers/.  Calipers with a vertical crossbar and horizontal sidebars are used to make amplitude measurements and are called, you guessed it, /amplitude calipers/.  Finally /angle calipers/ are used to measure angles, such as the 𝞫 angle in Brugada syndrome.
 ** Add Calipers
