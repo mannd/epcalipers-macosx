@@ -45,7 +45,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // ensures closed window reopened by clicking on dock
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        mainWindowController!.showWindow(self)
+        // Bring app window when dock icon gets clicked
+        if !flag {
+            for window: AnyObject in sender.windows {
+                window.makeKeyAndOrderFront(self)
+            }
+        }
         return true
     }
     
