@@ -13,9 +13,9 @@ import AppKit
 // To get control over IKImageEditPanel location when opened
 // When image is zoomed, double click makes panel disappear, it is somewhere off screen.
 // see http://stackoverflow.com/questions/30110720/how-to-get-ikimageeditpanel-to-work-in-swift
-extension IKImageView: IKImageEditPanelDataSource {
-
-}
+//extension IKImageView: IKImageEditPanelDataSource {
+//
+//}
 
 protocol QTcResultProtocol {
     func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormulaPreference,
@@ -536,7 +536,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBAction func openIKImageEditPanel(_ sender: AnyObject) {
         let editor = IKImageEditPanel.shared()
         editor?.setFrameOrigin(NSMakePoint(400,200))
-        editor?.dataSource = imageView
+        editor?.dataSource = imageView as? IKImageEditPanelDataSource
         editor?.makeKeyAndOrderFront(nil)
     }
     

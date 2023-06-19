@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D22B3F009C4007A505CE6C1 /* Pods_EP_Calipers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E13E2CC0D294FA41ABD1069 /* Pods_EP_Calipers.framework */; };
 		8E1CC9E72531459300F00A49 /* sampleECG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E1CC9E62531459300F00A49 /* sampleECG.jpg */; };
 		8E2282481C398B1300337695 /* CalipersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2282471C398B1300337695 /* CalipersView.swift */; };
 		8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E23BACA1C518CF6009E7A58 /* Preferences.swift */; };
@@ -21,6 +20,7 @@
 		8E3DA81A1C306C1300AD9556 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DA8191C306C1300AD9556 /* MainWindowController.swift */; };
 		8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81D1C30850200AD9556 /* Quartz.framework */; };
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
+		8E4E1C412A40DA4800DEBA9F /* MiniQTc in Frameworks */ = {isa = PBXBuildFile; productRef = 8E4E1C402A40DA4800DEBA9F /* MiniQTc */; };
 		8E545CA91F95A27500B1CEB0 /* QTcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E545CA81F95A27500B1CEB0 /* QTcResult.swift */; };
 		8E6D21092524D2A600AD1D7D /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D21082524D2A600AD1D7D /* Position.swift */; };
 		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
@@ -32,7 +32,6 @@
 		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
 		8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE97F7523ED332F00C3FEE7 /* ToolbarItem.swift */; };
 		8EFCD97B1F30D289007B3A45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFCD97D1F30D289007B3A45 /* InfoPlist.strings */; };
-		BC22D256FB148CA20F171A61 /* Pods_EP_CalipersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B808683C218942F5BC15DDB /* Pods_EP_CalipersTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,9 +65,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1FCEDC1A6D19AD2705C6CC7C /* Pods-EP CalipersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EP CalipersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EP CalipersTests/Pods-EP CalipersTests.release.xcconfig"; sourceTree = "<group>"; };
-		4B808683C218942F5BC15DDB /* Pods_EP_CalipersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_CalipersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		81C1360E6AA6A852758D21FA /* Pods-EP Calipers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EP Calipers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EP Calipers/Pods-EP Calipers.debug.xcconfig"; sourceTree = "<group>"; };
 		8E1CC9E62531459300F00A49 /* sampleECG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleECG.jpg; sourceTree = "<group>"; };
 		8E2282471C398B1300337695 /* CalipersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalipersView.swift; sourceTree = "<group>"; };
 		8E23BACA1C518CF6009E7A58 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -105,9 +101,6 @@
 		8EE97F7523ED332F00C3FEE7 /* ToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarItem.swift; sourceTree = "<group>"; };
 		8EFCD97C1F30D289007B3A45 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8EFCD97E1F30D28C007B3A45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9E13E2CC0D294FA41ABD1069 /* Pods_EP_Calipers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EP_Calipers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8C79A238808151B2EABD25B /* Pods-EP Calipers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EP Calipers.release.xcconfig"; path = "Pods/Target Support Files/Pods-EP Calipers/Pods-EP Calipers.release.xcconfig"; sourceTree = "<group>"; };
-		C307C4CACD01B7C1C41141D6 /* Pods-EP CalipersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EP CalipersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EP CalipersTests/Pods-EP CalipersTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,9 +108,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E4E1C412A40DA4800DEBA9F /* MiniQTc in Frameworks */,
 				8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */,
 				8E3DA81E1C30850200AD9556 /* Quartz.framework in Frameworks */,
-				7D22B3F009C4007A505CE6C1 /* Pods_EP_Calipers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC22D256FB148CA20F171A61 /* Pods_EP_CalipersTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,8 +141,6 @@
 				8E3DA7FF1C2E264000AD9556 /* EP CalipersTests */,
 				8E3DA80A1C2E264000AD9556 /* EP CalipersUITests */,
 				8E3DA7EE1C2E264000AD9556 /* Products */,
-				8E61A21F1F98460700625288 /* Frameworks */,
-				94B026D62EEB50920342AE38 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,15 +188,6 @@
 				8E3DA80D1C2E264000AD9556 /* Info.plist */,
 			);
 			path = "EP CalipersUITests";
-			sourceTree = "<group>";
-		};
-		8E61A21F1F98460700625288 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9E13E2CC0D294FA41ABD1069 /* Pods_EP_Calipers.framework */,
-				4B808683C218942F5BC15DDB /* Pods_EP_CalipersTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8E6D21072524D27E00AD1D7D /* Others */ = {
@@ -267,17 +248,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		94B026D62EEB50920342AE38 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				81C1360E6AA6A852758D21FA /* Pods-EP Calipers.debug.xcconfig */,
-				A8C79A238808151B2EABD25B /* Pods-EP Calipers.release.xcconfig */,
-				C307C4CACD01B7C1C41141D6 /* Pods-EP CalipersTests.debug.xcconfig */,
-				1FCEDC1A6D19AD2705C6CC7C /* Pods-EP CalipersTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -285,18 +255,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E3DA8101C2E264000AD9556 /* Build configuration list for PBXNativeTarget "EP Calipers" */;
 			buildPhases = (
-				03987AB5CBBC3EE1C2DA5E8A /* [CP] Check Pods Manifest.lock */,
 				8E3DA7E91C2E264000AD9556 /* Sources */,
 				8E3DA7EA1C2E264000AD9556 /* Frameworks */,
 				8E3DA7EB1C2E264000AD9556 /* Resources */,
 				8EFBEE481F9B07C200F03E23 /* Copy Files */,
-				5E7577FAEEAF34A90B013217 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "EP Calipers";
+			packageProductDependencies = (
+				8E4E1C402A40DA4800DEBA9F /* MiniQTc */,
+			);
 			productName = "EP Calipers";
 			productReference = 8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */;
 			productType = "com.apple.product-type.application";
@@ -305,7 +276,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E3DA8131C2E264000AD9556 /* Build configuration list for PBXNativeTarget "EP CalipersTests" */;
 			buildPhases = (
-				AB3980D920C107ACE3EF976C /* [CP] Check Pods Manifest.lock */,
 				8E3DA7F81C2E264000AD9556 /* Sources */,
 				8E3DA7F91C2E264000AD9556 /* Frameworks */,
 				8E3DA7FA1C2E264000AD9556 /* Resources */,
@@ -344,8 +314,9 @@
 		8E3DA7E51C2E264000AD9556 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "EP Studios";
 				TargetAttributes = {
 					8E3DA7EC1C2E264000AD9556 = {
@@ -381,6 +352,9 @@
 				fr,
 			);
 			mainGroup = 8E3DA7E41C2E264000AD9556;
+			packageReferences = (
+				8E4E1C3F2A40DA4800DEBA9F /* XCRemoteSwiftPackageReference "MiniQTc" */,
+			);
 			productRefGroup = 8E3DA7EE1C2E264000AD9556 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -423,63 +397,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		03987AB5CBBC3EE1C2DA5E8A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EP Calipers-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5E7577FAEEAF34A90B013217 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EP Calipers/Pods-EP Calipers-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/QTc/QTc.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QTc.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EP Calipers/Pods-EP Calipers-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AB3980D920C107ACE3EF976C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EP CalipersTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8E3DA7E91C2E264000AD9556 /* Sources */ = {
@@ -612,6 +529,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -668,6 +586,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -687,7 +606,6 @@
 		};
 		8E3DA8111C2E264000AD9556 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81C1360E6AA6A852758D21FA /* Pods-EP Calipers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -697,11 +615,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 41;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W74NPJXYEG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "EP Calipers/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -715,7 +637,6 @@
 		};
 		8E3DA8121C2E264000AD9556 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8C79A238808151B2EABD25B /* Pods-EP Calipers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -725,30 +646,40 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 41;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W74NPJXYEG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "EP Calipers/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "EP Calipers/EP Calipers-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 		8E3DA8141C2E264000AD9556 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C307C4CACD01B7C1C41141D6 /* Pods-EP CalipersTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = "EP CalipersTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -758,15 +689,21 @@
 		};
 		8E3DA8151C2E264000AD9556 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FCEDC1A6D19AD2705C6CC7C /* Pods-EP CalipersTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = "EP CalipersTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EP Calipers.app/Contents/MacOS/EP Calipers";
 			};
@@ -776,8 +713,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = "EP CalipersUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -791,11 +734,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = "EP CalipersUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = "EP Calipers";
@@ -843,6 +793,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E4E1C3F2A40DA4800DEBA9F /* XCRemoteSwiftPackageReference "MiniQTc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mannd/MiniQTc";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E4E1C402A40DA4800DEBA9F /* MiniQTc */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E4E1C3F2A40DA4800DEBA9F /* XCRemoteSwiftPackageReference "MiniQTc" */;
+			productName = MiniQTc;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8E3DA7E51C2E264000AD9556 /* Project object */;
 }

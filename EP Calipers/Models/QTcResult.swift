@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import QTc
+import MiniQTc
 
 class QTcResult: QTcResultProtocol {
     func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormulaPreference, convertToMsec: Bool, units: String) -> String {

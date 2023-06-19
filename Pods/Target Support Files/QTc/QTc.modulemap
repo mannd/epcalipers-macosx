@@ -1,6 +1,0 @@
-framework module QTc {
-  umbrella header "QTc-umbrella.h"
-
-  export *
-  module * { export * }
-}
