@@ -1049,14 +1049,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func calibrateWithText(_ inputText: String) {
         // caller must guarantee this
         assert(!inputText.isEmpty)
-        var value: Double = 0.0
         var trimmedUnits: String = ""
         let scanner: Scanner = Scanner.localizedScanner(with: inputText) as! Scanner
-        if scanner.scanDouble(&value) {
-            let scannerString = scanner.string
-            var scannerIndex = scannerString.startIndex
-            scannerIndex = scannerString.index(scannerString.startIndex, offsetBy: scanner.scanLocation)
-            trimmedUnits = scanner.string[scannerIndex...].trimmingCharacters(in: CharacterSet.whitespaces)
+        if var value = scanner.scanDouble() {
+            trimmedUnits = scanner.string[scanner.currentIndex...].trimmingCharacters(in: CharacterSet.whitespaces)
             value = fabs(value)
             if value > 0 {
                 guard let c = calipersView.activeCaliper(), c.points() > 0 else { return }
