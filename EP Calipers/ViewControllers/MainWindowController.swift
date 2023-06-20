@@ -10,19 +10,13 @@ import Cocoa
 import Quartz
 import AppKit
 
-// To get control over IKImageEditPanel location when opened
-// When image is zoomed, double click makes panel disappear, it is somewhere off screen.
-// see http://stackoverflow.com/questions/30110720/how-to-get-ikimageeditpanel-to-work-in-swift
-//extension IKImageView: IKImageEditPanelDataSource {
-//
-//}
-
 protocol QTcResultProtocol {
     func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormulaPreference,
                    convertToMsec: Bool, units: String) -> String
 }
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation, NSToolbarDelegate {
+
     let appName = NSLocalizedString("EP Calipers", comment:"")
 
     @IBOutlet weak var toolbar: NSToolbar!
@@ -190,10 +184,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         self.window?.registerForDraggedTypes(types)
 
         imageView.editable = true
-        imageView.doubleClickOpensImageEditPanel = false
+        imageView.doubleClickOpensImageEditPanel = false // EditPanel broken in newest macOS versions
         imageView.zoomImageToActualSize(self)
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeNone
+        imageView.supportsDragAndDrop = false // handled by app, not by ImageKit
         imageView.delegate = self
 
         calipersView.nextResponder = scrollView
@@ -386,9 +381,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if menuItem.action == #selector(MainWindowController.doZoom(_:)) {
             return !transparent && hasImage()
         }
-        if menuItem.action == #selector(openIKImageEditPanel(_:)) {
-            return !transparent && hasImage()
-        }
         if menuItem.action == #selector(doCalibration(_:)) {
             return !doingMeasurement() && !calipersView.isTweakingComponent && (hasImage() || isTransparent)
         }
@@ -531,13 +523,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     @IBAction func numberOfQTcMeanRRStepperAction(_ sender: AnyObject) {
         numberOfQTcMeanRRIntervalsTextField.integerValue = numberOfQTcMeanRRIntervalsStepper.integerValue
-    }
-    
-    @IBAction func openIKImageEditPanel(_ sender: AnyObject) {
-        let editor = IKImageEditPanel.shared()
-        editor?.setFrameOrigin(NSMakePoint(400,200))
-        editor?.dataSource = imageView as? IKImageEditPanelDataSource
-        editor?.makeKeyAndOrderFront(nil)
     }
     
     @IBAction func gotoPage(_ sender: Any) {
