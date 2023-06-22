@@ -531,15 +531,16 @@ class Caliper: NSObject {
     }
     
     func rateResult(_ interval: Double) -> Double {
-        if interval != 0 {
+        let absInterval = abs(interval)
+        if absInterval != 0 {
             if calibration.unitsAreMsec {
-                return 60000.0 / interval
+                return 60000.0 / absInterval
             }
             if calibration.unitsAreSeconds {
-                return 60.0 / interval
+                return 60.0 / absInterval
             }
         }
-        return interval
+        return absInterval
     }
     
     func intervalInSecs(_ interval: Double) -> Double {

@@ -34,10 +34,6 @@ If you have a track pad, you can move the image around using two finger scrollin
 If your ECG image is rotated or tilted, use the *Image | Rotation* menu commands to correct this.  You can rotate by 90°, 1°, or 0.1° increments in either direction.  The keyboard shortcuts for rotation are useful.  *Important:* You should rotate your image before calibrating your calipers or making measurements.  Once an image has been calibrated, rotation will affect the accuracy of the calibration.  For this reason, *you can only rotate an image before you calibrate.*  If you need to rotate the image after calibration, you will need to clear calibration (using *Clear* on the toolbar or the *Calipers | Clear* menu command) before you can rotate.
 ** Zooming
 If you have a trackpad, pinch to zoom works.  You can also use the /Zoom Toolbar/ to zoom in and out, or to set the image to its actual size.  Zooming is also available in the *Image* menu.  Note that caliper calibration *does* adjust with zooming.  There is no need to recalibrate the calipers after zooming.
-** Image Editor
-Use the *Image | Image Editor* menu command to open the /Image Editor/.  The editor has many options that can be used to alter the appearance of the ECG, such as changing its color or contrast.
-#+CAPTION: Image Editor
-[[../gfx/EPCImageEdit.png]]
 * Transparent windows
 ** What is transparent window mode?
 Sometimes it is easier to open an image or PDF file on your Desktop using the Preview app, and then make measurements directly on this image.  *EP Calipers* allows you do this using /transparent window mode/.  In this mode, the main window is transparent, allowing you to measure whatever is underneath the window using calipers.  Transparent window mode looks like this:

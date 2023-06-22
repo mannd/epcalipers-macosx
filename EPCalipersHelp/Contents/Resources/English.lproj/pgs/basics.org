@@ -68,7 +68,6 @@ Nearly all the functions of the app are contained in the main menu commands at t
 | ⌘+   | Zoom in                              |
 | ⌘-   | Zoom out                             |
 | ⌘=   | Zoom to actual size                  |
-| ⌃E   | Image editor                         |
 | ⌃H   | Toggle transparent window            |
 | ⌃T   | Add time caliper                     |
 | ⌃A   | Add amplitude caliper                |

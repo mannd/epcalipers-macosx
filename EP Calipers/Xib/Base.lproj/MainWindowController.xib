@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,36 +24,36 @@
         <window title="EP Calipers" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="faX-Do-WYj">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="131" y="158" width="869" height="482"/>
+            <rect key="contentRect" x="131" y="158" width="1000" height="600"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1095"/>
             <view key="contentView" id="uHL-zZ-C20" customClass="MainView" customModule="EP_Calipers" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="869" height="482"/>
+                <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
-                        <rect key="frame" x="0.0" y="0.0" width="869" height="482"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
-                            <rect key="frame" x="1" y="1" width="867" height="480"/>
+                            <rect key="frame" x="1" y="1" width="998" height="598"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
-                                    <rect key="frame" x="0.0" y="15" width="798" height="465"/>
+                                    <rect key="frame" x="0.0" y="133" width="798" height="465"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </view>
                             </subviews>
                         </clipView>
                         <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
-                            <rect key="frame" x="1" y="465" width="867" height="16"/>
+                            <rect key="frame" x="1" y="583" width="998" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lrJ-fG-BcI">
-                            <rect key="frame" x="852" y="1" width="16" height="480"/>
+                            <rect key="frame" x="983" y="1" width="16" height="598"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="869" height="482"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                     </customView>
                 </subviews>
                 <constraints>

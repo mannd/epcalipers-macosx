@@ -6,11 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
 <meta name="keywords" content="quick start, basics, keymap" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -41,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -190,55 +191,32 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
 <meta name="robots" content="anchors" />
 <meta name="robots" content="keywords" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
-<div id="outline-container-org2b9d49f" class="outline-2">
-<h2 id="org2b9d49f"><img src="../../shrd/64.png" alt="64.png" /> Introduction &#x2013; EP Calipers 101</h2>
-<div class="outline-text-2" id="text-org2b9d49f">
+<div id="content" class="content">
+<div id="outline-container-orgb8c0cdb" class="outline-2">
+<h2 id="orgb8c0cdb"><img src="../../shrd/64.png" alt="64.png" /> Introduction &#x2013; EP Calipers 101</h2>
+<div class="outline-text-2" id="text-orgb8c0cdb">
 <a name="EP Diagram basics"></a>
 </div>
-<div id="outline-container-org7c93c08" class="outline-3">
-<h3 id="org7c93c08">Electronic calipers</h3>
-<div class="outline-text-3" id="text-org7c93c08">
+<div id="outline-container-orge5adf78" class="outline-3">
+<h3 id="orge5adf78">Electronic calipers</h3>
+<div class="outline-text-3" id="text-orge5adf78">
 <p>
 <b>EP Calipers</b> provides <b>electronic calipers</b> for measuring intervals on images of electrocardiograms (ECGs) or electrophysiologic recordings.  In the electrophysiology lab electronic calipers are included as part of the recording system.  <b>EP Calipers</b> is intended to provide similar electronic calipers for use on your Mac.  The electronic calipers of <b>EP Calipers</b> are more accurate, easier to use, and less dangerous than mechanical calipers (they don't have sharp points!).
 </p>
 </div>
 </div>
-<div id="outline-container-org999cdb4" class="outline-3">
-<h3 id="org999cdb4">Quick start</h3>
-<div class="outline-text-3" id="text-org999cdb4">
+<div id="outline-container-orgcbbc5b4" class="outline-3">
+<h3 id="orgcbbc5b4">Quick start</h3>
+<div class="outline-text-3" id="text-orgcbbc5b4">
 <p>
 When <b>EP Calipers</b> starts, a sample ECG is loaded.  Click a caliper
 icon on the toolbar to add a caliper to the screen.  Move the caliper
@@ -257,14 +235,14 @@ like the corrected QT interval.
 </p>
 </div>
 </div>
-<div id="outline-container-org3ba5fd5" class="outline-3">
-<h3 id="org3ba5fd5">Toolbar</h3>
-<div class="outline-text-3" id="text-org3ba5fd5">
+<div id="outline-container-orgcd3aa25" class="outline-3">
+<h3 id="orgcd3aa25">Toolbar</h3>
+<div class="outline-text-3" id="text-orgcd3aa25">
 <p>
 The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The default toolbar looks like this:
 </p>
 
-<div id="orgdd4a7db" class="figure">
+<div id="org53d52d8" class="figure">
 <p><img src="../gfx/EPCtoolbar.png" alt="EPCtoolbar.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Toolbar</p>
@@ -274,9 +252,9 @@ The program is controlled either by the toolbar buttons at the top of the window
 Note that not all toolbar buttons will be available all the time, depending on whether calibration has been performed.  Some toolbar buttons are disabled when in transparent window mode also.  Disabled toolbar buttons are "grayed" out.  You can customize the toolbar items if you wish.  On newer Macs some of the toolbar items are also shown on the Touch Bar.
 </p>
 </div>
-<div id="outline-container-org49a5e16" class="outline-4">
-<h4 id="org49a5e16">Zoom toolbar</h4>
-<div class="outline-text-4" id="text-org49a5e16">
+<div id="outline-container-org196b598" class="outline-4">
+<h4 id="org196b598">Zoom toolbar</h4>
+<div class="outline-text-4" id="text-org196b598">
 <ul class="org-ul">
 <li><img src="../../shrd/TB_zoomIn.png" alt="TB_zoomIn.png" /> Zoom in</li>
 <li><img src="../../shrd/TB_zoomOut.png" alt="TB_zoomOut.png" /> Zoom out</li>
@@ -284,9 +262,9 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </ul>
 </div>
 </div>
-<div id="outline-container-org3a39abe" class="outline-4">
-<h4 id="org3a39abe">Calipers toolbar</h4>
-<div class="outline-text-4" id="text-org3a39abe">
+<div id="outline-container-orgc04af88" class="outline-4">
+<h4 id="orgc04af88">Calipers toolbar</h4>
+<div class="outline-text-4" id="text-orgc04af88">
 <ul class="org-ul">
 <li><img src="../../shrd/caliper-20x20.png" alt="caliper-20x20.png" /> Add time (horizontal) caliper</li>
 <li><img src="../../shrd/amplitude-caliper-20x20.png" alt="amplitude-caliper-20x20.png" /> Add amplitude (vertical) caliper</li>
@@ -296,9 +274,9 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </ul>
 </div>
 </div>
-<div id="outline-container-org527b112" class="outline-4">
-<h4 id="org527b112">Measurement toolbar</h4>
-<div class="outline-text-4" id="text-org527b112">
+<div id="outline-container-org5fd53b7" class="outline-4">
+<h4 id="org5fd53b7">Measurement toolbar</h4>
+<div class="outline-text-4" id="text-org5fd53b7">
 <ul class="org-ul">
 <li><b>Rate/Int</b> Toggle heart rate and time interval</li>
 <li><b>mean RR</b> Calculate mean interval from several intervals</li>
@@ -307,17 +285,17 @@ Note that not all toolbar buttons will be available all the time, depending on w
 </div>
 </div>
 </div>
-<div id="outline-container-org4e9cd2b" class="outline-3">
-<h3 id="org4e9cd2b">Menus</h3>
-<div class="outline-text-3" id="text-org4e9cd2b">
+<div id="outline-container-orgdcfcb52" class="outline-3">
+<h3 id="orgdcfcb52">Menus</h3>
+<div class="outline-text-3" id="text-orgdcfcb52">
 <p>
 Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
 </p>
 </div>
 </div>
-<div id="outline-container-orga1abf11" class="outline-3">
-<h3 id="orga1abf11">Keyboard shortcuts</h3>
-<div class="outline-text-3" id="text-orga1abf11">
+<div id="outline-container-org3558dc4" class="outline-3">
+<h3 id="org3558dc4">Keyboard shortcuts</h3>
+<div class="outline-text-3" id="text-org3558dc4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -381,11 +359,6 @@ Nearly all the functions of the app are contained in the main menu commands at t
 <tr>
 <td class="org-left">⌘=</td>
 <td class="org-left">Zoom to actual size</td>
-</tr>
-
-<tr>
-<td class="org-left">⌃E</td>
-<td class="org-left">Image editor</td>
 </tr>
 
 <tr>
