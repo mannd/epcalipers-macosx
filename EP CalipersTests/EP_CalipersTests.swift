@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import QTc
+@testable import MiniQTc
 @testable import EP_Calipers
 
 class EP_CalipersTests: XCTestCase {

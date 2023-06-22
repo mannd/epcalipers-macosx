@@ -21,7 +21,7 @@ extension UserDefaults {
     func setColor(_ color: NSColor?, forKey key: String) {
         var colorData: Data?
         if let color = color {
-            colorData = try? NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false)
+            colorData = try? NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: true)
         }
         set(colorData, forKey: key)
     }
