@@ -6,11 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
 <meta name="keywords" content="introduction, clavier, commencement rapide" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -41,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -190,68 +191,45 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
 <meta name="robots" content="anchors" />
 <meta name="robots" content="keywords" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
-<div id="outline-container-org8f4dc15" class="outline-2">
-<h2 id="org8f4dc15"><img src="../../shrd/64.png" alt="64.png" /> Introduction</h2>
-<div class="outline-text-2" id="text-org8f4dc15">
+<div id="content" class="content">
+<div id="outline-container-org96a0f2c" class="outline-2">
+<h2 id="org96a0f2c"><img src="../../shrd/64.png" alt="64.png" /> Introduction</h2>
+<div class="outline-text-2" id="text-org96a0f2c">
 <a name="EP Diagram basics"></a>
 </div>
-<div id="outline-container-orga344a4f" class="outline-3">
-<h3 id="orga344a4f">Compas électroniques</h3>
-<div class="outline-text-3" id="text-orga344a4f">
+<div id="outline-container-org4a0ba87" class="outline-3">
+<h3 id="org4a0ba87">Compas électroniques</h3>
+<div class="outline-text-3" id="text-org4a0ba87">
 <p>
 L'application <b>Compas EP</b> offre des <b>compas électroniques</b> pour mesurer les intervalles sur les images des enregistrements électrocardiographiques ou électrophysiologiques.  Dans le laboratoire d'électrophysiologie les compas électroniques font partie du système d'enregistrement informatisé.  L'application <b>Compas EP</b> fournit les mêmes compas électroniques pour votre Mac.  Les compas électroniques de <b>Compas EP</b> sont plus précis, plus faciles à utiliser, et moins dangereux que les compas mécaniques (ils n'ont pas de points tranchants!).
 </p>
 </div>
 </div>
-<div id="outline-container-org4936068" class="outline-3">
-<h3 id="org4936068">Commencement rapide</h3>
-<div class="outline-text-3" id="text-org4936068">
+<div id="outline-container-org2976a7e" class="outline-3">
+<h3 id="org2976a7e">Commencement rapide</h3>
+<div class="outline-text-3" id="text-org2976a7e">
 <p>
 Quand le <b>Compas EP</b> commence, un échantillon d'ECG et un compas de temps sont chargés.  Déplacer le compas en cliquant la barre transversale et en la faisant glisser avec la souris ou le trackpad.  Élargir et contracter le compas en cliquant la barre verticale et en le glissant.  Pincer et zoomer l'image de l'ECG ou utiliser les boutons de zoom pour l'agrandir ou le rétrécir selon votre besoin.  Si l'ECG est plus grand que votre écran, vous pouvez le glisser avec vos doigts ou la souris afin de trouver un endroit pour mesurer.  Le reste des instructions explique comment charger les images de l'ECG, ajouter et supprimer les compas, les étalonner, et rendre les calculs avancés comme l'intervalle QT corrigé.
 </p>
 </div>
 </div>
-<div id="outline-container-org1f51fa5" class="outline-3">
-<h3 id="org1f51fa5">Barres d’outils</h3>
-<div class="outline-text-3" id="text-org1f51fa5">
+<div id="outline-container-org2558219" class="outline-3">
+<h3 id="org2558219">Barres d’outils</h3>
+<div class="outline-text-3" id="text-org2558219">
 <p>
 L’application est contrôlée par les boutons de la barre d’outils en haut de la fênetre ou par le menu en haut de l’écran.  La barre d’outils ressemble ça:
 </p>
 
-<div id="org7c8e50e" class="figure">
+<div id="orgd5e70cd" class="figure">
 <p><img src="../gfx/EPCtoolbar.png" alt="EPCtoolbar.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Barre d’outils</p>
@@ -261,9 +239,9 @@ L’application est contrôlée par les boutons de la barre d’outils en haut d
 Noter que tous les boutons de la barre d'outils ne seront pas disponibles en permanence, selon que l'étalonnage a été effectué. Certains éléments de la barre d'outils sont désactivés en mode fenêtre transparente également. Les boutons désactivés sont "grisés". On peut personnaliser la barre d'outils.  Sur nouveaux Macs certaines fonctions sont disponibles sur la Touch Bar.
 </p>
 </div>
-<div id="outline-container-org24b9d26" class="outline-4">
-<h4 id="org24b9d26">Zoom toolbar</h4>
-<div class="outline-text-4" id="text-org24b9d26">
+<div id="outline-container-org3f6090a" class="outline-4">
+<h4 id="org3f6090a">Zoom toolbar</h4>
+<div class="outline-text-4" id="text-org3f6090a">
 <ul class="org-ul">
 <li><img src="../../shrd/TB_zoomIn.png" alt="TB_zoomIn.png" /> Zoom avant</li>
 <li><img src="../../shrd/TB_zoomOut.png" alt="TB_zoomOut.png" /> Zoom arrière</li>
@@ -271,9 +249,9 @@ Noter que tous les boutons de la barre d'outils ne seront pas disponibles en per
 </ul>
 </div>
 </div>
-<div id="outline-container-org9af4788" class="outline-4">
-<h4 id="org9af4788">Calipers toolbar</h4>
-<div class="outline-text-4" id="text-org9af4788">
+<div id="outline-container-org99949a5" class="outline-4">
+<h4 id="org99949a5">Calipers toolbar</h4>
+<div class="outline-text-4" id="text-org99949a5">
 <ul class="org-ul">
 <li><img src="../../shrd/caliper-20x20.png" alt="caliper-20x20.png" /> Ajouter un compas de temps</li>
 <li><img src="../../shrd/amplitude-caliper-20x20.png" alt="amplitude-caliper-20x20.png" /> Ajouter un compas d’amplitude</li>
@@ -283,9 +261,9 @@ Noter que tous les boutons de la barre d'outils ne seront pas disponibles en per
 </ul>
 </div>
 </div>
-<div id="outline-container-org4f4ee64" class="outline-4">
-<h4 id="org4f4ee64">Measurement toolbar</h4>
-<div class="outline-text-4" id="text-org4f4ee64">
+<div id="outline-container-org475777d" class="outline-4">
+<h4 id="org475777d">Measurement toolbar</h4>
+<div class="outline-text-4" id="text-org475777d">
 <ul class="org-ul">
 <li><b>Int/Fréq</b> Alterner l’intervalle et la fréquence cardiaque</li>
 <li><b>RR moyen</b> Calculer la fréquence cardiaque moyenne et l’intervalle moyen</li>
@@ -294,17 +272,17 @@ Noter que tous les boutons de la barre d'outils ne seront pas disponibles en per
 </div>
 </div>
 </div>
-<div id="outline-container-orgbb586ce" class="outline-3">
-<h3 id="orgbb586ce">Menus</h3>
-<div class="outline-text-3" id="text-orgbb586ce">
+<div id="outline-container-orgf7c9fa2" class="outline-3">
+<h3 id="orgf7c9fa2">Menus</h3>
+<div class="outline-text-3" id="text-orgf7c9fa2">
 <p>
 Presque toutes les fonctions de l’application sont contenues dans les commandes du menu principal en haut de l’écran.  Noter qu’il existe des raccourcis clavier dans le menu pour plusieurs fonctions du programme.  Par exemple, il est plus facile de faire tourner une image à l’aide d’une touche de raccourci clavier qu’en utilisant d’une commande de menu.  Comme pour les barres d’outils, certaines commandes de menu sont désactivées lorsque leur utilisation n’est pas autorisée.  Par exemple, la rotation de l’image n’est pas autorisée après étalonnage des compas.  Il est nécessaire d’effacer l’étalonnage pour restaurer les commandes de rotation.
 </p>
 </div>
 </div>
-<div id="outline-container-org315f51c" class="outline-3">
-<h3 id="org315f51c">Raccourcis clavier</h3>
-<div class="outline-text-3" id="text-org315f51c">
+<div id="outline-container-org74625ce" class="outline-3">
+<h3 id="org74625ce">Raccourcis clavier</h3>
+<div class="outline-text-3" id="text-org74625ce">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -368,11 +346,6 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 <tr>
 <td class="org-left">⌘=</td>
 <td class="org-left">Zoom à dimension réelle</td>
-</tr>
-
-<tr>
-<td class="org-left">⌃E</td>
-<td class="org-left">Éditeur d’image</td>
 </tr>
 
 <tr>

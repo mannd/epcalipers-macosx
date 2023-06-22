@@ -35,10 +35,6 @@ Avec un trackpad, vous pouvez réajuster la position de l’image en utilisant l
 Si l’image d’ECG est tournée ou inclinée, utiliser la commande de menu *Image | Rotation* pour la corriger.  Vous pouvez pivoter l’image par les incréments de 90°, 1°, ou 0,1° dans les deux directions. Les raccourcis clavier de rotation sont utiles.  *Important:* Vous devez pivoter l’image avant l’étalonnage des compas et avant que vous fassiez des mesures. Quand une image a éte étalonnée, la rotation affectera l’exactitude de l’étalonnage.  Pour cette raison, *vous pouvez seulement tourner une image avant l’étalonnage.*  Si vous devez tourner l’image après l’étalonnage, vous devrez effacer l’étalonnage (en utilisant *Effacer* sur la barre d’outils ou la commande de menu *Compas | Effacer*) avant que vous puissiez la tourner. 
 ** Zoom
 Si vous avez un trackpad, vous pouvez pincer pour zoomer.  Vous pouvez aussi utiliser la barre d’outils /Zoom/ pour zoomer en avant et en arrière ou pour rétablir l’image à sa dimension originale.  Le zoom est aussi disponible dans le menu *Image*.  Noter que l'étalonnage reste correct quand l'image est zoomée.  Il est inutile de réétalonner les compas après zoomer.
-** Éditeur d’image
-Utiliser la commande de menu *Image | Éditeur d’image* pour ouvrir l’éditeur d’image.  Cet éditeur a beaucoup d’options pour modifier l’apparence de l’ECG, p.e. le changement de couleur ou de contraste.
-#+CAPTION: Éditeur d’image
-[[../gfx/EPCImageEdit.png]]
 * Fênetre transparente
 ** Quel est le mode de fênetre transparente?
 Parfois il est plus facile d’ouvrir une image ou un fichier PDF en utilisant une autre application, p.e. votre navigateur web, et puis d’effectuer les mesures directement sur cette image.  *Compas EP* permit cela en utilisant /le mode de fênetre transparente/.  Dans ce mode, la fênetre principale est transparente, permettant la mesure de ce qui est sous la fênetre avec les compas.  Le mode de fênetre transparente ressemble à ça:

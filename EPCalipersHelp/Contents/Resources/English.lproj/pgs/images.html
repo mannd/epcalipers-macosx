@@ -6,11 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
 <meta name="keywords" content="open files, images, PDFs" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -41,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -190,173 +191,136 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
 <meta name="robots" content="anchors" />
 <meta name="robots" content="keywords" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
-<div id="outline-container-orgab29366" class="outline-2">
-<h2 id="orgab29366"><img src="../../shrd/64.png" alt="64.png" /> Images</h2>
-<div class="outline-text-2" id="text-orgab29366">
+<div id="content" class="content">
+<div id="outline-container-org30ef01b" class="outline-2">
+<h2 id="org30ef01b"><img src="../../shrd/64.png" alt="64.png" /> Images</h2>
+<div class="outline-text-2" id="text-org30ef01b">
 <a name="EP Diagram images"></a>
 <p>
 Images include files in typical image formats such as JPG and PNG, as well as PDF files.  When you start <b>EP Calipers</b> a sample normal ECG is loaded.  To load your own ECG images use one of the following methods.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd8bc4ce" class="outline-2">
-<h2 id="orgd8bc4ce">Loading an image</h2>
-<div class="outline-text-2" id="text-orgd8bc4ce">
+<div id="outline-container-org868d7c3" class="outline-2">
+<h2 id="org868d7c3">Loading an image</h2>
+<div class="outline-text-2" id="text-org868d7c3">
 </div>
-<div id="outline-container-org0acaa3c" class="outline-3">
-<h3 id="org0acaa3c">Open command</h3>
-<div class="outline-text-3" id="text-org0acaa3c">
+<div id="outline-container-orgf422dc4" class="outline-3">
+<h3 id="orgf422dc4">Open command</h3>
+<div class="outline-text-3" id="text-orgf422dc4">
 <p>
 Use the <b>File | Open</b> or <b>File | Open Recent</b> menu commands to select an image stored on your computer.
 </p>
 </div>
 </div>
-<div id="outline-container-org897ec4a" class="outline-3">
-<h3 id="org897ec4a">Drag and drop</h3>
-<div class="outline-text-3" id="text-org897ec4a">
+<div id="outline-container-org5b71dde" class="outline-3">
+<h3 id="org5b71dde">Drag and drop</h3>
+<div class="outline-text-3" id="text-org5b71dde">
 <p>
 You can drag and drop an image file onto the app window and it will load.
 </p>
 </div>
 </div>
-<div id="outline-container-org552b8f6" class="outline-3">
-<h3 id="org552b8f6">Right click menu</h3>
-<div class="outline-text-3" id="text-org552b8f6">
+<div id="outline-container-org7ba6e5a" class="outline-3">
+<h3 id="org7ba6e5a">Right click menu</h3>
+<div class="outline-text-3" id="text-org7ba6e5a">
 <p>
 Even when <b>EP Calipers</b> is not open, you can use the right click menu to open an image file.  The right click menu is opened either by right clicking on a file if you have a mouse, or using the left mouse button with the Control key held down, or, if you have a track pad, two-finger tapping on the trackpad.  After selecting <b>Open With</b> a list of apps will appear.  <b>EP Calipers</b> will be on the list of apps that can open the image.  Click it and the app will start with the loaded image.  This method is especially useful for opening email attachments.
 </p>
 </div>
 </div>
-<div id="outline-container-org9c8a2e8" class="outline-3">
-<h3 id="org9c8a2e8">Multi-page PDFs</h3>
-<div class="outline-text-3" id="text-org9c8a2e8">
+<div id="outline-container-orge983d36" class="outline-3">
+<h3 id="orge983d36">Multi-page PDFs</h3>
+<div class="outline-text-3" id="text-orge983d36">
 <p>
 If you load a PDF file with multiple pages, the first page will be shown initially.  You can use the <b>Image | Previous Page</b> and <b>Next Page</b> menu items to change pages, or the ^P and ^N (Control-P and Control-N) keys on your keyboard.  Use <b>Image | Go to page</b> to jump to a specific PDF page.
 </p>
 </div>
 </div>
-<div id="outline-container-org069d545" class="outline-3">
-<h3 id="org069d545">Opening <i>AliveCor™</i> ECGs</h3>
-<div class="outline-text-3" id="text-org069d545">
+<div id="outline-container-org1b321c8" class="outline-3">
+<h3 id="org1b321c8">Opening <i>AliveCor™</i> ECGs</h3>
+<div class="outline-text-3" id="text-org1b321c8">
 <p>
 <i>AliveCor</i> ECGs can be saved as PDF files.  Load them with any of the above methods.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org185f3da" class="outline-2">
-<h2 id="org185f3da">Adjusting the image</h2>
-<div class="outline-text-2" id="text-org185f3da">
+<div id="outline-container-orgc2ebcd8" class="outline-2">
+<h2 id="orgc2ebcd8">Adjusting the image</h2>
+<div class="outline-text-2" id="text-orgc2ebcd8">
 </div>
-<div id="outline-container-org9fe184e" class="outline-3">
-<h3 id="org9fe184e">Moving the image</h3>
-<div class="outline-text-3" id="text-org9fe184e">
+<div id="outline-container-org4a872ad" class="outline-3">
+<h3 id="org4a872ad">Moving the image</h3>
+<div class="outline-text-3" id="text-org4a872ad">
 <p>
 If you have a track pad, you can move the image around using two finger scrolling.  You can also scroll using a mouse. 
 </p>
 </div>
 </div>
-<div id="outline-container-org7c51ec1" class="outline-3">
-<h3 id="org7c51ec1">Rotation</h3>
-<div class="outline-text-3" id="text-org7c51ec1">
+<div id="outline-container-orgcf70df3" class="outline-3">
+<h3 id="orgcf70df3">Rotation</h3>
+<div class="outline-text-3" id="text-orgcf70df3">
 <p>
 If your ECG image is rotated or tilted, use the <b>Image | Rotation</b> menu commands to correct this.  You can rotate by 90°, 1°, or 0.1° increments in either direction.  The keyboard shortcuts for rotation are useful.  <b>Important:</b> You should rotate your image before calibrating your calipers or making measurements.  Once an image has been calibrated, rotation will affect the accuracy of the calibration.  For this reason, <b>you can only rotate an image before you calibrate.</b>  If you need to rotate the image after calibration, you will need to clear calibration (using <b>Clear</b> on the toolbar or the <b>Calipers | Clear</b> menu command) before you can rotate.
 </p>
 </div>
 </div>
-<div id="outline-container-org5bceb44" class="outline-3">
-<h3 id="org5bceb44">Zooming</h3>
-<div class="outline-text-3" id="text-org5bceb44">
+<div id="outline-container-org6cb1e53" class="outline-3">
+<h3 id="org6cb1e53">Zooming</h3>
+<div class="outline-text-3" id="text-org6cb1e53">
 <p>
 If you have a trackpad, pinch to zoom works.  You can also use the <i>Zoom Toolbar</i> to zoom in and out, or to set the image to its actual size.  Zooming is also available in the <b>Image</b> menu.  Note that caliper calibration <b>does</b> adjust with zooming.  There is no need to recalibrate the calipers after zooming.
 </p>
 </div>
 </div>
-<div id="outline-container-orge35fc74" class="outline-3">
-<h3 id="orge35fc74">Image Editor</h3>
-<div class="outline-text-3" id="text-orge35fc74">
-<p>
-Use the <b>Image | Image Editor</b> menu command to open the <i>Image Editor</i>.  The editor has many options that can be used to alter the appearance of the ECG, such as changing its color or contrast.
-</p>
-
-<div id="orga600f6d" class="figure">
-<p><img src="../gfx/EPCImageEdit.png" alt="EPCImageEdit.png" />
-</p>
-<p><span class="figure-number">Figure 1: </span>Image Editor</p>
 </div>
+<div id="outline-container-org69cb921" class="outline-2">
+<h2 id="org69cb921">Transparent windows</h2>
+<div class="outline-text-2" id="text-org69cb921">
 </div>
-</div>
-</div>
-<div id="outline-container-orgb436634" class="outline-2">
-<h2 id="orgb436634">Transparent windows</h2>
-<div class="outline-text-2" id="text-orgb436634">
-</div>
-<div id="outline-container-org04ba65b" class="outline-3">
-<h3 id="org04ba65b">What is transparent window mode?</h3>
-<div class="outline-text-3" id="text-org04ba65b">
+<div id="outline-container-org45e4ff5" class="outline-3">
+<h3 id="org45e4ff5">What is transparent window mode?</h3>
+<div class="outline-text-3" id="text-org45e4ff5">
 <p>
 Sometimes it is easier to open an image or PDF file on your Desktop using the Preview app, and then make measurements directly on this image.  <b>EP Calipers</b> allows you do this using <i>transparent window mode</i>.  In this mode, the main window is transparent, allowing you to measure whatever is underneath the window using calipers.  Transparent window mode looks like this:
 </p>
 
-<div id="orga64c076" class="figure">
+<div id="orgf14b212" class="figure">
 <p><img src="../gfx/transparentwindow.png" alt="transparentwindow.png" />
 </p>
-<p><span class="figure-number">Figure 2: </span>Transparent window mode</p>
+<p><span class="figure-number">Figure 1: </span>Transparent window mode</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org388f7ab" class="outline-3">
-<h3 id="org388f7ab">Activating transparent window mode</h3>
-<div class="outline-text-3" id="text-org388f7ab">
+<div id="outline-container-orgde78ca3" class="outline-3">
+<h3 id="orgde78ca3">Activating transparent window mode</h3>
+<div class="outline-text-3" id="text-orgde78ca3">
 <p>
 You can quickly toggle between transparent window mode and normal mode using the <b>Image | Transparent Window</b> menu item or its keyboard shortcut Control-H.  If you want the app to start up in transparent window mode, use the <b>EP Calipers | Show Preferences</b> menu item to display the <a href="./preferences.html">Preferences</a> dialog.  Check the <i>Transparent window</i> checkbox to change to transparent window mode.  Press <b>OK</b> and this setting will persist when you reopen the app.  Uncheck the check box to return to normal image mode.
 </p>
 </div>
 </div>
-<div id="outline-container-org059c8eb" class="outline-3">
-<h3 id="org059c8eb">Things to watch out for with transparent windows</h3>
-<div class="outline-text-3" id="text-org059c8eb">
+<div id="outline-container-orgc3011e5" class="outline-3">
+<h3 id="orgc3011e5">Things to watch out for with transparent windows</h3>
+<div class="outline-text-3" id="text-orgc3011e5">
 <p>
 When you load an image into <b>EP Calipers</b> the normal way and calibrate your calipers, the program will automatically adjust the calibration factor when you zoom the image.  In transparent window mode, the program has no clue if you zoom the underlying image that the calibration is now incorrect.  Take care to recalibrate your calipers if you zoom your image in a program external to <b>EP Calipers</b>.  Also note that if you run <b>EP Calipers</b> in full screen mode, transparent window mode won't work, since there is no Desktop under the window in full screen mode.  Finally, if you open a file while in transparent window mode, a dialog will appear asking if you wish to leave transparent window mode in order to load the image file.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6f43e02" class="outline-2">
-<h2 id="org6f43e02">Saving an image from <b>EP Calipers</b></h2>
-<div class="outline-text-2" id="text-org6f43e02">
+<div id="outline-container-orgd5d9ef0" class="outline-2">
+<h2 id="orgd5d9ef0">Saving an image from <b>EP Calipers</b></h2>
+<div class="outline-text-2" id="text-orgd5d9ef0">
 <p>
 Use the Mac system screenshot functions if you wish to save an image from <b>EP Calipers</b>.  <i>Command-Shift 3</i> takes a screenshot of your entire desktop.  Press <i>Command-Shift 4</i> and then <i>Space</i> to set up taking a screenshot of a window on the desktop.  Click the camera icon on the <b>EP Calipers</b> window.  Press the <i>Escape</i> (esc) key to cancel a screenshot.  
 </p>

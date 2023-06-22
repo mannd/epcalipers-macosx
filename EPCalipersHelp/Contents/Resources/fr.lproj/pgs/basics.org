@@ -55,7 +55,6 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 | ⌘+     | Zoom avant                                  |
 | ⌘-     | Zoom arrière                                |
 | ⌘=     | Zoom à dimension réelle                     |
-| ⌃E     | Éditeur d’image                             |
 | ⌃H     | Basculer la fenêtre transparente            |
 | ⌃T     | Ajouter un compas de temps                  |
 | ⌃A     | Ajouter un compas d’amplitude               |

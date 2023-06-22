@@ -6,11 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
 <meta name="keywords" content="images" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -41,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -190,174 +191,137 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
 <meta name="robots" content="anchors" />
 <meta name="robots" content="keywords" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
-<div id="outline-container-org16d15c6" class="outline-2">
-<h2 id="org16d15c6"><img src="../../shrd/64.png" alt="64.png" /> Images</h2>
-<div class="outline-text-2" id="text-org16d15c6">
+<div id="content" class="content">
+<div id="outline-container-org1286fff" class="outline-2">
+<h2 id="org1286fff"><img src="../../shrd/64.png" alt="64.png" /> Images</h2>
+<div class="outline-text-2" id="text-org1286fff">
 <a name="EP Diagram images"></a>
 <p>
 Parmi les images sont des formats typiques comme JPG et PNG ansi que les fichiers PDF.  Quand vous démarrez <b>Compas EP</b> un exemple ECG est chargé.  Pour charger votre images ECG vous utilisez l’une des techniques suivantes.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc6eb479" class="outline-2">
-<h2 id="orgc6eb479">Charger une image</h2>
-<div class="outline-text-2" id="text-orgc6eb479">
+<div id="outline-container-org524c2c4" class="outline-2">
+<h2 id="org524c2c4">Charger une image</h2>
+<div class="outline-text-2" id="text-org524c2c4">
 </div>
-<div id="outline-container-orgbc439ed" class="outline-3">
-<h3 id="orgbc439ed">Ouvrir un fichier</h3>
-<div class="outline-text-3" id="text-orgbc439ed">
+<div id="outline-container-orgb246e2c" class="outline-3">
+<h3 id="orgb246e2c">Ouvrir un fichier</h3>
+<div class="outline-text-3" id="text-orgb246e2c">
 <p>
 Utiliser la commande de menu <b>Fichier | Ouvrir</b> ou <b>Fichier | Ouvrir un élément récent</b> pour choisir une image enregistrée sur votre ordinateur.
 </p>
 </div>
 </div>
-<div id="outline-container-orga48b187" class="outline-3">
-<h3 id="orga48b187">Glisser-déposer</h3>
-<div class="outline-text-3" id="text-orga48b187">
+<div id="outline-container-orga0146dc" class="outline-3">
+<h3 id="orga0146dc">Glisser-déposer</h3>
+<div class="outline-text-3" id="text-orga0146dc">
 <p>
 Vous pouvez glisser-déposer un fichier d’image sur la fênetre d’application et il chargera.
 </p>
 </div>
 </div>
-<div id="outline-container-org44de118" class="outline-3">
-<h3 id="org44de118">Menu par clic-droit</h3>
-<div class="outline-text-3" id="text-org44de118">
+<div id="outline-container-org4da5724" class="outline-3">
+<h3 id="org4da5724">Menu par clic-droit</h3>
+<div class="outline-text-3" id="text-org4da5724">
 <p>
 Même quand <b>Compas EP</b> n’est pas ouvert, vous pouvez utiliser le menu par clic-droit pour ouvrir un fichier d’image.  Le menu par clic-droit est ouvert soit par un clic-droit sur un fichier si vous avez une souris ou en utilisant le bouton gauche de souris avec la touche contrôle, ou, si vous avez un trackpad, en le tappant avec deux droigts.  Après la sélection de <b>Ouvrir avec</b> une liste d’applications apparaîtra.  <b>Compas EP</b> sera dans la liste d’applications qui peut ouvrir l’image.  Cliquer-le et l’application commencera avec l’image chargée.  Cette méthode est très utile en ouvrant de fichiers joints.
 </p>
 </div>
 </div>
-<div id="outline-container-orgee4dcb2" class="outline-3">
-<h3 id="orgee4dcb2">PDFs à pages multiples</h3>
-<div class="outline-text-3" id="text-orgee4dcb2">
+<div id="outline-container-org3aa036d" class="outline-3">
+<h3 id="org3aa036d">PDFs à pages multiples</h3>
+<div class="outline-text-3" id="text-org3aa036d">
 <p>
 Quand les fichiers PDF ont plus d'une page, l'application affichera la première page au début. Vous pouvez naviguer sur les autres pages avec la sélection des touches <b>^P</b> et <b>^N</b> ou en utilisant les commandes de menu <b>Image | Page précédente</b> et <b>Image | Page suivante</b>.  Naviguer à une page specifique en utilisant la commande de menu <b>Image | Aller à la page</b>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc51d8c5" class="outline-3">
-<h3 id="orgc51d8c5">Charger un ECG d’/AliveCor™ Kardia/</h3>
-<div class="outline-text-3" id="text-orgc51d8c5">
+<div id="outline-container-org18e51c5" class="outline-3">
+<h3 id="org18e51c5">Charger un ECG d’/AliveCor™ Kardia/</h3>
+<div class="outline-text-3" id="text-org18e51c5">
 <p>
 Les ECGs d’/AliveCor/ peuvent être enregistrés comme des fichiers PDF.  Charger-les avec les méthodes précédentes.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb65b8b" class="outline-2">
-<h2 id="orgfb65b8b">Ajustement de l’image</h2>
-<div class="outline-text-2" id="text-orgfb65b8b">
+<div id="outline-container-org65fb3e6" class="outline-2">
+<h2 id="org65fb3e6">Ajustement de l’image</h2>
+<div class="outline-text-2" id="text-org65fb3e6">
 </div>
-<div id="outline-container-orgebe238d" class="outline-3">
-<h3 id="orgebe238d">Déplacer l’image</h3>
-<div class="outline-text-3" id="text-orgebe238d">
+<div id="outline-container-org0539757" class="outline-3">
+<h3 id="org0539757">Déplacer l’image</h3>
+<div class="outline-text-3" id="text-org0539757">
 <p>
 Avec un trackpad, vous pouvez réajuster la position de l’image en utilisant le déroulement avec deux droigts.  Vous pouvez aussi déplacer une image en utilisant une souris.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc4aba4b" class="outline-3">
-<h3 id="orgc4aba4b">Rotation</h3>
-<div class="outline-text-3" id="text-orgc4aba4b">
+<div id="outline-container-org975ffc4" class="outline-3">
+<h3 id="org975ffc4">Rotation</h3>
+<div class="outline-text-3" id="text-org975ffc4">
 <p>
 Si l’image d’ECG est tournée ou inclinée, utiliser la commande de menu <b>Image | Rotation</b> pour la corriger.  Vous pouvez pivoter l’image par les incréments de 90°, 1°, ou 0,1° dans les deux directions. Les raccourcis clavier de rotation sont utiles.  <b>Important:</b> Vous devez pivoter l’image avant l’étalonnage des compas et avant que vous fassiez des mesures. Quand une image a éte étalonnée, la rotation affectera l’exactitude de l’étalonnage.  Pour cette raison, <b>vous pouvez seulement tourner une image avant l’étalonnage.</b>  Si vous devez tourner l’image après l’étalonnage, vous devrez effacer l’étalonnage (en utilisant <b>Effacer</b> sur la barre d’outils ou la commande de menu <b>Compas | Effacer</b>) avant que vous puissiez la tourner. 
 </p>
 </div>
 </div>
-<div id="outline-container-org3ecd6d5" class="outline-3">
-<h3 id="org3ecd6d5">Zoom</h3>
-<div class="outline-text-3" id="text-org3ecd6d5">
+<div id="outline-container-org844cbe1" class="outline-3">
+<h3 id="org844cbe1">Zoom</h3>
+<div class="outline-text-3" id="text-org844cbe1">
 <p>
 Si vous avez un trackpad, vous pouvez pincer pour zoomer.  Vous pouvez aussi utiliser la barre d’outils <i>Zoom</i> pour zoomer en avant et en arrière ou pour rétablir l’image à sa dimension originale.  Le zoom est aussi disponible dans le menu <b>Image</b>.  Noter que l'étalonnage reste correct quand l'image est zoomée.  Il est inutile de réétalonner les compas après zoomer.
 </p>
 </div>
 </div>
-<div id="outline-container-orgce1bd9b" class="outline-3">
-<h3 id="orgce1bd9b">Éditeur d’image</h3>
-<div class="outline-text-3" id="text-orgce1bd9b">
-<p>
-Utiliser la commande de menu <b>Image | Éditeur d’image</b> pour ouvrir l’éditeur d’image.  Cet éditeur a beaucoup d’options pour modifier l’apparence de l’ECG, p.e. le changement de couleur ou de contraste.
-</p>
-
-<div id="orgfbdc6e3" class="figure">
-<p><img src="../gfx/EPCImageEdit.png" alt="EPCImageEdit.png" />
-</p>
-<p><span class="figure-number">Figure 1: </span>Éditeur d’image</p>
 </div>
+<div id="outline-container-orgd1f30ea" class="outline-2">
+<h2 id="orgd1f30ea">Fênetre transparente</h2>
+<div class="outline-text-2" id="text-orgd1f30ea">
 </div>
-</div>
-</div>
-<div id="outline-container-orga1c9dff" class="outline-2">
-<h2 id="orga1c9dff">Fênetre transparente</h2>
-<div class="outline-text-2" id="text-orga1c9dff">
-</div>
-<div id="outline-container-org7c4f6d4" class="outline-3">
-<h3 id="org7c4f6d4">Quel est le mode de fênetre transparente?</h3>
-<div class="outline-text-3" id="text-org7c4f6d4">
+<div id="outline-container-orgede746d" class="outline-3">
+<h3 id="orgede746d">Quel est le mode de fênetre transparente?</h3>
+<div class="outline-text-3" id="text-orgede746d">
 <p>
 Parfois il est plus facile d’ouvrir une image ou un fichier PDF en utilisant une autre application, p.e. votre navigateur web, et puis d’effectuer les mesures directement sur cette image.  <b>Compas EP</b> permit cela en utilisant <i>le mode de fênetre transparente</i>.  Dans ce mode, la fênetre principale est transparente, permettant la mesure de ce qui est sous la fênetre avec les compas.  Le mode de fênetre transparente ressemble à ça:
 </p>
 
-<div id="orga8451ea" class="figure">
+<div id="orgd38209c" class="figure">
 <p><img src="../gfx/transparentwindow.png" alt="transparentwindow.png" />
 </p>
-<p><span class="figure-number">Figure 2: </span>le mode de fênetre transparente</p>
+<p><span class="figure-number">Figure 1: </span>le mode de fênetre transparente</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgffa58f0" class="outline-3">
-<h3 id="orgffa58f0">L’activation du mode de fênetre transparente</h3>
-<div class="outline-text-3" id="text-orgffa58f0">
+<div id="outline-container-org43a5b62" class="outline-3">
+<h3 id="org43a5b62">L’activation du mode de fênetre transparente</h3>
+<div class="outline-text-3" id="text-org43a5b62">
 <p>
 Vouv pouvez rapidement basculer entre la fenêtre transparente et une image en utilisant la commande de menu <b>Image | Fenêtre transparente</b> ou la touche <i>Control-H</i>.  Si vous voulez que l'application démarre avec une fenêtre transparent, utilisez la commande de menu <b>Compas EP | Préférences&#x2026;</b> pour montrer la boîte de dialogue <a href="./preferences.html">Préférences</a>.  Cocher la case <i>Fênetre transparente</i> pour changer au mode de fênetre transparente.  Décocher la case pour retourner au mode d’image normale. 
 </p>
 </div>
 </div>
-<div id="outline-container-orge180ff6" class="outline-3">
-<h3 id="orge180ff6">Les prudences en utilisant le mode de fênetre transparente</h3>
-<div class="outline-text-3" id="text-orge180ff6">
+<div id="outline-container-org1deb5f4" class="outline-3">
+<h3 id="org1deb5f4">Les prudences en utilisant le mode de fênetre transparente</h3>
+<div class="outline-text-3" id="text-org1deb5f4">
 <p>
 Quand vous chargez une image dans le mode d’image normale et étalonnez les compas, l’application va automatiquement ajuster le facteur d’étalonnage en zoomant l’image.  Dans le mode de fênetre transparente, ce n’est pas possible de l’ajuster automatiquement.  Il faut réétalonner les compas si vous zoomez l’image avec un program externe.  Noter aussi qu’en utilisant le mode plein écran, le mode de fênetre transparente ne marche pas.  Enfin, si vous charger un fichier dans le mode de fênetre transparente, une boîte de dialogue apparaîtra qui se demande si vous voulez sortir le mode de fênetre transparente pour le charger.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc815942" class="outline-2">
-<h2 id="orgc815942">Enregistrer une image</h2>
-<div class="outline-text-2" id="text-orgc815942">
+<div id="outline-container-orga3e3e71" class="outline-2">
+<h2 id="orga3e3e71">Enregistrer une image</h2>
+<div class="outline-text-2" id="text-orga3e3e71">
 <p>
 Prendre une capture d’écran pour enregistrer une image de <i>Compas EP</i>.  Prendre une capture d’écran du bureau complet en appuyant <i>Commande-Maj-3</i>.  Appuyer <i>Commande-Maj-4</i> et puis la touche <i>Espace</i> pour prendre une capture d’écran d’une fênetre.  Cliquer l’icône de camera sur la fênetre de <b>Compas EP</b>.  Appuyer la touche <i>Échap</i> pour annuler une capture d’écran.
 </p>
