@@ -112,6 +112,35 @@ class EP_CalipersTests: XCTestCase {
         cal.rawUnits = "msec";
         XCTAssert(!cal.unitsAreMM);
     }
+
+    func testNoNegBPM() {
+        let cal = Calibration()
+        cal.calibrated = true
+        cal.direction = .horizontal
+        cal.offset = CGPoint(x: 100.0, y: 0.0)
+        cal.originalZoom = 1.0
+        cal.currentZoom = 1.0
+        cal.originalCalFactor = 1.0
+        cal.calibrationString = "1000 msec"
+        cal.rawUnits = "msec"
+        let c = Caliper()
+        c.calibration = cal
+        c.bar1Position = 1000
+        c.bar2Position = 2000
+        var m = c.measurement()
+        XCTAssertEqual(m, "1,000 msec")
+        cal.displayRate = true
+        m = c.measurement()
+        XCTAssertEqual(m, "60 bpm")
+        cal.displayRate = false
+        c.bar1Position = 2000
+        c.bar2Position = 1000
+        m = c.measurement()
+        XCTAssertEqual(m, "-1,000 msec")
+        cal.displayRate = true
+        m = c.measurement()
+        XCTAssertEqual(m, "60 bpm")
+    }
     
     func testIsAngleCaliper() {
         let caliper = Caliper()
