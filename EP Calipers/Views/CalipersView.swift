@@ -80,6 +80,10 @@ class CalipersView: NSView {
     }
 
     override func mouseDown(with theEvent: NSEvent) {
+        // Ctrl-left click emulates right click.
+        if theEvent.modifierFlags.contains(.control) {
+            return self.rightMouseDown(with: theEvent)
+        }
         let location = theEvent.locationInWindow
         selectedCaliper = getSelectedCaliper(location)
         if let selectedCaliper = selectedCaliper {
