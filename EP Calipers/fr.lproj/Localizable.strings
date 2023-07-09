@@ -137,7 +137,7 @@
 
 "\nQTc = %.4g %@ (%@ formula)" ="\nQTc = %.4g %@ (formule de %@)";
 
-"Tweak %@ with arrow keys and ⌘-arrow keys.  Press Escape (esc) to stop tweaking." = "Régler %@ en utilisant les touches fléchées et ⌘-fléchées.  Appuyer sur la touche Échap pour quitter.";
+"tweakMessage" = "Régler %@ en utilisant les touches fléchées et ⌘-fléchées.  Cliquez avec deux doigts sur un autre composant du compas pour changer le composant que vous souhaitez déplacer.  Appuyer sur la touche Échap pour quitter.";
 
 "left bar" = "la barre gauche";
 

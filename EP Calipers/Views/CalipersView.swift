@@ -257,7 +257,7 @@ class CalipersView: NSView {
         chosenCaliper?.isTweaking = true
         clearChosenComponents(exceptFor: chosenCaliper)
         if let componentName = Caliper.componentName(chosenCaliper?.chosenComponent ?? .noComponent) {
-            let message = String(format: NSLocalizedString("Tweak %@ with arrow keys and ⌘-arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
+            let message = String(format: NSLocalizedString("tweakMessage", comment:""), componentName)
             if !isTweakingComponent {
                 delegate?.showMessageAndSaveLast(message)
                 isTweakingComponent = true

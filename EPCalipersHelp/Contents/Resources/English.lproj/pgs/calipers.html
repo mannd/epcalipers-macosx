@@ -6,11 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="David Mann" />
 <meta name="keywords" content="calipers, calibration" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -41,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -190,104 +191,81 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 <style  type="text/css">:root { color-scheme: light dark; }</style>
 <meta name="robots" content="anchors" />
 <meta name="robots" content="keywords" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
-<div id="outline-container-org8fa5581" class="outline-2">
-<h2 id="org8fa5581"><img src="../../shrd/64.png" alt="64.png" /> Calipers</h2>
-<div class="outline-text-2" id="text-org8fa5581">
+<div id="content" class="content">
+<div id="outline-container-org28af824" class="outline-2">
+<h2 id="org28af824"><img src="../../shrd/64.png" alt="64.png" /> Calipers</h2>
+<div class="outline-text-2" id="text-org28af824">
 <a name="EP Diagram calipers"></a>
 </div>
 </div>
-<div id="outline-container-orge698801" class="outline-2">
-<h2 id="orge698801">Adding and deleting calipers</h2>
-<div class="outline-text-2" id="text-orge698801">
+<div id="outline-container-orged7aaaf" class="outline-2">
+<h2 id="orged7aaaf">Adding and deleting calipers</h2>
+<div class="outline-text-2" id="text-orged7aaaf">
 <p>
 Calipers come in three flavors.  Calipers with a horizontal crossbar and vertical sidebars are used to make time measurements and are called <i>time calipers</i>.  Calipers with a vertical crossbar and horizontal sidebars are used to make amplitude measurements and are called, you guessed it, <i>amplitude calipers</i>.  Finally <i>angle calipers</i> are used to measure angles, such as the 𝞫 angle in Brugada syndrome.
 </p>
 </div>
-<div id="outline-container-org9cebd15" class="outline-3">
-<h3 id="org9cebd15">Add Calipers</h3>
-<div class="outline-text-3" id="text-org9cebd15">
+<div id="outline-container-org5d5bc06" class="outline-3">
+<h3 id="org5d5bc06">Add Calipers</h3>
+<div class="outline-text-3" id="text-org5d5bc06">
 <p>
 Add calipers by clicking on one of the caliper icons on the toolbar, or use the <b>Caliper</b> menu to do this.
 </p>
 
-<div id="orgfdce43b" class="figure">
+<div id="orgcba6ad1" class="figure">
 <p><img src="../gfx/EPCCaliperIcons.png" alt="EPCCaliperIcons.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Add Calipers</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org9cd177c" class="outline-3">
-<h3 id="org9cd177c">Selecting Calipers</h3>
-<div class="outline-text-3" id="text-org9cd177c">
+<div id="outline-container-org0e04d85" class="outline-3">
+<h3 id="org0e04d85">Selecting Calipers</h3>
+<div class="outline-text-3" id="text-org0e04d85">
 <p>
 In order to make measurements or calibrate, it is necessary to "select" a single caliper when there are multiple calipers on the screen.  A single mouse click or single tap on any part of a caliper selects it.  A selected caliper is evident because it is a different color (by default red, but you can change this) than unselected calipers (by default blue).  Single-tapping or single-clicking a selected caliper will unselect it.  Only one caliper at a time can be selected.
 </p>
 
-<div id="org3f3ca07" class="figure">
+<div id="org2cf7ded" class="figure">
 <p><img src="../gfx/EPCSelectedCaliper.png" alt="EPCSelectedCaliper.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Three different types of calipers (time, amplitude, and angle).  The red time caliper is selected.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgdc7dcc6" class="outline-3">
-<h3 id="orgdc7dcc6">Deleting Calipers</h3>
-<div class="outline-text-3" id="text-orgdc7dcc6">
+<div id="outline-container-orgba328e0" class="outline-3">
+<h3 id="orgba328e0">Deleting Calipers</h3>
+<div class="outline-text-3" id="text-orgba328e0">
 <p>
 Double-tap on the trackpad or double-click with a mouse on a caliper to delete it.  A selected caliper (highlighted) can be deleted using the keyboard <i>Delete</i> key, or the <b>Caliper | Delete Selected Caliper</b> menu item.  All calipers can be deleted at once using <i>Command-Delete</i> on the keyboard, or the <b>Caliper | Delete All Calipers</b> menu item.   Note that after calibration, even if you delete all calibrated calipers, new calipers that are added will retain calibration.
 </p>
 </div>
 </div>
-<div id="outline-container-org8107bf3" class="outline-3">
-<h3 id="org8107bf3">Caliper Colors</h3>
-<div class="outline-text-3" id="text-org8107bf3">
+<div id="outline-container-org3023206" class="outline-3">
+<h3 id="org3023206">Caliper Colors</h3>
+<div class="outline-text-3" id="text-org3023206">
 <p>
 If you right-click on a caliper with your mouse, or two-finger click on your trackpad, the secondary menu will appear.  The first item on this menu is <b>Caliper Color</b>.  Click this option, and the color selector appears.  Use the color selector to change the color of the caliper you clicked on.  The color change will only affect the individual caliper you clicked on.  You can change the default caliper color of new calipers by changing <a href="./preferences.html">Preferences</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-org60b66e8" class="outline-3">
-<h3 id="org60b66e8">Marching calipers</h3>
-<div class="outline-text-3" id="text-org60b66e8">
+<div id="outline-container-orgab8a9be" class="outline-3">
+<h3 id="orgab8a9be">Marching calipers</h3>
+<div class="outline-text-3" id="text-orgab8a9be">
 <p>
 Right-clicking a <i>time caliper</i> with your mouse, or clicking with two fingers on the trackpad will open the secondary menu with the option <b>Marching Caliper</b> available.  Click this and the time caliper will be converted to a <i>marching caliper</i>.  Vertical caliper lines will appear equal to the caliper width on either side of the caliper.  This is very useful to assess the regularity or irregularity of a rhythm, or to detect P waves marching through a tachycardia or during heart block.  Select <b>Marching Caliper</b> again to change the marching caliper back to normal again.
 </p>
 
-<div id="orge638392" class="figure">
+<div id="org38bafcf" class="figure">
 <p><img src="../../shrd/marching_caliper.png" alt="marching_caliper.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Marching caliper</p>
@@ -295,21 +273,21 @@ Right-clicking a <i>time caliper</i> with your mouse, or clicking with two finge
 </div>
 </div>
 </div>
-<div id="outline-container-org3e7d81a" class="outline-2">
-<h2 id="org3e7d81a">Moving calipers</h2>
-<div class="outline-text-2" id="text-org3e7d81a">
+<div id="outline-container-orga582202" class="outline-2">
+<h2 id="orga582202">Moving calipers</h2>
+<div class="outline-text-2" id="text-orga582202">
 </div>
-<div id="outline-container-org24ea16c" class="outline-3">
-<h3 id="org24ea16c">Moving</h3>
-<div class="outline-text-3" id="text-org24ea16c">
+<div id="outline-container-org6e52e81" class="outline-3">
+<h3 id="org6e52e81">Moving</h3>
+<div class="outline-text-3" id="text-org6e52e81">
 <p>
 Calipers can be moved.  Use the left mouse button or press and hold the trackpad with your finger over the crossbar area of a time or amplitude caliper to grab it. To grab angle calipers, select the top (apex) of the angle where the two lines join together.  Drag the mouse or your finger to move the caliper as a unit.  
 </p>
 </div>
 </div>
-<div id="outline-container-orgfb3686a" class="outline-3">
-<h3 id="orgfb3686a">Stretching (opening and closing)</h3>
-<div class="outline-text-3" id="text-orgfb3686a">
+<div id="outline-container-org327ed47" class="outline-3">
+<h3 id="org327ed47">Stretching (opening and closing)</h3>
+<div class="outline-text-3" id="text-org327ed47">
 <p>
 If the cursor is positioned over either the left or right sidebars of a time caliper (or top or bottom bars of an amplitude caliper) clicking with the left mouse button or holding your finger down on the track pad and then dragging will move that caliper bar by itself.  In this way you can widen or narrow the caliper interval.  Note that you cannot move both bars at the same time.  When you move one caliper bar, the other one always stays fixed.  With angle calipers, select either of the two bars of the angle a little distance away from the apex and drag to open and close the angle.
 </p>
@@ -319,9 +297,9 @@ By combining movements, you can place a caliper anywhere on an ECG image to make
 </p>
 </div>
 </div>
-<div id="outline-container-org447ad25" class="outline-3">
-<h3 id="org447ad25">Tweaking</h3>
-<div class="outline-text-3" id="text-org447ad25">
+<div id="outline-container-orgd699e19" class="outline-3">
+<h3 id="orgd699e19">Tweaking</h3>
+<div class="outline-text-3" id="text-orgd699e19">
 <p>
 <i>Tweaking</i> or <i>micromoving</i> is a way to more finely control caliper movement.  When you tweak a caliper’s position, you use the keyboard arrow keys to move a caliper component or the entire caliper a fraction of a point in any direction.  If you right-click on a caliper with a mouse, or two-finger click on the trackpad, you bring up a secondary menu that includes the option <b>Tweak Caliper Position</b>.  Click on this option.  A message will appear showing which component of the caliper you clicked on (left bar, right bar, top bar, bottom bar, crossbar, or apex, depending of the type of caliper).  Right click on a different component to change which component you want to move.  Then use the keyboard arrow keys to move the selected caliper component.  To finely adjust the caliper component position, use the command + arrow keys.  Note that if you select the crossbar, or apex of an angle caliper, the arrow keys cause the caliper to move as a unit.  Selecting any other component moves that component.  Select <i>Escape</i>, or right-click away from a caliper to turn off tweaking.
 </p>

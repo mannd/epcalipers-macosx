@@ -35,23 +35,123 @@ delete calipers, calibrate the calipers and make advanced measurements
 like the corrected QT interval.
 ** Toolbar
 The program is controlled either by the toolbar buttons at the top of the window, or by the menu at the top of the screen.  The default toolbar looks like this:
-#+CAPTION: Toolbar
-[[../gfx/EPCtoolbar.png]]
+
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p>
+<picture>
+  <source
+    srcset="../gfx/toolbar.dark.en.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../gfx/toolbar.en.png"
+  />
+</picture>
+</p>
+<p><span class="figure-number">Figure 1: </span>Toolbar</p>
+</div>
+#+END_EXPORT
 
 Note that not all toolbar buttons will be available all the time, depending on whether calibration has been performed.  Some toolbar buttons are disabled when in transparent window mode also.  Disabled toolbar buttons are "grayed" out.  You can customize the toolbar items if you wish.  On newer Macs some of the toolbar items are also shown on the Touch Bar.
+# Below are direct html exports to support dark mode images
+*** Files
+ #+BEGIN_EXPORT html
+<ul class="org-ul">
+<li>
+<picture>
+  <source
+    srcset="../../shrd/square.and.arrow.down@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/square.and.arrow.down@2x.png"
+  />
+</picture>
+ Open an image file</li>
+</ul>
+#+END_EXPORT
 *** Zoom toolbar
-- [[../../shrd/TB_zoomIn.png]] Zoom in
-- [[../../shrd/TB_zoomOut.png]] Zoom out
-- [[../../shrd/TB_zoomActual.png]] Zoom to actual size
+ #+BEGIN_EXPORT html
+<ul class="org-ul">
+<li>
+<picture>
+  <source
+    srcset="../../shrd/plus.magnifyingglass@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/plus.magnifyingglass@2x.png"
+  />
+</picture>
+ Zoom in</li>
+<li>
+<picture>
+  <source
+    srcset="../../shrd/minus.magnifyingglass@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/minus.magnifyingglass@2x.png"
+  />
+</picture>
+ Zoom out</li>
+<li>
+<picture>
+  <source
+    srcset="../../shrd/1.magnifyingglass@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/1.magnifyingglass@2x.png"
+  />
+</picture>
+ Zoom to original size</li>
+</ul>
+#+END_EXPORT
 *** Calipers toolbar
-- [[../../shrd/caliper-20x20.png]] Add time (horizontal) caliper
-- [[../../shrd/amplitude-caliper-20x20.png]] Add amplitude (vertical) caliper
-- [[../../shrd/angle-caliper-20x20.png]] Add angle caliper
+ #+BEGIN_EXPORT html
+<ul class="org-ul">
+<li>
+<picture>
+  <source
+    srcset="../../shrd/custom.time.caliper.dark@2x.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/custom.time.caliper@2x.png"
+  />
+</picture>
+ Add time (horizontal) caliper</li>
+<li>
+<picture>
+  <source
+    srcset="../../shrd/custom.amplitude.caliper.dark@2x.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/custom.amplitude.caliper@2x.png"
+  />
+</picture>
+ Add amplitude (vertical) caliper</li>
+<li>
+<picture>
+  <source
+    srcset="../../shrd/custom.angle.caliper.dark@2x.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/custom.angle.caliper@2x.png"
+  />
+</picture>
+ Add angle caliper</li>
+</ul>
+#+END_EXPORT
 - *Calibrate* Calibrate caliper
 - *Clear* Clear all calibration
 *** Measurement toolbar
 - *Rate/Int* Toggle heart rate and time interval
-- *mean RR* Calculate mean interval from several intervals
+- *Mean Int* Calculate mean interval from several intervals
 - *QTc* Measure corrected QT (QTc)
 ** Menus
 Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.

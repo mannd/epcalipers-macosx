@@ -33,22 +33,22 @@
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
-                            <rect key="frame" x="1" y="1" width="983" height="583"/>
+                            <rect key="frame" x="1" y="1" width="998" height="598"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
-                                    <rect key="frame" x="0.0" y="118" width="798" height="465"/>
+                                    <rect key="frame" x="0.0" y="133" width="798" height="465"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </view>
                             </subviews>
                         </clipView>
                         <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
-                            <rect key="frame" x="1" y="584" width="983" height="15"/>
+                            <rect key="frame" x="1" y="583" width="998" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lrJ-fG-BcI">
-                            <rect key="frame" x="984" y="1" width="15" height="583"/>
+                            <rect key="frame" x="983" y="1" width="16" height="598"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -94,14 +94,14 @@
                     <toolbarItem implicitItemIdentifier="CEB2E0DB-41CE-479A-A48D-42CF972FD80B" explicitItemIdentifier="newCalipersToolbar" label="Calipers" paletteLabel="Calipers" sizingBehavior="auto" id="uO8-MM-MEU" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="28a-cr-2Ug">
-                            <rect key="frame" x="0.0" y="14" width="98" height="24"/>
+                            <rect key="frame" x="0.0" y="14" width="72" height="24"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="gZY-WC-scr">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="Add time caliper" image="new-time-caliper-icon"/>
-                                    <segment toolTip="Add amplitude caliper" image="new-amplitude-caliper-icon" tag="1"/>
-                                    <segment toolTip="Add angle caliper" image="new-angle-caliper-icon" tag="2"/>
+                                    <segment toolTip="Add time caliper" image="custom-time-caliper"/>
+                                    <segment toolTip="Add amplitude caliper" image="custom-amplitude-caliper" tag="1"/>
+                                    <segment toolTip="Add angle caliper" image="custom-angle-caliper" tag="2"/>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
@@ -112,13 +112,13 @@
                     <toolbarItem implicitItemIdentifier="6508849A-3838-49BA-A618-0849F234FFF7" explicitItemIdentifier="newMeasurementToolbar" label="Measurements" paletteLabel="Measurements" sizingBehavior="auto" id="zIV-EH-MOz" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="7mi-QJ-ZMd">
-                            <rect key="frame" x="0.0" y="14" width="216" height="24"/>
+                            <rect key="frame" x="0.0" y="14" width="215" height="24"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Cqb-X5-vZ6">
                                 <font key="font" metaFont="system"/>
                                 <segments>
                                     <segment label="Rate/Int" toolTip="Toggle rate/interval"/>
-                                    <segment label="mean RR" toolTip="Calculate mean interval and rate" tag="1"/>
+                                    <segment label="Mean Int" toolTip="Calculate mean interval and rate" tag="1"/>
                                     <segment label="QTc" toolTip="Calculate corrected QT" tag="2"/>
                                     <segment label="Cancel" toolTip="Cancel measurment"/>
                                 </segments>
@@ -204,11 +204,11 @@
     </objects>
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="custom-amplitude-caliper" width="11" height="11"/>
+        <image name="custom-angle-caliper" width="12" height="12"/>
+        <image name="custom-time-caliper" width="11" height="11"/>
         <image name="import-image" width="12" height="14"/>
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
-        <image name="new-amplitude-caliper-icon" width="20" height="20"/>
-        <image name="new-angle-caliper-icon" width="20" height="20"/>
-        <image name="new-time-caliper-icon" width="20" height="20"/>
         <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
     </resources>
 </document>
