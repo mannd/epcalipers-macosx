@@ -1565,8 +1565,11 @@ extension MainWindowController: NSTouchBarDelegate {
             if doingMeasurement() || calipersView.isTweakingComponent {
                 touchBar.defaultItemIdentifiers = [.zoom, .fixedSpaceSmall, .addCalipers]
             }
+            else if imageView.image() == nil {
+                touchBar.defaultItemIdentifiers = [.openFile]
+            }
             else {
-                touchBar.defaultItemIdentifiers = [.zoom, .fixedSpaceSmall, .addCalipers, .fixedSpaceSmall, .calibration]
+                touchBar.defaultItemIdentifiers = [.openFile, .fixedSpaceSmall, .zoom, .fixedSpaceSmall, .addCalipers, .fixedSpaceSmall, .calibration]
             }
         }
         else {
@@ -1583,15 +1586,28 @@ extension MainWindowController: NSTouchBarDelegate {
     public func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
         // We will leave the forced unwrapped optionals here as these images have to exist, and we should crash otherwise.
         switch identifier {
+        case .openFile:
+            let customViewItem = NSCustomTouchBarItem(identifier: identifier)
+            let openFileImage = NSImage(systemSymbolName: "square.and.arrow.down", accessibilityDescription: nil)!
+            let control = NSSegmentedControl(images:[openFileImage], trackingMode: .momentary, target: self, action: #selector(openImage(_:)))
+            control.segmentStyle = .separated
+            customViewItem.view = control
+            return customViewItem
         case NSTouchBarItem.Identifier.zoom:
             let customViewItem = NSCustomTouchBarItem(identifier: identifier)
-            let control = NSSegmentedControl(images: [NSImage(named: "zoom-in")!, NSImage(named: "zoom-out")!, NSImage(named:"zoom-reset")!], trackingMode: .momentary, target: self, action: #selector(doZoom(_:)))
+            let zoomInImage = NSImage(systemSymbolName: "plus.magnifyingglass", accessibilityDescription: nil)!
+            let zoomOutImage = NSImage(systemSymbolName: "minus.magnifyingglass", accessibilityDescription: nil)!
+            let zoomResetImage = NSImage(systemSymbolName: "1.magnifyingglass", accessibilityDescription: nil)!
+            let control = NSSegmentedControl(images: [zoomInImage, zoomOutImage, zoomResetImage], trackingMode: .momentary, target: self, action: #selector(doZoom(_:)))
             control.segmentStyle = .separated
             customViewItem.view = control
             return customViewItem
         case NSTouchBarItem.Identifier.addCalipers:
             let customViewItem = NSCustomTouchBarItem(identifier: identifier)
-            let control = NSSegmentedControl(images: [NSImage(named: "new-time-caliper-icon")!, NSImage(named: "new-amplitude-caliper-icon")!, NSImage(named: "new-angle-caliper-icon")!], trackingMode: .momentary, target: self, action: #selector(addCaliper(_:)))
+            let addTimeCaliperImage = NSImage(named: "custom-time-caliper")!
+            let addAmplitudeCaliperImage = NSImage(named: "custom-amplitude-caliper")!
+            let addAngleCaliperImage = NSImage(named: "custom-angle-caliper")!
+            let control = NSSegmentedControl(images: [addTimeCaliperImage, addAmplitudeCaliperImage, addAngleCaliperImage], trackingMode: .momentary, target: self, action: #selector(addCaliper(_:)))
             control.segmentStyle = .separated
             customViewItem.view = control
             return customViewItem
