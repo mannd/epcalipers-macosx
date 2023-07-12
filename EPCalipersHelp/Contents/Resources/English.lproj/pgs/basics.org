@@ -154,7 +154,7 @@ Note that not all toolbar buttons will be available all the time, depending on w
 - *Mean Int* Calculate mean interval from several intervals
 - *QTc* Measure corrected QT (QTc)
 ** Menus
-Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key then a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
+Nearly all the functions of the app are contained in the main menu commands at the top of the screen.  Note that there are keyboard shortcuts shown in the menu for many of the programs's functions.  For example, it is easier to rotate an image using a keyboard shortcut key than a menu command.  As with toolbars, some menu commands are disabled when their use is not allowed.  For example, image rotation is not allowed after calipers have been calibrated.  It is necessary to clear calibration to restore the rotation menu commands.
 ** Keyboard shortcuts
 | Key  | Function                             |
 |------+--------------------------------------|
