@@ -53,7 +53,7 @@ The program is controlled either by the toolbar buttons at the top of the window
 </div>
 #+END_EXPORT
 
-Note that not all toolbar buttons will be available all the time, depending on whether calibration has been performed.  Some toolbar buttons are disabled when in transparent window mode also.  Disabled toolbar buttons are "grayed" out.  You can customize the toolbar items if you wish.  On newer Macs some of the toolbar items are also shown on the Touch Bar.
+Note that not all toolbar buttons will be available all the time, depending on whether calibration has been performed.  Some toolbar buttons are disabled when in transparent window mode also.  Disabled toolbar buttons are grayed out.  You can customize the toolbar items if you wish.  On Macs with a Touch Bar some of the toolbar items are shown on it.
 # Below are direct html exports to support dark mode images
 *** Files
  #+BEGIN_EXPORT html
@@ -186,6 +186,6 @@ Nearly all the functions of the app are contained in the main menu commands at t
 | ⌘→   | Finely tweak caliper component right |
 | ⌘↑   | Finely tweak caliper component up    |
 | ⌘↓   | Finely tweak caliper component down  |
-| ⌘,   | Open preferences                     |
+| ⌘,   | Open settings                        |
 | ⌘O   | Open file                            |
 | ⌘N   | New window                           |

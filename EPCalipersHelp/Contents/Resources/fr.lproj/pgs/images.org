@@ -39,7 +39,7 @@ Si vous avez un trackpad, vous pouvez pincer pour zoomer.  Vous pouvez aussi uti
 ** Quel est le mode de fênetre transparente?
 Parfois il est plus facile d’ouvrir une image ou un fichier PDF en utilisant une autre application, p.e. votre navigateur web, et puis d’effectuer les mesures directement sur cette image.  *Compas EP* permit cela en utilisant /le mode de fênetre transparente/.  Dans ce mode, la fênetre principale est transparente, permettant la mesure de ce qui est sous la fênetre avec les compas.  Le mode de fênetre transparente ressemble à ça:
 #+CAPTION: le mode de fênetre transparente
-[[../gfx/transparentwindow.png]]
+[[../gfx/transparent.window.fr.png]]
 ** L’activation du mode de fênetre transparente
 Vouv pouvez rapidement basculer entre la fenêtre transparente et une image en utilisant la commande de menu *Image | Fenêtre transparente* ou la touche /Control-H/.  Si vous voulez que l'application démarre avec une fenêtre transparent, utilisez la commande de menu *Compas EP | Préférences...* pour montrer la boîte de dialogue [[./preferences.html][Préférences]].  Cocher la case /Fênetre transparente/ pour changer au mode de fênetre transparente.  Décocher la case pour retourner au mode d’image normale. 
 ** Les prudences en utilisant le mode de fênetre transparente
