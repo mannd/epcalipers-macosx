@@ -13,6 +13,7 @@ extension NSTouchBarItem.Identifier {
     static let zoom = NSTouchBarItem.Identifier("org.epstudios.epcalipers.zoom")
     static let addCalipers = NSTouchBarItem.Identifier("org.epstudios.epcalipers.addCalipers")
     static let calibration = NSTouchBarItem.Identifier("org.epstudios.epcalipers.calibration")
+    static let openFile = NSTouchBarItem.Identifier("org.epstudios.epcalipers.openFile")
     static let tweak = NSTouchBarItem.Identifier("org.epstudios.epcalipers.tweak")
     static let cancel = NSTouchBarItem.Identifier("org.epstudios.epcalipers.cancel")
 }

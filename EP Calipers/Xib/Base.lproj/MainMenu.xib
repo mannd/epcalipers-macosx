@@ -73,7 +73,7 @@
                                     <action selector="newWindow:" target="Voe-Tx-rLC" id="NFB-O9-W9n"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
+                            <menuItem title="Open…" image="square.and.arrow.down" catalog="system" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="openImage:" target="-1" id="doh-WR-gfL"/>
                                 </connections>
@@ -349,17 +349,17 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Image" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Zoom In" keyEquivalent="+" id="oLP-ek-a3b">
+                            <menuItem title="Zoom In" image="plus.magnifyingglass" catalog="system" keyEquivalent="+" id="oLP-ek-a3b">
                                 <connections>
                                     <action selector="doZoom:" target="-1" id="fC4-CD-NsL"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Zoom Out" tag="1" keyEquivalent="-" id="PfA-hX-1iQ">
+                            <menuItem title="Zoom Out" image="minus.magnifyingglass" catalog="system" tag="1" keyEquivalent="-" id="PfA-hX-1iQ">
                                 <connections>
                                     <action selector="doZoom:" target="-1" id="1p4-hB-kVC"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Zoom To Actual Size" tag="2" keyEquivalent="=" id="e1s-vQ-Cdy">
+                            <menuItem title="Zoom To Actual Size" image="1.magnifyingglass" catalog="system" tag="2" keyEquivalent="=" id="e1s-vQ-Cdy">
                                 <connections>
                                     <action selector="doZoom:" target="-1" id="Nze-eD-TOf"/>
                                 </connections>
@@ -446,19 +446,19 @@ CQ
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Caliper" id="MrP-RE-zcc">
                         <items>
-                            <menuItem title="Add Time Caliper" keyEquivalent="t" id="VXG-nN-9pi">
+                            <menuItem title="Add Time Caliper" image="custom-time-caliper" keyEquivalent="t" id="VXG-nN-9pi">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
                                     <action selector="addCaliper:" target="-1" id="fZs-ap-VyT"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Add Amplitude Caliper" tag="1" keyEquivalent="a" id="fyJ-Gr-6Q4">
+                            <menuItem title="Add Amplitude Caliper" image="custom-amplitude-caliper" tag="1" keyEquivalent="a" id="fyJ-Gr-6Q4">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
                                     <action selector="addCaliper:" target="-1" id="1vr-6D-jcL"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Add Angle Caliper" tag="2" keyEquivalent="g" id="jfR-HV-VKA">
+                            <menuItem title="Add Angle Caliper" image="custom-angle-caliper" tag="2" keyEquivalent="g" id="jfR-HV-VKA">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
                                     <action selector="addCaliper:" target="-1" id="Mbd-Ib-8ph"/>
@@ -576,4 +576,13 @@ CA
             <point key="canvasLocation" x="140" y="290"/>
         </menu>
     </objects>
+    <resources>
+        <image name="1.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="custom-amplitude-caliper" width="11" height="11"/>
+        <image name="custom-angle-caliper" width="12" height="12"/>
+        <image name="custom-time-caliper" width="11" height="11"/>
+        <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="16"/>
+    </resources>
 </document>

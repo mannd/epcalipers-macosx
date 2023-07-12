@@ -21,19 +21,58 @@ Il y a trois types de compas.  Les compas peuvent être horizontaux pour les mes
 ** Addition de compas
 Cliquer sur les icônes de compas sur la barre d’outils, ou utiliser le menu *Compas* pour ajouter de nouveaux compas.
 #+CAPTION: Barre d’outil /Compas/ pour ajouter des compas
-[[../gfx/EPCCaliperIcons.png]]
+
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p>
+<picture>
+  <source
+    srcset="../gfx/calipers.toolbar.dark.fr.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../gfx/calipers.toolbar.fr.png"
+  />
+</picture>
+</p>
+<p><span class="figure-number">Figure 1: </span>Barre d’outil <strong>Compas</strong> pour ajouter des compas
+</p>
+</div>
+#+END_EXPORT
+
 ** Sélection d'un compas
 Quand il y a plus d'un compas sur l'écran, il faut qu'un compas soit choisi comme le compas actif pour l'étalonner ou pour faire les calculs.  Par défaut un compas non choisi est bleu et un compas choisi est rouge. Vous pouvez changer les couleurs en utilisant les [[./preferences.html][préférences]].  Il est aussi possible de [[colors][changer les couleurs de compas individuels]].  Un clic de souris ou une frappe sur le touchpad sur un compas non choisi le choisira.  Un deuxième clic encore (mais pas trop vite, parce que un double clic supprimera le compas) le désélectionnera.  Comme il peut y avoir un seul compas choisi à la fois, la sélection d'un compas va désélectionner un autre compas qui est sélectionné.  Parfois un compas sera choisi automatiquement, par exemple pour faire de l'étalonnage, si aucun compas n'est déjà choisi.  Si vous voulez choisir un autre compas, il faut simplement le taper.
-#+CAPTION: Trois types de compas (de temps, d’amplitude, et d’angle).  Le compas rouge est choisi.
-[[../gfx/EPCSelectedCaliper.png]]
+
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p>
+<picture>
+  <source
+    srcset="../gfx/3.calipers.dark.fr.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../gfx/3.calipers.fr.png"
+  />
+</picture>
+</p>
+<p><span class="figure-number">Figure 2: </span>Trois types de compas (de temps, d’amplitude, et d’angle).  Le compas rouge est choisi.</p>
+</div>
+#+END_EXPORT
+
 ** Suppression de compas
 Un double clic avec la souris ou une double frappe du trackpad sur un compas le supprimera.  Un compas choisi peut être supprimé par la touche /Suppr/ ou par la commande de menu *Compas | Supprimer le compas choisi*.  Tous les compas peuvent être supprimés en même temps en utilisant /Commande + Suppr/ de votre clavier ou la commande de menu *Compas | Supprimer tous les compas*.  Noter que l’étalonnage continue même si tous les compas sont supprimés.  Des compas nouvellement ajoutés utilisent l’étalonnage précédent.
 ** <<colors>>Changer les couleurs de compas
 Au début les couleurs de compas sont fixés par les [[./preferences.html][préférences]] et ces couleurs sont appliquées à tous les nouveaux compas ajoutés.  Cependant, après qu'un compas est ajouté, sa couleur peut être changée.  Les changements de couleur persistent jusqu'à ce que les compas soient supprimés ou l'application soit arrêtée.  En utilisant un clic droit de la souris ou une frappe avec deux droigts du trackpad sur un compas, le menu secondaire apparaîtra.  Choisir *Couleur de compas*.  Choisir une couleur dans la boîte de dialogue et le compas prendra cette couleur-là.  Le changement affectera seulement le compas choisi.  Vous pouvez changer la couleur par défaut de nouveaux compas en utilisant le menu de [[./preferences.html][Préférences]].
 ** Les compas marchants
 En utilisant un clic droit de la souris ou une frappe avec deux droigts du trackpad sur un compas, le menu secondaire apparaîtra. Choisir *Compas marchant* pour changer un compas de temps à un compas marchant.  Des lignes verticales apparaîtront égales à la largeur du compas à chaque côté.  C’est utile pour l’évaluation les rythmes irréguliers ou réguliers, ou pour détecter les ondes P marchantes pendant une tachycardie ou un bloc cardiaque.  Choisir *Compas marchant* encore pour changer à un compas normal.
-#+CAPTION: Un compas marchant
+
 [[../../shrd/marching_caliper.png]]
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p><span class="figure-number">Figure 3: </span>Un compas marchant</p>
+</div>
+#+END_EXPORT
 
 * Déplacement des compas
 ** Mouvement
