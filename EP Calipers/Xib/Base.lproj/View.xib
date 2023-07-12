@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -100,7 +100,7 @@
             <rect key="frame" x="0.0" y="0.0" width="513" height="549"/>
             <subviews>
                 <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Ihd-Wb-ZtZ">
-                    <rect key="frame" x="333" y="438" width="160" height="22"/>
+                    <rect key="frame" x="330" y="436" width="166" height="26"/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </colorWell>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ebH-LI-WVv">
@@ -145,14 +145,14 @@
                     </textFieldCell>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eGw-e7-hy2">
-                    <rect key="frame" x="477" y="289" width="19" height="28"/>
+                    <rect key="frame" x="477" y="290" width="19" height="28"/>
                     <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="10" doubleValue="3" id="Riz-xo-CH7"/>
                     <connections>
                         <action selector="numberOfMeanRRStepperAction:" target="-2" id="HFW-ix-aEA"/>
                     </connections>
                 </stepper>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H94-tw-Juy">
-                    <rect key="frame" x="477" y="253" width="19" height="28"/>
+                    <rect key="frame" x="477" y="254" width="19" height="28"/>
                     <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="10" doubleValue="1" id="Yqs-a2-Ds8"/>
                     <connections>
                         <action selector="numberOfQTcMeanRRStepperAction:" target="-2" id="7j5-4I-8z3"/>
@@ -215,7 +215,7 @@
                     </textFieldCell>
                 </textField>
                 <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="ufw-DZ-SUu">
-                    <rect key="frame" x="333" y="474" width="160" height="22"/>
+                    <rect key="frame" x="330" y="472" width="166" height="26"/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </colorWell>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="9Nk-jL-6iI">
@@ -398,6 +398,7 @@
                 <constraint firstItem="XRw-Tn-Xcs" firstAttribute="trailing" secondItem="Qfe-0Y-e7q" secondAttribute="trailing" id="I37-cu-xKK"/>
                 <constraint firstItem="oN6-rn-Vft" firstAttribute="trailing" secondItem="9Nk-jL-6iI" secondAttribute="trailing" id="IG1-Bp-ekR"/>
                 <constraint firstItem="afA-oA-5bo" firstAttribute="trailing" secondItem="9Nk-jL-6iI" secondAttribute="trailing" id="IWq-4k-F6O"/>
+                <constraint firstItem="Itu-YD-RYJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wtt-7v-mJA" secondAttribute="trailing" constant="8" symbolic="YES" id="IrX-c3-9Cw"/>
                 <constraint firstItem="fEW-vJ-IeB" firstAttribute="trailing" secondItem="KDI-gk-o86" secondAttribute="trailing" id="JsR-Lf-6Vd"/>
                 <constraint firstItem="Itu-YD-RYJ" firstAttribute="bottom" secondItem="wtt-7v-mJA" secondAttribute="bottom" id="KDx-B6-N6S"/>
                 <constraint firstItem="fEW-vJ-IeB" firstAttribute="bottom" secondItem="9Nk-jL-6iI" secondAttribute="bottom" id="Kni-Ep-y7E"/>

@@ -86,7 +86,7 @@
 "Cqb-X5-vZ6.ibShadowedLabels[0]" = "Int/Fréq";
 
 /* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedLabels[1] = "mean RR"; ObjectID = "Cqb-X5-vZ6"; */
-"Cqb-X5-vZ6.ibShadowedLabels[1]" = "RR moyen";
+"Cqb-X5-vZ6.ibShadowedLabels[1]" = "Int moyen";
 
 /* Class = "NSSegmentedCell"; Cqb-X5-vZ6.ibShadowedLabels[3] = "Cancel"; ObjectID = "Cqb-X5-vZ6"; */
 "Cqb-X5-vZ6.ibShadowedLabels[3]" = "Annuler";

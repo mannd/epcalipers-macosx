@@ -23,22 +23,121 @@ Quand le *Compas EP* commence, un échantillon d'ECG et un compas de temps sont 
 ** Barres d’outils 
 L’application est contrôlée par les boutons de la barre d’outils en haut de la fênetre ou par le menu en haut de l’écran.  La barre d’outils ressemble ça:
 #+CAPTION: Barre d’outils
-[[../gfx/EPCtoolbar.png]]
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p>
+<picture>
+  <source
+    srcset="../gfx/toolbar.dark.fr.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../gfx/toolbar.fr.png"
+  />
+</picture>
+</p>
+<p><span class="figure-number">Figure 1: </span>Toolbar</p>
+</div>
+#+END_EXPORT
 
 Noter que tous les boutons de la barre d'outils ne seront pas disponibles en permanence, selon que l'étalonnage a été effectué. Certains éléments de la barre d'outils sont désactivés en mode fenêtre transparente également. Les boutons désactivés sont "grisés". On peut personnaliser la barre d'outils.  Sur nouveaux Macs certaines fonctions sont disponibles sur la Touch Bar.
+*** Fichiers toolbar
+ #+BEGIN_EXPORT html
+<ul class="org-ul">
+<li>
+<picture>
+  <source
+    srcset="../../shrd/square.and.arrow.down@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/square.and.arrow.down@2x.png"
+  />
+</picture>
+ Ouvrir un fichier d'image</li>
+</ul>
+#+END_EXPORT
 *** Zoom toolbar
-- [[../../shrd/TB_zoomIn.png]] Zoom avant
-- [[../../shrd/TB_zoomOut.png]] Zoom arrière
-- [[../../shrd/TB_zoomActual.png]] Zoom à dimension réelle
+ #+BEGIN_EXPORT html
+<ul class="org-ul">
+<li>
+<picture>
+  <source
+    srcset="../../shrd/plus.magnifyingglass@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/plus.magnifyingglass@2x.png"
+  />
+</picture>
+ Zoom avant</li>
+<li>
+<picture>
+  <source
+    srcset="../../shrd/minus.magnifyingglass@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/minus.magnifyingglass@2x.png"
+  />
+</picture>
+ Zoom arrière</li>
+<li>
+<picture>
+  <source
+    srcset="../../shrd/1.magnifyingglass@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/1.magnifyingglass@2x.png"
+  />
+</picture>
+Zoom à dimension originale</li>
+</ul>
+#+END_EXPORT
 *** Calipers toolbar
-- [[../../shrd/caliper-20x20.png]] Ajouter un compas de temps
-- [[../../shrd/amplitude-caliper-20x20.png]] Ajouter un compas d’amplitude
-- [[../../shrd/angle-caliper-20x20.png]] Ajouter un compas d’angle
+ #+BEGIN_EXPORT html
+<ul class="org-ul">
+<li>
+<picture>
+  <source
+    srcset="../../shrd/custom.time.caliper.dark@2x.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/custom.time.caliper@2x.png"
+  />
+</picture>
+Ajouter un compas de temps</li>
+<li>
+<picture>
+  <source
+    srcset="../../shrd/custom.amplitude.caliper.dark@2x.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/custom.amplitude.caliper@2x.png"
+  />
+</picture>
+ Ajouter un compas d’amplitude</li>
+<li>
+<picture>
+  <source
+    srcset="../../shrd/custom.angle.caliper.dark@2x.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/custom.angle.caliper@2x.png"
+  />
+</picture>
+ Ajouter un compas d’angle</li>
+</ul>
+#+END_EXPORT
 - *Étalonner* Étalonner un compas
 - *Effacer* Effacer tout l’étalonnage
 *** Measurement toolbar
 - *Int/Fréq* Alterner l’intervalle et la fréquence cardiaque
-- *RR moyen* Calculer la fréquence cardiaque moyenne et l’intervalle moyen 
+- *Int moyen* Calculer la fréquence cardiaque moyenne et l’intervalle moyen 
 - *QTc* Calculer le QTc corrigé
 ** Menus
 Presque toutes les fonctions de l’application sont contenues dans les commandes du menu principal en haut de l’écran.  Noter qu’il existe des raccourcis clavier dans le menu pour plusieurs fonctions du programme.  Par exemple, il est plus facile de faire tourner une image à l’aide d’une touche de raccourci clavier qu’en utilisant d’une commande de menu.  Comme pour les barres d’outils, certaines commandes de menu sont désactivées lorsque leur utilisation n’est pas autorisée.  Par exemple, la rotation de l’image n’est pas autorisée après étalonnage des compas.  Il est nécessaire d’effacer l’étalonnage pour restaurer les commandes de rotation.

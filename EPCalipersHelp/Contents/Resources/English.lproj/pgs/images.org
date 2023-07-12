@@ -8,6 +8,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
 #+HTML_HEAD: <meta name="robots" content="anchors" />
 #+HTML_HEAD: <meta name="robots" content="keywords" />
@@ -38,9 +39,9 @@ If you have a trackpad, pinch to zoom works.  You can also use the /Zoom Toolbar
 ** What is transparent window mode?
 Sometimes it is easier to open an image or PDF file on your Desktop using the Preview app, and then make measurements directly on this image.  *EP Calipers* allows you do this using /transparent window mode/.  In this mode, the main window is transparent, allowing you to measure whatever is underneath the window using calipers.  Transparent window mode looks like this:
 #+CAPTION: Transparent window mode
-[[../gfx/transparentwindow.png]]
+[[../gfx/transparent.window.en.png]]
 ** Activating transparent window mode
-You can quickly toggle between transparent window mode and normal mode using the *Image | Transparent Window* menu item or its keyboard shortcut Control-H.  If you want the app to start up in transparent window mode, use the *EP Calipers | Show Preferences* menu item to display the [[./preferences.html][Preferences]] dialog.  Check the /Transparent window/ checkbox to change to transparent window mode.  Press *OK* and this setting will persist when you reopen the app.  Uncheck the check box to return to normal image mode.
+You can quickly toggle between transparent window mode and normal mode using the *Image | Transparent Window* menu item or its keyboard shortcut Control-H.  If you want the app to start up in transparent window mode, use the *EP Calipers | Settings* menu item to display the [[./preferences.html][Settings]] dialog.  Check the /Transparent window/ checkbox to change to transparent window mode.  Press *OK* and this setting will persist when you reopen the app.  Uncheck the check box to return to normal image mode.
 ** Things to watch out for with transparent windows
 When you load an image into *EP Calipers* the normal way and calibrate your calipers, the program will automatically adjust the calibration factor when you zoom the image.  In transparent window mode, the program has no clue if you zoom the underlying image that the calibration is now incorrect.  Take care to recalibrate your calipers if you zoom your image in a program external to *EP Calipers*.  Also note that if you run *EP Calipers* in full screen mode, transparent window mode won't work, since there is no Desktop under the window in full screen mode.  Finally, if you open a file while in transparent window mode, a dialog will appear asking if you wish to leave transparent window mode in order to load the image file.
 * Saving an image from *EP Calipers*

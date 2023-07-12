@@ -80,6 +80,10 @@ class CalipersView: NSView {
     }
 
     override func mouseDown(with theEvent: NSEvent) {
+        // Ctrl-left click emulates right click.
+        if theEvent.modifierFlags.contains(.control) {
+            return self.rightMouseDown(with: theEvent)
+        }
         let location = theEvent.locationInWindow
         selectedCaliper = getSelectedCaliper(location)
         if let selectedCaliper = selectedCaliper {
@@ -253,7 +257,7 @@ class CalipersView: NSView {
         chosenCaliper?.isTweaking = true
         clearChosenComponents(exceptFor: chosenCaliper)
         if let componentName = Caliper.componentName(chosenCaliper?.chosenComponent ?? .noComponent) {
-            let message = String(format: NSLocalizedString("Tweak %@ with arrow keys and ⌘-arrow keys.  Press Escape (esc) to stop tweaking.", comment:""), componentName)
+            let message = String(format: NSLocalizedString("tweakMessage", comment:""), componentName)
             if !isTweakingComponent {
                 delegate?.showMessageAndSaveLast(message)
                 isTweakingComponent = true

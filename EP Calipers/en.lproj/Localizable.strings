@@ -50,7 +50,7 @@
 "Enter number of intervals" = "Enter number of intervals";
 
 /* No comment provided by engineer. */
-"EP Calipers preferences" = "EP Calipers preferences";
+"EP Calipers preferences" = "EP Calipers settings";
 
 /* No comment provided by engineer. */
 "File not opened" = "File not opened";
@@ -139,3 +139,5 @@
 "qtcStep1Message" = "Measure 1 or more RR intervals.  Select QTc again to continue.";
 
 "qtcStep2Message" = "Now measure QT interval and select QTc again to calculate the QTc.";
+
+"tweakMessage" = "Tweak %@ with arrow keys and ⌘-arrow keys.  Two-finger click on a different caliper component to change which component you wish to move.  Press Escape (esc) to stop tweaking.";
