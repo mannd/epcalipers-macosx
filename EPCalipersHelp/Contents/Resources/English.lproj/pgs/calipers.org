@@ -69,7 +69,7 @@ Right-clicking a /time caliper/ with your mouse, or clicking with two fingers on
 [[../../shrd/marching_caliper.png]]
  #+BEGIN_EXPORT html
 <div id="orgbd7a499" class="figure">
-<p><span class="figure-number">Figure 3: </span>Un compas marchant</p>
+<p><span class="figure-number">Figure 3: </span>A marching caliper</p>
 </div>
 #+END_EXPORT
 
