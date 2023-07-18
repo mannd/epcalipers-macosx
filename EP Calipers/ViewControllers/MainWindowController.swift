@@ -870,6 +870,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if direction == .horizontal {
             caliper.calibration = calipersView.horizontalCalibration
             caliper.textPosition = appPreferences.timeCaliperTextPosition
+            caliper.numberOfMarchingCalipers = appPreferences.numberOfMarchingCalipers
         }
         else {
             caliper.calibration = calipersView.verticalCalibration
