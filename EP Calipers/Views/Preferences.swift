@@ -61,7 +61,7 @@ class Preferences: NSObject {
     var timeCaliperTextPosition: TextPosition = .centerAbove
     var amplitudeCaliperTextPosition: TextPosition = .right
     var showSampleECG: Bool = true
-    var numberOfMarchingComponents = 20 
+    var numberOfMarchingComponents = Caliper.maxMarchingComponents
 
     func loadPreferences() {
         let preferences = UserDefaults.standard

@@ -476,7 +476,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
             appPreferences.savePreferences()
             // update calipersView
-            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, rounding: appPreferences.rounding, autoPositionText: appPreferences.autoPositionText, timeCaliperTextPosition: appPreferences.timeCaliperTextPosition, amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition, numberOfMarchingComponents: appPreferences.numberOfMarchingComponents)
+            calipersView.updateCaliperPreferences(
+                unselectedColor: appPreferences.caliperColor,
+                selectedColor: appPreferences.highlightColor,
+                lineWidth: appPreferences.lineWidth,
+                rounding: appPreferences.rounding,
+                autoPositionText: appPreferences.autoPositionText,
+                timeCaliperTextPosition: appPreferences.timeCaliperTextPosition,
+                amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition,
+                numberOfMarchingComponents: appPreferences.numberOfMarchingComponents
+            )
             // update transparency
             if transparent != appPreferences.transparency {
                 transparent = appPreferences.transparency
@@ -873,7 +882,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if direction == .horizontal {
             caliper.calibration = calipersView.horizontalCalibration
             caliper.textPosition = appPreferences.timeCaliperTextPosition
-            caliper.numberOfMarchingCalipers = appPreferences.numberOfMarchingComponents
+            caliper.numberOfMarchingComponants = appPreferences.numberOfMarchingComponents
         }
         else {
             caliper.calibration = calipersView.verticalCalibration

@@ -44,7 +44,7 @@ class Caliper: NSObject {
 
     let delta: Double = 20.0
     let minDistanceForMarch: CGFloat = 20
-    static let maxMarchingCalipers: Int = 20
+    static let maxMarchingComponents: Int = 20
     let roundToIntString: NSString = "%d %@"
     let roundToFourPlacesString: NSString = "%.4g %@"
     let roundToTenthsString: NSString = "%.1f %@"
@@ -72,7 +72,7 @@ class Caliper: NSObject {
     var autoPositionText: Bool
     var textPosition: TextPosition
     var chosenComponent: CaliperComponent = .noComponent
-    var numberOfMarchingCalipers = maxMarchingCalipers
+    var numberOfMarchingComponants = maxMarchingComponents
 
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
          crossBarPosition: CGFloat, calibration: Calibration) {
@@ -266,15 +266,11 @@ class Caliper: NSObject {
         let greaterBar = fmax(bar1Position, bar2Position)
         let lesserBar = fmin(bar1Position, bar2Position)
 
-        // Preferences can set number of marching calipers
-        if numberOfMarchingCalipers == 0 {
-            numberOfMarchingCalipers = Self.maxMarchingCalipers
-        }
-        var biggerBars = Array<CGFloat>(repeating: 0, count: numberOfMarchingCalipers)
-        var smallerBars = Array<CGFloat>(repeating: 0, count: numberOfMarchingCalipers)
+        var biggerBars = Array<CGFloat>(repeating: 0, count: numberOfMarchingComponants)
+        var smallerBars = Array<CGFloat>(repeating: 0, count: numberOfMarchingComponants)
         var point = greaterBar + difference
         var index = 0
-        while point < rect.size.width && index < numberOfMarchingCalipers {
+        while point < rect.size.width && index < numberOfMarchingComponants {
             biggerBars[index] = point
             point += difference
             index += 1
@@ -282,7 +278,7 @@ class Caliper: NSObject {
         let maxBiggerBars = index
         index = 0
         point = lesserBar - difference
-        while point > 0 && index < numberOfMarchingCalipers {
+        while point > 0 && index < numberOfMarchingComponants {
             smallerBars[index] = point
             point -= difference
             index += 1
