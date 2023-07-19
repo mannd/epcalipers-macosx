@@ -61,6 +61,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var autoPositionTextCheckBox: NSButton!
     @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
     @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
+    @IBOutlet var marchingSlider: NSSlider!
     
     @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
     @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
@@ -439,6 +440,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if let calibration = appPreferences.defaultCalibration {
             defaultCalibrationTextField.stringValue = calibration
         }
+        marchingSlider.integerValue = appPreferences.numberOfMarchingComponents
         if let calibration = appPreferences.defaultVerticalCalibration {
             defaultVerticalCalibrationTextField.stringValue = calibration
         }
@@ -459,6 +461,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.caliperColor = caliperColorWell.color
             appPreferences.highlightColor = highlightedCaliperColorWell.color
             appPreferences.lineWidth = lineWidthSlider.integerValue
+            appPreferences.numberOfMarchingComponents = marchingSlider.integerValue
             appPreferences.defaultCalibration = defaultCalibrationTextField.stringValue
             appPreferences.defaultVerticalCalibration = defaultVerticalCalibrationTextField.stringValue
             appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
@@ -870,7 +873,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if direction == .horizontal {
             caliper.calibration = calipersView.horizontalCalibration
             caliper.textPosition = appPreferences.timeCaliperTextPosition
-            caliper.numberOfMarchingCalipers = appPreferences.numberOfMarchingCalipers
+            caliper.numberOfMarchingCalipers = appPreferences.numberOfMarchingComponents
         }
         else {
             caliper.calibration = calipersView.verticalCalibration
