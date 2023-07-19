@@ -61,6 +61,7 @@ class Preferences: NSObject {
     var timeCaliperTextPosition: TextPosition = .centerAbove
     var amplitudeCaliperTextPosition: TextPosition = .right
     var showSampleECG: Bool = true
+    var numberOfMarchingComponents = Caliper.maxMarchingComponents
 
     func loadPreferences() {
         let preferences = UserDefaults.standard
@@ -89,6 +90,8 @@ class Preferences: NSObject {
         autoPositionText = preferences.bool(forKey: "autoPositionText")
         timeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: "timeCaliperTextPosition")) ?? .centerAbove
         amplitudeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: "amplitudeCaliperTextPosition")) ?? .right
+        numberOfMarchingComponents = preferences.integer(forKey: "numberOfMarchingComponents")
+
     }
     
     func savePreferences() {
@@ -108,5 +111,6 @@ class Preferences: NSObject {
         preferences.set(autoPositionText, forKey: "autoPositionText")
         preferences.set(timeCaliperTextPosition.rawValue, forKey: "timeCaliperTextPosition")
         preferences.set(amplitudeCaliperTextPosition.rawValue, forKey: "amplitudeCaliperTextPosition")
+        preferences.set(numberOfMarchingComponents, forKey: "numberOfMarchingComponents")
     }
 }

@@ -43,3 +43,6 @@
 
 /* added for "Show sample ECG at start" */
 "gkb-pl-sKv.title" = "Afficher l'échantillon d'ECG au démarrage";
+
+/* added manually */
+"C7W-um-fqU.title"= "Nombre de composants marchants";
