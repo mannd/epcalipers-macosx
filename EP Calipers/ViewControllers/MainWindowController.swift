@@ -476,7 +476,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
             appPreferences.savePreferences()
             // update calipersView
-            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, rounding: appPreferences.rounding, autoPositionText: appPreferences.autoPositionText, timeCaliperTextPosition: appPreferences.timeCaliperTextPosition, amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition)
+            calipersView.updateCaliperPreferences(appPreferences.caliperColor, selectedColor: appPreferences.highlightColor, lineWidth: appPreferences.lineWidth, rounding: appPreferences.rounding, autoPositionText: appPreferences.autoPositionText, timeCaliperTextPosition: appPreferences.timeCaliperTextPosition, amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition, numberOfMarchingComponents: appPreferences.numberOfMarchingComponents)
             // update transparency
             if transparent != appPreferences.transparency {
                 transparent = appPreferences.transparency

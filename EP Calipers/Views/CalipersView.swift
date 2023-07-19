@@ -494,7 +494,7 @@ class CalipersView: NSView {
         }
     }
     
-    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, rounding: Rounding, autoPositionText: Bool, timeCaliperTextPosition: TextPosition, amplitudeCaliperTextPosition: TextPosition) {
+    func updateCaliperPreferences(_ unselectedColor: NSColor?, selectedColor: NSColor?, lineWidth: Int, rounding: Rounding, autoPositionText: Bool, timeCaliperTextPosition: TextPosition, amplitudeCaliperTextPosition: TextPosition, numberOfMarchingComponents: Int) {
          for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
             // new calipers get the default color
@@ -509,6 +509,7 @@ class CalipersView: NSView {
             c.autoPositionText = autoPositionText
             if c.direction == .horizontal {
                 c.textPosition = timeCaliperTextPosition
+                c.numberOfMarchingCalipers = numberOfMarchingComponents
             }
             else if c.direction == .vertical {
                 c.textPosition = amplitudeCaliperTextPosition
