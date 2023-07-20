@@ -61,8 +61,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var autoPositionTextCheckBox: NSButton!
     @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
     @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
-    @IBOutlet var marchingSlider: NSSlider!
-    
+
+    @IBOutlet var marchingComponentsTextField: NSTextField!
+
+    @IBOutlet var marchingComponentsStepper: NSStepper!
+
     @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
     @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
 
@@ -238,6 +241,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
         numberOfQTcMeanRRIntervalsTextField.delegate = self
+        marchingComponentsTextField.delegate = self
         qtcNumberTextField.delegate = self
         
         if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg"), appPreferences.showSampleECG {
@@ -414,9 +418,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             let alert = NSAlert()
             alert.alertStyle = .informational
             alert.messageText = NSLocalizedString("EP Calipers preferences", comment:"")
-            	alert.accessoryView = preferencesAccessoryView
-                alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-                alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
+            alert.accessoryView = preferencesAccessoryView
+            alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
+            alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             preferencesAlert = alert
         }
         guard let preferencesAlert = preferencesAlert else { return }
@@ -440,7 +444,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if let calibration = appPreferences.defaultCalibration {
             defaultCalibrationTextField.stringValue = calibration
         }
-        marchingSlider.integerValue = appPreferences.numberOfMarchingComponents
         if let calibration = appPreferences.defaultVerticalCalibration {
             defaultVerticalCalibrationTextField.stringValue = calibration
         }
@@ -449,6 +452,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
         showPromptsCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showPrompts ? 1 : 0)
+
+        marchingComponentsTextField.integerValue = appPreferences.numberOfMarchingComponents
+        marchingComponentsStepper.integerValue = appPreferences.numberOfMarchingComponents
         
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
         showSampleECGCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showSampleECG ? 1 : 0)
@@ -461,7 +467,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.caliperColor = caliperColorWell.color
             appPreferences.highlightColor = highlightedCaliperColorWell.color
             appPreferences.lineWidth = lineWidthSlider.integerValue
-            appPreferences.numberOfMarchingComponents = marchingSlider.integerValue
+            // Note stepper is limited to number range, while text field isn't.
+            appPreferences.numberOfMarchingComponents = marchingComponentsStepper.integerValue
             appPreferences.defaultCalibration = defaultCalibrationTextField.stringValue
             appPreferences.defaultVerticalCalibration = defaultVerticalCalibrationTextField.stringValue
             appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
@@ -536,6 +543,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBAction func numberOfQTcMeanRRStepperAction(_ sender: AnyObject) {
         numberOfQTcMeanRRIntervalsTextField.integerValue = numberOfQTcMeanRRIntervalsStepper.integerValue
     }
+
+
     
     @IBAction func gotoPage(_ sender: Any) {
         getPageNumber()
@@ -1523,7 +1532,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberTextField.integerValue = numberStepper.integerValue
         qtcNumberTextField.integerValue = qtcNumberStepper.integerValue
     }
-    
+
+
+    @IBAction func marchingComponentsStepperAction(_ sender: Any) {
+        marchingComponentsTextField.integerValue = marchingComponentsStepper.integerValue
+    }
+
     func controlTextDidChange(_ obj: Notification) {
         if obj.name.rawValue == "NSControlTextDidChangeNotification" {
             if obj.object as AnyObject? === numberTextField {
@@ -1537,6 +1551,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             if obj.object as AnyObject? === qtcNumberTextField {
                 qtcNumberStepper.integerValue = qtcNumberTextField.integerValue
+            }
+            if obj.object as AnyObject? === marchingComponentsTextField {
+                marchingComponentsStepper.integerValue = marchingComponentsTextField.integerValue
             }
         }
     }
