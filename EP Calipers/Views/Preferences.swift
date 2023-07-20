@@ -43,8 +43,6 @@ public enum Rounding: Int {
     case None = 4 // for debugging only 123.456789 msec
 }
 
-
-
 class Preferences: NSObject {
     var caliperColor: NSColor? = NSColor.systemBlue
     var highlightColor: NSColor? = NSColor.systemRed
