@@ -35,3 +35,4 @@ Settings can be selected using the *EP Calipers | Settings* menu item.  You can 
 - Auto-position text: Caliper text will avoid being obscured by the window edges or the caliper itself by shifting position.  For example, if a caliper text label is to the right of the caliper and the caliper gets too close to the right side of the window, it will shift over to the left of the caliper.
 - Time caliper text position: Adjust the text label of time calipers to be above or below the center of the crossbar, or on the left or right side of the caliper.
 - Amplitude caliper text position: Adjust the text label of amplitude calipers on the top or bottom of the caliper, or left or right of the crossbar.
+- Number of marching components: Adjust the number of marching caliper components from 1 to a maximum of 20.

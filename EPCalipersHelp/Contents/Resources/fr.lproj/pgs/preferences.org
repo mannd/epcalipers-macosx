@@ -35,4 +35,4 @@ Les préférences d’application peuvent être choisies en utilisant la command
 - Auto-positionner texte: Positionner automatiquement le texte de chaque compas par rapport au compas.  Par exemple, si la position du texte est à droite et le compas est trop proche au côté droit de la fenêtre, elle changera à gauche.
 - Position du texte pour compas de temps: Positionner le texte pour les compas de temps au-dessus du centre, au-dessous du centre, à gauche ou à droite du compas.
 - Position du texte pour compas d'amplitude: Positionner le texte pour les compas d'amplitude au-dessus, au-dessous, à gauche ou à droite du compas.
-
+- Nombre de composants marchants: Adjuster le nombre de composants marchants de 1 à 20.
