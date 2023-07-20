@@ -61,7 +61,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var autoPositionTextCheckBox: NSButton!
     @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
     @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
-    @IBOutlet var marchingSlider: NSSlider!
 
     @IBOutlet var marchingComponentsTextField: NSTextField!
 
@@ -419,9 +418,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             let alert = NSAlert()
             alert.alertStyle = .informational
             alert.messageText = NSLocalizedString("EP Calipers preferences", comment:"")
-            	alert.accessoryView = preferencesAccessoryView
-                alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-                alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
+            alert.accessoryView = preferencesAccessoryView
+            alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
+            alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             preferencesAlert = alert
         }
         guard let preferencesAlert = preferencesAlert else { return }
