@@ -100,7 +100,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     let calipersMenuTag = 999
     let appPreferences = Preferences()
-    var preferencesChanged = false
     var preferencesAlert: NSAlert? = nil
     var calibrationAlert: NSAlert? = nil
     var meanIntervalAlert: NSAlert? = nil
@@ -476,7 +475,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if transparent != appPreferences.transparency {
                 transparent = appPreferences.transparency
             }
-            preferencesChanged = true
+
+            calipersView.horizontalCalibration.calibrationString = appPreferences.defaultHorizontalCalibration ?? defaultHorizontalCalibration
+            calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration ?? defaultVerticalCalibration
         }
     }
     
@@ -1006,19 +1007,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             guard let calibrationAlert = calibrationAlert else { return }
             calibrationAlert.informativeText = message
-            if preferencesChanged {
-                calipersView.horizontalCalibration.calibrationString = appPreferences.defaultHorizontalCalibration ?? defaultHorizontalCalibration
-                calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration ?? defaultVerticalCalibration
-                preferencesChanged = false
-            }
-            else {  // don't bother doing this again if preferencesChanged
-                if calipersView.horizontalCalibration.calibrationString.isEmpty {
-                    calipersView.horizontalCalibration.calibrationString = appPreferences.defaultHorizontalCalibration ?? defaultHorizontalCalibration
-                }
-                if calipersView.verticalCalibration.calibrationString.isEmpty {
-                    calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration ?? defaultVerticalCalibration
-                }
-            }
             let direction = c.direction
             var calibrationString: String
             if direction == .horizontal {
