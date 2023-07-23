@@ -109,7 +109,7 @@
                 </colorWell>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ebH-LI-WVv">
                     <rect key="frame" x="326" y="478" width="164" height="28"/>
-                    <sliderCell key="cell" alignment="left" minValue="1" maxValue="4" doubleValue="3" tickMarkPosition="above" numberOfTickMarks="4" allowsTickMarkValuesOnly="YES" sliderType="linear" id="3CF-0M-gRz"/>
+                    <sliderCell key="cell" alignment="left" minValue="1" maxValue="6" doubleValue="3" tickMarkPosition="above" numberOfTickMarks="6" allowsTickMarkValuesOnly="YES" sliderType="linear" id="3CF-0M-gRz"/>
                 </slider>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75T-Ch-tDA">
                     <rect key="frame" x="328" y="449" width="160" height="21"/>
