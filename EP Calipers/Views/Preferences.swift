@@ -43,7 +43,7 @@ public enum Rounding: Int {
     case None = 4 // for debugging only 123.456789 msec
 }
 
-class Preferences: NSObject {
+class Preferences {
     static let caliperColorKey = "caliperColorKey"
     static let highlightColorKey = "highlightColorKey"
     static let lineWidthKey = "lineWidthKey"
@@ -65,8 +65,8 @@ class Preferences: NSObject {
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
     var lineWidth: Int = 2
-    var defaultHorizontalCalibration: String? = "1000 msec"
-    var defaultVerticalCalibration: String? = "10 mm"
+    var defaultHorizontalCalibration: String = NSLocalizedString("1000 msec", comment: "")
+    var defaultVerticalCalibration: String = NSLocalizedString("10 mm", comment: "")
     var defaultNumberOfMeanRRIntervals: Int = 3
     var defaultNumberOfQTcMeanRRIntervals: Int = 1
     var showPrompts: Bool = true
@@ -83,8 +83,8 @@ class Preferences: NSObject {
     func registerDefaults() {
         let defaults = [
             Self.lineWidthKey: lineWidth,
-            Self.defaultHorizontalCalibrationKey: defaultHorizontalCalibration!,
-            Self.defaultVerticalCalibrationKey: defaultVerticalCalibration!,
+            Self.defaultHorizontalCalibrationKey: defaultHorizontalCalibration,
+            Self.defaultVerticalCalibrationKey: defaultVerticalCalibration,
             Self.defaultNumberOfMeanRRIntervalsKey: defaultNumberOfMeanRRIntervals,
             Self.defaultNumberOfQTcMeanRRIntervalsKey: defaultNumberOfQTcMeanRRIntervals,
             Self.showPromptsKey: showPrompts,

@@ -493,6 +493,15 @@ class CalipersView: NSView {
             }
         }
     }
+
+    func updateDefaultCalibrationStrings(horizontal: String?, vertical: String?) {
+        if let horizontal = horizontal {
+            horizontalCalibration.calibrationString = horizontal
+        }
+        if let vertical = vertical {
+            verticalCalibration.calibrationString = vertical
+        }
+    }
     
     func updateCaliperPreferences(
         unselectedColor: NSColor?,
