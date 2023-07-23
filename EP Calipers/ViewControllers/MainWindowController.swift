@@ -66,6 +66,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @IBOutlet var marchingComponentsStepper: NSStepper!
 
+    @IBOutlet var deemphasizeMarchingComponentsCheckbox: NSButton!
     @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
     @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
 
@@ -420,6 +421,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         marchingComponentsTextField.integerValue = appPreferences.numberOfMarchingComponents
         marchingComponentsStepper.integerValue = appPreferences.numberOfMarchingComponents
+
+        deemphasizeMarchingComponentsCheckbox.state = NSControl.StateValue(rawValue: appPreferences.deemphasizeMarchingComponents ? 1 : 0)
         
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
         showSampleECGCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showSampleECG ? 1 : 0)
@@ -451,6 +454,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.amplitudeCaliperTextPosition = amplitudeCaliperTextPositionArray[amplitudeCaliperTextPositionPopUpButton.indexOfSelectedItem]
             appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem) ?? QTcFormulaPreference.Bazett
             appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
+            appPreferences.deemphasizeMarchingComponents = deemphasizeMarchingComponentsCheckbox.integerValue == 1 ? true : false
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperPreferences(
@@ -461,7 +465,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 autoPositionText: appPreferences.autoPositionText,
                 timeCaliperTextPosition: appPreferences.timeCaliperTextPosition,
                 amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition,
-                numberOfMarchingComponents: appPreferences.numberOfMarchingComponents
+                numberOfMarchingComponents: appPreferences.numberOfMarchingComponents,
+                deemphasizeMarchingComponents: appPreferences.deemphasizeMarchingComponents
             )
             // Update default calibration strings in CalipersView
             calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration, vertical: appPreferences.defaultVerticalCalibration)

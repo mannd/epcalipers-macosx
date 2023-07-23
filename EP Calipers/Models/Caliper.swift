@@ -73,6 +73,7 @@ class Caliper: NSObject {
     var textPosition: TextPosition
     var chosenComponent: CaliperComponent = .noComponent
     var numberOfMarchingComponants = maxMarchingComponents
+    var deemphasizeMarchingComponents = true
 
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
          crossBarPosition: CGFloat, calibration: Calibration) {
@@ -297,7 +298,9 @@ class Caliper: NSObject {
             context.addLine(to: CGPoint(x: smallerBars[i], y: rect.size.height))
             i += 1
         }
-        context.setLineWidth(fmax(lineWidth - 1, 1))
+        if deemphasizeMarchingComponents {
+            context.setLineWidth(fmax(lineWidth - 1, 1))
+        } 
         context.strokePath()
     }
     

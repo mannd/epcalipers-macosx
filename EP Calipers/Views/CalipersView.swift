@@ -511,7 +511,8 @@ class CalipersView: NSView {
         autoPositionText: Bool,
         timeCaliperTextPosition: TextPosition,
         amplitudeCaliperTextPosition: TextPosition,
-        numberOfMarchingComponents: Int
+        numberOfMarchingComponents: Int,
+        deemphasizeMarchingComponents: Bool
     ) {
          for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
@@ -528,6 +529,7 @@ class CalipersView: NSView {
             if c.direction == .horizontal {
                 c.textPosition = timeCaliperTextPosition
                 c.numberOfMarchingComponants = numberOfMarchingComponents
+                c.deemphasizeMarchingComponents = deemphasizeMarchingComponents
             }
             else if c.direction == .vertical {
                 c.textPosition = amplitudeCaliperTextPosition
