@@ -44,10 +44,28 @@ public enum Rounding: Int {
 }
 
 class Preferences: NSObject {
-    var caliperColor: NSColor? = NSColor.systemBlue
-    var highlightColor: NSColor? = NSColor.systemRed
+    static let caliperColorKey = "caliperColorKey"
+    static let highlightColorKey = "highlightColorKey"
+    static let lineWidthKey = "lineWidthKey"
+    static let defaultHorizontalCalibrationKey = "defaultHorizontalCalibration"
+    static let defaultVerticalCalibrationKey = "defaultVerticalCalibration"
+    static let defaultNumberOfMeanRRIntervalsKey = "defaultNumberOfMeanRRIntervalsKey"
+    static let defaultNumberOfQTcMeanRRIntervalsKey = "defaultNumberOfQTcMeanRRIntervalsKey"
+    static let showPromptsKey = "showPromptsKey"
+    static let roundingKey = "roundingKey"
+    static let qtcFormulaKey = "qtcFormulaKey"
+    static let transparencyKey = "transparencyKey"
+    static let showSampleECGKey = "showSampleECGKey"
+    static let autoPositionTextKey = "autoPositionTextKey"
+    static let timeCaliperTextPositionKey = "timeCaliperTextPositionKey"
+    static let amplitudeCaliperTextPositionKey = "amplitudeCaliperTextPositionKey"
+    static let numberOfMarchingComponentsKey = "numberOfMarchingComponentsKey"
+    static let deemphasizeMarchingComponentsKey = "deemphasizeMarchingComponentsKey"
+
+    var caliperColor: NSColor = NSColor.systemBlue
+    var highlightColor: NSColor = NSColor.systemRed
     var lineWidth: Int = 2
-    var defaultCalibration: String? = "1000 msec"
+    var defaultHorizontalCalibration: String? = "1000 msec"
     var defaultVerticalCalibration: String? = "10 mm"
     var defaultNumberOfMeanRRIntervals: Int = 3
     var defaultNumberOfQTcMeanRRIntervals: Int = 1
@@ -60,55 +78,73 @@ class Preferences: NSObject {
     var amplitudeCaliperTextPosition: TextPosition = .right
     var showSampleECG: Bool = true
     var numberOfMarchingComponents = Caliper.maxMarchingComponents
+    var deemphasizeMarchingComponents: Bool = true
+
+    func registerDefaults() {
+        let defaults = [
+            Self.lineWidthKey: lineWidth,
+            Self.defaultHorizontalCalibrationKey: defaultHorizontalCalibration!,
+            Self.defaultVerticalCalibrationKey: defaultVerticalCalibration!,
+            Self.defaultNumberOfMeanRRIntervalsKey: defaultNumberOfMeanRRIntervals,
+            Self.defaultNumberOfQTcMeanRRIntervalsKey: defaultNumberOfQTcMeanRRIntervals,
+            Self.showPromptsKey: showPrompts,
+            Self.roundingKey: Rounding.ToInteger.rawValue,
+            Self.qtcFormulaKey: QTcFormulaPreference.Bazett.rawValue,
+            Self.transparencyKey: false,
+            Self.showSampleECGKey: true,
+            Self.autoPositionTextKey: true,
+            Self.timeCaliperTextPositionKey: timeCaliperTextPosition.rawValue,
+            Self.amplitudeCaliperTextPositionKey: TextPosition.right.rawValue,
+            Self.numberOfMarchingComponentsKey: numberOfMarchingComponents,
+            Self.deemphasizeMarchingComponentsKey: deemphasizeMarchingComponents,
+        ] as [String : Any]
+        let userDefaults = UserDefaults.standard
+        userDefaults.register(defaults: defaults)
+        loadPreferences()
+        // Manually set colors, they can't be registered.
+        userDefaults.setColor(NSColor.systemBlue, forKey: Self.caliperColorKey)
+        userDefaults.setColor(NSColor.systemRed, forKey: Self.highlightColorKey)
+    }
 
     func loadPreferences() {
         let preferences = UserDefaults.standard
-        caliperColor = preferences.colorForKey("caliperColorKey")
-        highlightColor = preferences.colorForKey("highlightColorKey")
-        lineWidth = preferences.integer(forKey: "lineWidthKey")
-        defaultCalibration = preferences.string(forKey: "defaultCalibrationKey")
-        defaultVerticalCalibration = preferences.string(forKey: "defaultVerticalCalibrationKey")
-        defaultNumberOfMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfMeanRRIntervalsKey")
-        defaultNumberOfQTcMeanRRIntervals = preferences.integer(forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
-        showPrompts = preferences.bool(forKey: "showPromptsKey")
-        transparency = preferences.bool(forKey: "transparency")
-        showSampleECG = preferences.bool(forKey: "showSampleECG")
-        if let formula = QTcFormulaPreference(rawValue: preferences.integer(forKey: "qtcFormula")) {
-            qtcFormula = formula
-        }
-        else {
-            qtcFormula = .Bazett
-        }
-        if let roundPreference = Rounding(rawValue: preferences.integer(forKey: "rounding")) {
-            rounding = roundPreference
-        }
-        else {
-            rounding = .ToInteger
-        }
-        autoPositionText = preferences.bool(forKey: "autoPositionText")
-        timeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: "timeCaliperTextPosition")) ?? .centerAbove
-        amplitudeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: "amplitudeCaliperTextPosition")) ?? .right
-        numberOfMarchingComponents = preferences.integer(forKey: "numberOfMarchingComponents")
-
+        caliperColor = preferences.colorForKey(Self.caliperColorKey) ?? caliperColor
+        highlightColor = preferences.colorForKey(Self.highlightColorKey) ?? highlightColor
+        lineWidth = preferences.integer(forKey: Self.lineWidthKey)
+        defaultHorizontalCalibration = preferences.string(forKey: Self.defaultHorizontalCalibrationKey) ?? defaultHorizontalCalibration
+        defaultVerticalCalibration = preferences.string(forKey: Self.defaultVerticalCalibrationKey) ?? defaultVerticalCalibration
+        defaultNumberOfMeanRRIntervals = preferences.integer(forKey: Self.defaultNumberOfMeanRRIntervalsKey)
+        defaultNumberOfQTcMeanRRIntervals = preferences.integer(forKey: Self.defaultNumberOfQTcMeanRRIntervalsKey)
+        showPrompts = preferences.bool(forKey: Self.showPromptsKey)
+        transparency = preferences.bool(forKey: Self.transparencyKey)
+        showSampleECG = preferences.bool(forKey: Self.showSampleECGKey)
+        qtcFormula = QTcFormulaPreference(rawValue: preferences.integer(forKey: Self.qtcFormulaKey)) ?? .Bazett
+        rounding = Rounding(rawValue: preferences.integer(forKey: Self.roundingKey)) ?? .ToInteger
+        autoPositionText = preferences.bool(forKey: Self.autoPositionTextKey)
+        timeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: Self.timeCaliperTextPositionKey)) ?? .centerAbove
+        amplitudeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: Self.amplitudeCaliperTextPositionKey)) ?? .right
+        numberOfMarchingComponents = preferences.integer(forKey: Self.numberOfMarchingComponentsKey)
+        deemphasizeMarchingComponents = preferences.bool(forKey: Self.deemphasizeMarchingComponentsKey)
     }
     
     func savePreferences() {
         let preferences = UserDefaults.standard
-        preferences.setColor(caliperColor, forKey: "caliperColorKey")
-        preferences.setColor(highlightColor, forKey: "highlightColorKey")
-        preferences.set(lineWidth, forKey: "lineWidthKey")
-        preferences.set(defaultCalibration, forKey: "defaultCalibrationKey")
-        preferences.set(defaultVerticalCalibration, forKey: "defaultVerticalCalibrationKey")
-        preferences.set(defaultNumberOfMeanRRIntervals, forKey: "defaultNumberOfMeanRRIntervalsKey")
-        preferences.set(defaultNumberOfQTcMeanRRIntervals, forKey: "defaultNumberOfQTcMeanRRIntervalsKey")
-        preferences.set(showPrompts, forKey: "showPromptsKey")
-        preferences.set(transparency, forKey: "transparency")
-        preferences.set(showSampleECG, forKey: "showSampleECG")
-        preferences.set(qtcFormula.rawValue, forKey: "qtcFormula")
-        preferences.set(rounding.rawValue, forKey: "rounding")
-        preferences.set(autoPositionText, forKey: "autoPositionText")
-        preferences.set(timeCaliperTextPosition.rawValue, forKey: "timeCaliperTextPosition")
-        preferences.set(amplitudeCaliperTextPosition.rawValue, forKey: "amplitudeCaliperTextPosition")
-        preferences.set(numberOfMarchingComponents, forKey: "numberOfMarchingComponents")
+        preferences.setColor(caliperColor, forKey: Self.caliperColorKey)
+        preferences.setColor(highlightColor, forKey: Self.highlightColorKey)
+        preferences.set(lineWidth, forKey: Self.lineWidthKey)
+        preferences.set(defaultHorizontalCalibration, forKey: Self.defaultHorizontalCalibrationKey)
+        preferences.set(defaultVerticalCalibration, forKey: Self.defaultVerticalCalibrationKey)
+        preferences.set(defaultNumberOfMeanRRIntervals, forKey: Self.defaultNumberOfMeanRRIntervalsKey)
+        preferences.set(defaultNumberOfQTcMeanRRIntervals, forKey: Self.defaultNumberOfQTcMeanRRIntervalsKey)
+        preferences.set(showPrompts, forKey: Self.showPromptsKey)
+        preferences.set(transparency, forKey: Self.transparencyKey)
+        preferences.set(showSampleECG, forKey: Self.showSampleECGKey)
+        preferences.set(qtcFormula.rawValue, forKey: Self.qtcFormulaKey)
+        preferences.set(rounding.rawValue, forKey: Self.roundingKey)
+        preferences.set(autoPositionText, forKey: Self.autoPositionTextKey)
+        preferences.set(timeCaliperTextPosition.rawValue, forKey: Self.timeCaliperTextPositionKey)
+        preferences.set(amplitudeCaliperTextPosition.rawValue, forKey: Self.amplitudeCaliperTextPositionKey)
+        preferences.set(numberOfMarchingComponents, forKey: Self.numberOfMarchingComponentsKey)
+        preferences.set(deemphasizeMarchingComponents, forKey: Self.deemphasizeMarchingComponentsKey)
     }
 }

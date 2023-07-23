@@ -19,8 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // uncomment below to clear default prefs for testing
-//        let appDomain = NSBundle.mainBundle().bundleIdentifier
-//        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+//        let appDomain = Bundle.main.bundleIdentifier
+//        UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+//        NSLog("WARNING, Preferences are set to be cleared with each start of app!!")
 
         // Insert code here to initialize your application
 

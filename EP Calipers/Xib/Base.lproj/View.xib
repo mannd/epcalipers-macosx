@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +10,7 @@
                 <outlet property="amplitudeCaliperTextPositionPopUpButton" destination="8tk-wv-slP" id="hnN-LD-QKg"/>
                 <outlet property="autoPositionTextCheckBox" destination="y2W-Oh-5qB" id="o20-bD-qjk"/>
                 <outlet property="caliperColorWell" destination="ufw-DZ-SUu" id="Bjg-yJ-JX8"/>
-                <outlet property="defaultCalibrationTextField" destination="75T-Ch-tDA" id="FEm-CP-iL6"/>
+                <outlet property="defaultHorizontalCalibrationTextField" destination="75T-Ch-tDA" id="FEm-CP-iL6"/>
                 <outlet property="defaultVerticalCalibrationTextField" destination="Um7-8U-edt" id="tv7-ps-URe"/>
                 <outlet property="formulaPopUpButton" destination="oN6-rn-Vft" id="blc-R9-FdW"/>
                 <outlet property="highlightedCaliperColorWell" destination="Ihd-Wb-ZtZ" id="Zbu-vj-TIu"/>
