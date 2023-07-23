@@ -18,7 +18,7 @@
 #+END_EXPORT
 Les préférences d’application peuvent être choisies en utilisant la commande de menu *Compas EP | Préférences*.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, la position du texte de compas, l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le /Nombre d’intervalles RR pour QTc/ à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
 #+CAPTION: Préférences
-[[../gfx/preferences.png]]
+[[../gfx/settings.fr.png]]
 ** Préférences expliquées
 - Afficher l'échantillon d'ECG au démarrage: Choisir d'afficher un échantillon d'ECG normal au démarrage.
 - Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant *Couleur de compas*. 
@@ -35,4 +35,5 @@ Les préférences d’application peuvent être choisies en utilisant la command
 - Auto-positionner texte: Positionner automatiquement le texte de chaque compas par rapport au compas.  Par exemple, si la position du texte est à droite et le compas est trop proche au côté droit de la fenêtre, elle changera à gauche.
 - Position du texte pour compas de temps: Positionner le texte pour les compas de temps au-dessus du centre, au-dessous du centre, à gauche ou à droite du compas.
 - Position du texte pour compas d'amplitude: Positionner le texte pour les compas d'amplitude au-dessus, au-dessous, à gauche ou à droite du compas.
+- Atténuer les composants marchants: Faire les composants marchants apparaître un peu atténués.
 - Nombre de composants marchants: Adjuster le nombre de composants marchants de 1 à 20.
