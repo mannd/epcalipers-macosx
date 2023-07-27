@@ -206,8 +206,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     override func windowDidLoad() {
         print("windowDidLoad")
         super.windowDidLoad()
-        // register preference defaults and load preferences
+        
         appPreferences.registerDefaults()
+        appPreferences.loadPreferences()
 
         Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self

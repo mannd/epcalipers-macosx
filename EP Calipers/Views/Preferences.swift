@@ -81,6 +81,7 @@ class Preferences {
     var deemphasizeMarchingComponents: Bool = true
 
     func registerDefaults() {
+        // Color defaults are handled in loadPreferences().
         let defaults = [
             Self.lineWidthKey: lineWidth,
             Self.defaultHorizontalCalibrationKey: defaultHorizontalCalibration,
@@ -100,10 +101,6 @@ class Preferences {
         ] as [String : Any]
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: defaults)
-        loadPreferences()
-        // Manually set colors, they can't be registered.
-        userDefaults.setColor(NSColor.systemBlue, forKey: Self.caliperColorKey)
-        userDefaults.setColor(NSColor.systemRed, forKey: Self.highlightColorKey)
     }
 
     func loadPreferences() {
