@@ -44,7 +44,7 @@ class Caliper: NSObject {
 
     let delta: Double = 20.0
     let minDistanceForMarch: CGFloat = 20
-    let maxMarchingCalipers: Int = 20
+    static let maxMarchingComponents: Int = 20
     let roundToIntString: NSString = "%d %@"
     let roundToFourPlacesString: NSString = "%.4g %@"
     let roundToTenthsString: NSString = "%.1f %@"
@@ -72,6 +72,8 @@ class Caliper: NSObject {
     var autoPositionText: Bool
     var textPosition: TextPosition
     var chosenComponent: CaliperComponent = .noComponent
+    var numberOfMarchingComponants = maxMarchingComponents
+    var deemphasizeMarchingComponents = true
 
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
          crossBarPosition: CGFloat, calibration: Calibration) {
@@ -264,11 +266,12 @@ class Caliper: NSObject {
         }
         let greaterBar = fmax(bar1Position, bar2Position)
         let lesserBar = fmin(bar1Position, bar2Position)
-        var biggerBars = Array<CGFloat>(repeating: 0, count: maxMarchingCalipers)
-        var smallerBars = Array<CGFloat>(repeating: 0, count: maxMarchingCalipers)
+
+        var biggerBars = Array<CGFloat>(repeating: 0, count: numberOfMarchingComponants)
+        var smallerBars = Array<CGFloat>(repeating: 0, count: numberOfMarchingComponants)
         var point = greaterBar + difference
         var index = 0
-        while point < rect.size.width && index < maxMarchingCalipers {
+        while point < rect.size.width && index < numberOfMarchingComponants {
             biggerBars[index] = point
             point += difference
             index += 1
@@ -276,7 +279,7 @@ class Caliper: NSObject {
         let maxBiggerBars = index
         index = 0
         point = lesserBar - difference
-        while point > 0 && index < maxMarchingCalipers {
+        while point > 0 && index < numberOfMarchingComponants {
             smallerBars[index] = point
             point -= difference
             index += 1
@@ -295,7 +298,9 @@ class Caliper: NSObject {
             context.addLine(to: CGPoint(x: smallerBars[i], y: rect.size.height))
             i += 1
         }
-        context.setLineWidth(fmax(lineWidth - 1, 1))
+        if deemphasizeMarchingComponents {
+            context.setLineWidth(fmax(lineWidth - 1, 1))
+        } 
         context.strokePath()
     }
     
