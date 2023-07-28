@@ -47,7 +47,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var caliperColorWell: NSColorWell!
     @IBOutlet weak var highlightedCaliperColorWell: NSColorWell!
     @IBOutlet weak var lineWidthSlider: NSSlider!
-    @IBOutlet weak var defaultCalibrationTextField: NSTextField!
+    @IBOutlet weak var defaultHorizontalCalibrationTextField: NSTextField!
     @IBOutlet weak var defaultVerticalCalibrationTextField: NSTextField!
     @IBOutlet weak var numberOfMeanRRIntervalsTextField: NSTextField!
     @IBOutlet weak var numberOfMeanRRIntervalsStepper: NSStepper!
@@ -66,12 +66,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @IBOutlet var marchingComponentsStepper: NSStepper!
 
+    @IBOutlet var deemphasizeMarchingComponentsCheckbox: NSButton!
     @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
     @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
 
-    let defaultHorizontalCalibration = NSLocalizedString("1000 msec", comment: "")
-    let defaultVerticalCalibration = NSLocalizedString("10 mm", comment: "")
-    
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
@@ -100,7 +98,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     let calipersMenuTag = 999
     let appPreferences = Preferences()
-    var preferencesChanged = false
     var preferencesAlert: NSAlert? = nil
     var calibrationAlert: NSAlert? = nil
     var meanIntervalAlert: NSAlert? = nil
@@ -208,35 +205,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     override func windowDidLoad() {
         print("windowDidLoad")
-        // register preference defaults
         super.windowDidLoad()
-        let defaults = [
-            "lineWidthKey": 2,
-            "defaultCalibrationKey": defaultHorizontalCalibration,
-            "defaultVerticalCalibrationKey": defaultVerticalCalibration,
-            "defaultNumberOfMeanRRIntervalsKey": 3,
-            "defaultNumberOfQTcMeanRRIntervalsKey": 1,
-            "showPromptsKey": true,
-            "roundMsecRateKey": true,
-            "rounding": Rounding.ToInteger.rawValue,
-            "qtcFormula": QTcFormulaPreference.Bazett.rawValue,
-            "transparency": false,
-            "showSampleECG": true,
-            "autoPositionText": true,
-            "timeCaliperTextPosition": TextPosition.centerAbove.rawValue,
-            "amplitudeCaliperTextPosition": TextPosition.right.rawValue
-        ] as [String : Any]
-        UserDefaults.standard.register(defaults: defaults)
+        
+        appPreferences.registerDefaults()
         appPreferences.loadPreferences()
-        // need to manually register colors, using extension to NSUserDefaults
-        if (appPreferences.caliperColor == nil) {
-            UserDefaults.standard.setColor(NSColor.systemBlue, forKey:"caliperColorKey")
-            appPreferences.caliperColor = NSColor.systemBlue
-        }
-        if (appPreferences.highlightColor == nil) {
-            UserDefaults.standard.setColor(NSColor.systemRed, forKey: "highlightColorKey")
-            appPreferences.highlightColor = NSColor.systemRed
-        }
+
         Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
         numberOfMeanRRIntervalsTextField.delegate = self
@@ -434,19 +407,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let amplitudeCaliperTextPositionIndex = amplitudeCaliperTextPositionArray.firstIndex(of: appPreferences.amplitudeCaliperTextPosition) ?? 0
         timeCaliperTextPositionPopUpButton.selectItem(at: timeCaliperTextPositionIndex)
         amplitudeCaliperTextPositionPopUpButton.selectItem(at: amplitudeCaliperTextPositionIndex)
-        if let color = appPreferences.caliperColor {
-            caliperColorWell.color = color
-        }
-        if let color = appPreferences.highlightColor {
-            highlightedCaliperColorWell.color = color
-        }
+        caliperColorWell.color = appPreferences.caliperColor
+        highlightedCaliperColorWell.color = appPreferences.highlightColor
         lineWidthSlider.integerValue = appPreferences.lineWidth
-        if let calibration = appPreferences.defaultCalibration {
-            defaultCalibrationTextField.stringValue = calibration
-        }
-        if let calibration = appPreferences.defaultVerticalCalibration {
-            defaultVerticalCalibrationTextField.stringValue = calibration
-        }
+
+        defaultHorizontalCalibrationTextField.stringValue = appPreferences.defaultHorizontalCalibration
+        defaultVerticalCalibrationTextField.stringValue = appPreferences.defaultVerticalCalibration
+
         numberOfMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
         numberOfMeanRRIntervalsStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
         numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
@@ -455,6 +422,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         marchingComponentsTextField.integerValue = appPreferences.numberOfMarchingComponents
         marchingComponentsStepper.integerValue = appPreferences.numberOfMarchingComponents
+
+        deemphasizeMarchingComponentsCheckbox.state = NSControl.StateValue(rawValue: appPreferences.deemphasizeMarchingComponents ? 1 : 0)
         
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
         showSampleECGCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showSampleECG ? 1 : 0)
@@ -469,8 +438,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.lineWidth = lineWidthSlider.integerValue
             // Note stepper is limited to number range, while text field isn't.
             appPreferences.numberOfMarchingComponents = marchingComponentsStepper.integerValue
-            appPreferences.defaultCalibration = defaultCalibrationTextField.stringValue
-            appPreferences.defaultVerticalCalibration = defaultVerticalCalibrationTextField.stringValue
+            // Avoid empty calibration strings, so reset to defaults if empty
+            if !defaultHorizontalCalibrationTextField.stringValue.isEmpty {
+                appPreferences.defaultHorizontalCalibration = defaultHorizontalCalibrationTextField.stringValue
+            }
+            if !defaultVerticalCalibrationTextField.stringValue.isEmpty {
+                appPreferences.defaultVerticalCalibration = defaultVerticalCalibrationTextField.stringValue
+            }
             appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
             appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
             appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
@@ -481,6 +455,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.amplitudeCaliperTextPosition = amplitudeCaliperTextPositionArray[amplitudeCaliperTextPositionPopUpButton.indexOfSelectedItem]
             appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem) ?? QTcFormulaPreference.Bazett
             appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
+            appPreferences.deemphasizeMarchingComponents = deemphasizeMarchingComponentsCheckbox.integerValue == 1 ? true : false
             appPreferences.savePreferences()
             // update calipersView
             calipersView.updateCaliperPreferences(
@@ -491,13 +466,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 autoPositionText: appPreferences.autoPositionText,
                 timeCaliperTextPosition: appPreferences.timeCaliperTextPosition,
                 amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition,
-                numberOfMarchingComponents: appPreferences.numberOfMarchingComponents
+                numberOfMarchingComponents: appPreferences.numberOfMarchingComponents,
+                deemphasizeMarchingComponents: appPreferences.deemphasizeMarchingComponents
             )
+            // Update default calibration strings in CalipersView
+            calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration, vertical: appPreferences.defaultVerticalCalibration)
             // update transparency
             if transparent != appPreferences.transparency {
                 transparent = appPreferences.transparency
             }
-            preferencesChanged = true
         }
     }
     
@@ -879,12 +856,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // initiallize with Preferences here
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
         caliper.rounding = appPreferences.rounding
-        if let color = appPreferences.caliperColor {
-            caliper.unselectedColor = color
-        }
-        if let color = appPreferences.highlightColor {
-            caliper.selectedColor = color
-        }
+        caliper.unselectedColor = appPreferences.caliperColor
+        caliper.selectedColor = appPreferences.highlightColor
         caliper.color = caliper.unselectedColor
         caliper.autoPositionText = appPreferences.autoPositionText
         caliper.direction = direction
@@ -919,12 +892,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         caliper.textPosition = appPreferences.timeCaliperTextPosition
         caliper.calibration = calipersView.horizontalCalibration
         caliper.verticalCalibration = calipersView.verticalCalibration
-        if let color = appPreferences.caliperColor {
-            caliper.unselectedColor = color
-        }
-        if let color = appPreferences.highlightColor {
-            caliper.selectedColor = color
-        }
+        caliper.unselectedColor = appPreferences.caliperColor
+        caliper.selectedColor = appPreferences.highlightColor
         caliper.color = caliper.unselectedColor
         caliper.setInitialPositionInRect(calipersView.bounds)
         calipersView.calipers.append(caliper)
@@ -1035,19 +1004,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             guard let calibrationAlert = calibrationAlert else { return }
             calibrationAlert.informativeText = message
-            if preferencesChanged {
-                calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration ?? defaultHorizontalCalibration
-                calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration ?? defaultVerticalCalibration
-                preferencesChanged = false
+
+            if calipersView.horizontalCalibration.calibrationString.isEmpty {
+                calipersView.horizontalCalibration.calibrationString = appPreferences.defaultHorizontalCalibration
             }
-            else {  // don't bother doing this again if preferencesChanged
-                if calipersView.horizontalCalibration.calibrationString.isEmpty {
-                    calipersView.horizontalCalibration.calibrationString = appPreferences.defaultCalibration ?? defaultHorizontalCalibration
-                }
-                if calipersView.verticalCalibration.calibrationString.isEmpty {
-                    calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration ?? defaultVerticalCalibration
-                }
+            if calipersView.verticalCalibration.calibrationString.isEmpty {
+                calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration
             }
+
+
             let direction = c.direction
             var calibrationString: String
             if direction == .horizontal {
