@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
 		8E4E1C412A40DA4800DEBA9F /* MiniQTc in Frameworks */ = {isa = PBXBuildFile; productRef = 8E4E1C402A40DA4800DEBA9F /* MiniQTc */; };
 		8E545CA91F95A27500B1CEB0 /* QTcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E545CA81F95A27500B1CEB0 /* QTcResult.swift */; };
+		8E5CCB692F3E43E200FB61A8 /* epcalipers-liquidglass01.icon in Resources */ = {isa = PBXBuildFile; fileRef = 8E5CCB682F3E43E200FB61A8 /* epcalipers-liquidglass01.icon */; };
 		8E6D21092524D2A600AD1D7D /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D21082524D2A600AD1D7D /* Position.swift */; };
 		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
 		8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */; };
@@ -86,6 +87,7 @@
 		8E3DA81D1C30850200AD9556 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E545CA81F95A27500B1CEB0 /* QTcResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTcResult.swift; sourceTree = "<group>"; };
+		8E5CCB682F3E43E200FB61A8 /* epcalipers-liquidglass01.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "epcalipers-liquidglass01.icon"; sourceTree = "<group>"; };
 		8E6D21082524D2A600AD1D7D /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		8E7C36D11F2ED89000E5FDA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View.xib; sourceTree = "<group>"; };
 		8E7C36D31F2ED94F00E5FDA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/View.strings; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				8E3DA7FF1C2E264000AD9556 /* EP CalipersTests */,
 				8E3DA80A1C2E264000AD9556 /* EP CalipersUITests */,
 				8E3DA7EE1C2E264000AD9556 /* Products */,
+				8E5CCB682F3E43E200FB61A8 /* epcalipers-liquidglass01.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -378,6 +381,7 @@
 				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
 				8E1CC9E72531459300F00A49 /* sampleECG.jpg in Resources */,
 				8E3C818D1FCFB11F004BD5FD /* EPCalipersHelp in Resources */,
+				8E5CCB692F3E43E200FB61A8 /* epcalipers-liquidglass01.icon in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,7 +611,7 @@
 		8E3DA8111C2E264000AD9556 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "epcalipers-liquidglass01";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "EP Calipers/EP Calipers.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -639,7 +643,7 @@
 		8E3DA8121C2E264000AD9556 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "epcalipers-liquidglass01";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "EP Calipers/EP Calipers.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
