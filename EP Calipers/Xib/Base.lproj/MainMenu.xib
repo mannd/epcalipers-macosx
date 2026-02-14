@@ -482,6 +482,12 @@ CA
                                     <action selector="deleteAllCalipers:" target="-1" id="Fg4-kw-pYd"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Delete All Notes" id="W2n-Lf-Vbq">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="deleteAllNotes:" target="-1" id="u1K-xp-0cZ"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="SPV-R3-c8z"/>
                             <menuItem title="Calibrate" keyEquivalent="c" id="fgl-ih-SXX">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
