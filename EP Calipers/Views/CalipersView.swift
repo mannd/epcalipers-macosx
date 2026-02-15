@@ -33,17 +33,79 @@ class CalipersView: NSView {
     var bar2Selected = false
     var crossBarSelected = false
     private var lastContextMenuLocation: NSPoint?
-    private final class NoteContainerView: NSView {
+    private final class NoteContainerView: NSView, NSTextViewDelegate {
+        private var trackingArea: NSTrackingArea?
+        private var showBorder = false
+        private var isHovering = false
+        private var isEditing = false
+        private var isSelected = false
+        private let hitSlop: CGFloat
+        weak var textView: NSTextView?
+
+        init(frame frameRect: NSRect, hitSlop: CGFloat) {
+            self.hitSlop = hitSlop
+            super.init(frame: frameRect)
+        }
+
+        required init?(coder: NSCoder) {
+            return nil
+        }
+
         override var isFlipped: Bool { true }
 
         override func draw(_ dirtyRect: NSRect) {
             super.draw(dirtyRect)
             NSColor.clear.setFill()
             dirtyRect.fill()
-            NSColor.black.setStroke()
-            let path = NSBezierPath(rect: bounds.insetBy(dx: 0.5, dy: 0.5))
-            path.lineWidth = 1.0
-            path.stroke()
+            if showBorder {
+                NSColor.black.setStroke()
+                let path = NSBezierPath(rect: bounds.insetBy(dx: 0.5, dy: 0.5))
+                path.lineWidth = 1.0
+                path.stroke()
+            }
+        }
+
+        override func updateTrackingAreas() {
+            super.updateTrackingAreas()
+            if let trackingArea = trackingArea {
+                removeTrackingArea(trackingArea)
+            }
+            let trackingRect = bounds.insetBy(dx: -hitSlop, dy: -hitSlop)
+            let options: NSTrackingArea.Options = [.mouseEnteredAndExited, .activeInKeyWindow]
+            let area = NSTrackingArea(rect: trackingRect, options: options, owner: self, userInfo: nil)
+            addTrackingArea(area)
+            trackingArea = area
+        }
+
+        override func mouseEntered(with event: NSEvent) {
+            isHovering = true
+            updateBorderVisibility()
+        }
+
+        override func mouseExited(with event: NSEvent) {
+            isHovering = false
+            updateBorderVisibility()
+        }
+
+        func textDidBeginEditing(_ notification: Notification) {
+            isEditing = true
+            updateBorderVisibility()
+        }
+
+        func textDidEndEditing(_ notification: Notification) {
+            isEditing = false
+            isSelected = false
+            updateBorderVisibility()
+        }
+
+        func textViewDidChangeSelection(_ notification: Notification) {
+            isSelected = window?.firstResponder === textView
+            updateBorderVisibility()
+        }
+
+        private func updateBorderVisibility() {
+            showBorder = isHovering || isEditing || isSelected
+            needsDisplay = true
         }
     }
 
@@ -289,7 +351,7 @@ class CalipersView: NSView {
         let scaledAnchor = noteAnchorInView(fromAbsoluteAnchor: absoluteAnchor)
         let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor)
         let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
-        let containerView = NoteContainerView(frame: noteFrame)
+        let containerView = NoteContainerView(frame: noteFrame, hitSlop: noteHitSlop)
         containerView.wantsLayer = true
         containerView.layer?.backgroundColor = NSColor.clear.cgColor
 
@@ -311,6 +373,8 @@ class CalipersView: NSView {
         textView.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
         textView.textContainerInset = NSSize(width: 4, height: 4)
         textView.autoresizingMask = [.width, .height]
+        textView.delegate = containerView
+        containerView.textView = textView
         scrollView.documentView = textView
 
         containerView.addSubview(scrollView)
