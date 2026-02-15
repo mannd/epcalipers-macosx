@@ -50,6 +50,13 @@
 			remoteGlobalIDString = 8E3DA7EC1C2E264000AD9556;
 			remoteInfo = "EP Calipers";
 		};
+		8E9BED1F2F4256A800799D32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E3DA7E51C2E264000AD9556 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E9BED1A2F42542C00799D32;
+			remoteInfo = EPCalipersHelp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -275,6 +282,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8E9BED202F4256A800799D32 /* PBXTargetDependency */,
 			);
 			name = "EP Calipers";
 			packageProductDependencies = (
@@ -496,6 +504,11 @@
 			isa = PBXTargetDependency;
 			target = 8E3DA7EC1C2E264000AD9556 /* EP Calipers */;
 			targetProxy = 8E3DA8081C2E264000AD9556 /* PBXContainerItemProxy */;
+		};
+		8E9BED202F4256A800799D32 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E9BED1A2F42542C00799D32 /* EPCalipersHelp */;
+			targetProxy = 8E9BED1F2F4256A800799D32 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

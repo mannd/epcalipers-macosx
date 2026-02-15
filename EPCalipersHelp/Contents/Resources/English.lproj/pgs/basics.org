@@ -170,7 +170,7 @@ Nearly all the functions of the app are contained in the main menu commands at t
 | ⌘=   | Zoom to actual size                  |
 | ⌃H   | Toggle transparent window            |
 | ⌃T   | Add time caliper                     |
-| ⌃A   | Add amplitude caliper                |
+| ⌃M   | Add amplitude caliper                |
 | ⌃G   | Add angle caliper                    |
 | ⌃C   | Calibrate                            |
 | Del  | Delete selected caliper              |
