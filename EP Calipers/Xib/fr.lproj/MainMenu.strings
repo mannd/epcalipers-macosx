@@ -235,6 +235,8 @@
 
 /* Class = "NSMenuItem"; title = "Delete All Calipers"; ObjectID = "gb9-F9-bXn"; */
 "gb9-F9-bXn.title" = "Supprimer tous les compas";
+/* Class = "NSMenuItem"; title = "Delete All Notes"; ObjectID = "W2n-Lf-Vbq"; */
+"W2n-Lf-Vbq.title" = "Supprimer toutes les notes";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "hQb-2v-fYv"; */
 "hQb-2v-fYv.title" = "Guillemets courbes";

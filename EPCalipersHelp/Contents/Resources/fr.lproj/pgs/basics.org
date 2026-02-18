@@ -156,7 +156,7 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 | ⌘=     | Zoom à dimension réelle                     |
 | ⌃H     | Basculer la fenêtre transparente            |
 | ⌃T     | Ajouter un compas de temps                  |
-| ⌃A     | Ajouter un compas d’amplitude               |
+| ⌃M     | Ajouter un compas d’amplitude               |
 | ⌃G     | Ajouter un compas d’angle                   |
 | ⌃C     | Étalonner                                   |
 | Del    | Supprimer le compas choisi                  |

@@ -6,6 +6,7 @@
 //  Copyright © 2015 EP Studios. All rights reserved.
 //
 
+import Cocoa
 import XCTest
 @testable import MiniQTc
 @testable import EP_Calipers
@@ -172,5 +173,5 @@ class EP_CalipersTests: XCTestCase {
         XCTAssertEqual(String(format: "%.2f", y), "1010.73")
 
     }
-    
+
 }

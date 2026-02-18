@@ -146,6 +146,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         clearCalibration()
         if isTransparent {
             calipersView.deleteAllCalipers()
+            calipersView.setNotesHidden(true)
             scrollView.drawsBackground = false
             scrollView.hasVerticalScroller = false
             scrollView.hasHorizontalScroller = false
@@ -158,6 +159,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             scrollView.drawsBackground = true
             scrollView.hasVerticalScroller = true
             scrollView.hasHorizontalScroller = true
+            calipersView.setNotesHidden(false)
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
@@ -364,6 +366,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         if menuItem.action == #selector(deleteAllCalipers(_:)) {
             return !(calipersView.calipers.count < 1)
+        }
+        if menuItem.action == #selector(deleteAllNotes(_:)) {
+            return calipersView.hasNotes
         }
         if menuItem.action == #selector(makeTransparent(_:)) {
             menuItem.state = isTransparent ? .on : .off
@@ -631,6 +636,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
         }
         if let goodURL = url {
+            calipersView.deleteAllNotes()
             clearPDF()
             if isPDFFile((goodURL as NSURL).filePathURL) {
                 openPDF(goodURL, addToRecentDocuments: addToRecentDocuments)
@@ -947,6 +953,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     @IBAction func deleteAllCalipers(_ sender: AnyObject) {
         calipersView.deleteAllCalipers()
+    }
+
+    @IBAction func deleteAllNotes(_ sender: AnyObject) {
+        calipersView.deleteAllNotes()
     }
     
     func calibrateWithPossiblePrompts() {

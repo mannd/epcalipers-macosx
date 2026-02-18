@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		8E3DA8201C30859A00AD9556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */; };
 		8E4E1C412A40DA4800DEBA9F /* MiniQTc in Frameworks */ = {isa = PBXBuildFile; productRef = 8E4E1C402A40DA4800DEBA9F /* MiniQTc */; };
 		8E545CA91F95A27500B1CEB0 /* QTcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E545CA81F95A27500B1CEB0 /* QTcResult.swift */; };
+		8E5CCB692F3E43E200FB61A8 /* epcalipers-liquidglass01.icon in Resources */ = {isa = PBXBuildFile; fileRef = 8E5CCB682F3E43E200FB61A8 /* epcalipers-liquidglass01.icon */; };
 		8E6D21092524D2A600AD1D7D /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D21082524D2A600AD1D7D /* Position.swift */; };
 		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
 		8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */; };
@@ -48,6 +49,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8E3DA7EC1C2E264000AD9556;
 			remoteInfo = "EP Calipers";
+		};
+		8E9BED1F2F4256A800799D32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E3DA7E51C2E264000AD9556 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E9BED1A2F42542C00799D32;
+			remoteInfo = EPCalipersHelp;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -86,11 +94,13 @@
 		8E3DA81D1C30850200AD9556 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E545CA81F95A27500B1CEB0 /* QTcResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTcResult.swift; sourceTree = "<group>"; };
+		8E5CCB682F3E43E200FB61A8 /* epcalipers-liquidglass01.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "epcalipers-liquidglass01.icon"; sourceTree = "<group>"; };
 		8E6D21082524D2A600AD1D7D /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		8E7C36D11F2ED89000E5FDA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View.xib; sourceTree = "<group>"; };
 		8E7C36D31F2ED94F00E5FDA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/View.strings; sourceTree = "<group>"; };
 		8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarIdentifiers.swift; sourceTree = "<group>"; };
 		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8E9BED1B2F42542C00799D32 /* EPCalipersHelp.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EPCalipersHelp.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
 		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
 		8EB72C991E2154340083DE96 /* AngleCaliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleCaliper.swift; sourceTree = "<group>"; };
@@ -128,6 +138,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E9BED182F42542C00799D32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -141,6 +158,7 @@
 				8E3DA7FF1C2E264000AD9556 /* EP CalipersTests */,
 				8E3DA80A1C2E264000AD9556 /* EP CalipersUITests */,
 				8E3DA7EE1C2E264000AD9556 /* Products */,
+				8E5CCB682F3E43E200FB61A8 /* epcalipers-liquidglass01.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,6 +168,7 @@
 				8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */,
 				8E3DA7FC1C2E264000AD9556 /* EP CalipersTests.xctest */,
 				8E3DA8071C2E264000AD9556 /* EP CalipersUITests.xctest */,
+				8E9BED1B2F42542C00799D32 /* EPCalipersHelp.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,6 +282,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8E9BED202F4256A800799D32 /* PBXTargetDependency */,
 			);
 			name = "EP Calipers";
 			packageProductDependencies = (
@@ -308,6 +328,25 @@
 			productReference = 8E3DA8071C2E264000AD9556 /* EP CalipersUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		8E9BED1A2F42542C00799D32 /* EPCalipersHelp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E9BED1E2F42542C00799D32 /* Build configuration list for PBXNativeTarget "EPCalipersHelp" */;
+			buildPhases = (
+				8E9BED172F42542C00799D32 /* Sources */,
+				8E9BED182F42542C00799D32 /* Frameworks */,
+				8E9BED192F42542C00799D32 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EPCalipersHelp;
+			packageProductDependencies = (
+			);
+			productName = EPCalipersHelp;
+			productReference = 8E9BED1B2F42542C00799D32 /* EPCalipersHelp.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -316,7 +355,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 2630;
 				ORGANIZATIONNAME = "EP Studios";
 				TargetAttributes = {
 					8E3DA7EC1C2E264000AD9556 = {
@@ -340,6 +379,9 @@
 						LastSwiftMigration = 0900;
 						TestTargetID = 8E3DA7EC1C2E264000AD9556;
 					};
+					8E9BED1A2F42542C00799D32 = {
+						CreatedOnToolsVersion = 26.3;
+					};
 				};
 			};
 			buildConfigurationList = 8E3DA7E81C2E264000AD9556 /* Build configuration list for PBXProject "EP Calipers" */;
@@ -362,6 +404,7 @@
 				8E3DA7EC1C2E264000AD9556 /* EP Calipers */,
 				8E3DA7FB1C2E264000AD9556 /* EP CalipersTests */,
 				8E3DA8061C2E264000AD9556 /* EP CalipersUITests */,
+				8E9BED1A2F42542C00799D32 /* EPCalipersHelp */,
 			);
 		};
 /* End PBXProject section */
@@ -378,6 +421,7 @@
 				8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */,
 				8E1CC9E72531459300F00A49 /* sampleECG.jpg in Resources */,
 				8E3C818D1FCFB11F004BD5FD /* EPCalipersHelp in Resources */,
+				8E5CCB692F3E43E200FB61A8 /* epcalipers-liquidglass01.icon in Resources */,
 				8E3DA7F61C2E264000AD9556 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +434,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8E3DA8051C2E264000AD9556 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9BED192F42542C00799D32 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -434,6 +485,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E9BED172F42542C00799D32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -446,6 +504,11 @@
 			isa = PBXTargetDependency;
 			target = 8E3DA7EC1C2E264000AD9556 /* EP Calipers */;
 			targetProxy = 8E3DA8081C2E264000AD9556 /* PBXContainerItemProxy */;
+		};
+		8E9BED202F4256A800799D32 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E9BED1A2F42542C00799D32 /* EPCalipersHelp */;
+			targetProxy = 8E9BED1F2F4256A800799D32 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -533,6 +596,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -551,6 +615,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -590,6 +655,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -601,13 +667,14 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Release;
 		};
 		8E3DA8111C2E264000AD9556 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "epcalipers-liquidglass01";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "EP Calipers/EP Calipers.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -617,7 +684,9 @@
 				CURRENT_PROJECT_VERSION = 51;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W74NPJXYEG;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = "EP Calipers/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -639,7 +708,7 @@
 		8E3DA8121C2E264000AD9556 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "epcalipers-liquidglass01";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "EP Calipers/EP Calipers.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -649,7 +718,9 @@
 				CURRENT_PROJECT_VERSION = 51;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W74NPJXYEG;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = "EP Calipers/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -685,7 +756,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -710,7 +781,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -732,7 +803,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -753,7 +824,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-CalipersUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -762,6 +833,71 @@
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = "EP Calipers";
 				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+		8E9BED1C2F42542C00799D32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W74NPJXYEG;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 EP Studios. All rights reserved.";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.epstudios.EPCalipersHelp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		8E9BED1D2F42542C00799D32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W74NPJXYEG;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 EP Studios. All rights reserved.";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.epstudios.EPCalipersHelp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -800,6 +936,15 @@
 			buildConfigurations = (
 				8E3DA8171C2E264000AD9556 /* Debug */,
 				8E3DA8181C2E264000AD9556 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E9BED1E2F42542C00799D32 /* Build configuration list for PBXNativeTarget "EPCalipersHelp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9BED1C2F42542C00799D32 /* Debug */,
+				8E9BED1D2F42542C00799D32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
