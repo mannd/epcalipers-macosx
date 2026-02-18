@@ -135,7 +135,7 @@ class CalipersView: NSView {
                 return nil
             }
             let innerRect = bounds.insetBy(dx: hitSlop, dy: hitSlop)
-            if innerRect.contains(point) {
+            if !CalipersView.isPointInNoteDragRing(point, noteFrame: innerRect, hitSlop: hitSlop) {
                 return nil
             }
             return self
@@ -537,6 +537,11 @@ class CalipersView: NSView {
             }
         }
         return false
+    }
+
+    static func isPointInNoteDragRing(_ point: NSPoint, noteFrame: NSRect, hitSlop: CGFloat) -> Bool {
+        let expandedFrame = noteFrame.insetBy(dx: -hitSlop, dy: -hitSlop)
+        return expandedFrame.contains(point) && !noteFrame.contains(point)
     }
 
     private func moveNote(at index: Int, byScaledDelta delta: NSPoint) {
