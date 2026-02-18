@@ -107,10 +107,63 @@ class CalipersView: NSView {
             showBorder = isHovering || isEditing || isSelected
             needsDisplay = true
         }
+
+        var isBorderVisible: Bool {
+            return showBorder
+        }
+    }
+
+    private final class NoteDragHandleView: NSView {
+        weak var owner: CalipersView?
+        weak var noteView: NoteContainerView?
+        private let hitSlop: CGFloat
+        private var lastDragLocation: NSPoint?
+
+        init(frame frameRect: NSRect, hitSlop: CGFloat) {
+            self.hitSlop = hitSlop
+            super.init(frame: frameRect)
+        }
+
+        required init?(coder: NSCoder) {
+            return nil
+        }
+
+        override var isFlipped: Bool { true }
+
+        override func hitTest(_ point: NSPoint) -> NSView? {
+            guard let noteView = noteView, noteView.isBorderVisible else {
+                return nil
+            }
+            let innerRect = bounds.insetBy(dx: hitSlop, dy: hitSlop)
+            if innerRect.contains(point) {
+                return nil
+            }
+            return self
+        }
+
+        override func mouseDown(with event: NSEvent) {
+            owner?.window?.makeFirstResponder(owner)
+            lastDragLocation = owner?.convert(event.locationInWindow, from: nil)
+        }
+
+        override func mouseDragged(with event: NSEvent) {
+            guard let owner = owner else { return }
+            let currentLocation = owner.convert(event.locationInWindow, from: nil)
+            if let lastLocation = lastDragLocation {
+                let delta = NSPoint(x: currentLocation.x - lastLocation.x, y: currentLocation.y - lastLocation.y)
+                owner.moveNote(for: noteView, byScaledDelta: delta)
+            }
+            lastDragLocation = currentLocation
+        }
+
+        override func mouseUp(with event: NSEvent) {
+            lastDragLocation = nil
+        }
     }
 
     private struct NoteEntry {
         var view: NoteContainerView
+        var dragHandle: NoteDragHandleView?
         var absoluteAnchor: NSPoint
     }
     private var noteEntries: [NoteEntry] = []
@@ -168,6 +221,10 @@ class CalipersView: NSView {
         // Ctrl-left click emulates right click.
         if theEvent.modifierFlags.contains(.control) {
             return self.rightMouseDown(with: theEvent)
+        }
+        let pointInView = convert(theEvent.locationInWindow, from: nil)
+        if !noteContainsPoint(pointInView) {
+            window?.makeFirstResponder(self)
         }
         let location = theEvent.locationInWindow
         selectedCaliper = getSelectedCaliper(location)
@@ -379,7 +436,12 @@ class CalipersView: NSView {
 
         containerView.addSubview(scrollView)
         addSubview(containerView)
-        noteEntries.append(NoteEntry(view: containerView, absoluteAnchor: absoluteAnchor))
+        let handleFrame = noteFrame.insetBy(dx: -noteHitSlop, dy: -noteHitSlop)
+        let dragHandle = NoteDragHandleView(frame: handleFrame, hitSlop: noteHitSlop)
+        dragHandle.owner = self
+        dragHandle.noteView = containerView
+        addSubview(dragHandle, positioned: .below, relativeTo: containerView)
+        noteEntries.append(NoteEntry(view: containerView, dragHandle: dragHandle, absoluteAnchor: absoluteAnchor))
         window?.makeFirstResponder(textView)
     }
 
@@ -388,12 +450,14 @@ class CalipersView: NSView {
         guard let noteIndex = noteIndex(near: location) else { return }
         let entry = noteEntries.remove(at: noteIndex)
         entry.view.removeFromSuperview()
+        entry.dragHandle?.removeFromSuperview()
         needsDisplay = true
     }
 
     func deleteAllNotes() {
         for entry in noteEntries {
             entry.view.removeFromSuperview()
+            entry.dragHandle?.removeFromSuperview()
         }
         noteEntries.removeAll()
         needsDisplay = true
@@ -402,6 +466,7 @@ class CalipersView: NSView {
     func setNotesHidden(_ hidden: Bool) {
         for entry in noteEntries {
             entry.view.isHidden = hidden
+            entry.dragHandle?.isHidden = hidden
         }
     }
 
@@ -451,14 +516,45 @@ class CalipersView: NSView {
     private func updateNoteFrames() {
         guard noteEntries.count > 0 else { return }
         for index in noteEntries.indices {
-            var entry = noteEntries[index]
+            let entry = noteEntries[index]
             let scaledAnchor = noteAnchorInView(fromAbsoluteAnchor: entry.absoluteAnchor)
             let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor)
             let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
             entry.view.isHidden = !bounds.contains(noteFrame)
             entry.view.setFrameOrigin(scaledOrigin)
-            noteEntries[index] = entry
+            if let dragHandle = entry.dragHandle {
+                let handleFrame = noteFrame.insetBy(dx: -noteHitSlop, dy: -noteHitSlop)
+                dragHandle.isHidden = entry.view.isHidden
+                dragHandle.frame = handleFrame
+            }
         }
+    }
+
+    private func noteContainsPoint(_ point: NSPoint) -> Bool {
+        for entry in noteEntries where !entry.view.isHidden {
+            if entry.view.frame.contains(point) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private func moveNote(at index: Int, byScaledDelta delta: NSPoint) {
+        guard noteEntries.indices.contains(index) else { return }
+        var entry = noteEntries[index]
+        let scale = CGFloat(horizontalCalibration.currentZoom)
+        if scale != 0 {
+            entry.absoluteAnchor.x += delta.x / scale
+            entry.absoluteAnchor.y += delta.y / scale
+        }
+        noteEntries[index] = entry
+        updateNoteFrames()
+    }
+
+    private func moveNote(for noteView: NoteContainerView?, byScaledDelta delta: NSPoint) {
+        guard let noteView = noteView else { return }
+        guard let index = noteEntries.firstIndex(where: { $0.view === noteView }) else { return }
+        moveNote(at: index, byScaledDelta: delta)
     }
 
     private func noteIndex(near point: NSPoint) -> Int? {
