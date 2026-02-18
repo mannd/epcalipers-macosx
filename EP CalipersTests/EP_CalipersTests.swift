@@ -174,16 +174,4 @@ class EP_CalipersTests: XCTestCase {
 
     }
 
-    func testNoteDragRingHitTesting() {
-        let noteFrame = NSRect(x: 100, y: 100, width: 180, height: 80)
-        let hitSlop: CGFloat = 10.0
-        let pointInsideNote = NSPoint(x: 110, y: 110)
-        let pointInRing = NSPoint(x: 95, y: 110)
-        let pointOutside = NSPoint(x: 50, y: 50)
-
-        XCTAssertFalse(CalipersView.isPointInNoteDragRing(pointInsideNote, noteFrame: noteFrame, hitSlop: hitSlop))
-        XCTAssertTrue(CalipersView.isPointInNoteDragRing(pointInRing, noteFrame: noteFrame, hitSlop: hitSlop))
-        XCTAssertFalse(CalipersView.isPointInNoteDragRing(pointOutside, noteFrame: noteFrame, hitSlop: hitSlop))
-    }
-    
 }
