@@ -170,8 +170,9 @@ class CalipersView: NSView {
     private let defaultNoteSize = NSSize(width: 180, height: 80)
     private let noteHitSlop: CGFloat = 10.0
     private let defaultNoteFontSize = NSFont.systemFontSize
-    private let minimumNoteFontSize: CGFloat = 8.0
-    private let maximumNoteFontSize: CGFloat = 36.0
+    private let defaultCaliperFontSize: CGFloat = 18.0
+    private let minimumFontSize: CGFloat = 10.0
+    private let maximumFontSize: CGFloat = 36.0
     var hasNotes: Bool { !noteEntries.isEmpty }
     // references to MainWindowController calibrations
     let horizontalCalibration = Calibration()
@@ -370,6 +371,7 @@ class CalipersView: NSView {
         verticalCalibration.currentZoom = Double(scrollView.magnification)
         horizontalCalibration.offset = getOffset()
         verticalCalibration.offset = getOffset()
+        updateCaliperTextFontsForCurrentZoom()
         updateNoteFrames()
         if calipers.count > 0 {
             needsDisplay = true
@@ -537,7 +539,25 @@ class CalipersView: NSView {
     private func noteFontSizeForCurrentZoom() -> CGFloat {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
         let scaledSize = defaultNoteFontSize * zoom
-        return max(minimumNoteFontSize, min(maximumNoteFontSize, scaledSize))
+        return max(minimumFontSize, min(maximumFontSize, scaledSize))
+    }
+
+    private func caliperFontSizeForCurrentZoom() -> CGFloat {
+        let zoom = CGFloat(horizontalCalibration.currentZoom)
+        let scaledSize = defaultCaliperFontSize * zoom
+        return max(minimumFontSize, min(maximumFontSize, scaledSize))
+    }
+
+    private func updateCaliperTextFontsForCurrentZoom() {
+        let fontSize = caliperFontSizeForCurrentZoom()
+        for caliper in calipers {
+            if let scaledFont = NSFont(name: caliper.textFont.fontName, size: fontSize) {
+                caliper.textFont = scaledFont
+            }
+            else {
+                caliper.textFont = NSFont.systemFont(ofSize: fontSize, weight: .medium)
+            }
+        }
     }
 
     private func updateFontForNote(_ noteView: NoteContainerView) {
