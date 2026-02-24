@@ -169,6 +169,10 @@ class CalipersView: NSView {
     private var noteEntries: [NoteEntry] = []
     private let defaultNoteSize = NSSize(width: 180, height: 80)
     private let noteHitSlop: CGFloat = 10.0
+    private let defaultNoteFontSize = NSFont.systemFontSize
+    private let defaultCaliperFontSize: CGFloat = 18.0
+    private let minimumFontSize: CGFloat = 10.0
+    private let maximumFontSize: CGFloat = 36.0
     var hasNotes: Bool { !noteEntries.isEmpty }
     // references to MainWindowController calibrations
     let horizontalCalibration = Calibration()
@@ -367,6 +371,7 @@ class CalipersView: NSView {
         verticalCalibration.currentZoom = Double(scrollView.magnification)
         horizontalCalibration.offset = getOffset()
         verticalCalibration.offset = getOffset()
+        updateCaliperTextFontsForCurrentZoom()
         updateNoteFrames()
         if calipers.count > 0 {
             needsDisplay = true
@@ -427,7 +432,7 @@ class CalipersView: NSView {
         textView.drawsBackground = false
         textView.backgroundColor = .clear
         textView.textColor = .black
-        textView.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        textView.font = NSFont.systemFont(ofSize: noteFontSizeForCurrentZoom())
         textView.textContainerInset = NSSize(width: 4, height: 4)
         textView.autoresizingMask = [.width, .height]
         textView.delegate = containerView
@@ -522,11 +527,46 @@ class CalipersView: NSView {
             let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
             entry.view.isHidden = !bounds.contains(noteFrame)
             entry.view.setFrameOrigin(scaledOrigin)
+            updateFontForNote(entry.view)
             if let dragHandle = entry.dragHandle {
                 let handleFrame = noteFrame.insetBy(dx: -noteHitSlop, dy: -noteHitSlop)
                 dragHandle.isHidden = entry.view.isHidden
                 dragHandle.frame = handleFrame
             }
+        }
+    }
+
+    private func noteFontSizeForCurrentZoom() -> CGFloat {
+        let zoom = CGFloat(horizontalCalibration.currentZoom)
+        let scaledSize = defaultNoteFontSize * zoom
+        return max(minimumFontSize, min(maximumFontSize, scaledSize))
+    }
+
+    private func caliperFontSizeForCurrentZoom() -> CGFloat {
+        let zoom = CGFloat(horizontalCalibration.currentZoom)
+        let scaledSize = defaultCaliperFontSize * zoom
+        return max(minimumFontSize, min(maximumFontSize, scaledSize))
+    }
+
+    private func updateCaliperTextFontsForCurrentZoom() {
+        let fontSize = caliperFontSizeForCurrentZoom()
+        for caliper in calipers {
+            if let scaledFont = NSFont(name: caliper.textFont.fontName, size: fontSize) {
+                caliper.textFont = scaledFont
+            }
+            else {
+                caliper.textFont = NSFont.systemFont(ofSize: fontSize, weight: .medium)
+            }
+        }
+    }
+
+    private func updateFontForNote(_ noteView: NoteContainerView) {
+        guard let textView = noteView.textView else { return }
+        let font = NSFont.systemFont(ofSize: noteFontSizeForCurrentZoom())
+        textView.font = font
+        textView.typingAttributes[.font] = font
+        if let storage = textView.textStorage, storage.length > 0 {
+            storage.addAttribute(.font, value: font, range: NSRange(location: 0, length: storage.length))
         }
     }
 

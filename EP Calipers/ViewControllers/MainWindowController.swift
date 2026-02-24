@@ -878,6 +878,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         caliper.setInitialPositionInRect(calipersView.bounds)
         calipersView.calipers.append(caliper)
+        calipersView.updateCalibration()
         calipersView.needsDisplay = true
     }
     
@@ -903,6 +904,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         caliper.color = caliper.unselectedColor
         caliper.setInitialPositionInRect(calipersView.bounds)
         calipersView.calipers.append(caliper)
+        calipersView.updateCalibration()
         calipersView.needsDisplay = true
     }
     
