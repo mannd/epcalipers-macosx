@@ -161,6 +161,7 @@ class CalipersView: NSView {
         }
     }
 
+    //FIXME: Changing text style (like to Bold) is lost when moving and zooming text box.
     private struct NoteEntry {
         var view: NoteContainerView
         var dragHandle: NoteDragHandleView?
@@ -173,6 +174,7 @@ class CalipersView: NSView {
     private let defaultCaliperFontSize: CGFloat = 18.0
     private let minimumFontSize: CGFloat = 10.0
     private let maximumFontSize: CGFloat = 36.0
+    private var previousNoteTextZoomScale: CGFloat?
     var hasNotes: Bool { !noteEntries.isEmpty }
     // references to MainWindowController calibrations
     let horizontalCalibration = Calibration()
@@ -520,6 +522,7 @@ class CalipersView: NSView {
 
     private func updateNoteFrames() {
         guard noteEntries.count > 0 else { return }
+        let noteFontZoomRatio = noteFontScaleRatioForCurrentZoom()
         for index in noteEntries.indices {
             let entry = noteEntries[index]
             let scaledAnchor = noteAnchorInView(fromAbsoluteAnchor: entry.absoluteAnchor)
@@ -527,7 +530,7 @@ class CalipersView: NSView {
             let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
             entry.view.isHidden = !bounds.contains(noteFrame)
             entry.view.setFrameOrigin(scaledOrigin)
-            updateFontForNote(entry.view)
+            updateFontForNote(entry.view, zoomRatio: noteFontZoomRatio)
             if let dragHandle = entry.dragHandle {
                 let handleFrame = noteFrame.insetBy(dx: -noteHitSlop, dy: -noteHitSlop)
                 dragHandle.isHidden = entry.view.isHidden
@@ -540,6 +543,13 @@ class CalipersView: NSView {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
         let scaledSize = defaultNoteFontSize * zoom
         return max(minimumFontSize, min(maximumFontSize, scaledSize))
+    }
+
+    private func noteFontScaleRatioForCurrentZoom() -> CGFloat {
+        let currentZoom = max(CGFloat(horizontalCalibration.currentZoom), 0.0001)
+        let previousZoom = previousNoteTextZoomScale ?? currentZoom
+        previousNoteTextZoomScale = currentZoom
+        return currentZoom / previousZoom
     }
 
     private func caliperFontSizeForCurrentZoom() -> CGFloat {
@@ -560,13 +570,30 @@ class CalipersView: NSView {
         }
     }
 
-    private func updateFontForNote(_ noteView: NoteContainerView) {
+    private func updateFontForNote(_ noteView: NoteContainerView, zoomRatio: CGFloat) {
         guard let textView = noteView.textView else { return }
-        let font = NSFont.systemFont(ofSize: noteFontSizeForCurrentZoom())
-        textView.font = font
-        textView.typingAttributes[.font] = font
+        let fallbackFont = textView.font ?? NSFont.systemFont(ofSize: noteFontSizeForCurrentZoom())
+        guard abs(zoomRatio - 1.0) > 0.0001 else { return }
+
         if let storage = textView.textStorage, storage.length > 0 {
-            storage.addAttribute(.font, value: font, range: NSRange(location: 0, length: storage.length))
+            storage.beginEditing()
+            storage.enumerateAttribute(.font, in: NSRange(location: 0, length: storage.length), options: []) { value, range, _ in
+                let currentFont = value as? NSFont ?? fallbackFont
+                let scaledSize = max(minimumFontSize, min(maximumFontSize, currentFont.pointSize * zoomRatio))
+                let scaledFont = NSFont(descriptor: currentFont.fontDescriptor, size: scaledSize) ?? fallbackFont
+                storage.addAttribute(.font, value: scaledFont, range: range)
+            }
+            storage.endEditing()
+        } else {
+            let scaledSize = max(minimumFontSize, min(maximumFontSize, fallbackFont.pointSize * zoomRatio))
+            textView.font = NSFont(descriptor: fallbackFont.fontDescriptor, size: scaledSize) ?? fallbackFont
+        }
+
+        if let typingFont = textView.typingAttributes[.font] as? NSFont {
+            let scaledSize = max(minimumFontSize, min(maximumFontSize, typingFont.pointSize * zoomRatio))
+            textView.typingAttributes[.font] = NSFont(descriptor: typingFont.fontDescriptor, size: scaledSize) ?? fallbackFont
+        } else {
+            textView.typingAttributes[.font] = fallbackFont
         }
     }
 
