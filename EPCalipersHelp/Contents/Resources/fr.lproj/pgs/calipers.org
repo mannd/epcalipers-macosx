@@ -82,3 +82,35 @@ Si le curseur est placé sur les barres gauches ou droites d’un compas de temp
 ** Petits mouvements
 Parfois vous aimeriez raffiner la position d'un compas, ou vous trouvez qu'il est trop difficile de le positionner exactement en glissant ses composants avec votre doigt ou avec la souris.  Vous pouvez faire ces petits mouvements avec les touches flèches du clavier.  En utilisant un clic droit de la souris ou une frappe avec deux droigts du trackpad sur un compas, le menu secondaire apparaîtra. Choisir *Régler la position du compas*.  Un message apparaîtra pour montrer quelque composant du compas a été choisi (barre transversale, barre latérale ou, en cas d'un compas d'angle, peut-être le sommet).  Des touches flèches à gauche, à droite, montantes ou descendantes déplaceront le composant choisi ou tout le compas en utilisant des petits mouvements.  Pour ajuster la position plus finement, utiliser la commande + des touches flèches.  Appuyer la touche /Échap/ pour quitter les petits mouvements.
 
+* Addition de notes
+À des fins pédagogiques ou illustratives, vous pouvez ajouter des notes textuelles à l'image. Ces notes, comme les compas, sont des ajouts temporaires. Pour obtenir une copie permanente, effectuez une capture d'écran.
+
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p>
+<picture>
+  <source
+    srcset="../gfx/note.dark.fr.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../gfx/note.fr.png"
+  />
+</picture>
+</p>
+<p><span class="figure-number">Figure 4: </span>Une note.</p>
+</div>
+#+END_EXPORT
+
+** Ajouter une note
+Faites un clic droit avec la souris ou un clic à deux doigts sur le touchpad pour afficher le menu contextuel. Sélectionnez l'option *Ajouter une note*. Saisissez votre texte dans la zone de texte qui apparaît. Faites un clic droit dans la zone de texte pour afficher un menu d'édition. Si vous déplacez le curseur en dehors de la zone de texte, le contour disparaît. Déplacez le curseur juste en dehors de la zone de texte et vous pourrez cliquer et faire glisser la zone de texte où vous le souhaitez.
+
+[[../../shrd/move_note.gif]]
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p><span class="figure-number">Figure 5: </span>Déplacer une note.</p>
+</div>
+#+END_EXPORT
+
+** Supprimer des notes
+Faites un clic droit juste en dehors de la zone de texte pour afficher le menu contextuel. Sélectionnez *Supprimer la note* pour supprimer la note. Vous pouvez supprimer toutes les notes en même temps en utilisant l'élément de menu *Caliper | Supprimer toutes les notes*.

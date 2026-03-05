@@ -82,9 +82,35 @@ If the cursor is positioned over either the left or right sidebars of a time cal
 By combining movements, you can place a caliper anywhere on an ECG image to make measurements.
 ** Tweaking
 /Tweaking/ or /micromoving/ is a way to more finely control caliper movement.  When you tweak a caliper’s position, you use the keyboard arrow keys to move a caliper component or the entire caliper a fraction of a point in any direction.  If you right-click on a caliper with a mouse, or two-finger click on the trackpad, you bring up a secondary menu that includes the option *Tweak Caliper Position*.  Click on this option.  A message will appear showing which component of the caliper you clicked on (left bar, right bar, top bar, bottom bar, crossbar, or apex, depending of the type of caliper).  Right-click or two-finger click on a different component to change which component you want to move.  Then use the keyboard arrow keys to move the selected caliper component.  To finely adjust the caliper component position, use the command + arrow keys.  Note that if you select the crossbar, or apex of an angle caliper, the arrow keys cause the caliper to move as a unit.  Selecting any other component moves that component.  Select /Escape/, or right-click or two-finger click away from a caliper to turn off tweaking.
-* TODO Using notes -- add figure
+* Using notes
 For teaching or illustrative purposes, you can add text notes to the image.  Notes, like calipers, are just temporary additions to the image.  If you want to make a permanent copy, take a screenshot.
+
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p>
+<picture>
+  <source
+    srcset="../gfx/note.dark.en.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../gfx/note.en.png"
+  />
+</picture>
+</p>
+<p><span class="figure-number">Figure 4: </span>A note.</p>
+</div>
+#+END_EXPORT
+
 ** Adding a note
-Right-click with your mouse or two-finger click on the trackpad to bring up the context menu.  Select the option *Add Note*.  Type in the text box that appears.  Right-click in the text box to bring up an editing menu.  If you move the cursor outside the text box the outline will disappear.  Move the cursor just outsite the text box and you will be able to click and drag the text box anywhere you want.
+Right-click with your mouse or two-finger click on the trackpad to bring up the context menu.  Select the option *Add Note*.  Type in the text box that appears.  Right-click or two-finger click on the trackpad inside the text box to bring up an editing menu.  If you click outside the text box the outline will disappear.  Move the cursor just outside the text box and you will be able to click and drag the text box anywhere you want.
+
+[[../../shrd/move_note.gif]]
+ #+BEGIN_EXPORT html
+<div id="orgbd7a499" class="figure">
+<p><span class="figure-number">Figure 5: </span>Moving a note.</p>
+</div>
+#+END_EXPORT
+
 ** Deleting notes
 Right-click just outside the text box to bring up the context menu.  Selecte *Delete Note* to delete the note.  You can delete all notes at the same time by using the *Caliper | Delete All Notes* menu item.
