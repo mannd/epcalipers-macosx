@@ -24,16 +24,16 @@
         <window title="EP Calipers" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="faX-Do-WYj">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="131" y="158" width="1000" height="600"/>
+            <rect key="contentRect" x="131" y="158" width="1200" height="600"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1084"/>
             <view key="contentView" id="uHL-zZ-C20" customClass="MainView" customModule="EP_Calipers" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
+                <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxA-IY-0Zx">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="TeI-oG-eGn">
-                            <rect key="frame" x="1" y="1" width="998" height="598"/>
+                            <rect key="frame" x="1" y="1" width="1198" height="598"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIK-MS-rQb" customClass="IKImageView">
@@ -44,16 +44,16 @@
                         </clipView>
                         <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="hvs-Uv-6A4">
-                            <rect key="frame" x="1" y="582" width="998" height="17"/>
+                            <rect key="frame" x="1" y="582" width="1198" height="17"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lrJ-fG-BcI">
-                            <rect key="frame" x="982" y="1" width="17" height="598"/>
+                            <rect key="frame" x="1182" y="1" width="17" height="598"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvW-Uo-B35" customClass="CalipersView" customModule="EP_Calipers" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                     </customView>
                 </subviews>
                 <constraints>
@@ -71,7 +71,21 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="DbN-gq-grY"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ouh-LL-r0x"/>
-                    <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" sizingBehavior="auto" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="CC9E30B8-92AC-4DB9-A7E9-B186DFC4BAC5" label="Open" paletteLabel="Open image" toolTip="Open image" tag="-1" image="square.and.arrow.down" catalog="system" bordered="YES" id="9Cv-6a-0pN">
+                        <size key="minSize" width="31" height="24"/>
+                        <size key="maxSize" width="31" height="24"/>
+                        <connections>
+                            <action selector="openImage:" target="-1" id="Ysc-aL-j9I"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="CB347D60-6A9B-4CD1-B6FB-78E65EB3B282" label="Screenshot" paletteLabel="Export Screenshot" toolTip="Export screenshot" tag="-1" image="camera.viewfinder" catalog="system" bordered="YES" id="hh9-NA-h5s">
+                        <size key="minSize" width="33" height="24"/>
+                        <size key="maxSize" width="33" height="24"/>
+                        <connections>
+                            <action selector="saveImage:" target="-1" id="CsX-BJ-2qc"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" bordered="YES" sizingBehavior="auto" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="gC6-ej-kGp">
                             <rect key="frame" x="0.0" y="14" width="113" height="24"/>
@@ -128,29 +142,6 @@
                             <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="671D5437-D9E4-4ED4-9362-69DE326CAD32" label="Files" paletteLabel="Files" sizingBehavior="auto" id="q9h-cp-i9R" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
-                        <nil key="toolTip"/>
-                        <segmentedControl key="view" verticalHuggingPriority="750" id="pjM-VC-7LA">
-                            <rect key="frame" x="4" y="14" width="24" height="24"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="BCX-fN-8ly">
-                                <font key="font" metaFont="system"/>
-                                <segments>
-                                    <segment toolTip="Open files" image="import-image"/>
-                                </segments>
-                            </segmentedCell>
-                        </segmentedControl>
-                        <connections>
-                            <action selector="openImage:" target="-1" id="yqE-CX-3AN"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="CB347D60-6A9B-4CD1-B6FB-78E65EB3B282" label="Screenshot" paletteLabel="Export Screenshot" toolTip="Export screenshot" tag="-1" image="camera.viewfinder" catalog="system" bordered="YES" id="hh9-NA-h5s">
-                        <size key="minSize" width="33" height="24"/>
-                        <size key="maxSize" width="33" height="24"/>
-                        <connections>
-                            <action selector="saveImage:" target="-1" id="CsX-BJ-2qc"/>
-                        </connections>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3178DB5C-CDC8-4F40-9C33-9F06D76BD3D2" explicitItemIdentifier="newCalibrationToolbar" label="Calibration" paletteLabel="Calibration" sizingBehavior="auto" id="XnC-gj-7nY" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="sBn-yF-ACb">
@@ -170,7 +161,7 @@
                     </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="q9h-cp-i9R"/>
+                    <toolbarItem reference="9Cv-6a-0pN"/>
                     <toolbarItem reference="hh9-NA-h5s"/>
                     <toolbarItem reference="BUH-5G-BGq"/>
                     <toolbarItem reference="uO8-MM-MEU"/>
@@ -216,8 +207,8 @@
         <image name="custom-amplitude-caliper" width="11" height="11"/>
         <image name="custom-angle-caliper" width="12" height="12"/>
         <image name="custom-time-caliper" width="11" height="11"/>
-        <image name="import-image" width="12" height="14"/>
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
     </resources>
 </document>

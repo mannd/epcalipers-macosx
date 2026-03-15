@@ -177,3 +177,12 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Export Screenshot"; ObjectID = "hh9-NA-h5s"; */
 "hh9-NA-h5s.toolTip" = "Capture d'écran";
+
+/* Class = "NSToolbarItem"; label = "Open"; ObjectID = "9Cv-6a-0pN"; */
+"9Cv-6a-0pN.label" = "Ouvrir";
+
+/* Class = "NSToolbarItem"; label = "Open"; ObjectID = "9Cv-6a-0pN"; */
+"9Cv-6a-0pN.paletteLabel" = "Ouvrir une image";
+
+/* Class = "NSToolbarItem"; label = "Open"; ObjectID = "9Cv-6a-0pN"; */
+"9Cv-6a-0pN.toolTip" = "Ouvrir une image";
