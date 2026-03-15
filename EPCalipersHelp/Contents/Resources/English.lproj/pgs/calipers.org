@@ -113,4 +113,4 @@ Right-click with your mouse or two-finger click on the trackpad to bring up the 
 #+END_EXPORT
 
 ** Deleting notes
-Right-click just outside the text box to bring up the context menu.  Selecte *Delete Note* to delete the note.  You can delete all notes at the same time by using the *Caliper | Delete All Notes* menu item.
+Right-click just outside the text box to bring up the context menu.  Select *Delete Note* to delete the note.  You can delete all notes at the same time by using the *Caliper | Delete All Notes* menu item.

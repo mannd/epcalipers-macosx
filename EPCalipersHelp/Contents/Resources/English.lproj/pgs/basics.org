@@ -68,7 +68,7 @@ toolbar buttons are grayed out.  You can customize the toolbar items
 if you wish.  On Macs with a Touch Bar some of the toolbar items are
 shown on it.
 # Below are direct html exports to support dark mode images
-*** Files
+*** Open image
  #+BEGIN_EXPORT html
 <ul class="org-ul">
 <li>
@@ -82,6 +82,22 @@ shown on it.
   />
 </picture>
  Open an image file</li>
+</ul>
+#+END_EXPORT
+*** Export Screenshot
+ #+BEGIN_EXPORT html
+<ul class="org-ul">
+<li>
+<picture>
+  <source
+    srcset="../../shrd/camera.viewfinder@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/camera.viewfinder@2x.png"
+  />
+</picture>
+ Export screenshot</li>
 </ul>
 #+END_EXPORT
 *** Zoom toolbar
@@ -207,5 +223,6 @@ to clear calibration to restore the rotation menu commands.
 | ⌘↑   | Finely tweak caliper component up    |
 | ⌘↓   | Finely tweak caliper component down  |
 | ⌘,   | Open settings                        |
-| ⌘O   | Open file                            |
+| ⌘O   | Open image file                      |
 | ⌘N   | New window                           |
+| ⇧⌃S   | Export screenshot                    |

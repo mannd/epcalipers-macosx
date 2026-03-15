@@ -41,7 +41,7 @@ L’application est contrôlée par les boutons de la barre d’outils en haut d
 #+END_EXPORT
 
 Noter que tous les boutons de la barre d'outils ne seront pas disponibles en permanence, selon que l'étalonnage a été effectué. Certains éléments de la barre d'outils sont désactivés en mode fenêtre transparente également. Les boutons désactivés sont "grisés". On peut personnaliser la barre d'outils.  Sur nouveaux Macs certaines fonctions sont disponibles sur la Touch Bar.
-*** Fichiers toolbar
+*** Ouvrir une image
  #+BEGIN_EXPORT html
 <ul class="org-ul">
 <li>
@@ -57,7 +57,23 @@ Noter que tous les boutons de la barre d'outils ne seront pas disponibles en per
  Ouvrir un fichier d'image</li>
 </ul>
 #+END_EXPORT
-*** Zoom toolbar
+*** Exporter une capture d'écran
+ #+BEGIN_EXPORT html
+<ul class="org-ul">
+<li>
+<picture>
+  <source
+    srcset="../../shrd/camera.viewfinder@2x-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../../shrd/camera.viewfinder@2x.png"
+  />
+</picture>
+ Exporter une capture d'écran</li>
+</ul>
+#+END_EXPORT
+*** Barre d'outils de zoom
  #+BEGIN_EXPORT html
 <ul class="org-ul">
 <li>
@@ -95,7 +111,7 @@ Noter que tous les boutons de la barre d'outils ne seront pas disponibles en per
 Zoom à dimension originale</li>
 </ul>
 #+END_EXPORT
-*** Calipers toolbar
+*** Barre d'outils de compas 
  #+BEGIN_EXPORT html
 <ul class="org-ul">
 <li>
@@ -135,7 +151,7 @@ Ajouter un compas de temps</li>
 #+END_EXPORT
 - *Étalonner* Étalonner un compas
 - *Effacer* Effacer tout l’étalonnage
-*** Measurement toolbar
+*** Barre d'outils de mesure
 - *Int/Fréq* Alterner l’intervalle et la fréquence cardiaque
 - *Int moyen* Calculer la fréquence cardiaque moyenne et l’intervalle moyen 
 - *QTc* Calculer le QTc corrigé
@@ -148,30 +164,31 @@ Presque toutes les fonctions de l’application sont contenues dans les commande
 | ⇧⌃L    | Tourner l’image 90° à gauche                |
 | ⌃R     | Tourner l’image 1° à droite                 |
 | ⌃L     | Tourner l’image 1° à gauche                 |
-| ⌘R     | Tourner l’image 0,1 à droite                |
-| ⌘L     | Tourner l’image 0,1 à gauche                |
+| ⌘R    | Tourner l’image 0,1 à droite                |
+| ⌘L    | Tourner l’image 0,1 à gauche                |
 | ⌃0     | Réinitialiser la rotation                   |
-| ⌘+     | Zoom avant                                  |
-| ⌘-     | Zoom arrière                                |
-| ⌘=     | Zoom à dimension réelle                     |
+| ⌘+    | Zoom avant                                  |
+| ⌘-    | Zoom arrière                                |
+| ⌘=    | Zoom à dimension réelle                     |
 | ⌃H     | Basculer la fenêtre transparente            |
 | ⌃T     | Ajouter un compas de temps                  |
 | ⌃M     | Ajouter un compas d’amplitude               |
 | ⌃G     | Ajouter un compas d’angle                   |
 | ⌃C     | Étalonner                                   |
 | Del    | Supprimer le compas choisi                  |
-| ⌘Del   | Supprimer tous les compas                   |
+| ⌘Del  | Supprimer tous les compas                   |
 | ^P     | Page précédente de multipage PDF            |
 | ^N     | Page suivante de multipage PDF              |
-| ⌥⌘G    | Aller à la page PDF                         |
+| ⌥⌘G   | Aller à la page PDF                         |
 | ←      | Régler le composant vers la gauche          |
 | →      | Régler le composant vers la droite          |
 | ↑      | Régler le composant vers le haut            |
 | ↓      | Régler le composant vers le bas             |
-| ⌘←     | Régler le composant finement vers la gauche |
-| ⌘→     | Régler le composant finement vers la droite |
-| ⌘↑     | Régler le composant finement vers le haut   |
-| ⌘↓     | Régler le composant finement vers le bas    |
-| ⌘,     | Ouvrir les préférences                      |
-| ⌘O     | Ouvrir un fichier                           |
-| ⌘N     | Nouvelle fenêtre                            |
+| ⌘←    | Régler le composant finement vers la gauche |
+| ⌘→    | Régler le composant finement vers la droite |
+| ⌘↑    | Régler le composant finement vers le haut   |
+| ⌘↓    | Régler le composant finement vers le bas    |
+| ⌘,    | Ouvrir les préférences                      |
+| ⌘O    | Ouvrir un fichier                           |
+| ⌘N    | Nouvelle fenêtre                            |
+| ⇧⌃S    | Exporter la capture d'écran                |
