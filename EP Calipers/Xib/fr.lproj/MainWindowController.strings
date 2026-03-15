@@ -167,7 +167,7 @@
 "q9h-cp-i9R.paletteLabel" = "Fichiers";
 
 /* Class = "NSSegmentedCell"; BCX-fN-8ly.ibShadowedToolTips[0] = "Open files"; ObjectID = "BCX-fN-8ly"; */
-"BCX-fN-8ly.ibShadowedToolTips[0]" = "Ouvrier un fichier";
+"BCX-fN-8ly.ibShadowedToolTips[0]" = "Ouvrir un fichier";
 
 /* Class = "NSToolbarItem"; label = "Screenshot"; ObjectID = "hh9-NA-h5s"; */
 "hh9-NA-h5s.label" = "Capture";
