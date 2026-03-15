@@ -327,6 +327,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     @objc func validateToolbarItem(_ toolbarItem: NSToolbarItem) -> Bool {
+        if toolbarItem.action == #selector(saveImage(_:)) {
+            return !transparent
+        }
         if toolbarItem.itemIdentifier.rawValue == "newZoomToolbar" {
             return !isTransparent && hasImage()
         }
@@ -343,6 +346,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(saveImage(_:)) {
+            return !transparent
+        }
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !transparent && hasImage() && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
