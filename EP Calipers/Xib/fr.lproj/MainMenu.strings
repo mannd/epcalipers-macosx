@@ -104,6 +104,9 @@
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
 "IAo-SY-fd9.title" = "Ouvrir…";
 
+/* Class = "NSMenuItem"; title = "Export Screenshot"; ObjectID = "aDM-oY-tMQ"; */
+"aDM-oY-tMQ.title" = "Exporter la capture d'écran";
+
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "Tout afficher";
 
