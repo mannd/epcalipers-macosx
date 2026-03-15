@@ -92,6 +92,12 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                            <menuItem title="Export Screenshot" image="camera.viewfinder" catalog="system" keyEquivalent="S" id="aDM-oY-tMQ">
+                                <connections>
+                                    <action selector="saveImage:" target="-1" id="hOI-xk-1M4"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="XjF-iL-WsH"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                 <connections>
                                     <action selector="performClose:" target="-1" id="HmO-Ls-i7Q"/>
@@ -584,6 +590,7 @@ CA
     </objects>
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="camera.viewfinder" catalog="system" width="16" height="15"/>
         <image name="custom-amplitude-caliper" width="11" height="11"/>
         <image name="custom-angle-caliper" width="12" height="12"/>
         <image name="custom-time-caliper" width="11" height="11"/>

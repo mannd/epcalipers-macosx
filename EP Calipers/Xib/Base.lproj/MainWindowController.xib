@@ -144,6 +144,13 @@
                             <action selector="openImage:" target="-1" id="yqE-CX-3AN"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="CB347D60-6A9B-4CD1-B6FB-78E65EB3B282" label="Screenshot" paletteLabel="Export Screenshot" toolTip="Export screenshot" tag="-1" image="camera.viewfinder" catalog="system" bordered="YES" id="hh9-NA-h5s">
+                        <size key="minSize" width="33" height="24"/>
+                        <size key="maxSize" width="33" height="24"/>
+                        <connections>
+                            <action selector="saveImage:" target="-1" id="CsX-BJ-2qc"/>
+                        </connections>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3178DB5C-CDC8-4F40-9C33-9F06D76BD3D2" explicitItemIdentifier="newCalibrationToolbar" label="Calibration" paletteLabel="Calibration" sizingBehavior="auto" id="XnC-gj-7nY" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="sBn-yF-ACb">
@@ -164,6 +171,7 @@
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="q9h-cp-i9R"/>
+                    <toolbarItem reference="hh9-NA-h5s"/>
                     <toolbarItem reference="BUH-5G-BGq"/>
                     <toolbarItem reference="uO8-MM-MEU"/>
                     <toolbarItem reference="XnC-gj-7nY"/>
@@ -204,6 +212,7 @@
     </objects>
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="camera.viewfinder" catalog="system" width="16" height="15"/>
         <image name="custom-amplitude-caliper" width="11" height="11"/>
         <image name="custom-angle-caliper" width="12" height="12"/>
         <image name="custom-time-caliper" width="11" height="11"/>
