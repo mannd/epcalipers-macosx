@@ -71,18 +71,20 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="DbN-gq-grY"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ouh-LL-r0x"/>
-                    <toolbarItem implicitItemIdentifier="CC9E30B8-92AC-4DB9-A7E9-B186DFC4BAC5" label="Open" paletteLabel="Open image" toolTip="Open image" tag="-1" image="square.and.arrow.down" catalog="system" bordered="YES" id="9Cv-6a-0pN">
-                        <size key="minSize" width="31" height="24"/>
-                        <size key="maxSize" width="31" height="24"/>
+                    <toolbarItem implicitItemIdentifier="B223B7F8-439A-4164-98C2-A35CF2138F19" explicitItemIdentifier="newFileToolbar" label="File" paletteLabel="File" bordered="YES" sizingBehavior="auto" id="o5d-Qp-RCb" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="pEP-du-BEL">
+                            <rect key="frame" x="0.0" y="14" width="65" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="S7O-fG-1gd">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment toolTip="Open image" image="square.and.arrow.down" catalog="system" width="32"/>
+                                    <segment toolTip="Export screenshot" image="camera.viewfinder" catalog="system" width="32" tag="1"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
                         <connections>
-                            <action selector="openImage:" target="-1" id="Ysc-aL-j9I"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="CB347D60-6A9B-4CD1-B6FB-78E65EB3B282" label="Screenshot" paletteLabel="Export Screenshot" toolTip="Export screenshot" tag="-1" image="camera.viewfinder" catalog="system" bordered="YES" id="hh9-NA-h5s">
-                        <size key="minSize" width="33" height="24"/>
-                        <size key="maxSize" width="33" height="24"/>
-                        <connections>
-                            <action selector="saveImage:" target="-1" id="CsX-BJ-2qc"/>
+                            <action selector="doFile:" target="-1" id="IW9-6g-Xpg"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" bordered="YES" sizingBehavior="auto" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
@@ -161,8 +163,7 @@
                     </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="9Cv-6a-0pN"/>
-                    <toolbarItem reference="hh9-NA-h5s"/>
+                    <toolbarItem reference="o5d-Qp-RCb"/>
                     <toolbarItem reference="BUH-5G-BGq"/>
                     <toolbarItem reference="uO8-MM-MEU"/>
                     <toolbarItem reference="XnC-gj-7nY"/>

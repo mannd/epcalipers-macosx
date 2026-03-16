@@ -186,3 +186,13 @@
 
 /* Class = "NSToolbarItem"; label = "Open"; ObjectID = "9Cv-6a-0pN"; */
 "9Cv-6a-0pN.toolTip" = "Ouvrir une image";
+
+/* Class = "NSToolbarItem"; label = "File"; ObjectID = "o5d-Qp-RCb"; */
+"o5d-Qp-RCb.label" = "Fichier";
+
+/* Class = "NSToolbarItem"; label = "File"; ObjectID = "o5d-Qp-RCb"; */
+"o5d-Qp-RCb.paletteLabel" = "Fichier";
+
+/* Class = "NSToolbarItem"; label = "File"; ObjectID = "S7O-fG-1gd"; */
+"S7O-fG-1gd.ibShadowedToolTips[0]" = "Ouvrir une image";
+"S7O-fG-1gd.ibShadowedToolTips[1]" = "Exporter une capture d'écran";

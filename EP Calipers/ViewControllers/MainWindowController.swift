@@ -327,6 +327,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     @objc func validateToolbarItem(_ toolbarItem: NSToolbarItem) -> Bool {
+        if toolbarItem.itemIdentifier.rawValue == "newFileToolbar" {
+            if let control = toolbarItem.view as? NSSegmentedControl {
+                control.setEnabled(true, forSegment: 0)
+                control.setEnabled(!transparent, forSegment: 1)
+            }
+            return true
+        }
         if toolbarItem.action == #selector(saveImage(_:)) {
             return !transparent
         }
@@ -670,7 +677,29 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     enum OpenError : Error {
         case Nonspecific
     }
-    
+
+
+    @IBAction func doFile(_ sender: AnyObject) {
+        print("doFile")
+        let tag: Int
+        if sender is NSSegmentedControl {
+            tag = sender.selectedSegment
+        }
+        else {
+            tag = sender.tag
+        }
+        print("tag = \(tag)")
+        switch tag {
+        case 0:
+            openImage(sender)
+        case 1:
+            saveImage(sender)
+        default:
+            break
+        }
+
+    }
+
     func openImageUrl(_ url: URL, addToRecentDocuments: Bool, isSampleECG: Bool = false) {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
         do {
