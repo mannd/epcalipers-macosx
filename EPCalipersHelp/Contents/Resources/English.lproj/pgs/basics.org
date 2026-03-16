@@ -68,7 +68,7 @@ toolbar buttons are grayed out.  You can customize the toolbar items
 if you wish.  On Macs with a Touch Bar some of the toolbar items are
 shown on it.
 # Below are direct html exports to support dark mode images
-*** Open image
+*** File toolbar
  #+BEGIN_EXPORT html
 <ul class="org-ul">
 <li>
@@ -84,7 +84,6 @@ shown on it.
  Open an image file</li>
 </ul>
 #+END_EXPORT
-*** Export Screenshot
  #+BEGIN_EXPORT html
 <ul class="org-ul">
 <li>
