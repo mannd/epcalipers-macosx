@@ -71,7 +71,23 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="DbN-gq-grY"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ouh-LL-r0x"/>
-                    <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" sizingBehavior="auto" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                    <toolbarItem implicitItemIdentifier="B223B7F8-439A-4164-98C2-A35CF2138F19" explicitItemIdentifier="newFileToolbar" label="File" paletteLabel="File" bordered="YES" sizingBehavior="auto" id="o5d-Qp-RCb" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="pEP-du-BEL">
+                            <rect key="frame" x="0.0" y="14" width="65" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="S7O-fG-1gd">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment toolTip="Open image" image="square.and.arrow.down" catalog="system" width="32"/>
+                                    <segment toolTip="Export screenshot" image="camera.viewfinder" catalog="system" width="32" tag="1"/>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="doFile:" target="-1" id="IW9-6g-Xpg"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="E369DD70-102B-4126-AD24-401C15ADE9FD" explicitItemIdentifier="newZoomToolbar" label="Zoom" paletteLabel="Zoom" bordered="YES" sizingBehavior="auto" id="BUH-5G-BGq" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="gC6-ej-kGp">
                             <rect key="frame" x="0.0" y="14" width="113" height="24"/>
@@ -128,22 +144,6 @@
                             <action selector="doMeasurement:" target="-1" id="gYo-9D-7eb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="671D5437-D9E4-4ED4-9362-69DE326CAD32" label="Files" paletteLabel="Files" sizingBehavior="auto" id="q9h-cp-i9R" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
-                        <nil key="toolTip"/>
-                        <segmentedControl key="view" verticalHuggingPriority="750" id="pjM-VC-7LA">
-                            <rect key="frame" x="4" y="14" width="24" height="24"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="BCX-fN-8ly">
-                                <font key="font" metaFont="system"/>
-                                <segments>
-                                    <segment toolTip="Open files" image="import-image"/>
-                                </segments>
-                            </segmentedCell>
-                        </segmentedControl>
-                        <connections>
-                            <action selector="openImage:" target="-1" id="yqE-CX-3AN"/>
-                        </connections>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3178DB5C-CDC8-4F40-9C33-9F06D76BD3D2" explicitItemIdentifier="newCalibrationToolbar" label="Calibration" paletteLabel="Calibration" sizingBehavior="auto" id="XnC-gj-7nY" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <nil key="toolTip"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="sBn-yF-ACb">
@@ -163,7 +163,7 @@
                     </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="q9h-cp-i9R"/>
+                    <toolbarItem reference="o5d-Qp-RCb"/>
                     <toolbarItem reference="BUH-5G-BGq"/>
                     <toolbarItem reference="uO8-MM-MEU"/>
                     <toolbarItem reference="XnC-gj-7nY"/>
@@ -204,11 +204,12 @@
     </objects>
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="camera.viewfinder" catalog="system" width="16" height="15"/>
         <image name="custom-amplitude-caliper" width="11" height="11"/>
         <image name="custom-angle-caliper" width="12" height="12"/>
         <image name="custom-time-caliper" width="11" height="11"/>
-        <image name="import-image" width="12" height="14"/>
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
     </resources>
 </document>

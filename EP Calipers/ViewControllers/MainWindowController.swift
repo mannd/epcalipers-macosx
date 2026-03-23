@@ -327,6 +327,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     @objc func validateToolbarItem(_ toolbarItem: NSToolbarItem) -> Bool {
+        if toolbarItem.itemIdentifier.rawValue == "newFileToolbar" {
+            if let control = toolbarItem.view as? NSSegmentedControl {
+                control.setEnabled(true, forSegment: 0)
+                control.setEnabled(!transparent, forSegment: 1)
+            }
+            return true
+        }
+        if toolbarItem.action == #selector(saveImage(_:)) {
+            return !transparent
+        }
         if toolbarItem.itemIdentifier.rawValue == "newZoomToolbar" {
             return !isTransparent && hasImage()
         }
@@ -343,6 +353,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(saveImage(_:)) {
+            return !transparent
+        }
         if menuItem.action == #selector(MainWindowController.doRotation(_:)) {
             return !transparent && hasImage() && !(calipersView.horizontalCalibration.calibrated || calipersView.verticalCalibration.calibrated)
         }
@@ -664,7 +677,29 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     enum OpenError : Error {
         case Nonspecific
     }
-    
+
+
+    @IBAction func doFile(_ sender: AnyObject) {
+        print("doFile")
+        let tag: Int
+        if sender is NSSegmentedControl {
+            tag = sender.selectedSegment
+        }
+        else {
+            tag = sender.tag
+        }
+        print("tag = \(tag)")
+        switch tag {
+        case 0:
+            openImage(sender)
+        case 1:
+            saveImage(sender)
+        default:
+            break
+        }
+
+    }
+
     func openImageUrl(_ url: URL, addToRecentDocuments: Bool, isSampleECG: Bool = false) {
         // See http://cocoaintheshell.whine.fr/2012/08/kcgimagesourceshouldcache-true-default-value/
         do {
@@ -706,16 +741,52 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         openURL(url, addToRecentDocuments: true)
     }
     
-    // This action has been removed
     @IBAction func saveImage(_ sender: AnyObject) {
-        // Save image for now is just uses the system screenshot utility
-        if !calipersView.takeScreenshot() {
+        guard let window = self.window,
+              let imageData = captureContentViewAsPNG(),
+              let contentView = window.contentView else {
             let alert = NSAlert()
-            alert.alertStyle = .informational
-            alert.messageText = NSLocalizedString("Screenshot cancelled", comment:"")
-            alert.informativeText = NSLocalizedString("Screenshot cancelled by user.  This message may also appear if there is a problem taking a screenshot on your machine.", comment:"")
+            alert.alertStyle = .warning
+            alert.messageText = NSLocalizedString("Screenshot failed", comment: "")
+            alert.informativeText = NSLocalizedString("Unable to capture the window contents.", comment: "")
             alert.runModal()
+            return
         }
+
+        let savePanel = NSSavePanel()
+        savePanel.allowedFileTypes = ["png"]
+        savePanel.canCreateDirectories = true
+        savePanel.canSelectHiddenExtension = true
+        savePanel.isExtensionHidden = false
+        savePanel.nameFieldStringValue = defaultScreenshotFileName()
+        savePanel.beginSheetModal(for: window) { result in
+            guard result == .OK, let url = savePanel.url else { return }
+            do {
+                try imageData.write(to: url)
+            } catch {
+                let alert = NSAlert()
+                alert.alertStyle = .warning
+                alert.messageText = NSLocalizedString("Screenshot not saved", comment: "")
+                alert.informativeText = NSLocalizedString("The screenshot could not be written to disk.", comment: "")
+                alert.beginSheetModal(for: window, completionHandler: nil)
+            }
+            contentView.needsDisplay = true
+        }
+    }
+
+    private func captureContentViewAsPNG() -> Data? {
+        guard let window = self.window, let contentView = window.contentView else { return nil }
+        let bounds = contentView.bounds
+        guard let bitmap = contentView.bitmapImageRepForCachingDisplay(in: bounds) else { return nil }
+
+        contentView.cacheDisplay(in: bounds, to: bitmap)
+        return bitmap.representation(using: .png, properties: [:])
+    }
+
+    private func defaultScreenshotFileName() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH.mm.ss"
+        return "EP Calipers Screenshot \(formatter.string(from: Date())).png"
     }
 
     // see http://stackoverflow.com/questions/15246563/extract-nsimage-from-pdfpage-with-varying-resolution?rq=1 and http://stackoverflow.com/questions/1897019/convert-pdf-pages-to-images-with-cocoa
