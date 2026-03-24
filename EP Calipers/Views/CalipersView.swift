@@ -310,6 +310,7 @@ class CalipersView: NSView {
             theMenu.addItem(colorMenuItem)
             theMenu.addItem(tweakMenuItem)
             theMenu.addItem(marchMenuItem)
+            theMenu.addItem(.separator())
             theMenu.addItem(addNoteMenuItem)
             theMenu.addItem(deleteNoteMenuItem)
             NSMenu.popUpContextMenu(theMenu, with: event, for: self)
