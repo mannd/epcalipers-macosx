@@ -144,6 +144,12 @@ class CalipersView: NSView {
         override func mouseDown(with event: NSEvent) {
             owner?.window?.makeFirstResponder(owner)
             lastDragLocation = owner?.convert(event.locationInWindow, from: nil)
+
+            // TODO: fix note not being removed when first created with empty text.
+            if noteView?.textView?.string.isEmpty == true {
+                debugPrint("Empty noteview")
+                noteView?.removeFromSuperview()
+            }
         }
 
         override func mouseDragged(with event: NSEvent) {
@@ -161,7 +167,6 @@ class CalipersView: NSView {
         }
     }
 
-    //FIXME: Changing text style (like to Bold) is lost when moving and zooming text box.
     private struct NoteEntry {
         var view: NoteContainerView
         var dragHandle: NoteDragHandleView?
