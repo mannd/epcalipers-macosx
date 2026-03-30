@@ -409,7 +409,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             let alert = NSAlert()
             alert.alertStyle = .informational
             alert.messageText = NSLocalizedString("EP Calipers preferences", comment:"")
-            alert.accessoryView = preferencesAccessoryView
+            alert.accessoryView = makeScrollablePreferencesAccessoryView()
             alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
             alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             preferencesAlert = alert
@@ -494,6 +494,28 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 transparent = appPreferences.transparency
             }
         }
+    }
+
+    private func makeScrollablePreferencesAccessoryView() -> NSView {
+        let contentSize = preferencesAccessoryView.fittingSize == .zero
+            ? preferencesAccessoryView.frame.size
+            : preferencesAccessoryView.fittingSize
+        let visibleFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? .zero
+        let maximumWidth = visibleFrame.width > 0 ? visibleFrame.width * 0.7 : contentSize.width
+        let maximumHeight = visibleFrame.height > 0 ? visibleFrame.height * 0.5 : contentSize.height
+        let accessorySize = NSSize(width: min(contentSize.width, maximumWidth),
+                                   height: min(contentSize.height, maximumHeight))
+
+        let scrollView = NSScrollView(frame: NSRect(origin: .zero, size: accessorySize))
+        scrollView.borderType = .noBorder
+        scrollView.drawsBackground = false
+        scrollView.autohidesScrollers = true
+        scrollView.hasVerticalScroller = contentSize.height > accessorySize.height
+        scrollView.hasHorizontalScroller = contentSize.width > accessorySize.width
+
+        preferencesAccessoryView.frame = NSRect(origin: .zero, size: contentSize)
+        scrollView.documentView = preferencesAccessoryView
+        return scrollView
     }
     
     private func fillQTcFormulaPopUp() {
