@@ -418,8 +418,9 @@ class CalipersView: NSView {
     @objc func addNote(_ sender: AnyObject) {
         let absoluteAnchor = resolveNoteAbsoluteAnchor()
         let scaledAnchor = noteAnchorInView(fromAbsoluteAnchor: absoluteAnchor)
-        let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor)
-        let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
+        let noteSize = noteSizeForCurrentZoom()
+        let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor, noteSize: noteSize)
+        let noteFrame = NSRect(origin: scaledOrigin, size: noteSize)
         let containerView = NoteContainerView(frame: noteFrame, hitSlop: noteHitSlop)
         containerView.owner = self
         containerView.wantsLayer = true
@@ -434,7 +435,7 @@ class CalipersView: NSView {
         scrollView.backgroundColor = .clear
         scrollView.autoresizingMask = [.width, .height]
 
-        let textView = NSTextView(frame: NSRect(origin: .zero, size: defaultNoteSize))
+        let textView = NSTextView(frame: NSRect(origin: .zero, size: noteSize))
         textView.isEditable = true
         textView.isSelectable = true
         textView.drawsBackground = false
@@ -488,8 +489,9 @@ class CalipersView: NSView {
     }
 
     private func resolveNoteAbsoluteAnchor() -> NSPoint {
-        let defaultLocation = NSPoint(x: bounds.midX - defaultNoteSize.width / 2,
-                                      y: bounds.midY - defaultNoteSize.height / 2)
+        let noteSize = noteSizeForCurrentZoom()
+        let defaultLocation = NSPoint(x: bounds.midX - noteSize.width / 2,
+                                      y: bounds.midY - noteSize.height / 2)
         let rawLocation = lastContextMenuLocation ?? defaultLocation
         let anchorInView = noteAnchorInView(for: rawLocation)
         return noteAnchorInAbsoluteSpace(from: anchorInView)
@@ -521,21 +523,22 @@ class CalipersView: NSView {
         return NSPoint(x: scaledX, y: scaledY)
     }
 
-    private func noteOriginInView(fromAnchor anchor: NSPoint) -> NSPoint {
-        let yOrigin = isFlipped ? anchor.y : anchor.y - defaultNoteSize.height
+    private func noteOriginInView(fromAnchor anchor: NSPoint, noteSize: NSSize) -> NSPoint {
+        let yOrigin = isFlipped ? anchor.y : anchor.y - noteSize.height
         return NSPoint(x: anchor.x, y: yOrigin)
     }
 
     private func updateNoteFrames() {
         guard noteEntries.count > 0 else { return }
         let noteFontZoomRatio = noteFontScaleRatioForCurrentZoom()
+        let noteSize = noteSizeForCurrentZoom()
         for index in noteEntries.indices {
             let entry = noteEntries[index]
             let scaledAnchor = noteAnchorInView(fromAbsoluteAnchor: entry.absoluteAnchor)
-            let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor)
-            let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
+            let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor, noteSize: noteSize)
+            let noteFrame = NSRect(origin: scaledOrigin, size: noteSize)
             entry.view.isHidden = !bounds.intersects(noteFrame)
-            entry.view.setFrameOrigin(scaledOrigin)
+            entry.view.frame = noteFrame
             updateFontForNote(entry.view, zoomRatio: noteFontZoomRatio)
             if let dragHandle = entry.dragHandle {
                 let handleFrame = noteFrame.insetBy(dx: -noteHitSlop, dy: -noteHitSlop)
@@ -549,6 +552,11 @@ class CalipersView: NSView {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
         let scaledSize = defaultNoteFontSize * zoom
         return max(minimumFontSize, min(maximumFontSize, scaledSize))
+    }
+
+    private func noteSizeForCurrentZoom() -> NSSize {
+        let zoom = CGFloat(horizontalCalibration.currentZoom)
+        return NSSize(width: defaultNoteSize.width * zoom, height: defaultNoteSize.height * zoom)
     }
 
     private func noteFontScaleRatioForCurrentZoom() -> CGFloat {
