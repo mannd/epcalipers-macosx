@@ -534,7 +534,7 @@ class CalipersView: NSView {
             let scaledAnchor = noteAnchorInView(fromAbsoluteAnchor: entry.absoluteAnchor)
             let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor)
             let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
-            entry.view.isHidden = !bounds.contains(noteFrame)
+            entry.view.isHidden = !bounds.intersects(noteFrame)
             entry.view.setFrameOrigin(scaledOrigin)
             updateFontForNote(entry.view, zoomRatio: noteFontZoomRatio)
             if let dragHandle = entry.dragHandle {
