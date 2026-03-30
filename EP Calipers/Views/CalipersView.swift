@@ -40,6 +40,7 @@ class CalipersView: NSView {
         private var isEditing = false
         private var isSelected = false
         private let hitSlop: CGFloat
+        weak var owner: CalipersView?
         weak var textView: NSTextView?
 
         init(frame frameRect: NSRect, hitSlop: CGFloat) {
@@ -96,6 +97,10 @@ class CalipersView: NSView {
             isEditing = false
             isSelected = false
             updateBorderVisibility()
+            let noteText = textView?.string.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            if noteText.isEmpty {
+                owner?.removeNote(for: self)
+            }
         }
 
         func textViewDidChangeSelection(_ notification: Notification) {
@@ -144,12 +149,6 @@ class CalipersView: NSView {
         override func mouseDown(with event: NSEvent) {
             owner?.window?.makeFirstResponder(owner)
             lastDragLocation = owner?.convert(event.locationInWindow, from: nil)
-
-            // TODO: fix note not being removed when first created with empty text.
-            if noteView?.textView?.string.isEmpty == true {
-                debugPrint("Empty noteview")
-                noteView?.removeFromSuperview()
-            }
         }
 
         override func mouseDragged(with event: NSEvent) {
@@ -422,6 +421,7 @@ class CalipersView: NSView {
         let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor)
         let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
         let containerView = NoteContainerView(frame: noteFrame, hitSlop: noteHitSlop)
+        containerView.owner = self
         containerView.wantsLayer = true
         containerView.layer?.backgroundColor = NSColor.clear.cgColor
 
@@ -628,6 +628,14 @@ class CalipersView: NSView {
         guard let noteView = noteView else { return }
         guard let index = noteEntries.firstIndex(where: { $0.view === noteView }) else { return }
         moveNote(at: index, byScaledDelta: delta)
+    }
+
+    private func removeNote(for noteView: NoteContainerView) {
+        guard let index = noteEntries.firstIndex(where: { $0.view === noteView }) else { return }
+        let entry = noteEntries.remove(at: index)
+        entry.view.removeFromSuperview()
+        entry.dragHandle?.removeFromSuperview()
+        needsDisplay = true
     }
 
     private func noteIndex(near point: NSPoint) -> Int? {
