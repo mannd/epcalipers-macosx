@@ -223,6 +223,7 @@
 		8EFAE9C723E9FC6900D5EE9B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
 				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
 				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
 				8EA7EFC11C4378A4002E0085 /* Calibration.swift */,
@@ -235,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				8E2282471C398B1300337695 /* CalipersView.swift */,
-				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
 				8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */,
 				8EE97F7523ED332F00C3FEE7 /* ToolbarItem.swift */,
 				8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */,
@@ -319,7 +319,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 2640;
 				ORGANIZATIONNAME = "EP Studios";
 				TargetAttributes = {
 					8E3DA7EC1C2E264000AD9556 = {
