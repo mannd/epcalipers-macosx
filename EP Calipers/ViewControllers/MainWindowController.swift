@@ -61,9 +61,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var autoPositionTextCheckBox: NSButton!
     @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
     @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
+    @IBOutlet weak var noteTextFontSizeTextField: NSTextField!
     @IBOutlet weak var noteTextFontSizeStepper: NSStepper!
     @IBOutlet weak var noteTextColor: NSColorWell!
+    @IBOutlet weak var noteTextBoxWidthTextField: NSTextField!
     @IBOutlet weak var noteTextBoxWidthStepper: NSStepper!
+    @IBOutlet weak var noteTextBoxHeightTextField: NSTextField!
     @IBOutlet weak var noteTextBoxHeightStepper: NSStepper!
 
     @IBOutlet var marchingComponentsTextField: NSTextField!
