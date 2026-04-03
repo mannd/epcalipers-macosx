@@ -171,13 +171,19 @@ class CalipersView: NSView {
         var dragHandle: NoteDragHandleView?
         var absoluteAnchor: NSPoint
     }
+    static let defaultMinimumNoteFontSize: CGFloat = 10.0
+    static let defaultMaximumNoteFontSize: CGFloat = 36.0
+    static let defaultNoteFontSize: CGFloat = NSFont.systemFontSize
+
+    var noteFontSize = defaultNoteFontSize
+    var noteSize = NSSize(width: 180, height: 80)
+    var noteTextColor: NSColor = .black
+
     private var noteEntries: [NoteEntry] = []
-    private let defaultNoteSize = NSSize(width: 180, height: 80)
     private let noteHitSlop: CGFloat = 10.0
-    private let defaultNoteFontSize = NSFont.systemFontSize
-    private let defaultCaliperFontSize: CGFloat = 18.0
-    private let minimumFontSize: CGFloat = 10.0
-    private let maximumFontSize: CGFloat = 36.0
+    private var defaultCaliperFontSize: CGFloat = 18.0
+    private let minimumNoteFontSize: CGFloat = defaultMinimumNoteFontSize
+    private let maximumNoteFontSize: CGFloat = defaultMaximumNoteFontSize
     private var previousNoteTextZoomScale: CGFloat?
     var hasNotes: Bool { !noteEntries.isEmpty }
     // references to MainWindowController calibrations
@@ -440,7 +446,7 @@ class CalipersView: NSView {
         textView.isSelectable = true
         textView.drawsBackground = false
         textView.backgroundColor = .clear
-        textView.textColor = .black
+        textView.textColor = noteTextColor
         textView.font = NSFont.systemFont(ofSize: noteFontSizeForCurrentZoom())
         textView.textContainerInset = NSSize(width: 4, height: 4)
         textView.autoresizingMask = [.width, .height]
@@ -550,13 +556,13 @@ class CalipersView: NSView {
 
     private func noteFontSizeForCurrentZoom() -> CGFloat {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
-        let scaledSize = defaultNoteFontSize * zoom
-        return max(minimumFontSize, min(maximumFontSize, scaledSize))
+        let scaledSize = noteFontSize * zoom
+        return max(minimumNoteFontSize, min(maximumNoteFontSize, scaledSize))
     }
 
     private func noteSizeForCurrentZoom() -> NSSize {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
-        return NSSize(width: defaultNoteSize.width * zoom, height: defaultNoteSize.height * zoom)
+        return NSSize(width: noteSize.width * zoom, height: noteSize.height * zoom)
     }
 
     private func noteFontScaleRatioForCurrentZoom() -> CGFloat {
@@ -569,7 +575,7 @@ class CalipersView: NSView {
     private func caliperFontSizeForCurrentZoom() -> CGFloat {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
         let scaledSize = defaultCaliperFontSize * zoom
-        return max(minimumFontSize, min(maximumFontSize, scaledSize))
+        return max(minimumNoteFontSize, min(maximumNoteFontSize, scaledSize))
     }
 
     private func updateCaliperTextFontsForCurrentZoom() {
@@ -593,18 +599,18 @@ class CalipersView: NSView {
             storage.beginEditing()
             storage.enumerateAttribute(.font, in: NSRange(location: 0, length: storage.length), options: []) { value, range, _ in
                 let currentFont = value as? NSFont ?? fallbackFont
-                let scaledSize = max(minimumFontSize, min(maximumFontSize, currentFont.pointSize * zoomRatio))
+                let scaledSize = max(minimumNoteFontSize, min(maximumNoteFontSize, currentFont.pointSize * zoomRatio))
                 let scaledFont = NSFont(descriptor: currentFont.fontDescriptor, size: scaledSize) ?? fallbackFont
                 storage.addAttribute(.font, value: scaledFont, range: range)
             }
             storage.endEditing()
         } else {
-            let scaledSize = max(minimumFontSize, min(maximumFontSize, fallbackFont.pointSize * zoomRatio))
+            let scaledSize = max(minimumNoteFontSize, min(maximumNoteFontSize, fallbackFont.pointSize * zoomRatio))
             textView.font = NSFont(descriptor: fallbackFont.fontDescriptor, size: scaledSize) ?? fallbackFont
         }
 
         if let typingFont = textView.typingAttributes[.font] as? NSFont {
-            let scaledSize = max(minimumFontSize, min(maximumFontSize, typingFont.pointSize * zoomRatio))
+            let scaledSize = max(minimumNoteFontSize, min(maximumNoteFontSize, typingFont.pointSize * zoomRatio))
             textView.typingAttributes[.font] = NSFont(descriptor: typingFont.fontDescriptor, size: scaledSize) ?? fallbackFont
         } else {
             textView.typingAttributes[.font] = fallbackFont
@@ -918,7 +924,10 @@ class CalipersView: NSView {
         timeCaliperTextPosition: TextPosition,
         amplitudeCaliperTextPosition: TextPosition,
         numberOfMarchingComponents: Int,
-        deemphasizeMarchingComponents: Bool
+        deemphasizeMarchingComponents: Bool,
+        noteTextFontSize: CGFloat,
+        noteTextBoxSize: NSSize,
+        noteTextColor: NSColor?
     ) {
          for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
@@ -941,9 +950,15 @@ class CalipersView: NSView {
                 c.textPosition = amplitudeCaliperTextPosition
             }
         }
+
+        // Note parameters only affect future notes
+        noteFontSize = noteTextFontSize
+        noteSize = noteTextBoxSize
+        self.noteTextColor = noteTextColor ?? .black
+
         needsDisplay = true
     }
-    
+
     override func draw(_ dirtyRect: NSRect) {
         guard let context = NSGraphicsContext.current?.cgContext else { return }
         for c in calipers {
@@ -970,26 +985,4 @@ class CalipersView: NSView {
         return nil
     }
     
-    // This doesn't work as of OS 10.12.  Less need for screenshots now that transparent windows are possible.
-    func takeScreenshot() -> Bool {
-        // Takes screenshot and stores in sandbox data directory (or home directory if
-        // no sandbox.  Returns false if screencapture doesn't work for some reason or
-        // if escape used to cancel screencapture.
-        // Screencapture in preview mode and window mode with sound.
-        let prefix = "EPCalipers"
-        let guid = ProcessInfo.processInfo.globallyUniqueString
-        let fileName = "\(prefix)_\(guid)"
-        let path = "\(NSHomeDirectory())/\(fileName).png"
-        let task = Process()
-        task.launchPath = "/bin/bash"
-        task.arguments = ["screencapture -P -w \(path)"]
-        task.launch()
-        
-//        let result = system("screencapture -P -w \(path)")
-//        if result != 0 {
-//            return false
-//        }
-        return true
-    }
-
 }

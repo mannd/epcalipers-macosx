@@ -63,7 +63,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
     @IBOutlet weak var noteTextFontSizeTextField: NSTextField!
     @IBOutlet weak var noteTextFontSizeStepper: NSStepper!
-    @IBOutlet weak var noteTextColor: NSColorWell!
+    @IBOutlet weak var noteTextColorWell: NSColorWell!
     @IBOutlet weak var noteTextBoxWidthTextField: NSTextField!
     @IBOutlet weak var noteTextBoxWidthStepper: NSStepper!
     @IBOutlet weak var noteTextBoxHeightTextField: NSTextField!
@@ -225,7 +225,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         numberOfQTcMeanRRIntervalsTextField.delegate = self
         marchingComponentsTextField.delegate = self
         qtcNumberTextField.delegate = self
-        
+        noteTextFontSizeTextField.delegate = self
+        noteTextBoxWidthTextField.delegate = self
+        noteTextBoxHeightTextField.delegate = self
+
         if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg"), appPreferences.showSampleECG {
             let url = URL(fileURLWithPath: path)
             self.openImageUrl(url, addToRecentDocuments: false, isSampleECG: true)
@@ -249,9 +252,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.horizontalCalibration.originalZoom = Double(scrollView.magnification)
         calipersView.verticalCalibration.originalZoom = Double(scrollView.magnification)
 
-        // Draw concurrently, possibly not safe, as must guarantee thread-safety of the view, so...
-//        calipersView.canDrawConcurrently = true
-//        self.window?.allowsConcurrentViewDrawing = true
+        calipersView.noteTextColor = appPreferences.noteTextColor
+        calipersView.noteFontSize = CGFloat(appPreferences.noteTextFontSize)
+        calipersView.noteSize = NSSize(width: CGFloat(appPreferences.noteTextBoxWidth), height: CGFloat(appPreferences.noteTextBoxHeight))
+        noteTextFontSizeStepper.minValue = CalipersView.defaultMinimumNoteFontSize
+        noteTextFontSizeStepper.maxValue = CalipersView.defaultMaximumNoteFontSize
+
+        // NOTE: Concurrent drawing stays disabled because the view's drawing path is not guaranteed to be thread-safe.  So we don't want to set calipersView.canDrawConcurrently to true (it is false by default).
 
         instructionPanel.setIsVisible(false)
         instructionPanel.becomesKeyOnlyIfNeeded = true
@@ -260,6 +267,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         scrollView.postsFrameChangedNotifications = true
         scrollView.contentView.postsBoundsChangedNotifications = true;
+
         NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
@@ -448,6 +456,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         marchingComponentsTextField.integerValue = appPreferences.numberOfMarchingComponents
         marchingComponentsStepper.integerValue = appPreferences.numberOfMarchingComponents
 
+        noteTextFontSizeTextField.integerValue = appPreferences.noteTextFontSize
+        noteTextFontSizeStepper.integerValue = appPreferences.noteTextFontSize
+        noteTextBoxWidthTextField.integerValue = Int(appPreferences.noteTextBoxWidth)
+        noteTextBoxWidthStepper.integerValue = Int(appPreferences.noteTextBoxWidth)
+        noteTextBoxHeightTextField.integerValue = Int(appPreferences.noteTextBoxHeight)
+        noteTextBoxHeightStepper.integerValue = Int(appPreferences.noteTextBoxHeight)
+        noteTextColorWell.color = appPreferences.noteTextColor
+
         deemphasizeMarchingComponentsCheckbox.state = NSControl.StateValue(rawValue: appPreferences.deemphasizeMarchingComponents ? 1 : 0)
         
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
@@ -481,7 +497,16 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem) ?? QTcFormulaPreference.Bazett
             appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
             appPreferences.deemphasizeMarchingComponents = deemphasizeMarchingComponentsCheckbox.integerValue == 1 ? true : false
+            appPreferences.noteTextFontSize = noteTextFontSizeStepper.integerValue
+            appPreferences.noteTextBoxWidth = CGFloat(noteTextBoxWidthStepper.integerValue)
+            appPreferences.noteTextBoxHeight = CGFloat(noteTextBoxHeightStepper.integerValue)
+            appPreferences.noteTextColor =  noteTextColorWell.color
+
             appPreferences.savePreferences()
+
+            let noteTextBoxSize = NSSize(width: appPreferences.noteTextBoxWidth,
+                                         height: appPreferences.noteTextBoxHeight)
+
             // update calipersView
             calipersView.updateCaliperPreferences(
                 unselectedColor: appPreferences.caliperColor,
@@ -492,7 +517,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 timeCaliperTextPosition: appPreferences.timeCaliperTextPosition,
                 amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition,
                 numberOfMarchingComponents: appPreferences.numberOfMarchingComponents,
-                deemphasizeMarchingComponents: appPreferences.deemphasizeMarchingComponents
+                deemphasizeMarchingComponents: appPreferences.deemphasizeMarchingComponents,
+                noteTextFontSize: CGFloat(appPreferences.noteTextFontSize),
+                noteTextBoxSize: NSSize(width: appPreferences.noteTextBoxWidth, height: appPreferences.noteTextBoxHeight),
+                noteTextColor: appPreferences.noteTextColor
             )
             // Update default calibration strings in CalipersView
             calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration, vertical: appPreferences.defaultVerticalCalibration)
@@ -1615,6 +1643,18 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         marchingComponentsTextField.integerValue = marchingComponentsStepper.integerValue
     }
 
+    @IBAction func noteTextFontSizeStepperAction(_ sender: Any) {
+        noteTextFontSizeTextField.integerValue = noteTextFontSizeStepper.integerValue
+    }
+
+    @IBAction func noteTextBoxWidthStepperAction(_ sender: Any) {
+        noteTextBoxWidthTextField.integerValue = noteTextBoxWidthStepper.integerValue
+    }
+
+    @IBAction func noteTextBoxHeightStepperAction(_ sender: Any) {
+        noteTextBoxHeightTextField.integerValue = noteTextBoxHeightStepper.integerValue
+    }
+
     func controlTextDidChange(_ obj: Notification) {
         if obj.name.rawValue == "NSControlTextDidChangeNotification" {
             if obj.object as AnyObject? === numberTextField {
@@ -1631,6 +1671,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             if obj.object as AnyObject? === marchingComponentsTextField {
                 marchingComponentsStepper.integerValue = marchingComponentsTextField.integerValue
+            }
+            if obj.object as AnyObject? === noteTextFontSizeTextField {
+                noteTextFontSizeStepper.integerValue = noteTextFontSizeTextField.integerValue
+            }
+            if obj.object as AnyObject? === noteTextBoxWidthTextField {
+                noteTextBoxWidthStepper.integerValue = noteTextBoxWidthTextField.integerValue
+            }
+            if obj.object as AnyObject? === noteTextBoxHeightTextField {
+                noteTextBoxHeightStepper.integerValue = noteTextBoxHeightTextField.integerValue
             }
         }
     }
