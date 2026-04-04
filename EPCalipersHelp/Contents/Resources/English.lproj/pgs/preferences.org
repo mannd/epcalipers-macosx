@@ -37,3 +37,10 @@ Settings can be selected using the *EP Calipers | Settings* menu item.  You can 
 - Amplitude caliper text position: Adjust the text label of amplitude calipers on the top or bottom of the caliper, or left or right of the crossbar.
 - Deemphasize marching components: If selected, marching components appear slightly less prominent than main caliper.
 - Number of marching components: Adjust the number of marching caliper components from 1 to a maximum of 20.
+- Note text font size: Adjust the text font size of new notes.[fn:1]
+- Note text color: Adjust the color of the text in new notes.
+- Note text box width, note text box height: These settings adjust the size of the text box that new notes appear in.
+
+* Footnotes
+
+[fn:1] All note settings apply to new notes only. 
