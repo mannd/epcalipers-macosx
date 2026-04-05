@@ -61,6 +61,11 @@ class Preferences {
     static let amplitudeCaliperTextPositionKey = "amplitudeCaliperTextPositionKey"
     static let numberOfMarchingComponentsKey = "numberOfMarchingComponentsKey"
     static let deemphasizeMarchingComponentsKey = "deemphasizeMarchingComponentsKey"
+    static let noteTextFontSizeKey = "noteTextFontSizeKey"
+    static let noteTextColorKey = "noteTextColorKey"
+    static let noteTextBoxWidthKey = "noteTextBoxWidthKey"
+    static let noteTextBoxHeightKey = "noteTextBoxHeightKey"
+    static let caliperTextFontSizeKey = "caliperTextFontSizeKey"
 
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
@@ -79,6 +84,11 @@ class Preferences {
     var showSampleECG: Bool = true
     var numberOfMarchingComponents = Caliper.maxMarchingComponents
     var deemphasizeMarchingComponents: Bool = true
+    var noteTextFontSize: Int = 12
+    var noteTextColor: NSColor = NSColor.black
+    var noteTextBoxWidth: CGFloat = 180.0
+    var noteTextBoxHeight: CGFloat = 80.0
+    var caliperTextFontSize: Int = 24
 
     func registerDefaults() {
         // Color defaults are handled in loadPreferences().
@@ -98,6 +108,11 @@ class Preferences {
             Self.amplitudeCaliperTextPositionKey: TextPosition.right.rawValue,
             Self.numberOfMarchingComponentsKey: numberOfMarchingComponents,
             Self.deemphasizeMarchingComponentsKey: deemphasizeMarchingComponents,
+            Self.noteTextFontSizeKey: noteTextFontSize,
+            Self.noteTextColorKey: noteTextColor,
+            Self.noteTextBoxWidthKey: noteTextBoxWidth,
+            Self.noteTextBoxHeightKey: noteTextBoxHeight,
+            Self.caliperTextFontSizeKey: caliperTextFontSize,
         ] as [String : Any]
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: defaults)
@@ -122,6 +137,11 @@ class Preferences {
         amplitudeCaliperTextPosition = TextPosition(rawValue: preferences.integer(forKey: Self.amplitudeCaliperTextPositionKey)) ?? .right
         numberOfMarchingComponents = preferences.integer(forKey: Self.numberOfMarchingComponentsKey)
         deemphasizeMarchingComponents = preferences.bool(forKey: Self.deemphasizeMarchingComponentsKey)
+        noteTextFontSize = preferences.integer(forKey: Self.noteTextFontSizeKey)
+        noteTextColor = preferences.colorForKey(Self.noteTextColorKey) ?? .black
+        noteTextBoxWidth = CGFloat(preferences.float(forKey: Self.noteTextBoxWidthKey))
+        noteTextBoxHeight = CGFloat(preferences.float(forKey: Self.noteTextBoxHeightKey))
+        caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
     }
     
     func savePreferences() {
@@ -143,5 +163,10 @@ class Preferences {
         preferences.set(amplitudeCaliperTextPosition.rawValue, forKey: Self.amplitudeCaliperTextPositionKey)
         preferences.set(numberOfMarchingComponents, forKey: Self.numberOfMarchingComponentsKey)
         preferences.set(deemphasizeMarchingComponents, forKey: Self.deemphasizeMarchingComponentsKey)
+        preferences.set(noteTextFontSize, forKey: Self.noteTextFontSizeKey)
+        preferences.setColor(noteTextColor, forKey: Self.noteTextColorKey)
+        preferences.set(noteTextBoxWidth, forKey: Self.noteTextBoxWidthKey)
+        preferences.set(noteTextBoxHeight, forKey: Self.noteTextBoxHeightKey)
+        preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
     }
 }

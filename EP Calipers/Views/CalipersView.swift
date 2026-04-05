@@ -40,6 +40,7 @@ class CalipersView: NSView {
         private var isEditing = false
         private var isSelected = false
         private let hitSlop: CGFloat
+        weak var owner: CalipersView?
         weak var textView: NSTextView?
 
         init(frame frameRect: NSRect, hitSlop: CGFloat) {
@@ -96,6 +97,10 @@ class CalipersView: NSView {
             isEditing = false
             isSelected = false
             updateBorderVisibility()
+            let noteText = textView?.string.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            if noteText.isEmpty {
+                owner?.removeNote(for: self)
+            }
         }
 
         func textViewDidChangeSelection(_ notification: Notification) {
@@ -161,19 +166,25 @@ class CalipersView: NSView {
         }
     }
 
-    //FIXME: Changing text style (like to Bold) is lost when moving and zooming text box.
     private struct NoteEntry {
         var view: NoteContainerView
         var dragHandle: NoteDragHandleView?
         var absoluteAnchor: NSPoint
     }
+    static let defaultMinimumFontSize: CGFloat = 10.0
+    static let defaultMaximumFontSize: CGFloat = 36.0
+    static let defaultNoteFontSize: CGFloat = NSFont.systemFontSize
+    static let defaultCaliperFontSize: CGFloat = 18.0
+
+    var noteFontSize = defaultNoteFontSize
+    var noteSize = NSSize(width: 180, height: 80)
+    var noteTextColor: NSColor = .black
+    var caliperTextFontSize: CGFloat = defaultCaliperFontSize
+
     private var noteEntries: [NoteEntry] = []
-    private let defaultNoteSize = NSSize(width: 180, height: 80)
     private let noteHitSlop: CGFloat = 10.0
-    private let defaultNoteFontSize = NSFont.systemFontSize
-    private let defaultCaliperFontSize: CGFloat = 18.0
-    private let minimumFontSize: CGFloat = 10.0
-    private let maximumFontSize: CGFloat = 36.0
+    private let minimumFontSize: CGFloat = defaultMinimumFontSize
+    private let maximumFontSize: CGFloat = defaultMaximumFontSize
     private var previousNoteTextZoomScale: CGFloat?
     var hasNotes: Bool { !noteEntries.isEmpty }
     // references to MainWindowController calibrations
@@ -310,6 +321,7 @@ class CalipersView: NSView {
             theMenu.addItem(colorMenuItem)
             theMenu.addItem(tweakMenuItem)
             theMenu.addItem(marchMenuItem)
+            theMenu.addItem(.separator())
             theMenu.addItem(addNoteMenuItem)
             theMenu.addItem(deleteNoteMenuItem)
             NSMenu.popUpContextMenu(theMenu, with: event, for: self)
@@ -413,9 +425,11 @@ class CalipersView: NSView {
     @objc func addNote(_ sender: AnyObject) {
         let absoluteAnchor = resolveNoteAbsoluteAnchor()
         let scaledAnchor = noteAnchorInView(fromAbsoluteAnchor: absoluteAnchor)
-        let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor)
-        let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
+        let noteSize = noteSizeForCurrentZoom()
+        let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor, noteSize: noteSize)
+        let noteFrame = NSRect(origin: scaledOrigin, size: noteSize)
         let containerView = NoteContainerView(frame: noteFrame, hitSlop: noteHitSlop)
+        containerView.owner = self
         containerView.wantsLayer = true
         containerView.layer?.backgroundColor = NSColor.clear.cgColor
 
@@ -428,12 +442,12 @@ class CalipersView: NSView {
         scrollView.backgroundColor = .clear
         scrollView.autoresizingMask = [.width, .height]
 
-        let textView = NSTextView(frame: NSRect(origin: .zero, size: defaultNoteSize))
+        let textView = NSTextView(frame: NSRect(origin: .zero, size: noteSize))
         textView.isEditable = true
         textView.isSelectable = true
         textView.drawsBackground = false
         textView.backgroundColor = .clear
-        textView.textColor = .black
+        textView.textColor = noteTextColor
         textView.font = NSFont.systemFont(ofSize: noteFontSizeForCurrentZoom())
         textView.textContainerInset = NSSize(width: 4, height: 4)
         textView.autoresizingMask = [.width, .height]
@@ -482,8 +496,9 @@ class CalipersView: NSView {
     }
 
     private func resolveNoteAbsoluteAnchor() -> NSPoint {
-        let defaultLocation = NSPoint(x: bounds.midX - defaultNoteSize.width / 2,
-                                      y: bounds.midY - defaultNoteSize.height / 2)
+        let noteSize = noteSizeForCurrentZoom()
+        let defaultLocation = NSPoint(x: bounds.midX - noteSize.width / 2,
+                                      y: bounds.midY - noteSize.height / 2)
         let rawLocation = lastContextMenuLocation ?? defaultLocation
         let anchorInView = noteAnchorInView(for: rawLocation)
         return noteAnchorInAbsoluteSpace(from: anchorInView)
@@ -515,21 +530,22 @@ class CalipersView: NSView {
         return NSPoint(x: scaledX, y: scaledY)
     }
 
-    private func noteOriginInView(fromAnchor anchor: NSPoint) -> NSPoint {
-        let yOrigin = isFlipped ? anchor.y : anchor.y - defaultNoteSize.height
+    private func noteOriginInView(fromAnchor anchor: NSPoint, noteSize: NSSize) -> NSPoint {
+        let yOrigin = isFlipped ? anchor.y : anchor.y - noteSize.height
         return NSPoint(x: anchor.x, y: yOrigin)
     }
 
     private func updateNoteFrames() {
         guard noteEntries.count > 0 else { return }
         let noteFontZoomRatio = noteFontScaleRatioForCurrentZoom()
+        let noteSize = noteSizeForCurrentZoom()
         for index in noteEntries.indices {
             let entry = noteEntries[index]
             let scaledAnchor = noteAnchorInView(fromAbsoluteAnchor: entry.absoluteAnchor)
-            let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor)
-            let noteFrame = NSRect(origin: scaledOrigin, size: defaultNoteSize)
-            entry.view.isHidden = !bounds.contains(noteFrame)
-            entry.view.setFrameOrigin(scaledOrigin)
+            let scaledOrigin = noteOriginInView(fromAnchor: scaledAnchor, noteSize: noteSize)
+            let noteFrame = NSRect(origin: scaledOrigin, size: noteSize)
+            entry.view.isHidden = !bounds.intersects(noteFrame)
+            entry.view.frame = noteFrame
             updateFontForNote(entry.view, zoomRatio: noteFontZoomRatio)
             if let dragHandle = entry.dragHandle {
                 let handleFrame = noteFrame.insetBy(dx: -noteHitSlop, dy: -noteHitSlop)
@@ -541,8 +557,13 @@ class CalipersView: NSView {
 
     private func noteFontSizeForCurrentZoom() -> CGFloat {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
-        let scaledSize = defaultNoteFontSize * zoom
+        let scaledSize = noteFontSize * zoom
         return max(minimumFontSize, min(maximumFontSize, scaledSize))
+    }
+
+    private func noteSizeForCurrentZoom() -> NSSize {
+        let zoom = CGFloat(horizontalCalibration.currentZoom)
+        return NSSize(width: noteSize.width * zoom, height: noteSize.height * zoom)
     }
 
     private func noteFontScaleRatioForCurrentZoom() -> CGFloat {
@@ -554,7 +575,7 @@ class CalipersView: NSView {
 
     private func caliperFontSizeForCurrentZoom() -> CGFloat {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
-        let scaledSize = defaultCaliperFontSize * zoom
+        let scaledSize = caliperTextFontSize * zoom
         return max(minimumFontSize, min(maximumFontSize, scaledSize))
     }
 
@@ -622,6 +643,14 @@ class CalipersView: NSView {
         guard let noteView = noteView else { return }
         guard let index = noteEntries.firstIndex(where: { $0.view === noteView }) else { return }
         moveNote(at: index, byScaledDelta: delta)
+    }
+
+    private func removeNote(for noteView: NoteContainerView) {
+        guard let index = noteEntries.firstIndex(where: { $0.view === noteView }) else { return }
+        let entry = noteEntries.remove(at: index)
+        entry.view.removeFromSuperview()
+        entry.dragHandle?.removeFromSuperview()
+        needsDisplay = true
     }
 
     private func noteIndex(near point: NSPoint) -> Int? {
@@ -896,9 +925,13 @@ class CalipersView: NSView {
         timeCaliperTextPosition: TextPosition,
         amplitudeCaliperTextPosition: TextPosition,
         numberOfMarchingComponents: Int,
-        deemphasizeMarchingComponents: Bool
+        deemphasizeMarchingComponents: Bool,
+        noteTextFontSize: CGFloat,
+        noteTextBoxSize: NSSize,
+        noteTextColor: NSColor?,
+        caliperTextFontSize: CGFloat
     ) {
-         for c in calipers {
+        for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
             // new calipers get the default color
             if let color = selectedColor {
@@ -918,10 +951,18 @@ class CalipersView: NSView {
             else if c.direction == .vertical {
                 c.textPosition = amplitudeCaliperTextPosition
             }
+            c.textFont = .systemFont(ofSize: caliperTextFontSize)
         }
+        self.caliperTextFontSize = caliperTextFontSize
+        
+        // Note parameters only affect future notes
+        noteFontSize = noteTextFontSize
+        noteSize = noteTextBoxSize
+        self.noteTextColor = noteTextColor ?? .black
+
         needsDisplay = true
     }
-    
+
     override func draw(_ dirtyRect: NSRect) {
         guard let context = NSGraphicsContext.current?.cgContext else { return }
         for c in calipers {
@@ -948,26 +989,4 @@ class CalipersView: NSView {
         return nil
     }
     
-    // This doesn't work as of OS 10.12.  Less need for screenshots now that transparent windows are possible.
-    func takeScreenshot() -> Bool {
-        // Takes screenshot and stores in sandbox data directory (or home directory if
-        // no sandbox.  Returns false if screencapture doesn't work for some reason or
-        // if escape used to cancel screencapture.
-        // Screencapture in preview mode and window mode with sound.
-        let prefix = "EPCalipers"
-        let guid = ProcessInfo.processInfo.globallyUniqueString
-        let fileName = "\(prefix)_\(guid)"
-        let path = "\(NSHomeDirectory())/\(fileName).png"
-        let task = Process()
-        task.launchPath = "/bin/bash"
-        task.arguments = ["screencapture -P -w \(path)"]
-        task.launch()
-        
-//        let result = system("screencapture -P -w \(path)")
-//        if result != 0 {
-//            return false
-//        }
-        return true
-    }
-
 }

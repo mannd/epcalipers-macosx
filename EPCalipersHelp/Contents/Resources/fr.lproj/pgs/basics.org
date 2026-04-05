@@ -2,7 +2,7 @@
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
 #+KEYWORDS: introduction, clavier, commencement rapide
-#+LANGUAGE:  en
+#+LANGUAGE:  fr
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export

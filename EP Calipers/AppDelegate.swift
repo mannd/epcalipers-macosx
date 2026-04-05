@@ -90,5 +90,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    // Added to prevent runtime warning about secure coding not
+    // being implemented.
+    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
+        return true
+    }
+
 }
 

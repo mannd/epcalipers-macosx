@@ -48,3 +48,13 @@
 "C7W-um-fqU.title"= "Nombre de composants marchants";
 
 "1SX-mZ-OAb.title"= "Atténuer les composants marchants";
+
+"NSl-Cell-Fnt.title" = "Taille de la police des notes";
+
+"NSl-Cell-Clr.title" = "Couleur du texte des notes";
+
+"NSl-Cell-Wdt.title" = "Largeur de la zone de texte des notes";
+
+"NSl-Cell-Hgt.title" = "Longeur de la zone de texte des notes";
+
+"CLF-Cell-01.title" = "Taille de la police des compas";
