@@ -11,6 +11,8 @@
                 <outlet property="amplitudeCaliperTextPositionPopUpButton" destination="8tk-wv-slP" id="hnN-LD-QKg"/>
                 <outlet property="autoPositionTextCheckBox" destination="y2W-Oh-5qB" id="o20-bD-qjk"/>
                 <outlet property="caliperColorWell" destination="ufw-DZ-SUu" id="Bjg-yJ-JX8"/>
+                <outlet property="caliperTextFontSizeStepper" destination="CLF-Step-01" id="rte-21-5IX"/>
+                <outlet property="caliperTextFontSizeTextField" destination="CLF-Val-001" id="xW9-VU-oOb"/>
                 <outlet property="deemphasizeMarchingComponentsCheckbox" destination="q3i-U6-wvQ" id="lBV-e2-RrT"/>
                 <outlet property="defaultHorizontalCalibrationTextField" destination="75T-Ch-tDA" id="FEm-CP-iL6"/>
                 <outlet property="defaultVerticalCalibrationTextField" destination="Um7-8U-edt" id="tv7-ps-URe"/>
@@ -107,15 +109,15 @@
             <point key="canvasLocation" x="263" y="645"/>
         </customView>
         <customView id="jm6-Ye-gwX">
-            <rect key="frame" x="0.0" y="0.0" width="508" height="776"/>
+            <rect key="frame" x="0.0" y="0.0" width="508" height="812"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Ihd-Wb-ZtZ">
-                    <rect key="frame" x="328" y="664" width="160" height="24"/>
+                    <rect key="frame" x="328" y="700" width="160" height="24"/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </colorWell>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ebH-LI-WVv">
-                    <rect key="frame" x="328" y="632" width="160" height="16"/>
+                    <rect key="frame" x="328" y="668" width="160" height="16"/>
                     <sliderCell key="cell" alignment="left" minValue="1" maxValue="6" doubleValue="3" tickMarkPosition="above" numberOfTickMarks="6" allowsTickMarkValuesOnly="YES" sliderType="linear" id="3CF-0M-gRz"/>
                 </slider>
                 <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75T-Ch-tDA">
@@ -170,7 +172,7 @@
                     </connections>
                 </stepper>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r4a-ZC-EWw">
-                    <rect key="frame" x="18" y="704" width="81" height="16"/>
+                    <rect key="frame" x="18" y="740" width="81" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Caliper color" id="Xyr-9E-EQ7">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -178,7 +180,7 @@
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QjZ-5I-b6C">
-                    <rect key="frame" x="18" y="668" width="157" height="16"/>
+                    <rect key="frame" x="18" y="704" width="157" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Selected caliper color" id="4zx-qT-fob">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -186,7 +188,7 @@
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vbu-qF-oSe">
-                    <rect key="frame" x="18" y="632" width="157" height="16"/>
+                    <rect key="frame" x="18" y="668" width="157" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Caliper line width" id="SkI-wb-HUG">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -201,6 +203,37 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CLF-Lb-001">
+                    <rect key="frame" x="18" y="632" width="195" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Caliper label font size" id="CLF-Cell-01">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="749" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CLF-Val-001">
+                    <rect key="frame" x="328" y="632" width="144" height="26"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="144" id="CLF-Wv-001"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="CLF-Tc-001">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="CLF-Fm-001"/>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="CLF-Step-01">
+                    <rect key="frame" x="475" y="632" width="13" height="26"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="13" id="CLF-Wd-001"/>
+                    </constraints>
+                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="10" maxValue="36" doubleValue="18" id="CLF-CellStep">
+                        <connections>
+                            <action selector="caliperTextFontSizeStepperAction:" target="-2" id="BBV-jK-5Be"/>
+                        </connections>
+                    </stepperCell>
+                </stepper>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zou-Nx-XEc">
                     <rect key="frame" x="18" y="560" width="195" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Amplitude calibration" id="dG9-FX-2Ej">
@@ -226,7 +259,7 @@
                     </textFieldCell>
                 </textField>
                 <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="ufw-DZ-SUu">
-                    <rect key="frame" x="328" y="700" width="160" height="24"/>
+                    <rect key="frame" x="328" y="736" width="160" height="24"/>
                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </colorWell>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="9Nk-jL-6iI">
@@ -363,7 +396,7 @@
                     </popUpButtonCell>
                 </popUpButton>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wtt-7v-mJA">
-                    <rect key="frame" x="18" y="740" width="162" height="16"/>
+                    <rect key="frame" x="18" y="776" width="162" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Show sample ECG at start" id="gkb-pl-sKv">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -371,7 +404,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Itu-YD-RYJ">
-                    <rect key="frame" x="472" y="740" width="16" height="16"/>
+                    <rect key="frame" x="472" y="776" width="16" height="16"/>
                     <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FeU-SX-rzx">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -538,8 +571,9 @@
                 <constraint firstItem="ebH-LI-WVv" firstAttribute="trailing" secondItem="eGw-e7-hy2" secondAttribute="trailing" id="3aH-Bp-PZG"/>
                 <constraint firstItem="Up2-cb-Ts2" firstAttribute="leading" secondItem="fbI-UI-vJR" secondAttribute="leading" id="3bT-At-Mm4"/>
                 <constraint firstItem="Suw-Xk-Yzu" firstAttribute="leading" secondItem="stG-Hf-V5B" secondAttribute="trailing" constant="3" id="4AF-Op-9pg"/>
+                <constraint firstItem="NSl-Nt-Clr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NSl-Lb-Clr" secondAttribute="trailing" constant="8" symbolic="YES" id="5Uo-WP-gbv"/>
                 <constraint firstItem="Zou-Nx-XEc" firstAttribute="trailing" secondItem="KDI-gk-o86" secondAttribute="trailing" id="6lY-kn-oqX"/>
-                <constraint firstItem="KDI-gk-o86" firstAttribute="top" secondItem="Vbu-qF-oSe" secondAttribute="bottom" constant="20" id="70d-wm-L9A"/>
+                <constraint firstItem="CLF-Lb-001" firstAttribute="top" secondItem="Vbu-qF-oSe" secondAttribute="bottom" constant="20" id="70d-wm-L9A"/>
                 <constraint firstItem="75T-Ch-tDA" firstAttribute="trailing" secondItem="Um7-8U-edt" secondAttribute="trailing" id="75t-Bs-Geo"/>
                 <constraint firstItem="sK9-Pd-kfB" firstAttribute="top" secondItem="Rdz-2k-3dT" secondAttribute="bottom" constant="20" id="7Ni-On-je6"/>
                 <constraint firstItem="ufw-DZ-SUu" firstAttribute="trailing" secondItem="ebH-LI-WVv" secondAttribute="trailing" id="8bp-qy-2UQ"/>
@@ -547,6 +581,17 @@
                 <constraint firstItem="q3i-U6-wvQ" firstAttribute="leading" secondItem="Up2-cb-Ts2" secondAttribute="trailing" constant="233" id="9j3-f7-Ocn"/>
                 <constraint firstItem="XRw-Tn-Xcs" firstAttribute="baseline" secondItem="oN6-rn-Vft" secondAttribute="baseline" id="9qI-PR-gt7"/>
                 <constraint firstItem="ufw-DZ-SUu" firstAttribute="leading" secondItem="Ihd-Wb-ZtZ" secondAttribute="leading" id="C5c-B6-tAz"/>
+                <constraint firstItem="CLF-Lb-001" firstAttribute="leading" secondItem="Vbu-qF-oSe" secondAttribute="leading" id="CLF-Cn-001"/>
+                <constraint firstItem="CLF-Lb-001" firstAttribute="trailing" secondItem="KDI-gk-o86" secondAttribute="trailing" id="CLF-Cn-002"/>
+                <constraint firstItem="CLF-Val-001" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CLF-Lb-001" secondAttribute="trailing" constant="8" symbolic="YES" id="CLF-Cn-003"/>
+                <constraint firstItem="CLF-Val-001" firstAttribute="leading" secondItem="stG-Hf-V5B" secondAttribute="leading" id="CLF-Cn-004"/>
+                <constraint firstItem="CLF-Val-001" firstAttribute="trailing" secondItem="stG-Hf-V5B" secondAttribute="trailing" id="CLF-Cn-005"/>
+                <constraint firstItem="CLF-Step-01" firstAttribute="leading" secondItem="CLF-Val-001" secondAttribute="trailing" constant="3" id="CLF-Cn-006"/>
+                <constraint firstItem="CLF-Step-01" firstAttribute="trailing" secondItem="Suw-Xk-Yzu" secondAttribute="trailing" id="CLF-Cn-007"/>
+                <constraint firstItem="CLF-Val-001" firstAttribute="bottom" secondItem="CLF-Lb-001" secondAttribute="bottom" id="CLF-Cn-008"/>
+                <constraint firstItem="CLF-Step-01" firstAttribute="top" secondItem="CLF-Val-001" secondAttribute="top" id="CLF-Cn-009"/>
+                <constraint firstItem="CLF-Step-01" firstAttribute="bottom" secondItem="CLF-Val-001" secondAttribute="bottom" id="CLF-Cn-010"/>
+                <constraint firstItem="KDI-gk-o86" firstAttribute="top" secondItem="CLF-Lb-001" secondAttribute="bottom" constant="20" id="CLF-Cn-011"/>
                 <constraint firstItem="Um7-8U-edt" firstAttribute="leading" secondItem="Whf-69-jWT" secondAttribute="leading" id="CXL-MB-AYj"/>
                 <constraint firstItem="75T-Ch-tDA" firstAttribute="leading" secondItem="ebH-LI-WVv" secondAttribute="leading" id="Cd2-rI-HG6"/>
                 <constraint firstItem="ebH-LI-WVv" firstAttribute="trailing" secondItem="Ihd-Wb-ZtZ" secondAttribute="trailing" id="CyK-CY-djn"/>

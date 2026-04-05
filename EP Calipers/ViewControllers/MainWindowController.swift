@@ -68,6 +68,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var noteTextBoxWidthStepper: NSStepper!
     @IBOutlet weak var noteTextBoxHeightTextField: NSTextField!
     @IBOutlet weak var noteTextBoxHeightStepper: NSStepper!
+    @IBOutlet weak var caliperTextFontSizeTextField: NSTextField!
+    @IBOutlet weak var caliperTextFontSizeStepper: NSStepper!
 
     @IBOutlet var marchingComponentsTextField: NSTextField!
 
@@ -228,6 +230,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         noteTextFontSizeTextField.delegate = self
         noteTextBoxWidthTextField.delegate = self
         noteTextBoxHeightTextField.delegate = self
+        caliperTextFontSizeTextField.delegate = self
 
         if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg"), appPreferences.showSampleECG {
             let url = URL(fileURLWithPath: path)
@@ -255,8 +258,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.noteTextColor = appPreferences.noteTextColor
         calipersView.noteFontSize = CGFloat(appPreferences.noteTextFontSize)
         calipersView.noteSize = NSSize(width: CGFloat(appPreferences.noteTextBoxWidth), height: CGFloat(appPreferences.noteTextBoxHeight))
-        noteTextFontSizeStepper.minValue = CalipersView.defaultMinimumNoteFontSize
-        noteTextFontSizeStepper.maxValue = CalipersView.defaultMaximumNoteFontSize
+        noteTextFontSizeStepper.minValue = CalipersView.defaultMinimumFontSize
+        noteTextFontSizeStepper.maxValue = CalipersView.defaultMaximumFontSize
+        caliperTextFontSizeStepper.minValue = CalipersView.defaultMinimumFontSize
+        caliperTextFontSizeStepper.maxValue = CalipersView.defaultMaximumFontSize
+
+        calipersView.caliperTextFontSize = CGFloat(appPreferences.caliperTextFontSize)
 
         // NOTE: Concurrent drawing stays disabled because the view's drawing path is not guaranteed to be thread-safe.  So we don't want to set calipersView.canDrawConcurrently to true (it is false by default).
 
@@ -464,6 +471,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         noteTextBoxHeightStepper.integerValue = Int(appPreferences.noteTextBoxHeight)
         noteTextColorWell.color = appPreferences.noteTextColor
 
+        caliperTextFontSizeTextField.integerValue = appPreferences.caliperTextFontSize
+        caliperTextFontSizeStepper.integerValue = appPreferences.caliperTextFontSize
+
         deemphasizeMarchingComponentsCheckbox.state = NSControl.StateValue(rawValue: appPreferences.deemphasizeMarchingComponents ? 1 : 0)
         
         transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
@@ -501,11 +511,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.noteTextBoxWidth = CGFloat(noteTextBoxWidthStepper.integerValue)
             appPreferences.noteTextBoxHeight = CGFloat(noteTextBoxHeightStepper.integerValue)
             appPreferences.noteTextColor =  noteTextColorWell.color
+            appPreferences.caliperTextFontSize = caliperTextFontSizeStepper.integerValue
 
             appPreferences.savePreferences()
-
-            let noteTextBoxSize = NSSize(width: appPreferences.noteTextBoxWidth,
-                                         height: appPreferences.noteTextBoxHeight)
 
             // update calipersView
             calipersView.updateCaliperPreferences(
@@ -520,7 +528,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 deemphasizeMarchingComponents: appPreferences.deemphasizeMarchingComponents,
                 noteTextFontSize: CGFloat(appPreferences.noteTextFontSize),
                 noteTextBoxSize: NSSize(width: appPreferences.noteTextBoxWidth, height: appPreferences.noteTextBoxHeight),
-                noteTextColor: appPreferences.noteTextColor
+                noteTextColor: appPreferences.noteTextColor,
+                caliperTextFontSize: CGFloat(appPreferences.caliperTextFontSize)
             )
             // Update default calibration strings in CalipersView
             calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration, vertical: appPreferences.defaultVerticalCalibration)
@@ -1655,6 +1664,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         noteTextBoxHeightTextField.integerValue = noteTextBoxHeightStepper.integerValue
     }
 
+    @IBAction func caliperTextFontSizeStepperAction(_ sender: Any) {
+        caliperTextFontSizeTextField.integerValue = caliperTextFontSizeStepper.integerValue
+    }
+
     func controlTextDidChange(_ obj: Notification) {
         if obj.name.rawValue == "NSControlTextDidChangeNotification" {
             if obj.object as AnyObject? === numberTextField {
@@ -1680,6 +1693,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
             if obj.object as AnyObject? === noteTextBoxHeightTextField {
                 noteTextBoxHeightStepper.integerValue = noteTextBoxHeightTextField.integerValue
+            }
+            if obj.object as AnyObject? === caliperTextFontSizeTextField {
+                caliperTextFontSizeStepper.integerValue = caliperTextFontSizeTextField.integerValue
             }
         }
     }

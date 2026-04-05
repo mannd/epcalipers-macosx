@@ -171,19 +171,20 @@ class CalipersView: NSView {
         var dragHandle: NoteDragHandleView?
         var absoluteAnchor: NSPoint
     }
-    static let defaultMinimumNoteFontSize: CGFloat = 10.0
-    static let defaultMaximumNoteFontSize: CGFloat = 36.0
+    static let defaultMinimumFontSize: CGFloat = 10.0
+    static let defaultMaximumFontSize: CGFloat = 36.0
     static let defaultNoteFontSize: CGFloat = NSFont.systemFontSize
+    static let defaultCaliperFontSize: CGFloat = 18.0
 
     var noteFontSize = defaultNoteFontSize
     var noteSize = NSSize(width: 180, height: 80)
     var noteTextColor: NSColor = .black
+    var caliperTextFontSize: CGFloat = defaultCaliperFontSize
 
     private var noteEntries: [NoteEntry] = []
     private let noteHitSlop: CGFloat = 10.0
-    private var defaultCaliperFontSize: CGFloat = 18.0
-    private let minimumNoteFontSize: CGFloat = defaultMinimumNoteFontSize
-    private let maximumNoteFontSize: CGFloat = defaultMaximumNoteFontSize
+    private let minimumFontSize: CGFloat = defaultMinimumFontSize
+    private let maximumFontSize: CGFloat = defaultMaximumFontSize
     private var previousNoteTextZoomScale: CGFloat?
     var hasNotes: Bool { !noteEntries.isEmpty }
     // references to MainWindowController calibrations
@@ -557,7 +558,7 @@ class CalipersView: NSView {
     private func noteFontSizeForCurrentZoom() -> CGFloat {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
         let scaledSize = noteFontSize * zoom
-        return max(minimumNoteFontSize, min(maximumNoteFontSize, scaledSize))
+        return max(minimumFontSize, min(maximumFontSize, scaledSize))
     }
 
     private func noteSizeForCurrentZoom() -> NSSize {
@@ -574,8 +575,8 @@ class CalipersView: NSView {
 
     private func caliperFontSizeForCurrentZoom() -> CGFloat {
         let zoom = CGFloat(horizontalCalibration.currentZoom)
-        let scaledSize = defaultCaliperFontSize * zoom
-        return max(minimumNoteFontSize, min(maximumNoteFontSize, scaledSize))
+        let scaledSize = caliperTextFontSize * zoom
+        return max(minimumFontSize, min(maximumFontSize, scaledSize))
     }
 
     private func updateCaliperTextFontsForCurrentZoom() {
@@ -599,18 +600,18 @@ class CalipersView: NSView {
             storage.beginEditing()
             storage.enumerateAttribute(.font, in: NSRange(location: 0, length: storage.length), options: []) { value, range, _ in
                 let currentFont = value as? NSFont ?? fallbackFont
-                let scaledSize = max(minimumNoteFontSize, min(maximumNoteFontSize, currentFont.pointSize * zoomRatio))
+                let scaledSize = max(minimumFontSize, min(maximumFontSize, currentFont.pointSize * zoomRatio))
                 let scaledFont = NSFont(descriptor: currentFont.fontDescriptor, size: scaledSize) ?? fallbackFont
                 storage.addAttribute(.font, value: scaledFont, range: range)
             }
             storage.endEditing()
         } else {
-            let scaledSize = max(minimumNoteFontSize, min(maximumNoteFontSize, fallbackFont.pointSize * zoomRatio))
+            let scaledSize = max(minimumFontSize, min(maximumFontSize, fallbackFont.pointSize * zoomRatio))
             textView.font = NSFont(descriptor: fallbackFont.fontDescriptor, size: scaledSize) ?? fallbackFont
         }
 
         if let typingFont = textView.typingAttributes[.font] as? NSFont {
-            let scaledSize = max(minimumNoteFontSize, min(maximumNoteFontSize, typingFont.pointSize * zoomRatio))
+            let scaledSize = max(minimumFontSize, min(maximumFontSize, typingFont.pointSize * zoomRatio))
             textView.typingAttributes[.font] = NSFont(descriptor: typingFont.fontDescriptor, size: scaledSize) ?? fallbackFont
         } else {
             textView.typingAttributes[.font] = fallbackFont
@@ -927,9 +928,10 @@ class CalipersView: NSView {
         deemphasizeMarchingComponents: Bool,
         noteTextFontSize: CGFloat,
         noteTextBoxSize: NSSize,
-        noteTextColor: NSColor?
+        noteTextColor: NSColor?,
+        caliperTextFontSize: CGFloat
     ) {
-         for c in calipers {
+        for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
             // new calipers get the default color
             if let color = selectedColor {
@@ -949,8 +951,10 @@ class CalipersView: NSView {
             else if c.direction == .vertical {
                 c.textPosition = amplitudeCaliperTextPosition
             }
+            c.textFont = .systemFont(ofSize: caliperTextFontSize)
         }
-
+        self.caliperTextFontSize = caliperTextFontSize
+        
         // Note parameters only affect future notes
         noteFontSize = noteTextFontSize
         noteSize = noteTextBoxSize

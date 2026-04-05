@@ -65,6 +65,7 @@ class Preferences {
     static let noteTextColorKey = "noteTextColorKey"
     static let noteTextBoxWidthKey = "noteTextBoxWidthKey"
     static let noteTextBoxHeightKey = "noteTextBoxHeightKey"
+    static let caliperTextFontSizeKey = "caliperTextFontSizeKey"
 
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
@@ -87,6 +88,7 @@ class Preferences {
     var noteTextColor: NSColor = NSColor.black
     var noteTextBoxWidth: CGFloat = 180.0
     var noteTextBoxHeight: CGFloat = 80.0
+    var caliperTextFontSize: Int = 24
 
     func registerDefaults() {
         // Color defaults are handled in loadPreferences().
@@ -110,6 +112,7 @@ class Preferences {
             Self.noteTextColorKey: noteTextColor,
             Self.noteTextBoxWidthKey: noteTextBoxWidth,
             Self.noteTextBoxHeightKey: noteTextBoxHeight,
+            Self.caliperTextFontSizeKey: caliperTextFontSize,
         ] as [String : Any]
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: defaults)
@@ -138,6 +141,7 @@ class Preferences {
         noteTextColor = preferences.colorForKey(Self.noteTextColorKey) ?? .black
         noteTextBoxWidth = CGFloat(preferences.float(forKey: Self.noteTextBoxWidthKey))
         noteTextBoxHeight = CGFloat(preferences.float(forKey: Self.noteTextBoxHeightKey))
+        caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
     }
     
     func savePreferences() {
@@ -163,5 +167,6 @@ class Preferences {
         preferences.setColor(noteTextColor, forKey: Self.noteTextColorKey)
         preferences.set(noteTextBoxWidth, forKey: Self.noteTextBoxWidthKey)
         preferences.set(noteTextBoxHeight, forKey: Self.noteTextBoxHeightKey)
+        preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
     }
 }
