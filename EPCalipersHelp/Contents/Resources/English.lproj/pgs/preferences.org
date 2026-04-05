@@ -21,9 +21,10 @@ Settings can be selected using the *EP Calipers | Settings* menu item.  You can 
 [[../gfx/settings.en.png]]
 ** Settings explained
 - Show sample ECG at start: Select to show a sample normal ECG at startup.
-- Caliper color: This is the color of unselected newly added calipers.  Note that this color can be overwritten by right-clicking on a caliper and selecting *Caliper Color*.
+- Caliper color: This is the color of unselected newly added calipers.  Note that this color can be overwritten by right-clicking on a caliper and selecting *Caliper Color*.[fn:2]
 - Selected caliper color: This is the color of the selected caliper.
 - Caliper line width: Increase or decrease this slider to make the caliper lines thicker or thinner.
+- Caliper label font size: Adjust the text font size of caliper labels.
 - Time calibration: This is the default value that appears in the text box when calibrating time calipers.  If you usually calibrate to a certain value (say 200 msec) then it is useful to change this default value.
 - Amplitude calibration: This is the default value for calibration of amplitude calipers.  Put whatever value you usually use to calibrate here.
 - Intervals for mean RR: The default number of intervals you use to measure mean RR intervals.
@@ -42,5 +43,6 @@ Settings can be selected using the *EP Calipers | Settings* menu item.  You can 
 - Note text box width, note text box height: These settings adjust the size of the text box that new notes appear in.
 
 * Footnotes
+[fn:2] All changes to caliper settings apply to both already created and new calipers. 
 
-[fn:1] All note settings apply to new notes only. 
+[fn:1] All note settings apply to newly created notes only. 

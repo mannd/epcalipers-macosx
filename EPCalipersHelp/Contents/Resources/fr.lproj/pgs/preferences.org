@@ -2,7 +2,7 @@
 #+EMAIL:     mannd@epstudiossoftware.com
 #+DATE:      
 #+KEYWORDS: préférences
-#+LANGUAGE:  en
+#+LANGUAGE:  fr
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc timestamp:nil
 #+EXPORT_SELECT_TAGS: export
@@ -21,9 +21,10 @@ Les préférences d’application peuvent être choisies en utilisant la command
 [[../gfx/settings.fr.png]]
 ** Préférences expliquées
 - Afficher l'échantillon d'ECG au démarrage: Choisir d'afficher un échantillon d'ECG normal au démarrage.
-- Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant *Couleur de compas*. 
+- Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant *Couleur de compas*.[fn:2] 
 - Couleur de compas choisi: C’est la couleur d’un compas sélectioné.
 - Largeur de ligne: Utiliser la glissière pour ajuster la larguer de ligne des compas.
+- Taille de la police des compas: Ajuster la taille de la police des compas.
 - Étalonnage de temps: C’est la valeur par défaut qui apparait dans la boîte de texte en étalonnant les compas de temps.  Si vous souvent utiliser une certaine valeur d’étalonnage (p.e. 200 msec), alors vous devriez cette préférence.
 - Étalonnage d’amplitude: C’est la valeur par défaut pour étalonner les compas d’amplitude.  
 - No. d’int pour RR moyen: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen.
@@ -41,7 +42,7 @@ Les préférences d’application peuvent être choisies en utilisant la command
 - Couleur du texte des notes: Ajuster la couleur du texte des nouvelles notes.
 - Largeur de la zone de texte des notes, longeur de la zone de texte des notes: Ces paramètres ajustent la taille de la zone de texte dans laquelle apparaissent les nouvelles notes.
 
-* Footnotes
+[fn:2] Toutes les modifications apportées aux paramètres de compas s'appliquent aussi bien aux anciennes qu'aux nouveaux compas.
 
-[fn:1] Tous les paramètres s'appliquent uniquement aux nouvelles notes.
+[fn:1] Tous les paramètres de note s'appliquent uniquement aux nouvelles notes.
 
