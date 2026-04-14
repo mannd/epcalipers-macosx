@@ -108,9 +108,36 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     let calipersMenuTag = 999
     let appPreferences = Preferences()
     var preferencesAlert: NSAlert? = nil
-    var calibrationAlert: NSAlert? = nil
     var meanIntervalAlert: NSAlert? = nil
     var qtcMeanIntervalAlert: NSAlert? = nil
+    private var calibrationRadioButtons: [NSButton] = []
+
+    private struct CalibrationOption {
+        let title: String
+        let value: String
+    }
+
+    private struct CalibrationAccessory {
+        let view: NSView
+        let customTextField: NSTextField
+        let customRadioButton: NSButton
+        let optionButtons: [NSButton]
+        let options: [CalibrationOption]
+
+        var inputText: String {
+            if customRadioButton.state == .on {
+                return customTextField.stringValue
+            }
+
+            for (index, button) in optionButtons.enumerated() {
+                if button.state == .on {
+                    return options[index].value
+                }
+            }
+
+            return customTextField.stringValue
+        }
+    }
     
     // These are taken from the Apple IKImageView demo
     let zoomInFactor: CGFloat = 1.414214
@@ -1141,18 +1168,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 example = NSLocalizedString("1000 msec", comment:"")
             }
             let message = String(format:NSLocalizedString("Enter calibration measurement (e.g. %@)", comment:""), example)
-            if calibrationAlert == nil {
-                let alert = NSAlert()
-                alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
-                //alert.informativeText = message
-                alert.alertStyle = NSAlert.Style.informational
-                alert.addButton(withTitle: NSLocalizedString("Calibrate", comment:""))
-                alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
-                alert.accessoryView = textInputView
-                calibrationAlert = alert
-            }
-            guard let calibrationAlert = calibrationAlert else { return }
-            calibrationAlert.informativeText = message
 
             if calipersView.horizontalCalibration.calibrationString.isEmpty {
                 calipersView.horizontalCalibration.calibrationString = appPreferences.defaultHorizontalCalibration
@@ -1170,16 +1185,108 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             else {
                 calibrationString = calipersView.verticalCalibration.calibrationString
             }
-            textField.stringValue = calibrationString
-            let result = calibrationAlert.runModal()
+
+            let alert = NSAlert()
+            alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
+            alert.informativeText = message
+            alert.alertStyle = NSAlert.Style.informational
+            alert.addButton(withTitle: NSLocalizedString("Calibrate", comment:""))
+            alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
+
+            let accessory = makeCalibrationAccessory(
+                direction: direction,
+                currentCalibration: calibrationString
+            )
+            alert.accessoryView = accessory.view
+
+            let result = alert.runModal()
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
-                let inputText = textField.stringValue
+                let inputText = accessory.inputText.trimmingCharacters(in: .whitespacesAndNewlines)
                 if !inputText.isEmpty {
                     calibrateWithText(inputText)
                     exitCalibration()
                 }
             }
         }
+    }
+
+    private func makeCalibrationAccessory(
+        direction: CaliperDirection,
+        currentCalibration: String
+    ) -> CalibrationAccessory {
+        let customRadioButton = NSButton(radioButtonWithTitle: NSLocalizedString("Custom", comment:""), target: nil, action: nil)
+        customRadioButton.target = self
+        customRadioButton.action = #selector(calibrationRadioButtonSelected(_:))
+        customRadioButton.state = .on
+
+        let customTextField = NSTextField(string: currentCalibration)
+        customTextField.alignment = .right
+        customTextField.target = self
+        customTextField.action = #selector(calibrationCustomTextFieldSelected(_:))
+        customTextField.translatesAutoresizingMaskIntoConstraints = false
+        customTextField.widthAnchor.constraint(equalToConstant: 198).isActive = true
+
+        let customRow = NSStackView(views: [customRadioButton, customTextField])
+        customRow.orientation = .vertical
+        customRow.alignment = .leading
+        customRow.spacing = 4
+        customTextField.leadingAnchor.constraint(equalTo: customRow.leadingAnchor, constant: 22).isActive = true
+
+        let options = calibrationOptions(for: direction)
+        let optionButtons = options.map { option in
+            NSButton(radioButtonWithTitle: option.title, target: self, action: #selector(calibrationRadioButtonSelected(_:)))
+        }
+        calibrationRadioButtons = [customRadioButton] + optionButtons
+
+        let stackView = NSStackView()
+        stackView.orientation = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(customRow)
+        optionButtons.forEach { stackView.addArrangedSubview($0) }
+
+        let accessoryWidth: CGFloat = 220
+        let accessoryHeight: CGFloat = direction == .horizontal ? 112 : 82
+        let accessoryView = NSView(frame: NSRect(x: 0, y: 0, width: accessoryWidth, height: accessoryHeight))
+        accessoryView.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: accessoryView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: accessoryView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: accessoryView.topAnchor),
+            stackView.bottomAnchor.constraint(lessThanOrEqualTo: accessoryView.bottomAnchor)
+        ])
+
+        return CalibrationAccessory(
+            view: accessoryView,
+            customTextField: customTextField,
+            customRadioButton: customRadioButton,
+            optionButtons: optionButtons,
+            options: options
+        )
+    }
+
+    private func calibrationOptions(for direction: CaliperDirection) -> [CalibrationOption] {
+        if direction == .horizontal {
+            return [
+                CalibrationOption(title: NSLocalizedString("1000 msec", comment:""), value: "1000 msec"),
+                CalibrationOption(title: NSLocalizedString("1.0 sec", comment:""), value: "1.0 sec")
+            ]
+        }
+
+        return [
+            CalibrationOption(title: NSLocalizedString("1 mV", comment:""), value: "1 mV"),
+            CalibrationOption(title: NSLocalizedString("10 mm", comment:""), value: "10 mm")
+        ]
+    }
+
+    @objc private func calibrationRadioButtonSelected(_ sender: NSButton) {
+        calibrationRadioButtons.forEach { $0.state = $0 === sender ? .on : .off }
+    }
+
+    @objc private func calibrationCustomTextFieldSelected(_ sender: NSTextField) {
+        calibrationRadioButtons.first?.state = .on
+        calibrationRadioButtons.dropFirst().forEach { $0.state = .off }
     }
     
     func calibrateWithText(_ inputText: String) {
