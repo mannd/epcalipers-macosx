@@ -66,6 +66,8 @@ class Preferences {
     static let noteTextBoxWidthKey = "noteTextBoxWidthKey"
     static let noteTextBoxHeightKey = "noteTextBoxHeightKey"
     static let caliperTextFontSizeKey = "caliperTextFontSizeKey"
+    static let lastHorizontalCalibrationKey = "lastHorizontalCalibrationKey"
+    static let lastVerticalCalibrationKey = "lastVerticalCalibrationKey"
 
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
@@ -90,6 +92,11 @@ class Preferences {
     var noteTextBoxHeight: CGFloat = 80.0
     var caliperTextFontSize: Int = 24
 
+    // Preferences hidden from the user
+    var lastHorizontalCalibrationDialogChoice = 0
+    var lastVerticalCalibrationDialogChoice = 0
+
+
     func registerDefaults() {
         // Color defaults are handled in loadPreferences().
         let defaults = [
@@ -113,6 +120,8 @@ class Preferences {
             Self.noteTextBoxWidthKey: noteTextBoxWidth,
             Self.noteTextBoxHeightKey: noteTextBoxHeight,
             Self.caliperTextFontSizeKey: caliperTextFontSize,
+            Self.lastVerticalCalibrationKey: defaultVerticalCalibration,
+            Self .lastHorizontalCalibrationKey: defaultHorizontalCalibration
         ] as [String : Any]
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: defaults)
@@ -142,6 +151,8 @@ class Preferences {
         noteTextBoxWidth = CGFloat(preferences.float(forKey: Self.noteTextBoxWidthKey))
         noteTextBoxHeight = CGFloat(preferences.float(forKey: Self.noteTextBoxHeightKey))
         caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
+        lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
+        lastHorizontalCalibrationDialogChoice = preferences.integer(forKey: Self.lastHorizontalCalibrationKey)
     }
     
     func savePreferences() {
@@ -168,5 +179,7 @@ class Preferences {
         preferences.set(noteTextBoxWidth, forKey: Self.noteTextBoxWidthKey)
         preferences.set(noteTextBoxHeight, forKey: Self.noteTextBoxHeightKey)
         preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
+        preferences.set(lastVerticalCalibrationDialogChoice, forKey: Self.lastVerticalCalibrationKey)
+        preferences.set(lastHorizontalCalibrationDialogChoice, forKey: Self.lastHorizontalCalibrationKey)
     }
 }
