@@ -10,6 +10,7 @@
 #+HTML_HEAD: <style media="screen" type="text/css"> img {max-width: 100%; height: auto;} </style>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../shrd/org.css"/>
 #+HTML_HEAD: <style  type="text/css">:root { color-scheme: light dark; }</style>
+#+HTML_HEAD: <style> p { margin-bottom: 1.5em; } </style>
 #+HTML_HEAD: <meta name="robots" content="anchors" />
 #+HTML_HEAD: <meta name="robots" content="keywords" />
 * [[../../shrd/64.png]] Calipers
