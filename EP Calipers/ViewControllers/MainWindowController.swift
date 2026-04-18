@@ -79,6 +79,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
     @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
 
+    private weak var calibrationCustomTextField: NSTextField?
+
     var imageProperties: NSDictionary = Dictionary<String, String>() as NSDictionary
     var imageUTType: String = ""
     var saveOptions: IKSaveOptions = IKSaveOptions()
@@ -136,6 +138,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             }
 
             return customTextField.stringValue
+        }
+
+        var buttonChosen: Int {
+            if customRadioButton.state == .on {
+                return 0
+            }
+
+            for (index, button) in optionButtons.enumerated() {
+                if button.state == .on {
+                    return index + 1
+                }
+            }
+
+            return 0
+
         }
     }
     
@@ -1178,13 +1195,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
 
             let direction = c.direction
-            var calibrationString: String
-            if direction == .horizontal {
-                calibrationString = calipersView.horizontalCalibration.calibrationString
-            }
-            else {
-                calibrationString = calipersView.verticalCalibration.calibrationString
-            }
 
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
@@ -1193,15 +1203,34 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             alert.addButton(withTitle: NSLocalizedString("Calibrate", comment:""))
             alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
 
+            var lastCustomCalibrationString = direction == .horizontal ? appPreferences.lastCustomHorizontalCalibration : appPreferences.lastCustomVerticalCalibration
+            if lastCustomCalibrationString.isEmpty {
+                lastCustomCalibrationString = direction == .horizontal ? appPreferences.defaultHorizontalCalibration : appPreferences.defaultVerticalCalibration
+            }
+
             let accessory = makeCalibrationAccessory(
                 direction: direction,
-                currentCalibration: calibrationString
+                lastCustomCalibrationString: lastCustomCalibrationString,
+                defaultButtonChoice: direction == .horizontal ? appPreferences.lastHorizontalCalibrationDialogChoice : appPreferences.lastVerticalCalibrationDialogChoice
             )
             alert.accessoryView = accessory.view
 
             let result = alert.runModal()
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 let inputText = accessory.inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+                let buttonChosen = accessory.buttonChosen
+                if direction == .horizontal {
+                    appPreferences.lastHorizontalCalibrationDialogChoice = buttonChosen
+                    if buttonChosen == 0 {
+                        appPreferences.lastCustomHorizontalCalibration = inputText
+                    }
+                }
+                else {
+                    appPreferences.lastVerticalCalibrationDialogChoice = buttonChosen
+                    if buttonChosen == 0 {
+                        appPreferences.lastCustomVerticalCalibration = inputText
+                    }
+                }
                 if !inputText.isEmpty {
                     calibrateWithText(inputText)
                     exitCalibration()
@@ -1212,14 +1241,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     private func makeCalibrationAccessory(
         direction: CaliperDirection,
-        currentCalibration: String
+        lastCustomCalibrationString: String,
+        defaultButtonChoice: Int = 0
     ) -> CalibrationAccessory {
         let customRadioButton = NSButton(radioButtonWithTitle: NSLocalizedString("Custom", comment:""), target: nil, action: nil)
         customRadioButton.target = self
         customRadioButton.action = #selector(calibrationRadioButtonSelected(_:))
         customRadioButton.state = .on
 
-        let customTextField = NSTextField(string: currentCalibration)
+        var customCalibrationString = lastCustomCalibrationString
+        if customCalibrationString.isEmpty {
+            customCalibrationString = direction == .horizontal ? appPreferences.defaultHorizontalCalibration : appPreferences.defaultVerticalCalibration
+        }
+
+        let customTextField = NSTextField(string: customCalibrationString)
         customTextField.alignment = .right
         customTextField.target = self
         customTextField.action = #selector(calibrationCustomTextFieldSelected(_:))
@@ -1237,17 +1272,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             NSButton(radioButtonWithTitle: option.title, target: self, action: #selector(calibrationRadioButtonSelected(_:)))
         }
         calibrationRadioButtons = [customRadioButton] + optionButtons
+        calibrationCustomTextField = customTextField
+        selectRadioButton(buttons: calibrationRadioButtons, index: defaultButtonChoice)
+        updateCalibrationCustomTextFieldEnabled()
 
         let stackView = NSStackView()
         stackView.orientation = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 8
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(customRow)
         optionButtons.forEach { stackView.addArrangedSubview($0) }
 
         let accessoryWidth: CGFloat = 220
-        let accessoryHeight: CGFloat = direction == .horizontal ? 112 : 82
+        let accessoryHeight: CGFloat = direction == .horizontal ? 148 : 106
         let accessoryView = NSView(frame: NSRect(x: 0, y: 0, width: accessoryWidth, height: accessoryHeight))
         accessoryView.addSubview(stackView)
         NSLayoutConstraint.activate([
@@ -1266,11 +1304,39 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         )
     }
 
+    private func updateCalibrationCustomTextFieldEnabled() {
+        calibrationCustomTextField?.isEnabled = calibrationRadioButtons.first?.state == .on
+    }
+
+    private func selectRadioButton(buttons: [NSButton], index: Int) {
+        guard index >= 0 && index < buttons.count else {
+            return
+        }
+        for button in buttons {
+            button.state = .off
+        }
+        buttons[index].state = .on
+        updateCalibrationCustomTextFieldEnabled()
+    }
+
+    @objc private func calibrationRadioButtonSelected(_ sender: NSButton) {
+        calibrationRadioButtons.forEach { $0.state = $0 === sender ? .on : .off }
+        updateCalibrationCustomTextFieldEnabled()
+    }
+
+    @objc private func calibrationCustomTextFieldSelected(_ sender: NSTextField) {
+        calibrationRadioButtons.first?.state = .on
+        calibrationRadioButtons.dropFirst().forEach { $0.state = .off }
+        updateCalibrationCustomTextFieldEnabled()
+    }
+
     private func calibrationOptions(for direction: CaliperDirection) -> [CalibrationOption] {
         if direction == .horizontal {
             return [
                 CalibrationOption(title: NSLocalizedString("1000 msec", comment:""), value: "1000 msec"),
-                CalibrationOption(title: NSLocalizedString("1.0 sec", comment:""), value: "1.0 sec")
+                CalibrationOption(title: NSLocalizedString("200 msec", comment:""), value: "200 msec"),
+                CalibrationOption(title: NSLocalizedString("1.0 sec", comment:""), value: "1.0 sec"),
+                CalibrationOption(title: NSLocalizedString("0.2 sec", comment: ""), value: "0.2 sec")
             ]
         }
 
@@ -1280,15 +1346,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         ]
     }
 
-    @objc private func calibrationRadioButtonSelected(_ sender: NSButton) {
-        calibrationRadioButtons.forEach { $0.state = $0 === sender ? .on : .off }
-    }
-
-    @objc private func calibrationCustomTextFieldSelected(_ sender: NSTextField) {
-        calibrationRadioButtons.first?.state = .on
-        calibrationRadioButtons.dropFirst().forEach { $0.state = .off }
-    }
-    
     func calibrateWithText(_ inputText: String) {
         // caller must guarantee this
         assert(!inputText.isEmpty)

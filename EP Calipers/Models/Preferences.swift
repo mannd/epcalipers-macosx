@@ -68,6 +68,8 @@ class Preferences {
     static let caliperTextFontSizeKey = "caliperTextFontSizeKey"
     static let lastHorizontalCalibrationKey = "lastHorizontalCalibrationKey"
     static let lastVerticalCalibrationKey = "lastVerticalCalibrationKey"
+    static let lastCustomHorizontalCalibrationKey = "lastCustomHorizontalCalibrationKey"
+    static let lastCustomVerticalCalibrationKey = "lastCustomVerticalCalibrationKey"
 
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
@@ -95,7 +97,8 @@ class Preferences {
     // Preferences hidden from the user
     var lastHorizontalCalibrationDialogChoice = 0
     var lastVerticalCalibrationDialogChoice = 0
-
+    var lastCustomHorizontalCalibration: String = ""
+    var lastCustomVerticalCalibration: String = ""
 
     func registerDefaults() {
         // Color defaults are handled in loadPreferences().
@@ -120,8 +123,10 @@ class Preferences {
             Self.noteTextBoxWidthKey: noteTextBoxWidth,
             Self.noteTextBoxHeightKey: noteTextBoxHeight,
             Self.caliperTextFontSizeKey: caliperTextFontSize,
-            Self.lastVerticalCalibrationKey: defaultVerticalCalibration,
-            Self .lastHorizontalCalibrationKey: defaultHorizontalCalibration
+            Self.lastVerticalCalibrationKey: lastVerticalCalibrationDialogChoice,
+            Self.lastHorizontalCalibrationKey: lastHorizontalCalibrationDialogChoice,
+            Self.lastCustomVerticalCalibrationKey: lastCustomVerticalCalibration,
+            Self .lastCustomHorizontalCalibrationKey: lastCustomHorizontalCalibration
         ] as [String : Any]
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: defaults)
@@ -153,6 +158,9 @@ class Preferences {
         caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
         lastHorizontalCalibrationDialogChoice = preferences.integer(forKey: Self.lastHorizontalCalibrationKey)
+        // At start of app the custom calibrations are the default calibrations.
+        lastCustomVerticalCalibration = defaultVerticalCalibration
+        lastCustomHorizontalCalibration = defaultHorizontalCalibration
     }
     
     func savePreferences() {
@@ -181,5 +189,7 @@ class Preferences {
         preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
         preferences.set(lastVerticalCalibrationDialogChoice, forKey: Self.lastVerticalCalibrationKey)
         preferences.set(lastHorizontalCalibrationDialogChoice, forKey: Self.lastHorizontalCalibrationKey)
+        preferences.set(lastCustomVerticalCalibration, forKey: Self.lastCustomVerticalCalibrationKey)
+        preferences.set(lastCustomHorizontalCalibration, forKey: Self.lastCustomHorizontalCalibrationKey)
     }
 }
