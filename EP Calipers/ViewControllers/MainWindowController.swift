@@ -1370,7 +1370,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     calibration.displayRate = false
                 }
                 calibration.originalZoom = Double(scrollView.magnification)
-                calibration.originalCalFactor = value / Double(c.points())
+                calibration.originalCalFactor = value / Double(abs(c.points()))
                 calibration.currentZoom = calibration.originalZoom
                 calibration.calibrated = true
             }
@@ -1581,7 +1581,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 // get integer from the stepper
                 let divisor = numberStepper.integerValue
                 assert (divisor != 0)
-                let intervalResult = fabs(c.intervalResult())
+                let intervalResult = abs(c.intervalResult())
                 let meanInterval = intervalResult / Double(divisor)
                 let meanRate = c.rateResult(meanInterval)
                 let intervalUnits = c.calibration.rawUnits
@@ -1691,7 +1691,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 // get integer from the stepper
                 let divisor = qtcNumberStepper.integerValue
                 assert (divisor != 0)
-                let intervalResult = fabs(c.intervalResult())
+                let intervalResult = abs(c.intervalResult())
                 let meanInterval = intervalResult / Double(divisor)
                 rrIntervalForQTc = c.intervalInSecs(meanInterval)
                 // now measure QT...
@@ -1714,8 +1714,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func doQTcResult() {
         if let c = calipersView.activeCaliper() {
-            let qt = fabs(c.intervalInSecs(c.intervalResult()))
-            let meanRR = fabs(rrIntervalForQTc)
+            let qt = abs(c.intervalInSecs(c.intervalResult()))
+            let meanRR = abs(rrIntervalForQTc)
             
             let qtcResult: QTcResultProtocol = QTcResult()
             let result = qtcResult.calculate(qtInSec: qt, rrInSec: meanRR, formula: appPreferences.qtcFormula,
