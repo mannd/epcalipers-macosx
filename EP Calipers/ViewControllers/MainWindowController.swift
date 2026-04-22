@@ -1353,9 +1353,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let scanner: Scanner = Scanner.localizedScanner(with: inputText) as! Scanner
         if var value = scanner.scanDouble() {
             trimmedUnits = scanner.string[scanner.currentIndex...].trimmingCharacters(in: CharacterSet.whitespaces)
-            value = fabs(value)
+            value = abs(value)
             if value > 0 {
-                guard let c = calipersView.activeCaliper(), c.points() > 0 else { return }
+                guard let c = calipersView.activeCaliper(), abs(c.points()) > 0 else { return }
 
                 var calibration: Calibration
                 if c.direction == .horizontal {
