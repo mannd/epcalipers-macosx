@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -74,7 +74,7 @@
                     <toolbarItem implicitItemIdentifier="B223B7F8-439A-4164-98C2-A35CF2138F19" explicitItemIdentifier="newFileToolbar" label="File" paletteLabel="File" bordered="YES" sizingBehavior="auto" id="o5d-Qp-RCb" customClass="ToolbarItem" customModule="EP_Calipers" customModuleProvider="target">
                         <segmentedControl key="view" verticalHuggingPriority="750" id="pEP-du-BEL">
                             <rect key="frame" x="0.0" y="14" width="65" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="S7O-fG-1gd">
                                 <font key="font" metaFont="system"/>
                                 <segments>
@@ -184,7 +184,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="360" height="139"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-mg-GQi">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-mg-GQi">
                         <rect key="frame" x="18" y="102" width="324" height="17"/>
                         <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="0Nj-hp-8mI">
                             <font key="font" metaFont="menu" size="14"/>
