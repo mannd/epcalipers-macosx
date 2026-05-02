@@ -929,7 +929,8 @@ class CalipersView: NSView {
         noteTextFontSize: CGFloat,
         noteTextBoxSize: NSSize,
         noteTextColor: NSColor?,
-        caliperTextFontSize: CGFloat
+        caliperTextFontSize: CGFloat,
+        allowNegativeValues: Bool
     ) {
         for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only
@@ -942,6 +943,7 @@ class CalipersView: NSView {
             }
             c.lineWidth = CGFloat(lineWidth)
             c.rounding = rounding
+            c.allowNegativeValues = allowNegativeValues
             c.autoPositionText = autoPositionText
             if c.direction == .horizontal {
                 c.textPosition = timeCaliperTextPosition

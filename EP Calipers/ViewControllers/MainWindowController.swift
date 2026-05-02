@@ -573,7 +573,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 noteTextFontSize: CGFloat(appPreferences.noteTextFontSize),
                 noteTextBoxSize: NSSize(width: appPreferences.noteTextBoxWidth, height: appPreferences.noteTextBoxHeight),
                 noteTextColor: appPreferences.noteTextColor,
-                caliperTextFontSize: CGFloat(appPreferences.caliperTextFontSize)
+                caliperTextFontSize: CGFloat(appPreferences.caliperTextFontSize),
+                allowNegativeValues: appPreferences.allowNegativeCaliperValues
             )
             // Update default calibration strings in CalipersView
             calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration, vertical: appPreferences.defaultVerticalCalibration)
@@ -1043,6 +1044,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // initiallize with Preferences here
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
         caliper.rounding = appPreferences.rounding
+        caliper.allowNegativeValues = appPreferences.allowNegativeCaliperValues
         caliper.unselectedColor = appPreferences.caliperColor
         caliper.selectedColor = appPreferences.highlightColor
         caliper.color = caliper.unselectedColor
@@ -1075,6 +1077,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let caliper = AngleCaliper()
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
         caliper.rounding = appPreferences.rounding
+        caliper.allowNegativeValues = appPreferences.allowNegativeCaliperValues
         caliper.direction = .horizontal
         caliper.autoPositionText = appPreferences.autoPositionText
         caliper.textPosition = appPreferences.timeCaliperTextPosition
@@ -1231,6 +1234,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                         appPreferences.lastCustomVerticalCalibration = inputText
                     }
                 }
+                appPreferences.savePreferences()
                 if !inputText.isEmpty {
                     calibrateWithText(inputText)
                     exitCalibration()

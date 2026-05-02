@@ -71,6 +71,20 @@ class Preferences {
     static let lastCustomHorizontalCalibrationKey = "lastCustomHorizontalCalibrationKey"
     static let lastCustomVerticalCalibrationKey = "lastCustomVerticalCalibrationKey"
 
+    // New preferences to be feature complete compared with
+    // EP Calipers 3 for Windows
+    static let allowNegativeCaliperValuesKey = "allowNegativeCaliperValuesKey" // default == true
+    static let showBrugadaTriangleKey = "showBrugadaTriangleKey" // default == true
+    // Zoom
+    static let adjustBarThicknessForZoomKey = "adjustBarThicknessForZoomKey"
+    static let adjustLabelSizeForZoomKey = "adjustLabelSizeForZoomKey"
+    // PDF
+    static let pdfResolutionKey = "pdfResolutionKey" // low or high
+    static let recalibrateWhenChangingPagesKey = "recalibrateWhenChangingPagesKey"
+    static let resetImageZoomBetweenPagesKey = "resetImageZoomBetweenPagesKey"
+    static let resetImageRotationBetweenPagesKey = "resetImageRotationBetweenPagesKey"
+    static let clearCalibrationBetweenPagesKey = "clearCalibrationBetweenPagesKey"
+
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
     var lineWidth: Int = 2
@@ -93,6 +107,7 @@ class Preferences {
     var noteTextBoxWidth: CGFloat = 180.0
     var noteTextBoxHeight: CGFloat = 80.0
     var caliperTextFontSize: Int = 24
+    var allowNegativeCaliperValues: Bool = true
 
     // Preferences hidden from the user
     var lastHorizontalCalibrationDialogChoice = 0
@@ -123,10 +138,12 @@ class Preferences {
             Self.noteTextBoxWidthKey: noteTextBoxWidth,
             Self.noteTextBoxHeightKey: noteTextBoxHeight,
             Self.caliperTextFontSizeKey: caliperTextFontSize,
+            Self.allowNegativeCaliperValuesKey: allowNegativeCaliperValues,
+            // preferences hidden from user
             Self.lastVerticalCalibrationKey: lastVerticalCalibrationDialogChoice,
             Self.lastHorizontalCalibrationKey: lastHorizontalCalibrationDialogChoice,
             Self.lastCustomVerticalCalibrationKey: lastCustomVerticalCalibration,
-            Self .lastCustomHorizontalCalibrationKey: lastCustomHorizontalCalibration
+            Self .lastCustomHorizontalCalibrationKey: lastCustomHorizontalCalibration,
         ] as [String : Any]
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: defaults)
@@ -156,6 +173,8 @@ class Preferences {
         noteTextBoxWidth = CGFloat(preferences.float(forKey: Self.noteTextBoxWidthKey))
         noteTextBoxHeight = CGFloat(preferences.float(forKey: Self.noteTextBoxHeightKey))
         caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
+        allowNegativeCaliperValues = false // preferences.bool(forKey: Self.allowNegativeCaliperValuesKey)
+        // preferencses hidden from user
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
         lastHorizontalCalibrationDialogChoice = preferences.integer(forKey: Self.lastHorizontalCalibrationKey)
         // At start of app the custom calibrations are the default calibrations.
@@ -187,6 +206,8 @@ class Preferences {
         preferences.set(noteTextBoxWidth, forKey: Self.noteTextBoxWidthKey)
         preferences.set(noteTextBoxHeight, forKey: Self.noteTextBoxHeightKey)
         preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
+        preferences.set(allowNegativeCaliperValues, forKey: Self.allowNegativeCaliperValuesKey)
+        // preferences hidden from user
         preferences.set(lastVerticalCalibrationDialogChoice, forKey: Self.lastVerticalCalibrationKey)
         preferences.set(lastHorizontalCalibrationDialogChoice, forKey: Self.lastHorizontalCalibrationKey)
         preferences.set(lastCustomVerticalCalibration, forKey: Self.lastCustomVerticalCalibrationKey)

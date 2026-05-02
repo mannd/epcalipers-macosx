@@ -148,7 +148,11 @@ class AngleCaliper: Caliper {
     }
 
     override func intervalResult() -> Double {
-        return Double(angleBar1 - angleBar2)
+        let result = Double(angleBar1 - angleBar2)
+        if (allowNegativeValues) {
+            return result
+        }
+        return abs(result)
     }
     
     override func moveBar1(delta: CGPoint, forLocation location: CGPoint) {

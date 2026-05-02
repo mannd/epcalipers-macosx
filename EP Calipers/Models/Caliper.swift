@@ -74,6 +74,7 @@ class Caliper: NSObject {
     var chosenComponent: CaliperComponent = .noComponent
     var numberOfMarchingComponants = maxMarchingComponents
     var deemphasizeMarchingComponents = true
+    var allowNegativeValues : Bool = true
 
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
          crossBarPosition: CGFloat, calibration: Calibration) {
@@ -532,7 +533,11 @@ class Caliper: NSObject {
     }
     
     func intervalResult() -> Double {
-        return Double(points()) * calibration.multiplier()
+        let result = Double(points()) * calibration.multiplier()
+        if allowNegativeValues {
+            return result
+        }
+        return abs(result)
     }
     
     func rateResult(_ interval: Double) -> Double {
