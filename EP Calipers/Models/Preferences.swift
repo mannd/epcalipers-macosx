@@ -108,6 +108,7 @@ class Preferences {
     var noteTextBoxHeight: CGFloat = 80.0
     var caliperTextFontSize: Int = 24
     var allowNegativeCaliperValues: Bool = true
+    var adjustLabelSizeForZoom: Bool = true
 
     // Preferences hidden from the user
     var lastHorizontalCalibrationDialogChoice = 0
@@ -139,6 +140,7 @@ class Preferences {
             Self.noteTextBoxHeightKey: noteTextBoxHeight,
             Self.caliperTextFontSizeKey: caliperTextFontSize,
             Self.allowNegativeCaliperValuesKey: allowNegativeCaliperValues,
+            Self.adjustLabelSizeForZoomKey: adjustLabelSizeForZoom,
             // preferences hidden from user
             Self.lastVerticalCalibrationKey: lastVerticalCalibrationDialogChoice,
             Self.lastHorizontalCalibrationKey: lastHorizontalCalibrationDialogChoice,
@@ -173,7 +175,8 @@ class Preferences {
         noteTextBoxWidth = CGFloat(preferences.float(forKey: Self.noteTextBoxWidthKey))
         noteTextBoxHeight = CGFloat(preferences.float(forKey: Self.noteTextBoxHeightKey))
         caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
-        allowNegativeCaliperValues = false // preferences.bool(forKey: Self.allowNegativeCaliperValuesKey)
+        allowNegativeCaliperValues = preferences.bool(forKey: Self.allowNegativeCaliperValuesKey)
+        adjustLabelSizeForZoom = preferences.bool(forKey: Self.adjustLabelSizeForZoomKey)
         // preferencses hidden from user
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
         lastHorizontalCalibrationDialogChoice = preferences.integer(forKey: Self.lastHorizontalCalibrationKey)
@@ -207,6 +210,7 @@ class Preferences {
         preferences.set(noteTextBoxHeight, forKey: Self.noteTextBoxHeightKey)
         preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
         preferences.set(allowNegativeCaliperValues, forKey: Self.allowNegativeCaliperValuesKey)
+        preferences.set(adjustLabelSizeForZoom, forKey: Self.adjustLabelSizeForZoomKey)
         // preferences hidden from user
         preferences.set(lastVerticalCalibrationDialogChoice, forKey: Self.lastVerticalCalibrationKey)
         preferences.set(lastHorizontalCalibrationDialogChoice, forKey: Self.lastHorizontalCalibrationKey)

@@ -574,7 +574,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 noteTextBoxSize: NSSize(width: appPreferences.noteTextBoxWidth, height: appPreferences.noteTextBoxHeight),
                 noteTextColor: appPreferences.noteTextColor,
                 caliperTextFontSize: CGFloat(appPreferences.caliperTextFontSize),
-                allowNegativeValues: appPreferences.allowNegativeCaliperValues
+                allowNegativeValues: appPreferences.allowNegativeCaliperValues,
+                adjustLabelSizeForZoom: appPreferences.adjustLabelSizeForZoom
             )
             // Update default calibration strings in CalipersView
             calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration, vertical: appPreferences.defaultVerticalCalibration)
