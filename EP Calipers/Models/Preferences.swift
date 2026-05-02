@@ -27,7 +27,7 @@ extension UserDefaults {
     }
 }
 
-public enum QTcFormulaPreference: Int {
+enum QTcFormulaPreference: Int {
     case Bazett = 0
     case Framingham = 1
     case Hodges = 2
@@ -35,12 +35,19 @@ public enum QTcFormulaPreference: Int {
     case all = 4
 }
 
-public enum Rounding: Int {
+enum Rounding: Int {
     case ToInteger = 0 // 123 msec
     case ToFourPlaces = 1 // 12.34 msec 123.4 msec
     case ToTenths = 2 // 123.4 msec 12.3 msec
     case ToHundredths = 3 // 123.45 msec 12.34 msec
     case None = 4 // for debugging only 123.456789 msec
+}
+
+// PDF resolution in dots per inch
+enum PdfResolution: Int {
+    case Low = 150
+    case Medium = 200
+    case High = 300
 }
 
 class Preferences {
@@ -107,8 +114,17 @@ class Preferences {
     var noteTextBoxWidth: CGFloat = 180.0
     var noteTextBoxHeight: CGFloat = 80.0
     var caliperTextFontSize: Int = 24
+    // New preferences as of 5/2026
     var allowNegativeCaliperValues: Bool = true
     var adjustLabelSizeForZoom: Bool = true
+    var adjustBarThicknessForZoom: Bool = true
+    var showBrugadaTriangle: Bool = true
+    // PDF
+    var pdfResolution: PdfResolution = .High
+    var recalibrateWhenChangingPages: Bool = true
+    var resetImageZoomBetweenPages: Bool = true
+    var resetImageRotationBetweenPages: Bool = true
+    var clearCalibrationBetweenPages: Bool = true
 
     // Preferences hidden from the user
     var lastHorizontalCalibrationDialogChoice = 0
@@ -141,6 +157,13 @@ class Preferences {
             Self.caliperTextFontSizeKey: caliperTextFontSize,
             Self.allowNegativeCaliperValuesKey: allowNegativeCaliperValues,
             Self.adjustLabelSizeForZoomKey: adjustLabelSizeForZoom,
+            Self.adjustBarThicknessForZoomKey: adjustBarThicknessForZoom,
+            Self.showBrugadaTriangleKey: showBrugadaTriangle,
+            Self.pdfResolutionKey: pdfResolution,
+            Self.recalibrateWhenChangingPagesKey: recalibrateWhenChangingPages,
+            Self.resetImageZoomBetweenPagesKey: resetImageZoomBetweenPages,
+            Self.resetImageRotationBetweenPagesKey: resetImageRotationBetweenPages,
+            Self.clearCalibrationBetweenPagesKey: clearCalibrationBetweenPages,
             // preferences hidden from user
             Self.lastVerticalCalibrationKey: lastVerticalCalibrationDialogChoice,
             Self.lastHorizontalCalibrationKey: lastHorizontalCalibrationDialogChoice,
@@ -177,6 +200,13 @@ class Preferences {
         caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
         allowNegativeCaliperValues = preferences.bool(forKey: Self.allowNegativeCaliperValuesKey)
         adjustLabelSizeForZoom = preferences.bool(forKey: Self.adjustLabelSizeForZoomKey)
+        adjustBarThicknessForZoom = preferences.bool(forKey: Self.adjustBarThicknessForZoomKey)
+        showBrugadaTriangle = preferences.bool(forKey: Self.showBrugadaTriangleKey)
+        pdfResolution = PdfResolution(rawValue: preferences.integer(forKey: Self.pdfResolutionKey)) ?? .High
+        recalibrateWhenChangingPages = preferences.bool(forKey: Self.recalibrateWhenChangingPagesKey)
+        resetImageZoomBetweenPages = preferences.bool(forKey: Self.resetImageZoomBetweenPagesKey)
+        resetImageRotationBetweenPages = preferences.bool(forKey: Self.resetImageRotationBetweenPagesKey)
+        clearCalibrationBetweenPages = preferences.bool(forKey: Self.clearCalibrationBetweenPagesKey)
         // preferencses hidden from user
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
         lastHorizontalCalibrationDialogChoice = preferences.integer(forKey: Self.lastHorizontalCalibrationKey)
@@ -211,6 +241,14 @@ class Preferences {
         preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
         preferences.set(allowNegativeCaliperValues, forKey: Self.allowNegativeCaliperValuesKey)
         preferences.set(adjustLabelSizeForZoom, forKey: Self.adjustLabelSizeForZoomKey)
+        preferences.set(adjustBarThicknessForZoom, forKey: Self.adjustBarThicknessForZoomKey)
+        preferences.set(showBrugadaTriangle, forKey: Self.showBrugadaTriangleKey)
+        preferences.set(pdfResolution.rawValue, forKey: Self.pdfResolutionKey)
+        preferences.set(recalibrateWhenChangingPages, forKey: Self.recalibrateWhenChangingPagesKey)
+        preferences.set(resetImageZoomBetweenPages, forKey: Self.resetImageZoomBetweenPagesKey)
+        preferences.set(resetImageRotationBetweenPages, forKey: Self.resetImageRotationBetweenPagesKey)
+        preferences.set(clearCalibrationBetweenPages, forKey: Self.clearCalibrationBetweenPagesKey)
+
         // preferences hidden from user
         preferences.set(lastVerticalCalibrationDialogChoice, forKey: Self.lastVerticalCalibrationKey)
         preferences.set(lastHorizontalCalibrationDialogChoice, forKey: Self.lastHorizontalCalibrationKey)
