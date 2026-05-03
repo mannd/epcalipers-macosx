@@ -68,7 +68,9 @@ class AngleCaliper: Caliper {
         caliperText(rect: rect, textPosition: .centerAbove, optimizeTextPosition: false)
 
         if let verticalCalibration = verticalCalibration {
-            if verticalCalibration.calibrated && verticalCalibration.unitsAreMM {
+            if verticalCalibration.calibrated
+                && verticalCalibration.unitsAreMM
+                && Preferences.shared.showBrugadaTriangle {
                 if angleInSouthernHemisphere(angleBar1) && angleInSouthernHemisphere(angleBar2) {
                     let pointsPerMM = 1.0 / verticalCalibration.multiplier()
                     drawTriangleBase(context, forHeight: 5 * pointsPerMM, rect: rect)

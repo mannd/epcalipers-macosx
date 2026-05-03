@@ -126,6 +126,8 @@ class Preferences: ObservableObject {
     var adjustBarThicknessForZoom: Bool = true
     var showBrugadaTriangle: Bool = true
     // PDF
+    // NOTE: These preferences don't affect the currently loaded PFD page,
+    // just subsequent pages.
     var pdfRenderScale: PdfRenderScale = .High
     var recalibrateWhenChangingPages: Bool = true
     var resetImageZoomBetweenPages: Bool = true
