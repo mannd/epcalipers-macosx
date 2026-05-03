@@ -933,7 +933,7 @@ class CalipersView: NSView {
         noteTextColor: NSColor?,
         caliperTextFontSize: CGFloat,
         allowNegativeValues: Bool,
-        adjustLabelSizeForZoom: Bool
+        adjustLabelSizeForZoom: Bool,
     ) {
         for c in calipers {
             // we no longer set c.unselected color to the default.  Calipers keep their colors, only

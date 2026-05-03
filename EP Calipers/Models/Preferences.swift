@@ -6,7 +6,7 @@
 //  Copyright © 2016 EP Studios. All rights reserved.
 //
 
-import Cocoa
+import SwiftUI
 
 // from http://stackoverflow.com/questions/1275662/saving-uicolor-to-and-loading-from-nsuserdefaults
 extension UserDefaults {
@@ -44,13 +44,19 @@ enum Rounding: Int {
 }
 
 // PDF resolution in dots per inch
-enum PdfResolution: Int {
-    case Low = 150
-    case Medium = 200
-    case High = 300
+enum PdfRenderScale: Int {
+    case Low = 1
+    case Medium = 2
+    case High = 4
 }
 
-class Preferences {
+/// This class holds all the preferences, aka settings for the app.
+///
+/// The class has a private init(), so obtained the shared instance via ``Preferences.shared``.
+///
+/// >Important: When adding new preferences, update ``registerDefaults()``, ``load()``
+/// and ``save()``.
+class Preferences: ObservableObject {
     static let caliperColorKey = "caliperColorKey"
     static let highlightColorKey = "highlightColorKey"
     static let lineWidthKey = "lineWidthKey"
@@ -86,7 +92,7 @@ class Preferences {
     static let adjustBarThicknessForZoomKey = "adjustBarThicknessForZoomKey"
     static let adjustLabelSizeForZoomKey = "adjustLabelSizeForZoomKey"
     // PDF
-    static let pdfResolutionKey = "pdfResolutionKey" // low or high
+    static let pdfRenderScaleKey = "pdfRenderScaleKey" // affects resolution of PDFs
     static let recalibrateWhenChangingPagesKey = "recalibrateWhenChangingPagesKey"
     static let resetImageZoomBetweenPagesKey = "resetImageZoomBetweenPagesKey"
     static let resetImageRotationBetweenPagesKey = "resetImageRotationBetweenPagesKey"
@@ -120,7 +126,7 @@ class Preferences {
     var adjustBarThicknessForZoom: Bool = true
     var showBrugadaTriangle: Bool = true
     // PDF
-    var pdfResolution: PdfResolution = .High
+    var pdfRenderScale: PdfRenderScale = .High
     var recalibrateWhenChangingPages: Bool = true
     var resetImageZoomBetweenPages: Bool = true
     var resetImageRotationBetweenPages: Bool = true
@@ -132,8 +138,13 @@ class Preferences {
     var lastCustomHorizontalCalibration: String = ""
     var lastCustomVerticalCalibration: String = ""
 
+    static let shared = Preferences()
+    private init() {
+        registerDefaults()
+    }
+
     func registerDefaults() {
-        // Color defaults are handled in loadPreferences().
+        // Color defaults are handled in load().
         let defaults = [
             Self.lineWidthKey: lineWidth,
             Self.defaultHorizontalCalibrationKey: defaultHorizontalCalibration,
@@ -159,7 +170,7 @@ class Preferences {
             Self.adjustLabelSizeForZoomKey: adjustLabelSizeForZoom,
             Self.adjustBarThicknessForZoomKey: adjustBarThicknessForZoom,
             Self.showBrugadaTriangleKey: showBrugadaTriangle,
-            Self.pdfResolutionKey: pdfResolution,
+            Self.pdfRenderScaleKey: pdfRenderScale.rawValue,
             Self.recalibrateWhenChangingPagesKey: recalibrateWhenChangingPages,
             Self.resetImageZoomBetweenPagesKey: resetImageZoomBetweenPages,
             Self.resetImageRotationBetweenPagesKey: resetImageRotationBetweenPages,
@@ -174,7 +185,7 @@ class Preferences {
         userDefaults.register(defaults: defaults)
     }
 
-    func loadPreferences() {
+    func load() {
         let preferences = UserDefaults.standard
         caliperColor = preferences.colorForKey(Self.caliperColorKey) ?? caliperColor
         highlightColor = preferences.colorForKey(Self.highlightColorKey) ?? highlightColor
@@ -202,7 +213,7 @@ class Preferences {
         adjustLabelSizeForZoom = preferences.bool(forKey: Self.adjustLabelSizeForZoomKey)
         adjustBarThicknessForZoom = preferences.bool(forKey: Self.adjustBarThicknessForZoomKey)
         showBrugadaTriangle = preferences.bool(forKey: Self.showBrugadaTriangleKey)
-        pdfResolution = PdfResolution(rawValue: preferences.integer(forKey: Self.pdfResolutionKey)) ?? .High
+        pdfRenderScale = PdfRenderScale(rawValue: preferences.integer(forKey: Self.pdfRenderScaleKey)) ?? .High
         recalibrateWhenChangingPages = preferences.bool(forKey: Self.recalibrateWhenChangingPagesKey)
         resetImageZoomBetweenPages = preferences.bool(forKey: Self.resetImageZoomBetweenPagesKey)
         resetImageRotationBetweenPages = preferences.bool(forKey: Self.resetImageRotationBetweenPagesKey)
@@ -215,7 +226,7 @@ class Preferences {
         lastCustomHorizontalCalibration = defaultHorizontalCalibration
     }
     
-    func savePreferences() {
+    func save() {
         let preferences = UserDefaults.standard
         preferences.setColor(caliperColor, forKey: Self.caliperColorKey)
         preferences.setColor(highlightColor, forKey: Self.highlightColorKey)
@@ -243,7 +254,7 @@ class Preferences {
         preferences.set(adjustLabelSizeForZoom, forKey: Self.adjustLabelSizeForZoomKey)
         preferences.set(adjustBarThicknessForZoom, forKey: Self.adjustBarThicknessForZoomKey)
         preferences.set(showBrugadaTriangle, forKey: Self.showBrugadaTriangleKey)
-        preferences.set(pdfResolution.rawValue, forKey: Self.pdfResolutionKey)
+        preferences.set(pdfRenderScale.rawValue, forKey: Self.pdfRenderScaleKey)
         preferences.set(recalibrateWhenChangingPages, forKey: Self.recalibrateWhenChangingPagesKey)
         preferences.set(resetImageZoomBetweenPages, forKey: Self.resetImageZoomBetweenPagesKey)
         preferences.set(resetImageRotationBetweenPages, forKey: Self.resetImageRotationBetweenPagesKey)

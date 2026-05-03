@@ -108,7 +108,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     var rrIntervalForQTc: Double = 0.0
     
     let calipersMenuTag = 999
-    let appPreferences = Preferences()
+    let appPreferences = Preferences.shared
     var preferencesAlert: NSAlert? = nil
     var meanIntervalAlert: NSAlert? = nil
     var qtcMeanIntervalAlert: NSAlert? = nil
@@ -262,8 +262,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         print("windowDidLoad")
         super.windowDidLoad()
         
-        appPreferences.registerDefaults()
-        appPreferences.loadPreferences()
+        appPreferences.load()
 
         Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
@@ -557,8 +556,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.noteTextColor =  noteTextColorWell.color
             appPreferences.caliperTextFontSize = caliperTextFontSizeStepper.integerValue
 
-            appPreferences.savePreferences()
+            // TODO: add rest of preferences here, before saving preferences
 
+            appPreferences.save()
+
+
+            // TODO: probably preferable to use our Preferences singleton in calipersView and avoid passing all these parameters.
             // update calipersView
             calipersView.updateCaliperPreferences(
                 unselectedColor: appPreferences.caliperColor,
@@ -754,7 +757,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 transparent = false
                 appPreferences.transparency = transparent
-                appPreferences.savePreferences()
+                appPreferences.save()
             }
             else {
                 return
@@ -932,7 +935,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
         // consider add preference for low res, hi res (2.0, 4.0 scale?)
-        let scale: CGFloat = 4.0
+        let scale = CGFloat(appPreferences.pdfRenderScale.rawValue)
         pdf.currentPage = page
         var tempImage = NSImage()
         tempImage.addRepresentation(pdf)
@@ -1235,7 +1238,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                         appPreferences.lastCustomVerticalCalibration = inputText
                     }
                 }
-                appPreferences.savePreferences()
+                appPreferences.save()
                 if !inputText.isEmpty {
                     calibrateWithText(inputText)
                     exitCalibration()
