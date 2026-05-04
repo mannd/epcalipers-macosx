@@ -561,28 +561,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.save()
 
 
-            // TODO: probably preferable to use our Preferences singleton in calipersView and avoid passing all these parameters.
-            // update calipersView
-            calipersView.updateCaliperPreferences(
-                unselectedColor: appPreferences.caliperColor,
-                selectedColor: appPreferences.highlightColor,
-                lineWidth: appPreferences.lineWidth,
-                rounding: appPreferences.rounding,
-                autoPositionText: appPreferences.autoPositionText,
-                timeCaliperTextPosition: appPreferences.timeCaliperTextPosition,
-                amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition,
-                numberOfMarchingComponents: appPreferences.numberOfMarchingComponents,
-                deemphasizeMarchingComponents: appPreferences.deemphasizeMarchingComponents,
-                noteTextFontSize: CGFloat(appPreferences.noteTextFontSize),
-                noteTextBoxSize: NSSize(width: appPreferences.noteTextBoxWidth, height: appPreferences.noteTextBoxHeight),
-                noteTextColor: appPreferences.noteTextColor,
-                caliperTextFontSize: CGFloat(appPreferences.caliperTextFontSize),
-                allowNegativeValues: appPreferences.allowNegativeCaliperValues,
-                adjustLabelSizeForZoom: appPreferences.adjustLabelSizeForZoom
-            )
+            // Update calipersView caliper preferences.
+            calipersView.updateCaliperPreferences()
+
             // Update default calibration strings in CalipersView
             calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration, vertical: appPreferences.defaultVerticalCalibration)
-            // update transparency
+
+            // Update transparency.  NOTE: updating the transparency property has side effects!
             if transparent != appPreferences.transparency {
                 transparent = appPreferences.transparency
             }
@@ -626,7 +611,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To 4 digits", comment: ""))
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To tenths", comment: ""))
         roundingPopUpButton.addItem(withTitle: NSLocalizedString("To hundredths", comment: ""))
-        // TODO: remove in production.  For debugging only.
+        // NOTE: comment out in production.  Uncomment for debugging only.
         //roundingPopUpButton.addItem(withTitle: "Raw")
     }
 

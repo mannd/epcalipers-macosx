@@ -918,52 +918,34 @@ class CalipersView: NSView {
         }
     }
     
-    func updateCaliperPreferences(
-        unselectedColor: NSColor?,
-        selectedColor: NSColor?,
-        lineWidth: Int,
-        rounding: Rounding,
-        autoPositionText: Bool,
-        timeCaliperTextPosition: TextPosition,
-        amplitudeCaliperTextPosition: TextPosition,
-        numberOfMarchingComponents: Int,
-        deemphasizeMarchingComponents: Bool,
-        noteTextFontSize: CGFloat,
-        noteTextBoxSize: NSSize,
-        noteTextColor: NSColor?,
-        caliperTextFontSize: CGFloat,
-        allowNegativeValues: Bool,
-        adjustLabelSizeForZoom: Bool,
-    ) {
+    func updateCaliperPreferences() {
+        let prefs = Preferences.shared
         for c in calipers {
-            // we no longer set c.unselected color to the default.  Calipers keep their colors, only
-            // new calipers get the default color
-            if let color = selectedColor {
-                c.selectedColor = color
-            }
+            // Calipers keep their colors, only new calipers get the default color.
+            c.selectedColor = prefs.highlightColor
             if c.selected {
                 c.color = c.selectedColor
             }
-            c.lineWidth = CGFloat(lineWidth)
-            c.rounding = rounding
-            c.allowNegativeValues = allowNegativeValues
-            c.autoPositionText = autoPositionText
+            c.lineWidth = CGFloat(prefs.lineWidth)
+            c.rounding = prefs.rounding
+            c.allowNegativeValues = prefs.allowNegativeCaliperValues
+            c.autoPositionText = prefs.autoPositionText
             if c.direction == .horizontal {
-                c.textPosition = timeCaliperTextPosition
-                c.numberOfMarchingComponants = numberOfMarchingComponents
-                c.deemphasizeMarchingComponents = deemphasizeMarchingComponents
+                c.textPosition = prefs.timeCaliperTextPosition
+                c.numberOfMarchingComponants = prefs.numberOfMarchingComponents
+                c.deemphasizeMarchingComponents = prefs.deemphasizeMarchingComponents
             }
             else if c.direction == .vertical {
-                c.textPosition = amplitudeCaliperTextPosition
+                c.textPosition = prefs.amplitudeCaliperTextPosition
             }
-            c.textFont = .systemFont(ofSize: caliperTextFontSize)
+            c.textFont = .systemFont(ofSize: CGFloat(prefs.caliperTextFontSize))
         }
-        self.caliperTextFontSize = caliperTextFontSize
-        
+        self.caliperTextFontSize = CGFloat(prefs.caliperTextFontSize)
+
         // Note parameters only affect future notes
-        noteFontSize = noteTextFontSize
-        noteSize = noteTextBoxSize
-        self.noteTextColor = noteTextColor ?? .black
+        noteFontSize = CGFloat(prefs.noteTextFontSize)
+        noteSize = NSSize(width: prefs.noteTextBoxWidth, height: prefs.noteTextBoxHeight)
+        self.noteTextColor = prefs.noteTextColor
 
         needsDisplay = true
     }

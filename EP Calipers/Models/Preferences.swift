@@ -96,7 +96,7 @@ class Preferences: ObservableObject {
     static let recalibrateWhenChangingPagesKey = "recalibrateWhenChangingPagesKey"
     static let resetImageZoomBetweenPagesKey = "resetImageZoomBetweenPagesKey"
     static let resetImageRotationBetweenPagesKey = "resetImageRotationBetweenPagesKey"
-    static let clearCalibrationBetweenPagesKey = "clearCalibrationBetweenPagesKey"
+    static let clearCalipersBetweenPagesKey = "clearCalibrationBetweenPagesKey"
 
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
@@ -129,10 +129,10 @@ class Preferences: ObservableObject {
     // NOTE: These preferences don't affect the currently loaded PFD page,
     // just subsequent pages.
     var pdfRenderScale: PdfRenderScale = .High
-    var recalibrateWhenChangingPages: Bool = true
+    var recalibrateWhenChangingPages: Bool = true // clear calibration when changing pages
     var resetImageZoomBetweenPages: Bool = true
     var resetImageRotationBetweenPages: Bool = true
-    var clearCalibrationBetweenPages: Bool = true
+    var clearCalipersBetweenPages: Bool = true  // deletes all calipers when changing pages
 
     // Preferences hidden from the user
     var lastHorizontalCalibrationDialogChoice = 0
@@ -176,7 +176,7 @@ class Preferences: ObservableObject {
             Self.recalibrateWhenChangingPagesKey: recalibrateWhenChangingPages,
             Self.resetImageZoomBetweenPagesKey: resetImageZoomBetweenPages,
             Self.resetImageRotationBetweenPagesKey: resetImageRotationBetweenPages,
-            Self.clearCalibrationBetweenPagesKey: clearCalibrationBetweenPages,
+            Self.clearCalipersBetweenPagesKey: clearCalipersBetweenPages,
             // preferences hidden from user
             Self.lastVerticalCalibrationKey: lastVerticalCalibrationDialogChoice,
             Self.lastHorizontalCalibrationKey: lastHorizontalCalibrationDialogChoice,
@@ -219,7 +219,7 @@ class Preferences: ObservableObject {
         recalibrateWhenChangingPages = preferences.bool(forKey: Self.recalibrateWhenChangingPagesKey)
         resetImageZoomBetweenPages = preferences.bool(forKey: Self.resetImageZoomBetweenPagesKey)
         resetImageRotationBetweenPages = preferences.bool(forKey: Self.resetImageRotationBetweenPagesKey)
-        clearCalibrationBetweenPages = preferences.bool(forKey: Self.clearCalibrationBetweenPagesKey)
+        clearCalipersBetweenPages = preferences.bool(forKey: Self.clearCalipersBetweenPagesKey)
         // preferencses hidden from user
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
         lastHorizontalCalibrationDialogChoice = preferences.integer(forKey: Self.lastHorizontalCalibrationKey)
@@ -260,7 +260,7 @@ class Preferences: ObservableObject {
         preferences.set(recalibrateWhenChangingPages, forKey: Self.recalibrateWhenChangingPagesKey)
         preferences.set(resetImageZoomBetweenPages, forKey: Self.resetImageZoomBetweenPagesKey)
         preferences.set(resetImageRotationBetweenPages, forKey: Self.resetImageRotationBetweenPagesKey)
-        preferences.set(clearCalibrationBetweenPages, forKey: Self.clearCalibrationBetweenPagesKey)
+        preferences.set(clearCalipersBetweenPages, forKey: Self.clearCalipersBetweenPagesKey)
 
         // preferences hidden from user
         preferences.set(lastVerticalCalibrationDialogChoice, forKey: Self.lastVerticalCalibrationKey)
