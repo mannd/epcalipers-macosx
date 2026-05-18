@@ -816,6 +816,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     self.window?.setTitleWithRepresentedFilename(urlPath)
                 }
                 self.imageURL = url
+                // Reset zoom to 1.0 when loading new image.
+                scrollView.magnification = 1.0
                 self.clearCalibration()
                 if addToRecentDocuments {
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
