@@ -919,7 +919,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
-        // consider add preference for low res, hi res (2.0, 4.0 scale?)
+        // TODO: this doesn't work.  calipers already cleared between pages at earlier step.
+        // TODO: what happens to notes when changing pages?
+//        if appPreferences.clearCalipersBetweenPages {
+//            calipersView.deleteAllCalipers()
+//        }
         let scale = CGFloat(appPreferences.pdfRenderScale.rawValue)
         pdf.currentPage = page
         var tempImage = NSImage()

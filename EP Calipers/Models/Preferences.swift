@@ -125,14 +125,15 @@ class Preferences: ObservableObject {
     var adjustLabelSizeForZoom: Bool = true
     var adjustBarThicknessForZoom: Bool = true
     var showBrugadaTriangle: Bool = true
+
     // PDF
     // NOTE: These preferences don't affect the currently loaded PFD page,
     // just subsequent pages.
     var pdfRenderScale: PdfRenderScale = .High
-    var recalibrateWhenChangingPages: Bool = true // clear calibration when changing pages
-    var resetImageZoomBetweenPages: Bool = true
-    var resetImageRotationBetweenPages: Bool = true
-    var clearCalipersBetweenPages: Bool = true  // deletes all calipers when changing pages
+    var recalibrateWhenChangingPages: Bool = false // clear calibration when changing pages
+    var resetImageZoomBetweenPages: Bool = false
+    var resetImageRotationBetweenPages: Bool = false
+    var clearCalipersBetweenPages: Bool = false  // deletes all calipers when changing pages
 
     // Preferences hidden from the user
     var lastHorizontalCalibrationDialogChoice = 0
