@@ -60,8 +60,6 @@ class Calibration: NSObject {
     func reset() {
         rawUnits = "points"
         displayRate = false
-        // originalZoom = 1.0
-        // currentZoom = 1.0
         calibrated = false
     }
     

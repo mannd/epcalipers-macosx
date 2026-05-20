@@ -816,9 +816,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     self.window?.setTitleWithRepresentedFilename(urlPath)
                 }
                 self.imageURL = url
-                // Reset zoom to 1.0 when loading new image.
-                scrollView.magnification = 1.0
                 self.clearCalibration()
+                scrollView.magnification = calipersView.horizontalCalibration.currentZoom
                 if addToRecentDocuments {
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
@@ -1172,16 +1171,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         if let c = calipersView.activeCaliper() {
             if !c.requiresCalibration {
+                // Only angle calipers don't require calibration - so far.
                 showAngleCaliperNoCalibrationAlert()
                 return
             }
-            var example: String
-            if c.direction == .vertical {
-                example = NSLocalizedString("1 mV", comment:"")
-            }
-            else {
-                example = NSLocalizedString("1000 msec", comment:"")
-            }
+
+            let example = c.direction == .vertical ? "1 mV" : "1000 msec"
             let message = String(format:NSLocalizedString("Enter calibration measurement (e.g. %@)", comment:""), example)
 
             if calipersView.horizontalCalibration.calibrationString.isEmpty {
@@ -1191,9 +1186,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration
             }
 
-
             let direction = c.direction
-
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
             alert.informativeText = message
@@ -1498,6 +1491,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // calibration buttons locked during QTc and MeanRR
         // if nothing else, clear messages
         exitCalibration()
+        let resetZoom = false
         if calipersView.horizontalCalibration.calibrated ||
             calipersView.verticalCalibration.calibrated {
             // No easy animation equivalent in Cocoa
@@ -1506,7 +1500,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.verticalCalibration.reset()
         }
     }
-    
+
+    func getCalibrationZoom() -> Double {
+        return calipersView.horizontalCalibration.currentZoom
+    }
+
+    func resetZoom() {
+        //calipersView.horizontalCalibration.
+    }
+
     func toggleIntervalRate() {
         // Don't do anthing if no time caliper on screen.
         guard !noTimeCaliperExists() else { return }
