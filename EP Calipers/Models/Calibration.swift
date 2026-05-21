@@ -12,12 +12,10 @@ class Calibration: NSObject {
     var direction: CaliperDirection
     var calibrationString: String = ""
     var displayRate: Bool = false
-    var originalZoom: Double = 1.0
-    var currentZoom: Double = 1.0
-    var originalCalFactor: Double = 1.0
+    var magnificationAtCalibration: Double = 1.0
+    var calibrationFactorAtCalibration: Double = 1.0
     var calibrated: Bool = false
     var rawUnits: String = "points"
-    var offset: CGPoint = CGPoint()
     
     init(direction: CaliperDirection) {
         self.direction = direction
@@ -44,19 +42,12 @@ class Calibration: NSObject {
         }
     }
     
-    func currentCalFactor() -> Double {
-        return (originalZoom * originalCalFactor) / currentZoom
+    func multiplier(currentMagnification: Double) -> Double {
+        guard calibrated else { return 1.0 }
+        return (magnificationAtCalibration * calibrationFactorAtCalibration) / currentMagnification
+
     }
-    
-    func multiplier() -> Double {
-        if calibrated {
-            return currentCalFactor()
-        }
-        else {
-            return 1.0
-        }
-    }
-    
+
     func reset() {
         rawUnits = "points"
         displayRate = false

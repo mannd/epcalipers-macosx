@@ -293,10 +293,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             self.scrollView.magnification = 1.0
         }
 
-        calipersView.horizontalCalibration.currentZoom = Double(scrollView.magnification)
-        calipersView.verticalCalibration.currentZoom = Double(scrollView.magnification)
-        calipersView.horizontalCalibration.originalZoom = Double(scrollView.magnification)
-        calipersView.verticalCalibration.originalZoom = Double(scrollView.magnification)
+//        calipersView.horizontalCalibration.magnificationAtCalibration = Double(scrollView.magnification)
+//        calipersView.verticalCalibration.magnificationAtCalibration = Double(scrollView.magnification)
 
         calipersView.noteTextColor = appPreferences.noteTextColor
         calipersView.noteFontSize = CGFloat(appPreferences.noteTextFontSize)
@@ -555,8 +553,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             appPreferences.noteTextBoxHeight = CGFloat(noteTextBoxHeightStepper.integerValue)
             appPreferences.noteTextColor =  noteTextColorWell.color
             appPreferences.caliperTextFontSize = caliperTextFontSizeStepper.integerValue
-
-            // TODO: add rest of preferences here, before saving preferences
 
             appPreferences.save()
 
@@ -817,7 +813,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 }
                 self.imageURL = url
                 self.clearCalibration()
-                scrollView.magnification = calipersView.horizontalCalibration.currentZoom
+                // TODO: need the Preference sensitive code here.
+                scrollView.magnification = 1.0
                 if addToRecentDocuments {
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
@@ -1053,7 +1050,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             caliper.calibration = calipersView.verticalCalibration
             caliper.textPosition = appPreferences.amplitudeCaliperTextPosition
         }
-        caliper.setInitialPositionInRect(calipersView.bounds)
+        calipersView.setInitialPosition(caliper)
         calipersView.calipers.append(caliper)
         calipersView.updateCalibration()
         calipersView.needsDisplay = true
@@ -1080,7 +1077,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         caliper.unselectedColor = appPreferences.caliperColor
         caliper.selectedColor = appPreferences.highlightColor
         caliper.color = caliper.unselectedColor
-        caliper.setInitialPositionInRect(calipersView.bounds)
+        calipersView.setInitialPosition(caliper)
         calipersView.calipers.append(caliper)
         calipersView.updateCalibration()
         calipersView.needsDisplay = true
@@ -1347,7 +1344,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             trimmedUnits = scanner.string[scanner.currentIndex...].trimmingCharacters(in: CharacterSet.whitespaces)
             value = abs(value)
             if value > 0 {
-                guard let c = calipersView.activeCaliper(), abs(c.points()) > 0 else { return }
+                guard let c = calipersView.activeCaliper(), calipersView.nonZeroPoints(c) else { return }
 
                 var calibration: Calibration
                 if c.direction == .horizontal {
@@ -1361,9 +1358,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 if !calibration.canDisplayRate {
                     calibration.displayRate = false
                 }
-                calibration.originalZoom = Double(scrollView.magnification)
-                calibration.originalCalFactor = value / Double(abs(c.points()))
-                calibration.currentZoom = calibration.originalZoom
+                calibration.magnificationAtCalibration = Double(scrollView.magnification)
+                calibration.calibrationFactorAtCalibration = value / calipersView.points(for: c)
                 calibration.calibrated = true
             }
             calipersView.needsDisplay = true
@@ -1491,7 +1487,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // calibration buttons locked during QTc and MeanRR
         // if nothing else, clear messages
         exitCalibration()
-        let resetZoom = false
         if calipersView.horizontalCalibration.calibrated ||
             calipersView.verticalCalibration.calibrated {
             // No easy animation equivalent in Cocoa
@@ -1499,14 +1494,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.horizontalCalibration.reset()
             calipersView.verticalCalibration.reset()
         }
-    }
-
-    func getCalibrationZoom() -> Double {
-        return calipersView.horizontalCalibration.currentZoom
-    }
-
-    func resetZoom() {
-        //calipersView.horizontalCalibration.
     }
 
     func toggleIntervalRate() {
@@ -1582,7 +1569,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 // get integer from the stepper
                 let divisor = numberStepper.integerValue
                 assert (divisor != 0)
-                let intervalResult = abs(c.intervalResult())
+                let intervalResult = abs(calipersView.getIntervalResult(c))
                 let meanInterval = intervalResult / Double(divisor)
                 let meanRate = c.rateResult(meanInterval)
                 let intervalUnits = c.calibration.rawUnits
@@ -1692,7 +1679,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 // get integer from the stepper
                 let divisor = qtcNumberStepper.integerValue
                 assert (divisor != 0)
-                let intervalResult = abs(c.intervalResult())
+                let intervalResult = calipersView.getIntervalResult(c)
                 let meanInterval = intervalResult / Double(divisor)
                 rrIntervalForQTc = c.intervalInSecs(meanInterval)
                 // now measure QT...
@@ -1715,7 +1702,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func doQTcResult() {
         if let c = calipersView.activeCaliper() {
-            let qt = abs(c.intervalInSecs(c.intervalResult()))
+            let qt = abs(c.intervalInSecs(calipersView.getIntervalResult(c)))
             let meanRR = abs(rrIntervalForQTc)
             
             let qtcResult: QTcResultProtocol = QTcResult()
