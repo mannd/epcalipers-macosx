@@ -27,12 +27,22 @@ extension UserDefaults {
     }
 }
 
-enum QTcFormulaPreference: Int {
+enum QTcFormulaPreference: Int, CaseIterable {
     case Bazett = 0
     case Framingham = 1
     case Hodges = 2
     case Fridericia = 3
     case all = 4
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .Bazett: return "Bazett"
+        case .Framingham: return "Framingham"
+        case .Hodges: return "Hodges"
+        case .Fridericia: return "Fridericia"
+        case .all: return "All"
+        }
+    }
 }
 
 enum Rounding: Int {

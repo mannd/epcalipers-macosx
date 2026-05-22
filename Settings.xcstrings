@@ -1,0 +1,97 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Calipers" : {
+      "comment" : "Calipers tabl for Settings view",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compas"
+          }
+        }
+      }
+    },
+    "General" : {
+      "comment" : "General tab for Settings view",
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Général"
+          }
+        }
+      }
+    },
+    "Notes" : {
+      "comment" : "Notes tab for Settings view",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes"
+          }
+        }
+      }
+    },
+    "Number of mean RR intervals" : {
+
+    },
+    "Number of mean RR intervals for QTc" : {
+
+    },
+    "PDF" : {
+      "comment" : "PDF tab for Settings view",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF"
+          }
+        }
+      }
+    },
+    "QTc formula" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formule QTc"
+          }
+        }
+      }
+    },
+    "Show prompts" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher les invites"
+          }
+        }
+      }
+    },
+    "Show sample ECG at start-up" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher un exemple d'ECG au démarrage"
+          }
+        }
+      }
+    },
+    "Transparent mode at start-up" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fênetre transparente au démarrage"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.2"
+}
