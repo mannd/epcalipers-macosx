@@ -466,6 +466,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     @IBAction func showPreferences(_ sender: AnyObject) {
+        let controller = SettingsViewController(mainWindowController: self)
+        controller.showModalWindow()
+        return;
         // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
         // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
         // Note there is an autolayout bug here, probable introduced in macOS 10.12
@@ -569,6 +572,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if transparent != appPreferences.transparency {
                 transparent = appPreferences.transparency
             }
+        }
+    }
+
+    func settingsDidChange(previousTransparency: Bool) {
+        calipersView.updateCaliperPreferences()
+        calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration,
+                                                     vertical: appPreferences.defaultVerticalCalibration)
+
+        // Updating transparency has side effects, so only route through the property when it changed.
+        if previousTransparency != appPreferences.transparency {
+            transparent = appPreferences.transparency
         }
     }
 

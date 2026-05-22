@@ -31,6 +31,7 @@
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
 		8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC11C4378A4002E0085 /* Calibration.swift */; };
 		8EAFAEF42FC0A1EB00EC583B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAFAEF32FC0A1EB00EC583B /* SettingsView.swift */; };
+		8EAFAF192FC0AE6A00EC583B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAFAF182FC0AE6A00EC583B /* SettingsViewController.swift */; };
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
 		8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE97F7523ED332F00C3FEE7 /* ToolbarItem.swift */; };
@@ -99,6 +100,7 @@
 		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
 		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
 		8EAFAEF32FC0A1EB00EC583B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8EAFAF182FC0AE6A00EC583B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8EB72C991E2154340083DE96 /* AngleCaliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleCaliper.swift; sourceTree = "<group>"; };
 		8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EP Calipers.entitlements"; sourceTree = "<group>"; };
 		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				8E3DA8191C306C1300AD9556 /* MainWindowController.swift */,
+				8EAFAF182FC0AE6A00EC583B /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,
 				8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */,
 				8EAFAEF42FC0A1EB00EC583B /* SettingsView.swift in Sources */,
+				8EAFAF192FC0AE6A00EC583B /* SettingsViewController.swift in Sources */,
 				8E6D21092524D2A600AD1D7D /* Position.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */,
