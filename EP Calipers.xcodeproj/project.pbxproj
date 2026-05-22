@@ -23,6 +23,7 @@
 		8E4E1C412A40DA4800DEBA9F /* MiniQTc in Frameworks */ = {isa = PBXBuildFile; productRef = 8E4E1C402A40DA4800DEBA9F /* MiniQTc */; };
 		8E545CA91F95A27500B1CEB0 /* QTcResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E545CA81F95A27500B1CEB0 /* QTcResult.swift */; };
 		8E5CCB692F3E43E200FB61A8 /* epcalipers-liquidglass01.icon in Resources */ = {isa = PBXBuildFile; fileRef = 8E5CCB682F3E43E200FB61A8 /* epcalipers-liquidglass01.icon */; };
+		8E6BB2B82FBE03C000C3E5C6 /* CalipersViewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BB2B72FBE03C000C3E5C6 /* CalipersViewport.swift */; };
 		8E6D21092524D2A600AD1D7D /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D21082524D2A600AD1D7D /* Position.swift */; };
 		8E7C36D01F2ED88200E5FDA8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C36CE1F2ED88200E5FDA8 /* View.xib */; };
 		8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B541823E65D2900751830 /* TouchBarIdentifiers.swift */; };
@@ -88,6 +89,7 @@
 		8E3DA81F1C30859A00AD9556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8E545CA81F95A27500B1CEB0 /* QTcResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTcResult.swift; sourceTree = "<group>"; };
 		8E5CCB682F3E43E200FB61A8 /* epcalipers-liquidglass01.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "epcalipers-liquidglass01.icon"; sourceTree = "<group>"; };
+		8E6BB2B72FBE03C000C3E5C6 /* CalipersViewport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalipersViewport.swift; sourceTree = "<group>"; };
 		8E6D21082524D2A600AD1D7D /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		8E7C36D11F2ED89000E5FDA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View.xib; sourceTree = "<group>"; };
 		8E7C36D31F2ED94F00E5FDA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/View.strings; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		8EFAE9C723E9FC6900D5EE9B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8E6BB2B72FBE03C000C3E5C6 /* CalipersViewport.swift */,
 				8E23BACA1C518CF6009E7A58 /* Preferences.swift */,
 				8EA7EFBF1C3F471F002E0085 /* Caliper.swift */,
 				8EB72C991E2154340083DE96 /* AngleCaliper.swift */,
@@ -319,7 +322,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 2650;
 				ORGANIZATIONNAME = "EP Studios";
 				TargetAttributes = {
 					8E3DA7EC1C2E264000AD9556 = {
@@ -417,6 +420,7 @@
 				8E6D21092524D2A600AD1D7D /* Position.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */,
+				8E6BB2B82FBE03C000C3E5C6 /* CalipersViewport.swift in Sources */,
 				8E8B541923E65D2900751830 /* TouchBarIdentifiers.swift in Sources */,
 				8E2282481C398B1300337695 /* CalipersView.swift in Sources */,
 			);

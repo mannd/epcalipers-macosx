@@ -37,9 +37,10 @@ class EP_CalipersTests: XCTestCase {
     
     func testBarCoord() {
         let c = Caliper()
-        XCTAssert(c.bar1Position == 0)
-        XCTAssert(c.bar2Position == 0);
-        XCTAssert(c.crossBarPosition == 0);
+        let viewport = CalipersViewport(magnification: 1.0, offset: .zero)
+        XCTAssert(c.bar1Position(in: viewport) == 0)
+        XCTAssert(c.bar2Position(in: viewport) == 0);
+        XCTAssert(c.crossBarPosition(in: viewport) == 0);
         let p = CGPoint(x: 100, y: 50);
         XCTAssert(c.barCoord(p) == 100);
         c.direction = .vertical;
@@ -71,12 +72,13 @@ class EP_CalipersTests: XCTestCase {
     
     func testCurrentHorizontalCalFactor() {
         let cal = Calibration()
-        cal.originalZoom = 1.0;
-        cal.originalCalFactor = 0.5;
-        cal.currentZoom = 1.0;
-        XCTAssert(cal.currentCalFactor() == 0.5);
-        cal.currentZoom = 2.0;
-        XCTAssert(cal.currentCalFactor() == 0.25);
+        cal.magnificationAtCalibration = 1.0;
+        cal.calibrationFactorAtCalibration = 0.5;
+        cal.calibrated = true
+        XCTAssert(cal.multiplier(currentMagnification: 1) == 0.5)
+        XCTAssert(cal.multiplier(currentMagnification: 2) == 0.25)
+        XCTAssert(cal.multiplier(currentMagnification: 0.5) == 1.0)
+        XCTAssert(cal.multiplier(currentMagnification: 0.25) == 2.0)
     }
     
     func testUnits() {
@@ -118,28 +120,27 @@ class EP_CalipersTests: XCTestCase {
         let cal = Calibration()
         cal.calibrated = true
         cal.direction = .horizontal
-        cal.offset = CGPoint(x: 100.0, y: 0.0)
-        cal.originalZoom = 1.0
-        cal.currentZoom = 1.0
-        cal.originalCalFactor = 1.0
+        cal.magnificationAtCalibration = 1.0
+        cal.calibrationFactorAtCalibration = 1.0
         cal.calibrationString = "1000 msec"
         cal.rawUnits = "msec"
+        let viewport = CalipersViewport(magnification: 1.0, offset: .zero)
         let c = Caliper()
         c.calibration = cal
-        c.bar1Position = 1000
-        c.bar2Position = 2000
-        var m = c.measurement()
+        c.setBar1Position(1000, in: viewport)
+        c.setBar2Position(2000, in: viewport)
+        var m = c.measurement(in: viewport)
         XCTAssertEqual(m, "1,000 msec")
         cal.displayRate = true
-        m = c.measurement()
+        m = c.measurement(in: viewport)
         XCTAssertEqual(m, "60 bpm")
         cal.displayRate = false
-        c.bar1Position = 2000
-        c.bar2Position = 1000
-        m = c.measurement()
+        c.setBar1Position(2000, in: viewport)
+        c.setBar2Position(1000, in: viewport)
+        m = c.measurement(in: viewport)
         XCTAssertEqual(m, "-1,000 msec")
         cal.displayRate = true
-        m = c.measurement()
+        m = c.measurement(in: viewport)
         XCTAssertEqual(m, "60 bpm")
     }
     
