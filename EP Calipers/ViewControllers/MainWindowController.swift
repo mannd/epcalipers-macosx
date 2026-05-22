@@ -889,7 +889,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 pdfRef = pdf
                 numberOfPDFPages = pdf.pageCount
                 imageIsPDF = true
-                showPDFPage(pdf, page: 0)
+                showPDFPage(pdf, page: 0, preserveRotation: false)
                 let urlPath = url.path
                 self.window?.setTitleWithRepresentedFilename(urlPath)
                 imageURL = url
@@ -913,22 +913,21 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
 
-    func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
+    func showPDFPage(_ pdf: NSPDFImageRep, page: Int, preserveRotation: Bool = true) {
         let scale = CGFloat(appPreferences.pdfRenderScale.rawValue)
+        let rotationAngle = preserveRotation ?  imageView.rotationAngle : 0.0
         pdf.currentPage = page
         var tempImage = NSImage()
         tempImage.addRepresentation(pdf)
         tempImage = scaleImage(tempImage, byFactor: scale)
         guard let image = nsImageToCGImage(tempImage) else { return }
         imageView.setImage(image, imageProperties: nil)
+        imageView.rotationAngle = appPreferences.resetImageRotationBetweenPages ? 0 : rotationAngle
         zoomImageViewToLogicalActualSize()
 
         if appPreferences.resetImageZoomBetweenPages {
             scrollView.magnification = 1.0
         }
-        //if appPreferences.resetImageRotationBetweenPages {
-            resetImageViewRotation()
-        //}
         calipersView.updateCalibration()
     }
 
