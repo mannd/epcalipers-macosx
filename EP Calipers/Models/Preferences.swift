@@ -17,7 +17,7 @@ extension UserDefaults {
         }
         return color
     }
-    
+
     func setColor(_ color: NSColor?, forKey key: String) {
         var colorData: Data?
         if let color = color {
@@ -129,12 +129,12 @@ class Preferences: ObservableObject {
     // PDF
     // NOTE: These preferences don't affect the currently loaded PFD page,
     // just subsequent pages.
-    // Default mimic current behavior of the app.
+    // Defaults roughtly mimic current behavior of the app.
     var pdfRenderScale: PdfRenderScale = .High
-    var recalibrateWhenChangingPages: Bool = true // clear calibration when changing pages
-    var resetImageZoomBetweenPages: Bool = true
-    var resetImageRotationBetweenPages: Bool = true
-    var clearCalipersBetweenPages: Bool = true  // deletes all calipers when changing pages
+    var recalibrateWhenChangingPages: Bool = false // clear calibration when changing pages
+    var resetImageZoomBetweenPages: Bool = false
+    var resetImageRotationBetweenPages: Bool = false
+    var clearCalipersBetweenPages: Bool = false  // deletes all calipers when changing pages
 
     // Preferences hidden from the user
     var lastHorizontalCalibrationDialogChoice = 0
@@ -230,7 +230,7 @@ class Preferences: ObservableObject {
         lastCustomVerticalCalibration = defaultVerticalCalibration
         lastCustomHorizontalCalibration = defaultHorizontalCalibration
     }
-    
+
     func save() {
         let preferences = UserDefaults.standard
         preferences.setColor(caliperColor, forKey: Self.caliperColorKey)
