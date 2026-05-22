@@ -30,6 +30,7 @@
 		8E8B9BC01E2ED1A0000386E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */; };
 		8EA7EFC01C3F471F002E0085 /* Caliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFBF1C3F471F002E0085 /* Caliper.swift */; };
 		8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EFC11C4378A4002E0085 /* Calibration.swift */; };
+		8EAFAEF42FC0A1EB00EC583B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAFAEF32FC0A1EB00EC583B /* SettingsView.swift */; };
 		8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB72C991E2154340083DE96 /* AngleCaliper.swift */; };
 		8ED1677E1F1C1D0200F44DF3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED167801F1C1D0200F44DF3 /* MainWindowController.xib */; };
 		8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE97F7523ED332F00C3FEE7 /* ToolbarItem.swift */; };
@@ -97,6 +98,7 @@
 		8E8B9BBF1E2ED1A0000386E7 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8EA7EFBF1C3F471F002E0085 /* Caliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caliper.swift; sourceTree = "<group>"; };
 		8EA7EFC11C4378A4002E0085 /* Calibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calibration.swift; sourceTree = "<group>"; };
+		8EAFAEF32FC0A1EB00EC583B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8EB72C991E2154340083DE96 /* AngleCaliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleCaliper.swift; sourceTree = "<group>"; };
 		8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EP Calipers.entitlements"; sourceTree = "<group>"; };
 		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		8E3DA7EF1C2E264000AD9556 /* EP Calipers */ = {
 			isa = PBXGroup;
 			children = (
+				8EAFAEF22FC09DD500EC583B /* SwiftUI */,
 				8E6D21072524D27E00AD1D7D /* Others */,
 				8EFAE9C923E9FCE000D5EE9B /* ViewControllers */,
 				8EFAE9C823E9FCA000D5EE9B /* Views */,
@@ -210,6 +213,14 @@
 				8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		8EAFAEF22FC09DD500EC583B /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				8EAFAEF32FC0A1EB00EC583B /* SettingsView.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		8EFAE9C423E9F5BD00D5EE9B /* Xib */ = {
@@ -417,6 +428,7 @@
 				8E23BACB1C518CF6009E7A58 /* Preferences.swift in Sources */,
 				8EA7EFC21C4378A4002E0085 /* Calibration.swift in Sources */,
 				8EB72C9A1E2154340083DE96 /* AngleCaliper.swift in Sources */,
+				8EAFAEF42FC0A1EB00EC583B /* SettingsView.swift in Sources */,
 				8E6D21092524D2A600AD1D7D /* Position.swift in Sources */,
 				8E3DA7F11C2E264000AD9556 /* AppDelegate.swift in Sources */,
 				8EE97F7623ED332F00C3FEE7 /* ToolbarItem.swift in Sources */,
@@ -648,7 +660,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 2.8.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -692,7 +704,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 2.8.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
