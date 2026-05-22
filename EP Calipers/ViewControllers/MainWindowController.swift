@@ -241,7 +241,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         imageView.editable = true
         imageView.doubleClickOpensImageEditPanel = false // EditPanel broken in newest macOS versions
-        imageView.zoomImageToActualSize(self)
+        //imageView.zoomImageToActualSize(self)
+        zoomImageViewToLogicalActualSize()
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeNone
         imageView.supportsDragAndDrop = false // handled by app, not by ImageKit
@@ -654,19 +655,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         case 0:
             zoomFactor = scrollView.magnification
             scrollView.magnification = zoomFactor * zoomInFactor
-
-//            zoomFactor = imageView.zoomFactor
-//            imageView.zoomFactor = zoomFactor * zoomInFactor
             calipersView.updateCalibration()
         case 1:
             zoomFactor = scrollView.magnification
             scrollView.magnification = scrollView.magnification * zoomOutFactor
-//            zoomFactor = imageView.zoomFactor
-//            imageView.zoomFactor = zoomFactor * zoomOutFactor
             calipersView.updateCalibration()
         case 2:
             scrollView.magnification = 1.0
-//            imageView.zoomImageToActualSize(self)
             calipersView.updateCalibration()
         default:
             break
@@ -804,7 +799,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             // if you are loading a large image and then try to scroll it.  Must load as below.
             if reachable, let data = NSData(contentsOf: url), let image = NSImage(data: data as Data) {
                 self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
-                self.imageView.zoomImageToActualSize(self)
+                //self.imageView.zoomImageToActualSize(self)
+                zoomImageViewToLogicalActualSize()
                 let urlPath = url.path
                 if !isSampleECG {
                     // We just use app name when showing sample ECG
@@ -813,7 +809,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 }
                 self.imageURL = url
                 self.clearCalibration()
-                // TODO: need the Preference sensitive code here.
                 scrollView.magnification = 1.0
                 if addToRecentDocuments {
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
@@ -899,6 +894,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 self.window?.setTitleWithRepresentedFilename(urlPath)
                 imageURL = url
                 clearCalibration()
+                // New PDF files reset magnification to 1.0.
+                scrollView.magnification = 1.0
                 if addToRecentDocuments {
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
@@ -917,11 +914,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
-        // TODO: this doesn't work.  calipers already cleared between pages at earlier step.
-        // TODO: what happens to notes when changing pages?
-//        if appPreferences.clearCalipersBetweenPages {
-//            calipersView.deleteAllCalipers()
-//        }
         let scale = CGFloat(appPreferences.pdfRenderScale.rawValue)
         pdf.currentPage = page
         var tempImage = NSImage()
@@ -929,12 +921,26 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         tempImage = scaleImage(tempImage, byFactor: scale)
         guard let image = nsImageToCGImage(tempImage) else { return }
         imageView.setImage(image, imageProperties: nil)
-        imageView.zoomImageToActualSize(self)
-        // keep size of image manageable by scaling down
-        imageView.zoomFactor = imageView.zoomFactor / scale
+        zoomImageViewToLogicalActualSize()
+
+        if appPreferences.resetImageZoomBetweenPages {
+            scrollView.magnification = 1.0
+        }
+        //if appPreferences.resetImageRotationBetweenPages {
+            resetImageViewRotation()
+        //}
         calipersView.updateCalibration()
     }
-    
+
+    private func zoomImageViewToLogicalActualSize() {
+        imageView.zoomImageToActualSize(self)
+
+        if imageIsPDF {
+            let scale = CGFloat(appPreferences.pdfRenderScale.rawValue)
+            imageView.zoomFactor = imageView.zoomFactor / scale
+        }
+    }
+
     // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion
     func scaleImage(_ image: NSImage, byFactor factor: CGFloat) -> NSImage {
         let newSize = NSMakeSize(image.size.width * factor, image.size.height * factor)
@@ -949,7 +955,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         scaledImage.unlockFocus()
         return scaledImage
     }
-    
+
     // convert NSImage to CGImage
     // from http://lists.apple.com/archives/cocoa-dev/2010/May/msg01171.html
     func nsImageToCGImage(_ image: NSImage) -> CGImage? {
@@ -962,7 +968,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         return imageRef
     }
-    
+
     @IBAction func previousPage(_ sender: AnyObject) {
         pdfPageNumber -= 1
         pdfPageNumber = pdfPageNumber < 0 ? 0 : pdfPageNumber
@@ -970,7 +976,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             showPDFPage(pdf, page: pdfPageNumber)
         }
     }
-    
+
     @IBAction func nextPage(_ sender: AnyObject) {
         pdfPageNumber += 1
         pdfPageNumber = pdfPageNumber >= numberOfPDFPages ? numberOfPDFPages - 1 : pdfPageNumber
@@ -978,7 +984,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             showPDFPage(pdf, page: pdfPageNumber)
         }
     }
-    
+
     @IBAction func doRotation(_ sender: AnyObject) {
         var rotationType: Int
         if sender is NSSegmentedControl {
@@ -1023,7 +1029,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func adjustImageAfterRotation() {
-        imageView.zoomImageToActualSize(self)
+        zoomImageViewToLogicalActualSize()
+//            imageView.zoomImageToActualSize(self)
         // since rotation can adjust zoom factor, must clear calibration
         clearCalibration()
     }
