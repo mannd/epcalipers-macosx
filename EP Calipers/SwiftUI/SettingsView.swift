@@ -34,7 +34,7 @@ struct SettingsView: View {
     var body: some View {
         TabView {
             Tab("General", systemImage: "gear") {
-                GeneralSettingsView()
+                GeneralSettingsView(settingsDraft: $settingsDraft)
             }
             Tab("Calipers", image: "custom-time-caliper") {
                 CaliperSettingsView()
@@ -50,9 +50,12 @@ struct SettingsView: View {
 }
 
 struct GeneralSettingsView: View {
+    @Binding var settingsDraft: SettingsDraft
+
     var body: some View {
         Form {
-            Text("Hello, World!")
+            Toggle("Start in transparent mode", isOn: $settingsDraft.transparency)
+            Toggle("Show sample ECG at start-up", isOn: $settingsDraft.showSampleECG)
         }
     }
 }
