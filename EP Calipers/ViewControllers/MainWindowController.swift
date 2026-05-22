@@ -928,6 +928,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         if appPreferences.resetImageZoomBetweenPages {
             scrollView.magnification = 1.0
         }
+        if appPreferences.clearCalipersBetweenPages {
+            calipersView.deleteAllCalipers()
+        }
+        if appPreferences.recalibrateWhenChangingPages {
+            clearCalibration()
+        }
         calipersView.updateCalibration()
     }
 
