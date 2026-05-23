@@ -469,6 +469,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let controller = SettingsViewController(mainWindowController: self)
         controller.showModalWindow()
         return;
+        // TODO: remove rest of method once new SettingsView is fully implemented
         // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
         // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
         // Note there is an autolayout bug here, probable introduced in macOS 10.12

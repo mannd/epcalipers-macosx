@@ -1,6 +1,18 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Appearance" : {
+
+    },
+    "Calibration" : {
+
+    },
+    "Caliper label font size" : {
+
+    },
+    "Caliper line width" : {
+
+    },
     "Calipers" : {
       "comment" : "Calipers tabl for Settings view",
       "localizations" : {
@@ -23,6 +35,15 @@
           }
         }
       }
+    },
+    "Labels" : {
+
+    },
+    "Marching Calipers" : {
+
+    },
+    "Measurement" : {
+
     },
     "Notes" : {
       "comment" : "Notes tab for Settings view",
@@ -62,6 +83,9 @@
         }
       }
     },
+    "Selected caliper color" : {
+
+    },
     "Show prompts" : {
       "localizations" : {
         "fr" : {
@@ -91,6 +115,9 @@
           }
         }
       }
+    },
+    "Unselected caliper color" : {
+
     }
   },
   "version" : "1.2"
