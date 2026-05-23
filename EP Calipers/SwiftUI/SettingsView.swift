@@ -13,14 +13,21 @@ struct SettingsDraft {
     var transparency: Bool
     var showSampleECG: Bool
     var showPrompts: Bool
-    var qtcFormula: QTcFormulaPreference
-    var numberOfQTcMeanRRIntervals: Int
-    var numberOfMeanRRIntervals: Int
     // Calipers tab
+    // Appearance heading
     var unselectedColor: Color
     var selectedColor: Color
     var lineWidth: Int
+    var adjustBarThicknessForZoom: Bool
+    // Measurement heading
+    var qtcFormula: QTcFormulaPreference
+    var numberOfQTcMeanRRIntervals: Int
+    var numberOfMeanRRIntervals: Int
+    var allowNegativeCaliperValues: Bool
+    // Calibration heading
+    // Labels heading
     var caliperTextFontSize: Int
+    var adjustLabelSizeForZoom: Bool
 
     // TODO: add all preferences
 
@@ -35,6 +42,9 @@ struct SettingsDraft {
         selectedColor = Color(preferences.highlightColor)
         lineWidth = preferences.lineWidth
         caliperTextFontSize = preferences.caliperTextFontSize
+        adjustBarThicknessForZoom = preferences.adjustBarThicknessForZoom
+        adjustLabelSizeForZoom = preferences.adjustLabelSizeForZoom
+        allowNegativeCaliperValues = preferences.allowNegativeCaliperValues
         // TODO: add all preferences
     }
 
@@ -48,6 +58,9 @@ struct SettingsDraft {
         preferences.highlightColor = NSColor(selectedColor)
         preferences.lineWidth = lineWidth
         preferences.caliperTextFontSize = caliperTextFontSize
+        preferences.adjustBarThicknessForZoom = adjustBarThicknessForZoom
+        preferences.adjustLabelSizeForZoom = adjustLabelSizeForZoom
+        preferences.allowNegativeCaliperValues = allowNegativeCaliperValues
         // TODO: add all preferences
     }
 
@@ -135,6 +148,9 @@ struct CaliperSettingsView: View {
                 ) {
                     Text("Caliper line width", tableName: "Settings")
                 }
+                Toggle(isOn: $settingsDraft.adjustBarThicknessForZoom) {
+                    Text("Adjust bar thickness for zoom", tableName: "Settings")
+                }
             } header: {
                 Text("Appearance", tableName: "Settings")
                     .font(Font.headline.bold())
@@ -164,6 +180,9 @@ struct CaliperSettingsView: View {
                 } label: {
                     Text("Number of mean RR intervals", tableName: "Settings")
                 }
+                Toggle(isOn: $settingsDraft.allowNegativeCaliperValues) {
+                    Text("Allow negative caliper values", tableName: "Settings")
+                }
 
             } header: {
                 Text("Measurement", tableName: "Settings")
@@ -177,12 +196,15 @@ struct CaliperSettingsView: View {
             }
             Section {
                 Picker(selection: $settingsDraft.caliperTextFontSize) {
-                    ForEach(12...42, id: \.self) {
+                    ForEach(10...36, id: \.self) {
                         Text("\($0)")
                             .tag($0)
                     }
                 } label: {
                     Text("Caliper label font size", tableName: "Settings")
+                }
+                Toggle(isOn: $settingsDraft.adjustLabelSizeForZoom) {
+                    Text("Adjust label size for zoom", tableName: "Settings")
                 }
             } header: {
                 Text("Labels", tableName: "Settings")

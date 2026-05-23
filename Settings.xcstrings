@@ -1,17 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Appearance" : {
+    "Adjust bar thickness for zoom" : {
 
+    },
+    "Adjust label size for zoom" : {
+
+    },
+    "Allow negative caliper values" : {
+
+    },
+    "Appearance" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apparence"
+          }
+        }
+      }
     },
     "Calibration" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étalonnage"
+          }
+        }
+      }
     },
     "Caliper label font size" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille de la police des compas"
+          }
+        }
+      }
     },
     "Caliper line width" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Largeur de ligne"
+          }
+        }
+      }
     },
     "Calipers" : {
       "comment" : "Calipers tabl for Settings view",
@@ -37,13 +74,34 @@
       }
     },
     "Labels" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étiquettes"
+          }
+        }
+      }
     },
     "Marching Calipers" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compas marchant"
+          }
+        }
+      }
     },
     "Measurement" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesure"
+          }
+        }
+      }
     },
     "Notes" : {
       "comment" : "Notes tab for Settings view",
@@ -57,10 +115,24 @@
       }
     },
     "Number of mean RR intervals" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre d'intervalles pour RR moyen"
+          }
+        }
+      }
     },
     "Number of mean RR intervals for QTc" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre d'intervalles RR pour QTc"
+          }
+        }
+      }
     },
     "PDF" : {
       "comment" : "PDF tab for Settings view",
@@ -84,14 +156,21 @@
       }
     },
     "Selected caliper color" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur de compas choisi"
+          }
+        }
+      }
     },
     "Show prompts" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afficher les invites"
+            "value" : "Des messages-guides"
           }
         }
       }
@@ -117,7 +196,14 @@
       }
     },
     "Unselected caliper color" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur de compas"
+          }
+        }
+      }
     }
   },
   "version" : "1.2"

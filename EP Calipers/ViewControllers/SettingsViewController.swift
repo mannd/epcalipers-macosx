@@ -30,10 +30,10 @@ final class SettingsViewController: NSViewController, NSWindowDelegate {
 
     override func loadView() {
         let rootView = NSView()
-        rootView.translatesAutoresizingMaskIntoConstraints = false
 
         let hostingView = NSHostingView(rootView: SettingsRootView(settingsStore: settingsStore))
         hostingView.translatesAutoresizingMaskIntoConstraints = false
+        hostingView.sizingOptions = []
 
         let cancelButton = NSButton(title: NSLocalizedString("Cancel", comment: ""), target: self, action: #selector(cancelSettings(_:)))
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +63,7 @@ final class SettingsViewController: NSViewController, NSWindowDelegate {
             buttonStack.bottomAnchor.constraint(equalTo: rootView.bottomAnchor, constant: -16),
 
             rootView.widthAnchor.constraint(greaterThanOrEqualToConstant: 560),
-            rootView.heightAnchor.constraint(greaterThanOrEqualToConstant: 420)
+            rootView.heightAnchor.constraint(greaterThanOrEqualToConstant: 600)
         ])
 
         view = rootView
