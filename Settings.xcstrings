@@ -10,6 +10,9 @@
     "Allow negative caliper values" : {
 
     },
+    "Amplitude calibration" : {
+
+    },
     "Amplitude caliper label position" : {
 
     },
@@ -67,6 +70,12 @@
         }
       }
     },
+    "Clear calipers between pages" : {
+
+    },
+    "Deemphasize marching componets" : {
+
+    },
     "General" : {
       "comment" : "General tab for Settings view",
       "extractionState" : "manual",
@@ -109,6 +118,18 @@
         }
       }
     },
+    "Note text box height" : {
+
+    },
+    "Note text box width" : {
+
+    },
+    "Note text color" : {
+
+    },
+    "Note text font size" : {
+
+    },
     "Notes" : {
       "comment" : "Notes tab for Settings view",
       "localizations" : {
@@ -119,6 +140,9 @@
           }
         }
       }
+    },
+    "Number of marching components" : {
+
     },
     "Number of mean RR intervals" : {
       "localizations" : {
@@ -151,6 +175,9 @@
         }
       }
     },
+    "PDF resolution" : {
+
+    },
     "QTc formula" : {
       "localizations" : {
         "fr" : {
@@ -160,6 +187,15 @@
           }
         }
       }
+    },
+    "Recalibrate calipers between pages" : {
+
+    },
+    "Reset image rotation between pages" : {
+
+    },
+    "Reset image zoom between pages" : {
+
     },
     "Round msec and rate" : {
       "localizations" : {
@@ -192,6 +228,9 @@
         }
       }
     },
+    "Show Brugada triangle" : {
+
+    },
     "Show prompts" : {
       "localizations" : {
         "fr" : {
@@ -211,6 +250,9 @@
           }
         }
       }
+    },
+    "Time calibration" : {
+
     },
     "Time caliper label position" : {
 

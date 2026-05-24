@@ -25,13 +25,30 @@ struct SettingsDraft {
     var numberOfQTcMeanRRIntervals: Int
     var numberOfMeanRRIntervals: Int
     var allowNegativeCaliperValues: Bool
+    var showBrugadaTriangle: Bool
     // Calibration heading
+    var timeCalibration: String
+    var amplitudeCalibration: String
     // Labels heading
     var caliperTextFontSize: Int
     var autoPositionText: Bool
     var adjustLabelSizeForZoom: Bool
     var timeCaliperTextPosition: TextPosition
     var amplitudeCaliperTextPosition: TextPosition
+    // Marching calipers heading
+    var deemphasizeMarchingComponents: Bool
+    var numberOfMarchingComponents: Int
+    // Notes tab
+    var noteTextFontSize: Int
+    var noteTextColor: Color
+    var noteTextBoxWidth: Int
+    var noteTextBoxHeight: Int
+    // PDF tab
+    var pdfRenderScale: PdfRenderScale
+    var recalibrateWhenChangingPages: Bool
+    var resetImageZoomBetweenPages: Bool
+    var resetImageRotationBetweenPages: Bool
+    var clearCalipersBetweenPages: Bool
 
     init(_ preferences: Preferences) {
         transparency = preferences.transparency
@@ -51,7 +68,20 @@ struct SettingsDraft {
         autoPositionText = preferences.autoPositionText
         timeCaliperTextPosition = preferences.timeCaliperTextPosition
         amplitudeCaliperTextPosition = preferences.amplitudeCaliperTextPosition
-        // TODO: add all preferences
+        timeCalibration = preferences.defaultHorizontalCalibration
+        amplitudeCalibration = preferences.defaultVerticalCalibration
+        deemphasizeMarchingComponents = preferences.deemphasizeMarchingComponents
+        numberOfMarchingComponents = preferences.numberOfMarchingComponents
+        showBrugadaTriangle = preferences.showBrugadaTriangle
+        noteTextFontSize = preferences.noteTextFontSize
+        noteTextColor = Color(preferences.noteTextColor)
+        noteTextBoxWidth = Int(preferences.noteTextBoxWidth)
+        noteTextBoxHeight = Int(preferences.noteTextBoxHeight)
+        pdfRenderScale = preferences.pdfRenderScale
+        recalibrateWhenChangingPages = preferences.recalibrateWhenChangingPages
+        resetImageZoomBetweenPages = preferences.resetImageZoomBetweenPages
+        resetImageRotationBetweenPages = preferences.resetImageRotationBetweenPages
+        clearCalipersBetweenPages = preferences.clearCalipersBetweenPages
     }
 
     func apply(to preferences: Preferences) {
@@ -71,9 +101,21 @@ struct SettingsDraft {
         preferences.autoPositionText = autoPositionText
         preferences.timeCaliperTextPosition = timeCaliperTextPosition
         preferences.amplitudeCaliperTextPosition = amplitudeCaliperTextPosition
+        preferences.defaultHorizontalCalibration = timeCalibration
+        preferences.defaultVerticalCalibration = amplitudeCalibration
+        preferences.deemphasizeMarchingComponents = deemphasizeMarchingComponents
+        preferences.numberOfMarchingComponents = numberOfMarchingComponents
+        preferences.showBrugadaTriangle = showBrugadaTriangle
+        preferences.noteTextFontSize = noteTextFontSize
+        preferences.noteTextColor = NSColor(noteTextColor)
+        preferences.noteTextBoxWidth = CGFloat(noteTextBoxWidth)
+        preferences.noteTextBoxHeight = CGFloat(noteTextBoxHeight)
+        preferences.pdfRenderScale = pdfRenderScale
+        preferences.clearCalipersBetweenPages = clearCalipersBetweenPages
+        preferences.recalibrateWhenChangingPages = recalibrateWhenChangingPages
+        preferences.resetImageZoomBetweenPages = resetImageZoomBetweenPages
+        preferences.resetImageRotationBetweenPages = resetImageRotationBetweenPages
     }
-
-
 }
 
 struct SettingsView: View {
@@ -97,7 +139,7 @@ struct SettingsView: View {
                         Image("custom-time-caliper")
                     }
                 }
-            NoteSettingsView()
+            NoteSettingsView(settingsDraft: $settingsDraft)
                 .tabItem {
                     Label {
                         Text("Notes", tableName: "Settings")
@@ -105,7 +147,7 @@ struct SettingsView: View {
                         Image(systemName: "pencil.and.list.clipboard")
                     }
                 }
-            PdfSettingsView()
+            PdfSettingsView(settingsDraft: $settingsDraft)
                 .tabItem {
                     Label {
                         Text("PDF", tableName: "Settings")
@@ -160,6 +202,9 @@ struct CaliperSettingsView: View {
                 Toggle(isOn: $settingsDraft.adjustBarThicknessForZoom) {
                     Text("Adjust bar thickness for zoom", tableName: "Settings")
                 }
+                Toggle(isOn: $settingsDraft.showBrugadaTriangle) {
+                    Text("Show Brugada triangle", tableName: "Settings")
+                }
             } header: {
                 Text("Appearance", tableName: "Settings")
                     .font(Font.headline.bold())
@@ -205,6 +250,12 @@ struct CaliperSettingsView: View {
                     .font(Font.headline.bold())
             }
             Section {
+                TextField(text: $settingsDraft.timeCalibration) {
+                    Text("Time calibration", tableName: "Settings")
+                }
+                TextField(text: $settingsDraft.amplitudeCalibration) {
+                    Text("Amplitude calibration", tableName: "Settings")
+                }
 
             } header: {
                 Text("Calibration", tableName: "Settings")
@@ -246,27 +297,88 @@ struct CaliperSettingsView: View {
                     .font(Font.headline.bold())
             }
             Section {
+                Toggle(isOn: $settingsDraft.deemphasizeMarchingComponents) {
+                    Text("Deemphasize marching componets", tableName:    "Settings")
+                }
 
             } header: {
                 Text("Marching Calipers", tableName: "Settings")
                     .font(Font.headline.bold())
+            }
+            Picker(selection: $settingsDraft.numberOfMarchingComponents) {
+                ForEach(1...20, id: \.self) {
+                    Text("\($0)")
+                        .tag($0)
+                }
+            } label: {
+                Text("Number of marching components", tableName: "Settings")
             }
         }
     }
 }
 
 struct NoteSettingsView: View {
+    @Binding var settingsDraft: SettingsDraft
+
     var body: some View {
         Form {
-            Text("Hello, World!")
+            Picker(selection: $settingsDraft.noteTextFontSize) {
+                ForEach(10...36, id: \.self) {
+                    Text("\($0)")
+                        .tag($0)
+                }
+            } label: {
+                Text("Note text font size", tableName: "Settings")
+            }
+            ColorPicker(selection: $settingsDraft.noteTextColor) {
+                Text("Note text color", tableName: "Settings")
+            }
+            Picker(selection: $settingsDraft.noteTextBoxWidth) {
+                ForEach(40...500, id: \.self) {
+                    Text("\($0)")
+                        .tag($0)
+                }
+            } label: {
+                Text("Note text box width", tableName: "Settings")
+            }
+            Picker(selection: $settingsDraft.noteTextBoxHeight) {
+                ForEach(20...300, id: \.self) {
+                    Text("\($0)")
+                        .tag($0)
+                }
+            } label: {
+                Text("Note text box height", tableName: "Settings")
+            }
+
         }
     }
 }
 
 struct PdfSettingsView: View {
+    @Binding var settingsDraft: SettingsDraft
+
     var body: some View {
         Form {
-            Text("Hello, World!")
+            Picker(selection: $settingsDraft.pdfRenderScale) {
+                ForEach(PdfRenderScale.allCases, id: \.self) { scale in
+                    Text(scale.localizedTitle)
+                        .tag(scale)
+                }
+            } label: {
+                Text("PDF resolution", tableName: "Settings")
+            }
+            Toggle(isOn: $settingsDraft.clearCalipersBetweenPages) {
+                Text("Clear calipers between pages", tableName: "Settings")
+            }
+            Toggle(isOn: $settingsDraft.recalibrateWhenChangingPages) {
+                Text("Recalibrate calipers between pages", tableName: "Settings")
+            }
+            Toggle(isOn: $settingsDraft.resetImageZoomBetweenPages) {
+                Text("Reset image zoom between pages", tableName: "Settings")
+            }
+            Toggle(isOn: $settingsDraft.resetImageRotationBetweenPages) {
+                Text("Reset image rotation between pages", tableName: "Settings")
+            }
         }
     }
 }
@@ -274,5 +386,5 @@ struct PdfSettingsView: View {
 #Preview {
     SettingsView(settingsDraft: .constant(SettingsDraft(Preferences.shared)))
         .padding(20)
-        .frame(width: 560, height: 600)
+        .frame(width: 600, height: 760)
 }

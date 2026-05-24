@@ -62,8 +62,8 @@ final class SettingsViewController: NSViewController, NSWindowDelegate {
             buttonStack.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
             buttonStack.bottomAnchor.constraint(equalTo: rootView.bottomAnchor, constant: -16),
 
-            rootView.widthAnchor.constraint(greaterThanOrEqualToConstant: 560),
-            rootView.heightAnchor.constraint(greaterThanOrEqualToConstant: 600)
+            rootView.widthAnchor.constraint(greaterThanOrEqualToConstant: 600),
+            rootView.heightAnchor.constraint(greaterThanOrEqualToConstant: 760)
         ])
 
         view = rootView

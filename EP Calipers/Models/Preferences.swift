@@ -64,10 +64,18 @@ enum Rounding: Int, CaseIterable {
 }
 
 // Affects PDF resolution
-enum PdfRenderScale: Int {
+enum PdfRenderScale: Int, CaseIterable {
     case Low = 1
     case Medium = 2
     case High = 4
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .Low: return "Low resolution"
+        case .Medium: return "Medium resolution"
+        case .High: return "High resolution"
+        }
+    }
 }
 
 /// This class holds all the preferences, aka settings for the app.
@@ -99,10 +107,6 @@ class Preferences: ObservableObject {
     static let noteTextBoxWidthKey = "noteTextBoxWidthKey"
     static let noteTextBoxHeightKey = "noteTextBoxHeightKey"
     static let caliperTextFontSizeKey = "caliperTextFontSizeKey"
-    static let lastHorizontalCalibrationKey = "lastHorizontalCalibrationKey"
-    static let lastVerticalCalibrationKey = "lastVerticalCalibrationKey"
-    static let lastCustomHorizontalCalibrationKey = "lastCustomHorizontalCalibrationKey"
-    static let lastCustomVerticalCalibrationKey = "lastCustomVerticalCalibrationKey"
 
     // New preferences to be feature complete compared with
     // EP Calipers 3 for Windows
@@ -117,6 +121,12 @@ class Preferences: ObservableObject {
     static let resetImageZoomBetweenPagesKey = "resetImageZoomBetweenPagesKey"
     static let resetImageRotationBetweenPagesKey = "resetImageRotationBetweenPagesKey"
     static let clearCalipersBetweenPagesKey = "clearCalibrationBetweenPagesKey"
+
+    // Preferences hidden from user
+    static let lastHorizontalCalibrationKey = "lastHorizontalCalibrationKey"
+    static let lastVerticalCalibrationKey = "lastVerticalCalibrationKey"
+    static let lastCustomHorizontalCalibrationKey = "lastCustomHorizontalCalibrationKey"
+    static let lastCustomVerticalCalibrationKey = "lastCustomVerticalCalibrationKey"
 
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
