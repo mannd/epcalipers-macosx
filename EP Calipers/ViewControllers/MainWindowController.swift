@@ -9,6 +9,7 @@
 import Cocoa
 import Quartz
 import AppKit
+import UniformTypeIdentifiers
 
 protocol QTcResultProtocol {
     func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormulaPreference,
@@ -234,8 +235,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     override func awakeFromNib() {
         print("awakeFromNib")
         // 2 lines below added for Swift 
-        let NSURLPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeURL as String)
-        let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String)
+        let NSURLPboardType = NSPasteboard.PasteboardType(rawValue: UTType.url.identifier)
+        let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: UTType.item.identifier)
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboard.PasteboardType.tiff]
         self.window?.registerForDraggedTypes(types)
 
@@ -465,6 +466,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
 
     @IBAction func showPreferences(_ sender: AnyObject) {
+        let controller = SettingsViewController(mainWindowController: self)
+        controller.showModalWindow()
+        return;
+        // TODO: remove rest of method once new SettingsView is fully implemented
         // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
         // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
         // Note there is an autolayout bug here, probable introduced in macOS 10.12
@@ -568,6 +573,17 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             if transparent != appPreferences.transparency {
                 transparent = appPreferences.transparency
             }
+        }
+    }
+
+    func settingsDidChange(previousTransparency: Bool) {
+        calipersView.updateCaliperPreferences()
+        calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration,
+                                                     vertical: appPreferences.defaultVerticalCalibration)
+
+        // Updating transparency has side effects, so only route through the property when it changed.
+        if previousTransparency != appPreferences.transparency {
+            transparent = appPreferences.transparency
         }
     }
 
@@ -702,7 +718,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         /* Present open panel. */
         guard let window = self.window else { return }
         let openPanel = NSOpenPanel()
-        openPanel.allowedFileTypes = validFileExtensions()
+        openPanel.allowedContentTypes = validFileContentTypes()
         openPanel.canSelectHiddenExtension = true
         openPanel.beginSheetModal(for: window,
             completionHandler: {
@@ -717,6 +733,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func validFileExtensions() -> [String] {
         let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/bmp/BMP/pdf/PDF"
         return extensions.components(separatedBy: "/")
+    }
+
+    func validFileContentTypes() -> [UTType] {
+        validFileExtensions().compactMap { UTType(filenameExtension: $0) }
     }
     
     func openURL(_ url: URL?, addToRecentDocuments: Bool) {
@@ -847,7 +867,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
 
         let savePanel = NSSavePanel()
-        savePanel.allowedFileTypes = ["png"]
+        savePanel.allowedContentTypes = [.png]
         savePanel.canCreateDirectories = true
         savePanel.canSelectHiddenExtension = true
         savePanel.isExtensionHidden = false

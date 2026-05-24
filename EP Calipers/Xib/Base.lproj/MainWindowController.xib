@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -184,7 +183,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="360" height="139"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-mg-GQi">
+                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-mg-GQi">
                         <rect key="frame" x="18" y="102" width="324" height="17"/>
                         <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="0Nj-hp-8mI">
                             <font key="font" metaFont="menu" size="14"/>
@@ -199,7 +198,7 @@
                     <constraint firstItem="Muj-mg-GQi" firstAttribute="leading" secondItem="sz9-UB-bmo" secondAttribute="leading" constant="20" symbolic="YES" id="Vg8-99-5yx"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="338" y="53"/>
+            <point key="canvasLocation" x="403" y="-31"/>
         </window>
     </objects>
     <resources>

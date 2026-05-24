@@ -516,8 +516,8 @@ class Caliper: NSObject {
                 format = roundToTenthsString
             case .ToHundredths:
                 format = roundToHundredthsString
-            case .None:
-                format = noRoundingString
+            //case .None:  // uncomment only for debugging
+            //    format = noRoundingString
             }
             if (rounding == .ToInteger) {
                 s = NSString.localizedStringWithFormat(format, Int(round(calibratedResult(in: viewport))), calibration.units) as String

@@ -224,8 +224,8 @@ class AngleCaliper: Caliper {
                 format = roundToTenthsString
             case .ToHundredths:
                 format = roundToHundredthsString
-            case .None:
-                format = noRoundingString
+            //case .None: // only uncomment for debugging
+            //    format = noRoundingString
             }
             if rounding == .ToInteger {
                 s = NSString.localizedStringWithFormat(format, Int(calibratedBaseResult(lengthInPoints, viewport: viewport)), calibration.rawUnits) as String

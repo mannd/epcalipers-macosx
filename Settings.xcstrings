@@ -1,0 +1,286 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Adjust bar thickness for zoom" : {
+
+    },
+    "Adjust label size for zoom" : {
+
+    },
+    "Allow negative caliper values" : {
+
+    },
+    "Amplitude calibration" : {
+
+    },
+    "Amplitude caliper label position" : {
+
+    },
+    "Appearance" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apparence"
+          }
+        }
+      }
+    },
+    "Auto-position labels" : {
+
+    },
+    "Calibration" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étalonnage"
+          }
+        }
+      }
+    },
+    "Caliper label font size" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille de la police des compas"
+          }
+        }
+      }
+    },
+    "Caliper line width" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Largeur de ligne"
+          }
+        }
+      }
+    },
+    "Calipers" : {
+      "comment" : "Calipers tabl for Settings view",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compas"
+          }
+        }
+      }
+    },
+    "Clear calipers between pages" : {
+
+    },
+    "Dim marching componets" : {
+
+    },
+    "General" : {
+      "comment" : "General tab for Settings view",
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Général"
+          }
+        }
+      }
+    },
+    "Labels" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étiquettes"
+          }
+        }
+      }
+    },
+    "Marching Calipers" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compas marchant"
+          }
+        }
+      }
+    },
+    "Measurement" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesure"
+          }
+        }
+      }
+    },
+    "Note text box height" : {
+
+    },
+    "Note text box width" : {
+
+    },
+    "Note text color" : {
+
+    },
+    "Note text font size" : {
+
+    },
+    "Notes" : {
+      "comment" : "Notes tab for Settings view",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes"
+          }
+        }
+      }
+    },
+    "Number of marching components" : {
+
+    },
+    "Number of mean RR intervals" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre d'intervalles pour RR moyen"
+          }
+        }
+      }
+    },
+    "Number of mean RR intervals for QTc" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre d'intervalles RR pour QTc"
+          }
+        }
+      }
+    },
+    "PDF" : {
+      "comment" : "PDF tab for Settings view",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF"
+          }
+        }
+      }
+    },
+    "PDF resolution" : {
+
+    },
+    "QTc formula" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formule QTc"
+          }
+        }
+      }
+    },
+    "Recalibrate calipers between pages" : {
+
+    },
+    "Reset image rotation between pages" : {
+
+    },
+    "Reset image zoom between pages" : {
+
+    },
+    "Round measurements" : {
+
+    },
+    "Round msec and rate" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrondir msec et bpm"
+          }
+        }
+      }
+    },
+    "Rounding" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrondir msec et bpm"
+          }
+        }
+      }
+    },
+    "Selected caliper color" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur de compas choisi"
+          }
+        }
+      }
+    },
+    "Show Brugada triangle" : {
+
+    },
+    "Show prompts" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des messages-guides"
+          }
+        }
+      }
+    },
+    "Show sample ECG at start-up" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher un exemple d'ECG au démarrage"
+          }
+        }
+      }
+    },
+    "Time calibration" : {
+
+    },
+    "Time caliper label position" : {
+
+    },
+    "Transparent mode at start-up" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fênetre transparente au démarrage"
+          }
+        }
+      }
+    },
+    "Unselected caliper color" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur de compas"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.2"
+}

@@ -27,27 +27,55 @@ extension UserDefaults {
     }
 }
 
-enum QTcFormulaPreference: Int {
+enum QTcFormulaPreference: Int, CaseIterable {
     case Bazett = 0
     case Framingham = 1
     case Hodges = 2
     case Fridericia = 3
     case all = 4
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .Bazett: return "Bazett"
+        case .Framingham: return "Framingham"
+        case .Hodges: return "Hodges"
+        case .Fridericia: return "Fridericia"
+        case .all: return "All"
+        }
+    }
 }
 
-enum Rounding: Int {
+enum Rounding: Int, CaseIterable {
     case ToInteger = 0 // 123 msec
     case ToFourPlaces = 1 // 12.34 msec 123.4 msec
     case ToTenths = 2 // 123.4 msec 12.3 msec
     case ToHundredths = 3 // 123.45 msec 12.34 msec
-    case None = 4 // for debugging only 123.456789 msec
+    //case None = 4 // for debugging only 123.456789 msec
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .ToInteger: return "To integer"
+        case .ToFourPlaces: return "To 4 digits"
+        case .ToTenths: return "To tenths"
+        case .ToHundredths: return "To hundredths"
+        //case .None: return "None"
+        }
+    }
 }
 
 // Affects PDF resolution
-enum PdfRenderScale: Int {
+enum PdfRenderScale: Int, CaseIterable {
     case Low = 1
     case Medium = 2
     case High = 4
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .Low: return "Low resolution"
+        case .Medium: return "Medium resolution"
+        case .High: return "High resolution"
+        }
+    }
 }
 
 /// This class holds all the preferences, aka settings for the app.
@@ -79,10 +107,6 @@ class Preferences: ObservableObject {
     static let noteTextBoxWidthKey = "noteTextBoxWidthKey"
     static let noteTextBoxHeightKey = "noteTextBoxHeightKey"
     static let caliperTextFontSizeKey = "caliperTextFontSizeKey"
-    static let lastHorizontalCalibrationKey = "lastHorizontalCalibrationKey"
-    static let lastVerticalCalibrationKey = "lastVerticalCalibrationKey"
-    static let lastCustomHorizontalCalibrationKey = "lastCustomHorizontalCalibrationKey"
-    static let lastCustomVerticalCalibrationKey = "lastCustomVerticalCalibrationKey"
 
     // New preferences to be feature complete compared with
     // EP Calipers 3 for Windows
@@ -97,6 +121,12 @@ class Preferences: ObservableObject {
     static let resetImageZoomBetweenPagesKey = "resetImageZoomBetweenPagesKey"
     static let resetImageRotationBetweenPagesKey = "resetImageRotationBetweenPagesKey"
     static let clearCalipersBetweenPagesKey = "clearCalibrationBetweenPagesKey"
+
+    // Preferences hidden from user
+    static let lastHorizontalCalibrationKey = "lastHorizontalCalibrationKey"
+    static let lastVerticalCalibrationKey = "lastVerticalCalibrationKey"
+    static let lastCustomHorizontalCalibrationKey = "lastCustomHorizontalCalibrationKey"
+    static let lastCustomVerticalCalibrationKey = "lastCustomVerticalCalibrationKey"
 
     var caliperColor: NSColor = NSColor.systemBlue
     var highlightColor: NSColor = NSColor.systemRed
