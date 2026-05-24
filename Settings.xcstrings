@@ -26,7 +26,7 @@
         }
       }
     },
-    "Auto-position Text" : {
+    "Auto-position labels" : {
 
     },
     "Calibration" : {
@@ -73,7 +73,7 @@
     "Clear calipers between pages" : {
 
     },
-    "Deemphasize marching componets" : {
+    "Dim marching componets" : {
 
     },
     "General" : {
@@ -197,7 +197,11 @@
     "Reset image zoom between pages" : {
 
     },
+    "Round measurements" : {
+
+    },
     "Round msec and rate" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {

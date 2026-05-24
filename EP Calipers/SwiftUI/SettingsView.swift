@@ -164,154 +164,157 @@ struct GeneralSettingsView: View {
 
     var body: some View {
         Form {
-            Toggle(isOn: $settingsDraft.transparency) {
-                Text("Transparent mode at start-up", tableName: "Settings")
-            }
-            Toggle(isOn: $settingsDraft.showSampleECG) {
-                Text("Show sample ECG at start-up", tableName: "Settings")
-            }
-            Toggle(isOn: $settingsDraft.showPrompts) {
-                Text("Show prompts", tableName: "Settings")
+
+                Toggle(isOn: $settingsDraft.transparency) {
+                    Text("Transparent mode at start-up", tableName: "Settings")
+                }
+                Toggle(isOn: $settingsDraft.showSampleECG) {
+                    Text("Show sample ECG at start-up", tableName: "Settings")
+                }
+                Toggle(isOn: $settingsDraft.showPrompts) {
+                    Text("Show prompts", tableName: "Settings")
+                }
             }
         }
-    }
 }
 
 struct CaliperSettingsView: View {
     @Binding var settingsDraft: SettingsDraft
 
     var body: some View {
-        Form {
-            Section {
-                ColorPicker(selection: $settingsDraft.unselectedColor) {
-                    Text("Unselected caliper color", tableName: "Settings")
-                }
-                ColorPicker(selection: $settingsDraft.selectedColor) {
-                    Text("Selected caliper color", tableName: "Settings")
-                }
-                Slider(
-                    value: Binding(
-                        get: { Double(settingsDraft.lineWidth) },
-                        set: { settingsDraft.lineWidth = Int($0.rounded()) }
-                    ),
-                    in: 1...10,
-                    step: 1
-                ) {
-                    Text("Caliper line width", tableName: "Settings")
-                }
-                Toggle(isOn: $settingsDraft.adjustBarThicknessForZoom) {
-                    Text("Adjust bar thickness for zoom", tableName: "Settings")
-                }
-                Toggle(isOn: $settingsDraft.showBrugadaTriangle) {
-                    Text("Show Brugada triangle", tableName: "Settings")
-                }
-            } header: {
-                Text("Appearance", tableName: "Settings")
-                    .font(Font.headline.bold())
-            }
-            Section {
-                Picker(selection: $settingsDraft.rounding) {
-                    ForEach(Rounding.allCases, id: \.self) {
-                        value in Text(value.localizedTitle).tag(value)
+        ScrollView {
+            Form {
+                Section {
+                    ColorPicker(selection: $settingsDraft.unselectedColor) {
+                        Text("Unselected caliper color", tableName: "Settings")
                     }
-                } label: {
-                    Text("Round msec and rate", tableName: "Settings")
-                }
-                Picker(selection: $settingsDraft.qtcFormula) {
-                    ForEach(QTcFormulaPreference.allCases, id: \.self) { formula in
-                        Text(formula.localizedTitle)
-                            .tag(formula)
+                    ColorPicker(selection: $settingsDraft.selectedColor) {
+                        Text("Selected caliper color", tableName: "Settings")
                     }
-                } label: {
-                    Text("QTc formula", tableName: "Settings")
-                }
-                Picker(selection: $settingsDraft.numberOfQTcMeanRRIntervals) {
-                    ForEach(1...10, id: \.self) {
-                        Text("\($0)")
-                            .tag($0)
+                    Slider(
+                        value: Binding(
+                            get: { Double(settingsDraft.lineWidth) },
+                            set: { settingsDraft.lineWidth = Int($0.rounded()) }
+                        ),
+                        in: 1...10,
+                        step: 1
+                    ) {
+                        Text("Caliper line width", tableName: "Settings")
+                    }.frame(width: 350)
+                    Toggle(isOn: $settingsDraft.adjustBarThicknessForZoom) {
+                        Text("Adjust bar thickness for zoom", tableName: "Settings")
                     }
-                } label: {
-                    Text("Number of mean RR intervals for QTc", tableName: "Settings")
-                }
-                Picker(selection: $settingsDraft.numberOfMeanRRIntervals) {
-                    ForEach(1...10, id: \.self) {
-                        Text("\($0)")
-                            .tag($0)
+                    Toggle(isOn: $settingsDraft.showBrugadaTriangle) {
+                        Text("Show Brugada triangle", tableName: "Settings")
                     }
-                } label: {
-                    Text("Number of mean RR intervals", tableName: "Settings")
-                }
-                Toggle(isOn: $settingsDraft.allowNegativeCaliperValues) {
-                    Text("Allow negative caliper values", tableName: "Settings")
-                }
+                } header: {
+                    Text("Appearance", tableName: "Settings")
+                        .font(.title)
 
-            } header: {
-                Text("Measurement", tableName: "Settings")
-                    .font(Font.headline.bold())
-            }
-            Section {
-                TextField(text: $settingsDraft.timeCalibration) {
-                    Text("Time calibration", tableName: "Settings")
                 }
-                TextField(text: $settingsDraft.amplitudeCalibration) {
-                    Text("Amplitude calibration", tableName: "Settings")
-                }
-
-            } header: {
-                Text("Calibration", tableName: "Settings")
-                    .font(Font.headline.bold())
-            }
-            Section {
-                Picker(selection: $settingsDraft.caliperTextFontSize) {
-                    ForEach(10...36, id: \.self) {
-                        Text("\($0)")
-                            .tag($0)
+                Section {
+                    Picker(selection: $settingsDraft.rounding) {
+                        ForEach(Rounding.allCases, id: \.self) {
+                            value in Text(value.localizedTitle).tag(value)
+                        }
+                    } label: {
+                        Text("Round measurements", tableName: "Settings")
                     }
-                } label: {
-                    Text("Caliper label font size", tableName: "Settings")
+                    Picker(selection: $settingsDraft.qtcFormula) {
+                        ForEach(QTcFormulaPreference.allCases, id: \.self) { formula in
+                            Text(formula.localizedTitle)
+                                .tag(formula)
+                        }
+                    } label: {
+                        Text("QTc formula", tableName: "Settings")
+                    }
+                    Picker(selection: $settingsDraft.numberOfQTcMeanRRIntervals) {
+                        ForEach(1...10, id: \.self) {
+                            Text("\($0)")
+                                .tag($0)
+                        }
+                    } label: {
+                        Text("Number of mean RR intervals for QTc", tableName: "Settings")
+                    }
+                    Picker(selection: $settingsDraft.numberOfMeanRRIntervals) {
+                        ForEach(1...10, id: \.self) {
+                            Text("\($0)")
+                                .tag($0)
+                        }
+                    } label: {
+                        Text("Number of mean RR intervals", tableName: "Settings")
+                    }
+                    Toggle(isOn: $settingsDraft.allowNegativeCaliperValues) {
+                        Text("Allow negative caliper values", tableName: "Settings")
+                    }
+                    
+                } header: {
+                    Text("Measurement", tableName: "Settings")
+                        .font(.title)
                 }
-                Toggle(isOn: $settingsDraft.autoPositionText) {
-                    Text("Auto-position Text", tableName: "Settings")
+                Section {
+                    TextField(text: $settingsDraft.timeCalibration) {
+                        Text("Time calibration", tableName: "Settings")
+                    }
+                    TextField(text: $settingsDraft.amplitudeCalibration) {
+                        Text("Amplitude calibration", tableName: "Settings")
+                    }
+                    
+                } header: {
+                    Text("Calibration", tableName: "Settings")
+                        .font(.title)
                 }
-                Toggle(isOn: $settingsDraft.adjustLabelSizeForZoom) {
-                    Text("Adjust label size for zoom", tableName: "Settings")
+                Section {
+                    Picker(selection: $settingsDraft.caliperTextFontSize) {
+                        ForEach(10...36, id: \.self) {
+                            Text("\($0)")
+                                .tag($0)
+                        }
+                    } label: {
+                        Text("Caliper label font size", tableName: "Settings")
+                    }
+                    Toggle(isOn: $settingsDraft.autoPositionText) {
+                        Text("Auto-position labels", tableName: "Settings")
+                    }
+                    Toggle(isOn: $settingsDraft.adjustLabelSizeForZoom) {
+                        Text("Adjust label size for zoom", tableName: "Settings")
+                    }
+                    Picker(selection: $settingsDraft.timeCaliperTextPosition) {
+                        Text("Center above").tag(TextPosition.centerAbove)
+                        Text("Center below").tag (TextPosition.centerBelow)
+                        Text("Left").tag(TextPosition.left)
+                        Text("Right").tag(TextPosition.right)
+                    } label: {
+                        Text("Time caliper label position", tableName: "Settings")
+                    }
+                    Picker(selection: $settingsDraft.amplitudeCaliperTextPosition) {
+                        Text("Left").tag(TextPosition.left)
+                        Text("Right").tag(TextPosition.right)
+                        Text("Top").tag(TextPosition.top)
+                        Text("Bottom").tag(TextPosition.bottom)
+                    } label: {
+                        Text("Amplitude caliper label position", tableName: "Settings")
+                    }
+                } header: {
+                    Text("Labels", tableName: "Settings")
+                        .font(.title)
                 }
-                Picker(selection: $settingsDraft.timeCaliperTextPosition) {
-                    Text("Center above").tag(TextPosition.centerAbove)
-                    Text("Center below").tag (TextPosition.centerBelow)
-                    Text("Left").tag(TextPosition.left)
-                    Text("Right").tag(TextPosition.right)
-                } label: {
-                    Text("Time caliper label position", tableName: "Settings")
+                Section {
+                    Toggle(isOn: $settingsDraft.deemphasizeMarchingComponents) {
+                        Text("Dim marching componets", tableName:    "Settings")
+                    }
+                    Picker(selection: $settingsDraft.numberOfMarchingComponents) {
+                        ForEach(1...20, id: \.self) {
+                            Text("\($0)")
+                                .tag($0)
+                        }
+                    } label: {
+                        Text("Number of marching components", tableName: "Settings")
+                    }
+                } header: {
+                    Text("Marching Calipers", tableName: "Settings")
+                        .font(.title)
                 }
-                Picker(selection: $settingsDraft.amplitudeCaliperTextPosition) {
-                    Text("Left").tag(TextPosition.left)
-                    Text("Right").tag(TextPosition.right)
-                    Text("Top").tag(TextPosition.top)
-                    Text("Bottom").tag(TextPosition.bottom)
-                } label: {
-                    Text("Amplitude caliper label position", tableName: "Settings")
-                }
-            } header: {
-                Text("Labels", tableName: "Settings")
-                    .font(Font.headline.bold())
-            }
-            Section {
-                Toggle(isOn: $settingsDraft.deemphasizeMarchingComponents) {
-                    Text("Deemphasize marching componets", tableName:    "Settings")
-                }
-
-            } header: {
-                Text("Marching Calipers", tableName: "Settings")
-                    .font(Font.headline.bold())
-            }
-            Picker(selection: $settingsDraft.numberOfMarchingComponents) {
-                ForEach(1...20, id: \.self) {
-                    Text("\($0)")
-                        .tag($0)
-                }
-            } label: {
-                Text("Number of marching components", tableName: "Settings")
             }
         }
     }
@@ -386,5 +389,5 @@ struct PdfSettingsView: View {
 #Preview {
     SettingsView(settingsDraft: .constant(SettingsDraft(Preferences.shared)))
         .padding(20)
-        .frame(width: 600, height: 760)
+        .frame(width: 650, height: 460)
 }
