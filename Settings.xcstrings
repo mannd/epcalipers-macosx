@@ -10,6 +10,9 @@
     "Allow negative caliper values" : {
 
     },
+    "Amplitude caliper label position" : {
+
+    },
     "Appearance" : {
       "localizations" : {
         "fr" : {
@@ -19,6 +22,9 @@
           }
         }
       }
+    },
+    "Auto-position Text" : {
+
     },
     "Calibration" : {
       "localizations" : {
@@ -155,6 +161,27 @@
         }
       }
     },
+    "Round msec and rate" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrondir msec et bpm"
+          }
+        }
+      }
+    },
+    "Rounding" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrondir msec et bpm"
+          }
+        }
+      }
+    },
     "Selected caliper color" : {
       "localizations" : {
         "fr" : {
@@ -184,6 +211,9 @@
           }
         }
       }
+    },
+    "Time caliper label position" : {
+
     },
     "Transparent mode at start-up" : {
       "localizations" : {

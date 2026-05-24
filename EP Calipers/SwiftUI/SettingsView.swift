@@ -20,6 +20,7 @@ struct SettingsDraft {
     var lineWidth: Int
     var adjustBarThicknessForZoom: Bool
     // Measurement heading
+    var rounding: Rounding
     var qtcFormula: QTcFormulaPreference
     var numberOfQTcMeanRRIntervals: Int
     var numberOfMeanRRIntervals: Int
@@ -27,9 +28,10 @@ struct SettingsDraft {
     // Calibration heading
     // Labels heading
     var caliperTextFontSize: Int
+    var autoPositionText: Bool
     var adjustLabelSizeForZoom: Bool
-
-    // TODO: add all preferences
+    var timeCaliperTextPosition: TextPosition
+    var amplitudeCaliperTextPosition: TextPosition
 
     init(_ preferences: Preferences) {
         transparency = preferences.transparency
@@ -45,6 +47,10 @@ struct SettingsDraft {
         adjustBarThicknessForZoom = preferences.adjustBarThicknessForZoom
         adjustLabelSizeForZoom = preferences.adjustLabelSizeForZoom
         allowNegativeCaliperValues = preferences.allowNegativeCaliperValues
+        rounding = preferences.rounding
+        autoPositionText = preferences.autoPositionText
+        timeCaliperTextPosition = preferences.timeCaliperTextPosition
+        amplitudeCaliperTextPosition = preferences.amplitudeCaliperTextPosition
         // TODO: add all preferences
     }
 
@@ -61,7 +67,10 @@ struct SettingsDraft {
         preferences.adjustBarThicknessForZoom = adjustBarThicknessForZoom
         preferences.adjustLabelSizeForZoom = adjustLabelSizeForZoom
         preferences.allowNegativeCaliperValues = allowNegativeCaliperValues
-        // TODO: add all preferences
+        preferences.rounding = rounding
+        preferences.autoPositionText = autoPositionText
+        preferences.timeCaliperTextPosition = timeCaliperTextPosition
+        preferences.amplitudeCaliperTextPosition = amplitudeCaliperTextPosition
     }
 
 
@@ -156,6 +165,13 @@ struct CaliperSettingsView: View {
                     .font(Font.headline.bold())
             }
             Section {
+                Picker(selection: $settingsDraft.rounding) {
+                    ForEach(Rounding.allCases, id: \.self) {
+                        value in Text(value.localizedTitle).tag(value)
+                    }
+                } label: {
+                    Text("Round msec and rate", tableName: "Settings")
+                }
                 Picker(selection: $settingsDraft.qtcFormula) {
                     ForEach(QTcFormulaPreference.allCases, id: \.self) { formula in
                         Text(formula.localizedTitle)
@@ -203,8 +219,27 @@ struct CaliperSettingsView: View {
                 } label: {
                     Text("Caliper label font size", tableName: "Settings")
                 }
+                Toggle(isOn: $settingsDraft.autoPositionText) {
+                    Text("Auto-position Text", tableName: "Settings")
+                }
                 Toggle(isOn: $settingsDraft.adjustLabelSizeForZoom) {
                     Text("Adjust label size for zoom", tableName: "Settings")
+                }
+                Picker(selection: $settingsDraft.timeCaliperTextPosition) {
+                    Text("Center above").tag(TextPosition.centerAbove)
+                    Text("Center below").tag (TextPosition.centerBelow)
+                    Text("Left").tag(TextPosition.left)
+                    Text("Right").tag(TextPosition.right)
+                } label: {
+                    Text("Time caliper label position", tableName: "Settings")
+                }
+                Picker(selection: $settingsDraft.amplitudeCaliperTextPosition) {
+                    Text("Left").tag(TextPosition.left)
+                    Text("Right").tag(TextPosition.right)
+                    Text("Top").tag(TextPosition.top)
+                    Text("Bottom").tag(TextPosition.bottom)
+                } label: {
+                    Text("Amplitude caliper label position", tableName: "Settings")
                 }
             } header: {
                 Text("Labels", tableName: "Settings")
@@ -238,4 +273,6 @@ struct PdfSettingsView: View {
 
 #Preview {
     SettingsView(settingsDraft: .constant(SettingsDraft(Preferences.shared)))
+        .padding(20)
+        .frame(width: 560, height: 600)
 }

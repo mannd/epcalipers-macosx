@@ -45,12 +45,22 @@ enum QTcFormulaPreference: Int, CaseIterable {
     }
 }
 
-enum Rounding: Int {
+enum Rounding: Int, CaseIterable {
     case ToInteger = 0 // 123 msec
     case ToFourPlaces = 1 // 12.34 msec 123.4 msec
     case ToTenths = 2 // 123.4 msec 12.3 msec
     case ToHundredths = 3 // 123.45 msec 12.34 msec
-    case None = 4 // for debugging only 123.456789 msec
+    //case None = 4 // for debugging only 123.456789 msec
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .ToInteger: return "To integer"
+        case .ToFourPlaces: return "To 4 digits"
+        case .ToTenths: return "To tenths"
+        case .ToHundredths: return "To hundredths"
+        //case .None: return "None"
+        }
+    }
 }
 
 // Affects PDF resolution
