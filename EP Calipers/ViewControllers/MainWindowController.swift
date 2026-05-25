@@ -22,6 +22,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     @IBOutlet weak var toolbar: NSToolbar!
 
+    @IBOutlet weak var mainView: MainView!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
@@ -294,9 +295,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         DispatchQueue.main.async {
             self.scrollView.magnification = 1.0
         }
-
-//        calipersView.horizontalCalibration.magnificationAtCalibration = Double(scrollView.magnification)
-//        calipersView.verticalCalibration.magnificationAtCalibration = Double(scrollView.magnification)
 
         calipersView.noteTextColor = appPreferences.noteTextColor
         calipersView.noteFontSize = CGFloat(appPreferences.noteTextFontSize)

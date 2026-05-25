@@ -13,6 +13,7 @@
                 <outlet property="imageView" destination="oIK-MS-rQb" id="tvd-y9-ClO"/>
                 <outlet property="instructionLabel" destination="Muj-mg-GQi" id="Uao-u3-Dau"/>
                 <outlet property="instructionPanel" destination="rGN-02-IWd" id="OUX-FL-fkZ"/>
+                <outlet property="mainView" destination="uHL-zZ-C20" id="bS6-Mv-2Hk"/>
                 <outlet property="scrollView" destination="AxA-IY-0Zx" id="E2e-dv-DLM"/>
                 <outlet property="toolbar" destination="Y6y-q2-GOt" id="BhB-8V-vGL"/>
                 <outlet property="window" destination="faX-Do-WYj" id="H0a-cQ-2An"/>
@@ -172,7 +173,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="fiA-je-WUL"/>
             </connections>
-            <point key="canvasLocation" x="385.5" y="476"/>
+            <point key="canvasLocation" x="260" y="477"/>
         </window>
         <window title="Instructions" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="rGN-02-IWd" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>

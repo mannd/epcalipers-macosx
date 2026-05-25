@@ -256,10 +256,12 @@ struct CaliperSettingsView: View {
                     TextField(text: $settingsDraft.timeCalibration) {
                         Text("Time calibration", tableName: "Settings")
                     }
+                    .frame(width: 300)
                     TextField(text: $settingsDraft.amplitudeCalibration) {
                         Text("Amplitude calibration", tableName: "Settings")
                     }
-                    
+                    .frame(width: 300)
+
                 } header: {
                     Text("Calibration", tableName: "Settings")
                         .font(.title)
