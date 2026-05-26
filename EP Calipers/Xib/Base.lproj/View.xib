@@ -727,7 +727,7 @@
                 <constraint firstItem="fEW-vJ-IeB" firstAttribute="leading" secondItem="0og-j1-K6d" secondAttribute="leading" id="zHq-Cf-Bnv"/>
                 <constraint firstItem="irw-rY-iLq" firstAttribute="trailing" secondItem="KDI-gk-o86" secondAttribute="trailing" id="zvQ-Jm-x1x"/>
             </constraints>
-            <point key="canvasLocation" x="342" y="51"/>
+            <point key="canvasLocation" x="263" y="15"/>
         </customView>
         <customView id="qm3-V8-T6z" userLabel="Number Input View">
             <rect key="frame" x="0.0" y="0.0" width="298" height="62"/>
