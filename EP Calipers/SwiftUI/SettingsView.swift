@@ -87,6 +87,7 @@ struct SettingsDraft {
     func apply(to preferences: Preferences) {
         preferences.transparency = transparency
         preferences.showSampleECG = showSampleECG
+        preferences.showPrompts = showPrompts
         preferences.qtcFormula = qtcFormula
         preferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervals
         preferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervals

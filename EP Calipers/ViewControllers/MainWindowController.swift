@@ -16,7 +16,7 @@ protocol QTcResultProtocol {
                    convertToMsec: Bool, units: String) -> String
 }
 
-class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation, NSToolbarDelegate {
+class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation, NSToolbarDelegate, NSToolbarItemValidation {
 
     let appName = NSLocalizedString("EP Calipers", comment:"")
 
@@ -99,6 +99,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             resetTouchBar()
         }
     }
+    var inQTc: Bool {
+        inQTcStep1 || inQTcStep2
+    }
+
+    var readyToMeasure: Bool {
+        calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate && (hasImage() || isTransparent)
+    }
+
+    var inMeasurement: Bool {
+        inQTc || calipersView.isTweakingComponent
+        || (appPreferences.showPrompts && inCalibration)
+        || (appPreferences.showPrompts && inMeanRR)
+    }
+
     var inCalibration = false
     var inMeanRR = false {
         didSet {
@@ -410,7 +424,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return !doingMeasurement() && !calipersView.isTweakingComponent && (hasImage() || isTransparent)
         }
         if toolbarItem.itemIdentifier.rawValue == "newMeasurementToolbar" {
-            return calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate && (hasImage() || isTransparent)
+            if let control = toolbarItem.view as? NSSegmentedControl {
+                control.setEnabled(readyToMeasure, forSegment: 0)
+                control.setEnabled(readyToMeasure, forSegment: 1)
+                control.setEnabled(readyToMeasure, forSegment: 2)
+                control.setEnabled(inMeasurement, forSegment: 3)
+            }
         }
         return true
     }
@@ -1155,7 +1174,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         default:
             break
         }
-
     }
     
     @IBAction func deleteAllCalipers(_ sender: AnyObject) {
@@ -1169,7 +1187,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func calibrateWithPossiblePrompts() {
         if appPreferences.showPrompts {
             if inCalibration {
-                // user pressed Calibrate again instead of Next, it's OK, do what s/he wants
+                // user pressed Calibrate, it's OK, do what s/he wants
                 calibrate()
                 return
             }
