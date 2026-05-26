@@ -45,39 +45,39 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet var instructionLabel: NSTextField!
 
     // Preferences accessory view
-    @IBOutlet var preferencesAccessoryView: NSView!
-    @IBOutlet weak var caliperColorWell: NSColorWell!
-    @IBOutlet weak var highlightedCaliperColorWell: NSColorWell!
-    @IBOutlet weak var lineWidthSlider: NSSlider!
-    @IBOutlet weak var defaultHorizontalCalibrationTextField: NSTextField!
-    @IBOutlet weak var defaultVerticalCalibrationTextField: NSTextField!
-    @IBOutlet weak var numberOfMeanRRIntervalsTextField: NSTextField!
-    @IBOutlet weak var numberOfMeanRRIntervalsStepper: NSStepper!
-    @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
-    @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
-    @IBOutlet weak var showPromptsCheckBox: NSButton!
-    @IBOutlet weak var transparencyCheckBox: NSButton!
-    @IBOutlet weak var showSampleECGCheckBox: NSButton!
-    @IBOutlet weak var roundingPopUpButton: NSPopUpButton!
-    @IBOutlet weak var formulaPopUpButton: NSPopUpButton!
-    @IBOutlet weak var autoPositionTextCheckBox: NSButton!
-    @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
-    @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
-    @IBOutlet weak var noteTextFontSizeTextField: NSTextField!
-    @IBOutlet weak var noteTextFontSizeStepper: NSStepper!
-    @IBOutlet weak var noteTextColorWell: NSColorWell!
-    @IBOutlet weak var noteTextBoxWidthTextField: NSTextField!
-    @IBOutlet weak var noteTextBoxWidthStepper: NSStepper!
-    @IBOutlet weak var noteTextBoxHeightTextField: NSTextField!
-    @IBOutlet weak var noteTextBoxHeightStepper: NSStepper!
-    @IBOutlet weak var caliperTextFontSizeTextField: NSTextField!
-    @IBOutlet weak var caliperTextFontSizeStepper: NSStepper!
-
-    @IBOutlet var marchingComponentsTextField: NSTextField!
-
-    @IBOutlet var marchingComponentsStepper: NSStepper!
-
-    @IBOutlet var deemphasizeMarchingComponentsCheckbox: NSButton!
+//    @IBOutlet var preferencesAccessoryView: NSView!
+//    @IBOutlet weak var caliperColorWell: NSColorWell!
+//    @IBOutlet weak var highlightedCaliperColorWell: NSColorWell!
+//    @IBOutlet weak var lineWidthSlider: NSSlider!
+//    @IBOutlet weak var defaultHorizontalCalibrationTextField: NSTextField!
+//    @IBOutlet weak var defaultVerticalCalibrationTextField: NSTextField!
+//    @IBOutlet weak var numberOfMeanRRIntervalsTextField: NSTextField!
+//    @IBOutlet weak var numberOfMeanRRIntervalsStepper: NSStepper!
+//    @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
+//    @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
+//    @IBOutlet weak var showPromptsCheckBox: NSButton!
+//    @IBOutlet weak var transparencyCheckBox: NSButton!
+//    @IBOutlet weak var showSampleECGCheckBox: NSButton!
+//    @IBOutlet weak var roundingPopUpButton: NSPopUpButton!
+//    @IBOutlet weak var formulaPopUpButton: NSPopUpButton!
+//    @IBOutlet weak var autoPositionTextCheckBox: NSButton!
+//    @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
+//    @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
+//    @IBOutlet weak var noteTextFontSizeTextField: NSTextField!
+//    @IBOutlet weak var noteTextFontSizeStepper: NSStepper!
+//    @IBOutlet weak var noteTextColorWell: NSColorWell!
+//    @IBOutlet weak var noteTextBoxWidthTextField: NSTextField!
+//    @IBOutlet weak var noteTextBoxWidthStepper: NSStepper!
+//    @IBOutlet weak var noteTextBoxHeightTextField: NSTextField!
+//    @IBOutlet weak var noteTextBoxHeightStepper: NSStepper!
+//    @IBOutlet weak var caliperTextFontSizeTextField: NSTextField!
+//    @IBOutlet weak var caliperTextFontSizeStepper: NSStepper!
+//
+//    @IBOutlet var marchingComponentsTextField: NSTextField!
+//
+//    @IBOutlet var marchingComponentsStepper: NSStepper!
+//
+//    @IBOutlet var deemphasizeMarchingComponentsCheckbox: NSButton!
     @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
     @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
 
@@ -283,14 +283,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
-        numberOfMeanRRIntervalsTextField.delegate = self
-        numberOfQTcMeanRRIntervalsTextField.delegate = self
-        marchingComponentsTextField.delegate = self
         qtcNumberTextField.delegate = self
-        noteTextFontSizeTextField.delegate = self
-        noteTextBoxWidthTextField.delegate = self
-        noteTextBoxHeightTextField.delegate = self
-        caliperTextFontSizeTextField.delegate = self
 
         if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg"), appPreferences.showSampleECG {
             let url = URL(fileURLWithPath: path)
@@ -313,10 +306,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         calipersView.noteTextColor = appPreferences.noteTextColor
         calipersView.noteFontSize = CGFloat(appPreferences.noteTextFontSize)
         calipersView.noteSize = NSSize(width: CGFloat(appPreferences.noteTextBoxWidth), height: CGFloat(appPreferences.noteTextBoxHeight))
-        noteTextFontSizeStepper.minValue = CalipersView.defaultMinimumFontSize
-        noteTextFontSizeStepper.maxValue = CalipersView.defaultMaximumFontSize
-        caliperTextFontSizeStepper.minValue = CalipersView.defaultMinimumFontSize
-        caliperTextFontSizeStepper.maxValue = CalipersView.defaultMaximumFontSize
 
         calipersView.caliperTextFontSize = CGFloat(appPreferences.caliperTextFontSize)
 
@@ -499,73 +488,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
 
-    private func makeScrollablePreferencesAccessoryView() -> NSView {
-        let contentSize = preferencesAccessoryView.fittingSize == .zero
-            ? preferencesAccessoryView.frame.size
-            : preferencesAccessoryView.fittingSize
-        let visibleFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? .zero
-        let maximumWidth = visibleFrame.width > 0 ? visibleFrame.width * 0.7 : contentSize.width
-        let maximumHeight = visibleFrame.height > 0 ? visibleFrame.height * 0.5 : contentSize.height
-        let accessorySize = NSSize(width: min(contentSize.width, maximumWidth),
-                                   height: min(contentSize.height, maximumHeight))
-
-        let scrollView = NSScrollView(frame: NSRect(origin: .zero, size: accessorySize))
-        scrollView.borderType = .noBorder
-        scrollView.drawsBackground = false
-        scrollView.autohidesScrollers = true
-        scrollView.hasVerticalScroller = contentSize.height > accessorySize.height
-        scrollView.hasHorizontalScroller = contentSize.width > accessorySize.width
-
-        preferencesAccessoryView.frame = NSRect(origin: .zero, size: contentSize)
-        scrollView.documentView = preferencesAccessoryView
-        return scrollView
-    }
-    
-    private func fillQTcFormulaPopUp() {
-        formulaPopUpButton.removeAllItems()
-        formulaPopUpButton.addItem(withTitle: "Bazett")
-        formulaPopUpButton.addItem(withTitle: "Framingham")
-        formulaPopUpButton.addItem(withTitle: "Hodges")
-        formulaPopUpButton.addItem(withTitle: "Fridericia")
-        formulaPopUpButton.addItem(withTitle: NSLocalizedString("All", comment: ""))
-    }
-
-    private func fillRoundingPopUp() {
-        roundingPopUpButton.removeAllItems()
-        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To integer", comment: ""))
-        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To 4 digits", comment: ""))
-        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To tenths", comment: ""))
-        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To hundredths", comment: ""))
-        // NOTE: comment out in production.  Uncomment for debugging only.
-        //roundingPopUpButton.addItem(withTitle: "Raw")
-    }
-
-    private func fillTimeCaliperTextPositionPopUp() {
-        timeCaliperTextPositionPopUpButton.removeAllItems()
-        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Center above", comment: ""))
-        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Center below", comment: ""))
-        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Left", comment: ""))
-        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Right", comment: ""))
-    }
-
-    private func fillAmplitudeCaliperTextPositionPopUp() {
-        amplitudeCaliperTextPositionPopUpButton.removeAllItems()
-        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Top", comment: ""))
-        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Bottom", comment: ""))
-        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Left", comment: ""))
-        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Right", comment: ""))
-    }
-
-    @IBAction func numberOfMeanRRStepperAction(_ sender: AnyObject) {
-        numberOfMeanRRIntervalsTextField.integerValue = numberOfMeanRRIntervalsStepper.integerValue
-    }
-    
-    @IBAction func numberOfQTcMeanRRStepperAction(_ sender: AnyObject) {
-        numberOfQTcMeanRRIntervalsTextField.integerValue = numberOfQTcMeanRRIntervalsStepper.integerValue
-    }
-
-
-    
     @IBAction func gotoPage(_ sender: Any) {
         getPageNumber()
     }
@@ -1742,55 +1664,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         qtcNumberTextField.integerValue = qtcNumberStepper.integerValue
     }
 
-
-    @IBAction func marchingComponentsStepperAction(_ sender: Any) {
-        marchingComponentsTextField.integerValue = marchingComponentsStepper.integerValue
-    }
-
-    @IBAction func noteTextFontSizeStepperAction(_ sender: Any) {
-        noteTextFontSizeTextField.integerValue = noteTextFontSizeStepper.integerValue
-    }
-
-    @IBAction func noteTextBoxWidthStepperAction(_ sender: Any) {
-        noteTextBoxWidthTextField.integerValue = noteTextBoxWidthStepper.integerValue
-    }
-
-    @IBAction func noteTextBoxHeightStepperAction(_ sender: Any) {
-        noteTextBoxHeightTextField.integerValue = noteTextBoxHeightStepper.integerValue
-    }
-
-    @IBAction func caliperTextFontSizeStepperAction(_ sender: Any) {
-        caliperTextFontSizeTextField.integerValue = caliperTextFontSizeStepper.integerValue
-    }
-
     func controlTextDidChange(_ obj: Notification) {
         if obj.name.rawValue == "NSControlTextDidChangeNotification" {
             if obj.object as AnyObject? === numberTextField {
                 numberStepper.integerValue = numberTextField.integerValue
             }
-            if obj.object as AnyObject? === numberOfMeanRRIntervalsTextField {
-                numberOfMeanRRIntervalsStepper.integerValue = numberOfMeanRRIntervalsTextField.integerValue
-            }
-            if obj.object as AnyObject? === numberOfQTcMeanRRIntervalsTextField {
-                numberOfQTcMeanRRIntervalsStepper.integerValue = numberOfQTcMeanRRIntervalsTextField.integerValue
-            }
             if obj.object as AnyObject? === qtcNumberTextField {
                 qtcNumberStepper.integerValue = qtcNumberTextField.integerValue
-            }
-            if obj.object as AnyObject? === marchingComponentsTextField {
-                marchingComponentsStepper.integerValue = marchingComponentsTextField.integerValue
-            }
-            if obj.object as AnyObject? === noteTextFontSizeTextField {
-                noteTextFontSizeStepper.integerValue = noteTextFontSizeTextField.integerValue
-            }
-            if obj.object as AnyObject? === noteTextBoxWidthTextField {
-                noteTextBoxWidthStepper.integerValue = noteTextBoxWidthTextField.integerValue
-            }
-            if obj.object as AnyObject? === noteTextBoxHeightTextField {
-                noteTextBoxHeightStepper.integerValue = noteTextBoxHeightTextField.integerValue
-            }
-            if obj.object as AnyObject? === caliperTextFontSizeTextField {
-                caliperTextFontSizeStepper.integerValue = caliperTextFontSizeTextField.integerValue
             }
         }
     }
