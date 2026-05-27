@@ -313,7 +313,22 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
+
+        // for debugging
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(windowDidResizeNotification(_:)),
+//            name: NSWindow.didResizeNotification,
+//            object: window
+//        )
     }
+
+    // for debugging window size
+//    @objc private func windowDidResizeNotification(_ notification: Notification) {
+//        guard let window else { return }
+//
+//        print("Content size: \(window.contentView?.bounds.size ?? .zero)")
+//    }
 
     private func showWelcomeView() {
         guard welcomeView.superview == nil else { return }
@@ -611,6 +626,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             alert.alertStyle = .warning
             alert.addButton(withTitle: NSLocalizedString("Turn off transparency and load image", comment:""))
             alert.addButton(withTitle: NSLocalizedString("Keep transparency and don't load image", comment:""))
+            hideWelcomeView()
+            hideWelcomeView()
             alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             let result = alert.runModal()
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
@@ -1817,6 +1834,7 @@ extension MainWindowController: NSTouchBarDelegate {
         }
     }
 }
+
 
 extension IKImageView {
     func hasImage() -> Bool {

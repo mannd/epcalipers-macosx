@@ -26,6 +26,7 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="1000" height="600"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1084"/>
+            <value key="minSize" type="size" width="650" height="450"/>
             <view key="contentView" id="uHL-zZ-C20" customClass="MainView" customModule="EP_Calipers" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -151,10 +151,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCu-go-0Ic">
-                    <rect key="frame" x="148" y="131" width="273" height="88"/>
+                    <rect key="frame" x="24" y="131" width="521" height="88"/>
                     <subviews>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="ArR-4G-3Nb">
-                            <rect key="frame" x="0.0" y="72" width="273" height="16"/>
+                            <rect key="frame" x="124" y="72" width="273" height="16"/>
                             <buttonCell key="cell" type="bevel" title="Click here or type ⌘-O to open an image file" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Fl1-hQ-iq9">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -164,7 +164,7 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="vWs-He-Fja">
-                            <rect key="frame" x="0.0" y="48" width="273" height="16"/>
+                            <rect key="frame" x="124" y="48" width="273" height="16"/>
                             <buttonCell key="cell" type="bevel" title="Click here to switch to a transparent window" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="v9v-Zd-0fL">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -174,7 +174,7 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Fur-Mw-IT4">
-                            <rect key="frame" x="46" y="24" width="181" height="16"/>
+                            <rect key="frame" x="170" y="24" width="181" height="16"/>
                             <buttonCell key="cell" type="bevel" title="Click here to change settings" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="OC9-Us-Mn0">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -184,7 +184,7 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="5sN-AK-EQh">
-                            <rect key="frame" x="79" y="0.0" width="115" height="16"/>
+                            <rect key="frame" x="203" y="0.0" width="115" height="16"/>
                             <buttonCell key="cell" type="bevel" title="Click here for help" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="snD-3y-ijn">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -220,7 +220,9 @@
                 <constraint firstItem="gCu-go-0Ic" firstAttribute="top" secondItem="JGr-O1-4PC" secondAttribute="bottom" constant="46" id="6MZ-yE-jGk"/>
                 <constraint firstItem="gCu-go-0Ic" firstAttribute="centerX" secondItem="17y-vt-B9z" secondAttribute="centerX" id="Vyd-WJ-hsU"/>
                 <constraint firstItem="gCu-go-0Ic" firstAttribute="centerY" secondItem="17y-vt-B9z" secondAttribute="centerY" id="p8s-w6-Cy6"/>
+                <constraint firstAttribute="trailing" secondItem="gCu-go-0Ic" secondAttribute="trailing" constant="24" id="paH-hB-Hr8"/>
                 <constraint firstItem="JGr-O1-4PC" firstAttribute="centerX" secondItem="17y-vt-B9z" secondAttribute="centerX" id="r7T-wd-v3h"/>
+                <constraint firstItem="gCu-go-0Ic" firstAttribute="leading" secondItem="17y-vt-B9z" secondAttribute="leading" constant="24" id="rTn-xd-gdo"/>
                 <constraint firstItem="JGr-O1-4PC" firstAttribute="centerX" secondItem="gCu-go-0Ic" secondAttribute="centerX" id="sXc-Ct-Ghw"/>
             </constraints>
             <point key="canvasLocation" x="317.5" y="232.5"/>
