@@ -18,6 +18,7 @@ protocol QTcResultProtocol {
 
 class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation, NSToolbarDelegate, NSToolbarItemValidation {
 
+    
     let appName = NSLocalizedString("EP Calipers", comment:"")
 
     @IBOutlet weak var toolbar: NSToolbar!
@@ -26,6 +27,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
+    @IBOutlet var welcomeView: NSView!
 
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
@@ -44,40 +46,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet var instructionPanel: NSPanel!
     @IBOutlet var instructionLabel: NSTextField!
 
-    // Preferences accessory view
-//    @IBOutlet var preferencesAccessoryView: NSView!
-//    @IBOutlet weak var caliperColorWell: NSColorWell!
-//    @IBOutlet weak var highlightedCaliperColorWell: NSColorWell!
-//    @IBOutlet weak var lineWidthSlider: NSSlider!
-//    @IBOutlet weak var defaultHorizontalCalibrationTextField: NSTextField!
-//    @IBOutlet weak var defaultVerticalCalibrationTextField: NSTextField!
-//    @IBOutlet weak var numberOfMeanRRIntervalsTextField: NSTextField!
-//    @IBOutlet weak var numberOfMeanRRIntervalsStepper: NSStepper!
-//    @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
-//    @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
-//    @IBOutlet weak var showPromptsCheckBox: NSButton!
-//    @IBOutlet weak var transparencyCheckBox: NSButton!
-//    @IBOutlet weak var showSampleECGCheckBox: NSButton!
-//    @IBOutlet weak var roundingPopUpButton: NSPopUpButton!
-//    @IBOutlet weak var formulaPopUpButton: NSPopUpButton!
-//    @IBOutlet weak var autoPositionTextCheckBox: NSButton!
-//    @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
-//    @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
-//    @IBOutlet weak var noteTextFontSizeTextField: NSTextField!
-//    @IBOutlet weak var noteTextFontSizeStepper: NSStepper!
-//    @IBOutlet weak var noteTextColorWell: NSColorWell!
-//    @IBOutlet weak var noteTextBoxWidthTextField: NSTextField!
-//    @IBOutlet weak var noteTextBoxWidthStepper: NSStepper!
-//    @IBOutlet weak var noteTextBoxHeightTextField: NSTextField!
-//    @IBOutlet weak var noteTextBoxHeightStepper: NSStepper!
-//    @IBOutlet weak var caliperTextFontSizeTextField: NSTextField!
-//    @IBOutlet weak var caliperTextFontSizeStepper: NSStepper!
-//
-//    @IBOutlet var marchingComponentsTextField: NSTextField!
-//
-//    @IBOutlet var marchingComponentsStepper: NSStepper!
-//
-//    @IBOutlet var deemphasizeMarchingComponentsCheckbox: NSButton!
+    // Welcome screen
+    @IBOutlet weak var welcomeImageButton: NSButton!
+    @IBOutlet weak var welcomeTransparentButton: NSButton!
+    @IBOutlet weak var welcomeSettingsButton: NSButton!
+    @IBOutlet weak var welcomeHelpButton: NSButton!
+
     @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
     @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
 
@@ -222,6 +196,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
+            hideWelcomeView()
             self.window?.title = appName
         }
         else {
@@ -232,6 +207,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
+            if !imageView.hasImage() {
+                showWelcomeView()
+            }
             if let title = oldWindowTitle {
                 self.window?.setTitleWithRepresentedFilename(title)
             }
@@ -314,6 +292,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         instructionPanel.setIsVisible(false)
         instructionPanel.becomesKeyOnlyIfNeeded = true
 
+        // Need to style Welcome Screen buttons before loading the screen.
+        let welcomeButtons = [welcomeImageButton, welcomeTransparentButton, welcomeSettingsButton, welcomeHelpButton]
+        for button in welcomeButtons {
+            styleWelcomeLinkButton(button)
+        }
+
+        // style Welcome Screen buttons, then show screen
+        if !isTransparent && !imageView.hasImage() {
+            print("Welcome screen: showing")
+            // load welcome screen here
+            showWelcomeView()
+        }
+
         toolbar.delegate = self
 
         scrollView.postsFrameChangedNotifications = true
@@ -322,6 +313,24 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
+    }
+
+    private func showWelcomeView() {
+        guard welcomeView.superview == nil else { return }
+
+        welcomeView.translatesAutoresizingMaskIntoConstraints = false
+        mainView.addSubview(welcomeView, positioned: .above, relativeTo: calipersView)
+
+        NSLayoutConstraint.activate([
+            welcomeView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            welcomeView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            welcomeView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            welcomeView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
+    }
+
+    private func hideWelcomeView() {
+        welcomeView.removeFromSuperview()
     }
 
     @objc
@@ -346,6 +355,22 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersViewTrailingContraint.constant = 0
         }
 
+    }
+
+    private func styleWelcomeLinkButton(_ button: NSButton?) {
+        guard let button else { return }
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: NSColor.linkColor,
+            .font: NSFont.systemFont(ofSize: 18)
+        ]
+
+        button.attributedTitle = NSAttributedString(
+            string: button.title,
+            attributes: attributes
+        )
+        button.isBordered = false
+        button.alignment = .left
+        //button.cursor = .pointingHand
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -469,6 +494,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
     private func doingMeasurement() -> Bool {
         return inMeanRR || inQTcStep1 || inQTcStep2
+    }
+
+    @IBAction func showHelp(_ sender: AnyObject) {
+        NSApplication.shared.showHelp(sender)
     }
 
     @IBAction func showPreferences(_ sender: AnyObject) {
@@ -662,6 +691,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     self.window?.setTitleWithRepresentedFilename(urlPath)
                 }
                 self.imageURL = url
+                hideWelcomeView()
                 self.clearCalibration()
                 scrollView.magnification = 1.0
                 if addToRecentDocuments {
@@ -744,6 +774,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 numberOfPDFPages = pdf.pageCount
                 imageIsPDF = true
                 showPDFPage(pdf, page: 0, preserveRotation: false)
+                hideWelcomeView()
                 let urlPath = url.path
                 self.window?.setTitleWithRepresentedFilename(urlPath)
                 imageURL = url
