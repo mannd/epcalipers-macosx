@@ -182,7 +182,6 @@ class CalipersView: NSView {
     var noteSize = NSSize(width: 180, height: 80)
     var noteTextColor: NSColor = .black
     var caliperTextFontSize: CGFloat = defaultCaliperFontSize
-    var adjustLabelSizeForZoom: Bool = true
 
     private var noteEntries: [NoteEntry] = []
     private let noteHitSlop: CGFloat = 10.0
@@ -594,7 +593,6 @@ class CalipersView: NSView {
     }
 
     private func updateCaliperTextFontsForCurrentZoom() {
-        if !adjustLabelSizeForZoom { return }
         let fontSize = caliperFontSizeForCurrentZoom()
         for caliper in calipers {
             if let scaledFont = NSFont(name: caliper.textFont.fontName, size: fontSize) {

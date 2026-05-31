@@ -152,8 +152,6 @@ class Preferences: ObservableObject {
     var caliperTextFontSize: Int = 24
     // New preferences as of 5/2026
     var allowNegativeCaliperValues: Bool = true
-    var adjustLabelSizeForZoom: Bool = true
-    var adjustBarThicknessForZoom: Bool = true
     var showBrugadaTriangle: Bool = true
 
     // PDF
@@ -201,8 +199,6 @@ class Preferences: ObservableObject {
             Self.noteTextBoxHeightKey: noteTextBoxHeight,
             Self.caliperTextFontSizeKey: caliperTextFontSize,
             Self.allowNegativeCaliperValuesKey: allowNegativeCaliperValues,
-            Self.adjustLabelSizeForZoomKey: adjustLabelSizeForZoom,
-            Self.adjustBarThicknessForZoomKey: adjustBarThicknessForZoom,
             Self.showBrugadaTriangleKey: showBrugadaTriangle,
             Self.pdfRenderScaleKey: pdfRenderScale.rawValue,
             Self.recalibrateWhenChangingPagesKey: recalibrateWhenChangingPages,
@@ -244,8 +240,6 @@ class Preferences: ObservableObject {
         noteTextBoxHeight = CGFloat(preferences.float(forKey: Self.noteTextBoxHeightKey))
         caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
         allowNegativeCaliperValues = preferences.bool(forKey: Self.allowNegativeCaliperValuesKey)
-        adjustLabelSizeForZoom = preferences.bool(forKey: Self.adjustLabelSizeForZoomKey)
-        adjustBarThicknessForZoom = preferences.bool(forKey: Self.adjustBarThicknessForZoomKey)
         showBrugadaTriangle = preferences.bool(forKey: Self.showBrugadaTriangleKey)
         pdfRenderScale = PdfRenderScale(rawValue: preferences.integer(forKey: Self.pdfRenderScaleKey)) ?? .High
         recalibrateWhenChangingPages = preferences.bool(forKey: Self.recalibrateWhenChangingPagesKey)
@@ -286,8 +280,6 @@ class Preferences: ObservableObject {
         preferences.set(noteTextBoxHeight, forKey: Self.noteTextBoxHeightKey)
         preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
         preferences.set(allowNegativeCaliperValues, forKey: Self.allowNegativeCaliperValuesKey)
-        preferences.set(adjustLabelSizeForZoom, forKey: Self.adjustLabelSizeForZoomKey)
-        preferences.set(adjustBarThicknessForZoom, forKey: Self.adjustBarThicknessForZoomKey)
         preferences.set(showBrugadaTriangle, forKey: Self.showBrugadaTriangleKey)
         preferences.set(pdfRenderScale.rawValue, forKey: Self.pdfRenderScaleKey)
         preferences.set(recalibrateWhenChangingPages, forKey: Self.recalibrateWhenChangingPagesKey)

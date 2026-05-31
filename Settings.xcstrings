@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Adjust bar thickness for zoom" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -12,6 +13,7 @@
       }
     },
     "Adjust label size for zoom" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {

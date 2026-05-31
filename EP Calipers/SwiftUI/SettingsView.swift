@@ -18,7 +18,6 @@ struct SettingsDraft {
     var unselectedColor: Color
     var selectedColor: Color
     var lineWidth: Int
-    var adjustBarThicknessForZoom: Bool
     // Measurement heading
     var rounding: Rounding
     var qtcFormula: QTcFormulaPreference
@@ -32,7 +31,6 @@ struct SettingsDraft {
     // Labels heading
     var caliperTextFontSize: Int
     var autoPositionText: Bool
-    var adjustLabelSizeForZoom: Bool
     var timeCaliperTextPosition: TextPosition
     var amplitudeCaliperTextPosition: TextPosition
     // Marching calipers heading
@@ -61,8 +59,6 @@ struct SettingsDraft {
         selectedColor = Color(preferences.highlightColor)
         lineWidth = preferences.lineWidth
         caliperTextFontSize = preferences.caliperTextFontSize
-        adjustBarThicknessForZoom = preferences.adjustBarThicknessForZoom
-        adjustLabelSizeForZoom = preferences.adjustLabelSizeForZoom
         allowNegativeCaliperValues = preferences.allowNegativeCaliperValues
         rounding = preferences.rounding
         autoPositionText = preferences.autoPositionText
@@ -95,8 +91,6 @@ struct SettingsDraft {
         preferences.highlightColor = NSColor(selectedColor)
         preferences.lineWidth = lineWidth
         preferences.caliperTextFontSize = caliperTextFontSize
-        preferences.adjustBarThicknessForZoom = adjustBarThicknessForZoom
-        preferences.adjustLabelSizeForZoom = adjustLabelSizeForZoom
         preferences.allowNegativeCaliperValues = allowNegativeCaliperValues
         preferences.rounding = rounding
         preferences.autoPositionText = autoPositionText
@@ -202,9 +196,6 @@ struct CaliperSettingsView: View {
                     ) {
                         Text("Caliper line width", tableName: "Settings")
                     }.frame(width: 350)
-                    Toggle(isOn: $settingsDraft.adjustBarThicknessForZoom) {
-                        Text("Adjust bar thickness for zoom", tableName: "Settings")
-                    }
                     Toggle(isOn: $settingsDraft.showBrugadaTriangle) {
                         Text("Show Brugada triangle", tableName: "Settings")
                     }
@@ -278,9 +269,6 @@ struct CaliperSettingsView: View {
                     }
                     Toggle(isOn: $settingsDraft.autoPositionText) {
                         Text("Auto-position labels", tableName: "Settings")
-                    }
-                    Toggle(isOn: $settingsDraft.adjustLabelSizeForZoom) {
-                        Text("Adjust label size for zoom", tableName: "Settings")
                     }
                     Picker(selection: $settingsDraft.timeCaliperTextPosition) {
                         Text("Center above").tag(TextPosition.centerAbove)
