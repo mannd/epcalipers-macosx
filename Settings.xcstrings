@@ -2,13 +2,34 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Adjust bar thickness for zoom" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajuster la largeur des lignes automatiquement"
+          }
+        }
+      }
     },
     "Adjust label size for zoom" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajuster la taille des étiquettes automatiquement"
+          }
+        }
+      }
     },
     "Allow negative caliper values" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permettre des valeurs negatives pour les compas "
+          }
+        }
+      }
     },
     "Amplitude calibration" : {
       "localizations" : {
@@ -21,7 +42,14 @@
       }
     },
     "Amplitude caliper label position" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position de l’étiquette pour compas d’amplitude"
+          }
+        }
+      }
     },
     "Appearance" : {
       "localizations" : {
@@ -85,7 +113,14 @@
       }
     },
     "Clear calipers between pages" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer les compas au changement de page"
+          }
+        }
+      }
     },
     "Dim marching componets" : {
       "localizations" : {
@@ -252,13 +287,34 @@
       }
     },
     "Recalibrate calipers between pages" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ré-étalonnage des compas au changement de page"
+          }
+        }
+      }
     },
     "Reset image rotation between pages" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "réinitialiser la rotation de l’image au changement de page"
+          }
+        }
+      }
     },
     "Reset image zoom between pages" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "réinitialiser le zoom au changement de page"
+          }
+        }
+      }
     },
     "Round measurements" : {
       "localizations" : {
@@ -266,17 +322,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Arrondir les mesures"
-          }
-        }
-      }
-    },
-    "Round msec and rate" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arrondir msec et bpm"
           }
         }
       }
@@ -303,7 +348,14 @@
       }
     },
     "Show Brugada triangle" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le triangle de Brugada"
+          }
+        }
+      }
     },
     "Show prompts" : {
       "localizations" : {
@@ -336,7 +388,14 @@
       }
     },
     "Time caliper label position" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position de l’étiquette pour compas de temps"
+          }
+        }
+      }
     },
     "Transparent mode at start-up" : {
       "localizations" : {

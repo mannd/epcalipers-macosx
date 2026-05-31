@@ -180,7 +180,7 @@
 
 "Center above" = "au-dessus du centre";
 
-"Center below" = "au-dessous du centre";
+"Center below" = "en-dessous du centre";
 
 "Left" = "à gauche";
 
@@ -188,7 +188,7 @@
 
 "Top" = "au-dessus";
 
-"Bottom" = "au-dessous";
+"Bottom" = "en-dessous";
 
 "Go to page" = "Aller à la page";
 
@@ -209,3 +209,9 @@
 "Transparent window at start-up" = "Fênetre transparente au démarrage";
 
 "None" = "Aucun";
+
+"High resolution" = "Haute résolution";
+
+"Medium resolution" = "Résolution moyenne";
+
+"Low resolution" = "Basse résolution";
