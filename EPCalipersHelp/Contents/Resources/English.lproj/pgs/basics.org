@@ -191,32 +191,32 @@ disabled when their use is not allowed.  For example, image rotation
 is not allowed after calipers have been calibrated.  It is necessary
 to clear calibration to restore the rotation menu commands.
 ** Keyboard shortcuts
-| Key   | Function                             |
-|-------+--------------------------------------|
-| ⇧⌃R   | Rotate image 90° right               |
-| ⇧⌃L   | Rotate image 90° left                |
-| ⌃R    | Rotate image 1° right                |
-| ⌃L    | Rotate image 1° left                 |
+| Key  | Function                             |
+|------+--------------------------------------|
+| ⇧⌃R  | Rotate image 90° right               |
+| ⇧⌃L  | Rotate image 90° left                |
+| ⌃R   | Rotate image 1° right                |
+| ⌃L   | Rotate image 1° left                 |
 | ⌘R   | Rotate image 0.1 right               |
 | ⌘L   | Rotate image 0.1 left                |
-| ⌃0    | Reset image rotation                 |
-| ⌘+   | Zoom in                              |
+| ⌥⌘0 | Reset image rotation                 |
+| ⌘=   | Zoom in                              |
 | ⌘-   | Zoom out                             |
-| ⌘=   | Zoom to actual size                  |
-| ⌃H    | Toggle transparent window            |
-| ⌃T    | Add time caliper                     |
-| ⌃M    | Add amplitude caliper                |
-| ⌃G    | Add angle caliper                    |
-| ⌃C    | Calibrate                            |
-| Del   | Delete selected caliper              |
+| ⌘0   | Zoom to actual size                  |
+| ⌃H   | Toggle transparent window            |
+| ⌃T   | Add time caliper                     |
+| ⌃M   | Add amplitude caliper                |
+| ⌃G   | Add angle caliper                    |
+| ⌃C   | Calibrate                            |
+| Del  | Delete selected caliper              |
 | ⌘Del | Delete all calipers                  |
-| ^P    | Prev page of multipage PDF           |
-| ^N    | Next page of multipage PDF           |
-| ⌥⌘G  | Go to PDF page                       |
-| ←     | Tweak caliper component left         |
-| →     | Tweak caliper component right        |
-| ↑     | Tweak caliper component up           |
-| ↓     | Tweak caliper component down         |
+| ^P   | Prev page of multipage PDF           |
+| ^N   | Next page of multipage PDF           |
+| ⌥⌘G | Go to PDF page                       |
+| ←    | Tweak caliper component left         |
+| →    | Tweak caliper component right        |
+| ↑    | Tweak caliper component up           |
+| ↓    | Tweak caliper component down         |
 | ⌘←   | Finely tweak caliper component left  |
 | ⌘→   | Finely tweak caliper component right |
 | ⌘↑   | Finely tweak caliper component up    |
@@ -224,4 +224,4 @@ to clear calibration to restore the rotation menu commands.
 | ⌘,   | Open settings                        |
 | ⌘O   | Open image file                      |
 | ⌘N   | New window                           |
-| ⇧⌃S   | Export screenshot                    |
+| ⇧⌃S  | Export screenshot                    |
