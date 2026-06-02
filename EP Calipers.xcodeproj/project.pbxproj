@@ -76,7 +76,6 @@
 		8E2867811F2A5CD700AF335C /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8E2867831F2A5CDB00AF335C /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8E3C818C1FCFB11F004BD5FD /* EPCalipersHelp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EPCalipersHelp; sourceTree = "<group>"; };
-		8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EP Calipers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3DA7F01C2E264000AD9556 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E3DA7F21C2E264000AD9556 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E3DA7F51C2E264000AD9556 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		8EAFAEF32FC0A1EB00EC583B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8EAFAF182FC0AE6A00EC583B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8EB72C991E2154340083DE96 /* AngleCaliper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleCaliper.swift; sourceTree = "<group>"; };
+		8EBC2A052FCD104E0043F77F /* EP Calipers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EP Calipers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED06CB31C5549C1000FD545 /* EP Calipers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EP Calipers.entitlements"; sourceTree = "<group>"; };
 		8ED1677D1F1C19B200F44DF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		8ED1677F1F1C1D0200F44DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
@@ -158,9 +158,9 @@
 		8E3DA7EE1C2E264000AD9556 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */,
 				8E3DA7FC1C2E264000AD9556 /* EP CalipersTests.xctest */,
 				8E3DA8071C2E264000AD9556 /* EP CalipersUITests.xctest */,
+				8EBC2A052FCD104E0043F77F /* EP Calipers.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 				8E4E1C402A40DA4800DEBA9F /* MiniQTc */,
 			);
 			productName = "EP Calipers";
-			productReference = 8E3DA7ED1C2E264000AD9556 /* EP Calipers.app */;
+			productReference = 8EBC2A052FCD104E0043F77F /* EP Calipers.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8E3DA7FB1C2E264000AD9556 /* EP CalipersTests */ = {
@@ -648,7 +648,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 58;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W74NPJXYEG;
 				ENABLE_APP_SANDBOX = YES;
@@ -671,7 +671,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
-				MARKETING_VERSION = 2.8.1;
+				MARKETING_VERSION = 2.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -692,7 +692,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 58;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W74NPJXYEG;
 				ENABLE_APP_SANDBOX = YES;
@@ -715,7 +715,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
-				MARKETING_VERSION = 2.8.1;
+				MARKETING_VERSION = 2.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.epstudios.EP-Calipers-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -292,7 +292,7 @@ struct CaliperSettingsView: View {
                 }
                 Section {
                     Toggle(isOn: $settingsDraft.deemphasizeMarchingComponents) {
-                        Text("Dim marching componets", tableName:    "Settings")
+                        Text("Dim marching components", tableName:    "Settings")
                     }
                     Picker(selection: $settingsDraft.numberOfMarchingComponents) {
                         ForEach(1...20, id: \.self) {
