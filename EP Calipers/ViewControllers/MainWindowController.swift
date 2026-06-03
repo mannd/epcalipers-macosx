@@ -793,6 +793,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 showPDFPage(pdf, page: 0, preserveRotation: false)
                 hideWelcomeView()
                 let urlPath = url.path
+                self.oldWindowTitle = urlPath
                 self.window?.setTitleWithRepresentedFilename(urlPath)
                 imageURL = url
                 clearCalibration()
