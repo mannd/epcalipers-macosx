@@ -72,7 +72,7 @@ Many settings provide default values used when making new measurements.  For exa
 - Note text box height: Set the height of note text box.
 *** PDF
 - PDF resolution: Choose the resolution used when rendering PDF pages.  Higher resolution can make PDF images clearer, but may use more memory and make page changes slower.
-- Clear calipers between pages: Remove calipers from the previous PODF page when changing pages.
+- Clear calipers between pages: Remove calipers from the previous PDF page when changing pages.
 - Recalibrate calipers between pages: Clear calibration automatically when changing PDF pages.
 - Reset image zoom between pages: Reset zoom to actual image size when changing pages.
 - Reset image rotation between pages: Reset image rotation when changing pages.
