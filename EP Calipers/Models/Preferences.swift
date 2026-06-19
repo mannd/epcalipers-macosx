@@ -6,7 +6,7 @@
 //  Copyright © 2016 EP Studios. All rights reserved.
 //
 
-import Cocoa
+import SwiftUI
 
 // from http://stackoverflow.com/questions/1275662/saving-uicolor-to-and-loading-from-nsuserdefaults
 extension UserDefaults {
@@ -17,7 +17,7 @@ extension UserDefaults {
         }
         return color
     }
-    
+
     func setColor(_ color: NSColor?, forKey key: String) {
         var colorData: Data?
         if let color = color {
@@ -27,23 +27,64 @@ extension UserDefaults {
     }
 }
 
-public enum QTcFormulaPreference: Int {
+enum QTcFormulaPreference: Int, CaseIterable {
     case Bazett = 0
     case Framingham = 1
     case Hodges = 2
     case Fridericia = 3
     case all = 4
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .Bazett: return "Bazett"
+        case .Framingham: return "Framingham"
+        case .Hodges: return "Hodges"
+        case .Fridericia: return "Fridericia"
+        case .all: return "All"
+        }
+    }
 }
 
-public enum Rounding: Int {
+enum Rounding: Int, CaseIterable {
     case ToInteger = 0 // 123 msec
     case ToFourPlaces = 1 // 12.34 msec 123.4 msec
     case ToTenths = 2 // 123.4 msec 12.3 msec
     case ToHundredths = 3 // 123.45 msec 12.34 msec
-    case None = 4 // for debugging only 123.456789 msec
+    //case None = 4 // for debugging only 123.456789 msec
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .ToInteger: return "To integer"
+        case .ToFourPlaces: return "To 4 digits"
+        case .ToTenths: return "To tenths"
+        case .ToHundredths: return "To hundredths"
+        //case .None: return "None"
+        }
+    }
 }
 
-class Preferences {
+// Affects PDF resolution
+enum PdfRenderScale: Int, CaseIterable {
+    case Low = 1
+    case Medium = 2
+    case High = 4
+
+    var localizedTitle: LocalizedStringKey {
+        switch self {
+        case .Low: return "Low resolution"
+        case .Medium: return "Medium resolution"
+        case .High: return "High resolution"
+        }
+    }
+}
+
+/// This class holds all the preferences, aka settings for the app.
+///
+/// The class has a private init(), so obtained the shared instance via ``Preferences.shared``.
+///
+/// >Important: When adding new preferences, update ``registerDefaults()``, ``load()``
+/// and ``save()``.
+class Preferences: ObservableObject {
     static let caliperColorKey = "caliperColorKey"
     static let highlightColorKey = "highlightColorKey"
     static let lineWidthKey = "lineWidthKey"
@@ -66,6 +107,22 @@ class Preferences {
     static let noteTextBoxWidthKey = "noteTextBoxWidthKey"
     static let noteTextBoxHeightKey = "noteTextBoxHeightKey"
     static let caliperTextFontSizeKey = "caliperTextFontSizeKey"
+
+    // New preferences to be feature complete compared with
+    // EP Calipers 3 for Windows
+    static let allowNegativeCaliperValuesKey = "allowNegativeCaliperValuesKey" // default == true
+    static let showBrugadaTriangleKey = "showBrugadaTriangleKey" // default == true
+    // Zoom
+    static let adjustBarThicknessForZoomKey = "adjustBarThicknessForZoomKey"
+    static let adjustLabelSizeForZoomKey = "adjustLabelSizeForZoomKey"
+    // PDF
+    static let pdfRenderScaleKey = "pdfRenderScaleKey" // affects resolution of PDFs
+    static let recalibrateWhenChangingPagesKey = "recalibrateWhenChangingPagesKey"
+    static let resetImageZoomBetweenPagesKey = "resetImageZoomBetweenPagesKey"
+    static let resetImageRotationBetweenPagesKey = "resetImageRotationBetweenPagesKey"
+    static let clearCalipersBetweenPagesKey = "clearCalibrationBetweenPagesKey"
+
+    // Preferences hidden from user
     static let lastHorizontalCalibrationKey = "lastHorizontalCalibrationKey"
     static let lastVerticalCalibrationKey = "lastVerticalCalibrationKey"
     static let lastCustomHorizontalCalibrationKey = "lastCustomHorizontalCalibrationKey"
@@ -93,6 +150,19 @@ class Preferences {
     var noteTextBoxWidth: CGFloat = 180.0
     var noteTextBoxHeight: CGFloat = 80.0
     var caliperTextFontSize: Int = 24
+    // New preferences as of 5/2026
+    var allowNegativeCaliperValues: Bool = true
+    var showBrugadaTriangle: Bool = true
+
+    // PDF
+    // NOTE: These preferences don't affect the currently loaded PFD page,
+    // just subsequent pages.
+    // Defaults roughtly mimic current behavior of the app.
+    var pdfRenderScale: PdfRenderScale = .High
+    var recalibrateWhenChangingPages: Bool = false // clear calibration when changing pages
+    var resetImageZoomBetweenPages: Bool = false
+    var resetImageRotationBetweenPages: Bool = false
+    var clearCalipersBetweenPages: Bool = false  // deletes all calipers when changing pages
 
     // Preferences hidden from the user
     var lastHorizontalCalibrationDialogChoice = 0
@@ -100,8 +170,13 @@ class Preferences {
     var lastCustomHorizontalCalibration: String = ""
     var lastCustomVerticalCalibration: String = ""
 
+    static let shared = Preferences()
+    private init() {
+        registerDefaults()
+    }
+
     func registerDefaults() {
-        // Color defaults are handled in loadPreferences().
+        // Color defaults are handled in load().
         let defaults = [
             Self.lineWidthKey: lineWidth,
             Self.defaultHorizontalCalibrationKey: defaultHorizontalCalibration,
@@ -123,16 +198,24 @@ class Preferences {
             Self.noteTextBoxWidthKey: noteTextBoxWidth,
             Self.noteTextBoxHeightKey: noteTextBoxHeight,
             Self.caliperTextFontSizeKey: caliperTextFontSize,
+            Self.allowNegativeCaliperValuesKey: allowNegativeCaliperValues,
+            Self.showBrugadaTriangleKey: showBrugadaTriangle,
+            Self.pdfRenderScaleKey: pdfRenderScale.rawValue,
+            Self.recalibrateWhenChangingPagesKey: recalibrateWhenChangingPages,
+            Self.resetImageZoomBetweenPagesKey: resetImageZoomBetweenPages,
+            Self.resetImageRotationBetweenPagesKey: resetImageRotationBetweenPages,
+            Self.clearCalipersBetweenPagesKey: clearCalipersBetweenPages,
+            // preferences hidden from user
             Self.lastVerticalCalibrationKey: lastVerticalCalibrationDialogChoice,
             Self.lastHorizontalCalibrationKey: lastHorizontalCalibrationDialogChoice,
             Self.lastCustomVerticalCalibrationKey: lastCustomVerticalCalibration,
-            Self .lastCustomHorizontalCalibrationKey: lastCustomHorizontalCalibration
+            Self .lastCustomHorizontalCalibrationKey: lastCustomHorizontalCalibration,
         ] as [String : Any]
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: defaults)
     }
 
-    func loadPreferences() {
+    func load() {
         let preferences = UserDefaults.standard
         caliperColor = preferences.colorForKey(Self.caliperColorKey) ?? caliperColor
         highlightColor = preferences.colorForKey(Self.highlightColorKey) ?? highlightColor
@@ -156,14 +239,23 @@ class Preferences {
         noteTextBoxWidth = CGFloat(preferences.float(forKey: Self.noteTextBoxWidthKey))
         noteTextBoxHeight = CGFloat(preferences.float(forKey: Self.noteTextBoxHeightKey))
         caliperTextFontSize = preferences.integer(forKey: Self.caliperTextFontSizeKey)
+        allowNegativeCaliperValues = preferences.bool(forKey: Self.allowNegativeCaliperValuesKey)
+        showBrugadaTriangle = preferences.bool(forKey: Self.showBrugadaTriangleKey)
+        pdfRenderScale = PdfRenderScale(rawValue: preferences.integer(forKey: Self.pdfRenderScaleKey)) ?? .High
+        recalibrateWhenChangingPages = preferences.bool(forKey: Self.recalibrateWhenChangingPagesKey)
+        resetImageZoomBetweenPages = preferences.bool(forKey: Self.resetImageZoomBetweenPagesKey)
+        resetImageRotationBetweenPages = preferences.bool(forKey: Self.resetImageRotationBetweenPagesKey)
+        clearCalipersBetweenPages = preferences.bool(forKey: Self.clearCalipersBetweenPagesKey)
+
+        // preferencses hidden from user
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
         lastHorizontalCalibrationDialogChoice = preferences.integer(forKey: Self.lastHorizontalCalibrationKey)
         // At start of app the custom calibrations are the default calibrations.
         lastCustomVerticalCalibration = defaultVerticalCalibration
         lastCustomHorizontalCalibration = defaultHorizontalCalibration
     }
-    
-    func savePreferences() {
+
+    func save() {
         let preferences = UserDefaults.standard
         preferences.setColor(caliperColor, forKey: Self.caliperColorKey)
         preferences.setColor(highlightColor, forKey: Self.highlightColorKey)
@@ -187,6 +279,15 @@ class Preferences {
         preferences.set(noteTextBoxWidth, forKey: Self.noteTextBoxWidthKey)
         preferences.set(noteTextBoxHeight, forKey: Self.noteTextBoxHeightKey)
         preferences.set(caliperTextFontSize, forKey: Self.caliperTextFontSizeKey)
+        preferences.set(allowNegativeCaliperValues, forKey: Self.allowNegativeCaliperValuesKey)
+        preferences.set(showBrugadaTriangle, forKey: Self.showBrugadaTriangleKey)
+        preferences.set(pdfRenderScale.rawValue, forKey: Self.pdfRenderScaleKey)
+        preferences.set(recalibrateWhenChangingPages, forKey: Self.recalibrateWhenChangingPagesKey)
+        preferences.set(resetImageZoomBetweenPages, forKey: Self.resetImageZoomBetweenPagesKey)
+        preferences.set(resetImageRotationBetweenPages, forKey: Self.resetImageRotationBetweenPagesKey)
+        preferences.set(clearCalipersBetweenPages, forKey: Self.clearCalipersBetweenPagesKey)
+
+        // preferences hidden from user
         preferences.set(lastVerticalCalibrationDialogChoice, forKey: Self.lastVerticalCalibrationKey)
         preferences.set(lastHorizontalCalibrationDialogChoice, forKey: Self.lastHorizontalCalibrationKey)
         preferences.set(lastCustomVerticalCalibration, forKey: Self.lastCustomVerticalCalibrationKey)

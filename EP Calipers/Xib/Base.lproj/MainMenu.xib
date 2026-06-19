@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -355,7 +354,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Image" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Zoom In" image="plus.magnifyingglass" catalog="system" keyEquivalent="+" id="oLP-ek-a3b">
+                            <menuItem title="Zoom In" image="plus.magnifyingglass" catalog="system" keyEquivalent="=" id="oLP-ek-a3b">
                                 <connections>
                                     <action selector="doZoom:" target="-1" id="fC4-CD-NsL"/>
                                 </connections>
@@ -365,7 +364,7 @@
                                     <action selector="doZoom:" target="-1" id="1p4-hB-kVC"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Zoom To Actual Size" image="1.magnifyingglass" catalog="system" tag="2" keyEquivalent="=" id="e1s-vQ-Cdy">
+                            <menuItem title="Zoom To Actual Size" image="1.magnifyingglass" catalog="system" tag="2" keyEquivalent="0" id="e1s-vQ-Cdy">
                                 <connections>
                                     <action selector="doZoom:" target="-1" id="Nze-eD-TOf"/>
                                 </connections>
@@ -409,7 +408,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Reset Rotation" tag="6" keyEquivalent="0" id="mRi-px-TI8">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="doRotation:" target="-1" id="EB4-Os-kNX"/>
                                             </connections>

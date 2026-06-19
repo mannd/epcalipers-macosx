@@ -13,24 +13,26 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>3</string>
 	<key>CFBundleSignature</key>
 	<string>hbwr</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>3</string>
 	<key>HPDBookAccessPath</key>
 	<string>EPCalipers.html</string>
 	<key>HPDBookIconPath</key>
 	<string>shrd/16.png</string>
 	<key>HPDBookKBProduct</key>
-	<string>epcalipers1</string>
+	<string>epcalipers3</string>
 	<key>HPDBookKBURL</key>
-	<string>http://www.epstudiossoftware.com</string>
+	<string>https://www.epstudiossoftware.com</string>
 	<key>HPDBookRemoteURL</key>
 	<string></string>
 	<key>HPDBookTitle</key>
 	<string>EP Calipers Help</string>
 	<key>HPDBookType</key>
 	<string>3</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>EPCalipersHelp</string>
 </dict>
 </plist>

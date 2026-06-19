@@ -9,21 +9,25 @@
 import Cocoa
 import Quartz
 import AppKit
+import UniformTypeIdentifiers
 
 protocol QTcResultProtocol {
     func calculate(qtInSec: Double, rrInSec: Double, formula: QTcFormulaPreference,
                    convertToMsec: Bool, units: String) -> String
 }
 
-class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation, NSToolbarDelegate {
+class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersViewDelegate, NSDraggingDestination, NSMenuItemValidation, NSToolbarDelegate, NSToolbarItemValidation {
 
+    
     let appName = NSLocalizedString("EP Calipers", comment:"")
 
     @IBOutlet weak var toolbar: NSToolbar!
 
+    @IBOutlet weak var mainView: MainView!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var imageView: IKImageView!
     @IBOutlet weak var calipersView: CalipersView!
+    @IBOutlet var welcomeView: NSView!
 
     // Note textInputView must be a strong reference to prevent deallocation
     @IBOutlet var textInputView: NSView!
@@ -42,40 +46,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     @IBOutlet var instructionPanel: NSPanel!
     @IBOutlet var instructionLabel: NSTextField!
 
-    // Preferences accessory view
-    @IBOutlet var preferencesAccessoryView: NSView!
-    @IBOutlet weak var caliperColorWell: NSColorWell!
-    @IBOutlet weak var highlightedCaliperColorWell: NSColorWell!
-    @IBOutlet weak var lineWidthSlider: NSSlider!
-    @IBOutlet weak var defaultHorizontalCalibrationTextField: NSTextField!
-    @IBOutlet weak var defaultVerticalCalibrationTextField: NSTextField!
-    @IBOutlet weak var numberOfMeanRRIntervalsTextField: NSTextField!
-    @IBOutlet weak var numberOfMeanRRIntervalsStepper: NSStepper!
-    @IBOutlet weak var numberOfQTcMeanRRIntervalsTextField: NSTextField!
-    @IBOutlet weak var numberOfQTcMeanRRIntervalsStepper: NSStepper!
-    @IBOutlet weak var showPromptsCheckBox: NSButton!
-    @IBOutlet weak var transparencyCheckBox: NSButton!
-    @IBOutlet weak var showSampleECGCheckBox: NSButton!
-    @IBOutlet weak var roundingPopUpButton: NSPopUpButton!
-    @IBOutlet weak var formulaPopUpButton: NSPopUpButton!
-    @IBOutlet weak var autoPositionTextCheckBox: NSButton!
-    @IBOutlet weak var timeCaliperTextPositionPopUpButton: NSPopUpButton!
-    @IBOutlet weak var amplitudeCaliperTextPositionPopUpButton: NSPopUpButton!
-    @IBOutlet weak var noteTextFontSizeTextField: NSTextField!
-    @IBOutlet weak var noteTextFontSizeStepper: NSStepper!
-    @IBOutlet weak var noteTextColorWell: NSColorWell!
-    @IBOutlet weak var noteTextBoxWidthTextField: NSTextField!
-    @IBOutlet weak var noteTextBoxWidthStepper: NSStepper!
-    @IBOutlet weak var noteTextBoxHeightTextField: NSTextField!
-    @IBOutlet weak var noteTextBoxHeightStepper: NSStepper!
-    @IBOutlet weak var caliperTextFontSizeTextField: NSTextField!
-    @IBOutlet weak var caliperTextFontSizeStepper: NSStepper!
+    // Welcome screen
+    @IBOutlet weak var welcomeImageButton: NSButton!
+    @IBOutlet weak var welcomeTransparentButton: NSButton!
+    @IBOutlet weak var welcomeSettingsButton: NSButton!
+    @IBOutlet weak var welcomeHelpButton: NSButton!
 
-    @IBOutlet var marchingComponentsTextField: NSTextField!
-
-    @IBOutlet var marchingComponentsStepper: NSStepper!
-
-    @IBOutlet var deemphasizeMarchingComponentsCheckbox: NSButton!
     @IBOutlet weak var calipersViewTrailingContraint: NSLayoutConstraint!
     @IBOutlet weak var calipersViewBottomConstraint: NSLayoutConstraint!
 
@@ -97,6 +73,20 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             resetTouchBar()
         }
     }
+    var inQTc: Bool {
+        inQTcStep1 || inQTcStep2
+    }
+
+    var readyToMeasure: Bool {
+        calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate && (hasImage() || isTransparent)
+    }
+
+    var inMeasurement: Bool {
+        inQTc || calipersView.isTweakingComponent
+        || (appPreferences.showPrompts && inCalibration)
+        || (appPreferences.showPrompts && inMeanRR)
+    }
+
     var inCalibration = false
     var inMeanRR = false {
         didSet {
@@ -108,7 +98,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     var rrIntervalForQTc: Double = 0.0
     
     let calipersMenuTag = 999
-    let appPreferences = Preferences()
+    let appPreferences = Preferences.shared
     var preferencesAlert: NSAlert? = nil
     var meanIntervalAlert: NSAlert? = nil
     var qtcMeanIntervalAlert: NSAlert? = nil
@@ -206,6 +196,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.clear
             window?.hasShadow = false
             imageView.isHidden = true
+            hideWelcomeView()
             self.window?.title = appName
         }
         else {
@@ -216,6 +207,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             window?.backgroundColor = NSColor.windowBackgroundColor
             window?.hasShadow = true
             imageView.isHidden = false
+            if !imageView.hasImage() {
+                showWelcomeView()
+            }
             if let title = oldWindowTitle {
                 self.window?.setTitleWithRepresentedFilename(title)
             }
@@ -234,14 +228,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     override func awakeFromNib() {
         print("awakeFromNib")
         // 2 lines below added for Swift 
-        let NSURLPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeURL as String)
-        let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String)
+        let NSURLPboardType = NSPasteboard.PasteboardType(rawValue: UTType.url.identifier)
+        let NSFilenamesPboardType = NSPasteboard.PasteboardType(rawValue: UTType.item.identifier)
         let types = [NSFilenamesPboardType, NSURLPboardType, NSPasteboard.PasteboardType.tiff]
         self.window?.registerForDraggedTypes(types)
 
         imageView.editable = true
         imageView.doubleClickOpensImageEditPanel = false // EditPanel broken in newest macOS versions
-        imageView.zoomImageToActualSize(self)
+        //imageView.zoomImageToActualSize(self)
+        zoomImageViewToLogicalActualSize()
         imageView.autoresizes = false
         imageView.currentToolMode = IKToolModeNone
         imageView.supportsDragAndDrop = false // handled by app, not by ImageKit
@@ -262,19 +257,11 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         print("windowDidLoad")
         super.windowDidLoad()
         
-        appPreferences.registerDefaults()
-        appPreferences.loadPreferences()
+        appPreferences.load()
 
         Bundle.main.loadNibNamed("View", owner: self, topLevelObjects: nil)
         numberTextField.delegate = self
-        numberOfMeanRRIntervalsTextField.delegate = self
-        numberOfQTcMeanRRIntervalsTextField.delegate = self
-        marchingComponentsTextField.delegate = self
         qtcNumberTextField.delegate = self
-        noteTextFontSizeTextField.delegate = self
-        noteTextBoxWidthTextField.delegate = self
-        noteTextBoxHeightTextField.delegate = self
-        caliperTextFontSizeTextField.delegate = self
 
         if let path = Bundle.main.path(forResource: "sampleECG", ofType: "jpg"), appPreferences.showSampleECG {
             let url = URL(fileURLWithPath: path)
@@ -294,18 +281,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             self.scrollView.magnification = 1.0
         }
 
-        calipersView.horizontalCalibration.currentZoom = Double(scrollView.magnification)
-        calipersView.verticalCalibration.currentZoom = Double(scrollView.magnification)
-        calipersView.horizontalCalibration.originalZoom = Double(scrollView.magnification)
-        calipersView.verticalCalibration.originalZoom = Double(scrollView.magnification)
-
         calipersView.noteTextColor = appPreferences.noteTextColor
         calipersView.noteFontSize = CGFloat(appPreferences.noteTextFontSize)
         calipersView.noteSize = NSSize(width: CGFloat(appPreferences.noteTextBoxWidth), height: CGFloat(appPreferences.noteTextBoxHeight))
-        noteTextFontSizeStepper.minValue = CalipersView.defaultMinimumFontSize
-        noteTextFontSizeStepper.maxValue = CalipersView.defaultMaximumFontSize
-        caliperTextFontSizeStepper.minValue = CalipersView.defaultMinimumFontSize
-        caliperTextFontSizeStepper.maxValue = CalipersView.defaultMaximumFontSize
 
         calipersView.caliperTextFontSize = CGFloat(appPreferences.caliperTextFontSize)
 
@@ -313,6 +291,19 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
 
         instructionPanel.setIsVisible(false)
         instructionPanel.becomesKeyOnlyIfNeeded = true
+
+        // Need to style Welcome Screen buttons before loading the screen.
+        let welcomeButtons = [welcomeImageButton, welcomeTransparentButton, welcomeSettingsButton, welcomeHelpButton]
+        for button in welcomeButtons {
+            styleWelcomeLinkButton(button)
+        }
+
+        // style Welcome Screen buttons, then show screen
+        if !isTransparent && !imageView.hasImage() {
+            print("Welcome screen: showing")
+            // load welcome screen here
+            showWelcomeView()
+        }
 
         toolbar.delegate = self
 
@@ -322,6 +313,39 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         NotificationCenter.default.addObserver(self, selector:#selector(imageBoundsDidChange), name: NSView.boundsDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector:#selector(imageFrameDidChange), name:NSView.frameDidChangeNotification, object:scrollView.contentView)
         NotificationCenter.default.addObserver(self, selector: #selector(scrollBarsDidChange), name: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil)
+
+        // for debugging
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(windowDidResizeNotification(_:)),
+//            name: NSWindow.didResizeNotification,
+//            object: window
+//        )
+    }
+
+    // for debugging window size
+//    @objc private func windowDidResizeNotification(_ notification: Notification) {
+//        guard let window else { return }
+//
+//        print("Content size: \(window.contentView?.bounds.size ?? .zero)")
+//    }
+
+    private func showWelcomeView() {
+        guard welcomeView.superview == nil else { return }
+
+        welcomeView.translatesAutoresizingMaskIntoConstraints = false
+        mainView.addSubview(welcomeView, positioned: .above, relativeTo: calipersView)
+
+        NSLayoutConstraint.activate([
+            welcomeView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            welcomeView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            welcomeView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            welcomeView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
+    }
+
+    private func hideWelcomeView() {
+        welcomeView.removeFromSuperview()
     }
 
     @objc
@@ -346,6 +370,22 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersViewTrailingContraint.constant = 0
         }
 
+    }
+
+    private func styleWelcomeLinkButton(_ button: NSButton?) {
+        guard let button else { return }
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: NSColor.linkColor,
+            .font: NSFont.systemFont(ofSize: 18)
+        ]
+
+        button.attributedTitle = NSAttributedString(
+            string: button.title,
+            attributes: attributes
+        )
+        button.isBordered = false
+        button.alignment = .left
+        //button.cursor = .pointingHand
     }
 
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation  {
@@ -413,7 +453,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             return !doingMeasurement() && !calipersView.isTweakingComponent && (hasImage() || isTransparent)
         }
         if toolbarItem.itemIdentifier.rawValue == "newMeasurementToolbar" {
-            return calipersView.horizontalCalibration.calibrated && calipersView.horizontalCalibration.canDisplayRate && (hasImage() || isTransparent)
+            if let control = toolbarItem.view as? NSSegmentedControl {
+                control.setEnabled(readyToMeasure, forSegment: 0)
+                control.setEnabled(readyToMeasure, forSegment: 1)
+                control.setEnabled(readyToMeasure, forSegment: 2)
+                control.setEnabled(inMeasurement, forSegment: 3)
+            }
         }
         return true
     }
@@ -466,191 +511,27 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         return inMeanRR || inQTcStep1 || inQTcStep2
     }
 
+    @IBAction func showHelp(_ sender: AnyObject) {
+        NSApplication.shared.showHelp(sender)
+    }
+
     @IBAction func showPreferences(_ sender: AnyObject) {
-        // preferencesAlert must be a persistent variable, or else values disappear from textfields with tabbing.
-        // See http://stackoverflow.com/questions/14615094/nstextfield-text-disappears-sometimes
-        // Note there is an autolayout bug here, probable introduced in macOS 10.12
-        // see http://openradar.appspot.com/28700495
-        if preferencesAlert == nil {
-            let alert = NSAlert()
-            alert.alertStyle = .informational
-            alert.messageText = NSLocalizedString("EP Calipers preferences", comment:"")
-            alert.accessoryView = makeScrollablePreferencesAccessoryView()
-            alert.addButton(withTitle: NSLocalizedString("OK", comment:""))
-            alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
-            preferencesAlert = alert
-        }
-        guard let preferencesAlert = preferencesAlert else { return }
-        fillQTcFormulaPopUp()
-        fillRoundingPopUp()
-        fillTimeCaliperTextPositionPopUp()
-        fillAmplitudeCaliperTextPositionPopUp()
-        let timeCaliperTextPositionArray: [TextPosition] = [.centerAbove, .centerBelow, .left, .right]
-        let amplitudeCaliperTextPositionArray: [TextPosition] = [.top, .bottom, .left, .right]
-        let timeCaliperTextPositionIndex = timeCaliperTextPositionArray.firstIndex(of: appPreferences.timeCaliperTextPosition) ?? 0
-        let amplitudeCaliperTextPositionIndex = amplitudeCaliperTextPositionArray.firstIndex(of: appPreferences.amplitudeCaliperTextPosition) ?? 0
-        timeCaliperTextPositionPopUpButton.selectItem(at: timeCaliperTextPositionIndex)
-        amplitudeCaliperTextPositionPopUpButton.selectItem(at: amplitudeCaliperTextPositionIndex)
-        caliperColorWell.color = appPreferences.caliperColor
-        highlightedCaliperColorWell.color = appPreferences.highlightColor
-        lineWidthSlider.integerValue = appPreferences.lineWidth
+        let controller = SettingsViewController(mainWindowController: self)
+        controller.showModalWindow()
+        return;
+    }
 
-        defaultHorizontalCalibrationTextField.stringValue = appPreferences.defaultHorizontalCalibration
-        defaultVerticalCalibrationTextField.stringValue = appPreferences.defaultVerticalCalibration
+    func settingsDidChange(previousTransparency: Bool) {
+        calipersView.updateCaliperPreferences()
+        calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration,
+                                                     vertical: appPreferences.defaultVerticalCalibration)
 
-        numberOfMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
-        numberOfMeanRRIntervalsStepper.integerValue = appPreferences.defaultNumberOfMeanRRIntervals
-        numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
-        numberOfQTcMeanRRIntervalsTextField.integerValue = appPreferences.defaultNumberOfQTcMeanRRIntervals
-        showPromptsCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showPrompts ? 1 : 0)
-
-        marchingComponentsTextField.integerValue = appPreferences.numberOfMarchingComponents
-        marchingComponentsStepper.integerValue = appPreferences.numberOfMarchingComponents
-
-        noteTextFontSizeTextField.integerValue = appPreferences.noteTextFontSize
-        noteTextFontSizeStepper.integerValue = appPreferences.noteTextFontSize
-        noteTextBoxWidthTextField.integerValue = Int(appPreferences.noteTextBoxWidth)
-        noteTextBoxWidthStepper.integerValue = Int(appPreferences.noteTextBoxWidth)
-        noteTextBoxHeightTextField.integerValue = Int(appPreferences.noteTextBoxHeight)
-        noteTextBoxHeightStepper.integerValue = Int(appPreferences.noteTextBoxHeight)
-        noteTextColorWell.color = appPreferences.noteTextColor
-
-        caliperTextFontSizeTextField.integerValue = appPreferences.caliperTextFontSize
-        caliperTextFontSizeStepper.integerValue = appPreferences.caliperTextFontSize
-
-        deemphasizeMarchingComponentsCheckbox.state = NSControl.StateValue(rawValue: appPreferences.deemphasizeMarchingComponents ? 1 : 0)
-        
-        transparencyCheckBox.state = NSControl.StateValue(rawValue: appPreferences.transparency ? 1 : 0)
-        showSampleECGCheckBox.state = NSControl.StateValue(rawValue: appPreferences.showSampleECG ? 1 : 0)
-        autoPositionTextCheckBox.state = NSControl.StateValue(rawValue: appPreferences.autoPositionText ? 1 : 0)
-        formulaPopUpButton.selectItem(at: appPreferences.qtcFormula.rawValue)
-        roundingPopUpButton.selectItem(at: appPreferences.rounding.rawValue)
-        let result = preferencesAlert.runModal()
-        if result == NSApplication.ModalResponse.alertFirstButtonReturn {
-            // assign new preferences
-            appPreferences.caliperColor = caliperColorWell.color
-            appPreferences.highlightColor = highlightedCaliperColorWell.color
-            appPreferences.lineWidth = lineWidthSlider.integerValue
-            // Note stepper is limited to number range, while text field isn't.
-            appPreferences.numberOfMarchingComponents = marchingComponentsStepper.integerValue
-            // Avoid empty calibration strings, so reset to defaults if empty
-            if !defaultHorizontalCalibrationTextField.stringValue.isEmpty {
-                appPreferences.defaultHorizontalCalibration = defaultHorizontalCalibrationTextField.stringValue
-            }
-            if !defaultVerticalCalibrationTextField.stringValue.isEmpty {
-                appPreferences.defaultVerticalCalibration = defaultVerticalCalibrationTextField.stringValue
-            }
-            appPreferences.defaultNumberOfMeanRRIntervals = numberOfMeanRRIntervalsStepper.integerValue
-            appPreferences.defaultNumberOfQTcMeanRRIntervals = numberOfQTcMeanRRIntervalsStepper.integerValue
-            appPreferences.showPrompts = showPromptsCheckBox.integerValue == 1 ? true : false
-            appPreferences.transparency = transparencyCheckBox.integerValue == 1 ? true : false
-            appPreferences.showSampleECG = showSampleECGCheckBox.integerValue == 1 ? true : false
-            appPreferences.autoPositionText = autoPositionTextCheckBox.integerValue == 1 ? true : false
-            appPreferences.timeCaliperTextPosition = timeCaliperTextPositionArray[timeCaliperTextPositionPopUpButton.indexOfSelectedItem]
-            appPreferences.amplitudeCaliperTextPosition = amplitudeCaliperTextPositionArray[amplitudeCaliperTextPositionPopUpButton.indexOfSelectedItem]
-            appPreferences.qtcFormula = QTcFormulaPreference(rawValue: formulaPopUpButton.indexOfSelectedItem) ?? QTcFormulaPreference.Bazett
-            appPreferences.rounding = Rounding(rawValue: roundingPopUpButton.indexOfSelectedItem) ?? Rounding.ToInteger
-            appPreferences.deemphasizeMarchingComponents = deemphasizeMarchingComponentsCheckbox.integerValue == 1 ? true : false
-            appPreferences.noteTextFontSize = noteTextFontSizeStepper.integerValue
-            appPreferences.noteTextBoxWidth = CGFloat(noteTextBoxWidthStepper.integerValue)
-            appPreferences.noteTextBoxHeight = CGFloat(noteTextBoxHeightStepper.integerValue)
-            appPreferences.noteTextColor =  noteTextColorWell.color
-            appPreferences.caliperTextFontSize = caliperTextFontSizeStepper.integerValue
-
-            appPreferences.savePreferences()
-
-            // update calipersView
-            calipersView.updateCaliperPreferences(
-                unselectedColor: appPreferences.caliperColor,
-                selectedColor: appPreferences.highlightColor,
-                lineWidth: appPreferences.lineWidth,
-                rounding: appPreferences.rounding,
-                autoPositionText: appPreferences.autoPositionText,
-                timeCaliperTextPosition: appPreferences.timeCaliperTextPosition,
-                amplitudeCaliperTextPosition: appPreferences.amplitudeCaliperTextPosition,
-                numberOfMarchingComponents: appPreferences.numberOfMarchingComponents,
-                deemphasizeMarchingComponents: appPreferences.deemphasizeMarchingComponents,
-                noteTextFontSize: CGFloat(appPreferences.noteTextFontSize),
-                noteTextBoxSize: NSSize(width: appPreferences.noteTextBoxWidth, height: appPreferences.noteTextBoxHeight),
-                noteTextColor: appPreferences.noteTextColor,
-                caliperTextFontSize: CGFloat(appPreferences.caliperTextFontSize)
-            )
-            // Update default calibration strings in CalipersView
-            calipersView.updateDefaultCalibrationStrings(horizontal: appPreferences.defaultHorizontalCalibration, vertical: appPreferences.defaultVerticalCalibration)
-            // update transparency
-            if transparent != appPreferences.transparency {
-                transparent = appPreferences.transparency
-            }
+        // Updating transparency has side effects, so only route through the property when it changed.
+        if previousTransparency != appPreferences.transparency {
+            transparent = appPreferences.transparency
         }
     }
 
-    private func makeScrollablePreferencesAccessoryView() -> NSView {
-        let contentSize = preferencesAccessoryView.fittingSize == .zero
-            ? preferencesAccessoryView.frame.size
-            : preferencesAccessoryView.fittingSize
-        let visibleFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? .zero
-        let maximumWidth = visibleFrame.width > 0 ? visibleFrame.width * 0.7 : contentSize.width
-        let maximumHeight = visibleFrame.height > 0 ? visibleFrame.height * 0.5 : contentSize.height
-        let accessorySize = NSSize(width: min(contentSize.width, maximumWidth),
-                                   height: min(contentSize.height, maximumHeight))
-
-        let scrollView = NSScrollView(frame: NSRect(origin: .zero, size: accessorySize))
-        scrollView.borderType = .noBorder
-        scrollView.drawsBackground = false
-        scrollView.autohidesScrollers = true
-        scrollView.hasVerticalScroller = contentSize.height > accessorySize.height
-        scrollView.hasHorizontalScroller = contentSize.width > accessorySize.width
-
-        preferencesAccessoryView.frame = NSRect(origin: .zero, size: contentSize)
-        scrollView.documentView = preferencesAccessoryView
-        return scrollView
-    }
-    
-    private func fillQTcFormulaPopUp() {
-        formulaPopUpButton.removeAllItems()
-        formulaPopUpButton.addItem(withTitle: "Bazett")
-        formulaPopUpButton.addItem(withTitle: "Framingham")
-        formulaPopUpButton.addItem(withTitle: "Hodges")
-        formulaPopUpButton.addItem(withTitle: "Fridericia")
-        formulaPopUpButton.addItem(withTitle: NSLocalizedString("All", comment: ""))
-    }
-
-    private func fillRoundingPopUp() {
-        roundingPopUpButton.removeAllItems()
-        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To integer", comment: ""))
-        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To 4 digits", comment: ""))
-        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To tenths", comment: ""))
-        roundingPopUpButton.addItem(withTitle: NSLocalizedString("To hundredths", comment: ""))
-        // TODO: remove in production.  For debugging only.
-        //roundingPopUpButton.addItem(withTitle: "Raw")
-    }
-
-    private func fillTimeCaliperTextPositionPopUp() {
-        timeCaliperTextPositionPopUpButton.removeAllItems()
-        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Center above", comment: ""))
-        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Center below", comment: ""))
-        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Left", comment: ""))
-        timeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Right", comment: ""))
-    }
-
-    private func fillAmplitudeCaliperTextPositionPopUp() {
-        amplitudeCaliperTextPositionPopUpButton.removeAllItems()
-        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Top", comment: ""))
-        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Bottom", comment: ""))
-        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Left", comment: ""))
-        amplitudeCaliperTextPositionPopUpButton.addItem(withTitle: NSLocalizedString("Right", comment: ""))
-    }
-
-    @IBAction func numberOfMeanRRStepperAction(_ sender: AnyObject) {
-        numberOfMeanRRIntervalsTextField.integerValue = numberOfMeanRRIntervalsStepper.integerValue
-    }
-    
-    @IBAction func numberOfQTcMeanRRStepperAction(_ sender: AnyObject) {
-        numberOfQTcMeanRRIntervalsTextField.integerValue = numberOfQTcMeanRRIntervalsStepper.integerValue
-    }
-
-
-    
     @IBAction func gotoPage(_ sender: Any) {
         getPageNumber()
     }
@@ -668,19 +549,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         case 0:
             zoomFactor = scrollView.magnification
             scrollView.magnification = zoomFactor * zoomInFactor
-
-//            zoomFactor = imageView.zoomFactor
-//            imageView.zoomFactor = zoomFactor * zoomInFactor
             calipersView.updateCalibration()
         case 1:
             zoomFactor = scrollView.magnification
             scrollView.magnification = scrollView.magnification * zoomOutFactor
-//            zoomFactor = imageView.zoomFactor
-//            imageView.zoomFactor = zoomFactor * zoomOutFactor
             calipersView.updateCalibration()
         case 2:
             scrollView.magnification = 1.0
-//            imageView.zoomImageToActualSize(self)
             calipersView.updateCalibration()
         default:
             break
@@ -721,7 +596,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         /* Present open panel. */
         guard let window = self.window else { return }
         let openPanel = NSOpenPanel()
-        openPanel.allowedFileTypes = validFileExtensions()
+        openPanel.allowedContentTypes = validFileContentTypes()
         openPanel.canSelectHiddenExtension = true
         openPanel.beginSheetModal(for: window,
             completionHandler: {
@@ -737,6 +612,10 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let extensions = "jpg/jpeg/JPG/JPEG/png/PNG/tiff/tif/TIFF/TIF/bmp/BMP/pdf/PDF"
         return extensions.components(separatedBy: "/")
     }
+
+    func validFileContentTypes() -> [UTType] {
+        validFileExtensions().compactMap { UTType(filenameExtension: $0) }
+    }
     
     func openURL(_ url: URL?, addToRecentDocuments: Bool) {
         // ensure no opening of anything if transparent mode
@@ -747,12 +626,14 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             alert.alertStyle = .warning
             alert.addButton(withTitle: NSLocalizedString("Turn off transparency and load image", comment:""))
             alert.addButton(withTitle: NSLocalizedString("Keep transparency and don't load image", comment:""))
+            hideWelcomeView()
+            hideWelcomeView()
             alert.addButton(withTitle: NSLocalizedString("Cancel", comment:""))
             let result = alert.runModal()
             if result == NSApplication.ModalResponse.alertFirstButtonReturn {
                 transparent = false
                 appPreferences.transparency = transparent
-                appPreferences.savePreferences()
+                appPreferences.save()
             }
             else {
                 return
@@ -818,7 +699,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             // if you are loading a large image and then try to scroll it.  Must load as below.
             if reachable, let data = NSData(contentsOf: url), let image = NSImage(data: data as Data) {
                 self.imageView.setImage(image.cgImage(forProposedRect: nil, context: nil, hints: nil), imageProperties: nil)
-                self.imageView.zoomImageToActualSize(self)
+                //self.imageView.zoomImageToActualSize(self)
+                zoomImageViewToLogicalActualSize()
                 let urlPath = url.path
                 if !isSampleECG {
                     // We just use app name when showing sample ECG
@@ -826,7 +708,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                     self.window?.setTitleWithRepresentedFilename(urlPath)
                 }
                 self.imageURL = url
+                hideWelcomeView()
                 self.clearCalibration()
+                scrollView.magnification = 1.0
                 if addToRecentDocuments {
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
@@ -864,7 +748,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
 
         let savePanel = NSSavePanel()
-        savePanel.allowedFileTypes = ["png"]
+        savePanel.allowedContentTypes = [.png]
         savePanel.canCreateDirectories = true
         savePanel.canSelectHiddenExtension = true
         savePanel.isExtensionHidden = false
@@ -906,11 +790,15 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 pdfRef = pdf
                 numberOfPDFPages = pdf.pageCount
                 imageIsPDF = true
-                showPDFPage(pdf, page: 0)
+                showPDFPage(pdf, page: 0, preserveRotation: false)
+                hideWelcomeView()
                 let urlPath = url.path
+                self.oldWindowTitle = urlPath
                 self.window?.setTitleWithRepresentedFilename(urlPath)
                 imageURL = url
                 clearCalibration()
+                // New PDF files reset magnification to 1.0.
+                scrollView.magnification = 1.0
                 if addToRecentDocuments {
                     NSDocumentController.shared.noteNewRecentDocumentURL(url)
                 }
@@ -928,21 +816,39 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
     }
 
-    func showPDFPage(_ pdf: NSPDFImageRep, page: Int) {
-        // consider add preference for low res, hi res (2.0, 4.0 scale?)
-        let scale: CGFloat = 4.0
+    func showPDFPage(_ pdf: NSPDFImageRep, page: Int, preserveRotation: Bool = true) {
+        let scale = CGFloat(appPreferences.pdfRenderScale.rawValue)
+        let rotationAngle = preserveRotation ?  imageView.rotationAngle : 0.0
         pdf.currentPage = page
         var tempImage = NSImage()
         tempImage.addRepresentation(pdf)
         tempImage = scaleImage(tempImage, byFactor: scale)
         guard let image = nsImageToCGImage(tempImage) else { return }
         imageView.setImage(image, imageProperties: nil)
-        imageView.zoomImageToActualSize(self)
-        // keep size of image manageable by scaling down
-        imageView.zoomFactor = imageView.zoomFactor / scale
+        imageView.rotationAngle = appPreferences.resetImageRotationBetweenPages ? 0 : rotationAngle
+        zoomImageViewToLogicalActualSize()
+
+        if appPreferences.resetImageZoomBetweenPages {
+            scrollView.magnification = 1.0
+        }
+        if appPreferences.clearCalipersBetweenPages {
+            calipersView.deleteAllCalipers()
+        }
+        if appPreferences.recalibrateWhenChangingPages {
+            clearCalibration()
+        }
         calipersView.updateCalibration()
     }
-    
+
+    private func zoomImageViewToLogicalActualSize() {
+        imageView.zoomImageToActualSize(self)
+
+        if imageIsPDF {
+            let scale = CGFloat(appPreferences.pdfRenderScale.rawValue)
+            imageView.zoomFactor = imageView.zoomFactor / scale
+        }
+    }
+
     // see http://stackoverflow.com/questions/12223739/ios-to-mac-graphiccontext-explanation-conversion
     func scaleImage(_ image: NSImage, byFactor factor: CGFloat) -> NSImage {
         let newSize = NSMakeSize(image.size.width * factor, image.size.height * factor)
@@ -957,7 +863,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         scaledImage.unlockFocus()
         return scaledImage
     }
-    
+
     // convert NSImage to CGImage
     // from http://lists.apple.com/archives/cocoa-dev/2010/May/msg01171.html
     func nsImageToCGImage(_ image: NSImage) -> CGImage? {
@@ -970,7 +876,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         return imageRef
     }
-    
+
     @IBAction func previousPage(_ sender: AnyObject) {
         pdfPageNumber -= 1
         pdfPageNumber = pdfPageNumber < 0 ? 0 : pdfPageNumber
@@ -978,7 +884,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             showPDFPage(pdf, page: pdfPageNumber)
         }
     }
-    
+
     @IBAction func nextPage(_ sender: AnyObject) {
         pdfPageNumber += 1
         pdfPageNumber = pdfPageNumber >= numberOfPDFPages ? numberOfPDFPages - 1 : pdfPageNumber
@@ -986,7 +892,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             showPDFPage(pdf, page: pdfPageNumber)
         }
     }
-    
+
     @IBAction func doRotation(_ sender: AnyObject) {
         var rotationType: Int
         if sender is NSSegmentedControl {
@@ -1031,7 +937,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     }
     
     func adjustImageAfterRotation() {
-        imageView.zoomImageToActualSize(self)
+        zoomImageViewToLogicalActualSize()
+//            imageView.zoomImageToActualSize(self)
         // since rotation can adjust zoom factor, must clear calibration
         clearCalibration()
     }
@@ -1043,6 +950,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         // initiallize with Preferences here
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
         caliper.rounding = appPreferences.rounding
+        caliper.allowNegativeValues = appPreferences.allowNegativeCaliperValues
         caliper.unselectedColor = appPreferences.caliperColor
         caliper.selectedColor = appPreferences.highlightColor
         caliper.color = caliper.unselectedColor
@@ -1057,7 +965,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             caliper.calibration = calipersView.verticalCalibration
             caliper.textPosition = appPreferences.amplitudeCaliperTextPosition
         }
-        caliper.setInitialPositionInRect(calipersView.bounds)
+        calipersView.setInitialPosition(caliper)
         calipersView.calipers.append(caliper)
         calipersView.updateCalibration()
         calipersView.needsDisplay = true
@@ -1075,6 +983,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         let caliper = AngleCaliper()
         caliper.lineWidth = CGFloat(appPreferences.lineWidth)
         caliper.rounding = appPreferences.rounding
+        caliper.allowNegativeValues = appPreferences.allowNegativeCaliperValues
         caliper.direction = .horizontal
         caliper.autoPositionText = appPreferences.autoPositionText
         caliper.textPosition = appPreferences.timeCaliperTextPosition
@@ -1083,7 +992,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         caliper.unselectedColor = appPreferences.caliperColor
         caliper.selectedColor = appPreferences.highlightColor
         caliper.color = caliper.unselectedColor
-        caliper.setInitialPositionInRect(calipersView.bounds)
+        calipersView.setInitialPosition(caliper)
         calipersView.calipers.append(caliper)
         calipersView.updateCalibration()
         calipersView.needsDisplay = true
@@ -1131,7 +1040,6 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         default:
             break
         }
-
     }
     
     @IBAction func deleteAllCalipers(_ sender: AnyObject) {
@@ -1145,7 +1053,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     func calibrateWithPossiblePrompts() {
         if appPreferences.showPrompts {
             if inCalibration {
-                // user pressed Calibrate again instead of Next, it's OK, do what s/he wants
+                // user pressed Calibrate, it's OK, do what s/he wants
                 calibrate()
                 return
             }
@@ -1174,16 +1082,12 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         }
         if let c = calipersView.activeCaliper() {
             if !c.requiresCalibration {
+                // Only angle calipers don't require calibration - so far.
                 showAngleCaliperNoCalibrationAlert()
                 return
             }
-            var example: String
-            if c.direction == .vertical {
-                example = NSLocalizedString("1 mV", comment:"")
-            }
-            else {
-                example = NSLocalizedString("1000 msec", comment:"")
-            }
+
+            let example = c.direction == .vertical ? "1 mV" : "1000 msec"
             let message = String(format:NSLocalizedString("Enter calibration measurement (e.g. %@)", comment:""), example)
 
             if calipersView.horizontalCalibration.calibrationString.isEmpty {
@@ -1193,9 +1097,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 calipersView.verticalCalibration.calibrationString = appPreferences.defaultVerticalCalibration
             }
 
-
             let direction = c.direction
-
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("Calibrate caliper", comment:"")
             alert.informativeText = message
@@ -1231,6 +1133,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                         appPreferences.lastCustomVerticalCalibration = inputText
                     }
                 }
+                appPreferences.save()
                 if !inputText.isEmpty {
                     calibrateWithText(inputText)
                     exitCalibration()
@@ -1355,7 +1258,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             trimmedUnits = scanner.string[scanner.currentIndex...].trimmingCharacters(in: CharacterSet.whitespaces)
             value = abs(value)
             if value > 0 {
-                guard let c = calipersView.activeCaliper(), abs(c.points()) > 0 else { return }
+                guard let c = calipersView.activeCaliper(), calipersView.nonZeroPoints(c) else { return }
 
                 var calibration: Calibration
                 if c.direction == .horizontal {
@@ -1369,9 +1272,8 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 if !calibration.canDisplayRate {
                     calibration.displayRate = false
                 }
-                calibration.originalZoom = Double(scrollView.magnification)
-                calibration.originalCalFactor = value / Double(abs(c.points()))
-                calibration.currentZoom = calibration.originalZoom
+                calibration.magnificationAtCalibration = Double(scrollView.magnification)
+                calibration.calibrationFactorAtCalibration = value / calipersView.points(for: c)
                 calibration.calibrated = true
             }
             calipersView.needsDisplay = true
@@ -1507,7 +1409,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             calipersView.verticalCalibration.reset()
         }
     }
-    
+
     func toggleIntervalRate() {
         // Don't do anthing if no time caliper on screen.
         guard !noTimeCaliperExists() else { return }
@@ -1581,7 +1483,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 // get integer from the stepper
                 let divisor = numberStepper.integerValue
                 assert (divisor != 0)
-                let intervalResult = abs(c.intervalResult())
+                let intervalResult = abs(calipersView.getIntervalResult(c))
                 let meanInterval = intervalResult / Double(divisor)
                 let meanRate = c.rateResult(meanInterval)
                 let intervalUnits = c.calibration.rawUnits
@@ -1691,7 +1593,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
                 // get integer from the stepper
                 let divisor = qtcNumberStepper.integerValue
                 assert (divisor != 0)
-                let intervalResult = abs(c.intervalResult())
+                let intervalResult = calipersView.getIntervalResult(c)
                 let meanInterval = intervalResult / Double(divisor)
                 rrIntervalForQTc = c.intervalInSecs(meanInterval)
                 // now measure QT...
@@ -1714,7 +1616,7 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
     
     func doQTcResult() {
         if let c = calipersView.activeCaliper() {
-            let qt = abs(c.intervalInSecs(c.intervalResult()))
+            let qt = abs(c.intervalInSecs(calipersView.getIntervalResult(c)))
             let meanRR = abs(rrIntervalForQTc)
             
             let qtcResult: QTcResultProtocol = QTcResult()
@@ -1811,55 +1713,13 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
         qtcNumberTextField.integerValue = qtcNumberStepper.integerValue
     }
 
-
-    @IBAction func marchingComponentsStepperAction(_ sender: Any) {
-        marchingComponentsTextField.integerValue = marchingComponentsStepper.integerValue
-    }
-
-    @IBAction func noteTextFontSizeStepperAction(_ sender: Any) {
-        noteTextFontSizeTextField.integerValue = noteTextFontSizeStepper.integerValue
-    }
-
-    @IBAction func noteTextBoxWidthStepperAction(_ sender: Any) {
-        noteTextBoxWidthTextField.integerValue = noteTextBoxWidthStepper.integerValue
-    }
-
-    @IBAction func noteTextBoxHeightStepperAction(_ sender: Any) {
-        noteTextBoxHeightTextField.integerValue = noteTextBoxHeightStepper.integerValue
-    }
-
-    @IBAction func caliperTextFontSizeStepperAction(_ sender: Any) {
-        caliperTextFontSizeTextField.integerValue = caliperTextFontSizeStepper.integerValue
-    }
-
     func controlTextDidChange(_ obj: Notification) {
         if obj.name.rawValue == "NSControlTextDidChangeNotification" {
             if obj.object as AnyObject? === numberTextField {
                 numberStepper.integerValue = numberTextField.integerValue
             }
-            if obj.object as AnyObject? === numberOfMeanRRIntervalsTextField {
-                numberOfMeanRRIntervalsStepper.integerValue = numberOfMeanRRIntervalsTextField.integerValue
-            }
-            if obj.object as AnyObject? === numberOfQTcMeanRRIntervalsTextField {
-                numberOfQTcMeanRRIntervalsStepper.integerValue = numberOfQTcMeanRRIntervalsTextField.integerValue
-            }
             if obj.object as AnyObject? === qtcNumberTextField {
                 qtcNumberStepper.integerValue = qtcNumberTextField.integerValue
-            }
-            if obj.object as AnyObject? === marchingComponentsTextField {
-                marchingComponentsStepper.integerValue = marchingComponentsTextField.integerValue
-            }
-            if obj.object as AnyObject? === noteTextFontSizeTextField {
-                noteTextFontSizeStepper.integerValue = noteTextFontSizeTextField.integerValue
-            }
-            if obj.object as AnyObject? === noteTextBoxWidthTextField {
-                noteTextBoxWidthStepper.integerValue = noteTextBoxWidthTextField.integerValue
-            }
-            if obj.object as AnyObject? === noteTextBoxHeightTextField {
-                noteTextBoxHeightStepper.integerValue = noteTextBoxHeightTextField.integerValue
-            }
-            if obj.object as AnyObject? === caliperTextFontSizeTextField {
-                caliperTextFontSizeStepper.integerValue = caliperTextFontSizeTextField.integerValue
             }
         }
     }
@@ -1975,6 +1835,7 @@ extension MainWindowController: NSTouchBarDelegate {
         }
     }
 }
+
 
 extension IKImageView {
     func hasImage() -> Bool {

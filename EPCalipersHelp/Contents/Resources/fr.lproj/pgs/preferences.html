@@ -202,47 +202,114 @@
 </head>
 <body>
 <div id="content" class="content">
-<div id="outline-container-org0ad960a" class="outline-2">
-<h2 id="org0ad960a"><img src="../../shrd/64.png" alt="64.png" /> Préférences</h2>
-<div class="outline-text-2" id="text-org0ad960a">
+<div id="outline-container-orgedb6bc6" class="outline-2">
+<h2 id="orgedb6bc6"><img src="../../shrd/64.png" alt="64.png" /> Réglages</h2>
+<div class="outline-text-2" id="text-orgedb6bc6">
 <a name="EP Diagram preferences"></a>
 <p>
-Les préférences d’application peuvent être choisies en utilisant la commande de menu <b>Compas EP | Préférences</b>.  Vous pouvez changer les couleurs de compas, la larguer de ligne de compas, la position du texte de compas, l’intervalle d”étalonnage par défaut et le nombre d’intervalles pour calculer les intervalles moyens.  Par exemple, si vous utilisez toujours un intervalle RR pour calculer le QTc, mettre le <i>Nombre d’intervalles RR pour QTc</i> à un intervalle.  Noter que vous pouvez changer ces nombres quand vous prenez les mesures.  Vous pouvez aussi utilisez le dialog de préférences pour activer la fênetre transparente.
+Les réglages peuvent être modifiés avec la commande de menu <b>Compas EP | Réglages</b>.  Ils sont regroupés dans les onglets Général, Compas, Notes et PDF.  Vous pouvez ajuster le comportement au démarrage, l’apparence des compas, les valeurs par défaut des mesures, la position des étiquettes, l’apparence des notes et le comportement des pages PDF.
 </p>
 
-<div id="orgfc151ac" class="figure">
-<p><img src="../gfx/settings.fr.png" alt="settings.fr.png" />
+<p>
+De nombreux réglages définissent les valeurs par défaut utilisées lors de nouvelles mesures.  Par exemple, si vous utilisez habituellement un seul intervalle RR pour les mesures du QTc, réglez le nombre par défaut d’intervalles RR moyens pour le QTc sur 1.  Vous pouvez toujours remplacer ces valeurs par défaut au moment de la mesure.
 </p>
-<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Préférences</p>
+
+<div id="orgbd8b499" class="figure">
+<p>
+<picture>
+  <source
+    srcset="../gfx/settings.dark.fr.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../gfx/settings.fr.png"
+  />
+</picture>
+</p>
+<p><span class="figure-number">Figure 1: </span>Réglages</p>
 </div>
 </div>
-<div id="outline-container-org1e567fc" class="outline-3">
-<h3 id="org1e567fc">Préférences expliquées</h3>
-<div class="outline-text-3" id="text-org1e567fc">
+<div id="outline-container-org6f9b0a5" class="outline-3">
+<h3 id="org6f9b0a5">Réglages expliqués</h3>
+<div class="outline-text-3" id="text-org6f9b0a5">
+</div>
+<div id="outline-container-org63b7677" class="outline-4">
+<h4 id="org63b7677">Général</h4>
+<div class="outline-text-4" id="text-org63b7677">
 <ul class="org-ul">
-<li>Afficher l'échantillon d'ECG au démarrage: Choisir d'afficher un échantillon d'ECG normal au démarrage.</li>
-<li>Couleur de compas: C’est la couleur d’un compas ajouté qui est non choisi.  Cette couleur peut étre plus tard changée par un clic-droit sur le compas et puis en choisissant <b>Couleur de compas</b>.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
-<li>Couleur de compas choisi: C’est la couleur d’un compas sélectioné.</li>
-<li>Largeur de ligne: Utiliser la glissière pour ajuster la larguer de ligne des compas.</li>
-<li>Taille de la police des compas: Ajuster la taille de la police des compas.</li>
-<li>Étalonnage de temps: C’est la valeur par défaut qui apparait dans la boîte de texte en étalonnant les compas de temps.  Si vous souvent utiliser une certaine valeur d’étalonnage (p.e. 200 msec), alors vous devriez cette préférence.</li>
-<li>Étalonnage d’amplitude: C’est la valeur par défaut pour étalonner les compas d’amplitude.</li>
-<li>No. d’int pour RR moyen: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen.</li>
-<li>No. d’int RR pour QTc: Le nombre d’intervalles par défaut que vous utilisez pour mesurer l’intervalle RR moyen pour calculer le QT corrigé.</li>
-<li>Formule QTc: Choisir une formule pour calculer le QTc.  Choisir « Toutes » pour utiliser toutes les formules.</li>
-<li>Des message-guides: Des messages-guides sont utiles quand vous êtes en train d’apprendre l’application. Vous pouvez l’accélérer en désactivant cette option.  Des messages-guides vous guident dans les étapes d’étalonnage et de mesures.</li>
-<li>Arrondir msec et bpm: Choisir comment arrondir les intervalles dans msec et les fréquences.  Les choix sont d’arrondir à l’entier le plus proche (examples: 305,463 devient 305, 1010,728 devient 1011), à 4 chiffres (305,5 et 1011), à 1 decimale (305,5 et 1010,7), ou à 2 decimales (305,46 et 1010,73).  Noter que les valeurs dans secs ou autres unités et les valeurs calculées comme le QTc sont toujours arrondées à 4 chiffres.</li>
-<li>Fênetre transparente: La fênetre primaire doit transparente.  <b>Compas EP</b> peut alors être utilisé comme un compas flottant pour mesurer des images sur votre bureau.</li>
-<li>Auto-positionner texte: Positionner automatiquement le texte de chaque compas par rapport au compas.  Par exemple, si la position du texte est à droite et le compas est trop proche au côté droit de la fenêtre, elle changera à gauche.</li>
-<li>Position du texte pour compas de temps: Positionner le texte pour les compas de temps au-dessus du centre, au-dessous du centre, à gauche ou à droite du compas.</li>
-<li>Position du texte pour compas d'amplitude: Positionner le texte pour les compas d'amplitude au-dessus, au-dessous, à gauche ou à droite du compas.</li>
-<li>Atténuer les composants marchants: Faire les composants marchants apparaître un peu atténués.</li>
-<li>Nombre de composants marchants: Adjuster le nombre de composants marchants de 1 à 20.</li>
-<li>Taille de la police du texte des notes: Ajuster la taille de la police du texte des nouvelles notes.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></li>
-<li>Couleur du texte des notes: Ajuster la couleur du texte des nouvelles notes.</li>
-<li>Largeur de la zone de texte des notes, longeur de la zone de texte des notes: Ces paramètres ajustent la taille de la zone de texte dans laquelle apparaissent les nouvelles notes.</li>
+<li>Mode transparent au démarrage: Rendez la fenêtre principale transparente.  <b>Compas EP</b> peut alors être utilisé comme un compas flottant pour mesurer tout élément ouvert sur votre bureau.  Ce réglage prend effet immédiatement et démarre aussi l’application en mode fenêtre transparente au prochain lancement.</li>
+<li>Afficher un exemple d’ECG au démarrage: Sélectionnez cette option pour afficher un exemple d’ECG normal au démarrage.  Si elle n’est pas cochée, l’application démarre avec un écran d’accueil.</li>
+<li>Afficher les messages-guides: Les messages-guides vous accompagnent pendant les étapes d’étalonnage et de mesure.  Ils sont utiles lorsque vous apprenez à utiliser le programme, mais il est plus rapide de désactiver cette option.  Notez que, même lorsque cette option est décochée, les messages-guides sont toujours affichés pendant les mesures du QTc.</li>
 </ul>
 </div>
+</div>
+<div id="outline-container-orgac2b6d8" class="outline-4">
+<h4 id="orgac2b6d8">Compas</h4>
+<div class="outline-text-4" id="text-orgac2b6d8">
+<ul class="org-ul">
+<li>Apparence
+<ul class="org-ul">
+<li>Couleur du compas non sélectionné: C’est la couleur des nouveaux compas non sélectionnés.  Notez que cette couleur peut être modifiée pour un compas particulier en faisant un clic droit sur le compas et en choisissant <b>Couleur du compas</b>.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
+<li>Couleur du compas sélectionné: C’est la couleur du compas sélectionné.</li>
+<li>Largeur de ligne du compas: Augmentez ou diminuez ce curseur pour rendre les lignes des compas plus épaisses ou plus fines.</li>
+<li>Afficher le triangle de Brugada: Affichez automatiquement la base du triangle de Brugada sur les compas d’angle lorsque les compas de temps sont étalonnés et que les compas d’amplitude sont étalonnés en millimètres.</li>
+</ul></li>
+<li>Mesure
+<ul class="org-ul">
+<li>Arrondir les mesures: Choisissez la façon dont les valeurs en msec et les fréquences sont affichées.  Les choix comprennent l’arrondi à l’entier le plus proche (par exemple 305,463 devient 305 et 1010,728 devient 1011), l’affichage de 4 chiffres significatifs (par exemple 305,5 et 1011), l’arrondi aux dixièmes (par exemple 305,5 et 1010,7) et l’arrondi aux centièmes (305,46 et 1010,73).  Notez que les valeurs en secondes, les valeurs utilisant d’autres unités et les valeurs calculées comme le QTc sont toujours affichées avec 4 chiffres.</li>
+<li>Formule QTc: Choisissez une formule de QTc.  Choisissez « Toutes » pour utiliser toutes les formules.</li>
+<li>Nombre d’intervalles RR moyens pour le QTc: Le nombre d’intervalles utilisé par défaut pour mesurer l’intervalle RR moyen lors des mesures du QTc.</li>
+<li>Nombre d’intervalles RR moyens: Le nombre d’intervalles utilisé par défaut pour mesurer les intervalles RR moyens.</li>
+<li>Autoriser les valeurs négatives des compas: Si cette option est cochée, les mesures des compas peuvent avoir des valeurs négatives.</li>
+</ul></li>
+<li>Étalonnage
+<ul class="org-ul">
+<li>Étalonnage de temps: C’est la valeur par défaut qui apparaît dans la zone de texte d’étalonnage personnalisé lors de l’étalonnage des compas de temps.  Si vous utilisez habituellement une certaine valeur d’étalonnage, par exemple 200 msec, il est utile de modifier cette valeur par défaut.</li>
+<li>Étalonnage d’amplitude: C’est la valeur par défaut pour l’étalonnage personnalisé des compas d’amplitude.  Saisissez la valeur que vous utilisez habituellement pour l’étalonnage.</li>
+</ul></li>
+<li>Étiquettes
+<ul class="org-ul">
+<li>Taille de la police des étiquettes de compas: Ajustez la taille du texte des étiquettes de compas.</li>
+<li>Positionnement automatique des étiquettes: Le texte du compas évite d’être masqué par les bords de la fenêtre ou par le compas lui-même en se déplaçant.  Par exemple, si une étiquette de compas se trouve à droite du compas et que celui-ci est trop proche du bord droit de la fenêtre, l’étiquette se déplace vers la gauche du compas.</li>
+<li>Position de l’étiquette des compas de temps: Placez l’étiquette des compas de temps au-dessus ou au-dessous du centre de la barre transversale, ou à gauche ou à droite du compas.</li>
+<li>Position de l’étiquette des compas d’amplitude: Placez l’étiquette des compas d’amplitude en haut ou en bas du compas, ou à gauche ou à droite de la barre transversale.</li>
+</ul></li>
+<li>Compas marchants
+<ul class="org-ul">
+<li>Atténuer les composants marchants: Si cette option est sélectionnée, les composants marchants apparaissent légèrement moins visibles que le compas principal.</li>
+<li>Nombre de composants marchants: Ajustez le nombre de composants de compas marchant, de 1 à un maximum de 20.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6e1abb8" class="outline-4">
+<h4 id="org6e1abb8">Notes</h4>
+<div class="outline-text-4" id="text-org6e1abb8">
+<ul class="org-ul">
+<li>Taille de la police du texte des notes: Ajustez la taille du texte des nouvelles notes.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></li>
+<li>Couleur du texte des notes: Ajustez la couleur du texte des nouvelles notes.</li>
+<li>Largeur de la zone de texte des notes: Définissez la largeur de la zone de texte des notes.</li>
+<li>Hauteur de la zone de texte des notes: Définissez la hauteur de la zone de texte des notes.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3af0cdc" class="outline-4">
+<h4 id="org3af0cdc">PDF</h4>
+<div class="outline-text-4" id="text-org3af0cdc">
+<ul class="org-ul">
+<li>Résolution PDF: Choisissez la résolution utilisée pour le rendu des pages PDF.  Une résolution plus élevée peut rendre les images PDF plus nettes, mais elle peut utiliser plus de mémoire et ralentir les changements de page.</li>
+<li>Effacer les compas entre les pages: Supprimez les compas de la page PDF précédente lors du changement de page.</li>
+<li>Réétalonner les compas entre les pages: Effacez automatiquement l’étalonnage lors du changement de page PDF.</li>
+<li>Réinitialiser le zoom de l’image entre les pages: Réinitialisez le zoom à la taille réelle de l’image lors du changement de page.</li>
+<li>Réinitialiser la rotation de l’image entre les pages: Réinitialisez la rotation de l’image lors du changement de page.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6962574" class="outline-2">
+<h2 id="org6962574">Notes de bas de page</h2>
+<div class="outline-text-2" id="text-org6962574">
 </div>
 </div>
 <div id="footnotes">
@@ -250,11 +317,11 @@ Les préférences d’application peuvent être choisies en utilisant la command
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-Toutes les modifications apportées aux paramètres de compas s'appliquent aussi bien aux anciennes qu'aux nouveaux compas.
+Toutes les modifications apportées aux réglages des compas s’appliquent aux compas déjà créés et aux nouveaux compas, sauf la couleur du compas non sélectionné, qui ne s’applique qu’aux nouveaux compas.
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-Tous les paramètres de note s'appliquent uniquement aux nouvelles notes.
+Tous les réglages des notes s’appliquent uniquement aux nouvelles notes.
 </p></div></div>
 
 

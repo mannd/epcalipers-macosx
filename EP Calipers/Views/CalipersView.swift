@@ -18,7 +18,6 @@ protocol CalipersViewDelegate: AnyObject {
     func resetTouchBar()
 }
 
-
 class CalipersView: NSView {
 
     weak var imageView: IKImageView? = nil
@@ -32,7 +31,9 @@ class CalipersView: NSView {
     var bar1Selected = false
     var bar2Selected = false
     var crossBarSelected = false
+
     private var lastContextMenuLocation: NSPoint?
+
     private final class NoteContainerView: NSView, NSTextViewDelegate {
         private var trackingArea: NSTrackingArea?
         private var showBorder = false
@@ -171,6 +172,7 @@ class CalipersView: NSView {
         var dragHandle: NoteDragHandleView?
         var absoluteAnchor: NSPoint
     }
+
     static let defaultMinimumFontSize: CGFloat = 10.0
     static let defaultMaximumFontSize: CGFloat = 36.0
     static let defaultNoteFontSize: CGFloat = NSFont.systemFontSize
@@ -191,8 +193,15 @@ class CalipersView: NSView {
     let horizontalCalibration = Calibration()
     let verticalCalibration = Calibration()
 
+    private var currentViewport: CalipersViewport {
+        CalipersViewport(
+            magnification: scrollView?.magnification ?? 1.0,
+            offset: getOffset()
+        )
+    }
+
     weak var delegate: CalipersViewDelegate? = nil;
-    
+
     // for color and tweak menu
     var chosenCaliper: Caliper? = nil
     
@@ -208,6 +217,14 @@ class CalipersView: NSView {
     // needed to handle key input
     override var acceptsFirstResponder: Bool {
         return true }
+
+    func setInitialPosition(_ c: Caliper) {
+        c.setInitialPositionInRect(bounds, in: currentViewport)
+    }
+
+    func getIntervalResult(_ c: Caliper) -> Double {
+        return c.intervalResult(in: currentViewport)
+    }
 
     func selectCaliper(_ c: Caliper) {
         c.color = c.selectedColor
@@ -246,13 +263,13 @@ class CalipersView: NSView {
         let location = theEvent.locationInWindow
         selectedCaliper = getSelectedCaliper(location)
         if let selectedCaliper = selectedCaliper {
-            if selectedCaliper.pointNearCrossBar(location) {
+            if selectedCaliper.pointNearCrossBar(location, in: currentViewport) {
                 crossBarSelected = true
             }
-            else if selectedCaliper.pointNearBar1(p: location) {
+            else if selectedCaliper.pointNearBar1(p: location, in: currentViewport) {
                 bar1Selected = true
             }
-            else if selectedCaliper.pointNearBar2(p: location) {
+            else if selectedCaliper.pointNearBar2(p: location, in: currentViewport) {
                 bar2Selected = true
             }
         }
@@ -285,7 +302,7 @@ class CalipersView: NSView {
         let pointInView = lastContextMenuLocation ?? .zero
         let isNearNote = nearNote(pointInView)
         chosenCaliper = getSelectedCaliper(event.locationInWindow)
-        chosenCaliper?.chosenComponent = chosenCaliper?.getSelectedCaliperComponent(atPoint: event.locationInWindow) ?? .noComponent
+        chosenCaliper?.chosenComponent = chosenCaliper?.getSelectedCaliperComponent(atPoint: event.locationInWindow, in: currentViewport) ?? .noComponent
         if chosenCaliper == nil && isTweakingComponent {
             isTweakingComponent = false
             delegate?.restoreLastMessage()
@@ -380,13 +397,9 @@ class CalipersView: NSView {
     }
 
     func updateCalibration() {
-        guard let scrollView = scrollView else { return }
-        horizontalCalibration.currentZoom = Double(scrollView.magnification)
-        verticalCalibration.currentZoom = Double(scrollView.magnification)
-        horizontalCalibration.offset = getOffset()
-        verticalCalibration.offset = getOffset()
         updateCaliperTextFontsForCurrentZoom()
         updateNoteFrames()
+
         if calipers.count > 0 {
             needsDisplay = true
         }
@@ -509,23 +522,23 @@ class CalipersView: NSView {
     }
 
     private func noteAnchorInAbsoluteSpace(from scaledAnchor: NSPoint) -> NSPoint {
-        let scale = CGFloat(horizontalCalibration.currentZoom)
+        let scale = CGFloat(currentViewport.magnification)
         let absoluteX = Position.translateToAbsolutePosition(scaledPosition: scaledAnchor.x,
-                                                             offset: horizontalCalibration.offset.x,
+                                                             offset: currentViewport.offset.x,
                                                              scale: scale)
         let absoluteY = Position.translateToAbsolutePosition(scaledPosition: scaledAnchor.y,
-                                                             offset: verticalCalibration.offset.y,
+                                                             offset: currentViewport.offset.y,
                                                              scale: scale)
         return NSPoint(x: absoluteX, y: absoluteY)
     }
 
     private func noteAnchorInView(fromAbsoluteAnchor absoluteAnchor: NSPoint) -> NSPoint {
-        let scale = CGFloat(horizontalCalibration.currentZoom)
+        let scale = CGFloat(currentViewport.magnification)
         let scaledX = Position.translateToScaledPosition(absolutePosition: absoluteAnchor.x,
-                                                         offset: horizontalCalibration.offset.x,
+                                                         offset: currentViewport.offset.x,
                                                          scale: scale)
         let scaledY = Position.translateToScaledPosition(absolutePosition: absoluteAnchor.y,
-                                                         offset: verticalCalibration.offset.y,
+                                                         offset: currentViewport.offset.y,
                                                          scale: scale)
         return NSPoint(x: scaledX, y: scaledY)
     }
@@ -556,25 +569,25 @@ class CalipersView: NSView {
     }
 
     private func noteFontSizeForCurrentZoom() -> CGFloat {
-        let zoom = CGFloat(horizontalCalibration.currentZoom)
+        let zoom = CGFloat(currentViewport.magnification)
         let scaledSize = noteFontSize * zoom
         return max(minimumFontSize, min(maximumFontSize, scaledSize))
     }
 
     private func noteSizeForCurrentZoom() -> NSSize {
-        let zoom = CGFloat(horizontalCalibration.currentZoom)
+        let zoom = CGFloat(currentViewport.magnification)
         return NSSize(width: noteSize.width * zoom, height: noteSize.height * zoom)
     }
 
     private func noteFontScaleRatioForCurrentZoom() -> CGFloat {
-        let currentZoom = max(CGFloat(horizontalCalibration.currentZoom), 0.0001)
+        let currentZoom = max(CGFloat(currentViewport.magnification), 0.0001)
         let previousZoom = previousNoteTextZoomScale ?? currentZoom
         previousNoteTextZoomScale = currentZoom
         return currentZoom / previousZoom
     }
 
     private func caliperFontSizeForCurrentZoom() -> CGFloat {
-        let zoom = CGFloat(horizontalCalibration.currentZoom)
+        let zoom = CGFloat(currentViewport.magnification)
         let scaledSize = caliperTextFontSize * zoom
         return max(minimumFontSize, min(maximumFontSize, scaledSize))
     }
@@ -630,7 +643,7 @@ class CalipersView: NSView {
     private func moveNote(at index: Int, byScaledDelta delta: NSPoint) {
         guard noteEntries.indices.contains(index) else { return }
         var entry = noteEntries[index]
-        let scale = CGFloat(horizontalCalibration.currentZoom)
+        let scale = CGFloat(currentViewport.magnification)
         if scale != 0 {
             entry.absoluteAnchor.x += delta.x / scale
             entry.absoluteAnchor.y += delta.y / scale
@@ -691,13 +704,13 @@ class CalipersView: NSView {
         guard let c = c else {
             return .noComponent
         }
-        if c.pointNearBar1(p: p) {
+        if c.pointNearBar1(p: p, in: currentViewport) {
             return c.direction == .horizontal ? .leftBar : .lowerBar
         }
-        else if c.pointNearBar2(p: p) {
+        else if c.pointNearBar2(p: p, in: currentViewport) {
             return c.direction == .horizontal ? .rightBar : .upperBar
         }
-        else if c.pointNearCrossBar(p) {
+        else if c.pointNearCrossBar(p, in: currentViewport) {
             return c.isAngleCaliper ? .apex : .crossBar
         }
         else {
@@ -709,7 +722,7 @@ class CalipersView: NSView {
     func getSelectedCaliper(_ point: CGPoint) -> Caliper?{
         var caliper: Caliper? = nil
         for c in calipers {
-            if c.pointNearCaliper(point) && caliper == nil {
+            if c.pointNearCaliper(point, in: currentViewport) && caliper == nil {
                 caliper = c
             }
         }
@@ -727,13 +740,13 @@ class CalipersView: NSView {
                 delta.y = -tmp
             }
             if crossBarSelected {
-                c.moveCrossBar(delta: delta)
+                c.moveCrossBar(delta: delta, in: currentViewport)
             }
             else if bar1Selected {
-                c.moveBar1(delta: delta, forLocation: location)
+                c.moveBar1(delta: delta, forLocation: location, in: currentViewport)
             }
             else if bar2Selected {
-                c.moveBar2(delta: delta, forLocation: location)
+                c.moveBar2(delta: delta, forLocation: location, in: currentViewport)
             }
             mouseWasDragged = true
             needsDisplay = true
@@ -825,7 +838,16 @@ class CalipersView: NSView {
         }
         return caliper
     }
-    
+
+    func nonZeroPoints(_ c: Caliper) -> Bool {
+        return abs(c.points(in: currentViewport)) > 0
+
+    }
+
+    func points(for c: Caliper) -> Double {
+        return c.points(in: currentViewport)
+    }
+
     override func keyDown(with theEvent: NSEvent) {
         interpretKeyEvents([theEvent])
     }
@@ -901,7 +923,7 @@ class CalipersView: NSView {
     func moveChosenComponent(movementDirection: MovementDirection, distance: CGFloat) {
         if let c = chosenCaliper {
             if isTweakingComponent {
-                c.moveBarInDirection(movementDirection: movementDirection, distance: distance)
+                c.moveBarInDirection(movementDirection: movementDirection, distance: distance, in: currentViewport)
                 needsDisplay = true
             }
         }
@@ -916,49 +938,34 @@ class CalipersView: NSView {
         }
     }
     
-    func updateCaliperPreferences(
-        unselectedColor: NSColor?,
-        selectedColor: NSColor?,
-        lineWidth: Int,
-        rounding: Rounding,
-        autoPositionText: Bool,
-        timeCaliperTextPosition: TextPosition,
-        amplitudeCaliperTextPosition: TextPosition,
-        numberOfMarchingComponents: Int,
-        deemphasizeMarchingComponents: Bool,
-        noteTextFontSize: CGFloat,
-        noteTextBoxSize: NSSize,
-        noteTextColor: NSColor?,
-        caliperTextFontSize: CGFloat
-    ) {
+    func updateCaliperPreferences() {
+        let prefs = Preferences.shared
         for c in calipers {
-            // we no longer set c.unselected color to the default.  Calipers keep their colors, only
-            // new calipers get the default color
-            if let color = selectedColor {
-                c.selectedColor = color
-            }
+            // Calipers keep their colors, only new calipers get the default color.
+            c.selectedColor = prefs.highlightColor
             if c.selected {
                 c.color = c.selectedColor
             }
-            c.lineWidth = CGFloat(lineWidth)
-            c.rounding = rounding
-            c.autoPositionText = autoPositionText
+            c.lineWidth = CGFloat(prefs.lineWidth)
+            c.rounding = prefs.rounding
+            c.allowNegativeValues = prefs.allowNegativeCaliperValues
+            c.autoPositionText = prefs.autoPositionText
             if c.direction == .horizontal {
-                c.textPosition = timeCaliperTextPosition
-                c.numberOfMarchingComponants = numberOfMarchingComponents
-                c.deemphasizeMarchingComponents = deemphasizeMarchingComponents
+                c.textPosition = prefs.timeCaliperTextPosition
+                c.numberOfMarchingComponants = prefs.numberOfMarchingComponents
+                c.deemphasizeMarchingComponents = prefs.deemphasizeMarchingComponents
             }
             else if c.direction == .vertical {
-                c.textPosition = amplitudeCaliperTextPosition
+                c.textPosition = prefs.amplitudeCaliperTextPosition
             }
-            c.textFont = .systemFont(ofSize: caliperTextFontSize)
+            c.textFont = .systemFont(ofSize: CGFloat(prefs.caliperTextFontSize))
         }
-        self.caliperTextFontSize = caliperTextFontSize
-        
+        self.caliperTextFontSize = CGFloat(prefs.caliperTextFontSize)
+
         // Note parameters only affect future notes
-        noteFontSize = noteTextFontSize
-        noteSize = noteTextBoxSize
-        self.noteTextColor = noteTextColor ?? .black
+        noteFontSize = CGFloat(prefs.noteTextFontSize)
+        noteSize = NSSize(width: prefs.noteTextBoxWidth, height: prefs.noteTextBoxHeight)
+        self.noteTextColor = prefs.noteTextColor
 
         needsDisplay = true
     }
@@ -966,7 +973,7 @@ class CalipersView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         guard let context = NSGraphicsContext.current?.cgContext else { return }
         for c in calipers {
-            c.drawWithContext(context, inRect: dirtyRect)
+            c.drawWithContext(context, inRect: dirtyRect, viewport: currentViewport)
         }
         // This matches the background of the other views.
         if hasNoImage() && !isTransparent {
@@ -984,7 +991,7 @@ class CalipersView: NSView {
 
     func caliper0Bar1Position() -> CGFloat? {
         if calipers.count > 0 {
-            return calipers[0].bar1Position
+            return calipers[0].bar1Position(in: currentViewport)
         }
         return nil
     }

@@ -202,46 +202,108 @@
 </head>
 <body>
 <div id="content" class="content">
-<div id="outline-container-org26b173f" class="outline-2">
-<h2 id="org26b173f"><img src="../../shrd/64.png" alt="64.png" /> Settings</h2>
-<div class="outline-text-2" id="text-org26b173f">
+<div id="outline-container-org71d3729" class="outline-2">
+<h2 id="org71d3729"><img src="../../shrd/64.png" alt="64.png" /> Settings</h2>
+<div class="outline-text-2" id="text-org71d3729">
 <a name="EP Diagram settings"></a>
 <p>
-Settings can be selected using the <b>EP Calipers | Settings</b> menu item.  You can change caliper colors, line width of the calipers, positioning of the text labels of calipers, default calibration intervals and number of intervals used to calculate mean intervals.  For example, if you usually use just 1 RR interval to calculate the QTc, set the number of mean RR intervals for the QTc measurement to 1 interval.  Remember though you can override any of these values when you actually do the measurements.  You can also use the dialog to change to a transparent window.
+Settings can be changed using the <b>EP Calipers | Settings</b> menu item.  Settings are grouped into General, Calipers, Notes, and PDF tabs.  You can adjust startup behavior, caliper appearance, measurement defaults, label placement, note appearance, and PDF page behavior.
 </p>
 
-<div id="org7ad78f0" class="figure">
-<p><img src="../gfx/settings.en.png" alt="settings.en.png" />
+<p>
+Many settings provide default values used when making new measurements.  For example, if you usually use one RR interval for QTc measurements, set the default number of mean RR intervals for QTc to 1.  You can still override these defaults while making a measurement.
+</p>
+
+<div id="orgbd7b499" class="figure">
+<p>
+<picture>
+  <source
+    srcset="../gfx/settings.dark.en.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="../gfx/settings.en.png"
+  />
+</picture>
 </p>
 <p><span class="figure-number">Figure 1: </span>Settings</p>
 </div>
 </div>
-<div id="outline-container-orgb9dbfb8" class="outline-3">
-<h3 id="orgb9dbfb8">Settings explained</h3>
-<div class="outline-text-3" id="text-orgb9dbfb8">
+<div id="outline-container-org115cbbf" class="outline-3">
+<h3 id="org115cbbf">Settings explained</h3>
+<div class="outline-text-3" id="text-org115cbbf">
+</div>
+<div id="outline-container-org6e8e801" class="outline-4">
+<h4 id="org6e8e801">General</h4>
+<div class="outline-text-4" id="text-org6e8e801">
 <ul class="org-ul">
-<li>Show sample ECG at start: Select to show a sample normal ECG at startup.</li>
-<li>Caliper color: This is the color of unselected newly added calipers.  Note that this color can be overwritten by right-clicking on a caliper and selecting <b>Caliper Color</b>.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
+<li>Transparent mode at start-up: Makes the main window transparent.  <b>EP Calipers</b> can then be used as a floating caliper to measure anything you have open on your Desktop.  Takes effect immediately, and will also start the app in transparent window mode when restarted.</li>
+<li>Show sample ECG at start-up: Select to show a sample normal ECG at startup.  If unchecked, will start with a welcome screen.</li>
+<li>Show prompts: Prompts guide you through the steps of calibrating and making measurements.  Prompting is useful when you are first learning the program, but it is faster to disable this option.  Note that even with this option unchecked, prompts are shown when making QTc measurements.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2464ce1" class="outline-4">
+<h4 id="org2464ce1">Calipers</h4>
+<div class="outline-text-4" id="text-org2464ce1">
+<ul class="org-ul">
+<li>Appearance
+<ul class="org-ul">
+<li>Unselected caliper color: This is the color of unselected newly added calipers.  Note that this color can be overridden by right-clicking on a caliper and selecting <b>Caliper Color</b>.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
 <li>Selected caliper color: This is the color of the selected caliper.</li>
 <li>Caliper line width: Increase or decrease this slider to make the caliper lines thicker or thinner.</li>
-<li>Caliper label font size: Adjust the text font size of caliper labels.</li>
-<li>Time calibration: This is the default value that appears in the text box when calibrating time calipers.  If you usually calibrate to a certain value (say 200 msec) then it is useful to change this default value.</li>
-<li>Amplitude calibration: This is the default value for calibration of amplitude calipers.  Put whatever value you usually use to calibrate here.</li>
-<li>Intervals for mean RR: The default number of intervals you use to measure mean RR intervals.</li>
-<li>Intervals for QTc: The default number of intervals you use to measure the mean RR interval for QTc measurements.</li>
+<li>Show Brugada triangle: Show the base of the Brugada triangle automatically on angle calipers when time calipers are calibrated and when amplitude calipers are calibrated in millimeters.</li>
+</ul></li>
+<li>Measurement
+<ul class="org-ul">
+<li>Round measurments: Choose how msec and rate values are displayed.  Choices include round to the nearest integer (e.g. 305.463 becomes 305, 1010.728 becomes 1011), display 4 significant digits (e.g. 305.5 and 1011), round to tenths (e.g. 305.5 and 1010.7), and round to hundredths (305.46 and 1010.73).  Note that values in secs or values using other units and calculated values such as QTc are always shown using 4 digits.</li>
 <li>QTc formula: Choose a QTc formula.  Choose "All" to use all the formulas.</li>
-<li>Show prompts:  Prompting is useful when you are first learning the program, but it is faster to disable this option.  Prompts guide you through the steps of calibrating and making measurements.</li>
-<li>Round msec and rate: Choose how msec and rate values are displayed.  Choices include round to the nearest integer (e.g. 305.463 becomes 305, 1010.728 becomes 1011), display 4 digits (e.g. 305.5 and 1011), round to tenths (e.g. 305.5 and 1010.7), and round to hundredths (305.46 and 1010.73).  Note that values in secs or values using other units and calculated values such as QTc are always shown using 4 digits.</li>
-<li>Transparent window: Makes the main window transparent.  <b>EP Calipers</b> can then be used as a floating caliper to measure anything you have open on your Desktop.</li>
+<li>Number of mean RR Intervals for QTc: The default number of intervals you use to measure the mean RR interval for QTc measurements.</li>
+<li>Number of mean intervals for mean RR: The default number of intervals you use to measure mean RR intervals.</li>
+<li>Allow negative caliper values:  If checked, caliper measurements can have negative values.</li>
+</ul></li>
+<li>Calibration
+<ul class="org-ul">
+<li>Time calibration: This is the default value that appears in the custom calibration text box when calibrating time calipers.  If you usually calibrate to a certain value (say 200 msec) then it is useful to change this default value.</li>
+<li>Amplitude calibration: This is the default value for custom calibration of amplitude calipers.  Put whatever value you usually use to calibrate here.</li>
+</ul></li>
+<li>Labels
+<ul class="org-ul">
+<li>Caliper label font size: Adjust the text font size of caliper labels.</li>
 <li>Auto-position text: Caliper text will avoid being obscured by the window edges or the caliper itself by shifting position.  For example, if a caliper text label is to the right of the caliper and the caliper gets too close to the right side of the window, it will shift over to the left of the caliper.</li>
 <li>Time caliper text position: Adjust the text label of time calipers to be above or below the center of the crossbar, or on the left or right side of the caliper.</li>
 <li>Amplitude caliper text position: Adjust the text label of amplitude calipers on the top or bottom of the caliper, or left or right of the crossbar.</li>
-<li>Deemphasize marching components: If selected, marching components appear slightly less prominent than main caliper.</li>
+</ul></li>
+<li>Marching Calipers
+<ul class="org-ul">
+<li>Dim marching components: If selected, marching components appear slightly less prominent than the main caliper.</li>
 <li>Number of marching components: Adjust the number of marching caliper components from 1 to a maximum of 20.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf622d67" class="outline-4">
+<h4 id="orgf622d67">Notes</h4>
+<div class="outline-text-4" id="text-orgf622d67">
+<ul class="org-ul">
 <li>Note text font size: Adjust the text font size of new notes.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></li>
 <li>Note text color: Adjust the color of the text in new notes.</li>
-<li>Note text box width, note text box height: These settings adjust the size of the text box that new notes appear in.</li>
+<li>Note text box width: Set the width of note text box.</li>
+<li>Note text box height: Set the height of note text box.</li>
 </ul>
+</div>
+</div>
+<div id="outline-container-org75f5e60" class="outline-4">
+<h4 id="org75f5e60">PDF</h4>
+<div class="outline-text-4" id="text-org75f5e60">
+<ul class="org-ul">
+<li>PDF resolution: Choose the resolution used when rendering PDF pages.  Higher resolution can make PDF images clearer, but may use more memory and make page changes slower.</li>
+<li>Clear calipers between pages: Remove calipers from the previous PDF page when changing pages.</li>
+<li>Recalibrate calipers between pages: Clear calibration automatically when changing PDF pages.</li>
+<li>Reset image zoom between pages: Reset zoom to actual image size when changing pages.</li>
+<li>Reset image rotation between pages: Reset image rotation when changing pages.</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -250,7 +312,7 @@ Settings can be selected using the <b>EP Calipers | Settings</b> menu item.  You
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-All changes to caliper settings apply to both already created and new calipers. 
+All changes to caliper settings apply to both already created and new calipers except for the unselected caliper color, which is only applied to new calipers. 
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">

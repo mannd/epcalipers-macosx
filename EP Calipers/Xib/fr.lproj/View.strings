@@ -58,3 +58,18 @@
 "NSl-Cell-Hgt.title" = "Longeur de la zone de texte des notes";
 
 "CLF-Cell-01.title" = "Taille de la police des compas";
+
+/* Class = "NSTextFieldCell"; title = "Welcome to EP Calipers"; ObjectID = "k7R-oH-UPm"; */
+"k7R-oH-UPm.title" = "Bienvenue dans Compas EP";
+
+/* Class = "NSButtonCell"; title = "Click here or type ⌘-O to open an image file"; ObjectID = "Fl1-hQ-iq9"; */
+"Fl1-hQ-iq9.title" = "Cliquez ici ou appuyez sur ⌘-O pour ouvrir un fichier image";
+
+/* Class = "NSButtonCell"; title = "Click here to switch to a transparent window"; ObjectID = "v9v-Zd-0fL"; */
+"v9v-Zd-0fL.title" = "Cliquez ici pour passer à une fenêtre transparente";
+
+/* Class = "NSButtonCell"; title = "Click here to change settings"; ObjectID = "OC9-Us-Mn0"; */
+"OC9-Us-Mn0.title" = "Cliquez ici pour modifier les réglages";
+
+/* Class = "NSButtonCell"; title = "Click here for help"; ObjectID = "snD-3y-ijn"; */
+"snD-3y-ijn.title" = "Cliquez ici pour obtenir de l’aide";
