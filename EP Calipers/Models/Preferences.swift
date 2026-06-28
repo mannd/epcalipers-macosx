@@ -155,8 +155,8 @@ class Preferences: ObservableObject {
     // New preferences as of 5/2026
     var allowNegativeCaliperValues: Bool = true
     var showBrugadaTriangle: Bool = true
-    var adjustSidebarLength: Bool = false
-    var sidebarLength: CGFloat = 200
+    var adjustSidebarLength: Bool = true
+    var sidebarLength: CGFloat = 100
 
     // PDF
     // NOTE: These preferences don't affect the currently loaded PFD page,
@@ -254,6 +254,8 @@ class Preferences: ObservableObject {
         clearCalipersBetweenPages = preferences.bool(forKey: Self.clearCalipersBetweenPagesKey)
         adjustSidebarLength = preferences.bool(forKey: Self.adjustSidebarLengthKey)
         sidebarLength = CGFloat(preferences.float(forKey: Self.sidebarLengthKey))
+        adjustSidebarLength = true
+        sidebarLength = CGFloat(100)
 
         // preferencses hidden from user
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)

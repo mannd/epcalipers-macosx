@@ -965,6 +965,9 @@ class MainWindowController: NSWindowController, NSTextFieldDelegate, CalipersVie
             caliper.calibration = calipersView.verticalCalibration
             caliper.textPosition = appPreferences.amplitudeCaliperTextPosition
         }
+        caliper.adjustSidebarLength = appPreferences.adjustSidebarLength
+        caliper.sidebarLength = appPreferences.sidebarLength
+
         calipersView.setInitialPosition(caliper)
         calipersView.calipers.append(caliper)
         calipersView.updateCalibration()
