@@ -121,6 +121,8 @@ class Preferences: ObservableObject {
     static let resetImageZoomBetweenPagesKey = "resetImageZoomBetweenPagesKey"
     static let resetImageRotationBetweenPagesKey = "resetImageRotationBetweenPagesKey"
     static let clearCalipersBetweenPagesKey = "clearCalibrationBetweenPagesKey"
+    static let adjustSidebarLengthKey = "adjustSidebarLengthKey"
+    static let sidebarLengthKey = "sidebarLengthKey"
 
     // Preferences hidden from user
     static let lastHorizontalCalibrationKey = "lastHorizontalCalibrationKey"
@@ -153,6 +155,8 @@ class Preferences: ObservableObject {
     // New preferences as of 5/2026
     var allowNegativeCaliperValues: Bool = true
     var showBrugadaTriangle: Bool = true
+    var adjustSidebarLength: Bool = true
+    var sidebarLength: CGFloat = 100
 
     // PDF
     // NOTE: These preferences don't affect the currently loaded PFD page,
@@ -209,7 +213,9 @@ class Preferences: ObservableObject {
             Self.lastVerticalCalibrationKey: lastVerticalCalibrationDialogChoice,
             Self.lastHorizontalCalibrationKey: lastHorizontalCalibrationDialogChoice,
             Self.lastCustomVerticalCalibrationKey: lastCustomVerticalCalibration,
-            Self .lastCustomHorizontalCalibrationKey: lastCustomHorizontalCalibration,
+            Self.lastCustomHorizontalCalibrationKey: lastCustomHorizontalCalibration,
+            Self.adjustSidebarLengthKey: adjustSidebarLength,
+            Self.sidebarLengthKey: sidebarLength,
         ] as [String : Any]
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: defaults)
@@ -246,6 +252,8 @@ class Preferences: ObservableObject {
         resetImageZoomBetweenPages = preferences.bool(forKey: Self.resetImageZoomBetweenPagesKey)
         resetImageRotationBetweenPages = preferences.bool(forKey: Self.resetImageRotationBetweenPagesKey)
         clearCalipersBetweenPages = preferences.bool(forKey: Self.clearCalipersBetweenPagesKey)
+        adjustSidebarLength = preferences.bool(forKey: Self.adjustSidebarLengthKey)
+        sidebarLength = CGFloat(preferences.float(forKey: Self.sidebarLengthKey))
 
         // preferencses hidden from user
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
@@ -286,6 +294,8 @@ class Preferences: ObservableObject {
         preferences.set(resetImageZoomBetweenPages, forKey: Self.resetImageZoomBetweenPagesKey)
         preferences.set(resetImageRotationBetweenPages, forKey: Self.resetImageRotationBetweenPagesKey)
         preferences.set(clearCalipersBetweenPages, forKey: Self.clearCalipersBetweenPagesKey)
+        preferences.set(adjustSidebarLength, forKey: Self.adjustSidebarLengthKey)
+        preferences.set(sidebarLength, forKey: Self.sidebarLengthKey)
 
         // preferences hidden from user
         preferences.set(lastVerticalCalibrationDialogChoice, forKey: Self.lastVerticalCalibrationKey)

@@ -79,6 +79,9 @@ class Caliper: NSObject {
     var numberOfMarchingComponants = maxMarchingComponents
     var deemphasizeMarchingComponents = true
     var allowNegativeValues : Bool = true
+    // implements adjustable sidebar length
+    var adjustSidebarLength : Bool = false
+    var sidebarLength : CGFloat = 200
 
     init(direction: CaliperDirection, bar1Position: CGFloat, bar2Position: CGFloat,
          crossBarPosition: CGFloat, calibration: Calibration, viewport: CalipersViewport) {
@@ -181,22 +184,36 @@ class Caliper: NSObject {
         context.setLineWidth(lineWidth)
 
         if self.direction == .horizontal {
+            let yEndpoints = adjustSidebarLength
+            ? sidebarEndPoints(
+                center: crossBarPosition(in: viewport), maxPosition: rect.height,
+                viewport: viewport
+            )
+            : (start: CGFloat(0), end: rect.height)
+
             setCrossBarPosition(CGFloat(fmin(Double(crossBarPosition(in: viewport)), Double(rect.size.height) - delta)), in: viewport)
             setCrossBarPosition(CGFloat(fmax(Double(crossBarPosition(in: viewport)), delta)), in: viewport)
-            context.move(to: CGPoint(x: bar1Position(in: viewport), y: 0));
-            context.addLine(to: CGPoint(x: bar1Position(in: viewport), y: rect.size.height))
-            context.move(to: CGPoint(x: bar2Position(in: viewport), y: 0))
-            context.addLine(to: CGPoint(x: bar2Position(in: viewport), y: rect.size.height))
+            context.move(to: CGPoint(x: bar1Position(in: viewport), y: yEndpoints.start));
+            context.addLine(to: CGPoint(x: bar1Position(in: viewport), y: yEndpoints.end))
+            context.move(to: CGPoint(x: bar2Position(in: viewport), y: yEndpoints.start))
+            context.addLine(to: CGPoint(x: bar2Position(in: viewport), y: yEndpoints.end))
             context.move(to: CGPoint(x: bar2Position(in: viewport), y: crossBarPosition(in: viewport)))
             context.addLine(to: CGPoint(x: bar1Position(in: viewport), y: crossBarPosition(in: viewport)))
 
         } else {    // vertical caliper
+            let xEndpoints = adjustSidebarLength
+            ? sidebarEndPoints(
+                center: crossBarPosition(in: viewport), maxPosition: rect.width,
+                viewport: viewport
+            )
+            : (start: CGFloat(0), end: rect.width)
+
             setCrossBarPosition(CGFloat(fmin(Double(crossBarPosition(in: viewport)), Double(rect.size.width) - delta)), in: viewport)
             setCrossBarPosition(CGFloat(fmax(Double(crossBarPosition(in: viewport)), delta)), in: viewport)
-            context.move(to: CGPoint(x: 0, y: bar1Position(in: viewport)))
-            context.addLine(to: CGPoint(x: rect.size.width, y: bar1Position(in: viewport)))
-            context.move(to: CGPoint(x: 0, y: bar2Position(in: viewport)))
-            context.addLine(to: CGPoint(x: rect.size.width, y: bar2Position(in: viewport)))
+            context.move(to: CGPoint(x: xEndpoints.start, y: bar1Position(in: viewport)))
+            context.addLine(to: CGPoint(x: xEndpoints.end, y: bar1Position(in: viewport)))
+            context.move(to: CGPoint(x: xEndpoints.start, y: bar2Position(in: viewport)))
+            context.addLine(to: CGPoint(x: xEndpoints.end, y: bar2Position(in: viewport)))
             context.move(to: CGPoint(x: crossBarPosition(in: viewport), y: bar2Position(in: viewport)))
             context.addLine(to: CGPoint(x: crossBarPosition(in: viewport), y: bar1Position(in: viewport)))
         }
@@ -207,6 +224,15 @@ class Caliper: NSObject {
         // TODO: investigate why optimizeTextPosition is set to true.  Is it a Parameter?
         caliperText(rect: rect, textPosition: textPosition, viewport: viewport, optimizeTextPosition: true)
         drawChosenComponent(context, inRect: rect, viewport: viewport)
+    }
+
+    private func sidebarEndPoints(center: CGFloat, maxPosition: CGFloat, viewport: CalipersViewport) -> (start: CGFloat, end: CGFloat) {
+        let scaledLength = sidebarLength * viewport.magnification
+        let halfLength = scaledLength / 2
+        return (
+            start: max(0, center - halfLength),
+            end: min(maxPosition, center + halfLength)
+        )
     }
 
     // could be calculated property
@@ -225,19 +251,34 @@ class Caliper: NSObject {
         guard chosenComponent != .noComponent, isTweaking else { return }
         context.setStrokeColor(getChosenComponentColor())
 
+        let yEndpoints = adjustSidebarLength
+        ? sidebarEndPoints(
+            center: crossBarPosition(in: viewport), maxPosition: rect.height,
+            viewport: viewport
+        )
+        : (start: CGFloat(0), end: rect.height)
+
+        let xEndpoints = adjustSidebarLength
+        ? sidebarEndPoints(
+            center: crossBarPosition(in: viewport), maxPosition: rect.width,
+            viewport: viewport
+        )
+        : (start: CGFloat(0), end: rect.width)
+
+
         switch self.chosenComponent {
         case .leftBar:
-            context.move(to: CGPoint(x: bar1Position(in: viewport), y: rect.size.height))
-            context.addLine(to: CGPoint(x: bar1Position(in: viewport), y: 0))
+            context.move(to: CGPoint(x: bar1Position(in: viewport), y: yEndpoints.end))
+            context.addLine(to: CGPoint(x: bar1Position(in: viewport), y: yEndpoints.start))
         case .lowerBar:
-            context.move(to: CGPoint(x: 0, y: bar1Position(in: viewport)))
-            context.addLine(to: CGPoint(x: rect.size.width, y: bar1Position(in: viewport)))
+            context.move(to: CGPoint(x: xEndpoints.start, y: bar1Position(in: viewport)))
+            context.addLine(to: CGPoint(x: xEndpoints.end, y: bar1Position(in: viewport)))
         case .rightBar:
-            context.move(to: CGPoint(x: bar2Position(in: viewport), y: rect.size.height))
-            context.addLine(to: CGPoint(x: bar2Position(in: viewport), y: 0))
+            context.move(to: CGPoint(x: bar2Position(in: viewport), y: yEndpoints.end))
+            context.addLine(to: CGPoint(x: bar2Position(in: viewport), y: yEndpoints.start))
         case .upperBar:
-            context.move(to: CGPoint(x: 0, y: bar2Position(in: viewport)))
-            context.addLine(to: CGPoint(x: rect.size.width, y: bar2Position(in: viewport)))
+            context.move(to: CGPoint(x: xEndpoints.start, y: bar2Position(in: viewport)))
+            context.addLine(to: CGPoint(x: xEndpoints.end, y: bar2Position(in: viewport)))
         case .crossBar:
             if (direction == .horizontal) {
                 context.move(to: CGPoint(x: bar2Position(in: viewport), y: crossBarPosition(in: viewport)))

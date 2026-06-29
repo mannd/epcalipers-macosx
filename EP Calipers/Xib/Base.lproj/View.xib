@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="25084" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="25084"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -154,8 +154,8 @@
                     <rect key="frame" x="24" y="131" width="521" height="88"/>
                     <subviews>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="ArR-4G-3Nb">
-                            <rect key="frame" x="124" y="72" width="273" height="16"/>
-                            <buttonCell key="cell" type="bevel" title="Click here or type ⌘-O to open an image file" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Fl1-hQ-iq9">
+                            <rect key="frame" x="126" y="72" width="270" height="16"/>
+                            <buttonCell key="cell" type="bevel" title="Click here or type ⌘ O to open an image file" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Fl1-hQ-iq9">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>

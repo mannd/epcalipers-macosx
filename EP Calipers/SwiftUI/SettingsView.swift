@@ -47,6 +47,8 @@ struct SettingsDraft {
     var resetImageZoomBetweenPages: Bool
     var resetImageRotationBetweenPages: Bool
     var clearCalipersBetweenPages: Bool
+    var adjustSidebarLength: Bool
+    var sidebarLength: Int
 
     init(_ preferences: Preferences) {
         transparency = preferences.transparency
@@ -78,6 +80,8 @@ struct SettingsDraft {
         resetImageZoomBetweenPages = preferences.resetImageZoomBetweenPages
         resetImageRotationBetweenPages = preferences.resetImageRotationBetweenPages
         clearCalipersBetweenPages = preferences.clearCalipersBetweenPages
+        adjustSidebarLength = preferences.adjustSidebarLength
+        sidebarLength = Int(preferences.sidebarLength)
     }
 
     func apply(to preferences: Preferences) {
@@ -110,6 +114,8 @@ struct SettingsDraft {
         preferences.recalibrateWhenChangingPages = recalibrateWhenChangingPages
         preferences.resetImageZoomBetweenPages = resetImageZoomBetweenPages
         preferences.resetImageRotationBetweenPages = resetImageRotationBetweenPages
+        preferences.adjustSidebarLength = adjustSidebarLength
+        preferences.sidebarLength = CGFloat(sidebarLength)
     }
 }
 
@@ -196,6 +202,18 @@ struct CaliperSettingsView: View {
                     ) {
                         Text("Caliper line width", tableName: "Settings")
                     }.frame(width: 350)
+                    Toggle(isOn: $settingsDraft.adjustSidebarLength) {
+                        Text("Adjustable side bar length", tableName: "Settings")
+                    }
+                    Picker(selection: $settingsDraft.sidebarLength) {
+                        ForEach(50...100, id: \.self) {
+                            Text("\($0)")
+                                .tag($0)
+                        }
+                    }
+                    label: {
+                        Text("Side bar length", tableName: "Settings")
+                    }
                     Toggle(isOn: $settingsDraft.showBrugadaTriangle) {
                         Text("Show Brugada triangle", tableName: "Settings")
                     }

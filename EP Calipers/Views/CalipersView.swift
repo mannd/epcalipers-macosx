@@ -959,6 +959,8 @@ class CalipersView: NSView {
                 c.textPosition = prefs.amplitudeCaliperTextPosition
             }
             c.textFont = .systemFont(ofSize: CGFloat(prefs.caliperTextFontSize))
+            c.adjustSidebarLength = prefs.adjustSidebarLength
+            c.sidebarLength = CGFloat(prefs.sidebarLength)
         }
         self.caliperTextFontSize = CGFloat(prefs.caliperTextFontSize)
 
