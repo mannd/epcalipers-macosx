@@ -47,6 +47,8 @@ Many settings provide default values used when making new measurements.  For exa
   - Unselected caliper color: This is the color of unselected newly added calipers.  Note that this color can be overridden by right-clicking on a caliper and selecting *Caliper Color*.[fn:2]
   - Selected caliper color: This is the color of the selected caliper.
   - Caliper line width: Increase or decrease this slider to make the caliper lines thicker or thinner.
+  - Adjustable side bar length: When selected, the length of the side bars of time and amplitude calipers is set by the Side bar length setting.  When not selected, caliper side bars always span the full extent of the window.  Note that even if selected, marching calipers always extend the full height of the screen.
+  - Side bar length: When the Adjustable side bar length setting is selected, this sets the length of side bars in points.
   - Show Brugada triangle: Show the base of the Brugada triangle automatically on angle calipers when time calipers are calibrated and when amplitude calipers are calibrated in millimeters.
 - Measurement
   - Round measurments: Choose how msec and rate values are displayed.  Choices include round to the nearest integer (e.g. 305.463 becomes 305, 1010.728 becomes 1011), display 4 significant digits (e.g. 305.5 and 1011), round to tenths (e.g. 305.5 and 1010.7), and round to hundredths (305.46 and 1010.73).  Note that values in secs or values using other units and calculated values such as QTc are always shown using 4 digits.

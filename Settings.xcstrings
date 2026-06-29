@@ -6,7 +6,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Longueur de barres latérales réglables"
+            "value" : "Longueur réglable des barres latérales"
           }
         }
       }
@@ -372,7 +372,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Longueur de barres latérales"
+            "value" : "Longueur des barres latérales"
           }
         }
       }
