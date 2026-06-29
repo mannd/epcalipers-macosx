@@ -181,6 +181,19 @@ struct GeneralSettingsView: View {
 
 struct CaliperSettingsView: View {
     @Binding var settingsDraft: SettingsDraft
+    @State private var sidebarLengthText = ""
+
+    private static let sidebarLengthRange = 20...300
+
+    private var sidebarLengthTextBinding: Binding<String> {
+        Binding(
+            get: { sidebarLengthText },
+            set: { newValue in
+                sidebarLengthText = newValue
+                updateSidebarLengthDraft(from: newValue)
+            }
+        )
+    }
 
     var body: some View {
         ScrollView {
@@ -205,14 +218,22 @@ struct CaliperSettingsView: View {
                     Toggle(isOn: $settingsDraft.adjustSidebarLength) {
                         Text("Adjustable side bar length", tableName: "Settings")
                     }
-                    Picker(selection: $settingsDraft.sidebarLength) {
-                        ForEach(50...100, id: \.self) {
-                            Text("\($0)")
-                                .tag($0)
-                        }
-                    }
-                    label: {
+                    HStack {
                         Text("Side bar length", tableName: "Settings")
+                        TextField("Value", text: sidebarLengthTextBinding, onEditingChanged: { isEditing in
+                            if !isEditing {
+                                commitSidebarLengthText()
+                            }
+                        }, onCommit: {
+                            commitSidebarLengthText()
+                        })
+                        .frame(width: 150)
+                        Stepper("", value: Binding(
+                            get: { settingsDraft.sidebarLength },
+                            set: { newValue in
+                                stepSidebarLength(to: newValue)
+                            }), in: Self.sidebarLengthRange, step: 1)
+                        .labelsHidden()
                     }
                     Toggle(isOn: $settingsDraft.showBrugadaTriangle) {
                         Text("Show Brugada triangle", tableName: "Settings")
@@ -326,11 +347,88 @@ struct CaliperSettingsView: View {
                 }
             }
         }
+        .onAppear {
+            updateSidebarLengthText()
+        }
+        .onDisappear {
+            commitSidebarLengthText()
+        }
+    }
+
+    private func commitSidebarLengthText() {
+        guard let typedSidebarLength = parsedSidebarLengthText() else {
+            updateSidebarLengthText()
+            return
+        }
+
+        settingsDraft.sidebarLength = typedSidebarLength
+        updateSidebarLengthText()
+    }
+
+    private func stepSidebarLength(to newValue: Int) {
+        let step = newValue - settingsDraft.sidebarLength
+        let baseSidebarLength = parsedSidebarLengthText() ?? settingsDraft.sidebarLength
+        settingsDraft.sidebarLength = clampedSidebarLength(baseSidebarLength + step)
+        updateSidebarLengthText()
+    }
+
+    private func parsedSidebarLengthText() -> Int? {
+        parsedSidebarLength(from: sidebarLengthText)
+    }
+
+    private func updateSidebarLengthDraft(from text: String) {
+        guard let value = parsedSidebarLength(from: text) else {
+            return
+        }
+
+        settingsDraft.sidebarLength = value
+    }
+
+    private func parsedSidebarLength(from text: String) -> Int? {
+        let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let value = Int(trimmedText) else {
+            return nil
+        }
+
+        return clampedSidebarLength(value)
+    }
+
+    private func clampedSidebarLength(_ value: Int) -> Int {
+        min(max(value, Self.sidebarLengthRange.lowerBound), Self.sidebarLengthRange.upperBound)
+    }
+
+    private func updateSidebarLengthText() {
+        sidebarLengthText = "\(settingsDraft.sidebarLength)"
     }
 }
 
 struct NoteSettingsView: View {
     @Binding var settingsDraft: SettingsDraft
+    @State private var noteTextBoxWidthText = ""
+    @State private var noteTextBoxHeightText = ""
+
+    private static let noteTextBoxWidthRange = 40...500
+    private static let noteTextBoxHeightRange = 20...300
+
+    private var noteTextBoxWidthTextBinding: Binding<String> {
+        Binding(
+            get: { noteTextBoxWidthText },
+            set: { newValue in
+                noteTextBoxWidthText = newValue
+                updateNoteTextBoxWidthDraft(from: newValue)
+            }
+        )
+    }
+
+    private var noteTextBoxHeightTextBinding: Binding<String> {
+        Binding(
+            get: { noteTextBoxHeightText },
+            set: { newValue in
+                noteTextBoxHeightText = newValue
+                updateNoteTextBoxHeightDraft(from: newValue)
+            }
+        )
+    }
 
     var body: some View {
         Form {
@@ -345,24 +443,141 @@ struct NoteSettingsView: View {
             ColorPicker(selection: $settingsDraft.noteTextColor) {
                 Text("Note text color", tableName: "Settings")
             }
-            Picker(selection: $settingsDraft.noteTextBoxWidth) {
-                ForEach(40...500, id: \.self) {
-                    Text("\($0)")
-                        .tag($0)
-                }
-            } label: {
+            HStack {
                 Text("Note text box width", tableName: "Settings")
+                TextField("Value", text: noteTextBoxWidthTextBinding, onEditingChanged: { isEditing in
+                    if !isEditing {
+                        commitNoteTextBoxWidthText()
+                    }
+                }, onCommit: {
+                    commitNoteTextBoxWidthText()
+                })
+                .frame(width: 150)
+                Stepper("", value: Binding(
+                    get: { settingsDraft.noteTextBoxWidth },
+                    set: { newValue in
+                        stepNoteTextBoxWidth(to: newValue)
+                    }), in: Self.noteTextBoxWidthRange, step: 1)
+                .labelsHidden()
             }
-            Picker(selection: $settingsDraft.noteTextBoxHeight) {
-                ForEach(20...300, id: \.self) {
-                    Text("\($0)")
-                        .tag($0)
-                }
-            } label: {
+            HStack {
                 Text("Note text box height", tableName: "Settings")
+                TextField("Value", text: noteTextBoxHeightTextBinding, onEditingChanged: { isEditing in
+                    if !isEditing {
+                        commitNoteTextBoxHeightText()
+                    }
+                }, onCommit: {
+                    commitNoteTextBoxHeightText()
+                })
+                .frame(width: 150)
+                Stepper("", value: Binding(
+                    get: { settingsDraft.noteTextBoxHeight },
+                    set: { newValue in
+                        stepNoteTextBoxHeight(to: newValue)
+                    }), in: Self.noteTextBoxHeightRange, step: 1)
+                .labelsHidden()
             }
-
         }
+        .onAppear {
+            updateNoteTextBoxWidthText()
+            updateNoteTextBoxHeightText()
+        }
+        .onDisappear {
+            commitNoteTextBoxWidthText()
+            commitNoteTextBoxHeightText()
+        }
+    }
+
+    private func commitNoteTextBoxWidthText() {
+        guard let typedWidth = parsedNoteTextBoxWidthText() else {
+            updateNoteTextBoxWidthText()
+            return
+        }
+
+        settingsDraft.noteTextBoxWidth = typedWidth
+        updateNoteTextBoxWidthText()
+    }
+
+    private func commitNoteTextBoxHeightText() {
+        guard let typedHeight = parsedNoteTextBoxHeightText() else {
+            updateNoteTextBoxHeightText()
+            return
+        }
+
+        settingsDraft.noteTextBoxHeight = typedHeight
+        updateNoteTextBoxHeightText()
+    }
+
+    private func stepNoteTextBoxWidth(to newValue: Int) {
+        let step = newValue - settingsDraft.noteTextBoxWidth
+        let baseWidth = parsedNoteTextBoxWidthText() ?? settingsDraft.noteTextBoxWidth
+        settingsDraft.noteTextBoxWidth = clampedNoteTextBoxWidth(baseWidth + step)
+        updateNoteTextBoxWidthText()
+    }
+
+    private func stepNoteTextBoxHeight(to newValue: Int) {
+        let step = newValue - settingsDraft.noteTextBoxHeight
+        let baseHeight = parsedNoteTextBoxHeightText() ?? settingsDraft.noteTextBoxHeight
+        settingsDraft.noteTextBoxHeight = clampedNoteTextBoxHeight(baseHeight + step)
+        updateNoteTextBoxHeightText()
+    }
+
+    private func parsedNoteTextBoxWidthText() -> Int? {
+        parsedNoteTextBoxWidth(from: noteTextBoxWidthText)
+    }
+
+    private func parsedNoteTextBoxHeightText() -> Int? {
+        parsedNoteTextBoxHeight(from: noteTextBoxHeightText)
+    }
+
+    private func updateNoteTextBoxWidthDraft(from text: String) {
+        guard let value = parsedNoteTextBoxWidth(from: text) else {
+            return
+        }
+
+        settingsDraft.noteTextBoxWidth = value
+    }
+
+    private func updateNoteTextBoxHeightDraft(from text: String) {
+        guard let value = parsedNoteTextBoxHeight(from: text) else {
+            return
+        }
+
+        settingsDraft.noteTextBoxHeight = value
+    }
+
+    private func parsedNoteTextBoxWidth(from text: String) -> Int? {
+        let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let value = Int(trimmedText) else {
+            return nil
+        }
+
+        return clampedNoteTextBoxWidth(value)
+    }
+
+    private func parsedNoteTextBoxHeight(from text: String) -> Int? {
+        let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let value = Int(trimmedText) else {
+            return nil
+        }
+
+        return clampedNoteTextBoxHeight(value)
+    }
+
+    private func clampedNoteTextBoxWidth(_ value: Int) -> Int {
+        min(max(value, Self.noteTextBoxWidthRange.lowerBound), Self.noteTextBoxWidthRange.upperBound)
+    }
+
+    private func clampedNoteTextBoxHeight(_ value: Int) -> Int {
+        min(max(value, Self.noteTextBoxHeightRange.lowerBound), Self.noteTextBoxHeightRange.upperBound)
+    }
+
+    private func updateNoteTextBoxWidthText() {
+        noteTextBoxWidthText = "\(settingsDraft.noteTextBoxWidth)"
+    }
+
+    private func updateNoteTextBoxHeightText() {
+        noteTextBoxHeightText = "\(settingsDraft.noteTextBoxHeight)"
     }
 }
 
