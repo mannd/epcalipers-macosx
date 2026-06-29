@@ -254,8 +254,6 @@ class Preferences: ObservableObject {
         clearCalipersBetweenPages = preferences.bool(forKey: Self.clearCalipersBetweenPagesKey)
         adjustSidebarLength = preferences.bool(forKey: Self.adjustSidebarLengthKey)
         sidebarLength = CGFloat(preferences.float(forKey: Self.sidebarLengthKey))
-        adjustSidebarLength = true
-        sidebarLength = CGFloat(100)
 
         // preferencses hidden from user
         lastVerticalCalibrationDialogChoice = preferences.integer(forKey: Self.lastVerticalCalibrationKey)
